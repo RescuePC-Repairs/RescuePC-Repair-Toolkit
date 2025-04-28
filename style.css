@@ -192,14 +192,14 @@ header.hero {
 
 /* ===== Antivirus Disclosure Section ===== */
 .disclosure {
-  margin-top: 3rem; /* <-- Add breathing room */
-  margin-bottom: 3rem; /* <-- Add breathing room */
+  margin-top: 3rem;
+  margin-bottom: 3rem;
   padding: 3rem 2rem;
   background-color: #1a1b1f;
   text-align: center;
   font-size: 0.95rem;
   color: #cccccc;
-  border-radius: 8px; /* slight soft corners for polish */
+  border-radius: 8px;
 }
 
 .disclosure h2 {
