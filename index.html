@@ -9,6 +9,9 @@
   <link rel="stylesheet" href="style.css">
 
   <title>RescuePC Repairs | Offline Windows Repair Toolkit</title>
+
+  <!-- Stripe Buy Button JS -->
+  <script async src="https://js.stripe.com/v3/buy-button.js"></script>
 </head>
 
 <body>
@@ -16,21 +19,24 @@
   <header class="hero">
     <img src="assets/RescuePC_Logo_Light.png" alt="RescuePC Logo" class="logo">
 
-    <h1 class="headline">Offline Repairs. Instant Results.</h1>
-    <p class="subtitle">RescuePC revives broken PCs — fixing networks, audio, drivers, and system performance without internet access.</p>
+    <h1 class="headline">Broken PC? Fix It Offline — Fast.</h1>
+    <p class="subtitle">RescuePC repairs networks, drivers, audio, and speeds up your system — no internet, no waiting, no stress.</p>
+
 
     <ul class="hero-benefits">
       <li>🛠️ Repair lost Wi-Fi and network issues</li>
-      <li>🔈 Restore missing or corrupted sound drivers</li>
+      <li>🌈 Restore missing or corrupted sound drivers</li>
       <li>🚀 Boost speed by fixing hidden Windows errors</li>
-      <li>💾 Install missing drivers from 40GB offline library</li>
+      <li>💎 Install missing drivers from 40GB offline library</li>
       <li>🛡️ Malware removal with built-in offline scanner</li>
     </ul>
 
+    <!-- Stripe Buy Button (TOP) -->
     <div class="cta-buttons">
-      <a href="https://buy.stripe.com/00g6qF1XWglF7w4aEF" target="_blank" rel="noopener noreferrer" class="btn-primary">
-        💳 Buy RescuePC Now – $29.99
-      </a>
+      <stripe-buy-button
+        buy-button-id="buy_btn_1RJ2VDHddahti95eZmdGuvi3"
+        publishable-key="pk_live_51RHgNWHddahti95euP7f7D1c3KoGiTDwcqTr0NnUs9y2dXkLbIceXwbPNY3TyJWxnTympc9ZDolUXENQAJ1qkCJn00gzZcfHjb">
+      </stripe-buy-button>
     </div>
 
     <div class="scroll-hint">
@@ -46,7 +52,7 @@
         <p>Network fixes, driver installs, audio restoration, junk cleaning — all in minutes, fully offline.</p>
       </div>
       <div class="feature-card">
-        <h3>💾 Driver Megapack Included</h3>
+        <h3>💎 Driver Megapack Included</h3>
         <p>Preloaded with 40GB+ of critical drivers. Fix Dell, HP, Lenovo, ASUS, Acer, and more without downloads.</p>
       </div>
       <div class="feature-card">
@@ -69,10 +75,12 @@
   </section>
 
   <section class="buy-now">
-    <h2>Ready to Own Your Repairs?</h2>
+    <h2>Still Need More Info?</h2>
     <p>One toolkit. Unlimited PC fixes. No subscriptions. No bloatware. Just lifetime offline ownership.</p>
+
+    <!-- Old Button Now Placed Lower -->
     <a href="https://buy.stripe.com/00g6qF1XWglF7w4aEF" target="_blank" rel="noopener noreferrer" class="btn-primary-large">
-      💳 Get RescuePC USB Toolkit
+      💳 Buy RescuePC Now – $29.99
     </a>
   </section>
 
@@ -100,5 +108,6 @@
   </footer>
 
   <script src="main.js"></script>
+
 </body>
 </html>
