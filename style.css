@@ -840,3 +840,41 @@ stripe-buy-button {
     font-size: 14px;
   }
 }
+/* Responsive Design Fixes */
+@media screen and (max-width: 768px) {
+  body {
+    font-size: 16px;
+    padding: 10px;
+  }
+
+  header, nav, footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  nav ul {
+    flex-direction: column;
+    padding: 0;
+  }
+
+  nav li {
+    margin: 10px 0;
+  }
+
+  .container, .content {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  button, input, select {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
