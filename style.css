@@ -168,16 +168,13 @@ button, .btn {
     padding: 1rem;
     gap: 1.2rem;
   }
-
   .nav-links.active {
     display: flex;
   }
-
   .mobile-menu-toggle {
     display: block;
     cursor: pointer;
   }
-
   .mobile-menu-toggle .bar {
     width: 28px;
     height: 3px;
@@ -245,7 +242,7 @@ button, .btn {
   gap: 1.5rem;
 }
 
-/* ===== General Sections ===== */
+/* ===== Sections (General) ===== */
 section {
   padding: 5rem 2rem;
   text-align: center;
@@ -271,7 +268,7 @@ section {
   line-height: 1.8;
 }
 
-/* ===== Features Section ===== */
+/* ===== Feature Grid ===== */
 .feature-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -325,21 +322,139 @@ section {
   font-size: 1.1rem;
 }
 
-@media (max-width: 768px) {
-  .comparison-table th,
-  .comparison-table td {
-    font-size: 0.9rem;
-    padding: 0.75rem;
-  }
+/* ===== FAQ Section ===== */
+.faq {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.faq h2 {
+  font-size: 2.2rem;
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.faq .faq-item {
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  background: var(--bg-lighter);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-medium);
+}
+
+.faq .faq-item summary {
+  padding: 1.2rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--bg-light);
+  transition: background var(--transition-fast);
+}
+
+.faq .faq-item summary:hover {
+  background: var(--bg-lighter);
+}
+
+.faq .faq-item[open] {
+  box-shadow: var(--shadow-md);
+}
+
+.faq .faq-answer {
+  padding: 1rem 1.2rem;
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Support & Questions ===== */
+.support {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.support h2 {
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: var(--primary-color);
+}
+
+.support p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--text-bright);
+  max-width: 800px;
+  margin: 0 auto 2rem auto;
+  text-align: center;
+}
+
+.support-card {
+  padding: 2rem;
+  background: var(--bg-lighter);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-md);
+  margin-bottom: 2rem;
+  text-align: center;
+  font-size: 1.1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.support-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.support-card h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: var(--primary-color);
+}
+
+.support-card p {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  color: var(--text-muted);
+}
+
+.support-card a.support-link {
+  font-size: 1.05rem;
+  display: inline-block;
+  color: var(--primary-color);
+  word-break: break-word;
+  transition: color var(--transition-fast);
+}
+
+.support-card a.support-link:hover {
+  color: var(--secondary-color);
 }
 
 /* ===== Pricing Section ===== */
+.pricing {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
 .pricing-card {
   background: var(--bg-lighter);
   border-radius: var(--border-radius-lg);
   padding: 2rem 1.5rem;
   max-width: 420px;
-  margin: 0 auto;
+  margin: 0 auto 2rem;
   box-shadow: var(--shadow-lg);
   border: 1px solid rgba(255, 255, 255, 0.1);
   text-align: center;
@@ -347,8 +462,8 @@ section {
 }
 
 .pricing-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+  transform: translateY(-8px);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.3);
 }
 
 .pricing-header h2 {
@@ -377,15 +492,17 @@ section {
   list-style: none;
   padding: 0;
   text-align: left;
-  margin-bottom: 1.5rem;
+  margin: 0 auto 1.5rem auto;
+  max-width: 320px;
 }
 
 .pricing-features li {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
   font-size: 1.1rem;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
+  color: var(--text-muted);
 }
 
 stripe-buy-button {
@@ -401,6 +518,7 @@ stripe-buy-button {
   margin-top: 1rem;
   font-size: 0.9rem;
   color: var(--text-muted);
+  text-align: center;
 }
 
 /* ===== Footer ===== */
@@ -415,13 +533,14 @@ footer {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 2.5rem;
+  gap: 2rem;
   margin-top: 2rem;
 }
 
 .footer-column h4 {
-  margin-bottom: 1.2rem;
+  margin-bottom: 1rem;
   color: var(--text-bright);
+  font-size: 1.2rem;
 }
 
 .footer-column ul {
@@ -430,7 +549,7 @@ footer {
 }
 
 .footer-column li {
-  margin-bottom: 0.7rem;
+  margin-bottom: 0.6rem;
 }
 
 .footer-column a {
@@ -443,8 +562,9 @@ footer {
 }
 
 .copyright {
-  margin-top: 2.5rem;
-  font-size: 1rem;
+  margin-top: 2rem;
+  font-size: 0.95rem;
+  opacity: 0.8;
 }
 
 /* ===== Responsive Tweaks ===== */
@@ -471,4 +591,172 @@ footer {
     flex-direction: column;
     align-items: center;
   }
+  .faq h2, .faq .faq-item summary {
+    font-size: 1.3rem;
+  }
+  .support h2 {
+    font-size: 1.7rem;
+  }
+  .support-card {
+    padding: 1.5rem;
+  }
+}
+.compatibility {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.compatibility h2 {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+}
+
+.windows-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.windows-item {
+  background: var(--bg-lighter);
+  padding: 1rem 2rem;
+  border-radius: var(--border-radius-sm);
+  font-size: 1.2rem;
+  color: var(--text-bright);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+}
+
+.windows-item:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+/* ===== Testimonials Section ===== */
+.testimonials {
+  background: var(--bg-lighter);
+  padding: 4rem 2rem;
+  text-align: center;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+  max-width: var(--max-width);
+  margin: 4rem auto;
+}
+
+.testimonials h2 {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+}
+
+.testimonial {
+  margin-bottom: 2.5rem;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-muted);
+  position: relative;
+  padding: 1.5rem;
+  border-left: 4px solid var(--primary-color);
+  background: var(--bg-light);
+  border-radius: var(--border-radius-md);
+}
+
+.testimonial:last-child {
+  margin-bottom: 0;
+}
+
+.testimonial .stars {
+  color: gold;
+  font-size: 1.3rem;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.testimonial .quote {
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+
+.testimonial .author {
+  font-weight: bold;
+  color: var(--text-bright);
+}
+/* ===== Antivirus Info Section ===== */
+.antivirus-info {
+  background: var(--bg-light);
+  padding: 3rem 2rem;
+  border-left: 6px solid var(--primary-color);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+  max-width: var(--max-width);
+  margin: 4rem auto;
+  color: var(--text-bright);
+  text-align: left;
+}
+
+.antivirus-info h2 {
+  font-size: 2.3rem;
+  margin-bottom: 1.5rem;
+  color: var(--primary-color);
+  text-align: center;
+}
+
+.antivirus-info p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 1.2rem;
+}
+
+.antivirus-info ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.antivirus-info ul li {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  background: var(--bg-lighter);
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.support {
+  background-color: var(--bg-light);
+  padding: 3rem 2rem;
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  margin: 2rem auto;
+  max-width: var(--max-width);
+}
+
+.support h2 {
+  color: var(--primary-color);
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.support p {
+  color: var(--text-bright);
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.support a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.support a:hover {
+  text-decoration: underline;
 }
