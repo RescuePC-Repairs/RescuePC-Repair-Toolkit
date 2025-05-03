@@ -760,3 +760,37 @@ footer {
 .support a:hover {
   text-decoration: underline;
 }
+.comparison-table table {
+  width: 100%;
+  min-width: unset;
+  table-layout: fixed;
+  word-break: break-word;
+}
+
+.comparison-table td,
+.comparison-table th {
+  font-size: 0.85rem;
+  padding: 0.75rem 0.5rem;
+}
+.comparison-table {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 2rem;
+}
+stripe-buy-button {
+  width: 100% !important;
+  max-width: 100% !important;
+  display: block !important;
+  margin: 1.5rem auto 0 auto !important;
+}
+.pricing-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.footer .logo {
+  max-width: 120px;
+  height: auto;
+  margin: 0 auto 1rem;
+  display: block;
+}
