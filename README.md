@@ -1,6 +1,6 @@
-# FixMate™ - Offline Windows PC Repair Toolkit
+# RescuePC Repairs™ - Offline Windows PC Repair Toolkit
 
-**FixMate™** is the ultimate offline Windows PC repair toolkit designed to revive broken systems without needing internet access. Repair Wi-Fi, audio, drivers, and boost system performance instantly — all from a local download or portable USB drive.
+**RescuePC Repairs™** is the ultimate offline Windows PC repair toolkit designed to revive broken systems without needing internet access. Repair Wi-Fi, audio, drivers, and boost system performance instantly — all from a local download or portable USB drive.
 
 ---
 
@@ -16,7 +16,7 @@
 
 ## 📦 What's Inside
 
-- **FixMate GUI** — Simple interface for repairs
+- **RescuePC Repairs GUI** — Simple interface for repairs
 - **Offline Driver Megapack** — Preloaded drivers for Dell, HP, Lenovo, ASUS, Acer, and more
 - **Network Recovery Tools** — Fix broken Wi-Fi and Ethernet instantly
 - **Audio Repair Scripts** — Restore missing/corrupted sound drivers
@@ -25,7 +25,7 @@
 
 ---
 
-## 🧠 Why FixMate?
+## 🧠 Why RescuePC Repairs?
 
 - **Truly Offline**: No downloads needed after purchase.
 - **Instant Recovery**: Run immediately after download or from USB.
@@ -34,10 +34,10 @@
 
 ---
 
-## 💳 Buy FixMate™
+## 💳 Buy RescuePC Repairs™
 
 Ready to repair smarter?  
-👉 [Purchase FixMate for $29.99](https://buy.stripe.com/00g6qF1XWglF7w4aEF)
+👉 [Purchase RescuePC Repairs for $29.99](https://buy.stripe.com/00g6qF1XWglF7w4aEF)
 
 After purchase, you'll be redirected to a secure download page.
 
@@ -45,7 +45,7 @@ After purchase, you'll be redirected to a secure download page.
 
 ## 📄 License
 
-FixMate™ software and branding © 2025 Tyler Keesee.  
+RescuePC Repairs™ software and branding © 2025 Tyler Keesee.  
 All rights reserved.  
 Unauthorized distribution is prohibited.
 
@@ -53,10 +53,10 @@ Unauthorized distribution is prohibited.
 
 ## 🛠️ Contact & Support
 
-**Email:** [keeseetyler17@yahoo.com](mailto:keeseetyler17@yahoo.com)  
-**Website:** [FixMate GitHub Pages Site (Live Link)](https://tyler1201623.github.io/FixMate-PC-Repair-Toolkit/) *(after Pages is enabled)*
+**Email:** [***REMOVED***](mailto:***REMOVED***)  
+**Website:** [RescuePC Repairs GitHub Pages Site (Live Link)](https://tyler1201623.github.io/RescuePC-Repair-Toolkit/) 
 
-Need help with your download? Questions about FixMate™?  
+Need help with your download? Questions about RescuePC Repairs™?  
 Contact us — real support, real fast.
 
 ---
