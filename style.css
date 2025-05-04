@@ -811,11 +811,11 @@ footer .logo {
   
   /* Navigation */
   .nav-container {
-    padding: 0.3rem 1rem;
+    padding: 0.1rem 1rem;
   }
   
   .logo {
-    width: 45px;
+    width: 30px;
   }
   
   .mobile-menu-toggle {
