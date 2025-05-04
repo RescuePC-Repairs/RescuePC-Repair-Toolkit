@@ -1,0 +1,1829 @@
+/* ===== Enhanced Reset & Base Styles ===== */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #00e0ff;
+  --secondary-color: #6772e5;
+  --bg-dark: #121212;
+  --bg-darker: #0a0a0a;
+  --bg-light: #1f2024;
+  --bg-lighter: #2a2b2f;
+  --text-bright: #f0f0f5;
+  --text-muted: #b8b8c7;
+  --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 6px 12px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.2);
+  --transition-fast: 0.2s ease;
+  --transition-medium: 0.4s ease;
+  --border-radius-sm: 8px;
+  --border-radius-md: 12px;
+  --border-radius-lg: 20px;
+  --max-width: 1200px;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-bright);
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ===== Accessibility: Skip Link ===== */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #000;
+  color: #fff;
+  padding: 8px 16px;
+  z-index: 999;
+  transition: top var(--transition-fast);
+}
+.skip-link:focus {
+  top: 0;
+}
+
+/* ===== Typography ===== */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 1.2rem;
+  text-align: center;
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--secondary-color);
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+button, .btn {
+  cursor: pointer;
+  font-family: inherit;
+  border: none;
+  outline: none;
+}
+
+/* ===== Navigation ===== */
+.main-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(18, 18, 18, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-md);
+  z-index: 1000;
+  transition: top var(--transition-fast);
+}
+
+.main-nav.hide-nav {
+  top: -120px;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.logo {
+  width: 120px;
+  transition: transform var(--transition-medium);
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links li a {
+  color: var(--text-bright);
+  font-weight: 500;
+  position: relative;
+  font-size: 1rem;
+  padding: 4px 0;
+  display: inline-block;
+}
+
+.nav-links li a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary-color);
+  transition: width var(--transition-fast);
+}
+
+.nav-links li a:hover::after {
+  width: 100%;
+}
+
+/* ===== Mobile Menu ===== */
+.mobile-menu-toggle {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background: var(--bg-dark);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    padding: 1rem;
+    gap: 1.2rem;
+  }
+  .nav-links.active {
+    display: flex;
+  }
+  .mobile-menu-toggle {
+    display: block;
+    cursor: pointer;
+  }
+  .mobile-menu-toggle .bar {
+    width: 28px;
+    height: 3px;
+    background: #fff;
+    margin: 5px 0;
+    transition: 0.4s;
+  }
+}
+
+/* ===== Hero Section ===== */
+.hero {
+  min-height: 100vh;
+  background: radial-gradient(circle at top left, #232526, #141518);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 6rem 2rem 3rem;
+  padding-top: 200px;
+}
+
+.hero-content {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.headline {
+  font-size: 3.5rem;
+  font-weight: 800;
+  background: linear-gradient(90deg, white, var(--primary-color));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1.5rem;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  color: var(--text-bright);
+  margin-bottom: 3rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-benefits {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 2rem;
+  font-size: 1.3rem;
+}
+
+.hero-benefits li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+/* ===== Sections (General) ===== */
+section {
+  padding: 5rem 2rem;
+  text-align: center;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.section-header {
+  margin-bottom: 3.5rem;
+}
+
+.section-header h2 {
+  font-size: 2.8rem;
+  color: var(--primary-color);
+  margin-bottom: 1.2rem;
+}
+
+.section-header p {
+  color: var(--text-muted);
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1.2rem;
+  line-height: 1.8;
+}
+
+/* ===== Feature Grid ===== */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.feature-card {
+  background: var(--bg-lighter);
+  border-radius: var(--border-radius-md);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition-medium);
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+}
+
+.feature-icon {
+  font-size: 2.8rem;
+  margin-bottom: 1.2rem;
+  color: var(--primary-color);
+}
+
+/* ===== Comparison Table ===== */
+.comparison-table {
+  overflow-x: auto;
+  margin-top: 2rem;
+}
+
+.comparison-table table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+.comparison-table th,
+.comparison-table td {
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+  font-size: 1rem;
+}
+
+.comparison-table thead {
+  background: var(--bg-lighter);
+}
+
+.comparison-table th {
+  color: var(--primary-color);
+  font-size: 1.1rem;
+}
+
+/* ===== FAQ Section ===== */
+.faq {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.faq h2 {
+  font-size: 2.2rem;
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.faq .faq-item {
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  background: var(--bg-lighter);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-medium);
+}
+
+.faq .faq-item summary {
+  padding: 1.2rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--bg-light);
+  transition: background var(--transition-fast);
+}
+
+.faq .faq-item summary:hover {
+  background: var(--bg-lighter);
+}
+
+.faq .faq-item[open] {
+  box-shadow: var(--shadow-md);
+}
+
+.faq .faq-answer {
+  padding: 1rem 1.2rem;
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Support & Questions ===== */
+.support {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.support h2 {
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: var(--primary-color);
+}
+
+.support p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--text-bright);
+  max-width: 800px;
+  margin: 0 auto 2rem auto;
+  text-align: center;
+}
+
+.support-card {
+  padding: 2rem;
+  background: var(--bg-lighter);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-md);
+  margin-bottom: 2rem;
+  text-align: center;
+  font-size: 1.1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.support-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.support-card h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: var(--primary-color);
+}
+
+.support-card p {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  color: var(--text-muted);
+}
+
+.support-card a.support-link {
+  font-size: 1.05rem;
+  display: inline-block;
+  color: var(--primary-color);
+  word-break: break-word;
+  transition: color var(--transition-fast);
+}
+
+.support-card a.support-link:hover {
+  color: var(--secondary-color);
+}
+
+/* ===== Pricing Section ===== */
+.pricing {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.pricing-card {
+  background: var(--bg-lighter);
+  border-radius: var(--border-radius-lg);
+  padding: 2rem 1.5rem;
+  max-width: 420px;
+  margin: 0 auto 2rem;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pricing-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.3);
+}
+
+.pricing-header h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+}
+
+.price {
+  font-size: 2.5rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-bottom: 0.5rem;
+  color: var(--text-bright);
+}
+
+.price-subtitle {
+  color: var(--text-muted);
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.pricing-features ul {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+  margin: 0 auto 1.5rem auto;
+  max-width: 320px;
+}
+
+.pricing-features li {
+  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--text-muted);
+}
+
+stripe-buy-button {
+  margin-top: 1.5rem;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.secure-payment {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ===== Footer ===== */
+footer {
+  background: var(--bg-darker);
+  padding: 4rem 2rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.footer-column h4 {
+  margin-bottom: 1rem;
+  color: var(--text-bright);
+  font-size: 1.2rem;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-column li {
+  margin-bottom: 0.6rem;
+}
+
+.footer-column a {
+  color: var(--text-muted);
+  transition: color var(--transition-fast);
+}
+
+.footer-column a:hover {
+  color: var(--primary-color);
+}
+
+.copyright {
+  margin-top: 2rem;
+  font-size: 0.95rem;
+  opacity: 0.8;
+}
+
+/* ===== Responsive Tweaks ===== */
+@media (max-width: 768px) {
+  .headline {
+    font-size: 2.3rem;
+    line-height: 1.2;
+  }
+  .subtitle {
+    font-size: 1.1rem;
+    padding: 0 1rem;
+  }
+  .nav-container {
+    padding: 1rem;
+  }
+  .feature-grid {
+    gap: 1.2rem;
+  }
+  .cta-buttons {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .footer-links {
+    flex-direction: column;
+    align-items: center;
+  }
+  .faq h2, .faq .faq-item summary {
+    font-size: 1.3rem;
+  }
+  .support h2 {
+    font-size: 1.7rem;
+  }
+  .support-card {
+    padding: 1.5rem;
+  }
+}
+.compatibility {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.compatibility h2 {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+}
+
+.windows-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.windows-item {
+  background: var(--bg-lighter);
+  padding: 1rem 2rem;
+  border-radius: var(--border-radius-sm);
+  font-size: 1.2rem;
+  color: var(--text-bright);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+}
+
+.windows-item:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+/* ===== Testimonials Section ===== */
+.testimonials {
+  background: var(--bg-lighter);
+  padding: 4rem 2rem;
+  text-align: center;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+  max-width: var(--max-width);
+  margin: 4rem auto;
+}
+
+.testimonials h2 {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+}
+
+.testimonial {
+  margin-bottom: 2.5rem;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-muted);
+  position: relative;
+  padding: 1.5rem;
+  border-left: 4px solid var(--primary-color);
+  background: var(--bg-light);
+  border-radius: var(--border-radius-md);
+}
+
+.testimonial:last-child {
+  margin-bottom: 0;
+}
+
+.testimonial .stars {
+  color: gold;
+  font-size: 1.3rem;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.testimonial .quote {
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+
+.testimonial .author {
+  font-weight: bold;
+  color: var(--text-bright);
+}
+/* ===== Antivirus Info Section ===== */
+.antivirus-info {
+  background: var(--bg-light);
+  padding: 3rem 2rem;
+  border-left: 6px solid var(--primary-color);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+  max-width: var(--max-width);
+  margin: 4rem auto;
+  color: var(--text-bright);
+  text-align: left;
+}
+
+.antivirus-info h2 {
+  font-size: 2.3rem;
+  margin-bottom: 1.5rem;
+  color: var(--primary-color);
+  text-align: center;
+}
+
+.antivirus-info p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 1.2rem;
+}
+
+.antivirus-info ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.antivirus-info ul li {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  background: var(--bg-lighter);
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.support {
+  background-color: var(--bg-light);
+  padding: 3rem 2rem;
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  margin: 2rem auto;
+  max-width: var(--max-width);
+}
+
+.support h2 {
+  color: var(--primary-color);
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.support p {
+  color: var(--text-bright);
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.support a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.support a:hover {
+  text-decoration: underline;
+}
+.comparison-table table {
+  width: 100%;
+  min-width: unset;
+  table-layout: fixed;
+  word-break: break-word;
+}
+
+.comparison-table td,
+.comparison-table th {
+  font-size: 0.85rem;
+  padding: 0.75rem 0.5rem;
+}
+.comparison-table {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 2rem;
+}
+stripe-buy-button {
+  width: 100% !important;
+  max-width: 100% !important;
+  display: block !important;
+  margin: 1.5rem auto 0 auto !important;
+}
+.pricing-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.footer .logo {
+  max-width: 120px;
+  height: auto;
+  margin: 0 auto 1rem;
+  display: block;
+}
+stripe-buy-button {
+  max-width: 100%;
+  width: 100%;
+  margin: 0 auto;
+  display: block;
+  box-sizing: border-box;
+}
+
+.pricing-card stripe-buy-button {
+  max-width: 320px; /* Or whatever fits your box layout */
+  margin: 0 auto;
+}
+
+.pricing-card {
+  padding: 1rem;
+  box-sizing: border-box;
+  background-color: #2c2b2b;
+  border-radius: 12px;
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+}
+.comparison-table {
+  overflow-x: auto;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.comparison-table table {
+  border-collapse: collapse;
+  min-width: 600px;
+  width: 100%;
+}
+
+.comparison-table th,
+.comparison-table td {
+  padding: 12px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+@media (max-width: 600px) {
+  .comparison-table table {
+    font-size: 14px;
+  }
+}
+/* Responsive Design Fixes */
+@media screen and (max-width: 768px) {
+  body {
+    font-size: 16px;
+    padding: 10px;
+  }
+
+  header, nav, footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  nav ul {
+    flex-direction: column;
+    padding: 0;
+  }
+
+  nav li {
+    margin: 10px 0;
+  }
+
+  .container, .content {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  button, input, select {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+/* ===== Mobile Fixes for Comparison Table ===== */
+@media screen and (max-width: 768px) {
+  /* Improve comparison table readability on mobile */
+  .comparison-table {
+    margin: 1rem -1rem 2rem -1rem;
+    width: calc(100% + 2rem);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 10px; /* Space for scrollbar */
+  }
+
+  .comparison-table table {
+    width: 100%;
+    min-width: 100%;
+    table-layout: auto; /* Allow table to determine column widths */
+  }
+
+  .comparison-table th,
+  .comparison-table td {
+    padding: 12px 10px;
+    font-size: 0.9rem;
+    white-space: nowrap; /* Prevent text wrapping */
+  }
+
+  /* Make checkmarks and x-marks larger for better visibility */
+  .comparison-table td:nth-child(n+2) {
+    font-size: 1.2rem;
+  }
+  
+  /* Add horizontal scroll indicator */
+  .comparison-table::after {
+    content: "← Scroll →";
+    display: block;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    padding-top: 5px;
+    opacity: 0.7;
+  }
+
+  /* Ensure proper stripe button sizing and containment */
+  .pricing-card {
+    padding: 1.5rem 1rem;
+    width: 100%;
+    max-width: 95%;
+    margin: 0 auto 2rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Fix Stripe button container */
+  stripe-buy-button {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 1.5rem auto 0 !important;
+    display: block !important;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  /* Target specific pricing elements within cards */
+  .pricing-features {
+    width: 100%;
+    text-align: left;
+  }
+
+  .pricing-features ul {
+    padding-left: 0;
+    width: 100%;
+  }
+
+  /* Force all Stripe buttons to be properly sized */
+  stripe-buy-button > * {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+/* Add some additional spacing around the table at very small screens */
+@media screen and (max-width: 400px) {
+  .comparison-table th,
+  .comparison-table td {
+    padding: 10px 6px;
+    font-size: 0.8rem;
+  }
+  
+  /* Ensure proper table column sizing on smallest screens */
+  .comparison-table table {
+    table-layout: fixed;
+  }
+  
+  .comparison-table th:first-child,
+  .comparison-table td:first-child {
+    width: 35%; /* Make first column (features) take reasonable space */
+  }
+  
+  .comparison-table th:not(:first-child),
+  .comparison-table td:not(:first-child) {
+    width: 21.66%; /* Distribute remaining space evenly */
+  }
+}
+/* ===== COMPREHENSIVE MOBILE FIXES - Add to bottom of style.css ===== */
+
+/* Mobile-First Approach - General Improvements */
+@media screen and (max-width: 768px) {
+  /* Base font size adjustments */
+  html {
+    font-size: 15px; /* Slightly reduce base font size on mobile */
+  }
+  
+  body {
+    padding: 0; /* Remove any body padding on mobile */
+  }
+  
+  /* Container sizing */
+  section, .container, .content, .support, .testimonials, .antivirus-info, .compatibility, .faq {
+    padding: 3rem 1rem; /* Standardize padding across sections */
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  /* Typography scaling */
+  h1 {
+    font-size: 2rem;
+    line-height: 1.3;
+  }
+  
+  h2 {
+    font-size: 1.8rem;
+    line-height: 1.3;
+  }
+  
+  .section-header h2 {
+    font-size: 2rem;
+  }
+  
+  .headline {
+    font-size: 2rem;
+    padding: 0 0.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .subtitle {
+    font-size: 1rem;
+    padding: 0 0.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  /* Better spacing for all sections */
+  .section-header {
+    margin-bottom: 2rem;
+  }
+  
+  /* Hero section improvements */
+  .hero {
+    padding-top: 100px; /* Account for fixed header */
+    min-height: 90vh;
+  }
+  
+  .hero-benefits {
+    font-size: 1rem;
+    text-align: left;
+    max-width: 90%;
+    margin: 0 auto 2rem;
+  }
+  
+  .hero-benefits li {
+    text-align: left;
+    margin-bottom: 0.8rem;
+  }
+  
+  /* Improved Nav/Header */
+  .nav-container {
+    padding: 0.8rem 1rem;
+  }
+  
+  .logo {
+    width: 100px; /* Smaller logo on mobile */
+  }
+  
+  /* Fix mobile menu toggle visibility and spacing */
+  .mobile-menu-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 11;
+  }
+  
+  .mobile-menu-toggle .bar {
+    width: 25px;
+    height: 2px;
+    margin: 3px 0;
+  }
+  
+  /* Properly place the mobile menu */
+  .nav-links.active {
+    display: flex;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: var(--bg-dark);
+    flex-direction: column;
+    padding: 1rem;
+    box-shadow: var(--shadow-md);
+    z-index: 1000;
+  }
+  
+  .nav-links.active li {
+    width: 100%;
+    text-align: center;
+    padding: 0.8rem 0;
+  }
+  
+  /* Fix feature grid on mobile */
+  .feature-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin: 0 auto;
+    max-width: 450px;
+  }
+  
+  .feature-card {
+    padding: 1.8rem 1.2rem;
+  }
+  
+  /* Fix buttons and CTAs */
+  .cta-buttons {
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  
+  .cta-buttons .btn, 
+  button, 
+  .btn {
+    width: 100%;
+    text-align: center;
+    padding: 0.8rem 1.2rem;
+    font-size: 1rem;
+  }
+  
+  /* Fix pricing cards */
+  .pricing-card {
+    padding: 1.5rem 1rem;
+    margin: 0 auto 2rem;
+    width: 100%;
+    max-width: 90%;
+  }
+  
+  .pricing-header h2 {
+    font-size: 1.6rem;
+  }
+  
+  .price {
+    font-size: 2rem;
+  }
+  
+  .pricing-features ul {
+    text-align: left;
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .pricing-features li {
+    font-size: 0.95rem;
+    gap: 0.5rem;
+  }
+  
+  /* Fix comparison table */
+  .comparison-table {
+    margin: 1rem -1rem 2rem;
+    width: calc(100% + 2rem);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 15px;
+  }
+  
+  .comparison-table::before {
+    content: "← Swipe to see more →";
+    display: block;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    padding-bottom: 10px;
+  }
+  
+  .comparison-table table {
+    width: 650px; /* Minimum width to ensure content fits */
+    table-layout: fixed;
+  }
+  
+  .comparison-table th:first-child,
+  .comparison-table td:first-child {
+    width: 40%;
+  }
+  
+  .comparison-table th:not(:first-child),
+  .comparison-table td:not(:first-child) {
+    width: 20%;
+  }
+  
+  .comparison-table th,
+  .comparison-table td {
+    padding: 12px 8px;
+    font-size: 0.9rem;
+    vertical-align: middle;
+  }
+  
+  /* Fix FAQ section */
+  .faq .faq-item summary {
+    padding: 1rem;
+    font-size: 1rem;
+  }
+  
+  .faq .faq-answer {
+    padding: 1rem;
+    font-size: 0.95rem;
+  }
+  
+  /* Fix testimonials section */
+  .testimonial {
+    padding: 1.2rem 1rem;
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .testimonial .stars {
+    font-size: 1.1rem;
+  }
+  
+  /* Fix Windows compatibility section */
+  .windows-list {
+    gap: 1rem;
+    flex-direction: column;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  
+  .windows-item {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+  }
+  
+  /* Fix antivirus info section */
+  .antivirus-info {
+    padding: 2rem 1rem;
+  }
+  
+  .antivirus-info ul {
+    flex-direction: column;
+    gap: 0.8rem;
+    max-width: 300px;
+    margin: 1.5rem auto 0;
+  }
+  
+  .antivirus-info ul li {
+    font-size: 0.95rem;
+    padding: 0.6rem 1rem;
+  }
+  
+  /* Fix support section */
+  .support-card {
+    padding: 1.5rem 1rem;
+  }
+  
+  .support-card h3 {
+    font-size: 1.3rem;
+  }
+  
+  /* Fix footer layout */
+  footer {
+    padding: 3rem 1rem 2rem;
+  }
+  
+  .footer-links {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .footer-column {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Extra Small Devices (under 480px) */
+@media screen and (max-width: 480px) {
+  html {
+    font-size: 14px; /* Further reduce base font on very small screens */
+  }
+  
+  .headline {
+    font-size: 1.8rem;
+  }
+  
+  .subtitle {
+    font-size: 0.95rem;
+  }
+  
+  /* Extreme small screen fixes */
+  .feature-card, 
+  .support-card, 
+  .pricing-card {
+    padding: 1.2rem 0.8rem;
+  }
+  
+  /* Ensure all section headers fit */
+  .section-header h2,
+  .pricing h2, 
+  .faq h2, 
+  .support h2,
+  .testimonials h2,
+  .compatibility h2,
+  .antivirus-info h2 {
+    font-size: 1.6rem;
+    line-height: 1.3;
+  }
+  
+  /* Fix stripe button container on very small screens */
+  stripe-buy-button {
+    overflow: hidden;
+    width: 100% !important; 
+    max-width: 100% !important;
+  }
+  
+  /* Ensure all stripe button elements respect container */
+  stripe-buy-button > * {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  
+  /* Force all pricing cards to have the same height */
+  .pricing-card {
+    height: auto;
+    min-height: 450px;
+  }
+}
+
+/* Fix for Stripe Button Containers */
+stripe-buy-button {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+
+/* Ensure all Stripe iframe containers are properly sized */
+stripe-buy-button > div,
+stripe-buy-button > iframe,
+stripe-buy-button > * {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+}
+
+/* Fix for mobile nav behavior - ensure it closes when links clicked */
+@media (max-width: 768px) {
+  .nav-links li a {
+    display: block;
+    width: 100%;
+    padding: 0.8rem 0;
+  }
+  
+  /* Ensure proper vertical spacing in mobile menu */
+  .nav-links.active {
+    padding: 0.5rem 0;
+  }
+  
+  .nav-links.active li {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .nav-links.active li:last-child {
+    border-bottom: none;
+  }
+}
+
+/* Fix for screen height issues on mobile */
+@media screen and (max-height: 600px) and (max-width: 768px) {
+  .hero {
+    min-height: auto;
+    padding-top: 80px;
+    padding-bottom: 2rem;
+  }
+}
+
+/* Ensure all table text is visible and readable on mobile */
+@media screen and (max-width: 400px) {
+  .comparison-table td,
+  .comparison-table th {
+    font-size: 0.8rem;
+    white-space: normal; /* Allow text wrapping for very small screens */
+  }
+}
+/* ===== COMPLETE MOBILE FIXES - Add to end of style.css ===== */
+
+/* Fix mobile menu toggle button and animation */
+.mobile-menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1001;
+}
+
+.mobile-menu-toggle .bar {
+  width: 25px;
+  height: 2px;
+  background: #fff;
+  margin: 3px 0;
+  transition: all 0.3s ease;
+}
+
+.mobile-menu-toggle.active .bar:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.mobile-menu-toggle.active .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-toggle.active .bar:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Fix Stripe button containers universally */
+stripe-buy-button {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 1.5rem auto 0 !important;
+  overflow: visible !important;
+}
+
+stripe-buy-button > div,
+stripe-buy-button iframe,
+stripe-buy-button * {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+/* Enhanced Table Responsiveness */
+.comparison-table {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+}
+
+.comparison-table::before {
+  content: "← Scroll horizontally →";
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  opacity: 0.8;
+}
+
+/* Universal Mobile Fixes */
+@media screen and (max-width: 768px) {
+  html {
+    font-size: 15px;
+  }
+  
+  body {
+    padding: 0;
+    overflow-x: hidden;
+    width: 100%;
+  }
+  
+  section, 
+  .container, 
+  .content, 
+  .support, 
+  .testimonials, 
+  .antivirus-info, 
+  .compatibility, 
+  .faq {
+    padding: 3rem 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+  }
+  
+  /* Mobile Navigation */
+  .nav-container {
+    padding: 0.8rem 1rem;
+    position: relative;
+    width: 100%;
+  }
+  
+  .logo {
+    width: 100px;
+  }
+  
+  .mobile-menu-toggle {
+    display: flex;
+  }
+  
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: var(--bg-dark);
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    z-index: 1000;
+    box-shadow: var(--shadow-md);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .nav-links.active {
+    display: flex;
+  }
+  
+  .nav-links li {
+    width: 100%;
+    margin: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .nav-links li:last-child {
+    border-bottom: none;
+  }
+  
+  .nav-links li a {
+    display: block;
+    padding: 1rem;
+    width: 100%;
+    text-align: center;
+  }
+  
+  /* Hero Section */
+  .hero {
+    padding-top: 100px; /* Adjust for fixed header */
+    padding-bottom: 3rem;
+    min-height: auto;
+  }
+  
+  .headline {
+    font-size: 2rem;
+    line-height: 1.3;
+    margin-bottom: 1rem;
+  }
+  
+  .subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    padding: 0 0.5rem;
+  }
+  
+  .hero-benefits {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .hero-benefits li {
+    justify-content: flex-start;
+    margin-bottom: 0.8rem;
+  }
+  
+  /* CTA Buttons */
+  .cta-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  
+  .cta-buttons .btn, 
+  button, 
+  .btn {
+    width: 100%;
+    text-align: center;
+    padding: 0.8rem 1.2rem;
+  }
+  
+  /* Features Grid */
+  .feature-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin: 0 auto;
+    max-width: 450px;
+  }
+  
+  .feature-card {
+    padding: 1.8rem 1.2rem;
+  }
+  
+  /* Pricing Cards */
+  .pricing-card {
+    padding: 1.5rem 1rem;
+    margin: 0 auto 2rem;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    min-height: 450px;
+  }
+  
+  .pricing-header h2 {
+    font-size: 1.6rem;
+  }
+  
+  .price {
+    font-size: 2rem;
+  }
+  
+  .pricing-features ul {
+    text-align: left;
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .pricing-features li {
+    font-size: 0.95rem;
+    gap: 0.5rem;
+  }
+  
+  /* Comparison Table */
+  .comparison-table {
+    margin: 1rem -1rem 2.5rem;
+    width: calc(100% + 2rem);
+    padding-bottom: 25px; /* Space for scroll message */
+  }
+  
+  .comparison-table table {
+    width: 650px;
+    table-layout: fixed;
+  }
+  
+  .comparison-table th:first-child,
+  .comparison-table td:first-child {
+    width: 40%;
+  }
+  
+  .comparison-table th:not(:first-child),
+  .comparison-table td:not(:first-child) {
+    width: 20%;
+  }
+  
+  .comparison-table th,
+  .comparison-table td {
+    padding: 12px 8px;
+    font-size: 0.9rem;
+    vertical-align: middle;
+  }
+  
+  /* FAQs */
+  .faq .faq-item summary {
+    padding: 1rem;
+    font-size: 1rem;
+  }
+  
+  .faq .faq-answer {
+    padding: 1rem;
+    font-size: 0.95rem;
+  }
+  
+  /* Testimonials */
+  .testimonial {
+    padding: 1.2rem 1rem;
+    font-size: 0.95rem;
+  }
+  
+  /* Windows Compatibility */
+  .windows-list {
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  
+  .windows-item {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+  }
+  
+  /* Antivirus Info */
+  .antivirus-info {
+    padding: 2rem 1rem;
+  }
+  
+  .antivirus-info ul {
+    flex-direction: column;
+    gap: 0.8rem;
+    max-width: 300px;
+    margin: 1.5rem auto 0;
+  }
+  
+  .antivirus-info ul li {
+    padding: 0.6rem 1rem;
+  }
+  
+  /* Support Cards */
+  .support-card {
+    padding: 1.5rem 1rem;
+  }
+  
+  /* Footer */
+  footer {
+    padding: 3rem 1rem 2rem;
+  }
+  
+  .footer-links {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .footer-column {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Additional fixes for very small devices */
+@media screen and (max-width: 480px) {
+  html {
+    font-size: 14px;
+  }
+  
+  .headline {
+    font-size: 1.8rem;
+  }
+  
+  .subtitle {
+    font-size: 0.95rem;
+  }
+  
+  .feature-card,
+  .support-card,
+  .pricing-card {
+    padding: 1.2rem 0.8rem;
+    width: 100%;
+  }
+  
+  .section-header h2,
+  .pricing h2, 
+  .faq h2, 
+  .support h2,
+  .testimonials h2,
+  .compatibility h2,
+  .antivirus-info h2 {
+    font-size: 1.6rem;
+  }
+  
+  .comparison-table th,
+  .comparison-table td {
+    font-size: 0.8rem;
+    white-space: normal;
+  }
+}
+
+/* Fix for screen height issues on small devices */
+@media screen and (max-height: 600px) {
+  .hero {
+    min-height: auto;
+    padding-top: 80px;
+    padding-bottom: 2rem;
+  }
+}
+
+/* Fix for Stripe Button on all screen sizes */
+stripe-buy-button::part(button),
+stripe-buy-button::shadow-part {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Fix accessibility focus styles */
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Ensure touch targets are large enough */
+button, 
+.btn,
+.nav-links li a,
+.mobile-menu-toggle,
+input[type="checkbox"],
+input[type="radio"],
+select {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Fix for Firefox */
+@-moz-document url-prefix() {
+  .comparison-table {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) var(--bg-light);
+  }
+}
+
+/* Fix for webkit browsers */
+.comparison-table::-webkit-scrollbar {
+  height: 8px;
+}
+
+.comparison-table::-webkit-scrollbar-track {
+  background: var(--bg-light);
+}
+
+.comparison-table::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+  border-radius: 20px;
+}
+
+/* Fix content flash during page load */
+body {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
