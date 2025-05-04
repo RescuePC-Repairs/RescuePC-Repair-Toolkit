@@ -309,7 +309,7 @@ section {
 
 /* ===== Comparison Table ===== */
 .comparison-table {
-  overflow-x: auto;
+  overflow-x: visible;
   margin-top: 2rem;
   margin-bottom: 2rem;
   position: relative;
@@ -765,15 +765,15 @@ footer .logo {
   html {
     font-size: 15px;
   }
-  
+
   body {
     padding: 0;
     overflow-x: hidden;
   }
-  
+
   /* Section spacing */
-  section, 
-  .container, 
+  section,
+  .container,
   .compatibility,
   .faq,
   .testimonials,
@@ -782,19 +782,19 @@ footer .logo {
   .antivirus-info {
     padding: 3rem 1rem;
   }
-  
+
   /* Typography */
   .headline {
     font-size: 2rem;
     line-height: 1.3;
   }
-  
+
   .subtitle {
     font-size: 1.1rem;
     padding: 0 0.5rem;
     margin-bottom: 2rem;
   }
-  
+
   .section-header h2,
   .testimonials h2,
   .compatibility h2,
@@ -804,25 +804,25 @@ footer .logo {
   .pricing h2 {
     font-size: 1.8rem;
   }
-  
+
   .section-header {
     margin-bottom: 2rem;
   }
-  
+
   /* Navigation */
   .nav-container {
     padding: 0.1rem 1rem;
   }
-  
+
   .logo {
     width: 40px !important;
     height: auto;
   }
-  
+
   .mobile-menu-toggle {
     display: flex;
   }
-  
+
   .nav-links {
     display: none;
     position: absolute;
@@ -837,21 +837,21 @@ footer .logo {
     box-shadow: var(--shadow-md);
     border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
-  
+
   .nav-links.active {
     display: flex;
   }
-  
+
   .nav-links li {
     width: 100%;
     margin: 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
-  
+
   .nav-links li:last-child {
     border-bottom: none;
   }
-  
+
   .nav-links li a {
     display: flex;
     justify-content: center;
@@ -861,26 +861,26 @@ footer .logo {
     width: 100%;
     text-align: center;
   }
-  
+
   /* Hero section */
   .hero {
     padding-top: 100px;
     padding-bottom: 3rem;
     min-height: auto;
   }
-  
+
   .hero-benefits {
     font-size: 1rem;
     text-align: left;
     max-width: 90%;
     margin: 0 auto 2rem;
   }
-  
+
   .hero-benefits li {
     justify-content: flex-start;
     margin-bottom: 0.8rem;
   }
-  
+
   /* CTA buttons */
   .cta-buttons {
     flex-direction: column;
@@ -890,13 +890,13 @@ footer .logo {
     max-width: 300px;
     margin: 0 auto;
   }
-  
+
   .cta-buttons .btn {
     width: 100%;
     text-align: center;
     padding: 0.8rem 1.2rem;
   }
-  
+
   /* Features */
   .feature-grid {
     grid-template-columns: 1fr;
@@ -904,52 +904,57 @@ footer .logo {
     margin: 0 auto;
     max-width: 450px;
   }
-  
+
   .feature-card {
     padding: 1.8rem 1.2rem;
   }
-  
+
   /* Comparison table */
   .comparison-table {
-    margin: 1rem -1rem 2.5rem;
-    width: calc(100% + 2rem);
+    width: 100%;
+    overflow: visible;
+    -webkit-overflow-scrolling: auto;
     padding-bottom: 25px;
   }
-  
+
   .comparison-table::before {
-    content: "← Scroll horizontally →";
-    position: absolute;
-    bottom: -20px;
-    left: 0;
-    right: 0;
-    text-align: center;
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    opacity: 0.8;
+    content: none; /* Remove scroll hint since table is now fully visible */
   }
-  
+
   .comparison-table table {
+    display: block;
     width: 100%;
-    max-width: 650px;
+    border-collapse: separate;
+    border-spacing: 0;
   }
-  
-  .comparison-table th:first-child,
-  .comparison-table td:first-child {
-    width: 40%;
+
+  .comparison-table thead {
+    display: none; /* Hide headers for better mobile layout */
   }
-  
-  .comparison-table th:not(:first-child),
-  .comparison-table td:not(:first-child) {
-    width: 20%;
+
+  .comparison-table tr {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 10px;
   }
-  
-  .comparison-table th,
+
   .comparison-table td {
-    padding: 12px 8px;
-    font-size: 0.9rem;
-    vertical-align: middle;
+    display: block;
+    text-align: left;
+    padding: 8px;
+    font-size: 1rem;
   }
-  
+
+  .comparison-table td::before {
+    content: attr(data-label); /* Retain column names for readability */
+    font-weight: bold;
+    display: block;
+    margin-bottom: 3px;
+    color: var(--text-bright);
+  }
+
   /* Windows compatibility */
   .windows-list {
     flex-direction: column;
@@ -957,61 +962,61 @@ footer .logo {
     max-width: 300px;
     margin: 0 auto;
   }
-  
+
   .windows-item {
     width: 100%;
     padding: 0.8rem 1rem;
     font-size: 1rem;
   }
-  
+
   /* FAQs */
   .faq .faq-item summary {
     padding: 1rem;
     font-size: 1rem;
   }
-  
+
   .faq .faq-answer {
     padding: 1rem;
     font-size: 0.95rem;
   }
-  
+
   /* Testimonials */
   .testimonial {
     padding: 1.2rem 1rem;
     font-size: 0.95rem;
     margin-bottom: 1.5rem;
   }
-  
+
   .testimonial .stars {
     font-size: 1.1rem;
   }
-  
+
   /* Antivirus Info */
   .antivirus-info {
     padding: 2rem 1rem;
   }
-  
+
   .antivirus-info ul {
     flex-direction: column;
     gap: 0.8rem;
     max-width: 300px;
     margin: 1.5rem auto 0;
   }
-  
+
   .antivirus-info ul li {
     padding: 0.6rem 1rem;
     font-size: 0.95rem;
   }
-  
+
   /* Support */
   .support-card {
     padding: 1.5rem 1rem;
   }
-  
+
   .support-card h3 {
     font-size: 1.3rem;
   }
-  
+
   /* Pricing */
   .pricing-card {
     padding: 1.5rem 1rem;
@@ -1019,35 +1024,35 @@ footer .logo {
     width: 90%;
     min-height: 450px;
   }
-  
+
   .pricing-header h2 {
     font-size: 1.6rem;
   }
-  
+
   .price {
     font-size: 2rem;
   }
-  
+
   .pricing-features ul {
     text-align: left;
     width: 100%;
   }
-  
+
   .pricing-features li {
     font-size: 0.95rem;
     gap: 0.5rem;
   }
-  
+
   /* Footer */
   footer {
     padding: 3rem 1rem 2rem;
   }
-  
+
   .footer-links {
     flex-direction: column;
     gap: 2rem;
   }
-  
+
   .footer-column {
     width: 100%;
     text-align: center;
@@ -1059,74 +1064,32 @@ footer .logo {
   html {
     font-size: 14px;
   }
-  
+
   .headline {
     font-size: 1.8rem;
   }
-  
+
   .subtitle {
     font-size: 0.95rem;
   }
-  
+
   .feature-card,
   .support-card,
   .pricing-card {
     padding: 1.2rem 0.8rem;
     width: 100%;
   }
-  
+
   /* Table fixes for very small screens */
+  .comparison-table {
+    overflow: visible;
+  }
   .comparison-table th,
   .comparison-table td {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     white-space: normal;
-    padding: 8px 6px;
-  }
-  /* ===== Mobile Navigation Fix ===== */
-@media (max-width: 768px) {
-  /* Improve mobile menu toggle visibility and interaction */
-  .mobile-menu-toggle {
-    display: flex;
-    background: transparent;
-    border: none;
-    z-index: 1001;
-    padding: 8px;
-    margin-right: -8px;
-  }
-
-  /* Make the nav links properly display when active */
-  .nav-links.active {
-    display: flex;
-    animation: fadeIn 0.3s ease;
-  }
-
-  /* Fix link styling in mobile view */
-  .nav-links li a {
-    justify-content: center;
-    padding: 1rem;
-    font-size: 1.1rem;
-    min-height: 44px;
-    width: 100%;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    line-height: 1.2;
-    word-break: keep-all;
-    white-space: nowrap;
-  }
-  
-  /* Disable the after element for mobile */
-  .nav-links li a::after {
-    display: none;
-  }
-  
-  /* Add a JS class for when the menu is open */
-  body.menu-open {
-    overflow: hidden;
-  }
-  
-  /* Fix for nav links getting cut off */
-  .nav-links li:last-child {
-    padding-bottom: 10px;
+    padding: 4px 2px;
+    margin-bottom: 3px;
+    word-break: break-work;
   }
 }
