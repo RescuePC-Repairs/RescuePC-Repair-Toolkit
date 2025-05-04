@@ -930,7 +930,7 @@ footer .logo {
   
   .comparison-table table {
     width: 100%;
-    width: 650px;
+    max-width: 650px;
   }
   
   .comparison-table th:first-child,
