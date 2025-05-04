@@ -929,6 +929,7 @@ footer .logo {
   }
   
   .comparison-table table {
+    width: 100%;
     width: 650px;
   }
   
