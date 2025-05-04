@@ -815,7 +815,7 @@ footer .logo {
   }
   
   .logo {
-    width: 90px;
+    width: 110px !important;
   }
   
   .mobile-menu-toggle {
