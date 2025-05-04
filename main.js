@@ -1,4 +1,4 @@
-// main.js – FixMate USB Toolkit Frontend Enhancements
+// main.js – RescuePC Repairs USB Toolkit Frontend Enhancements
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ===== Easter egg for devs =====
-  console.log('%cFixMate USB Toolkit ✨', 'font-size: 18px; color: #6772e5; font-weight: bold;');
+  console.log('%cRescuePC Repais USB Toolkit ✨', 'font-size: 18px; color: #6772e5; font-weight: bold;');
   console.log('%cBuilt by Tyler Keesee for real PC repair heroes.', 'font-size: 14px; color: #333;');
   console.log('%cSecure. Offline. Yours.', 'font-size: 12px; color: gray;');
 
