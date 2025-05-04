@@ -815,7 +815,7 @@ footer .logo {
   }
   
   .logo {
-    width: 30px;
+    width: 10px;
   }
   
   .mobile-menu-toggle {
@@ -854,7 +854,9 @@ footer .logo {
   .nav-links li a {
     display: flex;
     justify-content: center;
-    padding: 1rem;
+    padding: 0.5rem;
+    min-height: 36px;
+    line-height: 1.1;
     width: 100%;
     text-align: center;
   }
