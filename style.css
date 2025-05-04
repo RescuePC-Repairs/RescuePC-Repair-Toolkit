@@ -1078,3 +1078,51 @@ footer .logo {
     white-space: normal;
     padding: 8px 6px;
   }
+  /* ===== Mobile Navigation Fix ===== */
+@media (max-width: 768px) {
+  /* Improve mobile menu toggle visibility and interaction */
+  .mobile-menu-toggle {
+    display: flex;
+    background: transparent;
+    border: none;
+    z-index: 1001;
+    padding: 8px;
+    margin-right: -8px;
+  }
+
+  /* Make the nav links properly display when active */
+  .nav-links.active {
+    display: flex;
+    animation: fadeIn 0.3s ease;
+  }
+
+  /* Fix link styling in mobile view */
+  .nav-links li a {
+    justify-content: center;
+    padding: 1rem;
+    font-size: 1.1rem;
+    min-height: 44px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    line-height: 1.2;
+    word-break: keep-all;
+    white-space: nowrap;
+  }
+  
+  /* Disable the after element for mobile */
+  .nav-links li a::after {
+    display: none;
+  }
+  
+  /* Add a JS class for when the menu is open */
+  body.menu-open {
+    overflow: hidden;
+  }
+  
+  /* Fix for nav links getting cut off */
+  .nav-links li:last-child {
+    padding-bottom: 10px;
+  }
+}
