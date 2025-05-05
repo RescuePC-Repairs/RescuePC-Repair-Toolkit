@@ -171,7 +171,7 @@ button, .btn {
   align-items: center;
   width: 44px;
   height: 34px;
-  background: transparent;
+  background: none;
   border: none;
   cursor: pointer;
   padding: 0;
@@ -180,7 +180,7 @@ button, .btn {
 
 .mobile-menu-toggle .bar {
   width: 25px;
-  height: 2px;
+  height: 3px;
   background: #fff;
   margin: 3px 0;
   transition: all 0.3s ease;
