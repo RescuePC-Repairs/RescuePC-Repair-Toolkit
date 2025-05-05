@@ -37,7 +37,7 @@
 ## 💳 Buy RescuePC Repairs™
 
 Ready to repair smarter?  
-👉 [Purchase RescuePC Repairs for $29.99](https://buy.stripe.com/00g6qF1XWglF7w4aEF)
+👉 [Purchase RescuePC Repairs for $19.99](https://buy.stripe.com/00g6qF1XWglF7w4aEF)
 
 After purchase, you'll be redirected to a secure download page.
 
