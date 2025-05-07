@@ -140,4 +140,172 @@ document.addEventListener('DOMContentLoaded', () => {
   console.log('%cRescuePC Repairs USB Toolkit ✨', 'font-size: 18px; color: #6772e5; font-weight: bold;');
   console.log('%cBuilt by Tyler Keesee for real PC repair heroes.', 'font-size: 14px; color: #333;');
   console.log('%cSecure. Offline. Yours.', 'font-size: 12px; color: gray;');
+
+  // ===== Parallax scrolling effect for hero section =====
+  const hero = document.querySelector('.hero');
+  
+  window.addEventListener('scroll', () => {
+    if (hero) {
+      const scrollPosition = window.pageYOffset;
+      hero.style.backgroundPosition = `center ${scrollPosition * 0.5}px`;
+    }
+  });
+  
+  // ===== Animated counter for statistics =====
+  const animateCounter = (element, target, duration = 2000) => {
+    let start = 0;
+    const increment = target / (duration / 16);
+    
+    const updateCounter = () => {
+      start += increment;
+      if (start < target) {
+        element.textContent = Math.floor(start);
+        requestAnimationFrame(updateCounter);
+      } else {
+        element.textContent = target;
+      }
+    };
+    
+    updateCounter();
+  };
+  
+  // Apply to any counter elements when they come into view
+  const counters = document.querySelectorAll('.counter-value');
+  
+  if (counters.length > 0) {
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const target = parseInt(entry.target.getAttribute('data-target'), 10);
+          animateCounter(entry.target, target);
+          counterObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    
+    counters.forEach(counter => counterObserver.observe(counter));
+  }
+  
+  // ===== Typed.js effect for dynamic text =====
+  // Note: Would require adding Typed.js library
+  const typedElement = document.querySelector('.typed-text');
+  if (typedElement && typeof Typed !== 'undefined') {
+    new Typed(typedElement, {
+      strings: [
+        'Fix network issues instantly.',
+        'Restore missing audio drivers.',
+        'Remove malware without internet.',
+        'Boost system performance.',
+        'All from a simple USB drive.'
+      ],
+      typeSpeed: 50,
+      backSpeed: 30,
+      backDelay: 2000,
+      loop: true
+    });
+  }
+  
+  // ===== Dark/Light mode toggle =====
+  const darkModeToggle = document.querySelector('.dark-mode-toggle');
+  if (darkModeToggle) {
+    darkModeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('light-mode');
+      
+      // Save preference to localStorage
+      const isDarkMode = !document.body.classList.contains('light-mode');
+      localStorage.setItem('darkMode', isDarkMode);
+      
+      // Update toggle icon
+      const icon = darkModeToggle.querySelector('i');
+      if (icon) {
+        icon.className = isDarkMode ? 'fas fa-sun' : 'fas fa-moon';
+      }
+    });
+    
+    // Check for saved preference
+    const savedDarkMode = localStorage.getItem('darkMode');
+    if (savedDarkMode === 'false') {
+      document.body.classList.add('light-mode');
+      const icon = darkModeToggle.querySelector('i');
+      if (icon) icon.className = 'fas fa-moon';
+    }
+  }
+  
+  // ===== Image lazy loading with blur-up effect =====
+  const lazyImages = document.querySelectorAll('.lazy-image');
+  
+  if ('IntersectionObserver' in window && lazyImages.length > 0) {
+    const imageObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          const src = img.getAttribute('data-src');
+          
+          if (src) {
+            img.src = src;
+            img.classList.add('loaded');
+            imageObserver.unobserve(img);
+          }
+        }
+      });
+    });
+    
+    lazyImages.forEach(img => imageObserver.observe(img));
+  }
+  
+  // ===== Ensure comparison table is properly displayed =====
+  const comparisonTable = document.querySelector('.comparison-table');
+  if (comparisonTable) {
+    // Check if table is wider than its container
+    const tableWrapper = comparisonTable.closest('.comparison-table-wrapper');
+    if (tableWrapper && comparisonTable.offsetWidth > tableWrapper.offsetWidth) {
+      // Add a subtle indicator that the table can be scrolled horizontally on mobile
+      const scrollIndicator = document.createElement('div');
+      scrollIndicator.className = 'table-scroll-hint';
+      scrollIndicator.innerHTML = '<span>Swipe to see more →</span>';
+      scrollIndicator.style.textAlign = 'center';
+      scrollIndicator.style.fontSize = '0.8rem';
+      scrollIndicator.style.color = 'var(--text-muted)';
+      scrollIndicator.style.padding = '0.5rem 0';
+      scrollIndicator.style.display = 'none';
+      
+      // Only show on mobile
+      if (window.innerWidth < 768) {
+        scrollIndicator.style.display = 'block';
+      }
+      
+      // Insert before the table wrapper
+      tableWrapper.parentNode.insertBefore(scrollIndicator, tableWrapper);
+      
+      // Hide the indicator after the user has scrolled the table
+      tableWrapper.addEventListener('scroll', () => {
+        if (scrollIndicator.style.display === 'block') {
+          scrollIndicator.style.opacity = '0';
+          setTimeout(() => {
+            scrollIndicator.style.display = 'none';
+          }, 300);
+        }
+      }, { once: true });
+    }
+  }
+
+  // ===== Timeline animation =====
+  const timelineItems = document.querySelectorAll('.timeline-item');
+
+  if (timelineItems.length > 0) {
+    const timelineObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-timeline');
+          timelineObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    
+    timelineItems.forEach((item, index) => {
+      // Add a staggered animation delay
+      item.style.transitionDelay = `${index * 0.2}s`;
+      timelineObserver.observe(item);
+    });
+  }
 });
