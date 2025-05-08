@@ -1786,25 +1786,26 @@ stripe-buy-button * {
 /* Mobile PDF link enhancements */
 @media (max-width: 768px) {
   .pdf-link {
-    padding: 8px 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 15px;
     background-color: rgba(0, 224, 255, 0.1);
     border-radius: var(--border-radius-sm);
-    transition: background-color var(--transition-fast);
+    width: 100%;
+    margin: 5px 0;
+    transition: background-color 0.3s ease;
   }
   
   .pdf-link:hover, 
-  .pdf-link:focus {
-    background-color: rgba(0, 224, 255, 0.2);
+  .pdf-link:active {
+    background-color: rgba(0, 224, 255, 0.3);
   }
   
-  /* Ensure buttons with PDF links maintain their style */
-  .btn-secondary.pdf-link {
-    background: var(--bg-dark);
-    padding: 0.8rem 1.5rem;
-  }
-  
-  .btn-secondary.pdf-link:hover {
-    background: var(--primary-color);
+  .pdf-link::before {
+    content: "\f1c1"; /* PDF icon */
+    font-family: "Font Awesome 5 Free";
+    margin-right: 8px;
   }
 }
 

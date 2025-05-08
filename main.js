@@ -5,29 +5,53 @@ document.addEventListener('DOMContentLoaded', () => {
   const pdfLinks = document.querySelectorAll('a[href$=".pdf"]')
   
   pdfLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-      // Check if it's a mobile device with screen width less than 768px
-      if (window.innerWidth < 768 && !navigator.userAgent.match(/iPad/i)) {
-        // For iOS devices that might have issues with PDFs
-        if (navigator.userAgent.match(/iPhone|iPod/i)) {
-          // Inform iOS users they might need to download the file
-          const confirmView = confirm("The PDF will open in a new tab. You may need to download it to view properly on iOS devices. Continue?")
-          if (!confirmView) {
-            e.preventDefault()
-            return false
-          }
+    // Remove any existing click event listeners to avoid conflicts
+    const newLink = link.cloneNode(true);
+    link.parentNode.replaceChild(newLink, link);
+    
+    newLink.addEventListener('click', (e) => {
+      // Get the correct relative path to the PDF
+      const pdfUrl = newLink.getAttribute('href');
+      
+      // Check if it's a mobile device
+      const isMobile = window.innerWidth < 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      
+      if (isMobile) {
+        e.preventDefault();
+        
+        // For mobile devices, try to open in a new tab first
+        const newWindow = window.open(pdfUrl, '_blank');
+        
+        // If opening in a new tab was blocked or failed, try download approach
+        if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+          const tempLink = document.createElement('a');
+          tempLink.href = pdfUrl;
+          tempLink.setAttribute('download', pdfUrl.split('/').pop());
+          tempLink.style.display = 'none';
+          document.body.appendChild(tempLink);
+          tempLink.click();
+          
+          // Clean up
+          setTimeout(() => {
+            document.body.removeChild(tempLink);
+          }, 100);
         }
+        
+        return false;
       }
+      
+      // For desktop, open in new tab as normal
+      newLink.setAttribute('target', '_blank');
       
       // Track PDF views if analytics is available
       if (typeof gtag === 'function') {
         gtag('event', 'view_item', {
           'event_category': 'Resource',
           'event_label': 'Product Flyer'
-        })
+        });
       }
-    })
-  })
+    });
+  });
   // ===== Smooth scrolling for anchor links =====
   // Selects all anchor links that start with '#'
   const anchorLinks = document.querySelectorAll('a[href^="#"]');
