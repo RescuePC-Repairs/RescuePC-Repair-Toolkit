@@ -980,6 +980,23 @@ stripe-buy-button * {
   }
 }
 
+/* Additional fix for footer bottom alignment */
+@media (max-width: 768px) {
+  .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
 /* ===== Scrollbar Styling ===== */
 .comparison-table::-webkit-scrollbar {
   height: 8px;
