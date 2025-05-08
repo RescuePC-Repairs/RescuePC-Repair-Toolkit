@@ -1687,8 +1687,6 @@ stripe-buy-button * {
     padding: 0.7rem 1rem;
   }
 }
-/* Add this to your style.css file */
-
 /* Media query for mobile sizes */
 @media (max-width: 768px) { /* Adjust 768px if your mobile breakpoint is different */
 
@@ -1728,6 +1726,7 @@ stripe-buy-button * {
   }
 
   .footer-column li {
+    display: block;
       /* If list items were inline-block, ensure they stack or remain centered */
       /* display: block; /* Often preferred on mobile for readability */
       /* text-align: center; /* Ensure text is centered if li is block */
