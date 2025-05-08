@@ -1,6 +1,33 @@
 // main.js – RescuePC Repairs USB Toolkit Frontend Enhancements
 
 document.addEventListener('DOMContentLoaded', () => {
+  // PDF link handling for better mobile experience
+  const pdfLinks = document.querySelectorAll('a[href$=".pdf"]')
+  
+  pdfLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      // Check if it's a mobile device with screen width less than 768px
+      if (window.innerWidth < 768 && !navigator.userAgent.match(/iPad/i)) {
+        // For iOS devices that might have issues with PDFs
+        if (navigator.userAgent.match(/iPhone|iPod/i)) {
+          // Inform iOS users they might need to download the file
+          const confirmView = confirm("The PDF will open in a new tab. You may need to download it to view properly on iOS devices. Continue?")
+          if (!confirmView) {
+            e.preventDefault()
+            return false
+          }
+        }
+      }
+      
+      // Track PDF views if analytics is available
+      if (typeof gtag === 'function') {
+        gtag('event', 'view_item', {
+          'event_category': 'Resource',
+          'event_label': 'Product Flyer'
+        })
+      }
+    })
+  })
   // ===== Smooth scrolling for anchor links =====
   // Selects all anchor links that start with '#'
   const anchorLinks = document.querySelectorAll('a[href^="#"]');

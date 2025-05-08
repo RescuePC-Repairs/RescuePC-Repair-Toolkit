@@ -1606,3 +1606,84 @@ stripe-buy-button * {
     transition: none;
   }
 }
+/* ===== Resources Section ===== */
+.resources {
+  max-width: var(--max-width);
+  margin: 4rem auto;
+  padding: 3rem 2rem;
+  background: var(--bg-lighter);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.resource-card {
+  background: var(--bg-light);
+  border-radius: var(--border-radius-md);
+  padding: 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+}
+
+.resource-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.resource-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+}
+
+.resource-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-bright);
+}
+
+.resource-card p {
+  margin-bottom: 1.5rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg-dark);
+  color: var(--primary-color);
+  padding: 0.8rem 1.5rem;
+  border-radius: var(--border-radius-sm);
+  font-weight: 600;
+  transition: all var(--transition-fast);
+  border: 1px solid var(--primary-color);
+}
+
+.btn-secondary:hover {
+  background: var(--primary-color);
+  color: var(--bg-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Make sure PDF links are properly styled in mobile view */
+@media (max-width: 768px) {
+  .resources {
+    padding: 2rem 1rem;
+    margin: 3rem auto;
+  }
+  
+  .resource-card {
+    padding: 1.5rem 1rem;
+  }
+  
+  .btn-secondary {
+    width: 100%;
+    justify-content: center;
+    padding: 0.7rem 1rem;
+  }
+}
