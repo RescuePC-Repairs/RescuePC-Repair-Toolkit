@@ -11,7 +11,7 @@
   --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.1);
   --shadow-md: 0 6px 12px rgba(0, 0, 0, 0.15);
   --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.2);
-  --transition-fast: 0.2s ease;
+  --transition-fast: 0.2ss;
   --transition-medium: 0.4s ease;
   --border-radius-sm: 8px;
   --border-radius-md: 12px;
@@ -722,7 +722,6 @@ section {
   gap: 0.75rem;
   color: #ffffff;
 }
-
 stripe-buy-button {
   display: block !important;
   width: 100% !important;
@@ -865,7 +864,7 @@ stripe-buy-button * {
 }
 
 .social-links a:hover {
-  background: var(--primary-color);
+  background: var(--bg-color);
   color: var(--bg-darker);
   transform: translateY(-3px);
 }
@@ -1413,17 +1412,6 @@ stripe-buy-button * {
   transition: all 0.3s ease;
 }
 
-.btn-primary:before, .btn-learn-more:before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
-  transition: all 0.6s ease;
-}
-
 .btn-primary:hover:before, .btn-learn-more:hover:before {
   left: 100%;
 }
@@ -1778,53 +1766,63 @@ stripe-buy-button * {
     padding: 0.7rem 1rem;
   }
 }
-/* Media query for mobile sizes */
-@media (max-width: 768px) { /* Adjust 768px if your mobile breakpoint is different */
 
-  /* Select the container holding your columns */
-  .footer-container {
-      /* Ensure this container isn't preventing centering */
-      /* If it's a flex container stacking items, ensure its width is appropriate */
-      width: 100%; /* Make sure it takes full width */
-      /* Add padding if needed to prevent content touching screen edges */
-      /* padding: 0 15px; */
+/* PDF Link Styling */
+.pdf-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pdf-link::before {
+  content: "\f1c1"; /* PDF icon from Font Awesome */
+  font-family: "Font Awesome 5 Free";
+  font-weight: 400;
+  margin-right: 4px;
+  font-size: 0.9em;
+}
+
+/* Mobile PDF link enhancements */
+@media (max-width: 768px) {
+  .pdf-link {
+    padding: 8px 12px;
+    background-color: rgba(0, 224, 255, 0.1);
+    border-radius: var(--border-radius-sm);
+    transition: background-color var(--transition-fast);
   }
-
-  /* Select each footer column */
-  .footer-column {
-      /* Ensure columns stack on top of each other if they were side-by-side */
-      float: none; /* If using floats */
-      display: block; /* If using inline-block or flex items */
-      width: 100%; /* Allow column to take full width up to max-width */
-      max-width: 250px; /* Optional: Set a max-width to prevent columns from being too wide on tablets */
-
-      /* --- This is the key part to center the block --- */
-      margin-left: auto;
-      margin-right: auto;
-      /* Or shorthand: */
-      margin: 15px auto; /* Add some vertical margin between stacked columns */
-
-      /* --- This centers the text/inline content *within* the column --- */
-      text-align: center; /* Centers h4 and list items' text */
+  
+  .pdf-link:hover, 
+  .pdf-link:focus {
+    background-color: rgba(0, 224, 255, 0.2);
   }
-
-  /* Optional: Adjust list alignment within the centered column */
-  .footer-column ul {
-      /* Remove default left padding that pushes the list right */
-      padding-left: 0;
-      /* Often you want lists in footers without bullet points */
-      list-style: none;
+  
+  /* Ensure buttons with PDF links maintain their style */
+  .btn-secondary.pdf-link {
+    background: var(--bg-dark);
+    padding: 0.8rem 1.5rem;
   }
-
-  .footer-column li {
-    display: block;
-      /* If list items were inline-block, ensure they stack or remain centered */
-      /* display: block; /* Often preferred on mobile for readability */
-      /* text-align: center; /* Ensure text is centered if li is block */
+  
+  .btn-secondary.pdf-link:hover {
+    background: var(--primary-color);
   }
+}
 
-  /* Center the copyright line if it's not already */
-  .footer-bottom {
-       text-align: center;
+.resource-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .resource-buttons {
+    flex-direction: column;
+    gap: 0.75rem;
   }
+  
+  .resource-buttons .btn-secondary {
+    width: 100%;
+  }
+}
 }
