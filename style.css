@@ -1687,3 +1687,54 @@ stripe-buy-button * {
     padding: 0.7rem 1rem;
   }
 }
+/* Add this to your style.css file */
+
+/* Media query for mobile sizes */
+@media (max-width: 768px) { /* Adjust 768px if your mobile breakpoint is different */
+
+  /* Select the container holding your columns */
+  .footer-container {
+      /* Ensure this container isn't preventing centering */
+      /* If it's a flex container stacking items, ensure its width is appropriate */
+      width: 100%; /* Make sure it takes full width */
+      /* Add padding if needed to prevent content touching screen edges */
+      /* padding: 0 15px; */
+  }
+
+  /* Select each footer column */
+  .footer-column {
+      /* Ensure columns stack on top of each other if they were side-by-side */
+      float: none; /* If using floats */
+      display: block; /* If using inline-block or flex items */
+      width: 100%; /* Allow column to take full width up to max-width */
+      max-width: 250px; /* Optional: Set a max-width to prevent columns from being too wide on tablets */
+
+      /* --- This is the key part to center the block --- */
+      margin-left: auto;
+      margin-right: auto;
+      /* Or shorthand: */
+      margin: 15px auto; /* Add some vertical margin between stacked columns */
+
+      /* --- This centers the text/inline content *within* the column --- */
+      text-align: center; /* Centers h4 and list items' text */
+  }
+
+  /* Optional: Adjust list alignment within the centered column */
+  .footer-column ul {
+      /* Remove default left padding that pushes the list right */
+      padding-left: 0;
+      /* Often you want lists in footers without bullet points */
+      list-style: none;
+  }
+
+  .footer-column li {
+      /* If list items were inline-block, ensure they stack or remain centered */
+      /* display: block; /* Often preferred on mobile for readability */
+      /* text-align: center; /* Ensure text is centered if li is block */
+  }
+
+  /* Center the copyright line if it's not already */
+  .footer-bottom {
+       text-align: center;
+  }
+}
