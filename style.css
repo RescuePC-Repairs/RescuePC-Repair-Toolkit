@@ -872,37 +872,111 @@ stripe-buy-button * {
 
 /* Mobile responsive footer */
 @media (max-width: 768px) {
+  /* Footer container */
   .footer {
     padding: 3rem 0 1.5rem;
   }
   
+  /* Main footer container */
   .footer-container {
-    padding: 0 1.5rem;
-  }
-  
-  .footer-content {
+    width: 100%;
+    padding: 0;
+    display: flex;
     flex-direction: column;
-    gap: 2rem;
-    margin-bottom: 2rem;
+    align-items: center;
   }
   
-  .footer-column {
+  /* Footer logo section */
+  .footer-logo {
+    margin-bottom: 2rem;
+    text-align: center;
     width: 100%;
   }
   
-  .footer-column h4 {
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
+  .footer-logo img {
+    margin: 0 auto;
   }
   
-  .footer-bottom {
+  /* Footer content section that holds columns */
+  .footer-content {
+    width: 100%;
+    display: flex;
     flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+  }
+  
+  /* Individual footer column */
+  .footer-column {
+    width: 100%;
+    max-width: 250px;
+    margin: 0 auto;
     text-align: center;
+  }
+  
+  /* Footer column headings */
+  .footer-column h4 {
+    text-align: center;
+    margin-bottom: 1.2rem;
+    position: relative;
+  }
+  
+  /* Center the underline below headings */
+  .footer-column h4::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 2px;
+    background-color: var(--primary-color);
+  }
+  
+  /* Footer lists */
+  .footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+  }
+  
+  /* Footer list items */
+  .footer-column ul li {
+    margin-bottom: 0.8rem;
+    text-align: center;
+  }
+  
+  /* Footer links */
+  .footer-column ul li a {
+    display: inline-block;
+    text-align: center;
+  }
+  
+  /* Footer bottom section */
+  .footer-bottom {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem 0;
     gap: 1.5rem;
   }
   
+  /* Copyright text */
+  .copyright {
+    width: 100%;
+    text-align: center;
+  }
+  
+  /* Social links if present */
   .social-links {
+    display: flex;
     justify-content: center;
+    width: 100%;
   }
 }
 

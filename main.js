@@ -110,27 +110,23 @@ document.addEventListener('DOMContentLoaded', () => {
   handleResize(); // Call immediately on load
 
   // ===== Mobile nav toggle (hamburger menu) =====
-  // Select the toggle button and the navigation links
   const toggle = document.querySelector('.mobile-menu-toggle');
   const navLinks = document.querySelector('.nav-links');
 
-  // Check if both elements exist before adding listener
   if (toggle && navLinks) {
     toggle.addEventListener('click', () => {
-      // Toggle the 'active' class on navigation links to show/hide menu
       navLinks.classList.toggle('active');
-      // Optional: Toggle an active class on the toggle button itself for styling
       toggle.classList.toggle('is-active');
     });
-     // Optional: Hide mobile menu when a link is clicked (for single-page apps)
-     navLinks.querySelectorAll('a').forEach(link => {
-         link.addEventListener('click', () => {
-             if (navLinks.classList.contains('active')) {
-                 navLinks.classList.remove('active');
-                 toggle.classList.remove('is-active');
-             }
-         });
-     });
+   
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (navLinks.classList.contains('active')) {
+          navLinks.classList.remove('active');
+          toggle.classList.remove('is-active');
+        }
+      });
+    });
   }
 
 
