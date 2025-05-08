@@ -138,21 +138,42 @@ document.addEventListener('DOMContentLoaded', () => {
   const navLinks = document.querySelector('.nav-links');
 
   if (toggle && navLinks) {
+    // Add click event to toggle button
     toggle.addEventListener('click', () => {
+      // Toggle active class on nav links
       navLinks.classList.toggle('active');
+      
+      // Toggle active class on the button itself (for animation)
       toggle.classList.toggle('is-active');
+      
+      // Update aria-expanded for accessibility
+      const expanded = toggle.getAttribute('aria-expanded') === 'true' || false;
+      toggle.setAttribute('aria-expanded', !expanded);
+      
+      // Log for debugging
+      console.log('Menu toggled, active:', navLinks.classList.contains('active'));
     });
-   
+
+    // Close menu when a link is clicked
     navLinks.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
-        if (navLinks.classList.contains('active')) {
-          navLinks.classList.remove('active');
-          toggle.classList.remove('is-active');
-        }
+        navLinks.classList.remove('active');
+        toggle.classList.remove('is-active');
+        toggle.setAttribute('aria-expanded', 'false');
       });
     });
+    
+    // Also close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!toggle.contains(e.target) && !navLinks.contains(e.target) && navLinks.classList.contains('active')) {
+        navLinks.classList.remove('active');
+        toggle.classList.remove('is-active');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  } else {
+    console.error("Mobile menu toggle or nav links not found");
   }
-
 
   // ===== Nav hide on scroll (auto-hide top nav) =====
   // Variable to store the last known scroll position

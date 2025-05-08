@@ -6,16 +6,11 @@
   <meta name="description" content="RescuePC Repairs - The Ultimate Offline Windows Repair Toolkit. Fix networks, drivers, audio, system crashes without internet.">
 
   <meta property="og:type" content="website">
-  <meta property="og:url" content="YOUR_WEBSITE_URL_HERE"> <meta property="og:title" content="RescuePC Repairs | Offline Windows Repair Toolkit">
+  <meta property="og:url" content="https://rescuepc-repairs.github.io/RescuePC-Repair-Toolkit/index.html"> <meta property="og:title" content="RescuePC Repairs | Offline Windows Repair Toolkit">
   <meta property="og:description" content="Fix your Windows PC without internet. Repair networks, drivers, audio issues and more with our all-in-one offline toolkit.">
   <meta property="og:image" content="assets/RescuePC Repairs_social_preview.jpg">
 
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="YOUR_WEBSITE_URL_HERE"> <meta property="twitter:title" content="RescuePC Repairs | Offline Windows Repair Toolkit">
-  <meta property="twitter:description" content="Fix your Windows PC without internet. Repair networks, drivers, audio issues and more with our all-in-one offline toolkit.">
-  <meta property="twitter:image" content="assets/RescuePC Repairs_social_preview.jpg">
-
-
+  
   <link rel="icon" href="assets/RescuePC_Icon.ico">
   <link rel="apple-touch-icon" href="assets/RescuePC_apple_touch.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -410,31 +405,5 @@
   </footer>
 
   <script src="main.js"></script>
-  <script>
-    // Keep one script block for the mobile menu toggle
-    document.addEventListener("DOMContentLoaded", function () {
-      const toggle = document.querySelector('.mobile-menu-toggle');
-      const navLinks = document.querySelector('.nav-links');
-
-      if (toggle && navLinks) {
-        toggle.addEventListener('click', () => {
-          navLinks.classList.toggle('active');
-          // Optional: Add aria-expanded toggle for accessibility
-          const expanded = toggle.getAttribute('aria-expanded') === 'true' || false;
-          toggle.setAttribute('aria-expanded', !expanded);
-        });
-
-        // Optional: Close menu when a link is clicked
-        navLinks.querySelectorAll('a').forEach(link => {
-          link.addEventListener('click', () => {
-            navLinks.classList.remove('active');
-            toggle.setAttribute('aria-expanded', 'false');
-          });
-        });
-      } else {
-          console.error("Mobile menu toggle or nav links not found.");
-      }
-    });
-  </script>
 </body>
 </html>
