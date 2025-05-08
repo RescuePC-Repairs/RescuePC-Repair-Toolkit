@@ -7,7 +7,7 @@
 ## 🚀 Features
 
 - **🛠️ One-Click Network, Audio, and System Repairs**
-- **💾 Includes 40GB+ Offline Driver Library** (no downloads needed)
+- **💾 Includes 11GB+ Offline Driver Library** (no downloads needed)
 - **🔒 100% Private and Offline** — No accounts, no telemetry, no internet required
 - **⚡ Launch Instantly from Download or USB Drive**
 - **🛡️ Malware Scanning and Performance Boost Tools Built-In**
