@@ -139,7 +139,6 @@ class Portfolio {
     this.initScrollAnimation();
     this.initNavigation();
     this.initSkills();
-    this.initResumeDownload();
     this.initTimelineAnimation();
     this.initProjectAnimations();
   }
@@ -172,16 +171,6 @@ class Portfolio {
       card.style.opacity = "0";
       card.style.transform = "translateY(20px)";
       observer.observe(card);
-    });
-  }
-
-  initResumeDownload() {
-    document.querySelector(".cta-secondary").addEventListener("click", (e) => {
-      e.preventDefault();
-      const link = document.createElement("a");
-      link.href = "resume/Tyler_Keesee_Resume.pdf";
-      link.download = "Tyler_Keesee_Resume.pdf";
-      link.click();
     });
   }
 
