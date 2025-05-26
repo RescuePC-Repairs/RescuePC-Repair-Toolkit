@@ -54,7 +54,7 @@ Unauthorized distribution is prohibited.
 ## 🛠️ Contact & Support
 
 **Email:** [rescuepcrepair@yahoo.com](mailto:rescuepcrepair@yahoo.com)  
-**Website:** [RescuePC Repairs GitHub Pages Site (Live Link)](https://tyler1201623.github.io/RescuePC-Repair-Toolkit/) 
+**Website:** [RescuePC Repairs GitHub Pages Site (Live Link)](https://rescuepc-repairs.github.io/RescuePC-Repair-Toolkit/index.html) 
 
 Need help with your download? Questions about RescuePC Repairs™?  
 Contact us — real support, real fast.
