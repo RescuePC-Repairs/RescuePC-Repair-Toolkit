@@ -264,7 +264,7 @@ button:active, .btn:active {
 }
 
 .nav-links li a {
-  color: var(--text-muted);
+  color: white;
   font-weight: 500;
   position: relative;
   font-size: 0.95rem;
