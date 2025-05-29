@@ -145,12 +145,19 @@ class Portfolio {
 
   initNavigation() {
     document.querySelectorAll(".nav-links a").forEach((link) => {
-      link.addEventListener("click", (e) => {
-        e.preventDefault();
-        document.querySelector(link.getAttribute("href")).scrollIntoView({
-          behavior: "smooth",
+      const href = link.getAttribute("href");
+      // Only handle anchor links (starting with #) for smooth scrolling
+      if (href && href.startsWith('#')) {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+            });
+          }
         });
-      });
+      }
     });
   }
 
