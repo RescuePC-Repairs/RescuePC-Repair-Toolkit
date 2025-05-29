@@ -488,7 +488,7 @@ button:active, .btn:active {
 
 .subtitle {
   font-size: 1.25rem;
-  color: var(--text-muted);
+  color: white; 
   margin-bottom: 3rem;
   max-width: 800px;
   margin-left: auto;
