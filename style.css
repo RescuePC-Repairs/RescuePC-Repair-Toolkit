@@ -1108,7 +1108,7 @@ stripe-buy-button * {
 }
 
 .footer-column ul li a {
-  color: var(--text-muted);
+  color: white;
   text-decoration: none;
   transition: color var(--transition-fast);
   font-size: 1rem;
@@ -1134,7 +1134,7 @@ stripe-buy-button * {
 }
 
 .copyright {
-  color: var(--text-muted);
+  color: white;
   font-size: 0.9rem;
 }
 
