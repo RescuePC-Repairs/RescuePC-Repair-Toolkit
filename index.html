@@ -309,6 +309,9 @@
           </li>
         </ul>
       </nav>
+      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <i class="fas fa-bars"></i>
+      </button>
     </div>
   </header>
 
@@ -454,26 +457,41 @@
       </div>
     </section>
 
-    <section class="testimonials">
-      <div class="section-header">
+    <section class="testimonials" id="testimonials">
+      <div class="testimonials-header">
         <h2>What Users Are Saying</h2>
         <p class="section-subtitle">Don't just take our word for it - hear from our satisfied users</p>
       </div>
-      <div class="container">
-        <div class="testimonial-grid">
-          <div class="testimonial">
+      
+      <!-- Navigation Dots -->
+      <div class="testimonial-nav">
+        <div class="testimonial-dot active" data-index="0"></div>
+        <div class="testimonial-dot" data-index="1"></div>
+        <div class="testimonial-dot" data-index="2"></div>
+      </div>
+      
+      <div class="testimonial-grid">
+        <!-- Testimonial 1 -->
+        <div class="testimonial" data-index="0">
+          <div class="testimonial-content">
             <div class="stars">★★★★★</div>
             <p class="quote">"At first, I had my doubts, but I decided to give RescuePC Repairs a try and I'm glad I did! It worked like a charm and completely resolved my issue."</p>
             <p class="author">— Donna K.</p>
           </div>
+        </div>
 
-          <div class="testimonial">
+        <!-- Testimonial 2 -->
+        <div class="testimonial" data-index="1">
+          <div class="testimonial-content">
             <div class="stars">★★★★★</div>
             <p class="quote">"Worth every penny. My PC wouldn't boot properly after a Windows update. RescuePC Repairs found and fixed the problem when nothing else worked."</p>
             <p class="author">— Sarah T.</p>
           </div>
+        </div>
 
-          <div class="testimonial">
+        <!-- Testimonial 3 -->
+        <div class="testimonial" data-index="2">
+          <div class="testimonial-content">
             <div class="stars">★★★★★</div>
             <p class="quote">"As an IT consultant, this is now my go-to repair tool. The offline driver library alone has saved me countless hours of searching for drivers."</p>
             <p class="author">— David M.</p>
@@ -481,6 +499,241 @@
         </div>
       </div>
     </section>
+    
+    <script>
+    // Testimonials Scroll-Snap Functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const container = document.querySelector('.testimonials');
+      const testimonials = document.querySelectorAll('.testimonial');
+      const dots = document.querySelectorAll('.testimonial-dot');
+      let isScrolling = false;
+      let scrollTimeout;
+      
+      // Initialize first testimonial
+      if (testimonials[0]) {
+        testimonials[0].classList.add('visible');
+      }
+      
+      // Set up intersection observer for animations
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const index = entry.target.getAttribute('data-index');
+            entry.target.classList.add('visible');
+            
+            // Update active dot
+            dots.forEach(dot => dot.classList.remove('active'));
+            const activeDot = document.querySelector(`.testimonial-dot[data-index="${index}"]`);
+            if (activeDot) activeDot.classList.add('active');
+          }
+        });
+      }, {
+        threshold: 0.7,
+        rootMargin: '0px'
+      });
+      
+      // Observe all testimonials
+      testimonials.forEach(testimonial => {
+        observer.observe(testimonial);
+      });
+      
+      // Handle dot navigation
+      dots.forEach(dot => {
+        dot.addEventListener('click', () => {
+          const index = dot.getAttribute('data-index');
+          const targetTestimonial = document.querySelector(`.testimonial[data-index="${index}"]`);
+          if (targetTestimonial) {
+            isScrolling = true;
+            targetTestimonial.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+            
+            // Prevent multiple rapid clicks
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+              isScrolling = false;
+            }, 1000);
+          }
+        });
+      });
+      
+      // Handle keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (isScrolling) return;
+        
+        const currentScroll = container.scrollTop;
+        const windowHeight = window.innerHeight;
+        let targetScroll;
+        
+        switch(e.key) {
+          case 'ArrowDown':
+          case 'PageDown':
+          case ' ':
+            e.preventDefault();
+            targetScroll = Math.ceil(currentScroll / windowHeight) * windowHeight;
+            if (targetScroll <= currentScroll) targetScroll += windowHeight;
+            break;
+            
+          case 'ArrowUp':
+          case 'PageUp':
+            e.preventDefault();
+            targetScroll = Math.floor(currentScroll / windowHeight) * windowHeight;
+            if (targetScroll >= currentScroll) targetScroll = Math.max(0, targetScroll - windowHeight);
+            break;
+            
+          case 'Home':
+            e.preventDefault();
+            targetScroll = 0;
+            break;
+            
+          case 'End':
+            e.preventDefault();
+            targetScroll = container.scrollHeight;
+            break;
+            
+          default:
+            return;
+        }
+        
+        // Ensure we don't scroll past boundaries
+        targetScroll = Math.max(0, Math.min(targetScroll, container.scrollHeight - windowHeight));
+        
+        isScrolling = true;
+        
+        container.scrollTo({
+          top: targetScroll,
+          behavior: 'smooth'
+        });
+        
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+          isScrolling = false;
+        }, 1000);
+      });
+      
+      // Handle wheel events for smooth scrolling
+      function handleWheel(e) {
+        if (isScrolling) {
+          e.preventDefault();
+          return;
+        }
+        
+        // Only prevent default for touchpad/mouse wheel
+        if (e.cancelable) {
+          e.preventDefault();
+        }
+        
+        isScrolling = true;
+        clearTimeout(scrollTimeout);
+        
+        const currentScroll = container.scrollTop;
+        const windowHeight = window.innerHeight;
+        let targetScroll;
+        
+        if (e.deltaY > 0) {
+          // Scrolling down
+          targetScroll = Math.ceil(currentScroll / windowHeight) * windowHeight;
+          if (targetScroll <= currentScroll) targetScroll += windowHeight;
+        } else {
+          // Scrolling up
+          targetScroll = Math.floor(currentScroll / windowHeight) * windowHeight;
+          if (targetScroll >= currentScroll) targetScroll = Math.max(0, targetScroll - windowHeight);
+        }
+        
+        // Ensure we don't scroll past boundaries
+        targetScroll = Math.max(0, Math.min(targetScroll, container.scrollHeight - windowHeight));
+        
+        container.scrollTo({
+          top: targetScroll,
+          behavior: 'smooth'
+        });
+        
+        scrollTimeout = setTimeout(() => {
+          isScrolling = false;
+        }, 1000);
+      }
+      
+      // Add wheel event with passive: false to allow preventDefault
+      container.addEventListener('wheel', handleWheel, { passive: false });
+      
+      // Handle touch events for mobile
+      let touchStartY = 0;
+      let touchStartTime = 0;
+      
+      container.addEventListener('touchstart', (e) => {
+        touchStartY = e.touches[0].clientY;
+        touchStartTime = Date.now();
+      }, { passive: true });
+      
+      container.addEventListener('touchend', (e) => {
+        if (isScrolling) return;
+        
+        const touchEndY = e.changedTouches[0].clientY;
+        const touchEndTime = Date.now();
+        const diffY = touchStartY - touchEndY;
+        const timeDiff = touchEndTime - touchStartTime;
+        
+        // Ignore small swipes or very quick swipes
+        if (Math.abs(diffY) < 50 || timeDiff < 100) return;
+        
+        isScrolling = true;
+        const currentScroll = container.scrollTop;
+        const windowHeight = window.innerHeight;
+        let targetScroll;
+        
+        if (diffY > 0) {
+          // Swiped up - go to next section
+          targetScroll = Math.ceil(currentScroll / windowHeight) * windowHeight;
+          if (targetScroll <= currentScroll) targetScroll += windowHeight;
+        } else {
+          // Swiped down - go to previous section
+          targetScroll = Math.floor(currentScroll / windowHeight) * windowHeight;
+          if (targetScroll >= currentScroll) targetScroll = Math.max(0, targetScroll - windowHeight);
+        }
+        
+        // Ensure we don't scroll past boundaries
+        targetScroll = Math.max(0, Math.min(targetScroll, container.scrollHeight - windowHeight));
+        
+        container.scrollTo({
+          top: targetScroll,
+          behavior: 'smooth'
+        });
+        
+        setTimeout(() => {
+          isScrolling = false;
+        }, 1000);
+      }, { passive: true });
+      
+      // Update active dot on manual scroll
+      function updateActiveDot() {
+        if (isScrolling) return;
+        
+        const windowHeight = window.innerHeight;
+        const scrollPosition = container.scrollTop + (windowHeight / 2);
+        
+        testimonials.forEach(testimonial => {
+          const rect = testimonial.getBoundingClientRect();
+          const elementTop = rect.top + window.pageYOffset;
+          const elementBottom = elementTop + rect.height;
+          
+          if (scrollPosition >= elementTop && scrollPosition < elementBottom) {
+            const index = testimonial.getAttribute('data-index');
+            dots.forEach(dot => dot.classList.remove('active'));
+            const activeDot = document.querySelector(`.testimonial-dot[data-index="${index}"]`);
+            if (activeDot) activeDot.classList.add('active');
+          }
+        });
+      }
+      
+      // Throttle scroll events
+      let scrollUpdateTimeout;
+      container.addEventListener('scroll', () => {
+        clearTimeout(scrollUpdateTimeout);
+        scrollUpdateTimeout = setTimeout(updateActiveDot, 100);
+      }, { passive: true });
+    });
+    </script>
 
     <section class="buy-now">
       <div class="pricing-card">
@@ -794,6 +1047,62 @@
 
   <script src="main.js" defer></script>
   <script src="theme.js" defer></script>
+  <script>
+    // Mobile menu toggle functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const menuToggle = document.querySelector('.mobile-menu-toggle');
+      const navLinks = document.querySelector('.nav-links');
+      const body = document.body;
+
+      if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', function() {
+          const isExpanded = this.getAttribute('aria-expanded') === 'true';
+          this.setAttribute('aria-expanded', !isExpanded);
+          navLinks.classList.toggle('active');
+          body.classList.toggle('menu-open', !isExpanded);
+          
+          // Toggle between menu and close icon
+          const icon = this.querySelector('i');
+          if (icon) {
+            icon.className = isExpanded ? 'fas fa-bars' : 'fas fa-times';
+          }
+        });
+
+        // Close menu when clicking on a nav link
+        document.querySelectorAll('.nav-link').forEach(link => {
+          link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            body.classList.remove('menu-open');
+            const icon = menuToggle.querySelector('i');
+            if (icon) {
+              icon.className = 'fas fa-bars';
+            }
+          });
+        });
+      }
+
+
+      // Add smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          const targetId = this.getAttribute('href');
+          if (targetId === '#' || !document.querySelector(targetId)) return;
+          
+          e.preventDefault();
+          const targetElement = document.querySelector(targetId);
+          const headerOffset = 80; // Height of your header
+          const elementPosition = targetElement.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        });
+      });
+    });
+  </script>
   <script src="lazyload.js" defer></script>
   <script src="smooth-scroll.js" defer></script>
   <!-- Image Modal -->
