@@ -1,0 +1,60 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://rescuepcrepairs.com/sitemap.xml
+
+# Disallow admin and sensitive areas
+Disallow: /admin/
+Disallow: /wp-admin/
+Disallow: /wp-includes/
+Disallow: /search/
+Disallow: /*?s=
+Disallow: /*&s=
+Disallow: /search
+Disallow: /private/
+Disallow: /includes/
+Disallow: /config/
+
+# Allow all robots to access these directories
+Allow: /assets/
+Allow: /css/
+Allow: /js/
+Allow: /images/
+
+# Crawl-delay: 10
+
+# Block specific files
+Disallow: /*.php$
+Disallow: /*.inc$
+Disallow: /*.log$
+Disallow: /*.sql$
+Disallow: /*.tpl$
+Disallow: /*.xml$
+
+# Block specific pages
+Disallow: /privacy-policy
+Disallow: /terms-of-service
+Disallow: /gdpr
+Disallow: /cookie-policy
+
+# Allow media files
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.png$
+Allow: /*.gif$
+Allow: /*.svg$
+Allow: /*.webp$
+Allow: /*.woff$
+Allow: /*.woff2$
+Allow: /*.ttf$
+Allow: /*.eot$
+
+# Host
+Host: rescuepcrepairs.com
+
+# Clean params
+Clean-param: ref /
+Sitemap: https://rescuepc-repairs.github.io/RescuePC-Repair-Toolkit/sitemap.xml

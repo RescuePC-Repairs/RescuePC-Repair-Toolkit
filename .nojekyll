@@ -1,0 +1,2 @@
+# This file ensures GitHub Pages doesn't use Jekyll processing
+# and serves all files as static content, including files with leading underscores
