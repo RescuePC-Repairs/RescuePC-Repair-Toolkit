@@ -3782,7 +3782,7 @@ h4 {
 stripe-buy-button {
   display: block !important;
   width: 100% !important;
-  max-width: 100% !important;
+  max-width: 300px !important;
   margin: 1.5rem auto 0 !important;
   overflow: visible !important;
   border-radius: 8px !important;
@@ -3799,6 +3799,109 @@ stripe-buy-button:hover {
 }
 
 stripe-buy-button > div,
+/* Pricing Card */
+.pricing-card {
+  background: #2d3748;
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: white;
+}
+
+.pricing-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.pricing-header h2 {
+  color: white !important;
+  margin-bottom: 1rem;
+  font-size: 1.75rem;
+}
+
+.price {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: white !important;
+  margin: 1rem 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  line-height: 1;
+}
+
+.price .currency {
+  font-size: 1.5rem;
+  margin-right: 2px;
+  margin-top: 0.5rem;
+  color: white !important;
+}
+
+.price .amount {
+  font-size: 3.5rem;
+  line-height: 1;
+  color: white !important;
+}
+
+.price .cents {
+  font-size: 1.5rem;
+  margin-top: 0.5rem;
+  color: white !important;
+}
+
+.price-subtitle {
+  color: white !important;
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
+}
+
+.pricing-features {
+  margin: 2rem 0;
+}
+
+.pricing-features ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pricing-features li {
+  color: white !important;
+  padding: 0.5rem 0;
+  font-size: 1rem;
+  display: flex;
+  align-items: flex-start;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+/* Remove duplicate checkmarks - using emoji from HTML instead */
+.pricing-features li:before {
+  content: none;
+}
+
+.stripe-button-container {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.secure-payment {
+  color: white !important;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.secure-payment::before {
+  content: '🔒';
+}
+
+/* Stripe Button Styling */
 stripe-buy-button iframe,
 stripe-buy-button * {
   max-width: 100% !important;
@@ -3807,6 +3910,7 @@ stripe-buy-button * {
   overflow: hidden !important;
   color: white !important;
   font-weight: 600 !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
 }
 
 /* Style the button inside the iframe */
@@ -3814,6 +3918,38 @@ stripe-buy-button iframe {
   min-height: 50px !important;
   background: #1e40af !important;
   color: white !important;
+  border: none !important;
+}
+
+/* Ensure button text is white */
+stripe-buy-button::part(button) {
+  color: white !important;
+  background: #1e40af !important;
+}
+
+/* Price display styling */
+stripe-buy-button::part(price) {
+  color: white !important;
+  font-weight: 700 !important;
+}
+
+/* Ensure button text is visible */
+stripe-buy-button button {
+  color: white !important;
+  background: #1e40af !important;
+  border: none !important;
+  padding: 12px 24px !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.5px !important;
+  text-transform: none !important;
+  line-height: 1.5 !important;
+}
+
+/* Hover state */
+stripe-buy-button button:hover {
+  background: #1e3a8a !important;
+  transform: translateY(-1px) !important;
 }
 
 /* Navigation Bar Styles */
@@ -4415,7 +4551,7 @@ main {
 .secure-payment {
   margin-top: 1rem;
   font-size: 0.9rem;
-  color: #4b5563;
+  color: white;
   text-align: center;
   display: flex;
   align-items: center;
@@ -5843,6 +5979,135 @@ html {
     padding: 4px 2px;
     margin-bottom: 3px;
     word-break: break-work;
+  }
+}
+
+/* Footer Styles */
+.footer {
+  background-color: #1a202c;
+  color: white;
+  padding: 3rem 0 0;
+  text-align: center;
+}
+
+.footer .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.footer-column {
+  flex: 1;
+  min-width: 200px;
+  margin-bottom: 1.5rem;
+}
+
+.footer-column h4 {
+  color: white;
+  margin-bottom: 1.25rem;
+  font-size: 1.1rem;
+  position: relative;
+  display: inline-block;
+}
+
+.footer-column h4::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -8px;
+  width: 40px;
+  height: 2px;
+  background: #3b82f6;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 0.75rem;
+}
+
+.footer-column a {
+  color: white !important;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-column a:hover {
+  color: white;
+}
+
+.footer-bottom {
+  background-color: #0f172a;
+  padding: 1.5rem 0;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.copyright {
+  color: white !important;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.legal-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.legal-links a {
+  color: white !important;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+}
+
+.legal-links a:hover {
+  color: white;
+}
+
+.legal-links span {
+  color: white !important;
+  margin: 0 0.5rem;
+  opacity: 0.7;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .footer-column {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .legal-links {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .legal-links span {
+    display: none;
   }
 }
 

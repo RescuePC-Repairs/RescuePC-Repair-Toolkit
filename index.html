@@ -151,7 +151,7 @@
     },
     "offers": {
       "@type": "Offer",
-      "price": "29.99",
+      "price": "129.99",
       "priceCurrency": "USD",
       "availability": "https://schema.org/InStock",
       "url": "https://rescuepc-repairs.github.io/RescuePC-Repair-Toolkit/"
@@ -530,7 +530,6 @@
         </div>
       </div>
     </section>
-    </script>
 
     <section class="buy-now">
       <div class="pricing-card">
@@ -538,7 +537,7 @@
           <h2>RescuePC Repairs Lifetime License</h2>
           <div class="price">
             <span class="currency">$</span>
-            <span class="amount">29</span>
+            <span class="amount">129</span>
             <span class="cents">.99</span>
           </div>
           <p class="price-subtitle">One-time payment, lifetime updates</p>
@@ -556,12 +555,18 @@
           </ul>
         </div>
 
-        <a href="https://buy.stripe.com/dRm6oHeFqfR4gXhbFm93y05" class="btn btn-primary btn-lg" style="display: inline-block; margin: 1rem 0;">
-          <i class="fas fa-shopping-cart"></i> Buy Now - $29.99
-        </a>
+        <script async
+    src="https://js.stripe.com/v3/buy-button.js">
+</script>
 
-        <p class="secure-payment">🔒 Secure payment via Stripe</p>
-      </div>
+  <div class="stripe-button-container">
+    <stripe-buy-button
+      id="buy_btn_1RW3SzHddahti95eqUSVu7HM" buy-button-id="buy_btn_1RW3SzHddahti95eqUSVu7HM"
+      publishable-key="pk_live_51RHgNWHddahti95euP7f7D1c3KoGiTDwcqTr0NnUs9y2dXkLbIceXwbPNY3TyJWxnTympc9ZDolUXENQAJ1qkCJn00gzZcfHjb">
+    </stripe-buy-button>
+    <p class="secure-payment">Secure payment via Stripe</p>
+  </div>
+</div>
     </section>
 
     <section class="resources">
@@ -769,7 +774,7 @@
     "applicationCategory": "UtilitiesApplication",
     "offers": {
       "@type": "Offer",
-      "price": "0",
+      "price": "129.99",
       "priceCurrency": "USD"
     },
     "aggregateRating": {
