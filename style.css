@@ -1,6 +1,12 @@
 /* ====================================================================
   1. GLOBAL STYLES & VARIABLES
   ==================================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 :root {
   /* Light Theme Colors */
   --primary: #2563eb;
@@ -235,6 +241,145 @@ body {
   display: flex;
   gap: 1.5rem;
   align-items: center;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Mobile menu styles */
+@media (max-width: 1024px) {
+  /* Hide desktop navigation on mobile */
+  .desktop-nav {
+    display: none;
+  }
+  
+  /* Show mobile menu toggle */
+  .mobile-menu-toggle {
+    display: flex !important;
+  }
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 85%;
+    max-width: 400px;
+    height: 100vh;
+    background: var(--bg-primary);
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 5rem 2rem 2rem;
+    z-index: 1000;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    transition: right 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    overscroll-behavior: contain; /* Prevent scroll chaining */
+  }
+
+  .nav-links.active {
+    right: 0;
+  }
+
+  .nav-links .nav-item {
+    width: 100%;
+    text-align: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .nav-links .nav-link {
+    font-size: 1.1rem;
+    padding: 1rem 0;
+    display: block;
+    width: 100%;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color 0.2s ease, background-color 0.2s ease;
+    border-radius: var(--border-radius);
+  }
+  
+  .nav-links .nav-link:active {
+    background-color: var(--gray-100);
+  }
+  
+  .nav-links .nav-cta {
+    margin-top: 1.5rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--primary);
+    color: white !important;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    text-align: center;
+  }
+  
+  .nav-links .nav-cta:active {
+    background: var(--primary-dark);
+    transform: translateY(1px);
+  }
+
+  .mobile-menu-toggle {
+    display: none; /* Hidden by default, shown via media query */
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 1001;
+    padding: 0.5rem;
+    margin-left: auto;
+    transition: transform 0.2s ease;
+  }
+  
+  .mobile-menu-toggle:active {
+    transform: scale(0.95);
+  }
+
+  .mobile-menu-close {
+    display: block;
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.75rem;
+    cursor: pointer;
+    z-index: 1002;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  
+  .nav-links.active + .mobile-menu-close {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .nav-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .nav-overlay.active {
+    display: block;
+    opacity: 1;
+  }
+
+  .nav-cta {
+    width: 100%;
+    text-align: center;
+    margin-top: 1rem;
+    padding: 0.75rem 1.5rem;
+  }
 }
 
 .nav-link {
@@ -256,7 +401,7 @@ body {
   font-weight: 600;
 }
 
-/* Mobile Menu Toggle */
+/* Mobile menu toggle button */
 .mobile-menu-toggle {
   display: none;
   background: none;
@@ -265,8 +410,42 @@ body {
   font-size: 1.5rem;
   cursor: pointer;
   padding: 0.5rem;
-  margin-left: 1rem;
   z-index: 1001;
+}
+
+/* Ensure mobile menu is hidden on desktop */
+@media (min-width: 1025px) {
+  .mobile-menu-toggle,
+  .mobile-menu-close,
+  .nav-overlay {
+    display: none !important;
+  }
+  
+  .nav-links {
+    display: flex !important;
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+    background: transparent !important;
+    padding: 0 !important;
+    transform: none !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+  }
+  
+  .nav-links ul {
+    flex-direction: row !important;
+    align-items: center;
+  }
+  
+  .nav-links li {
+    margin: 0 0.5rem !important;
+  }
+  
+  .nav-links a {
+    padding: 0.5rem 1rem !important;
+    color: white !important;
+  }
 }
 
 /* Main Content Padding */
@@ -292,7 +471,7 @@ main {
 }
 
 @media (max-width: 768px) {
-  html {
+  :root {
     font-size: 15px;
   }
   
@@ -309,7 +488,6 @@ main {
     height: 38px;
   }
   
-  /* Mobile Menu Styles */
   .mobile-menu-toggle {
     display: block;
   }
@@ -318,31 +496,84 @@ main {
     position: fixed;
     top: 0;
     right: -100%;
-    width: 280px;
+    width: 85%;
+    max-width: 320px;
     height: 100vh;
-    background: var(--bg-primary);
+    background: rgba(15, 23, 42, 0.98);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     flex-direction: column;
-    justify-content: flex-start;
-    padding: 5rem 1.5rem 2rem;
-    transition: right 0.3s ease-in-out;
+    justify-content: center;
+    align-items: center;
+    padding: 6rem 1.5rem 2rem;
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 1000;
-    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
   }
   
   .nav-links.active {
     right: 0;
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .nav-links::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+    z-index: -1;
   }
   
   .nav-link {
+    padding: 1.2rem 0;
+    font-size: 1.2rem;
     width: 100%;
-    padding: 0.75rem 0;
-    border-bottom: 1px solid var(--border-color);
+    text-align: center;
+    color: rgba(255, 255, 255, 0.9);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .nav-link:hover {
+    color: var(--primary-light);
+    transform: translateX(5px);
   }
   
   .nav-cta {
-    margin-top: 1rem;
+    margin: 1.5rem 0 0;
     width: 100%;
-    text-align: center;
+    max-width: 200px;
+    padding: 0.8rem 1.5rem;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+  }
+  
+    /* Overlay when menu is active */
+  .nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    z-index: 998;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .nav-overlay.active {
+    opacity: 1;
+    visibility: visible;
   }
 }
 
@@ -459,6 +690,22 @@ html {
   font-size: 16px;
   scroll-behavior: smooth;
   scroll-padding-top: 5rem;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 body {
@@ -1747,7 +1994,7 @@ body.no-scroll {
 
 /* Hero Section */
 .hero {
-  padding: 5rem 1.5rem 4rem;
+  padding: .01rem 1.05rem 3rem;
   text-align: center;
   background: linear-gradient(135deg, #1e40af 0%, #1e1b4b 100%);
   color: white;
@@ -1759,7 +2006,7 @@ body.no-scroll {
   align-items: center;
   justify-content: center;
   min-height: auto;
-  position: relative;
+  margin-top: 0;
   z-index: 1;
   background-image: 
     radial-gradient(circle at 10% 20%, rgba(37, 99, 235, 0.2) 0%, transparent 20%),
@@ -3045,8 +3292,42 @@ stripe-buy-button * {
 }
 
 @media (max-width: 768px) {
-  .about-section, .compatibility {
-    padding: 4rem 0;
+  /* Reset margins and padding for mobile */
+  body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .main-nav {
+    padding: 0.5rem 1rem;
+  }
+
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    max-width: 100%;
+  }
+
+  .about-section, .compatibility, 
+  .features, .pricing, .testimonials,
+  .faq, .support {
+    padding: 2.5rem 1rem;
+  }
+
+  .section-header {
+    padding: 0 1rem;
+  }
+
+  .section-header h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .section-subtitle {
+    font-size: 1rem;
+    margin-bottom: 2rem;
   }
   
   .about-text p {
@@ -5133,6 +5414,181 @@ button, .btn, [role="button"], a[role="button"] {
 
 /* Small mobile devices */
 @media (max-width: 480px) {
+  :root {
+    --border-radius: 0.5rem;
+    --section-padding: 2rem 1rem;
+    --header-height: 60px;
+  }
+  
+  .hero {
+    padding: 1.5rem 1rem 2.5rem;
+    margin-top: 0;
+  }
+  
+  .hero h1 {
+    font-size: 1.75rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  
+  /* Reset body padding and margin */
+  body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  /* Fix for iOS viewport height */
+  @supports (-webkit-touch-callout: none) {
+    html, body {
+      height: 100%;
+    }
+    
+    .hero {
+      min-height: -webkit-fill-available;
+      margin-top: 0;
+      height: calc(100vh - var(--header-height));
+    }
+  }
+  
+  /* Content spacing */
+  section {
+    scroll-margin-top: var(--header-height);
+    padding: 3rem 1rem;
+    /* Account for safe areas */
+    padding-left: calc(1rem + env(safe-area-inset-left));
+    padding-right: calc(1rem + env(safe-area-inset-right));
+    box-sizing: border-box;
+    position: relative;
+  }
+  
+  /* Adjust section spacing for mobile */
+  section + section {
+    padding-top: 1.5rem;
+  }
+  
+  .main-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: var(--bg-primary);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    height: var(--header-height);
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* Add safe area for notches */
+    padding-top: env(safe-area-inset-top);
+    padding-left: calc(1rem + env(safe-area-inset-left));
+    padding-right: calc(1rem + env(safe-area-inset-right));
+    /* Ensure content is properly aligned */
+    box-sizing: border-box;
+  }
+  
+  /* Adjust content to account for fixed header */
+  main {
+    padding-top: var(--header-height);
+    min-height: 100vh;
+  }
+  
+  .main-nav .container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+  }
+  
+  .hero {
+    padding: 2rem 1rem;
+    min-height: calc(100vh - var(--header-height));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* Account for safe areas */
+    padding-left: calc(1rem + env(safe-area-inset-left));
+    padding-right: calc(1rem + env(safe-area-inset-right));
+    padding-bottom: calc(2rem + env(safe-area-inset-bottom));
+    box-sizing: border-box;
+  }
+  
+  /* Improve touch targets for mobile */
+  .btn, button, [role="button"], .nav-link, .mobile-menu-toggle {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Ensure links have proper touch targets */
+  a {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 0;
+  }
+  
+  /* Ensure all interactive elements are tappable */
+  a, button, input, textarea, select, [role="button"] {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+  }
+  
+  /* Prevent zoom on input focus in iOS < 10 */
+  @media screen and (-webkit-min-device-pixel-ratio:0) {
+    input, 
+    select,
+    textarea {  
+      font-size: 16px !important;
+    }
+  }
+  
+  /* Prevent zoom on input focus in iOS 10+ */
+  @media screen and (-webkit-min-device-pixel-ratio:0) and (min-device-width: 320px) and (max-device-width: 1024px) {
+    input, 
+    select,
+    textarea {  
+      font-size: 16px !important;
+    }
+  }
+  
+  /* Fix for iOS form elements */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="url"],
+  input[type="search"],
+  textarea {
+    appearance: none;
+    -webkit-appearance: none;
+    border-radius: var(--border-radius);
+  }
+  
+  /* Fix for iOS zoom on input focus */
+  @media screen and (-webkit-min-device-pixel-ratio: 0) {
+    input,
+    select,
+    textarea {
+      font-size: 16px !important;
+    }
+  }
+  
+  /* Improve form elements */
+  input, textarea, select, button {
+    font-size: 16px; /* Prevent iOS zoom on focus */
+  }
+  
   html {
     font-size: 14px;
   }
