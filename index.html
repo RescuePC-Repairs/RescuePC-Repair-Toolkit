@@ -76,6 +76,9 @@
   <link rel="preload" href="assets/RescuePC_Logo_Light.png" as="image" type="image/png" fetchpriority="high">
   <link rel="preload" href="assets/hero-bg.jpg" as="image" type="image/jpeg" fetchpriority="high">
   
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
   <!-- Preload critical fonts -->
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"></noscript>
@@ -100,7 +103,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://rescuepc-repairs.github.io/RescuePC-Repair-Toolkit/">
   <meta property="og:title" content="RescuePC Repairs | The Ultimate Windows Repair Toolkit">
-  <meta property="og:description" content="Fix Windows issues instantly with RescuePC Repairs - The most comprehensive offline repair toolkit. Repair networks, drivers, audio, and system errors without internet.">
+  <meta property="og:description" content="Fix Windows issues instantly with RescuePC Repairs - The most comprehensive offline repair toolkit. Repair networks, drivers, audio, system errors, and optimize PC performance without requiring an internet connection.">
   <meta property="og:image" content="https://rescuepc-repairs.github.io/RescuePC-Repair-Toolkit/assets/RescuePC_Logo_Light.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -111,13 +114,15 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://rescuepc-repairs.github.io/RescuePC-Repair-Toolkit/">
   <meta name="twitter:title" content="RescuePC Repairs | The Ultimate Windows Repair Toolkit">
-  <meta name="twitter:description" content="Fix Windows issues instantly with RescuePC Repairs - The most comprehensive offline repair toolkit. Repair networks, drivers, audio, and system errors without internet.">
+  <meta name="twitter:description" content="Fix Windows issues instantly with RescuePC Repairs - The most comprehensive offline repair toolkit. Repair networks, drivers, audio, system errors, and optimize PC performance without requiring an internet connection.">
   <meta name="twitter:image" content="https://rescuepc-repairs.github.io/RescuePC-Repair-Toolkit/assets/RescuePC_Logo_Light.png">
   
   <!-- Favicon & App Icons -->
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="Portfolio/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="Portfolio/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="Portfolio/favicon/favicon-16x16.png">
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#0f172a">
   <link rel="mask-icon" href="assets/safari-pinned-tab.svg" color="#0f172a">
   <link rel="shortcut icon" href="assets/favicon.ico">
   <meta name="msapplication-TileColor" content="#0f172a">
@@ -125,30 +130,7 @@
   <meta name="theme-color" content="#0f172a">
   
   <!-- Preload Critical Resources -->
-  <link rel="preload" href="assets/RescuePC_Logo_Light.png" as="image" fetchpriority="high">
-  <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="style.css"></noscript>
-  
-  <!-- Preconnect to External Domains -->
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-  <link rel="preconnect" href="https://js.stripe.com" crossorigin>
-  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-  <link rel="dns-prefetch" href="https://js.stripe.com">
-  
-  <!-- Load Non-Critical CSS Asynchronously -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" media="print" onload="this.media='all'">
-  
-  <!-- Preload Web Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
-  
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-  <link rel="stylesheet" href="style.css">
-
-  <link rel="preload" href="assets/RescuePC_Logo_Light.png" as="image">
+  <link rel="preload" href="/assets/RescuePC_Logo_Light.png" as="image" type="image/png" fetchpriority="high">
   <link rel="preload" href="RescuePC_GUI.png" as="image">
   <title>RescuePC Repairs</title>
 
@@ -218,159 +200,196 @@
 
   <!-- Load non-critical scripts with defer -->
   <script src="https://js.stripe.com/v3/buy-button.js" defer></script>
+  
+  <!-- Mobile Navigation Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+      const navbarNav = document.querySelector('.navbar-nav');
+      const navOverlay = document.createElement('div');
+      navOverlay.className = 'nav-overlay';
+      document.body.appendChild(navOverlay);
+      
+      // Toggle mobile menu
+      function toggleMobileMenu() {
+        const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+        mobileMenuToggle.setAttribute('aria-expanded', !isExpanded);
+        navbarNav.classList.toggle('active');
+        navOverlay.classList.toggle('active');
+        document.body.style.overflow = isExpanded ? '' : 'hidden';
+      }
+      
+      // Close mobile menu when clicking on overlay
+      navOverlay.addEventListener('click', function() {
+        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+        navbarNav.classList.remove('active');
+        this.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+      
+      // Close mobile menu when clicking on a nav link
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function() {
+          if (window.innerWidth <= 1024) {
+            mobileMenuToggle.setAttribute('aria-expanded', 'false');
+            navbarNav.classList.remove('active');
+            navOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+          }
+        });
+      });
+      
+      // Toggle mobile menu when clicking the toggle button
+      mobileMenuToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        toggleMobileMenu();
+      });
+      
+      // Close mobile menu when window is resized to desktop
+      function handleResize() {
+        if (window.innerWidth > 1024) {
+          mobileMenuToggle.setAttribute('aria-expanded', 'false');
+          navbarNav.classList.remove('active');
+          navOverlay.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      }
+      
+      window.addEventListener('resize', handleResize);
+    });
+  </script>
   <script>
     // Load non-critical CSS after page load
     function loadCSS(href, before, media) {
-      'use strict';
       var ss = window.document.createElement('link');
       var ref = before || window.document.getElementsByTagName('script')[0];
       ss.rel = 'stylesheet';
       ss.href = href;
       ss.media = 'only x';
-      ref.parentNode.insertBefore(ss, ref);
-      setTimeout(function() {
+      
+      ref.parentNode.insertBefore(ss, (before || ref));
+      
+      ss.onload = function() {
         ss.media = media || 'all';
-      });
+      };
+      
       return ss;
     }
     
-    // Load CSS with low priority
+    // Load non-critical CSS after page load
     window.addEventListener('load', function() {
-      loadCSS('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+      // Font Awesome is already loaded with preload
+      // Add any additional non-critical CSS here
     });
+    
+    // Add a class to the html element when JavaScript is enabled
+    document.documentElement.classList.add('js');
   </script>
 </head>
 
-  <!-- Navigation Overlay -->
-  <div class="nav-overlay"></div>
-  
-  <header class="main-nav">
+  <!-- Navigation -->
+  <header class="navbar" id="navbar">
     <div class="container">
-      <div class="logo-container">
-        <a href="index.html" aria-label="RescuePC Repairs Home">
-          <img src="assets/RescuePC_Logo_Light.png" alt="RescuePC Repairs Logo" class="logo" width="200" height="50" loading="lazy">
+      <nav class="navbar-container">
+        <a href="index.html" class="navbar-brand">
+          <img src="assets/RescuePC_Logo_Light.png" alt="RescuePC Repairs Logo" width="180" height="auto">
         </a>
-      </div>
-      
-      <button class="mobile-menu-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="main-navigation">
-        <span class="sr-only">Menu</span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </button>
-      
-      <button class="mobile-menu-close" aria-label="Close menu">
-        <i class="fas fa-times"></i>
-      </button>
-      
-      <nav id="main-navigation" aria-label="Main navigation">
-        <ul class="nav-links" role="menubar">
-          <li role="none">
-            <a href="#features" class="nav-link" role="menuitem" tabindex="-1">
+
+        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-navigation">
+          <span class="hamburger">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </span>
+        </button>
+        
+        <div class="nav-overlay"></div>
+        
+        <ul class="navbar-nav" id="primary-navigation" role="navigation" aria-label="Main navigation">
+          <li class="nav-item">
+            <a href="#features" class="nav-link">
               <i class="fas fa-star" aria-hidden="true"></i>
               <span>Features</span>
             </a>
           </li>
-          <li role="none">
-            <a href="Portfolio/index.html" class="nav-link" role="menuitem" tabindex="-1">
-              <i class="fas fa-images" aria-hidden="true"></i>
-              <span>Portfolio</span>
-            </a>
-          </li>
-          <li role="none">
-            <a href="#demo" class="nav-link" role="menuitem" tabindex="-1">
+          <li class="nav-item">
+            <a href="#how-it-works" class="nav-link">
               <i class="fas fa-play-circle" aria-hidden="true"></i>
-              <span>Demo</span>
+              <span>How It Works</span>
             </a>
           </li>
-          <li role="none">
-            <a href="#support" class="nav-link" role="menuitem" tabindex="-1">
-              <i class="fas fa-headset" aria-hidden="true"></i>
-              <span>Support</span>
+          <li class="nav-item">
+            <a href="#testimonials" class="nav-link">
+              <i class="fas fa-quote-left" aria-hidden="true"></i>
+              <span>Testimonials</span>
             </a>
           </li>
-          <li role="none">
-            <a href="#faq" class="nav-link" role="menuitem" tabindex="-1">
+          <li class="nav-item">
+            <a href="#pricing" class="nav-link">
+              <i class="fas fa-tags" aria-hidden="true"></i>
+              <span>Pricing</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#faq" class="nav-link">
               <i class="fas fa-question-circle" aria-hidden="true"></i>
               <span>FAQ</span>
             </a>
           </li>
-          <li role="none" class="nav-divider"></li>
-          <li role="none">
-            <a href="join-discord.html" class="nav-link" role="menuitem" tabindex="-1">
-              <i class="fab fa-discord" aria-hidden="true"></i>
-              <span>Join Discord</span>
-            </a>
-          </li>
-          <li role="none">
-            <a href="RescuePC Repairs Flyer.pdf" target="_blank" rel="noopener" class="nav-link pdf-link" role="menuitem" tabindex="-1">
-              <i class="fas fa-file-pdf" aria-hidden="true"></i>
-              <span>Download Flyer</span>
-            </a>
-          </li>
-          <li role="none" class="nav-cta-container">
-            <a href="https://buy.stripe.com/cNibJ11SE7ky4av7p693y03" class="btn btn-primary nav-cta" role="menuitem" tabindex="-1">
-              <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+          <li class="nav-item nav-cta">
+            <a href="https://buy.stripe.com/dRm6oHeFqfR4gXhbFm93y05" class="btn btn-primary">
+              <i class="fas fa-shopping-cart"></i>
               <span>Buy Now</span>
             </a>
           </li>
         </ul>
       </nav>
-      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
-        <i class="fas fa-bars"></i>
-      </button>
     </div>
   </header>
 
-  <section class="hero">
-    <!-- Floating elements -->
-    <div class="floating" style="width: 200px; height: 200px; top: 15%; left: 10%; animation-delay: 0s;"></div>
-    <div class="floating" style="width: 300px; height: 300px; bottom: 15%; right: 10%; animation-delay: -5s;"></div>
-    <div class="floating" style="width: 150px; height: 150px; top: 50%; right: 20%; animation-delay: -10s;"></div>
-    <div class="floating" style="width: 250px; height: 250px; bottom: 25%; left: 15%; animation-delay: -7s;">
-      <div class="floating" style="width: 50%; height: 50%; background: rgba(255,255,255,0.05); top: 25%; left: 25%;"></div>
-    </div>
-    
-    <div class="container">
-      <div class="hero-content">
-        <div class="hero-badge">
-        </div>
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <!-- Left Column: Text Content -->
+      <div class="hero-text">
         <h1><span class="gradient-text">🖥️ RescuePC Repairs</span><br>Your Complete Windows Repair Solution</h1>
         <p class="hero-subtitle">The Ultimate All-in-One Repair Toolkit for Windows</p>
         <p class="hero-description">
           Say goodbye to frustrating errors and unreliable fixes. With RescuePC Repairs, you get the essential repair program that should be built into Windows. 
           Designed for instant, automatic repairs that actually make a difference.
         </p>
+        
         <div class="hero-buttons">
-          <a href="https://buy.stripe.com/cNibJ11SE7ky4av7p693y03" class="btn btn-primary pulse">
+          <a href="https://buy.stripe.com/dRm6oHeFqfR4gXhbFm93y05" class="btn btn-primary">
             <i class="fas fa-bolt"></i> Get Instant Access
           </a>
           <a href="#features" class="btn btn-secondary">
-            <i class="fas fa-play-circle"></i> Watch Demo
+            <i class="fas fa-play-circle"></i> About RescuePC Repairs
           </a>
         </div>
+        
         <div class="hero-features">
           <div class="feature">
             <div class="feature-icon">
-              <i class="fas fa-wifi"></i>
+              <i class="fas fa-wifi fa-fw"></i>
             </div>
             <span>Fix Network & Wi-Fi</span>
           </div>
           <div class="feature">
             <div class="feature-icon">
-              <i class="fas fa-shield-alt"></i>
+              <i class="fas fa-shield-alt fa-fw"></i>
             </div>
             <span>System Protection</span>
           </div>
           <div class="feature">
             <div class="feature-icon">
-              <i class="fas fa-tools"></i>
+              <i class="fas fa-tools fa-fw"></i>
             </div>
             <span>One-Click Repairs</span>
           </div>
           <div class="feature">
             <div class="feature-icon">
-              <i class="fas fa-tachometer-alt"></i>
+              <i class="fas fa-tachometer-alt fa-fw"></i>
             </div>
             <span>Performance Boost</span>
           </div>
@@ -391,7 +410,18 @@
           </div>
         </div>
       </div>
+      
+      <!-- Right Column: Image -->
+      <div class="hero-image">
+        <img src="RescuePC_GUI.png" alt="RescuePC Repairs Interface" loading="lazy">
+      </div>
     </div>
+    
+    <!-- Floating Background Elements -->
+    <div class="floating" style="width: 200px; height: 200px; top: 15%; left: 10%; animation-delay: 0s;"></div>
+    <div class="floating" style="width: 300px; height: 300px; bottom: 15%; right: 10%; animation-delay: -5s;"></div>
+    <div class="floating" style="width: 150px; height: 150px; top: 50%; right: 20%; animation-delay: -10s;"></div>
+    <div class="floating" style="width: 250px; height: 250px; bottom: 25%; left: 15%; animation-delay: -7s;"></div>
   </section>
 
   <div class="promo-banner">
@@ -406,46 +436,46 @@
         <h2>Why RescuePC Repairs Stands Out</h2>
         <p>RescuePC Repairs is your ultimate all-in-one solution for fixing even the most frustrating Windows issues—online or offline. Why pay hundreds at a repair shop when you can get the same reliable performance for a single purchase? Enjoy a safe, hassle-free experience with a powerful toolkit designed to restore your PC in no time.</p>
       </div>
-        <div class="feature-grid">
+      <div class="features-grid">
         <div class="feature-card">
           <div class="feature-icon">🛠️</div>
           <h3>One-Click Repairs</h3>
-          <p><strong>Instantly fix networks, install drivers, restore audio, and cleans junk fast, hassle-free, and fully offline. No installs. No tech skills required. Just launch and repair any PC effortlessly.</strong></p>
+          <p>Instantly fix networks, install drivers, restore audio, and clean junk fast, hassle-free, and fully offline. No installs. No tech skills required. Just launch and repair any PC effortlessly.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">💾</div>
           <h3>Driver Packages Included</h3>
-          <p><strong>Loaded with 11GB of critical drivers, this cutting-edge tool seamlessly restores all Windows computers including Intel, AMD, NVIDIA, Dell, HP, Lenovo, ASUS, Acer, and more without requiring any downloads.</strong></p>
+          <p>Loaded with 11GB of critical drivers, this cutting-edge tool seamlessly restores all Windows computers including Intel, AMD, NVIDIA, Dell, HP, Lenovo, ASUS, Acer, and more without requiring any downloads.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">🚀</div>
           <h3>Launch from USB Instantly</h3>
-          <p><strong>No installation. No setup. Simply transfer RescuePC Repairs to your USB, plug it in, and start repairing.</strong></p>
+          <p>No installation. No setup. Simply transfer RescuePC Repairs to your USB, plug it in, and start repairing.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">🔍</div>
           <h3>Deep System Diagnostics</h3>
-          <p><strong>Run advanced checks to detect and fix hidden errors affecting performance</strong></p>
+          <p>Run advanced checks to detect and fix hidden errors affecting performance.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">🖥️</div>
           <h3>Windows Repair & Recovery</h3>
-          <p><strong>Fix registry issues, missing system files, and update failures seamlessly.</strong></p>
+          <p>Fix registry issues, missing system files, and update failures seamlessly.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">⚡</div>
           <h3>Real-Time Error Fixing</h3>
-          <p><strong>Automatically detect and resolve common PC issues in seconds.</strong></p>
+          <p>Automatically detect and resolve common PC issues in seconds.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">🧠</div>
           <h3>AI-Driven Performance Optimization</h3>
-          <p><strong>Intelligently optimize startup programs, memory usage, and overall system efficiency.</strong></p>
+          <p>Intelligently optimize startup programs, memory usage, and overall system efficiency.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">🔥</div>
           <h3>Hardware Health Monitoring</h3>
-          <p><strong>Analyze CPU, RAM, and storage health to prevent hardware failures.</strong></p>
+          <p>Analyze CPU, RAM, and storage health to prevent hardware failures.</p>
         </div>
       </div>
     </section>
@@ -526,7 +556,7 @@
           </ul>
         </div>
 
-        <a href="https://buy.stripe.com/cNibJ11SE7ky4av7p693y03" class="btn btn-primary btn-lg" style="display: inline-block; margin: 1rem 0;">
+        <a href="https://buy.stripe.com/dRm6oHeFqfR4gXhbFm93y05" class="btn btn-primary btn-lg" style="display: inline-block; margin: 1rem 0;">
           <i class="fas fa-shopping-cart"></i> Buy Now - $29.99
         </a>
 
@@ -806,132 +836,38 @@
       "name": "What operating systems are supported?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Our toolkit supports Windows 10 and Windows 11. We're continuously working to expand compatibility with other operating systems."
+        "text": "Our toolkit supports Windows 7, 8, 8.1, 10 and 11. We're continuously working to expand compatibility with other operating systems."
       }
     }]
   }
   </script>
 
   <script src="main.js" defer></script>
-  <script src="theme.js" defer></script>
+  <script src="js/modal.js" defer></script>
+  <script src="js/navigation.js" defer></script>
+  <script src="js/scroll-behavior.js" defer></script>
+  <script src="js/smooth-scroll.js" defer></script>
+  <script src="js/lazyload.js" defer></script>
+  <!-- Remove web-vitals import from main.js if not needed -->
   <script>
-    // Mobile menu and smooth scrolling functionality
-    document.addEventListener('DOMContentLoaded', function() {
-      // Mobile menu elements
-      const menuToggle = document.querySelector('.mobile-menu-toggle');
-      const menuClose = document.querySelector('.mobile-menu-close');
-      const navLinks = document.querySelector('.nav-links');
-      const navOverlay = document.querySelector('.nav-overlay');
-      const body = document.body;
-      
-      // Toggle mobile menu
-      function toggleMenu() {
-        const isOpening = !navLinks.classList.contains('active');
-        
-        if (isOpening) {
-          // Opening menu
-          body.style.overflow = 'hidden';
-          navLinks.classList.add('active');
-          navOverlay.classList.add('active');
-          menuClose.style.display = 'block';
-          menuToggle.setAttribute('aria-expanded', 'true');
-          
-          // Set focus to first menu item when opening
-          setTimeout(() => {
-            const firstNavItem = navLinks.querySelector('a');
-            if (firstNavItem) firstNavItem.focus();
-          }, 100);
-        } else {
-          // Closing menu
-          closeMenu();
-        }
-      }
-      
-      // Close menu function
-      function closeMenu() {
-        body.style.overflow = '';
-        navLinks.classList.remove('active');
-        navOverlay.classList.remove('active');
-        menuClose.style.display = 'none';
-        menuToggle.setAttribute('aria-expanded', 'false');
-        menuToggle.focus();
-      }
-      
-      // Event listeners for mobile menu
-      if (menuToggle && menuClose && navLinks && navOverlay) {
-        menuToggle.addEventListener('click', toggleMenu);
-        menuClose.addEventListener('click', closeMenu);
-        navOverlay.addEventListener('click', closeMenu);
-        
-        // Close menu when clicking on a nav link
-        document.querySelectorAll('.nav-link').forEach(link => {
-          link.addEventListener('click', closeMenu);
-        });
-        
-        // Close menu with Escape key
-        document.addEventListener('keydown', function(e) {
-          if (e.key === 'Escape' && navLinks.classList.contains('active')) {
-            closeMenu();
-          }
-        });
-        
-        // Trap focus inside menu when open
-        document.addEventListener('keydown', function(e) {
-          if (!navLinks.classList.contains('active')) return;
-          
-          const focusableElements = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
-          const focusableContent = navLinks.querySelectorAll(focusableElements);
-          
-          if (focusableContent.length === 0) return;
-          
-          const firstFocusableElement = focusableContent[0];
-          const lastFocusableElement = focusableContent[focusableContent.length - 1];
-          
-          if (e.key === 'Tab') {
-            if (e.shiftKey) { // Shift + Tab
-              if (document.activeElement === firstFocusableElement) {
-                lastFocusableElement.focus();
-                e.preventDefault();
-              }
-            } else { // Tab
-              if (document.activeElement === lastFocusableElement) {
-                firstFocusableElement.focus();
-                e.preventDefault();
-              }
-            }
-          }
-        });
-      }
-      
-      // Smooth scrolling for anchor links
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-          const targetId = this.getAttribute('href');
-          if (targetId === '#' || !document.querySelector(targetId)) return;
-          
-          e.preventDefault();
-          closeMenu(); // Close menu when clicking anchor links
-          
-          const targetElement = document.querySelector(targetId);
-          const headerOffset = 80; // Height of your header
-          const elementPosition = targetElement.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-          
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
-        });
-      });
-    });
+    // Temporary fix for web-vitals error
+    window.reportWebVitals = function() {};
   </script>
-  <script src="lazyload.js" defer></script>
-  <script src="smooth-scroll.js" defer></script>
   <!-- Image Modal -->
-  <div id="imageModal" class="modal">
-    <span class="close-modal">&times;</span>
+  <div class="modal" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <button class="close-modal" aria-label="Close image">&times;</button>
+    <button class="modal-nav prev" aria-label="Previous image">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <button class="modal-nav next" aria-label="Next image">
+      <i class="fas fa-chevron-right"></i>
+    </button>
     <div class="modal-content">
-      <img id="modalImage" src="" alt="">
+      <div class="modal-loading">
+        <div class="spinner"></div>
+      </div>
+      <img class="modal-image" src="" alt="" loading="lazy">
+      <div class="modal-caption"></div>
     </div>
   </div>
 
@@ -980,7 +916,5 @@
       }
     });
   </script>
-  
-  <script src="js/modal.js" defer></script>
 </body>
 </html>
