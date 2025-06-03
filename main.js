@@ -436,18 +436,10 @@ function showInstallPromotion() {
   document.body.appendChild(installButton);
 }
 
-// Optimize Web Vitals
-const reportWebVitals = (onPerfEntry) => {
-  if (onPerfEntry && onPerfEntry instanceof Function) {
-    import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
-      getCLS(onPerfEntry);
-      getFID(onPerfEntry);
-      getFCP(onPerfEntry);
-      getLCP(onPerfEntry);
-      getTTFB(onPerfEntry);
-    });
-  }
-};
+//// Web Vitals is not available, provide a no-op function
+const reportWebVitals = () => {};
+
+export default reportWebVitals;
 
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
