@@ -1,6 +1,599 @@
 // main.js – RescuePC Repairs USB Toolkit Frontend Enhancements
 
+// Theme Toggle Functionality
+const initThemeToggle = () => {
+  const themeToggle = document.querySelector('.theme-toggle');
+  if (!themeToggle) return;
+  
+  const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+  const currentTheme = localStorage.getItem('theme') || 'system';
+  
+  // Set initial theme
+  const setTheme = (theme) => {
+    document.documentElement.classList.remove('light', 'dark');
+    
+    if (theme === 'system') {
+      document.documentElement.classList.toggle('dark', prefersDarkScheme.matches);
+    } else {
+      document.documentElement.classList.add(theme);
+    }
+    
+    // Update button aria-label
+    const isDark = document.documentElement.classList.contains('dark');
+    themeToggle.setAttribute('aria-label', `Switch to ${isDark ? 'light' : 'dark'} mode`);
+    themeToggle.setAttribute('title', `Switch to ${isDark ? 'light' : 'dark'} mode`);
+    
+    // Save preference
+    localStorage.setItem('theme', theme);
+  };
+  
+  // Toggle between light/dark
+  const toggleTheme = () => {
+    const isDark = document.documentElement.classList.contains('dark');
+    setTheme(isDark ? 'light' : 'dark');
+  };
+  
+  // Listen for system theme changes
+  prefersDarkScheme.addEventListener('change', (e) => {
+    if (localStorage.getItem('theme') === 'system') {
+      setTheme('system');
+    }
+  });
+  
+  // Initialize theme
+  setTheme(currentTheme);
+  
+  // Add click event
+  themeToggle.addEventListener('click', toggleTheme);
+  
+  // Add keyboard navigation
+  themeToggle.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleTheme();
+    }
+  });
+};
+
+// Cookie Consent Banner
+function createCookieBanner() {
+  if (!localStorage.getItem('cookieConsent')) {
+    const banner = document.createElement('div');
+    banner.id = 'cookie-banner';
+    banner.innerHTML = `
+      <div class="cookie-content">
+        <p>We use cookies to enhance your experience. By continuing to visit this site, you agree to our use of cookies.</p>
+        <div class="cookie-buttons">
+          <button id="accept-cookies" class="cookie-btn accept">Accept</button>
+          <button id="reject-cookies" class="cookie-btn reject">Reject</button>
+          <a href="CookiePolicy.html" class="cookie-link">Learn more</a>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(banner);
+
+    document.getElementById('accept-cookies').addEventListener('click', () => {
+      localStorage.setItem('cookieConsent', 'accepted');
+      banner.remove();
+    });
+
+    document.getElementById('reject-cookies').addEventListener('click', () => {
+      localStorage.setItem('cookieConsent', 'rejected');
+      banner.remove();
+    });
+  }
+}
+
+// Add cookie consent styles
+const style = document.createElement('style');
+style.textContent = `
+  #cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(15, 23, 42, 0.95);
+    color: #e2e8f0;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    backdrop-filter: blur(10px);
+  }
+  
+  .cookie-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .cookie-content p {
+    margin: 0;
+    flex: 1;
+    min-width: 200px;
+  }
+  
+  .cookie-buttons {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+  }
+  
+  .cookie-btn {
+    padding: 0.5rem 1.25rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+  }
+  
+  .accept {
+    background: #3b82f6;
+    color: white;
+  }
+  
+  .reject {
+    background: transparent;
+    color: #94a3b8;
+    border: 1px solid #94a3b8;
+  }
+  
+  .cookie-link {
+    color: #60a5fa;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  
+  .cookie-link:hover {
+    text-decoration: underline;
+  }
+  
+  @media (max-width: 640px) {
+    .cookie-content {
+      flex-direction: column;
+      text-align: center;
+    }
+    
+    .cookie-buttons {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+`;
+document.head.appendChild(style);
+
+/**
+ * Advanced Lazy Loading with Priority
+ * - IntersectionObserver for viewport detection
+ * - requestIdleCallback for non-critical loading
+ * - Data attributes for responsive images
+ * - Blur-up technique for smooth loading
+ */
+
+class AdvancedLazyLoader {
+  constructor() {
+    this.observer = null;
+    this.config = {
+      rootMargin: '200px 0px',
+      threshold: 0.01,
+      useNativeLazyLoading: 'loading' in HTMLImageElement.prototype,
+      useNativeIntersectionObserver: 'IntersectionObserver' in window,
+      useIdleCallback: 'requestIdleCallback' in window
+    };
+    this.observedElements = new Set();
+    this.pendingElements = [];
+    this.initialized = false;
+  }
+
+  init() {
+    if (this.initialized) return;
+    this.initialized = true;
+    
+    // Setup observer if supported
+    if (this.config.useNativeIntersectionObserver) {
+      this.setupObserver();
+    } else {
+      this.loadAllNonLazy();
+    }
+    
+    // Load low priority images during idle time
+    if (this.config.useIdleCallback) {
+      requestIdleCallback(() => this.loadLowPriorityImages(), { timeout: 2000 });
+    }
+    
+    // Handle dynamic content
+    this.setupMutationObserver();
+  }
+  
+  setupObserver() {
+    this.observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const element = entry.target;
+          this.loadElement(element);
+          this.observer.unobserve(element);
+          this.observedElements.delete(element);
+        }
+      });
+    }, {
+      rootMargin: this.config.rootMargin,
+      threshold: this.config.threshold
+    });
+    
+    // Observe all lazy elements
+    document.querySelectorAll('[data-lazy-src], [data-srcset]').forEach(el => {
+      this.observeElement(el);
+    });
+  }
+  
+  observeElement(element) {
+    if (!this.observedElements.has(element)) {
+      this.observedElements.add(element);
+      if (this.observer) {
+        this.observer.observe(element);
+      } else {
+        this.pendingElements.push(element);
+      }
+    }
+  }
+  
+  loadElement(element) {
+    // Handle different element types
+    if (element.tagName === 'IMG') {
+      this.loadImage(element);
+    } else if (element.tagName === 'IFRAME') {
+      this.loadIframe(element);
+    } else if (element.tagName === 'VIDEO' || element.tagName === 'AUDIO') {
+      this.loadMedia(element);
+    } else if (element.hasAttribute('data-bg')) {
+      this.loadBackground(element);
+    }
+    
+    // Remove lazy attributes
+    element.removeAttribute('data-lazy-src');
+    element.removeAttribute('data-srcset');
+    element.classList.remove('lazy');
+  }
+  
+  loadImage(img) {
+    // Skip if already loaded
+    if (img.getAttribute('data-loaded') === 'true') return;
+    
+    // Load src and srcset
+    const src = img.getAttribute('data-src');
+    const srcset = img.getAttribute('data-srcset');
+    
+    if (src) {
+      // Use requestAnimationFrame to avoid blocking the main thread
+      requestAnimationFrame(() => {
+        img.src = src;
+        if (srcset) img.srcset = srcset;
+        
+        // Handle loading state
+        img.onload = () => {
+          img.setAttribute('data-loaded', 'true');
+          img.classList.add('lazy-loaded');
+          
+          // Remove blur effect if using blur-up technique
+          if (img.classList.contains('lazy-blur')) {
+            img.style.filter = 'blur(0)';
+            img.style.transition = 'filter 0.5s ease-out';
+            
+            // Remove the transition after it completes
+            setTimeout(() => {
+              img.style.transition = '';
+            }, 500);
+          }
+        };
+        
+        // Handle errors
+        img.onerror = () => {
+          console.warn('Failed to load image:', src);
+          img.classList.add('lazy-error');
+        };
+      });
+    }
+  }
+  
+  loadIframe(iframe) {
+    const src = iframe.getAttribute('data-src');
+    if (src) {
+      iframe.src = src;
+    }
+  }
+  
+  loadMedia(media) {
+    const src = media.getAttribute('data-src');
+    if (src) {
+      media.src = src;
+      media.load();
+    }
+  }
+  
+  loadBackground(element) {
+    const bgUrl = element.getAttribute('data-bg');
+    if (bgUrl) {
+      element.style.backgroundImage = `url(${bgUrl})`;
+      element.classList.add('lazy-bg-loaded');
+    }
+  }
+  
+  loadAllNonLazy() {
+    document.querySelectorAll('[data-lazy-src], [data-srcset]').forEach(el => {
+      if (!this.observedElements.has(el)) {
+        this.loadElement(el);
+      }
+    });
+  }
+  
+  loadLowPriorityImages() {
+    // Load low priority images (e.g., those below the fold)
+    document.querySelectorAll('[data-lazy-src][data-priority="low"]').forEach(img => {
+      if (this.observedElements.has(img)) {
+        this.loadElement(img);
+        this.observer.unobserve(img);
+        this.observedElements.delete(img);
+      }
+    });
+  }
+  
+  setupMutationObserver() {
+    if (!('MutationObserver' in window)) return;
+    
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        mutation.addedNodes.forEach((node) => {
+          if (node.nodeType === 1) { // Element node
+            if (node.matches('[data-lazy-src], [data-srcset]')) {
+              this.observeElement(node);
+            }
+            // Check children of added nodes
+            node.querySelectorAll('[data-lazy-src], [data-srcset]').forEach(el => {
+              this.observeElement(el);
+            });
+          }
+        });
+      });
+    });
+    
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+  }
+}
+
+// Initialize the lazy loader
+const lazyLoader = new AdvancedLazyLoader();
+
+// Start lazy loading when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    lazyLoader.init();
+    initializeServiceWorker();
+  });
+} else {
+  lazyLoader.init();
+  initializeServiceWorker();
+}
+
+// Service Worker Registration
+function initializeServiceWorker() {
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').then(registration => {
+        console.log('ServiceWorker registration successful');
+      }).catch(err => {
+        console.log('ServiceWorker registration failed: ', err);
+      });
+    });
+  }
+}
+
+// Install prompt for PWA
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+  // Prevent Chrome 67 and earlier from automatically showing the prompt
+  e.preventDefault();
+  // Stash the event so it can be triggered later
+  deferredPrompt = e;
+  // Show the install button or custom UI
+  showInstallPromotion();
+});
+
+function showInstallPromotion() {
+  // Show your custom install button or banner
+  const installButton = document.createElement('button');
+  installButton.id = 'install-button';
+  installButton.textContent = 'Install App';
+  installButton.style.position = 'fixed';
+  installButton.style.bottom = '20px';
+  installButton.style.right = '20px';
+  installButton.style.padding = '10px 20px';
+  installButton.style.background = '#1e40af';
+  installButton.style.color = 'white';
+  installButton.style.border = 'none';
+  installButton.style.borderRadius = '4px';
+  installButton.style.cursor = 'pointer';
+  installButton.style.zIndex = '9999';
+  
+  installButton.addEventListener('click', async () => {
+    // Hide the install button
+    installButton.style.display = 'none';
+    // Show the install prompt
+    deferredPrompt.prompt();
+    // Wait for the user to respond to the prompt
+    const { outcome } = await deferredPrompt.userChoice;
+    // Optionally, send analytics event with outcome of user choice
+    console.log(`User response to the install prompt: ${outcome}`);
+    // We've used the prompt, and can't use it again, throw it away
+    deferredPrompt = null;
+  });
+  
+  document.body.appendChild(installButton);
+}
+
+// Optimize Web Vitals
+const reportWebVitals = (onPerfEntry) => {
+  if (onPerfEntry && onPerfEntry instanceof Function) {
+    import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
+      getCLS(onPerfEntry);
+      getFID(onPerfEntry);
+      getFCP(onPerfEntry);
+      getLCP(onPerfEntry);
+      getTTFB(onPerfEntry);
+    });
+  }
+};
+
+// Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
+  // Initialize theme toggle
+  initThemeToggle();
+  
+  // Initialize cookie banner
+  createCookieBanner();
+  
+  // Report Web Vitals
+  reportWebVitals(metric => {
+    console.log(metric);
+  });
+  
+  // Lazy loading is already initialized by the AdvancedLazyLoader class
+  // Image Modal Functionality
+  const modal = document.getElementById('imageModal');
+  const modalImg = document.getElementById('modalImage');
+  const captionText = document.getElementById('caption');
+  const closeModal = document.querySelector('.close-modal');
+  let isModalOpen = false;
+  let scrollPosition = 0;
+
+  // Function to prevent body scroll when modal is open
+  const lockBodyScroll = () => {
+    if (typeof window !== 'undefined') {
+      scrollPosition = window.pageYOffset;
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollPosition}px`;
+      document.body.style.width = '100%';
+    }
+  };
+
+  // Function to re-enable body scroll
+  const unlockBodyScroll = () => {
+    if (typeof window !== 'undefined') {
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      window.scrollTo(0, scrollPosition);
+    }
+  };
+
+  // Make openModal globally available for HTML onclick
+  window.openModal = function(imgSrc, altText = '') {
+    if (isModalOpen) return;
+    
+    // Preload image for smoother experience
+    const img = new Image();
+    img.src = imgSrc;
+    
+    img.onload = () => {
+      modalImg.src = imgSrc;
+      modalImg.alt = altText;
+      captionText.textContent = altText;
+      
+      // Show the modal
+      modal.style.display = 'flex';
+      // Force reflow to ensure the transition works
+      void modal.offsetWidth;
+      modal.classList.add('show');
+      modal.style.opacity = '1';
+      
+      // Lock body scroll and remember scroll position
+      lockBodyScroll();
+      isModalOpen = true;
+      
+      // Add no-scroll class to html element
+      document.documentElement.classList.add('modal-open');
+    };
+    
+    // If image fails to load, still show the modal with error state
+    img.onerror = () => {
+      modalImg.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiB2aWV3Qm94PSIwIDAgNDAwIDMwMCI+CiAgPHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iIzIyMiIvPgogIDx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIiBmaWxsPSIjOTk5Ij5JbWFnZSBjb3VsZCBub3QgYmUgbG9hZGVkPC90ZXh0Pgo8L3N2Zz4=';
+      modalImg.alt = 'Failed to load image';
+      captionText.textContent = 'Failed to load image';
+      
+      modal.style.display = 'flex';
+      void modal.offsetWidth;
+      modal.classList.add('show');
+      modal.style.opacity = '1';
+      
+      lockBodyScroll();
+      isModalOpen = true;
+      document.documentElement.classList.add('modal-open');
+    };
+  };
+
+  // Function to close the modal
+  function closeImageModal() {
+    if (!isModalOpen) return;
+    
+    modal.style.opacity = '0';
+    
+    // Wait for the fade-out animation to complete
+    setTimeout(() => {
+      modal.classList.remove('show');
+      modal.style.display = 'none';
+      
+      // Unlock body scroll
+      unlockBodyScroll();
+      isModalOpen = false;
+      document.documentElement.classList.remove('modal-open');
+      
+      // Reset modal content
+      modalImg.src = '';
+      modalImg.alt = '';
+      captionText.textContent = '';
+    }, 300); // Match this with the CSS transition time
+  }
+
+  // Close modal when clicking the X
+  closeModal.addEventListener('click', (e) => {
+    e.stopPropagation();
+    closeImageModal();
+  });
+
+  // Close modal when clicking outside the image
+  modal.addEventListener('click', function(event) {
+    if (event.target === modal) {
+      closeImageModal();
+    }
+  }, false);
+
+  // Close modal with Escape key
+  const handleEscape = (event) => {
+    if (event.key === 'Escape' && isModalOpen) {
+      closeImageModal();
+      // Remove the event listener after closing to prevent memory leaks
+      document.removeEventListener('keydown', handleEscape);
+    }
+  };
+  
+  // Add event listener for Escape key when modal is opened
+  document.addEventListener('keydown', handleEscape);
+  
+  // Clean up event listeners when modal is closed
+  modal.addEventListener('transitionend', function handler(event) {
+    if (event.propertyName === 'opacity' && !isModalOpen) {
+      document.removeEventListener('keydown', handleEscape);
+      modal.removeEventListener('transitionend', handler);
+    }
+  });
+
   // PDF link handling for better mobile experience
   const pdfLinks = document.querySelectorAll('a[href$=".pdf"]')
   
@@ -134,74 +727,173 @@ document.addEventListener('DOMContentLoaded', () => {
   handleResize(); // Call immediately on load
 
   // ===== Mobile nav toggle (hamburger menu) =====
-  const toggle = document.querySelector('.mobile-menu-toggle');
+  const mobileMenu = document.querySelector('.mobile-menu-toggle');
   const navLinks = document.querySelector('.nav-links');
 
-  if (toggle && navLinks) {
+  if (mobileMenu && navLinks) {
     // Add click event to toggle button
-    toggle.addEventListener('click', () => {
+    mobileMenu.addEventListener('click', (e) => {
+      e.stopPropagation();
+      
       // Toggle active class on nav links
       navLinks.classList.toggle('active');
       
       // Toggle active class on the button itself (for animation)
-      toggle.classList.toggle('is-active');
+      mobileMenu.classList.toggle('is-active');
+      
+      // Toggle body overflow when menu is open/closed
+      if (navLinks.classList.contains('active')) {
+        document.body.style.overflow = 'hidden';
+        document.documentElement.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
+      }
       
       // Update aria-expanded for accessibility
-      const expanded = toggle.getAttribute('aria-expanded') === 'true' || false;
-      toggle.setAttribute('aria-expanded', !expanded);
+      const expanded = mobileMenu.getAttribute('aria-expanded') === 'true' || false;
+      mobileMenu.setAttribute('aria-expanded', !expanded);
       
-      // Log for debugging
-      console.log('Menu toggled, active:', navLinks.classList.contains('active'));
+      // Add event listener to close menu when clicking outside
+      if (navLinks.classList.contains('active')) {
+        setTimeout(() => {
+          document.addEventListener('click', closeMenuOnClickOutside);
+        }, 10);
+      } else {
+        document.removeEventListener('click', closeMenuOnClickOutside);
+      }
     });
-
+    
+    // Close menu when clicking outside
+    const closeMenuOnClickOutside = (e) => {
+      if (!navLinks.contains(e.target) && !mobileMenu.contains(e.target)) {
+        navLinks.classList.remove('active');
+        mobileMenu.classList.remove('is-active');
+        document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
+        document.removeEventListener('click', closeMenuOnClickOutside);
+      }
+    };
+    
     // Close menu when a link is clicked
     navLinks.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         navLinks.classList.remove('active');
-        toggle.classList.remove('is-active');
-        toggle.setAttribute('aria-expanded', 'false');
+        mobileMenu.classList.remove('is-active');
+        document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
       });
-    });
-    
-    // Also close menu when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!toggle.contains(e.target) && !navLinks.contains(e.target) && navLinks.classList.contains('active')) {
-        navLinks.classList.remove('active');
-        toggle.classList.remove('is-active');
-        toggle.setAttribute('aria-expanded', 'false');
-      }
     });
   } else {
     console.error("Mobile menu toggle or nav links not found");
   }
 
   // ===== Nav hide on scroll (auto-hide top nav) =====
-  // Variable to store the last known scroll position
-  let lastScroll = 0;
-  // Select the main navigation element
+  // Navigation scroll behavior
   const nav = document.querySelector('.main-nav');
+  const navHeight = nav ? nav.offsetHeight : 0;
+  let lastScroll = 0;
+  let ticking = false;
 
-  // Check if the nav element exists before adding listener
-  if (nav) {
-    window.addEventListener('scroll', () => {
-      const currentScroll = window.pageYOffset; // Get current vertical scroll position
+  // Add padding to body to account for fixed header
+  document.body.style.paddingTop = navHeight + 'px';
+  document.documentElement.style.scrollPaddingTop = navHeight + 'px';
 
-      // If scrolling up or at the very top, show the nav
-      if (currentScroll <= 0 || currentScroll < lastScroll) {
-        nav.classList.remove('hide-nav');
+  // Function to handle scroll events with throttling
+  const handleScroll = () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        const currentScroll = window.pageYOffset;
+        const isMobileMenuOpen = mobileMenu && mobileMenu.classList.contains('is-active');
+        
+        // Don't hide/show nav if mobile menu is open
+        if (isMobileMenuOpen) {
+          ticking = false;
+          return;
+        }
+        
+        if (nav) {
+          // Add/remove scrolled class when scrolled past 50px
+          if (currentScroll > 50) {
+            nav.classList.add('scrolled');
+          } else {
+            nav.classList.remove('scrolled');
+          }
+          
+          // Only hide/show nav when not at the top
+          if (currentScroll > 0) {
+            if (currentScroll > lastScroll && currentScroll > navHeight) {
+              // Scrolling down
+              nav.classList.add('hide-nav');
+            } else {
+              // Scrolling up
+              nav.classList.remove('hide-nav');
+            }
+          } else {
+            // At the top of the page
+            nav.classList.remove('hide-nav');
+          }
+        }
+        
+        lastScroll = currentScroll;
+        ticking = false;
+      });
+      ticking = true;
+    }
+  };
+
+  // Add scroll event listener with passive for better performance
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  
+  // Timeline animation on scroll
+  const timelineSections = document.querySelectorAll('.timeline-item');
+  
+  if (timelineSections.length > 0) {
+    const isInViewport = (element) => {
+      const rect = element.getBoundingClientRect();
+      return (
+        rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8 &&
+        rect.bottom >= 0
+      );
+    };
+
+    const handleTimelineScroll = () => {
+      timelineSections.forEach((item, index) => {
+        if (isInViewport(item) && !item.classList.contains('animate-timeline')) {
+          // Add staggered delay for each item
+          setTimeout(() => {
+            item.classList.add('animate-timeline');
+          }, 150 * index);
+        }
+      });
+    };
+
+    // Initial check with a slight delay to allow for page load
+    setTimeout(() => {
+      handleTimelineScroll();
+    }, 300);
+    
+    // Throttle the scroll event for better performance
+    let isScrolling;
+    const throttledHandleScroll = () => {
+      if (!isScrolling) {
+        window.requestAnimationFrame(() => {
+          handleTimelineScroll();
+          isScrolling = false;
+        });
+        isScrolling = true;
       }
-      // If scrolling down and not at the top, hide the nav
-      else if (currentScroll > lastScroll) {
-         // Add a small buffer (e.g., 50px) before hiding to avoid flicker
-         if (currentScroll > 50) {
-           nav.classList.add('hide-nav');
-         }
-      }
-
-      lastScroll = currentScroll; // Update the last scroll position
-    });
+    };
+    
+    // Add scroll event for timeline with throttling
+    window.addEventListener('scroll', throttledHandleScroll, { passive: true });
+    
+    // Also trigger on window resize in case layout changes
+    window.addEventListener('resize', throttledHandleScroll, { passive: true });
   }
-
+  
+  // Initial check
+  handleScroll();
 
   // ===== Console Easter Egg for Devs =====
   // Logs messages to the browser console with custom styling

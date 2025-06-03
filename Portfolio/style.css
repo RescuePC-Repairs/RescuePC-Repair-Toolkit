@@ -106,11 +106,14 @@
 
 [data-theme="light"] {
   .journey-card p {
-    color: var(--text-color) !important; /* Force dark text color */
+    color: black !important; /* Force dark text color */
+    text-align: center;
   }
 
   .skill-header span {
-    color: var(--text-color) !important;
+    color: black !important;
+  }
+    text-align: center;
   }
 
   .intro {
@@ -124,10 +127,13 @@
     color: var(--text-color) !important;
     text-shadow: none;
   }
+    text-align: center;
+  }
 
   .timeline-content {
     background: var(--card-bg);
-    color: var(--text-color);
+    border-radius: 10px;    color: var(--text-color);
+    text-align: center;
   }
 
   .skill-card {
@@ -182,6 +188,7 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: var(--text-color);
+    text-align: center;
   }
   /* Fix logo color in light mode */
   .logo {
@@ -450,7 +457,7 @@ html {
 }
 
 .nav-links a {
-  color: var(--text-color);
+  color: black;
   text-decoration: none;
   font-weight: 500;
   font-size: 1rem;
@@ -946,6 +953,7 @@ html {
   -webkit-text-fill-color: transparent;
   font-weight: 700;
   letter-spacing: 0.5px;
+  text-align: center;
 }
 
 .tech-stack {
@@ -1113,7 +1121,7 @@ footer {
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1000px) {
   .project-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -2001,6 +2009,7 @@ p,
   font-size: 2rem;
   margin-bottom: 1.5rem;
   color: white;
+  text-align: center;
 }
 
 .cta-buttons.prominent {
@@ -2208,6 +2217,7 @@ p,
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  text-align: center;
 }
 
 /* Testimonials */
