@@ -323,34 +323,71 @@
   </header>
 
   <section class="hero">
+    <!-- Floating elements -->
+    <div class="floating" style="width: 200px; height: 200px; top: 15%; left: 10%; animation-delay: 0s;"></div>
+    <div class="floating" style="width: 300px; height: 300px; bottom: 15%; right: 10%; animation-delay: -5s;"></div>
+    <div class="floating" style="width: 150px; height: 150px; top: 50%; right: 20%; animation-delay: -10s;"></div>
+    <div class="floating" style="width: 250px; height: 250px; bottom: 25%; left: 15%; animation-delay: -7s;">
+      <div class="floating" style="width: 50%; height: 50%; background: rgba(255,255,255,0.05); top: 25%; left: 25%;"></div>
+    </div>
+    
     <div class="container">
       <div class="hero-content">
-        <h1>🖥️ RescuePC Repairs: The Best Windows Repair Toolkit</h1>
-        <p class="hero-subtitle">A Must-Have for Every System</p>
+        <div class="hero-badge">
+        </div>
+        <h1><span class="gradient-text">🖥️ RescuePC Repairs</span><br>Your Complete Windows Repair Solution</h1>
+        <p class="hero-subtitle">The Ultimate All-in-One Repair Toolkit for Windows</p>
         <p class="hero-description">
           Say goodbye to frustrating errors and unreliable fixes. With RescuePC Repairs, you get the essential repair program that should be built into Windows. 
-          Designed for instant, automatic repairs that actually make a difference, this all-in-one solution safely restores any Windows computer with zero risk of file loss or system damage.
+          Designed for instant, automatic repairs that actually make a difference.
         </p>
         <div class="hero-buttons">
-          <a href="https://buy.stripe.com/cNibJ11SE7ky4av7p693y03" class="btn btn-primary">
-            <i class="fas fa-shopping-cart"></i> Buy Now
+          <a href="https://buy.stripe.com/cNibJ11SE7ky4av7p693y03" class="btn btn-primary pulse">
+            <i class="fas fa-bolt"></i> Get Instant Access
           </a>
           <a href="#features" class="btn btn-secondary">
-            <i class="fas fa-info-circle"></i> Learn More
+            <i class="fas fa-play-circle"></i> Watch Demo
           </a>
         </div>
         <div class="hero-features">
           <div class="feature">
-            <i class="fas fa-wifi"></i>
-            <span>🛠️ Repair lost Wi-Fi and network issues</span>
+            <div class="feature-icon">
+              <i class="fas fa-wifi"></i>
+            </div>
+            <span>Fix Network & Wi-Fi</span>
           </div>
           <div class="feature">
-            <i class="fas fa-history"></i>
-            <span>♻️ Creates System Restore Points with every repair</span>
+            <div class="feature-icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <span>System Protection</span>
           </div>
           <div class="feature">
-            <i class="fas fa-volume-up"></i>
-            <span>🔊 Restore missing or corrupted sound drivers</span>
+            <div class="feature-icon">
+              <i class="fas fa-tools"></i>
+            </div>
+            <span>One-Click Repairs</span>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">
+              <i class="fas fa-tachometer-alt"></i>
+            </div>
+            <span>Performance Boost</span>
+          </div>
+        </div>
+        
+        <div class="trust-badges">
+          <div class="trust-badge">
+            <i class="fas fa-check-circle"></i>
+            <span>30-Day Money Back</span>
+          </div>
+          <div class="trust-badge">
+            <i class="fas fa-lock"></i>
+            <span>Secure Checkout</span>
+          </div>
+          <div class="trust-badge">
+            <i class="fas fa-headset"></i>
+            <span>24/7 Support</span>
           </div>
         </div>
       </div>
@@ -463,14 +500,6 @@
         </div>
       </div>
     </section>
-
-      // Throttle scroll events
-      let scrollUpdateTimeout;
-      container.addEventListener('scroll', () => {
-        clearTimeout(scrollUpdateTimeout);
-        scrollUpdateTimeout = setTimeout(updateActiveDot, 100);
-      }, { passive: true });
-    });
     </script>
 
     <section class="buy-now">
