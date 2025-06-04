@@ -9331,7 +9331,7 @@ html {
   align-items: center;
   gap: 0.5rem;
   background: var(--bg-dark);
-  color: rgb(255, 255, 255);
+  color: black;
   padding: 0.8rem 1.5rem;
   border-radius: var(--border-radius-sm);
   font-weight: 600;
