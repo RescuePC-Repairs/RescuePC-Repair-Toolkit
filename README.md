@@ -2,6 +2,10 @@
 
 **RescuePC Repairs™** is the ultimate offline Windows PC repair toolkit designed to revive broken systems without needing internet access. Repair Wi-Fi, audio, drivers, and boost system performance instantly — all from a local download or portable USB drive.
 
+🛡️ **Trademark & Licensing Notice**  
+RescuePC Repairs™ is a protected trademark. All source code, branding, and compiled software are © 2025 Tyler Keesee.  
+Use is subject to the [LICENSE](./LICENSE.txt) and [EULA](./EULA.txt) terms. Redistribution or resale is strictly prohibited.
+
 ---
 
 ## 🚀 Features
@@ -43,18 +47,24 @@ After purchase, you'll be redirected to a secure download page.
 
 ---
 
-## 📄 License
+## 📄 License & Legal
 
-RescuePC Repairs™ software and branding © 2025 Tyler Keesee.  
-All rights reserved.  
-Unauthorized distribution is prohibited.
+- [LICENSE.txt](./LICENSE.txt) – Personal use license  
+- [EULA.txt](./EULA.txt) – End-User License Agreement  
+- [NOTICE.txt](./NOTICE.txt) – Copyright & trademark declaration
+
+> This repository and toolkit are digitally fingerprinted and protected by DMCA takedown rights.
+
+© 2025 Tyler Keesee. All rights reserved.  
+RescuePC Repairs™, its software, and branding may not be copied, resold, or redistributed.
 
 ---
 
 ## 🛠️ Contact & Support
 
 **Email:** [***REMOVED***](mailto:***REMOVED***)  
-**Website:** [RescuePC Repairs GitHub Pages Site (Live Link)](https://rescuepc-repairs.github.io/RescuePC-Repair-Toolkit/index.html) 
+**Website:** [RescuePC Repairs Live Site](https://www.rescuepcrepairs.com)  
+**Docs:** Coming soon!
 
 Need help with your download? Questions about RescuePC Repairs™?  
 Contact us — real support, real fast.
