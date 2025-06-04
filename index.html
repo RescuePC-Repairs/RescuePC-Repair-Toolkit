@@ -9,7 +9,14 @@
   <meta name="description" content="Professional PC Repair Software for Windows. Fix common PC issues with our comprehensive repair toolkit.">
   <title>RescuePC Repairs - Professional PC Repair Software</title>
   
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
+  <link rel="shortcut icon" href="assets/icons/favicon.ico">
+  
   <!-- Preload critical resources -->
+  <link rel="preload" href="assets/hero-image-800.jpg" as="image" media="(max-width: 800px)">
+  <link rel="preload" href="assets/hero-bg.jpg" as="image">
   <link rel="preload" href="assets/RescuePC_Logo_Light.png" as="image" type="image/png">
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"></noscript>
@@ -559,7 +566,33 @@
   </script>
 
   <!-- Load non-critical scripts with defer -->
-  <script src="https://js.stripe.com/v3/buy-button.js" defer></script>
+  <script>
+    // Load Stripe with error handling
+    window.addEventListener('error', function(e) {
+      if (e.target && e.target.src && e.target.src.includes('stripe')) {
+        console.warn('Stripe script was blocked by an ad blocker');
+        // Show fallback content if needed
+        const stripeButtons = document.querySelectorAll('stripe-buy-button');
+        stripeButtons.forEach(btn => {
+          btn.innerHTML = `
+            <div style="padding: 1rem; text-align: center; background: #f8f9fa; border-radius: 8px; margin: 1rem 0;">
+              <p>Payment processing powered by Stripe</p>
+              <a href="#pricing" class="btn btn-primary">View Pricing Options</a>
+            </div>
+          `;
+        });
+      }
+    }, true);
+
+    // Load Stripe script
+    const stripeScript = document.createElement('script');
+    stripeScript.src = 'https://js.stripe.com/v3/buy-button.js';
+    stripeScript.async = true;
+    stripeScript.onerror = function() {
+      console.warn('Failed to load Stripe script');
+    };
+    document.head.appendChild(stripeScript);
+  </script>
   
   <!-- Load non-critical CSS asynchronously -->
   <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -1418,53 +1451,36 @@
     </div>
   </div>
 
+  <!-- Navigation JavaScript -->
+  <script src="js/navigation.js"></script>
+  <!-- Stripe Error Handling -->
   <script>
-    // Image Modal Functionality
-    function openModal(imageSrc, altText) {
-      const modal = document.getElementById('imageModal');
-      const modalImg = document.getElementById('modalImage');
-      
-      modal.style.display = 'flex';
-      modalImg.src = imageSrc;
-      modalImg.alt = altText;
-      
-      // Trigger reflow to enable the fade-in effect
-      setTimeout(() => {
-        modal.classList.add('show');
-      }, 10);
-      
-      // Prevent body scroll when modal is open
-      document.body.style.overflow = 'hidden';
-    }
+    // Handle Stripe errors gracefully
+    window.addEventListener('error', function(e) {
+      // Check if the error is from Stripe
+      if (e.message && e.message.includes('stripe') || 
+          e.filename && e.filename.includes('stripe')) {
+        console.warn('Stripe script failed to load. This is normal if you have an ad blocker enabled.');
+        e.preventDefault();
+      }
+    }, true);
     
-    // Close modal when clicking the close button
-    document.querySelector('.close-modal').addEventListener('click', function() {
-      const modal = document.getElementById('imageModal');
-      modal.classList.remove('show');
-      
-      // Wait for the fade-out animation to complete before hiding the modal
-      setTimeout(() => {
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-      }, 300);
-    });
-    
-    // Close modal when clicking outside the image
-    window.addEventListener('click', function(event) {
-      const modal = document.getElementById('imageModal');
-      if (event.target === modal) {
-        modal.classList.remove('show');
-        
-        // Wait for the fade-out animation to complete before hiding the modal
-        setTimeout(() => {
-          modal.style.display = 'none';
-          document.body.style.overflow = 'auto';
-        }, 300);
+    // Handle Stripe button if it fails to load
+    document.addEventListener('DOMContentLoaded', function() {
+      const stripeButtons = document.querySelectorAll('stripe-buy-button');
+      if (stripeButtons.length > 0) {
+        // If Stripe buttons exist but script fails to load
+        setTimeout(function() {
+          if (typeof Stripe === 'undefined') {
+            stripeButtons.forEach(button => {
+              button.innerHTML = '<div style="text-align:center;padding:1rem;background:#f8f9fa;border-radius:4px;">' +
+                '<p>Payment processing powered by Stripe</p>' +
+                '<a href="#pricing" class="btn btn-primary">View Pricing</a></div>';
+            });
+          }
+        }, 3000); // Check after 3 seconds if Stripe is loaded
       }
     });
   </script>
-
-  <!-- Navigation JavaScript -->
-  <script src="js/navigation.js"></script>
-</body>
+  </body>
 </html>
