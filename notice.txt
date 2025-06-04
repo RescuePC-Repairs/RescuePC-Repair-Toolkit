@@ -1,0 +1,7 @@
+RescuePC Repairs™ is a trademark of Tyler Keesee.
+
+All source code, branding, assets, scripts, and compiled binaries in this project are © 2025 Tyler Keesee. All rights reserved.
+
+Unauthorized copying, modification, redistribution, or resale of any part of this toolkit or website is strictly prohibited.
+
+This product contains digital fingerprinting technology to detect tampering or redistribution. Violations will be pursued under applicable copyright and trademark law, including but not limited to DMCA takedowns.
