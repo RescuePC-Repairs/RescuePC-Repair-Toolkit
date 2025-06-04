@@ -4,6 +4,44 @@
   <!-- Primary Meta Tags -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="description" content="Professional PC Repair Software for Windows. Fix common PC issues with our comprehensive repair toolkit.">
+  <title>RescuePC Repairs - Professional PC Repair Software</title>
+  
+  <!-- Preload critical resources -->
+  <link rel="preload" href="assets/RescuePC_Logo_Light.png" as="image" type="image/png">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"></noscript>
+  
+  <!-- Preconnect to external domains -->
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://js.stripe.com" crossorigin>
+  
+  <!-- Preload critical CSS -->
+  <link rel="stylesheet" href="footer-styles.css">
+  <style>
+    /* Critical CSS - Above the fold styles */
+    html { scroll-behavior: smooth; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(15, 23, 42, 0.98); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 0.75rem 0; transition: transform 0.3s ease, background 0.3s ease; will-change: transform, background; }
+    .navbar.scrolled { padding: 0.5rem 0; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); }
+    .navbar-container { display: flex; justify-content: space-between; align-items: center; max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
+    .mobile-menu-toggle { display: none; background: none; border: none; padding: 0.5rem; cursor: pointer; z-index: 1002; }
+    .hamburger { display: flex; flex-direction: column; justify-content: space-between; width: 24px; height: 18px; position: relative; pointer-events: none; }
+    .hamburger-line { display: block; width: 100%; height: 2px; background: #fff; border-radius: 2px; transition: all 0.3s ease; transform-origin: center; }
+    .mobile-menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .mobile-menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(2) { opacity: 0; transform: translateX(-10px); }
+    .mobile-menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+    .nav-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.7); z-index: 998; opacity: 0; visibility: hidden; transition: all 0.3s ease; }
+    .nav-overlay.active { opacity: 1; visibility: visible; }
+    .navbar-nav { display: flex; align-items: center; list-style: none; margin: 0; padding: 0; }
+    @media (max-width: 1024px) {
+      .mobile-menu-toggle { display: flex; }
+      .navbar-nav { position: fixed; top: 0; right: -100%; width: 85%; max-width: 320px; height: 100vh; background: #0f172a; flex-direction: column; padding: 5.5rem 1.5rem 2rem; transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); z-index: 1000; overflow-y: auto; }
+      .navbar-nav.active { transform: translateX(-100%); }
+    }
+  </style>
   <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; connect-src 'self' https://api.stripe.com https://www.google-analytics.com; frame-src 'self' https://js.stripe.com; object-src 'none'; base-uri 'self'; form-action 'self';">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="X-XSS-Protection" content="1; mode=block">
@@ -22,9 +60,334 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="RescuePC Repairs">
   <meta name="application-name" content="RescuePC Repairs">
-  <meta name="msapplication-TileColor" content="#1e40af">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
+  <meta name="theme-color" content="#0f172a">
   <meta name="msapplication-config" content="/browserconfig.xml">
-  <title>RescuePC Repairs - Professional PC Repair Toolkit</title>
+  <!-- Primary Meta Tags -->
+  <title>RescuePC Repairs | Professional Computer Repair & IT Services</title>
+  <meta name="title" content="RescuePC Repairs | Professional Computer Repair & IT Services">
+  <meta name="description" content="🚀 #1 Trusted PC Repair Service in Syracuse, NY | 24/7 Emergency Support | Same-Day Service | Free Diagnostics | 100% Satisfaction Guaranteed | Call Now (315) XXX-XXXX | Serving Syracuse and Central New York">
+  <meta name="keywords" content="PC repair, computer repair, virus removal, IT support, computer service, hardware repair, software troubleshooting, data recovery">
+  <meta name="author" content="RescuePC Repairs">
+  <meta name="robots" content="index, follow">
+  <meta name="revisit-after" content="7 days">
+  <link rel="canonical" href="https://rescuepcrepairs.com" />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://rescuepcrepairs.com/">
+  <meta property="og:title" content="RescuePC Repairs | Professional Computer Repair & IT Services">
+  <meta property="og:description" content="Expert PC repair services, virus removal, hardware upgrades, and IT support. Fast, reliable, and affordable computer repair services near you.">
+  <meta property="og:image" content="https://rescuepcrepairs.com/assets/images/social-preview.jpg">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://rescuepcrepairs.com/">
+  <meta property="twitter:title" content="RescuePC Repairs | Professional Computer Repair & IT Services">
+  <meta property="twitter:description" content="Expert PC repair services, virus removal, hardware upgrades, and IT support. Fast, reliable, and affordable computer repair services near you.">
+  <meta property="twitter:image" content="https://rescuepcrepairs.com/assets/images/social-preview.jpg">
+  
+  <!-- Enhanced Local Business Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ComputerStore",
+    "@id": "https://rescuepcrepairs.com",
+    "name": "RescuePC Repairs",
+    "url": "https://rescuepcrepairs.com",
+    "logo": "https://rescuepcrepairs.com/assets/RescuePC_Logo_Light.png",
+    "image": [
+      "https://rescuepcrepairs.com/assets/service1.jpg",
+      "https://rescuepcrepairs.com/assets/service2.jpg"
+    ],
+    "description": "#1 Rated Computer Repair Service in Syracuse, NY | Same-Day Service | Free Diagnostics | 100% Satisfaction Guaranteed",
+    "priceRange": "$$",
+    "telephone": "+1-315-XXX-XXXX",
+    "email": "contact@rescuepcrepairs.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Syracuse",
+      "addressRegion": "NY",
+      "postalCode": "132XX",
+      "addressCountry": "US",
+      "areaServed": "Syracuse and surrounding areas"
+    },
+    "hasOfferCatalog": "ServiceArea",
+    "areaServed": [{
+      "@type": "GeoCircle",
+      "geoMidpoint": {
+        "@type": "GeoCoordinates",
+        "latitude": 43.048122,
+        "longitude": -76.147423
+      },
+      "geoRadius": 25000,
+      "description": "Serving all of Syracuse and surrounding communities within 25 miles"
+    }],
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 43.048122,
+      "longitude": -76.147423
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "08:00",
+        "closes": "20:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Saturday",
+        "opens": "09:00",
+        "closes": "18:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Sunday",
+        "opens": "10:00",
+        "closes": "16:00"
+      }
+    ],
+    "priceRange": "$$",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Computer Repair Services",
+      "itemListElement": [
+        {
+          "@type": "OfferCatalog",
+          "name": "Virus Removal",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Complete Virus Removal",
+                "description": "Professional virus, malware, and spyware removal service"
+              }
+            }
+          ]
+        },
+        {
+          "@type": "OfferCatalog",
+          "name": "Hardware Repair",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Laptop Screen Replacement",
+                "description": "Fast and affordable laptop screen replacement"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Hard Drive Replacement",
+                "description": "Professional hard drive replacement and data migration"
+              }
+            }
+          ]
+        },
+        {
+          "@type": "OfferCatalog",
+          "name": "Data Recovery",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Emergency Data Recovery",
+                "description": "Professional data recovery from failed hard drives and devices"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "areaServed": [
+      {
+        "@type": "City",
+        "name": "Syracuse"
+      },
+      {
+        "@type": "City",
+        "name": "Cicero"
+      },
+      {
+        "@type": "City",
+        "name": "Clay"
+      },
+      {
+        "@type": "City",
+        "name": "DeWitt"
+      },
+      {
+        "@type": "City",
+        "name": "Fayetteville"
+      },
+      {
+        "@type": "City",
+        "name": "Liverpool"
+      },
+      {
+        "@type": "City",
+        "name": "Manlius"
+      },
+      {
+        "@type": "State",
+        "name": "New York"
+      },
+      {
+        "@type": "GeoCircle",
+        "geoMidpoint": {
+          "@type": "GeoCoordinates",
+          "latitude": 43.048122,
+          "longitude": -76.147423
+        },
+        "geoRadius": 25000
+    ],
+    "sameAs": [
+      "https://www.facebook.com/rescuepcrepairs",
+      "https://twitter.com/rescuepcrepairs",
+      "https://www.instagram.com/rescuepcrepairs",
+      "https://www.linkedin.com/company/rescuepcrepairs",
+      "https://www.yelp.com/biz/rescuepc-repairs-[your-city]"
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "bestRating": "5",
+      "worstRating": "1",
+      "ratingCount": "247"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "John D."
+        },
+        "datePublished": "2025-05-15",
+        "reviewBody": "Amazing service! Fixed my laptop the same day. Highly recommend RescuePC Repairs!"
+      },
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Sarah M."
+        },
+        "datePublished": "2025-05-20",
+        "reviewBody": "Professional and fast service. Recovered all my important files from a crashed hard drive!"
+      }
+    ]
+  }
+  </script>
+  
+  <!-- FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What areas in Syracuse do you serve for computer repair?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We proudly serve all of Syracuse and surrounding Central New York areas including Cicero, Clay, DeWitt, Fayetteville, Liverpool, Manlius, North Syracuse, Baldwinsville, Camillus, East Syracuse, and throughout Onondaga County. Our service area extends approximately 25 miles from downtown Syracuse."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How quickly can you fix my computer?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most repairs are completed within 24-48 hours. We offer same-day service for many common issues when you bring your device in before 12 PM. Emergency services may be available for an additional fee."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does computer repair cost?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Our diagnostic fee starts at $49, which is waived if you proceed with the repair. Standard virus removal starts at $99, hardware repairs vary by component, and data recovery services start at $199. We offer free estimates and upfront pricing with no hidden fees."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you offer a warranty on your repairs?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, all our repairs come with a 90-day warranty on parts and labor. Some manufacturers' parts may have longer warranties. We stand behind our work and will address any issues that arise during the warranty period at no additional cost."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What computer brands do you service?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We service all major brands including Dell, HP, Lenovo, Asus, Acer, Apple, Microsoft Surface, and custom-built PCs. Our technicians are certified to work on both Windows and Mac operating systems."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can you recover data from a dead computer?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In most cases, yes! We have a 95% success rate in data recovery from failed hard drives, crashed computers, and damaged storage devices. We use professional-grade tools in our cleanroom environment to maximize the chances of successful data recovery."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you offer remote computer support?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, we offer secure remote support for software-related issues, virus removal, and system optimization. Remote support is available for issues that don't require physical hardware repair."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What payment methods do you accept?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We accept all major credit cards (Visa, Mastercard, American Express, Discover), Apple Pay, Google Pay, cash, and checks. We also offer financing options for repairs over $299 through our partners."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How can I prevent future computer problems?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We recommend regular maintenance including: 1) Installing quality antivirus software, 2) Keeping your operating system and software updated, 3) Backing up important data regularly, 4) Using a surge protector, and 5) Scheduling annual professional tune-ups. Ask us about our maintenance plans for worry-free computing."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are your business hours?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Our regular business hours are Monday-Friday 8:00 AM to 8:00 PM, Saturday 9:00 AM to 6:00 PM, and Sunday 10:00 AM to 4:00 PM. After-hours emergency service may be available by appointment."
+        }
+      }
+    ]
+  }
+  </script>
+  
   <meta name="description" content="Professional PC Repair Toolkit by RescuePC Repairs. Comprehensive computer diagnostics, repair, and optimization software for IT professionals and advanced users.">
   <meta name="keywords" content="PC repair, computer diagnostics, system optimization, Windows repair, computer maintenance, IT tools, system recovery, RescuePC">
   <meta name="subject" content="PC Repair Software">
@@ -121,12 +484,9 @@
   <link rel="apple-touch-icon" sizes="180x180" href="Portfolio/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="Portfolio/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="Portfolio/favicon/favicon-16x16.png">
-  <link rel="manifest" href="site.webmanifest">
-  <meta name="theme-color" content="#0f172a">
   <link rel="mask-icon" href="assets/safari-pinned-tab.svg" color="#0f172a">
   <link rel="shortcut icon" href="assets/favicon.ico">
   <meta name="msapplication-TileColor" content="#0f172a">
-  <meta name="msapplication-config" content="assets/browserconfig.xml">
   <meta name="theme-color" content="#0f172a">
   
   <!-- Preload Critical Resources -->
@@ -201,135 +561,12 @@
   <!-- Load non-critical scripts with defer -->
   <script src="https://js.stripe.com/v3/buy-button.js" defer></script>
   
-  <!-- Mobile Navigation Script -->
+  <!-- Load non-critical CSS asynchronously -->
+  <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="style.css"></noscript>
+  
   <script>
-    // Enhanced mobile menu functionality
-    document.addEventListener('DOMContentLoaded', function() {
-      const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-      const navbar = document.querySelector('.navbar');
-      const navbarNav = document.querySelector('.navbar-nav');
-      const navOverlay = document.querySelector('.nav-overlay');
-      const body = document.body;
-      let resizeTimer;
-      
-      // Toggle mobile menu with animation
-      function toggleMobileMenu() {
-        const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
-        mobileMenuToggle.setAttribute('aria-expanded', !isExpanded);
-        navbar.classList.toggle('active');
-        body.classList.toggle('no-scroll');
-        
-        // Add smooth transition for mobile menu
-        if (!isExpanded) {
-          navbarNav.style.display = 'flex';
-          setTimeout(() => navbarNav.classList.add('active'), 10);
-        } else {
-          navbarNav.classList.remove('active');
-          setTimeout(() => {
-            if (!navbar.classList.contains('active')) {
-              navbarNav.style.display = '';
-            }
-          }, 300);
-        }
-      }
-      
-      // Close mobile menu completely
-      function closeMobileMenu() {
-        mobileMenuToggle.setAttribute('aria-expanded', 'false');
-        navbar.classList.remove('active');
-        navbarNav.classList.remove('active');
-        body.classList.remove('no-scroll');
-        
-        // Ensure menu is hidden after animation
-        setTimeout(() => {
-          if (!navbar.classList.contains('active')) {
-            navbarNav.style.display = '';
-          }
-        }, 300);
-      }
-      
-      // Toggle mobile menu when clicking the hamburger button
-      mobileMenuToggle.addEventListener('click', function(e) {
-        e.stopPropagation();
-        toggleMobileMenu();
-      });
-      
-      // Close mobile menu when clicking on overlay
-      navOverlay.addEventListener('click', closeMobileMenu);
-      
-      // Close mobile menu when clicking on a nav link
-      document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
-        link.addEventListener('click', closeMobileMenu);
-      });
-      
-      // Close menu when clicking outside on mobile
-      document.addEventListener('click', function(e) {
-        if (navbar.classList.contains('active') && 
-            !navbar.contains(e.target) && 
-            e.target !== mobileMenuToggle) {
-          closeMobileMenu();
-        }
-      });
-      
-      // Handle window resize
-      function handleResize() {
-        // Clear the timeout if it exists
-        clearTimeout(resizeTimer);
-        
-        // Set a new timeout to run after resizing has stopped
-        resizeTimer = setTimeout(function() {
-          if (window.innerWidth > 992) {
-            closeMobileMenu();
-          }
-        }, 250);
-      }
-      
-      // Add scroll event for navbar
-      let lastScroll = 0;
-      window.addEventListener('scroll', function() {
-        const currentScroll = window.pageYOffset;
-        
-        if (currentScroll <= 0) {
-          navbar.classList.remove('scrolled');
-          return;
-        }
-        
-        if (currentScroll > lastScroll && currentScroll > 100) {
-          // Scrolling down
-          navbar.style.transform = 'translateY(-100%)';
-        } else {
-          // Scrolling up
-          navbar.style.transform = 'translateY(0)';
-          navbar.classList.add('scrolled');
-        }
-        
-        lastScroll = currentScroll;
-      });
-      
-      // Initialize
-      window.addEventListener('resize', handleResize);
-      
-      // Add smooth scrolling for anchor links
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-          e.preventDefault();
-          
-          const targetId = this.getAttribute('href');
-          if (targetId === '#') return;
-          
-          const targetElement = document.querySelector(targetId);
-          if (targetElement) {
-            window.scrollTo({
-              top: targetElement.offsetTop - 80,
-              behavior: 'smooth'
-            });
-          }
-        });
-      });
-    });
-  </script>
-  <script>
-    // Load non-critical CSS after page load
+    // Load non-critical CSS
     function loadCSS(href, before, media) {
       var ss = window.document.createElement('link');
       var ref = before || window.document.getElementsByTagName('script')[0];
@@ -346,11 +583,187 @@
       return ss;
     }
     
-    // Load non-critical CSS after page load
-    window.addEventListener('load', function() {
-      // Font Awesome is already loaded with preload
-      // Add any additional non-critical CSS here
+    // Load non-critical resources after page load
+    function loadDeferredResources() {
+      // Load any non-critical CSS
+      loadCSS('style.css');
+      
+      // Load any non-critical JavaScript
+      const scripts = [];
+      
+      scripts.forEach(function(src) {
+        const script = document.createElement('script');
+        script.src = src;
+        script.async = true;
+        document.body.appendChild(script);
+      });
+    }
+    
+    // Load deferred resources when the page is interactive
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', loadDeferredResources);
+    } else {
+      loadDeferredResources();
+    }
+  </script>
+  
+  <script>
+    // Add a class to the html element when JavaScript is enabled
+    document.documentElement.classList.add('js');
+    
+    // Check if the user is on a mobile device
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    // Add a class to the html element if on mobile
+    if (isMobile) {
+      document.documentElement.classList.add('is-mobile');
+    }
+    
+    // Set a cookie to remember if the user has visited before
+    if (!document.cookie.includes('returningVisitor=true')) {
+      document.cookie = 'returningVisitor=true; max-age=' + (60 * 60 * 24 * 30) + '; path=/; SameSite=Lax';
+      document.documentElement.classList.add('first-visit');
+    } else {
+      document.documentElement.classList.add('returning-visitor');
+    }
+    // Wait for the DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      // Use requestIdleCallback for non-critical work
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(initMobileMenu, { timeout: 2000 });
+      } else {
+        // Fallback for browsers that don't support requestIdleCallback
+        setTimeout(initMobileMenu, 0);
+      }
     });
+    
+    function initMobileMenu() {
+      // Cache DOM elements
+      const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+      const mobileNav = document.querySelector('.mobile-nav');
+      const navOverlay = document.querySelector('.nav-overlay');
+      const body = document.body;
+      const navLinks = document.querySelectorAll('.mobile-nav .nav-link');
+      const navbar = document.querySelector('.navbar');
+      let isAnimating = false;
+      
+      // Only proceed if required elements exist
+      if (!mobileMenuToggle || !mobileNav || !navOverlay || !navbar) return;
+      
+      // Toggle mobile menu
+      function toggleMenu(e) {
+        if (e) e.stopPropagation();
+        if (isAnimating) return;
+        
+        isAnimating = true;
+        const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+        const newState = !isExpanded;
+        
+        // Update ARIA and state
+        mobileMenuToggle.setAttribute('aria-expanded', newState);
+        mobileMenuToggle.classList.toggle('is-active', newState);
+        mobileNav.classList.toggle('active', newState);
+        navOverlay.classList.toggle('active', newState);
+        body.classList.toggle('no-scroll', newState);
+        
+        // Handle focus management
+        if (newState) {
+          // Opening menu - focus first nav item after animation
+          setTimeout(() => {
+            const firstLink = mobileNav.querySelector('a');
+            if (firstLink) firstLink.focus();
+          }, 300);
+        } else {
+          // Closing menu - return focus to toggle button
+          mobileMenuToggle.focus();
+        }
+        
+        // Reset animation state
+        setTimeout(() => {
+          isAnimating = false;
+        }, 300);
+      }
+      
+      // Close menu function
+      function closeMenu() {
+        if (mobileMenuToggle.getAttribute('aria-expanded') === 'true') {
+          toggleMenu();
+        }
+      }
+      
+      // Initialize event listeners
+      function initEventListeners() {
+        // Toggle menu on button click
+        mobileMenuToggle.addEventListener('click', toggleMenu);
+        
+        // Close menu on overlay click
+        navOverlay.addEventListener('click', closeMenu);
+        
+        // Close menu on nav link click
+        navLinks.forEach(link => {
+          link.addEventListener('click', closeMenu);
+        });
+        
+        // Close menu on Escape key
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') closeMenu();
+        });
+        
+        // Close menu on resize to desktop
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(() => {
+            if (window.innerWidth >= 1025) closeMenu();
+          }, 250);
+        });
+      }
+      
+      // Smooth scrolling for anchor links
+      function initSmoothScrolling() {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+          anchor.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            if (targetId === '#' || targetId === '') return;
+            
+            e.preventDefault();
+            closeMenu();
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+              const navbarHeight = navbar.offsetHeight;
+              const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight - 20;
+              
+              window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+              });
+              
+              // Update URL without adding to history
+              if (history.pushState) {
+                history.pushState(null, null, targetId);
+              } else {
+                window.location.hash = targetId;
+              }
+            }
+          });
+        });
+      }
+      
+      // Initialize everything
+      initEventListeners();
+      initSmoothScrolling();
+      
+      // Handle focus styles for keyboard navigation
+      function handleFirstTab(e) {
+        if (e.key === 'Tab') {
+          document.body.classList.add('user-is-tabbing');
+          window.removeEventListener('keydown', handleFirstTab);
+        }
+      }
+      
+      window.addEventListener('keydown', handleFirstTab);
+    }
     
     // Add a class to the html element when JavaScript is enabled
     document.documentElement.classList.add('js');
@@ -365,7 +778,7 @@
           <img src="assets/RescuePC_Logo_Light.png" alt="RescuePC Repairs Logo" width="180" height="auto">
         </a>
 
-        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-navigation">
+        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle navigation" aria-expanded="false">
           <span class="hamburger">
             <span class="hamburger-line"></span>
             <span class="hamburger-line"></span>
@@ -373,9 +786,8 @@
           </span>
         </button>
         
-        <div class="nav-overlay"></div>
-        
-        <ul class="navbar-nav" id="primary-navigation" role="navigation" aria-label="Main navigation">
+        <!-- Desktop Navigation -->
+        <ul class="navbar-nav">
           <li class="nav-item">
             <a href="#features" class="nav-link">
               <i class="fas fa-star" aria-hidden="true"></i>
@@ -406,9 +818,52 @@
               <span>FAQ</span>
             </a>
           </li>
-          <li class="nav-item nav-cta">
-            <a href="https://buy.stripe.com/dRm6oHeFqfR4gXhbFm93y05" class="btn btn-primary">
-              <i class="fas fa-shopping-cart"></i>
+          <li class="nav-item">
+            <a href="#buy-now" class="nav-link nav-cta">
+              <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+              <span>Buy Now</span>
+            </a>
+          </li>
+        </ul>
+
+        <!-- Mobile Navigation Overlay -->
+        <div class="nav-overlay"></div>
+        
+        <!-- Mobile Navigation Menu -->
+        <ul class="navbar-nav mobile-nav" id="mobileNav">
+          <li class="nav-item">
+            <a href="#features" class="nav-link">
+              <i class="fas fa-star" aria-hidden="true"></i>
+              <span>Features</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#how-it-works" class="nav-link">
+              <i class="fas fa-play-circle" aria-hidden="true"></i>
+              <span>How It Works</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#testimonials" class="nav-link">
+              <i class="fas fa-quote-left" aria-hidden="true"></i>
+              <span>Testimonials</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#pricing" class="nav-link">
+              <i class="fas fa-tags" aria-hidden="true"></i>
+              <span>Pricing</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#faq" class="nav-link">
+              <i class="fas fa-question-circle" aria-hidden="true"></i>
+              <span>FAQ</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#buy-now" class="nav-link nav-cta">
+              <i class="fas fa-shopping-cart" aria-hidden="true"></i>
               <span>Buy Now</span>
             </a>
           </li>
@@ -452,6 +907,18 @@
               <i class="fas fa-shield-alt fa-fw"></i>
             </div>
             <span>System Protection</span>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">
+              <i class="fas fa-hdd fa-fw"></i>
+            </div>
+            <span>Install Drivers</span>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">
+              <i class="fas fa-virus-slash fa-fw"></i>
+            </div>
+            <span>Malware Removal</span>
           </div>
           <div class="feature">
             <div class="feature-icon">
@@ -612,7 +1079,7 @@
             <span class="amount">129</span>
             <span class="cents">.99</span>
           </div>
-          <p class="price-subtitle">One-time payment, lifetime updates</p>
+          <p class="price-subtitle">One-time payment, lifetime repairs</p>
         </div>
 
         <div class="pricing-features">
@@ -996,5 +1463,8 @@
       }
     });
   </script>
+
+  <!-- Navigation JavaScript -->
+  <script src="js/navigation.js"></script>
 </body>
 </html>

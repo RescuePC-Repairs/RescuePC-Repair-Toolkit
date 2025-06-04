@@ -2,23 +2,124 @@
 <urlset 
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+  xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"
   xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
   http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
   
+  <!-- ====== MAIN PAGES ====== -->
   <!-- Homepage -->
   <url>
     <loc>https://rescuepcrepairs.com/</loc>
     <lastmod>2025-06-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://rescuepcrepairs.com/assets/images/hero-banner.jpg</image:loc>
+      <image:caption>Professional Computer Repair Services in [Your City]</image:caption>
+      <image:title>RescuePC Repairs - #1 Computer Repair Service</image:title>
+    </image:image>
   </url>
   
-  <!-- Main Pages -->
+  <!-- Services -->
   <url>
-    <loc>https://rescuepcrepairs.com/features</loc>
+    <loc>https://rescuepcrepairs.com/services</loc>
     <lastmod>2025-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+  </url>
+  
+  <!-- Virus Removal -->
+  <url>
+    <loc>https://rescuepcrepairs.com/services/virus-removal</loc>
+    <lastmod>2025-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Data Recovery -->
+  <url>
+    <loc>https://rescuepcrepairs.com/services/data-recovery</loc>
+    <lastmod>2025-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Hardware Repair -->
+  <url>
+    <loc>https://rescuepcrepairs.com/services/hardware-repair</loc>
+    <lastmod>2025-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- About Us -->
+  <url>
+    <loc>https://rescuepcrepairs.com/about</loc>
+    <lastmod>2025-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Contact -->
+  <url>
+    <loc>https://rescuepcrepairs.com/contact</loc>
+    <lastmod>2025-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Blog -->
+  <url>
+    <loc>https://rescuepcrepairs.com/blog</loc>
+    <lastmod>2025-06-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- ====== BLOG POSTS ====== -->
+  <url>
+    <loc>https://rescuepcrepairs.com/blog/how-to-choose-the-right-computer-repair-service</loc>
+    <lastmod>2025-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://rescuepcrepairs.com/blog/top-5-signs-your-computer-has-a-virus</loc>
+    <lastmod>2025-05-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- ====== RESOURCE PAGES ====== -->
+  <url>
+    <loc>https://rescuepcrepairs.com/resources</loc>
+    <lastmod>2025-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <!-- ====== LEGAL PAGES ====== -->
+  <url>
+    <loc>https://rescuepcrepairs.com/privacy-policy</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  
+  <url>
+    <loc>https://rescuepcrepairs.com/terms-of-service</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  
+  <url>
+    <loc>https://rescuepcrepairs.com/sitemap.html</loc>
+    <lastmod>2025-06-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>

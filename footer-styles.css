@@ -1,0 +1,128 @@
+/* Footer Styles */
+.site-footer {
+  background: #0f172a;
+  color: #fff;
+  padding: 4rem 0 2rem;
+  margin-top: auto;
+  width: 100%;
+  position: relative;
+  z-index: 10;
+  text-align: center;
+}
+
+.footer-content {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.footer-sections {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4rem;
+  margin: 0 auto 3rem;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.footer-section {
+  flex: 0 0 auto;
+  min-width: 160px;
+  margin: 0 1rem 2rem;
+  text-align: center;
+}
+
+.footer-heading {
+  color: #fff;
+  font-size: 1.1rem;
+  margin: 0 0 1.5rem 0;
+  padding: 0;
+  position: relative;
+  display: inline-block;
+}
+
+.footer-heading::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 2px;
+  background: #3b82f6;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 200px;
+}
+
+.footer-links li {
+  margin: 0 0 0.8rem 0;
+  width: 100%;
+  text-align: center;
+}
+
+.footer-links a {
+  color: #fff !important;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  display: inline-block;
+  padding: 0.25rem 0;
+}
+
+.footer-links a:hover {
+  color: #60a5fa !important;
+  transform: translateX(3px);
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 2rem;
+  margin-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100%;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.footer-bottom p {
+  margin: 0;
+  color: #fff !important;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .footer-sections {
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+  }
+  
+  .footer-section {
+    width: 100%;
+    max-width: 280px;
+    margin-bottom: 2rem;
+  }
+  
+  .footer-heading {
+    margin-bottom: 1.25rem;
+  }
+  
+  .footer-bottom {
+    padding-top: 1.5rem;
+    margin-top: 1.5rem;
+  }
+}

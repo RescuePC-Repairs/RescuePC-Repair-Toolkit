@@ -1,0 +1,24 @@
+{
+  "name": "rescuepc-repairs-html",
+  "version": "1.0.0",
+  "description": "**RescuePC Repairs™** is the ultimate offline Windows PC repair toolkit designed to revive broken systems without needing internet access. Repair Wi-Fi, audio, drivers, and boost system performance instantly — all from a local download or portable USB drive.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RescuePC-Repairs/RescuePC-Repair-Toolkit.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/RescuePC-Repairs/RescuePC-Repair-Toolkit/issues"
+  },
+  "homepage": "https://github.com/RescuePC-Repairs/RescuePC-Repair-Toolkit#readme",
+  "dependencies": {
+    "sharp": "^0.34.2"
+  }
+}
