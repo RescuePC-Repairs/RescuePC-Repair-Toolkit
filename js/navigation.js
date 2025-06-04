@@ -73,94 +73,115 @@ document.addEventListener('DOMContentLoaded', function() {
   highlightActiveSection();
   
   // Toggle mobile menu with animations
-  function toggleMenu() {
+  function toggleMenu(e) {
+    if (e) e.stopPropagation();
     if (isAnimating) return;
     isAnimating = true;
     
     isMenuOpen = !isMenuOpen;
     
-    // Toggle body scroll and overlay
+    // Update ARIA and state
+    mobileMenuToggle.setAttribute('aria-expanded', isMenuOpen);
+    mobileMenuToggle.classList.toggle('is-active', isMenuOpen);
+    
     if (isMenuOpen) {
       // Open menu
       body.classList.add('menu-open');
-      mobileMenuToggle.setAttribute('aria-expanded', 'true');
       navOverlay.style.display = 'block';
+      mobileNav.style.display = 'flex'; // Ensure flex display for proper layout
       
       // Force reflow to ensure the display property is applied
       void navOverlay.offsetHeight;
       
       // Add active classes with slight delay for overlay
-      setTimeout(() => {
+      requestAnimationFrame(() => {
         mobileNav.classList.add('active');
         navOverlay.classList.add('active');
-      }, 10);
-      
-      // Animate in menu items with staggered delay
-      document.querySelectorAll('.mobile-nav .nav-item').forEach((item, index) => {
-        item.style.setProperty('--i', index);
-        item.style.opacity = '0';
-        item.style.transform = 'translateX(24px)';
-        
-        // Trigger reflow
-        void item.offsetHeight;
-        
-        // Animate in
-        item.style.opacity = '1';
-        item.style.transform = 'translateX(0)';
       });
+      
+      // Focus management for accessibility
+      setTimeout(() => {
+        const firstLink = mobileNav.querySelector('a');
+        if (firstLink) firstLink.focus();
+      }, 100);
+      
     } else {
       // Close menu
-      mobileMenuToggle.setAttribute('aria-expanded', 'false');
       mobileNav.classList.remove('active');
       navOverlay.classList.remove('active');
+      body.classList.remove('menu-open');
       
-      // Animate out menu items
-      document.querySelectorAll('.mobile-nav .nav-item').forEach((item, index) => {
-        item.style.opacity = '0';
-        item.style.transform = 'translateX(24px)';
-      });
-      
-      // Remove active classes after animation
+      // Return focus to toggle button
       setTimeout(() => {
-        body.classList.remove('menu-open');
-        navOverlay.style.display = 'none';
-      }, ANIMATION_DURATION);
+        mobileMenuToggle.focus();
+        
+        // Hide elements after animation
+        if (!mobileNav.classList.contains('active')) {
+          mobileNav.style.display = 'none';
+          navOverlay.style.display = 'none';
+        }
+      }, 300);
     }
     
     // Reset animation lock
     setTimeout(() => {
       isAnimating = false;
-    }, ANIMATION_DURATION);
+    }, 300);
   }
   
   // Event Listeners
-  mobileMenuToggle.addEventListener('click', function(e) {
-    e.stopPropagation();
-    e.preventDefault();
-    toggleMenu();
+  mobileMenuToggle.addEventListener('click', toggleMenu);
+  
+  // Close menu when clicking on overlay
+  navOverlay.addEventListener('click', function(e) {
+    if (isMenuOpen) {
+      toggleMenu(e);
+    }
   });
   
-  // Close menu when clicking on overlay or nav links
-  navOverlay.addEventListener('click', toggleMenu);
+  // Close menu when clicking on nav links
   navLinks.forEach(link => {
     link.addEventListener('click', function(e) {
       if (isMenuOpen) {
-        // Add active state to clicked link
-        navLinks.forEach(l => l.classList.remove('active'));
-        this.classList.add('active');
-        
-        // Close menu after a small delay for better UX
-        setTimeout(toggleMenu, 100);
+        toggleMenu(e);
       }
     });
   });
   
-  // Close menu with Escape key
+  // Close menu when pressing Escape key
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape' && isMenuOpen) {
-      toggleMenu();
+      e.preventDefault();
+      toggleMenu(e);
     }
   });
+  
+  // Close menu when window is resized to desktop
+  function handleResize() {
+    if (window.innerWidth > 992 && isMenuOpen) {
+      toggleMenu();
+    } else {
+      // Reset mobile nav display property on larger screens
+      if (window.innerWidth > 992) {
+        mobileNav.style.display = 'none';
+        navOverlay.style.display = 'none';
+        body.classList.remove('menu-open');
+      }
+    }
+  }
+  
+  // Throttle resize events
+  let resizeTimeout;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(handleResize, 100);
+  });
+  
+  // Initial setup
+  if (window.innerWidth <= 992) {
+    mobileNav.style.display = 'none';
+    navOverlay.style.display = 'none';
+  }
   
   // Smooth scrolling for anchor links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {

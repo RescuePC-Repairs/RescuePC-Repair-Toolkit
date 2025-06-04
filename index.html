@@ -596,6 +596,41 @@
   
   <!-- Load non-critical CSS asynchronously -->
   <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="stylesheet" href="navbar-styles.css">
+  <link rel="stylesheet" href="hero-styles.css">
+  <style>
+    /* Force remove underline from hero title */
+    #home .hero-title,
+    #home h1.hero-title,
+    .hero-content .hero-title,
+    .hero-text .hero-title,
+    .hero h1[class*="hero-title"],
+    h1.hero-title {
+      text-decoration: none !important;
+      border-bottom: 0 !important;
+      box-shadow: none !important;
+      background-image: none !important;
+      -webkit-text-decoration: none !important;
+      -moz-text-decoration: none !important;
+      text-underline-offset: 0 !important;
+      text-underline-position: unset !important;
+      -webkit-box-shadow: none !important;
+      -moz-box-shadow: none !important;
+      text-decoration-line: none !important;
+      text-decoration-style: none !important;
+      text-decoration-thickness: 0 !important;
+      -webkit-appearance: none !important;
+      -moz-appearance: none !important;
+      appearance: none !important;
+    }
+    
+    /* Remove any potential underline from the emoji */
+    .hero-title::before {
+      text-decoration: none !important;
+      -webkit-text-decoration: none !important;
+      -moz-text-decoration: none !important;
+    }
+  </style>
   <noscript><link rel="stylesheet" href="style.css"></noscript>
   
   <script>
@@ -659,171 +694,85 @@
     } else {
       document.documentElement.classList.add('returning-visitor');
     }
-    // Initialize mobile menu when DOM is loaded
+      
+  </script>
+  
+  <!-- Navbar JavaScript -->
+  <script src="navbar.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    // Initialize particles.js
     document.addEventListener('DOMContentLoaded', function() {
-      // Cache DOM elements
-      const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-      const mobileNav = document.querySelector('.mobile-nav');
-      const navOverlay = document.querySelector('.nav-overlay');
-      const body = document.body;
-      const navLinks = document.querySelectorAll('.mobile-nav .nav-link');
-      const navbar = document.querySelector('.navbar');
-      let isAnimating = false;
-      
-      // Only proceed if required elements exist
-      if (!mobileMenuToggle || !mobileNav || !navOverlay || !navbar) return;
-      
-      // Toggle mobile menu
-      function toggleMenu(e) {
-        if (e) e.stopPropagation();
-        if (isAnimating) return;
-        
-        isAnimating = true;
-        const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
-        const newState = !isExpanded;
-        
-        // Update ARIA and state
-        mobileMenuToggle.setAttribute('aria-expanded', newState);
-        mobileMenuToggle.classList.toggle('is-active', newState);
-        mobileNav.classList.toggle('active', newState);
-        navOverlay.classList.toggle('active', newState);
-        body.classList.toggle('no-scroll', newState);
-        
-        // Force display properties
-        if (newState) {
-          mobileNav.style.display = 'flex';
-          navOverlay.style.display = 'block';
-          // Opening menu - focus first nav item after animation
-          setTimeout(() => {
-            const firstLink = mobileNav.querySelector('a');
-            if (firstLink) firstLink.focus();
-          }, 300);
-        } else {
-          // Closing menu - return focus to toggle button
-          mobileMenuToggle.focus();
-          // Delay hiding to allow for animation
-          setTimeout(() => {
-            if (mobileMenuToggle.getAttribute('aria-expanded') === 'false') {
-              mobileNav.style.display = 'none';
-              navOverlay.style.display = 'none';
+      if (typeof particlesJS !== 'undefined') {
+        particlesJS('particles-js', {
+          particles: {
+            number: { value: 80, density: { enable: true, value_area: 800 } },
+            color: { value: '#ffffff' },
+            shape: { type: 'circle' },
+            opacity: {
+              value: 0.5,
+              random: false,
+              anim: { enable: false }
+            },
+            size: {
+              value: 3,
+              random: true,
+              anim: { enable: false }
+            },
+            line_linked: {
+              enable: true,
+              distance: 150,
+              color: '#ffffff',
+              opacity: 0.2,
+              width: 1
+            },
+            move: {
+              enable: true,
+              speed: 2,
+              direction: 'none',
+              random: false,
+              straight: false,
+              out_mode: 'out',
+              bounce: false,
+              attract: { enable: false, rotateX: 600, rotateY: 1200 }
             }
-          }, 300);
-        }
-        
-        // Reset animation state
-        setTimeout(() => {
-          isAnimating = false;
-        }, 300);
-      }
-      
-      // Close menu function
-      function closeMenu() {
-        if (mobileMenuToggle.getAttribute('aria-expanded') === 'true') {
-          toggleMenu();
-        }
-      }
-      
-      // Initialize event listeners
-      function initEventListeners() {
-        // Toggle menu on button click
-        mobileMenuToggle.addEventListener('click', toggleMenu);
-        
-        // Close menu on overlay click
-        navOverlay.addEventListener('click', closeMenu);
-        
-        // Close menu on nav link click
-        navLinks.forEach(link => {
-          link.addEventListener('click', closeMenu);
-        });
-        
-        // Close menu on Escape key
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'Escape') closeMenu();
-        });
-        
-        // Close menu on resize to desktop
-        let resizeTimer;
-        window.addEventListener('resize', () => {
-          clearTimeout(resizeTimer);
-          resizeTimer = setTimeout(() => {
-            if (window.innerWidth >= 1025) closeMenu();
-          }, 250);
-        });
-      }
-      
-      // Smooth scrolling for anchor links
-      function initSmoothScrolling() {
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-          anchor.addEventListener('click', function(e) {
-            const targetId = this.getAttribute('href');
-            if (targetId === '#' || targetId === '') return;
-            
-            e.preventDefault();
-            closeMenu();
-            
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-              const navbarHeight = navbar.offsetHeight;
-              const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight - 20;
-              
-              window.scrollTo({
-                top: targetPosition,
-                behavior: 'smooth'
-              });
-              
-              // Update URL without adding to history
-              if (history.pushState) {
-                history.pushState(null, null, targetId);
-              } else {
-                window.location.hash = targetId;
-              }
+          },
+          interactivity: {
+            detect_on: 'canvas',
+            events: {
+              onhover: { enable: true, mode: 'grab' },
+              onclick: { enable: true, mode: 'push' },
+              resize: true
+            },
+            modes: {
+              grab: { distance: 140, line_linked: { opacity: 1 } },
+              push: { particles_nb: 4 }
             }
-          });
+          },
+          retina_detect: true
         });
       }
-      
-      // Initialize everything
-      initEventListeners();
-      initSmoothScrolling();
-      
-      // Set initial state
-      mobileNav.style.display = 'none';
-      navOverlay.style.display = 'none';
-      mobileMenuToggle.setAttribute('aria-expanded', 'false');
-      
-      // Handle focus styles for keyboard navigation
-      function handleFirstTab(e) {
-        if (e.key === 'Tab') {
-          document.body.classList.add('user-is-tabbing');
-          window.removeEventListener('keydown', handleFirstTab);
-        }
-      }
-      
-      window.addEventListener('keydown', handleFirstTab);
-      
-      // Add a class to the html element when JavaScript is enabled
-      document.documentElement.classList.add('js');
     });
   </script>
 </head>
 
   <!-- Navigation -->
   <header class="navbar" id="navbar">
-    <div class="container">
-      <nav class="navbar-container">
-        <a href="index.html" class="navbar-brand">
-          <img src="assets/RescuePC_Logo_Light.png" alt="RescuePC Repairs Logo" width="180" height="auto">
-        </a>
+    <div class="navbar-container">
+      <a href="#home" class="navbar-brand">
+        <img src="assets/RescuePC_Logo_Light.png" alt="RescuePC Repairs Logo">
+      </a>
 
-        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle navigation" aria-expanded="false">
-          <span class="hamburger">
-            <span class="hamburger-line"></span>
-            <span class="hamburger-line"></span>
-            <span class="hamburger-line"></span>
-          </span>
-        </button>
-        
-        <!-- Desktop Navigation -->
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="hamburger">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </span>
+      </button>
+      
+      <!-- Desktop Navigation -->
+      <nav>
         <ul class="navbar-nav">
           <li class="nav-item">
             <a href="#features" class="nav-link">
@@ -862,11 +811,13 @@
             </a>
           </li>
         </ul>
+      </nav>
 
-        <!-- Mobile Navigation Overlay -->
-        <div class="nav-overlay"></div>
-        
-        <!-- Mobile Navigation Menu -->
+      <!-- Mobile Navigation Overlay -->
+      <div class="nav-overlay"></div>
+      
+      <!-- Mobile Navigation Menu -->
+      <nav>
         <ul class="navbar-nav mobile-nav" id="mobileNav">
           <li class="nav-item">
             <a href="#features" class="nav-link">
@@ -910,94 +861,94 @@
   </header>
 
   <!-- Hero Section -->
-  <section class="hero" id="home">
+  <section class="hero" id="home" aria-label="Main Hero Section">
+    <div class="hero-background">
+      <div class="hero-overlay"></div>
+      <div class="hero-particles" id="particles-js"></div>
+    </div>
+    
     <div class="hero-content">
-      <!-- Left Column: Text Content -->
       <div class="hero-text">
-        <div class="hero-title" style="font-size: 2.5rem; font-weight: 800; line-height: 1.2; margin: 0 auto 1rem; text-align: center; color: white; text-decoration: none !important; border: none !important; box-shadow: none !important;">
-          🖥️ RescuePC Repairs
+        <div class="hero-badge">
+          <span>🔥 TRUSTED BY THOUSANDS</span>
         </div>
-        <p class="hero-subtitle">The Ultimate All-in-One Repair Toolkit for Windows</p>
+        
+        <h1 class="hero-title">
+          <span class="hero-emoji" style="display: inline-block; font-size: 2.5rem; color: #ffffff; text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);">🖥️</span>
+          <span class="title-text">RescuePC Repairs</span>
+        </h1>
+        
+        <p class="hero-tagline">The Ultimate Windows Repair Toolkit</p>
+        
         <p class="hero-description">
-          Say goodbye to frustrating errors and unreliable fixes. With RescuePC Repairs, you get the essential repair program that should be built into Windows. 
+          Say goodbye to frustrating errors and unreliable fixes. Get the essential repair program that should be built into Windows. 
           Designed for instant, automatic repairs that actually make a difference.
         </p>
         
-        <div class="hero-buttons">
-          <a href="https://buy.stripe.com/dRm6oHeFqfR4gXhbFm93y05" class="btn btn-primary">
-            <i class="fas fa-bolt"></i> Get Instant Access
+        <div class="hero-cta">
+          <a href="https://buy.stripe.com/dRm6oHeFqfR4gXhbFm93y05" class="cta-button primary" aria-label="Get Instant Access">
+            <span class="btn-icon">
+              <i class="fas fa-bolt"></i>
+            </span>
+            <span class="btn-text">Get Instant Access</span>
+            <span class="btn-arrow">→</span>
           </a>
-          <a href="#features" class="btn btn-secondary">
-            <i class="fas fa-play-circle"></i> About RescuePC Repairs
-          </a>
-        </div>
-        
-        <div class="hero-features">
-          <div class="feature">
-            <div class="feature-icon">
-              <i class="fas fa-wifi fa-fw"></i>
+          
+          <div class="hero-guarantee">
+            <div class="guarantee-icon">
+              <i class="fas fa-shield-alt"></i>
             </div>
-            <span>Fix Network & Wi-Fi</span>
-          </div>
-          <div class="feature">
-            <div class="feature-icon">
-              <i class="fas fa-shield-alt fa-fw"></i>
-            </div>
-            <span>System Protection</span>
-          </div>
-          <div class="feature">
-            <div class="feature-icon">
-              <i class="fas fa-hdd fa-fw"></i>
-            </div>
-            <span>Install Drivers</span>
-          </div>
-          <div class="feature">
-            <div class="feature-icon">
-              <i class="fas fa-virus-slash fa-fw"></i>
-            </div>
-            <span>Malware Removal</span>
-          </div>
-          <div class="feature">
-            <div class="feature-icon">
-              <i class="fas fa-tools fa-fw"></i>
-            </div>
-            <span>One-Click Repairs</span>
-          </div>
-          <div class="feature">
-            <div class="feature-icon">
-              <i class="fas fa-tachometer-alt fa-fw"></i>
-            </div>
-            <span>Performance Boost</span>
+            <span>30-Day Money Back Guarantee</span>
           </div>
         </div>
         
-        <div class="trust-badges">
-          <div class="trust-badge">
-            <i class="fas fa-check-circle"></i>
-            <span>30-Day Money Back</span>
-          </div>
-          <div class="trust-badge">
-            <i class="fas fa-lock"></i>
-            <span>Secure Checkout</span>
-          </div>
-          <div class="trust-badge">
-            <i class="fas fa-headset"></i>
-            <span>24/7 Support</span>
+        <div class="hero-trust">
+          <div class="trust-badges">
+            <div class="badge">
+              <i class="fas fa-lock"></i>
+              <span>Secure Checkout</span>
+            </div>
+            <div class="divider"></div>
+            <div class="badge">
+              <i class="fas fa-shield-alt"></i>
+              <span>Virus Free</span>
+            </div>
+            <div class="divider"></div>
+            <div class="badge">
+              <i class="fas fa-headset"></i>
+              <span>24/7 Support</span>
+            </div>
           </div>
         </div>
       </div>
       
-      <!-- Right Column: Image -->
-      <div class="hero-image">
-        <img src="RescuePC_GUI.png" alt="RescuePC Repairs Interface" loading="lazy">
+      <div class="hero-visual">
+        <div class="hero-image-wrapper">
+          <div class="hero-image">
+            <img src="RescuePC_GUI.png" alt="RescuePC Repairs Software Interface" loading="eager" class="main-image">
+            <div class="floating-shape shape-1"></div>
+            <div class="floating-shape shape-2"></div>
+            <div class="floating-shape shape-3"></div>
+          </div>
+        </div>
+        <div class="feature-badges-container">
+          <div class="feature-badges">
+            <div class="feature-badge">
+              <i class="fas fa-bolt"></i>
+              <span>Fast Scanning</span>
+            </div>
+            <div class="feature-badge">
+              <i class="fas fa-shield-alt"></i>
+              <span>Virus Removal</span>
+            </div>
+            <div class="feature-badge">
+              <i class="fas fa-tools"></i>
+              <span>System Optimization</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    
-    <!-- Floating Background Elements -->
-    <div class="floating" style="width: 200px; height: 200px; top: 15%; left: 10%; animation-delay: 0s;"></div>
-    <div class="floating" style="width: 300px; height: 300px; bottom: 15%; right: 10%; animation-delay: -5s;"></div>
-    <div class="floating" style="width: 150px; height: 150px; top: 50%; right: 20%; animation-delay: -10s;"></div>
-    <div class="floating" style="width: 250px; height: 250px; bottom: 25%; left: 15%; animation-delay: -7s;"></div>
   </section>
 
   <div class="promo-banner">
@@ -1531,6 +1482,63 @@
             });
           }
         }, 3000); // Check after 3 seconds if Stripe is loaded
+      }
+    });
+  </script>
+  
+  <!-- Particles.js for Hero Section Background -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    // Initialize particles.js
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof particlesJS !== 'undefined' && document.getElementById('particles-js')) {
+        particlesJS('particles-js', {
+          particles: {
+            number: { value: 80, density: { enable: true, value_area: 800 } },
+            color: { value: '#ffffff' },
+            shape: { type: 'circle' },
+            opacity: {
+              value: 0.5,
+              random: false,
+              anim: { enable: false }
+            },
+            size: {
+              value: 3,
+              random: true,
+              anim: { enable: false }
+            },
+            line_linked: {
+              enable: true,
+              distance: 150,
+              color: '#ffffff',
+              opacity: 0.2,
+              width: 1
+            },
+            move: {
+              enable: true,
+              speed: 2,
+              direction: 'none',
+              random: false,
+              straight: false,
+              out_mode: 'out',
+              bounce: false,
+              attract: { enable: false, rotateX: 600, rotateY: 1200 }
+            }
+          },
+          interactivity: {
+            detect_on: 'canvas',
+            events: {
+              onhover: { enable: true, mode: 'grab' },
+              onclick: { enable: true, mode: 'push' },
+              resize: true
+            },
+            modes: {
+              grab: { distance: 140, line_linked: { opacity: 1 } },
+              push: { particles_nb: 4 }
+            }
+          },
+          retina_detect: true
+        });
       }
     });
   </script>
