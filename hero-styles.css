@@ -1086,7 +1086,7 @@
 .btn-secondary {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
-  color: white !important;
+  color: black;
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
