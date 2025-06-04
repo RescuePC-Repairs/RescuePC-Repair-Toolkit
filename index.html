@@ -203,59 +203,129 @@
   
   <!-- Mobile Navigation Script -->
   <script>
+    // Enhanced mobile menu functionality
     document.addEventListener('DOMContentLoaded', function() {
-      const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+      const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+      const navbar = document.querySelector('.navbar');
       const navbarNav = document.querySelector('.navbar-nav');
-      const navOverlay = document.createElement('div');
-      navOverlay.className = 'nav-overlay';
-      document.body.appendChild(navOverlay);
+      const navOverlay = document.querySelector('.nav-overlay');
+      const body = document.body;
+      let resizeTimer;
       
-      // Toggle mobile menu
+      // Toggle mobile menu with animation
       function toggleMobileMenu() {
         const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
         mobileMenuToggle.setAttribute('aria-expanded', !isExpanded);
-        navbarNav.classList.toggle('active');
-        navOverlay.classList.toggle('active');
-        document.body.style.overflow = isExpanded ? '' : 'hidden';
+        navbar.classList.toggle('active');
+        body.classList.toggle('no-scroll');
+        
+        // Add smooth transition for mobile menu
+        if (!isExpanded) {
+          navbarNav.style.display = 'flex';
+          setTimeout(() => navbarNav.classList.add('active'), 10);
+        } else {
+          navbarNav.classList.remove('active');
+          setTimeout(() => {
+            if (!navbar.classList.contains('active')) {
+              navbarNav.style.display = '';
+            }
+          }, 300);
+        }
       }
       
-      // Close mobile menu when clicking on overlay
-      navOverlay.addEventListener('click', function() {
+      // Close mobile menu completely
+      function closeMobileMenu() {
         mobileMenuToggle.setAttribute('aria-expanded', 'false');
+        navbar.classList.remove('active');
         navbarNav.classList.remove('active');
-        this.classList.remove('active');
-        document.body.style.overflow = '';
-      });
-      
-      // Close mobile menu when clicking on a nav link
-      document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', function() {
-          if (window.innerWidth <= 1024) {
-            mobileMenuToggle.setAttribute('aria-expanded', 'false');
-            navbarNav.classList.remove('active');
-            navOverlay.classList.remove('active');
-            document.body.style.overflow = '';
+        body.classList.remove('no-scroll');
+        
+        // Ensure menu is hidden after animation
+        setTimeout(() => {
+          if (!navbar.classList.contains('active')) {
+            navbarNav.style.display = '';
           }
-        });
-      });
+        }, 300);
+      }
       
-      // Toggle mobile menu when clicking the toggle button
+      // Toggle mobile menu when clicking the hamburger button
       mobileMenuToggle.addEventListener('click', function(e) {
         e.stopPropagation();
         toggleMobileMenu();
       });
       
-      // Close mobile menu when window is resized to desktop
-      function handleResize() {
-        if (window.innerWidth > 1024) {
-          mobileMenuToggle.setAttribute('aria-expanded', 'false');
-          navbarNav.classList.remove('active');
-          navOverlay.classList.remove('active');
-          document.body.style.overflow = '';
+      // Close mobile menu when clicking on overlay
+      navOverlay.addEventListener('click', closeMobileMenu);
+      
+      // Close mobile menu when clicking on a nav link
+      document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
+        link.addEventListener('click', closeMobileMenu);
+      });
+      
+      // Close menu when clicking outside on mobile
+      document.addEventListener('click', function(e) {
+        if (navbar.classList.contains('active') && 
+            !navbar.contains(e.target) && 
+            e.target !== mobileMenuToggle) {
+          closeMobileMenu();
         }
+      });
+      
+      // Handle window resize
+      function handleResize() {
+        // Clear the timeout if it exists
+        clearTimeout(resizeTimer);
+        
+        // Set a new timeout to run after resizing has stopped
+        resizeTimer = setTimeout(function() {
+          if (window.innerWidth > 992) {
+            closeMobileMenu();
+          }
+        }, 250);
       }
       
+      // Add scroll event for navbar
+      let lastScroll = 0;
+      window.addEventListener('scroll', function() {
+        const currentScroll = window.pageYOffset;
+        
+        if (currentScroll <= 0) {
+          navbar.classList.remove('scrolled');
+          return;
+        }
+        
+        if (currentScroll > lastScroll && currentScroll > 100) {
+          // Scrolling down
+          navbar.style.transform = 'translateY(-100%)';
+        } else {
+          // Scrolling up
+          navbar.style.transform = 'translateY(0)';
+          navbar.classList.add('scrolled');
+        }
+        
+        lastScroll = currentScroll;
+      });
+      
+      // Initialize
       window.addEventListener('resize', handleResize);
+      
+      // Add smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          const targetId = this.getAttribute('href');
+          if (targetId === '#') return;
+          
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 80,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
     });
   </script>
   <script>
@@ -352,10 +422,9 @@
     <div class="hero-content">
       <!-- Left Column: Text Content -->
       <div class="hero-text">
-        <h1>
-  <span class="gradient-text">🖥️ RescuePC Repairs</span>
-  <div class="solution-text">Your Complete Windows Repair Solution</div>
-</h1>
+        <div class="hero-title" style="font-size: 2.5rem; font-weight: 800; line-height: 1.2; margin: 0 auto 1rem; text-align: center; color: white; text-decoration: none !important; border: none !important; box-shadow: none !important;">
+          🖥️ RescuePC Repairs
+        </div>
         <p class="hero-subtitle">The Ultimate All-in-One Repair Toolkit for Windows</p>
         <p class="hero-description">
           Say goodbye to frustrating errors and unreliable fixes. With RescuePC Repairs, you get the essential repair program that should be built into Windows. 
@@ -713,59 +782,61 @@
       </div>
     </section>
 
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-logo">
-        <a href="index.html">
-          <img src="assets/RescuePC_Logo_Light.png" alt="RescuePC Repairs Logo" width="200" height="auto">
-        </a>
-      </div>
-      <div class="footer-content">
-        <div class="footer-column">
-          <h4>Product</h4>
-          <ul>
-            <li><a href="#features">Features</a></li>
-            <li><a href="#demo">Demo</a></li>
-            <li><a href="#faq">FAQ</a></li>
-          </ul>
-        </div>
+    </main>
 
-        <div class="footer-column">
-          <h4>Support</h4>
-          <ul>
-            <li><a href="mailto:***REMOVED***">Email Support</a></li>
-            <li><a href="Knowledge-Base.html">Knowledge Base</a></li>
-            <li><a href="Portfolio/index.html">Portfolio</a></li>
-            <li><a href="join-discord.html">Join Discord</a></li>
-            <li><a href="RescuePC Repairs Flyer.pdf" target="_blank" rel="noopener">Flyer</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-column">
-          <h4>Legal</h4>
-          <ul>
-            <li><a href="License.html" rel="noopener noreferrer">License</a></li>
-            <li><a href="PrivacyPolicy.html" rel="noopener noreferrer">Privacy Policy</a></li>
-            <li><a href="TermOfService.html" rel="noopener noreferrer">Terms of Service</a></li>
-            <li><a href="RefundPolicy.html" rel="noopener noreferrer">Refund Policy</a></li>
-            <li><a href="CookiePolicy.html" rel="noopener noreferrer">Cookie Policy</a></li>
-            <li><a href="GDPR.html" rel="noopener noreferrer">GDPR Compliance</a></li>
-          </ul>
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3 class="footer-heading">Product</h3>
+            <ul class="footer-links">
+              <li><a href="#features">Features</a></li>
+              <li><a href="#demo">Demo</a></li>
+              <li><a href="#faq">FAQ</a></li>
+              <li><a href="#support">Support</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-section">
+            <h3 class="footer-heading">Support</h3>
+            <ul class="footer-links">
+              <li><a href="mailto:***REMOVED***">Email Support</a></li>
+              <li><a href="Knowledge-Base.html">Knowledge Base</a></li>
+              <li><a href="Portfolio/index.html">Portfolio</a></li>
+              <li><a href="join-discord.html" target="_blank" rel="noopener noreferrer">Join Discord</a></li>
+              <li><a href="RescuePC Repairs Flyer.pdf" target="_blank" rel="noopener">Flyer</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-section">
+            <h3 class="footer-heading">Legal</h3>
+            <ul class="footer-links">
+              <li><a href="License.html" rel="noopener noreferrer">License</a></li>
+              <li><a href="PrivacyPolicy.html" rel="noopener noreferrer">Privacy Policy</a></li>
+              <li><a href="TermOfService.html" rel="noopener noreferrer">Terms of Service</a></li>
+              <li><a href="RefundPolicy.html" rel="noopener noreferrer">Refund Policy</a></li>
+              <li><a href="CookiePolicy.html" rel="noopener noreferrer">Cookie Policy</a></li>
+              <li><a href="GDPR.html" rel="noopener noreferrer">GDPR Compliance</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-bottom">
+            <p>&copy; 2025 RescuePC Repairs. All rights reserved.</p>
+            <div class="footer-social">
+              <a href="https://facebook.com/rescuepcrepairs" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                <i class="fab fa-facebook"></i>
+              </a>
+              <a href="https://twitter.com/rescuepcrepairs" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="join-discord.html" target="_blank" rel="noopener noreferrer" aria-label="Discord">
+                <i class="fab fa-discord"></i>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-
-    <div class="footer-bottom">
-      <div class="copyright">
-        <p> © 2025 RescuePC Repairs. All rights reserved.</p>
-        <div class="legal-links">
-          <a href="PrivacyPolicy.html" rel="noopener noreferrer">Privacy Policy</a> | 
-          <a href="TermOfService.html" rel="noopener noreferrer">Terms of Service</a> | 
-          <a href="CookiePolicy.html" rel="noopener noreferrer">Cookie Policy</a>
-        </div>
-      </div>
-    </div>
-  </footer>
+    </footer>
 
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -857,6 +928,7 @@
   <script src="js/smooth-scroll.js" defer></script>
   <script src="js/lazyload.js" defer></script>
   <!-- Remove web-vitals import from main.js if not needed -->
+
   <script>
     // Temporary fix for web-vitals error
     window.reportWebVitals = function() {};
