@@ -659,18 +659,8 @@
     } else {
       document.documentElement.classList.add('returning-visitor');
     }
-    // Wait for the DOM to be fully loaded
+    // Initialize mobile menu when DOM is loaded
     document.addEventListener('DOMContentLoaded', function() {
-      // Use requestIdleCallback for non-critical work
-      if ('requestIdleCallback' in window) {
-        window.requestIdleCallback(initMobileMenu, { timeout: 2000 });
-      } else {
-        // Fallback for browsers that don't support requestIdleCallback
-        setTimeout(initMobileMenu, 0);
-      }
-    });
-    
-    function initMobileMenu() {
       // Cache DOM elements
       const mobileMenuToggle = document.getElementById('mobileMenuToggle');
       const mobileNav = document.querySelector('.mobile-nav');
@@ -699,8 +689,10 @@
         navOverlay.classList.toggle('active', newState);
         body.classList.toggle('no-scroll', newState);
         
-        // Handle focus management
+        // Force display properties
         if (newState) {
+          mobileNav.style.display = 'flex';
+          navOverlay.style.display = 'block';
           // Opening menu - focus first nav item after animation
           setTimeout(() => {
             const firstLink = mobileNav.querySelector('a');
@@ -709,6 +701,13 @@
         } else {
           // Closing menu - return focus to toggle button
           mobileMenuToggle.focus();
+          // Delay hiding to allow for animation
+          setTimeout(() => {
+            if (mobileMenuToggle.getAttribute('aria-expanded') === 'false') {
+              mobileNav.style.display = 'none';
+              navOverlay.style.display = 'none';
+            }
+          }, 300);
         }
         
         // Reset animation state
@@ -787,6 +786,11 @@
       initEventListeners();
       initSmoothScrolling();
       
+      // Set initial state
+      mobileNav.style.display = 'none';
+      navOverlay.style.display = 'none';
+      mobileMenuToggle.setAttribute('aria-expanded', 'false');
+      
       // Handle focus styles for keyboard navigation
       function handleFirstTab(e) {
         if (e.key === 'Tab') {
@@ -796,10 +800,10 @@
       }
       
       window.addEventListener('keydown', handleFirstTab);
-    }
-    
-    // Add a class to the html element when JavaScript is enabled
-    document.documentElement.classList.add('js');
+      
+      // Add a class to the html element when JavaScript is enabled
+      document.documentElement.classList.add('js');
+    });
   </script>
 </head>
 
@@ -1089,7 +1093,7 @@
       </div>
     </section>
 
-    <section id="demo" class="media">
+    <section id="how-it-works" class="media">
       <div class="section-header">
         <h2>Take a Look at the User Interface of RescuePC Repairs</h2>
         <p>Take a Look at the User Interface of RescuePC Repairs to see how easy it is to use.</p>
@@ -1103,7 +1107,7 @@
       </div>
     </section>
 
-    <section class="buy-now">
+    <section id="pricing" class="buy-now">
       <div class="pricing-card">
         <div class="pricing-header">
           <h2>RescuePC Repairs Lifetime License</h2>
@@ -1131,7 +1135,7 @@
     src="https://js.stripe.com/v3/buy-button.js">
 </script>
 
-  <div class="stripe-button-container">
+  <div id="buy-now" class="stripe-button-container">
     <stripe-buy-button
       id="buy_btn_1RW3SzHddahti95eqUSVu7HM" buy-button-id="buy_btn_1RW3SzHddahti95eqUSVu7HM"
       publishable-key="pk_live_51RHgNWHddahti95euP7f7D1c3KoGiTDwcqTr0NnUs9y2dXkLbIceXwbPNY3TyJWxnTympc9ZDolUXENQAJ1qkCJn00gzZcfHjb">
@@ -1158,6 +1162,54 @@
           <a href="RescuePC Repairs Flyer.pdf" class="btn-secondary pdf-link">
             <i class="fas fa-download"></i> Download
           </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonials" class="testimonials">
+      <div class="section-header">
+        <h2>What Our Customers Say</h2>
+        <p>Hear from users who have transformed their PC experience with RescuePC Repairs</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-content">
+            <div class="testimonial-rating" aria-label="5 out of 5 stars">★★★★★</div>
+            <p>"This tool saved me hundreds in repair costs. Fixed my network issues in minutes! I was back online and working without having to call a technician."</p>
+            <div class="testimonial-author">
+              <div class="author-avatar" aria-hidden="true">DK</div>
+              <div class="author-info">
+                <span class="author-name">Donna K.</span>
+                <span class="author-title">Small Business Owner</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-content">
+            <div class="testimonial-rating" aria-label="5 out of 5 stars">★★★★★</div>
+            <p>"The driver database is incredible. It had drivers for my old laptop that I couldn't find anywhere else. This tool is a lifesaver for older hardware!"</p>
+            <div class="testimonial-author">
+              <div class="author-avatar" aria-hidden="true">SR</div>
+              <div class="author-info">
+                <span class="author-name">Sarah R.</span>
+                <span class="author-title">Freelance Designer</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-content">
+            <div class="testimonial-rating" aria-label="5 out of 5 stars">★★★★★</div>
+            <p>"As an IT professional, I use this tool daily. It's become an essential part of my toolkit for troubleshooting and maintaining client systems efficiently."</p>
+            <div class="testimonial-author">
+              <div class="author-avatar" aria-hidden="true">DT</div>
+              <div class="author-info">
+                <span class="author-name">David T.</span>
+                <span class="author-title">IT Consultant</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

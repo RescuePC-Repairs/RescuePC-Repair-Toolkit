@@ -12,6 +12,66 @@ document.addEventListener('DOMContentLoaded', function() {
   let isAnimating = false;
   const ANIMATION_DURATION = 400; // ms
   
+  // Navigation functionality with smooth scrolling and active section highlighting
+  const navLinksAll = document.querySelectorAll('.navbar-nav .nav-link, .mobile-nav .nav-link');
+  const sections = document.querySelectorAll('section[id]');
+  
+  // Smooth scrolling for anchor links
+  navLinksAll.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      const targetId = this.getAttribute('href');
+      if (targetId === '#') return;
+      
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        const headerOffset = 100; // Adjust based on your header height
+        const elementPosition = targetElement.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+
+        // Close mobile menu if open
+        if (mobileNav && mobileNav.classList.contains('active')) {
+          mobileNav.classList.remove('active');
+          document.body.style.overflow = '';
+          mobileMenuToggle.setAttribute('aria-expanded', 'false');
+        }
+      }
+    });
+  });
+
+  // Highlight active section in navigation
+  function highlightActiveSection() {
+    let current = '';
+    
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.offsetHeight;
+      
+      if (pageYOffset >= (sectionTop - 200)) {
+        current = '#' + section.getAttribute('id');
+      }
+    });
+
+    navLinksAll.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === current) {
+        link.classList.add('active');
+      }
+    });
+  }
+
+  // Add scroll event listener
+  window.addEventListener('scroll', highlightActiveSection);
+  
+  // Initial call to set active state on page load
+  highlightActiveSection();
+  
   // Toggle mobile menu with animations
   function toggleMenu() {
     if (isAnimating) return;
