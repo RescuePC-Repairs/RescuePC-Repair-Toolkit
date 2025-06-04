@@ -1,0 +1,57 @@
+/* TEAM */
+  Site: RescuePC Repairs
+  Site: https://rescuepcrepairs.com
+  Contact: your@email.com
+  Twitter: @yourhandle/*
+  _____                _____ ____    _    _   _ 
+ |  __ \      /\     / ____/ __ \  | |  | | (_)
+ | |__) |    /  \   | |   | |  | | | |__| | |_ 
+ |  _  /    / /\ \  | |   | |  | | |  __  | | |
+ | | \ \   / ____ \ | |___| |__| | | |  | | | |
+ |_|  \_\ /_/    \_\\_____\____/  |_|  |_| |_|
+
+*/
+
+
+/* TEAM */
+  Owner: Tyler
+  Position: Founder & Lead Technician
+  Contact: contact@rescuepcrepairs.com
+  Phone: (315) XXX-XXXX
+  Twitter: @rescuepcrepairs
+  Facebook: /rescuepcrepairs
+  LinkedIn: /company/rescuepcrepairs
+  Location: Syracuse, New York, USA
+  Service Areas: Syracuse, Cicero, Clay, DeWitt, Fayetteville, Liverpool, Manlius, and throughout Onondaga County
+
+  Technician: [Technician Name]
+  Position: Senior IT Specialist
+  Expertise: Hardware Repair, Data Recovery
+  
+  Support: [Support Staff Name]
+  Position: Customer Support Specialist
+  Hours: Mon-Fri 8:00 AM - 8:00 PM
+
+/* SITE */
+  Last updated: 2025/06/03
+  Language: English (en-US)
+  Web Standards: HTML5, CSS3, ECMAScript 2022
+  Components: Vanilla JavaScript, Service Workers, Web App Manifest
+  Software: Visual Studio Code, Git, Adobe Creative Suite
+  Hosting: [Your Hosting Provider]
+  CDN: Cloudflare
+  Analytics: Google Analytics 4
+  Search Console: Google Search Console, Bing Webmaster Tools
+  
+/* THANKS */
+  Font Awesome for the amazing icons
+  Google Fonts for beautiful typography
+  All our wonderful customers for their trust and support
+
+/* NOTE */
+  This website was built with care and attention to detail.
+  We're committed to providing the best computer repair services in [Your City].
+  
+  If you have any questions or need assistance, please don't hesitate to contact us!
+  
+  Made with ❤️ by the RescuePC Repairs team
