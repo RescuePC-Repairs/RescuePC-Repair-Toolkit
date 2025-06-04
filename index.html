@@ -594,6 +594,9 @@
     document.head.appendChild(stripeScript);
   </script>
   
+  <!-- Load mobile fixes CSS -->
+  <link rel="stylesheet" href="css/mobile-fixes.css">
+  
   <!-- Load non-critical CSS asynchronously -->
   <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <link rel="stylesheet" href="navbar-styles.css">
@@ -763,12 +766,10 @@
         <img src="assets/RescuePC_Logo_Light.png" alt="RescuePC Repairs Logo">
       </a>
 
-      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle navigation" aria-expanded="false">
-        <span class="hamburger">
-          <span class="hamburger-line"></span>
-          <span class="hamburger-line"></span>
-          <span class="hamburger-line"></span>
-        </span>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobileNav">
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
       
       <!-- Desktop Navigation -->
@@ -814,49 +815,78 @@
       </nav>
 
       <!-- Mobile Navigation Overlay -->
-      <div class="nav-overlay"></div>
+      <div class="nav-overlay" id="navOverlay" aria-hidden="true" tabindex="-1"></div>
       
       <!-- Mobile Navigation Menu -->
-      <nav>
-        <ul class="navbar-nav mobile-nav" id="mobileNav">
-          <li class="nav-item">
-            <a href="#features" class="nav-link">
-              <i class="fas fa-star" aria-hidden="true"></i>
-              <span>Features</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#how-it-works" class="nav-link">
-              <i class="fas fa-play-circle" aria-hidden="true"></i>
-              <span>How It Works</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#testimonials" class="nav-link">
-              <i class="fas fa-quote-left" aria-hidden="true"></i>
-              <span>Testimonials</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#pricing" class="nav-link">
-              <i class="fas fa-tags" aria-hidden="true"></i>
-              <span>Pricing</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#faq" class="nav-link">
-              <i class="fas fa-question-circle" aria-hidden="true"></i>
-              <span>FAQ</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#buy-now" class="nav-link nav-cta">
-              <i class="fas fa-shopping-cart" aria-hidden="true"></i>
-              <span>Buy Now</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
+      <div class="mobile-nav-container">
+        <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+          <!-- Mobile Search Bar -->
+          <div class="mobile-search-container">
+            <div class="search-input-container">
+              <i class="fas fa-search search-icon" aria-hidden="true"></i>
+              <input 
+                type="text" 
+                class="mobile-search-input" 
+                placeholder="Search..." 
+                aria-label="Search site"
+              >
+              <button class="clear-search" aria-label="Clear search" style="display: none;">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+          
+          <ul class="mobile-nav-list">
+            <li class="nav-item">
+              <a href="#home" class="nav-link" data-section="home">
+                <i class="fas fa-home" aria-hidden="true"></i>
+                <span>Home</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#features" class="nav-link" data-section="features">
+                <i class="fas fa-star" aria-hidden="true"></i>
+                <span>Features</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#how-it-works" class="nav-link">
+                <i class="fas fa-play-circle" aria-hidden="true"></i>
+                <span>How It Works</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#testimonials" class="nav-link">
+                <i class="fas fa-quote-left" aria-hidden="true"></i>
+                <span>Testimonials</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#pricing" class="nav-link">
+                <i class="fas fa-tags" aria-hidden="true"></i>
+                <span>Pricing</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#faq" class="nav-link">
+                <i class="fas fa-question-circle" aria-hidden="true"></i>
+                <span>FAQ</span>
+              </a>
+            </li>
+            <li class="nav-item nav-item-cta">
+              <a href="#buy-now" class="nav-link nav-cta">
+                <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+                <span>Buy Now</span>
+              </a>
+            </li>
+          </ul>
+          
+          <!-- Back to Top Button (Mobile) -->
+          <button class="back-to-top" id="backToTop" aria-label="Back to top">
+            <i class="fas fa-arrow-up"></i>
+          </button>
+        </nav>
+      </div>
     </div>
   </header>
 
@@ -893,7 +923,16 @@
             <span class="btn-text">Get Instant Access</span>
             <span class="btn-arrow">→</span>
           </a>
-          
+          <a href="#features" class="cta-button secondary" aria-label="Learn More">
+            <span class="btn-icon">
+              <i class="fas fa-info-circle"></i>
+            </span>
+            <span class="btn-text">Learn More</span>
+            <span class="btn-arrow">→</span>
+          </a>
+          <a href="#features" class="scroll-indicator" aria-label="Scroll down">
+            <span>Scroll Down</span>
+          </a>
           <div class="hero-guarantee">
             <div class="guarantee-icon">
               <i class="fas fa-shield-alt"></i>
@@ -1323,6 +1362,20 @@
             </ul>
           </div>
           
+          <div class="footer-notice">
+            <div class="notice-content">
+              <p class="notice-text">
+                <strong>RescuePC Repairs™</strong> is a trademark of Tyler Keesee. All source code, branding, assets, scripts, and compiled binaries in this project are © 2025 Tyler Keesee. All rights reserved.
+              </p>
+              <p class="notice-warning">
+                <i class="fas fa-exclamation-triangle"></i> Unauthorized copying, modification, redistribution, or resale of any part of this toolkit or website is strictly prohibited.
+              </p>
+              <p class="notice-legal">
+                This product contains digital fingerprinting technology to detect tampering or redistribution. Violations will be pursued under applicable copyright and trademark law, including but not limited to DMCA takedowns.
+              </p>
+            </div>
+          </div>
+          
           <div class="footer-bottom">
             <p>&copy; 2025 RescuePC Repairs. All rights reserved.</p>
             <div class="footer-social">
@@ -1425,8 +1478,9 @@
   </script>
 
   <script src="main.js" defer></script>
-  <script src="js/modal.js" defer></script>
+  <script src="js/animations.js" defer></script>
   <script src="js/navigation.js" defer></script>
+  <script src="js/mobile-nav.js" defer></script>
   <script src="js/scroll-behavior.js" defer></script>
   <script src="js/smooth-scroll.js" defer></script>
   <script src="js/lazyload.js" defer></script>

@@ -99,18 +99,63 @@
 }
 
 /* Mobile Navigation Links */
+.mobile-nav {
+  position: fixed;
+  top: 70px;
+  right: -100%;
+  width: 85%;
+  max-width: 320px;
+  height: calc(100vh - 70px);
+  background: #0f172a;
+  padding: 1.5rem 0;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1001;
+  overflow-y: auto;
+  margin: 0;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.mobile-nav.active {
+  right: 0;
+}
+
+.mobile-nav .nav-item {
+  margin: 0;
+  width: 100%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-nav .nav-item:last-child {
+  border-bottom: none;
+}
+
 .mobile-nav .nav-link {
   color: #ffffff !important;
-  padding: 0.75rem 1.5rem;
-  display: block;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
   width: 100%;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.mobile-nav .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding-left: 1.75rem;
 }
 
 .mobile-nav .nav-link i {
   color: #ffffff !important;
-  width: 20px;
+  width: 24px;
   text-align: center;
   margin-right: 12px;
+  font-size: 1.1rem;
+  transition: transform 0.3s ease;
+}
+
+.mobile-nav .nav-link:hover i {
+  transform: scale(1.1);
 }
 
 .nav-link::after {
@@ -223,10 +268,12 @@ html {
 
 /* Mobile Menu Toggle Button */
 .mobile-menu-toggle {
-  display: none; /* Hidden by default, shown on mobile */
+  display: none;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
+  transition: all 0.3s ease;
+  transition: all 0.3s ease;
   padding: 0.75rem;
   cursor: pointer;
   z-index: 10000; /* Higher than menu and overlay */
@@ -1052,6 +1099,32 @@ main {
   .mobile-menu-toggle { 
     display: flex !important;
     visibility: visible !important;
+    opacity: 1 !important;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    padding: 0.5rem;
+    cursor: pointer;
+    z-index: 1002;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 44px;
+    height: 44px;
+    margin-left: 0.5rem;
+    transition: all 0.3s ease;
+    opacity: 1 !important;
+    background: transparent;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    z-index: 1002;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 44px;
+    height: 44px;
+    margin-left: 0.5rem;
     opacity: 1 !important;
     position: relative;
     z-index: 1002;
@@ -8271,16 +8344,12 @@ html {
 .hero-content {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 2rem 1.5rem;
   position: relative;
   z-index: 2;
   width: 100%;
   box-sizing: border-box;
-  overflow: visible;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  perspective: 1000px;
+  overflow: hidden;
 }
 
 .hero-text {
