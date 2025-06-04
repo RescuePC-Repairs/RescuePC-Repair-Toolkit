@@ -437,9 +437,9 @@ function showInstallPromotion() {
 }
 
 //// Web Vitals is not available, provide a no-op function
-const reportWebVitals = () => {};
-
-export default reportWebVitals;
+function reportWebVitals() {
+  // No-op function for web vitals
+}
 
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
@@ -553,30 +553,34 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 300); // Match this with the CSS transition time
   }
 
-  // Close modal when clicking the X
-  closeModal.addEventListener('click', (e) => {
-    e.stopPropagation();
-    closeImageModal();
-  });
-
-  // Close modal when clicking outside the image
-  modal.addEventListener('click', function(event) {
-    if (event.target === modal) {
+  // Initialize modal event listeners if elements exist
+  if (closeModal && modal) {
+    closeModal.addEventListener('click', (e) => {
+      e.stopPropagation();
       closeImageModal();
-    }
-  }, false);
+    });
 
-  // Close modal with Escape key
-  const handleEscape = (event) => {
-    if (event.key === 'Escape' && isModalOpen) {
-      closeImageModal();
-      // Remove the event listener after closing to prevent memory leaks
-      document.removeEventListener('keydown', handleEscape);
-    }
-  };
-  
-  // Add event listener for Escape key when modal is opened
-  document.addEventListener('keydown', handleEscape);
+    // Close modal when clicking outside the image
+    modal.addEventListener('click', function(event) {
+      if (event.target === modal) {
+        closeImageModal();
+      }
+    }, false);
+
+    // Close modal with Escape key
+    const handleEscape = (event) => {
+      if (event.key === 'Escape' && isModalOpen) {
+        closeImageModal();
+        // Remove the event listener after closing to prevent memory leaks
+        document.removeEventListener('keydown', handleEscape);
+      }
+    };
+    
+    // Add event listener for Escape key when modal is opened
+    document.addEventListener('keydown', handleEscape);
+  } else {
+    console.warn('Modal elements not found. Skipping modal event listeners.');
+  }
   
   // Clean up event listeners when modal is closed
   modal.addEventListener('transitionend', function handler(event) {
