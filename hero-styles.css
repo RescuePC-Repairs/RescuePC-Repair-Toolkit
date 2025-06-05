@@ -36,9 +36,259 @@
   }
 }
 
-/* Base Hero Styles */
-/* Import Inter font from Google Fonts */
+/* Base Styles */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --primary: #3b82f6;
+  --primary-dark: #2563eb;
+  --primary-light: #93c5fd;
+  --secondary: #4f46e5;
+  --accent: #8b5cf6;
+  --text-dark: #1f2937;
+  --text-muted: #6b7280;
+  --text-light: #ffffff;
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base Layout */
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  line-height: 1.5;
+  color: var(--text-dark);
+  background-color: #ffffff;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Header Section */
+.header {
+  position: relative;
+  padding: 5rem 0;
+  background: linear-gradient(135deg, #f0f5ff 0%, #e6f0ff 100%);
+  overflow: hidden;
+  text-align: center;
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  max-height: 500px;
+  z-index: 0;
+  border-bottom-left-radius: 30% 20%;
+  border-bottom-right-radius: 30% 20%;
+}
+
+.header-content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.header-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: #1e40af;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.header-subtitle {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 1.5rem;
+  line-height: 1.4;
+}
+
+.header-description {
+  font-size: 1.25rem;
+  line-height: 1.7;
+  color: #4b5563;
+  max-width: 800px;
+  margin: 0 auto 2.5rem;
+}
+
+/* Header CTA Buttons */
+.header-cta {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+  gap: 0.5rem;
+}
+
+.cta-button.primary {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+
+.cta-button.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+}
+
+.cta-button.secondary {
+  background: white;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+}
+
+.cta-button.secondary:hover {
+  background: rgba(59, 130, 246, 0.05);
+  transform: translateY(-2px);
+}
+
+/* Trust Badges */
+.trust-badges {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-top: 2.5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--gray-200);
+}
+
+.trust-badges .badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.trust-badges .badge i {
+  color: var(--primary);
+  font-size: 1.25rem;
+}
+
+.trust-badges .divider {
+  width: 1px;
+  height: 1.5rem;
+  background-color: var(--gray-300);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  .header {
+    padding: 4rem 0;
+  }
+  
+  .header-title {
+    font-size: 3rem;
+  }
+  
+  .header-subtitle {
+    font-size: 1.5rem;
+  }
+  
+  .header-description {
+    font-size: 1.15rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 3rem 0;
+  }
+  
+  .header-content {
+    padding: 0 1rem;
+  }
+  
+  .header-title {
+    font-size: 2.5rem;
+  }
+  
+  .header-subtitle {
+    font-size: 1.375rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .header-description {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .header-cta {
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+  
+  .cta-button {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  
+  .trust-badges {
+    flex-direction: column;
+    gap: 1rem;
+    padding-top: 2rem;
+  }
+  
+  .trust-badges .divider {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-title {
+    font-size: 2.25rem;
+  }
+  
+  .header-subtitle {
+    font-size: 1.25rem;
+  }
+  
+  .header-description {
+    font-size: 1rem;
+  }
+  
+  .cta-button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+  }
+}
 
 .hero {
   position: relative;
@@ -462,38 +712,94 @@
   background: none !important;
 }
 
-/* Diagnostic styles for hero emoji */
-.hero-emoji {
-  font-size: 2.5rem !important;
-  display: inline-block !important;
-  line-height: 1;
-  animation: float 3s ease-in-out infinite;
-  opacity: 1 !important;
-  color: #ff0000 !important; /* Bright red to test visibility */
-  text-shadow: 0 0 20px #00ff00; /* Bright green glow */
-  position: relative;
-  z-index: 9999 !important;
-  background: rgba(0, 0, 255, 0.2) !important; /* Blue background to test */
-  padding: 10px;
-  border: 2px solid #ffff00 !important; /* Yellow border */
+.feature-card h3 {
+  font-size: 1.375rem;
+  margin-bottom: 1rem;
+  color: #111827;
+  font-weight: 700;
+  line-height: 1.3;
+  transition: color 0.2s ease;
 }
 
-.hero-tagline {
-  color: #e2e8f0;
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 1.5rem;
-  animation: fadeInUp 0.8s ease-out 0.4s both;
+.feature-card:hover h3 {
+  color: #3b82f6;
 }
 
-.hero-description {
-  color: #e2e8f0;
-  font-size: 1.1rem;
+.feature-card p {
+  color: #4b5563;
+  font-size: 1.05rem;
   line-height: 1.7;
-  max-width: 700px;
-  margin: 0 auto 2.5rem;
+  margin-bottom: 1.75rem;
+  flex-grow: 1;
+  transition: color 0.2s ease;
+}
+
+.feature-link {
+  display: inline-flex;
+  align-items: center;
+  color: #3b82f6;
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-decoration: none;
+  margin-top: auto;
+  transition: all 0.2s ease;
   opacity: 0;
-  animation: fadeInUp 0.8s ease-out 0.5s forwards;
+  transform: translateX(-5px);
+  max-width: fit-content;
+}
+
+.feature-card:hover .feature-link {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.feature-link i {
+  margin-left: 0.5rem;
+  font-size: 0.8rem;
+  transition: transform 0.2s ease;
+}
+
+.feature-link:hover {
+  color: #2563eb;
+}
+
+.feature-link:hover i {
+  transform: translateX(3px);
+}
+
+.feature-card {
+  background: white;
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(145deg, #ffffff 0%, #f9fafb 100%);
+}
+
+.feature-icon {
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  color: white;
+  font-size: 1.75rem;
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.2);
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover .feature-icon {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
 }
 
 /* Hero CTA Buttons */
