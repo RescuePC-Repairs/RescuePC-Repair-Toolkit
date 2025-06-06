@@ -1,7 +1,7 @@
 /* TEAM */
   Site: RescuePC Repairs
   Site: https://rescuepcrepairs.com
-  Contact: your@email.com
+  Contact: ***REMOVED***
   Twitter: @RescuePCRepair/*
 
 */
