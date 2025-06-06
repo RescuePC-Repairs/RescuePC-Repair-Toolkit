@@ -13,10 +13,10 @@
   Header set Referrer-Policy "strict-origin-when-cross-origin"
   
   # Permissions-Policy
-  Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+  Header set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=(), usb=(), interest-cohort=()"
   
   # Content Security Policy (CSP)
-  Header set Content-Security-Policy "default-src 'self' https:; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; connect-src 'self' https:;"
+  Header set Content-Security-Policy "default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; connect-src 'self' https:; frame-ancestors 'none'; form-action 'self'; base-uri 'self'; object-src 'none'; require-trusted-types-for 'script';"
   
   # Strict-Transport-Security
   Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
@@ -26,6 +26,30 @@
     
     # Content Security Policy (CSP)
     Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://js.stripe.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self' https://api.stripe.com; frame-src 'self' https://js.stripe.com;"
+
+  # Enhanced Permissions Policy
+  Header set Permissions-Policy "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()"
+  
+  # Cross-Origin Resource Policy
+  Header set Cross-Origin-Resource-Policy "same-origin"
+  
+  # Cross-Origin Opener Policy
+  Header set Cross-Origin-Opener-Policy "same-origin"
+  
+  # Cross-Origin Embedder Policy
+  Header set Cross-Origin-Embedder-Policy "require-corp"
+  
+  # Clear-Site-Data
+  Header set Clear-Site-Data "\"cache\",\"cookies\",\"storage\""
+  
+  # Expect-CT
+  Header set Expect-CT "max-age=7776000, enforce"
+
+  # Remove sensitive headers
+  Header unset X-Powered-By
+  Header unset Server
+  Header unset X-AspNet-Version
+  Header unset X-AspNetMvc-Version
 </IfModule>
 
 # Enable Compression
@@ -284,3 +308,158 @@ Options All -Indexes
 
 # 404 Error Document
 ErrorDocument 404 /404.html
+
+# Additional Security Measures
+<IfModule mod_rewrite.c>
+  # Block access to sensitive files
+  RewriteRule ^(\.git|\.env|\.htaccess|\.htpasswd|\.user\.ini|\.well-known) - [F,L]
+  
+  # Block access to backup and source files
+  RewriteRule \.(bak|config|sql|fla|psd|ini|log|sh|inc|swp|dist|json|lock)$ - [F,L]
+  
+  # Block access to hidden files and directories
+  RewriteCond %{SCRIPT_FILENAME} -d [OR]
+  RewriteCond %{SCRIPT_FILENAME} -f
+  RewriteRule "(^|/)\." - [F,L]
+</IfModule>
+
+# PHP Security Settings
+<IfModule mod_php.c>
+  php_flag display_errors off
+  php_flag log_errors on
+  php_value error_log /path/to/error.log
+  php_flag allow_url_fopen off
+  php_flag allow_url_include off
+  php_flag expose_php off
+  php_flag session.cookie_httponly on
+  php_flag session.cookie_secure on
+  php_flag session.use_only_cookies on
+  php_value session.cookie_samesite "Strict"
+</IfModule>
+
+# Block access to sensitive directories
+<FilesMatch "^(\.htaccess|\.htpasswd|\.git|\.env|\.user\.ini|\.well-known)">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# Block access to backup and source files
+<FilesMatch "\.(bak|config|sql|fla|psd|ini|log|sh|inc|swp|dist|json|lock)$">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# Protect configuration directory
+<Directory "config">
+    Order Deny,Allow
+    Deny from all
+</Directory>
+
+# Protect security dashboard
+<Files "security-dashboard.php">
+    Order Deny,Allow
+    Deny from all
+    Allow from 192.168.1.142
+    Allow from 127.0.0.1
+    Allow from ::1
+</Files>
+
+<Files "security-report.php">
+    Order Deny,Allow
+    Deny from all
+    Allow from 192.168.1.142
+    Allow from 127.0.0.1
+    Allow from ::1
+</Files>
+
+<Files "security-reports.log">
+    Order Deny,Allow
+    Deny from all
+    Allow from 192.168.1.142
+    Allow from 127.0.0.1
+    Allow from ::1
+</Files>
+
+# Block access to all PHP files in config directory
+<FilesMatch "^config/.*\.php$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
+
+# Prevent directory listing
+Options -Indexes
+
+# Block access to sensitive files
+<FilesMatch "^(security-dashboard\.php|security-report\.php|security-reports\.log|\.htaccess|\.htpasswd|config/.*)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Block access to sensitive directories
+<DirectoryMatch "^/.*(\.git|\.svn|\.hg|\.bzr|\.config|\.env|\.well-known)/">
+    Order allow,deny
+    Deny from all
+</DirectoryMatch>
+
+# Block suspicious user agents
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{HTTP_USER_AGENT} (havij|libwww-perl|wget|python|nikto|curl|scan|java|winhttp|clshttp|loader) [NC,OR]
+    RewriteCond %{HTTP_USER_AGENT} (<|>|'|%0A|%0D|%27|%3C|%3E|%00) [NC,OR]
+    RewriteCond %{HTTP_USER_AGENT} (;|<|>|'|"|\)|\(|%0A|%0D|%22|%27|%3C|%3E|%00).*(libwww-perl|wget|python|nikto|curl|scan|java|winhttp|HTTrack|clshttp|archiver|loader|email|harvest|extract|grab|miner) [NC]
+    RewriteRule .* - [F,L]
+</IfModule>
+
+# Enhanced Content Security Policy
+<IfModule mod_headers.c>
+    Header set Content-Security-Policy "default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval'; script-src 'self' https: 'unsafe-inline' 'unsafe-eval'; style-src 'self' https: 'unsafe-inline'; img-src 'self' https: data:; font-src 'self' https: data:; connect-src 'self' https:; frame-src 'self' https:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests; block-all-mixed-content;"
+    
+    # Additional Security Headers
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+    Header set Cross-Origin-Embedder-Policy "require-corp"
+    Header set Cross-Origin-Opener-Policy "same-origin"
+    Header set Cross-Origin-Resource-Policy "same-origin"
+    Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+</IfModule>
+
+# Block access to sensitive files
+<FilesMatch "^(\.htaccess|\.htpasswd|\.git|\.env|composer\.json|composer\.lock|package\.json|package-lock\.json|security-.*|config/.*|logs/.*)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Block access to backup and temporary files
+<FilesMatch "\.(bak|config|sql|fla|psd|ini|log|sh|inc|swp|dist|tmp|temp)$">
+    Order allow,deny
+    Deny from all
+    Satisfy All
+</FilesMatch>
+
+# Block access to hidden files and directories
+<IfModule mod_rewrite.c>
+    RewriteCond %{SCRIPT_FILENAME} -d [OR]
+    RewriteCond %{SCRIPT_FILENAME} -f
+    RewriteRule "(^|/)\." - [F]
+</IfModule>
+
+# Block access to sensitive directories
+RedirectMatch 403 ^/config/?$
+RedirectMatch 403 ^/logs/?$
+RedirectMatch 403 ^/\.git/?$
+RedirectMatch 403 ^/node_modules/?$
+
+# Block suspicious user agents
+RewriteCond %{HTTP_USER_AGENT} (havij|libwww-perl|wget|python|nikto|curl|scan|java|winhttp|clshttp|loader) [NC,OR]
+RewriteCond %{HTTP_USER_AGENT} (<|>|'|%0A|%0D|%27|%3C|%3E|%00) [NC,OR]
+RewriteCond %{HTTP_USER_AGENT} (;|<|>|'|"|\)|\(|%0A|%0D|%22|%27|%3C|%3E|%00).*(libwww-perl|wget|python|nikto|curl|scan|java|winhttp|HTTrack|clshttp|archiver|loader|email|harvest|extract|grab|miner) [NC]
+RewriteRule .* - [F,L]
+
+# Block access to sensitive file extensions
+<FilesMatch "\.(env|config.js|md|gitignore|gitattributes|lock)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
