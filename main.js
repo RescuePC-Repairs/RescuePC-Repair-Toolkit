@@ -931,4 +931,16 @@ document.addEventListener('DOMContentLoaded', () => {
       timelineObserver.observe(item);
     });
   }
+
+  // Video playback functionality
+  const video = document.getElementById('showcase-video');
+  if (video) {
+    video.addEventListener('click', function() {
+      if (video.paused) {
+        video.play();
+      } else {
+        video.pause();
+      }
+    });
+  }
 });
