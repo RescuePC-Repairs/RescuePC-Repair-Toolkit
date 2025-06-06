@@ -26,6 +26,10 @@
   <link rel="preconnect" href="https://js.stripe.com" crossorigin>
   
   <!-- Preload critical CSS -->
+  <link rel="preload" href="optimized.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="optimized.css"></noscript>
+  
+  <!-- Preload critical CSS -->
   <link rel="stylesheet" href="footer-styles.css">
   <style>
     /* Critical CSS - Above the fold styles */
@@ -598,7 +602,7 @@
   <link rel="stylesheet" href="css/mobile-fixes.css">
   
   <!-- Load non-critical CSS asynchronously -->
-  <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="stylesheet" href="optimized.css">
   <link rel="stylesheet" href="navbar-styles.css">
   <link rel="stylesheet" href="hero-styles.css">
   <style>
@@ -759,6 +763,8 @@
   </script>
 </head>
 
+<body>
+
   <!-- Navigation -->
   <header class="navbar" id="navbar">
     <div class="navbar-container">
@@ -773,8 +779,8 @@
       </button>
       
       <!-- Desktop Navigation -->
-      <nav>
-        <ul class="navbar-nav">
+      <nav class="navbar-nav" aria-label="Main navigation">
+        <ul class="nav-list">
           <li class="nav-item">
             <a href="#features" class="nav-link">
               <i class="fas fa-star" aria-hidden="true"></i>
@@ -818,90 +824,67 @@
       <div class="nav-overlay" id="navOverlay" aria-hidden="true" tabindex="-1"></div>
       
       <!-- Mobile Navigation Menu -->
-      <div class="mobile-nav-container">
-        <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
-          <!-- Mobile Search Bar -->
-          <div class="mobile-search-container">
-            <div class="search-input-container">
-              <i class="fas fa-search search-icon" aria-hidden="true"></i>
-              <input 
-                type="text" 
-                class="mobile-search-input" 
-                placeholder="Search..." 
-                aria-label="Search site"
-              >
-              <button class="clear-search" aria-label="Clear search" style="display: none;">
-                <i class="fas fa-times"></i>
-              </button>
-            </div>
-          </div>
-          
-          <ul class="mobile-nav-list">
-            <li class="nav-item">
-              <a href="#home" class="nav-link" data-section="home">
-                <i class="fas fa-home" aria-hidden="true"></i>
-                <span>Home</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#features" class="nav-link" data-section="features">
-                <i class="fas fa-star" aria-hidden="true"></i>
-                <span>Features</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#how-it-works" class="nav-link">
-                <i class="fas fa-play-circle" aria-hidden="true"></i>
-                <span>How It Works</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#testimonials" class="nav-link">
-                <i class="fas fa-quote-left" aria-hidden="true"></i>
-                <span>Testimonials</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#pricing" class="nav-link">
-                <i class="fas fa-tags" aria-hidden="true"></i>
-                <span>Pricing</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#faq" class="nav-link">
-                <i class="fas fa-question-circle" aria-hidden="true"></i>
-                <span>FAQ</span>
-              </a>
-            </li>
-            <li class="nav-item nav-item-cta">
-              <a href="#buy-now" class="nav-link nav-cta">
-                <i class="fas fa-shopping-cart" aria-hidden="true"></i>
-                <span>Buy Now</span>
-              </a>
-            </li>
-          </ul>
-          
-          <!-- Back to Top Button (Mobile) -->
-          <button class="back-to-top" id="backToTop" aria-label="Back to top">
-            <i class="fas fa-arrow-up"></i>
-          </button>
-        </nav>
-      </div>
+      <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+        <ul class="mobile-nav-list">
+          <li class="nav-item">
+            <a href="#home" class="nav-link" data-section="home">
+              <i class="fas fa-home" aria-hidden="true"></i>
+              <span>Home</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#features" class="nav-link" data-section="features">
+              <i class="fas fa-star" aria-hidden="true"></i>
+              <span>Features</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#how-it-works" class="nav-link">
+              <i class="fas fa-play-circle" aria-hidden="true"></i>
+              <span>How It Works</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#testimonials" class="nav-link">
+              <i class="fas fa-quote-left" aria-hidden="true"></i>
+              <span>Testimonials</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#pricing" class="nav-link">
+              <i class="fas fa-tags" aria-hidden="true"></i>
+              <span>Pricing</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#faq" class="nav-link">
+              <i class="fas fa-question-circle" aria-hidden="true"></i>
+              <span>FAQ</span>
+            </a>
+          </li>
+          <li class="nav-item nav-item-cta">
+            <a href="#buy-now" class="nav-link nav-cta">
+              <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+              <span>Buy Now</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
     </div>
   </header>
 
   <!-- Header Section -->
-  <header class="header">
-    <div class="header-content">
-      <h1 class="header-title">RescuePC Repairs</h1>
-      <h2 class="header-subtitle">The Ultimate Windows Repair Toolkit</h2>
-      <p class="header-description">
+  <header class="header centered-section">
+    <div class="header-content centered-section">
+      <h1 class="header-title text-center">RescuePC Repairs</h1>
+      <h2 class="header-subtitle text-center">The Ultimate Windows Repair Toolkit</h2>
+      <p class="header-description text-center">
         RescuePC Repairs is your ultimate all-in-one solution for fixing even the most frustrating Windows issues—online or offline. 
         Why pay hundreds at a repair shop when you can get the same reliable performance for a single purchase? 
         Enjoy a safe, hassle-free experience with a powerful toolkit designed to restore your PC in no time.
       </p>
       
-      <div class="header-cta">
+      <div class="header-cta centered-section">
         <a href="https://buy.stripe.com/dRm6oHeFqfR4gXhbFm93y05" class="cta-button primary">
           <i class="fas fa-bolt"></i>
           Get Instant Access
@@ -912,7 +895,7 @@
         </a>
       </div>
       
-      <div class="trust-badges">
+      <div class="trust-badges centered-section">
         <div class="badge">
           <i class="fas fa-lock"></i>
           <span>Secure Checkout</span>
@@ -932,20 +915,33 @@
   </header>
 
   <!-- Promo Banner -->
-  <div class="promo-banner">
-    <div class="container">
-      <p>For 24/7 customer support, email <a href="mailto:***REMOVED***">***REMOVED***</a></p>
+  <div class="promo-banner centered-section">
+    <div class="container centered-section">
+      <p class="text-center">For 24/7 customer support, email <a href="mailto:***REMOVED***">***REMOVED***</a></p>
     </div>
   </div>
 
   <!-- Main Content -->
   <main id="main-content">
-    <section id="features" class="features">
-      <div class="section-header">
-        <h2>Why Choose RescuePC Repairs?</h2>
-        <p>Discover the powerful features that make our toolkit the best choice for Windows repair and optimization.</p>
+    <!-- UI Preview Section -->
+    <section id="how-it-works" class="media centered-section">
+      <div class="section-header centered-section">
+        <h2 class="text-center">Take a Look at the User Interface of RescuePC Repairs</h2>
+        <p class="text-center">Take a Look at the User Interface of RescuePC Repairs to see how easy it is to use.</p>
       </div>
-      <div class="features-grid">
+      <div class="media-gallery centered-section">
+        <div class="main-preview">
+          <img src="RescuePC_GUI.png" alt="RescuePC Repairs User Interface Preview" class="ui-preview-image">
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="features centered-section">
+      <div class="section-header centered-section">
+        <h2 class="text-center">Why Choose RescuePC Repairs?</h2>
+        <p class="text-center">Discover the powerful features that make our toolkit the best choice for Windows repair and optimization.</p>
+      </div>
+      <div class="features-grid centered-section">
         <div class="feature-card">
           <div class="feature-icon">🛠️</div>
           <h3>One-Click Repairs</h3>
@@ -989,18 +985,20 @@
       </div>
     </section>
 
+    <!-- About Section -->
     <section id="about" class="about-section">
-      <div class="section-header">
-        <h2>About the Creator</h2>
-      </div>
       <div class="about-content">
+        <div class="section-header">
+          <h2 class="text-center">About the Creator</h2>
+        </div>
         <div class="about-grid">
           <div class="about-image-container">
-            <img src="FrontendAboutMePicture.png" alt="Tyler - Founder of RescuePC Repairs" class="profile-image">
+            <img src="FrontendAboutMePicture.png" alt="Tyler - Founder of RescuePC Repairs" class="about-image">
             <div class="image-overlay">
-              <div class="view-fullscreen">
-                <i class="fas fa-expand"></i> View Full Size
-              </div>
+              <button class="view-fullscreen" onclick="window.open('FrontendAboutMePicture.png', '_blank')">
+                <i class="fas fa-expand"></i>
+                <span>View Full Size</span>
+              </button>
             </div>
           </div>
           <div class="about-text">
@@ -1014,97 +1012,90 @@
       </div>
     </section>
 
-    <section class="compatibility">
-      <div class="section-header">
+    <section class="windows-versions">
+      <div class="container">
         <h2>Works With All Windows Versions</h2>
-      </div>
-      <div class="windows-list">
-        <div class="windows-item">Windows 11</div>
-        <div class="windows-item">Windows 10</div>
-        <div class="windows-item">Windows 8.1</div>
-        <div class="windows-item">Windows 7</div>
-      </div>
-    </section>
-
-    <section id="how-it-works" class="media">
-      <div class="section-header">
-        <h2>Take a Look at the User Interface of RescuePC Repairs</h2>
-        <p>Take a Look at the User Interface of RescuePC Repairs to see how easy it is to use.</p>
-      </div>
-      <div class="media-gallery">
-        <div class="main-preview">
-          <img src="RescuePC_GUI.png" alt="RescuePC Repairs User Interface Preview" class="media-item" width="800" height="500">
-          <div class="preview-overlay">
-            </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="pricing" class="buy-now">
-      <div class="pricing-card">
-        <div class="pricing-header">
-          <h2>RescuePC Repairs Lifetime License</h2>
-          <div class="price">
-            <span class="currency">$</span>
-            <span class="amount">129</span>
-            <span class="cents">.99</span>
+        <div class="windows-grid">
+          <div class="windows-version">
+            <h3>Windows 11</h3>
           </div>
-          <p class="price-subtitle">One-time payment, lifetime repairs</p>
+          <div class="windows-version">
+            <h3>Windows 10</h3>
+          </div>
+          <div class="windows-version">
+            <h3>Windows 8.1</h3>
+          </div>
+          <div class="windows-version">
+            <h3>Windows 7</h3>
+          </div>
         </div>
-
-        <div class="pricing-features">
-          <ul>
-            <li>✅ Full Offline Driver Library (11GB)</li>
-            <li>✅ Network & Wi-Fi Recovery Tools</li>
-            <li>✅ Audio Restoration System</li>
-            <li>✅ Windows Error Repair Module</li>
-            <li>✅ Malware Scanner & Remover</li>
-            <li>✅ Unlimited PC Repairs</li>
-            <li>✅ Get your access password instantly via email / The download will begin instantly.</li>
-          </ul>
-        </div>
-
-        <script async
-    src="https://js.stripe.com/v3/buy-button.js">
-</script>
-
-  <div id="buy-now" class="stripe-button-container">
-    <stripe-buy-button
-      id="buy_btn_1RW3SzHddahti95eqUSVu7HM" buy-button-id="buy_btn_1RW3SzHddahti95eqUSVu7HM"
-      publishable-key="pk_live_51RHgNWHddahti95euP7f7D1c3KoGiTDwcqTr0NnUs9y2dXkLbIceXwbPNY3TyJWxnTympc9ZDolUXENQAJ1qkCJn00gzZcfHjb">
-    </stripe-buy-button>
-    <p class="secure-payment">Secure payment via Stripe</p>
-  </div>
-</div>
+      </div>
     </section>
 
-    <section class="resources">
-      <div class="section-header">
-        <h2>Resources</h2>
-        <p>Download helpful materials to learn more about RescuePC Repairs</p>
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing-section">
+      <div class="container">
+        <div class="pricing-card">
+          <div class="pricing-header">
+            <h2>RescuePC Repairs Lifetime License</h2>
+            <div class="price">
+              <span class="currency">$</span>
+              <span class="amount">129</span>
+              <span class="cents">.99</span>
+            </div>
+            <p class="price-subtitle">One-time payment, lifetime repairs</p>
+          </div>
+          <div class="pricing-features">
+            <ul>
+              <li>Full Offline Driver Library (11GB)</li>
+              <li>Network & Wi-Fi Recovery Tools</li>
+              <li>Audio Restoration System</li>
+              <li>Windows Error Repair Module</li>
+              <li>Malware Scanner & Remover</li>
+              <li>Unlimited PC Repairs</li>
+              <li>Get your access password instantly via email / The download will begin instantly.</li>
+            </ul>
+          </div>
+          <div class="stripe-button-container">
+            <stripe-buy-button
+              buy-button-id="buy_btn_1RW3SzHddahti95eqUSVu7HM"
+              publishable-key="pk_live_51RHgNWHddahti95euP7f7D1c3KoGiTDwcqTr0NnUs9y2dXkLbIceXwbPNY3TyJWxnTympc9ZDolUXENQAJ1qkCJn00gzZcfHjb">
+            </stripe-buy-button>
+            <p class="secure-payment">Secure payment via Stripe</p> 
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="resources centered-section">
+      <div class="section-header centered-section">
+        <h2 class="text-center">Resources</h2>
+        <p class="text-center">Download helpful materials to learn more about RescuePC Repairs</p>
       </div>
 
-      <div class="resource-card">
+      <div class="resource-card centered-section">
         <div class="resource-icon">📄</div>
         <h3>Product Flyer</h3>
         <p>Download our detailed product flyer with complete information about RescuePC Repairs features and benefits.</p>
         <div class="resource-buttons">
-          <a href="RescuePC Repairs Flyer.pdf" class="btn-secondary pdf-link">
-            <i class="fas fa-file-pdf"></i> View Flyer
+          <a href="RescuePC Repairs Flyer.pdf" class="btn-primary" target="_blank">
+            <i class="fas fa-file-pdf"></i>
+            View Flyer
           </a>
-          <a href="RescuePC Repairs Flyer.pdf" class="btn-secondary pdf-link">
-            <i class="fas fa-download"></i> Download
+          <a href="RescuePC Repairs Flyer.pdf" class="btn-secondary" download>
+            <i class="fas fa-download"></i>
+            Download
           </a>
         </div>
       </div>
     </section>
 
-    <section id="testimonials" class="testimonials">
-      <div class="section-header">
-        <h2>What Our Customers Say</h2>
-        <p>Hear from users who have transformed their PC experience with RescuePC Repairs</p>
+    <section id="testimonials" class="testimonials centered-section">
+      <div class="section-header centered-section">
+        <h2 class="text-center">What Our Customers Say</h2>
+        <p class="text-center">Hear from users who have transformed their PC experience with RescuePC Repairs</p>
       </div>
-      <div class="testimonials-grid">
+      <div class="testimonials-grid centered-section">
         <div class="testimonial-card">
           <div class="testimonial-content">
             <div class="testimonial-rating" aria-label="5 out of 5 stars">★★★★★</div>
@@ -1147,12 +1138,12 @@
       </div>
     </section>
 
-    <section id="faq" class="faq" aria-label="Frequently Asked Questions">
-      <div class="section-header">
-        <h2>Frequently Asked Questions</h2>
-        <p class="section-subtitle">Find answers to common questions about RescuePC Repairs</p>
+    <section id="faq" class="faq centered-section" aria-label="Frequently Asked Questions">
+      <div class="section-header centered-section">
+        <h2 class="text-center">Frequently Asked Questions</h2>
+        <p class="section-subtitle text-center">Find answers to common questions about RescuePC Repairs</p>
       </div>
-      <div class="container">
+      <div class="container centered-section">
         <details class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
           <summary itemprop="name">How does RescuePC Repairs work without internet?</summary>
           <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
@@ -1173,24 +1164,12 @@
           <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
             <div itemprop="text">
               <p>RescuePC Repairs supports a wide range of Windows versions, including legacy and current systems:</p>
-              <div class="compatibility-grid">
-                <div class="compatibility-item">
-                  <i class="fab fa-windows"></i>
-                  <span>Windows 11 (32/64-bit)</span>
-                </div>
-                <div class="compatibility-item">
-                  <i class="fab fa-windows"></i>
-                  <span>Windows 10 (32/64-bit)</span>
-                </div>
-                <div class="compatibility-item">
-                  <i class="fab fa-windows"></i>
-                  <span>Windows 8.1 (32/64-bit)</span>
-                </div>
-                <div class="compatibility-item">
-                  <i class="fab fa-windows"></i>
-                  <span>Windows 7 (32/64-bit)</span>
-                </div>
-              </div>
+              <ul>
+                <li>Windows 11 (32/64-bit)</li>
+                <li>Windows 10 (32/64-bit)</li>
+                <li>Windows 8.1 (32/64-bit)</li>
+                <li>Windows 7 (32/64-bit)</li>
+              </ul>
             </div>
           </div>
         </details>
@@ -1230,13 +1209,13 @@
       </div>
     </section>
 
-    <section id="support" class="support">
-      <div class="section-header">
-        <h2>Support & Questions</h2>
-        <p>We're here to help you get the most out of RescuePC Repairs</p>
+    <section id="support" class="support centered-section">
+      <div class="section-header centered-section">
+        <h2 class="text-center">Support & Questions</h2>
+        <p class="text-center">We're here to help you get the most out of RescuePC Repairs</p>
       </div>
 
-      <div class="support-options">
+      <div class="support-options centered-section">
         <div class="support-card">
           <div class="support-icon">📧</div>
           <h3>Email Support</h3>
@@ -1266,76 +1245,75 @@
         </div>
       </div>
     </section>
+  </main>
 
-    </main>
-
-    <footer class="site-footer">
-      <div class="container">
-        <div class="footer-content">
-          <div class="footer-section">
-            <h3 class="footer-heading">Product</h3>
-            <ul class="footer-links">
-              <li><a href="#features">Features</a></li>
-              <li><a href="#demo">Demo</a></li>
-              <li><a href="#faq">FAQ</a></li>
-              <li><a href="#support">Support</a></li>
-            </ul>
+  <footer class="site-footer centered-section">
+    <div class="container centered-section">
+      <div class="footer-content centered-section">
+        <div class="footer-section">
+          <h3 class="footer-heading">Product</h3>
+          <ul class="footer-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#demo">Demo</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#support">Support</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3 class="footer-heading">Support</h3>
+          <ul class="footer-links">
+            <li><a href="mailto:***REMOVED***">Email Support</a></li>
+            <li><a href="Knowledge-Base.html">Knowledge Base</a></li>
+            <li><a href="Portfolio/index.html">Portfolio</a></li>
+            <li><a href="join-discord.html" target="_blank" rel="noopener noreferrer">Join Discord</a></li>
+            <li><a href="RescuePC Repairs Flyer.pdf" target="_blank" rel="noopener">Flyer</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3 class="footer-heading">Legal</h3>
+          <ul class="footer-links">
+            <li><a href="License.html" rel="noopener noreferrer">License</a></li>
+            <li><a href="PrivacyPolicy.html" rel="noopener noreferrer">Privacy Policy</a></li>
+            <li><a href="TermOfService.html" rel="noopener noreferrer">Terms of Service</a></li>
+            <li><a href="RefundPolicy.html" rel="noopener noreferrer">Refund Policy</a></li>
+            <li><a href="CookiePolicy.html" rel="noopener noreferrer">Cookie Policy</a></li>
+            <li><a href="GDPR.html" rel="noopener noreferrer">GDPR Compliance</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-notice">
+          <div class="notice-content">
+            <p class="notice-text">
+              <strong>RescuePC Repairs™</strong> is a trademark of Tyler Keesee. All source code, branding, assets, scripts, and compiled binaries in this project are © 2025 Tyler Keesee. All rights reserved.
+            </p>
+            <p class="notice-warning">
+              <i class="fas fa-exclamation-triangle"></i> Unauthorized copying, modification, redistribution, or resale of any part of this toolkit or website is strictly prohibited.
+            </p>
+            <p class="notice-legal">
+              This product contains digital fingerprinting technology to detect tampering or redistribution. Violations will be pursued under applicable copyright and trademark law, including but not limited to DMCA takedowns.
+            </p>
           </div>
-          
-          <div class="footer-section">
-            <h3 class="footer-heading">Support</h3>
-            <ul class="footer-links">
-              <li><a href="mailto:***REMOVED***">Email Support</a></li>
-              <li><a href="Knowledge-Base.html">Knowledge Base</a></li>
-              <li><a href="Portfolio/index.html">Portfolio</a></li>
-              <li><a href="join-discord.html" target="_blank" rel="noopener noreferrer">Join Discord</a></li>
-              <li><a href="RescuePC Repairs Flyer.pdf" target="_blank" rel="noopener">Flyer</a></li>
-            </ul>
-          </div>
-          
-          <div class="footer-section">
-            <h3 class="footer-heading">Legal</h3>
-            <ul class="footer-links">
-              <li><a href="License.html" rel="noopener noreferrer">License</a></li>
-              <li><a href="PrivacyPolicy.html" rel="noopener noreferrer">Privacy Policy</a></li>
-              <li><a href="TermOfService.html" rel="noopener noreferrer">Terms of Service</a></li>
-              <li><a href="RefundPolicy.html" rel="noopener noreferrer">Refund Policy</a></li>
-              <li><a href="CookiePolicy.html" rel="noopener noreferrer">Cookie Policy</a></li>
-              <li><a href="GDPR.html" rel="noopener noreferrer">GDPR Compliance</a></li>
-            </ul>
-          </div>
-          
-          <div class="footer-notice">
-            <div class="notice-content">
-              <p class="notice-text">
-                <strong>RescuePC Repairs™</strong> is a trademark of Tyler Keesee. All source code, branding, assets, scripts, and compiled binaries in this project are © 2025 Tyler Keesee. All rights reserved.
-              </p>
-              <p class="notice-warning">
-                <i class="fas fa-exclamation-triangle"></i> Unauthorized copying, modification, redistribution, or resale of any part of this toolkit or website is strictly prohibited.
-              </p>
-              <p class="notice-legal">
-                This product contains digital fingerprinting technology to detect tampering or redistribution. Violations will be pursued under applicable copyright and trademark law, including but not limited to DMCA takedowns.
-              </p>
-            </div>
-          </div>
-          
-          <div class="footer-bottom">
-            <p>&copy; 2025 RescuePC Repairs. All rights reserved.</p>
-            <div class="footer-social">
-              <a href="https://facebook.com/rescuepcrepairs" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                <i class="fab fa-facebook"></i>
-              </a>
-              <a href="https://twitter.com/rescuepcrepairs" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-                <i class="fab fa-twitter"></i>
-              </a>
-              <a href="join-discord.html" target="_blank" rel="noopener noreferrer" aria-label="Discord">
-                <i class="fab fa-discord"></i>
-              </a>
-            </div>
+        </div>
+        
+        <div class="footer-bottom">
+          <p>&copy; 2025 RescuePC Repairs. All rights reserved.</p>
+          <div class="footer-social">
+            <a href="https://facebook.com/rescuepcrepairs" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <i class="fab fa-facebook"></i>
+            </a>
+            <a href="https://twitter.com/rescuepcrepairs" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="join-discord.html" target="_blank" rel="noopener noreferrer" aria-label="Discord">
+              <i class="fab fa-discord"></i>
+            </a>
           </div>
         </div>
       </div>
-    </footer>
+    </div>
+  </footer>
 
   <!-- Structured Data -->
   <script type="application/ld+json">
