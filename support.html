@@ -20,10 +20,173 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     
     <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --text: #000000;
+            --text-light: #000000;
+            --bg: #ffffff;
+            --card-bg: #f8fafc;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --radius: 15px;
+            --transition: all 0.3s ease;
+        }
+
+        /* Basic Navbar Styles */
+        .navbar {
+            background: #0f172a;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            height: 40px;
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            color: #ffffff;
+            font-size: 1.2rem;
+        }
+
+        .navbar-menu {
+            display: flex;
+        }
+
+        .navbar-nav {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .navbar-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .navbar-toggle {
+                display: block;
+            }
+
+            .navbar-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #0f172a;
+            }
+
+            .navbar-menu.active {
+                display: block;
+            }
+
+            .navbar-nav {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: #0f172a;
+                padding: 2rem;
+                display: none;
+                flex-direction: column;
+                gap: 1.5rem;
+                z-index: 1000;
+                overflow-y: auto;
+            }
+
+            .navbar-nav.active {
+                display: flex;
+            }
+
+            .navbar-nav li {
+                width: 100%;
+                text-align: center;
+            }
+
+            .navbar-nav .nav-link {
+                display: block;
+                padding: 1rem;
+                font-size: 1.2rem;
+                color: #ffffff;
+                border-radius: 8px;
+                transition: background-color 0.3s ease;
+            }
+
+            .navbar-nav .nav-link:hover {
+                background: rgba(255, 255, 255, 0.1);
+            }
+
+            .nav-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+                display: none;
+                z-index: 999;
+            }
+
+            .nav-overlay.active {
+                display: block;
+            }
+        }
+
         .support-container {
             max-width: 1200px;
             margin: 120px auto 60px;
             padding: 0 20px;
+        }
+
+        .support-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .support-header h1 {
+            font-size: 2.5rem;
+            color: var(--text);
+            margin-bottom: 20px;
+        }
+
+        .support-header p {
+            font-size: 1.2rem;
+            color: var(--text);
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         .support-grid {
@@ -34,106 +197,147 @@
         }
 
         .support-card {
-            background: #ffffff;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+            background: var(--bg);
+            border-radius: var(--radius);
+            padding: 40px 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .support-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
         }
 
         .support-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
         }
 
-        .support-card i {
-            font-size: 2.5rem;
-            color: #2563eb;
-            margin-bottom: 20px;
+        .support-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--card-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            transition: var(--transition);
+        }
+
+        .support-card:hover .support-icon {
+            transform: scale(1.1);
+            background: var(--primary);
+        }
+
+        .support-icon i {
+            font-size: 2rem;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .support-card:hover .support-icon i {
+            color: white;
         }
 
         .support-card h3 {
             font-size: 1.5rem;
+            color: var(--text);
             margin-bottom: 15px;
-            color: #1e293b;
         }
 
         .support-card p {
-            color: #64748b;
-            margin-bottom: 20px;
+            color: var(--text);
+            margin-bottom: 25px;
             line-height: 1.6;
+            flex-grow: 1;
         }
 
         .support-btn {
-            display: inline-block;
-            padding: 12px 25px;
-            background: #2563eb;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 30px;
+            background: var(--primary);
             color: white;
             border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
-            transition: background 0.3s ease;
+            transition: var(--transition);
+            border: 2px solid var(--primary);
         }
 
         .support-btn:hover {
-            background: #1d4ed8;
+            background: transparent;
+            color: var(--primary);
         }
 
-        .availability-badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.875rem;
-            font-weight: 500;
-            margin-bottom: 15px;
-        }
-
-        .availability-badge.online {
-            background: #dcfce7;
-            color: #166534;
-        }
-
-        .availability-badge.offline {
-            background: #fee2e2;
-            color: #991b1b;
-        }
-
-        .availability-badge.email {
-            background: #dbeafe;
-            color: #1e40af;
+        .support-btn i {
+            font-size: 1.2rem;
         }
 
         .faq-section {
-            margin-top: 60px;
+            margin-top: 80px;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: var(--radius);
+        }
+
+        .faq-section h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--text);
         }
 
         .faq-item {
-            background: #ffffff;
+            background: var(--bg);
             border-radius: 10px;
             margin-bottom: 20px;
             overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
 
         .faq-question {
             padding: 20px;
-            background: #f8fafc;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: var(--transition);
+        }
+
+        .faq-question:hover {
+            background: var(--card-bg);
         }
 
         .faq-question h4 {
             margin: 0;
-            color: #1e293b;
+            color: var(--text);
             font-size: 1.1rem;
+        }
+
+        .faq-question i {
+            color: var(--primary);
+            transition: var(--transition);
         }
 
         .faq-answer {
             padding: 0 20px;
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease;
+            transition: var(--transition);
         }
 
         .faq-answer.active {
@@ -141,90 +345,324 @@
             max-height: 1000px;
         }
 
-        .chat-widget {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: #2563eb;
-            color: white;
-            padding: 15px 25px;
-            border-radius: 50px;
-            box-shadow: 0 5px 20px rgba(37, 99, 235, 0.3);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            z-index: 1000;
+        .faq-answer p {
+            color: var(--text);
+            line-height: 1.6;
+            margin: 0;
         }
 
-        .chat-widget i {
-            font-size: 1.2rem;
+        .email-support {
+            text-align: center;
+            margin-top: 60px;
+            padding: 40px;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+        }
+
+        .email-support h2 {
+            color: var(--text);
+            margin-bottom: 20px;
+        }
+
+        .email-support p {
+            color: var(--text);
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .email-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+
+        .email-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
         }
 
         @media (max-width: 768px) {
             .support-container {
-                margin-top: 100px;
+                margin-top: 80px;
+                padding: 0 15px;
+            }
+
+            .support-header h1 {
+                font-size: 2rem;
+            }
+
+            .support-header p {
+                font-size: 1rem;
             }
 
             .support-grid {
                 grid-template-columns: 1fr;
+                gap: 20px;
             }
 
-            .chat-widget {
-                bottom: 20px;
-                right: 20px;
-                padding: 12px 20px;
+            .support-card {
+                padding: 30px 20px;
+            }
+
+            .faq-section {
+                padding: 20px;
+                margin-top: 40px;
+            }
+
+            .email-support {
+                padding: 20px;
+            }
+
+            .email-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .support-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .support-icon {
+                width: 60px;
+                height: 60px;
+            }
+
+            .support-icon i {
+                font-size: 1.5rem;
+            }
+
+            .support-card h3 {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* Full Page Mobile Menu */
+        @media (max-width: 768px) {
+            .navbar-nav {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 100%;
+                height: 100vh;
+                background: #0f172a;
+                padding: 80px 20px 20px;
+                z-index: 999;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .navbar-nav.active {
+                display: flex;
+            }
+
+            .navbar-nav li {
+                width: 100%;
+                text-align: center;
+                margin: 15px 0;
+            }
+
+            .navbar-nav .nav-link {
+                display: block;
+                padding: 20px;
+                color: white;
+                font-size: 24px;
+                border-radius: 8px;
+                transition: background-color 0.3s ease;
+            }
+
+            .navbar-nav .nav-link:hover {
+                background: rgba(255, 255, 255, 0.1);
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+                background: none;
+                border: none;
+                color: white;
+                font-size: 28px;
+                cursor: pointer;
+                padding: 10px;
+                z-index: 1000;
+            }
+
+            .navbar-brand {
+                z-index: 1000;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .mobile-menu-toggle {
+                display: none;
+            }
+        }
+
+        /* Dead Simple Mobile Menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0f172a;
+            z-index: 9999;
+            padding-top: 80px;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .mobile-menu li {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .mobile-menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 24px;
+            display: block;
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: block;
+            }
+            .navbar-nav {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Navbar will be injected by navbar.js -->
-    <div id="navbar-placeholder"></div>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-brand">
+                <img src="assets/RescuePC_Logo_Light.png" alt="RescuePC Repairs Logo" class="navbar-logo">
+            </a>
+            
+            <button class="mobile-toggle" onclick="toggleMobileMenu()">☰</button>
+            
+            <ul class="navbar-nav">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="Knowledge-Base.html" class="nav-link">Knowledge Base</a></li>
+                <li><a href="support.html" class="nav-link">Support</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#features">Features</a></li>
+            <li><a href="index.html#demo">Demo</a></li>
+            <li><a href="Knowledge-Base.html">Knowledge Base</a></li>
+            <li><a href="support.html">Support</a></li>
+            <li><a href="join-discord.html">Join Discord</a></li>
+            <li><a href="PrivacyPolicy.html">Privacy Policy</a></li>
+            <li><a href="TermOfService.html">Terms of Service</a></li>
+            <li><a href="CookiePolicy.html">Cookie Policy</a></li>
+            <li><a href="GDPR.html">GDPR</a></li>
+            <li><a href="RefundPolicy.html">Refund Policy</a></li>
+        </ul>
+    </div>
+
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
+            document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
+        }
+    </script>
 
     <div class="support-container">
-        <h1 class="text-center mb-8">How can we help you?</h1>
+        <div class="support-header">
+            <h1>How can we help you?</h1>
+            <p>Our support team is here to assist you with any questions or issues you may have.</p>
+        </div>
         
         <div class="support-grid">
             <div class="support-card">
-                <div class="availability-badge email">
-                    <i class="fas fa-clock mr-2"></i>24/7 Available
+                <div class="support-icon">
+                    <i class="fas fa-envelope"></i>
                 </div>
-                <i class="fas fa-ticket-alt"></i>
-                <h3>Submit a Ticket</h3>
-                <p>Create a support ticket for technical issues or general inquiries. Our team will respond within 24 hours.</p>
+                <h3>Email Support</h3>
+                <p>Get in touch with our support team via email. We typically respond within 24 hours.</p>
                 <a href="mailto:***REMOVED***" class="support-btn">
-                    <i class="fas fa-envelope mr-2"></i>Email Support
+                    <i class="fas fa-envelope"></i>
+                    Contact Us
                 </a>
             </div>
 
             <div class="support-card">
-                <div class="availability-badge offline">
-                    <i class="fas fa-clock mr-2"></i>Mon-Fri, 9AM-5PM EST
+                <div class="support-icon">
+                    <i class="fas fa-book"></i>
                 </div>
-                <i class="fas fa-comments"></i>
-                <h3>Live Chat</h3>
-                <p>Chat with our support team during business hours for immediate assistance with your questions.</p>
-                <a href="#" class="support-btn" onclick="openLiveChat()">
-                    <i class="fas fa-comments mr-2"></i>Start Chat
-                </a>
-            </div>
-
-            <div class="support-card">
-                <div class="availability-badge online">
-                    <i class="fas fa-check-circle mr-2"></i>Always Available
-                </div>
-                <i class="fas fa-book"></i>
                 <h3>Knowledge Base</h3>
                 <p>Browse our comprehensive knowledge base for detailed guides and troubleshooting articles.</p>
                 <a href="Knowledge-Base.html" class="support-btn">
-                    <i class="fas fa-book mr-2"></i>View Articles
+                    <i class="fas fa-book"></i>
+                    View Articles
+                </a>
+            </div>
+
+            <div class="support-card">
+                <div class="support-icon">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <h3>Documentation</h3>
+                <p>Access our detailed documentation and user guides to help you get the most out of RescuePC Repairs.</p>
+                <a href="RescuePC Repairs Flyer.pdf" class="support-btn" target="_blank">
+                    <i class="fas fa-file-alt"></i>
+                    View Documentation
                 </a>
             </div>
         </div>
 
+        <div class="email-support">
+            <h2>Need Immediate Assistance?</h2>
+            <p>Our support team is ready to help you with any questions or issues you may have. Send us an email and we'll get back to you as soon as possible.</p>
+            <a href="mailto:***REMOVED***" class="email-btn">
+                <i class="fas fa-envelope"></i>
+                Email Support Team
+            </a>
+        </div>
+
         <div class="faq-section">
-            <h2 class="text-center mb-8">Frequently Asked Questions</h2>
+            <h2>Frequently Asked Questions</h2>
             
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFAQ(this)">
@@ -248,47 +686,39 @@
 
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFAQ(this)">
-                    <h4>How do I update the software?</h4>
+                    <h4>How do I get technical support?</h4>
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="faq-answer">
-                    <p>The software will automatically check for updates when launched. You can also manually check for updates by clicking the "Check for Updates" option in the settings menu.</p>
+                    <p style="color: #000000;">For technical support, please email us at ***REMOVED***. Include as much detail as possible about your issue, including any error messages you're seeing.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <h4>What payment methods do you accept?</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>We accept all major credit cards and PayPal through our secure payment processor, Stripe. All transactions are encrypted and secure.</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="chat-widget" onclick="openLiveChat()">
-        <i class="fas fa-comments"></i>
-        <span>Chat with us</span>
-    </div>
-
-    <!-- Footer will be injected by footer.js -->
-    <div id="footer-placeholder"></div>
-
-    <script src="navbar.js"></script>
-    <script src="js/support.js"></script>
     <script>
-        function toggleFAQ(element) {
-            const answer = element.nextElementSibling;
-            const icon = element.querySelector('i');
-            
-            answer.classList.toggle('active');
-            icon.style.transform = answer.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0)';
-        }
-
-        function openLiveChat() {
-            const now = new Date();
-            const day = now.getDay();
-            const hour = now.getHours();
-            
-            // Check if it's a weekday (1-5) and between 9 AM and 5 PM EST
-            if (day >= 1 && day <= 5 && hour >= 9 && hour < 17) {
-                supportChat.open();
-            } else {
-                alert('Live chat is available Monday through Friday, 9 AM to 5 PM EST. Please email us at ***REMOVED*** for immediate assistance.');
-            }
-        }
+        document.addEventListener('DOMContentLoaded', function() {
+            // FAQ Toggle
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const answer = question.nextElementSibling;
+                    const icon = question.querySelector('i');
+                    answer.style.maxHeight = answer.style.maxHeight ? null : answer.scrollHeight + 'px';
+                    icon.style.transform = answer.style.maxHeight ? 'rotate(180deg)' : 'rotate(0)';
+                });
+            });
+        });
     </script>
 </body>
 </html> 
