@@ -1566,7 +1566,9 @@ section {
 }
 
 .feature-list i {
-  color: #4CAF50;
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   font-size: 1.2rem;
 }
 
@@ -1596,7 +1598,9 @@ section {
 
 .feature-highlight i {
   font-size: 1.5rem;
-  color: #4CAF50;
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .feature-highlight span {
