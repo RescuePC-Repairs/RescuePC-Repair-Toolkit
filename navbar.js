@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
           <li><a href="index.html#demo" class="nav-link">Demo</a></li>
           <li><a href="support.html" class="nav-link"><i class="fas fa-headset mr-2"></i>Support</a></li>
           <li><a href="Knowledge-Base.html" class="nav-link">Knowledge Base</a></li>
-          <li><a href="join-discord.html" class="nav-link">Join Discord</a></li>
+          <li><a href="https://discord.gg/VgWkPazd" class="nav-link">Join Discord</a></li>
         </ul>
       </div>
     </nav>
