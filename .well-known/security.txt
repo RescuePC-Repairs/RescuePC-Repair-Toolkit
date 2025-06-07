@@ -1,6 +1,6 @@
 # If you've discovered a security vulnerability, we appreciate your help in disclosing it to us responsibly.
 
-Contact: mailto:security@rescuepcrepairs.com
+Contact: mailto:***REMOVED***
 Encryption: https://rescuepcrepairs.com/.well-known/pgp-key.txt
 Acknowledgments: https://rescuepcrepairs.com/security-hall-of-fame
 Policy: https://rescuepcrepairs.com/security-policy

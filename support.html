@@ -165,9 +165,10 @@
             }
         }
 
+        /* Support Page Styles */
         .support-container {
             max-width: 1200px;
-            margin: 120px auto 60px;
+            margin: 100px auto 50px;
             padding: 0 20px;
         }
 
@@ -178,219 +179,173 @@
 
         .support-header h1 {
             font-size: 2.5rem;
-            color: var(--text);
+            color: #000000;
             margin-bottom: 20px;
         }
 
-        .support-header p {
+        .support-intro {
             font-size: 1.2rem;
-            color: var(--text);
-            max-width: 600px;
+            color: #000000;
+            max-width: 800px;
             margin: 0 auto;
+            line-height: 1.6;
         }
 
         .support-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
         }
 
         .support-card {
-            background: var(--bg);
-            border-radius: var(--radius);
-            padding: 40px 30px;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 30px;
             text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .support-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .support-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
         }
 
-        .support-icon {
-            width: 80px;
-            height: 80px;
-            background: var(--card-bg);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 25px;
-            transition: var(--transition);
+        .support-card i {
+            font-size: 2.5rem;
+            color: #2563eb;
+            margin-bottom: 20px;
         }
 
-        .support-card:hover .support-icon {
-            transform: scale(1.1);
-            background: var(--primary);
-        }
-
-        .support-icon i {
-            font-size: 2rem;
-            color: var(--primary);
-            transition: var(--transition);
-        }
-
-        .support-card:hover .support-icon i {
-            color: white;
-        }
-
-        .support-card h3 {
+        .support-card h2 {
             font-size: 1.5rem;
-            color: var(--text);
+            color: #000000;
             margin-bottom: 15px;
         }
 
         .support-card p {
-            color: var(--text);
+            color: #000000;
             margin-bottom: 25px;
             line-height: 1.6;
-            flex-grow: 1;
         }
 
-        .support-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 30px;
-            background: var(--primary);
+        .support-button, .cta-button {
+            display: inline-block;
+            padding: 12px 25px;
+            background: #2563eb;
             color: white;
-            border-radius: 8px;
             text-decoration: none;
-            font-weight: 600;
-            transition: var(--transition);
-            border: 2px solid var(--primary);
+            border-radius: 8px;
+            font-weight: 500;
+            transition: background 0.3s ease;
         }
 
-        .support-btn:hover {
-            background: transparent;
-            color: var(--primary);
+        .support-button:hover, .cta-button:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
         }
 
-        .support-btn i {
-            font-size: 1.2rem;
-        }
-
-        .faq-section {
-            margin-top: 80px;
-            background: var(--card-bg);
+        .support-cta {
+            background: #f8fafc;
+            border-radius: 15px;
             padding: 40px;
-            border-radius: var(--radius);
-        }
-
-        .faq-section h2 {
             text-align: center;
-            margin-bottom: 40px;
-            color: var(--text);
+            margin-bottom: 60px;
         }
 
-        .faq-item {
-            background: var(--bg);
-            border-radius: 10px;
-            margin-bottom: 20px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-
-        .faq-question {
-            padding: 20px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: var(--transition);
-        }
-
-        .faq-question:hover {
-            background: var(--card-bg);
-        }
-
-        .faq-question h4 {
-            margin: 0;
-            color: var(--text);
-            font-size: 1.1rem;
-        }
-
-        .faq-question i {
-            color: var(--primary);
-            transition: var(--transition);
-        }
-
-        .faq-answer {
-            padding: 0 20px;
-            max-height: 0;
-            overflow: hidden;
-            transition: var(--transition);
-        }
-
-        .faq-answer.active {
-            padding: 20px;
-            max-height: 1000px;
-        }
-
-        .faq-answer p {
-            color: var(--text);
-            line-height: 1.6;
-            margin: 0;
-        }
-
-        .email-support {
-            text-align: center;
-            margin-top: 60px;
-            padding: 40px;
-            background: var(--card-bg);
-            border-radius: var(--radius);
-        }
-
-        .email-support h2 {
-            color: var(--text);
+        .support-cta h2 {
+            font-size: 2rem;
+            color: #000000;
             margin-bottom: 20px;
         }
 
-        .email-support p {
-            color: var(--text);
+        .support-cta p {
+            color: #000000;
             margin-bottom: 30px;
+            font-size: 1.1rem;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
         }
 
-        .email-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 15px 40px;
-            background: var(--primary);
-            color: white;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
+        .faq-section {
+            margin-bottom: 60px;
+        }
+
+        .faq-section h2 {
+            text-align: center;
+            font-size: 2rem;
+            color: #000000;
+            margin-bottom: 40px;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .faq-item {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-item h3 {
+            color: #000000;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        .faq-item p {
+            color: #000000;
+            line-height: 1.6;
+        }
+
+        .support-guarantee {
+            background: #f8fafc;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .support-guarantee h2 {
+            font-size: 2rem;
+            color: #000000;
+            margin-bottom: 20px;
+        }
+
+        .support-guarantee p {
+            color: #000000;
+            margin-bottom: 30px;
             font-size: 1.1rem;
-            transition: var(--transition);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .email-btn:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
+        .guarantee-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
+        .guarantee-list li {
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 8px;
+            color: #000000;
+            font-weight: 500;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Responsive Styles */
         @media (max-width: 768px) {
             .support-container {
                 margin-top: 80px;
@@ -401,31 +356,36 @@
                 font-size: 2rem;
             }
 
-            .support-header p {
-                font-size: 1rem;
+            .support-intro {
+                font-size: 1.1rem;
             }
 
             .support-grid {
                 grid-template-columns: 1fr;
-                gap: 20px;
             }
 
             .support-card {
+                padding: 20px;
+            }
+
+            .support-cta {
                 padding: 30px 20px;
             }
 
-            .faq-section {
-                padding: 20px;
-                margin-top: 40px;
+            .support-cta h2 {
+                font-size: 1.8rem;
             }
 
-            .email-support {
-                padding: 20px;
+            .faq-grid {
+                grid-template-columns: 1fr;
             }
 
-            .email-btn {
-                width: 100%;
-                justify-content: center;
+            .support-guarantee {
+                padding: 30px 20px;
+            }
+
+            .guarantee-list {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -434,17 +394,9 @@
                 font-size: 1.8rem;
             }
 
-            .support-icon {
-                width: 60px;
-                height: 60px;
-            }
-
-            .support-icon i {
-                font-size: 1.5rem;
-            }
-
-            .support-card h3 {
-                font-size: 1.3rem;
+            .support-button, .cta-button {
+                width: 100%;
+                text-align: center;
             }
         }
 
@@ -611,98 +563,84 @@
     <div class="support-container">
         <div class="support-header">
             <h1>How can we help you?</h1>
-            <p>Our support team is here to assist you with any questions or issues you may have.</p>
+            <p class="support-intro">Our dedicated support team is here to assist you 24/7. Whether you have questions about installation, troubleshooting, or general inquiries, we're committed to providing you with the best possible support experience.</p>
         </div>
         
         <div class="support-grid">
             <div class="support-card">
-                <div class="support-icon">
-                    <i class="fas fa-envelope"></i>
-                </div>
-                <h3>Email Support</h3>
-                <p>Get in touch with our support team via email. We typically respond within 24 hours.</p>
-                <a href="mailto:***REMOVED***" class="support-btn">
-                    <i class="fas fa-envelope"></i>
-                    Contact Us
-                </a>
+                <i class="fas fa-envelope"></i>
+                <h2>Email Support</h2>
+                <p>Get in touch with our expert support team via email. We typically respond within 24 hours, and our team is available around the clock to assist you.</p>
+                <a href="mailto:***REMOVED***" class="cta-button">Email Support Team</a>
             </div>
 
             <div class="support-card">
-                <div class="support-icon">
-                    <i class="fas fa-book"></i>
-                </div>
-                <h3>Knowledge Base</h3>
-                <p>Browse our comprehensive knowledge base for detailed guides and troubleshooting articles.</p>
-                <a href="Knowledge-Base.html" class="support-btn">
-                    <i class="fas fa-book"></i>
-                    View Articles
-                </a>
+                <i class="fas fa-book"></i>
+                <h2>Knowledge Base</h2>
+                <p>Browse our comprehensive knowledge base for detailed guides, troubleshooting articles, and best practices. Find quick solutions to common issues and learn how to maximize your RescuePC Repairs experience.</p>
+                <a href="Knowledge-Base.html" class="support-button">View Articles</a>
             </div>
 
             <div class="support-card">
-                <div class="support-icon">
-                    <i class="fas fa-file-alt"></i>
-                </div>
-                <h3>Documentation</h3>
-                <p>Access our detailed documentation and user guides to help you get the most out of RescuePC Repairs.</p>
-                <a href="RescuePC Repairs Flyer.pdf" class="support-btn" target="_blank">
-                    <i class="fas fa-file-alt"></i>
-                    View Documentation
-                </a>
+                <i class="fas fa-file-alt"></i>
+                <h2>Documentation</h2>
+                <p>Access our detailed documentation and user guides. Learn about all features, advanced settings, and optimization techniques to get the most out of RescuePC Repairs.</p>
+                <a href="Knowledge-Base.html#documentation" class="support-button">View Documentation</a>
             </div>
         </div>
 
-        <div class="email-support">
+        <div class="support-cta">
             <h2>Need Immediate Assistance?</h2>
             <p>Our support team is ready to help you with any questions or issues you may have. Send us an email and we'll get back to you as soon as possible.</p>
-            <a href="mailto:***REMOVED***" class="email-btn">
-                <i class="fas fa-envelope"></i>
-                Email Support Team
-            </a>
+            <a href="mailto:***REMOVED***" class="support-button">Email Support Team</a>
         </div>
 
         <div class="faq-section">
             <h2>Frequently Asked Questions</h2>
-            
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFAQ(this)">
-                    <h4>How do I install RescuePC Repairs?</h4>
-                    <i class="fas fa-chevron-down"></i>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3>How do I install RescuePC Repairs?</h3>
+                    <p>Download the installer from our website and run it. Follow the on-screen instructions to complete the installation process. Make sure you have administrator privileges on your Windows system. The installation typically takes less than 5 minutes.</p>
                 </div>
-                <div class="faq-answer">
-                    <p>Download the installer from our website and run it. Follow the on-screen instructions to complete the installation process. Make sure you have administrator privileges on your Windows system.</p>
-                </div>
-            </div>
 
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFAQ(this)">
-                    <h4>What are the system requirements?</h4>
-                    <i class="fas fa-chevron-down"></i>
+                <div class="faq-item">
+                    <h3>What are the system requirements?</h3>
+                    <p>RescuePC Repairs requires Windows 10 or later, 4GB RAM minimum, 1GB free disk space, and an active internet connection. For optimal performance, we recommend 8GB RAM and 2GB free disk space.</p>
                 </div>
-                <div class="faq-answer">
-                    <p>RescuePC Repairs requires Windows 10 or later, 4GB RAM minimum, and 500MB of free disk space. A stable internet connection is recommended for updates and online features.</p>
-                </div>
-            </div>
 
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFAQ(this)">
-                    <h4>How do I get technical support?</h4>
-                    <i class="fas fa-chevron-down"></i>
+                <div class="faq-item">
+                    <h3>How do I get technical support?</h3>
+                    <p>You can reach our technical support team through multiple channels: email support, our knowledge base, or by joining our Discord community. We provide 24/7 support to ensure you get help whenever you need it.</p>
                 </div>
-                <div class="faq-answer">
-                    <p style="color: #000000;">For technical support, please email us at ***REMOVED***. Include as much detail as possible about your issue, including any error messages you're seeing.</p>
-                </div>
-            </div>
 
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFAQ(this)">
-                    <h4>What payment methods do you accept?</h4>
-                    <i class="fas fa-chevron-down"></i>
+                <div class="faq-item">
+                    <h3>What payment methods do you accept?</h3>
+                    <p>We accept all major credit cards (Visa, MasterCard, American Express) and PayPal. All transactions are secure and encrypted. We also offer a 30-day money-back guarantee if you're not satisfied with our product.</p>
                 </div>
-                <div class="faq-answer">
-                    <p>We accept all major credit cards and PayPal through our secure payment processor, Stripe. All transactions are encrypted and secure.</p>
+
+                <div class="faq-item">
+                    <h3>Is my data safe with RescuePC Repairs?</h3>
+                    <p>Yes, absolutely. We take data security seriously. RescuePC Repairs uses industry-standard encryption and security measures to protect your data. We never collect or store sensitive personal information.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>How often is the software updated?</h3>
+                    <p>We release regular updates to improve performance, add new features, and enhance security. Updates are automatic and free for all licensed users. You'll always have access to the latest version of RescuePC Repairs.</p>
                 </div>
             </div>
+        </div>
+
+        <div class="support-guarantee">
+            <h2>Our Support Guarantee</h2>
+            <p>We're committed to providing exceptional support to all our users. If you're not satisfied with our support, we'll work with you until you are. Your success is our priority.</p>
+            <ul class="guarantee-list">
+                <li>24/7 Support Availability</li>
+                <li>Quick Response Times</li>
+                <li>Expert Technical Assistance</li>
+                <li>Comprehensive Documentation</li>
+                <li>Regular Software Updates</li>
+                <li>30-Day Money-Back Guarantee</li>
+            </ul>
         </div>
     </div>
 
