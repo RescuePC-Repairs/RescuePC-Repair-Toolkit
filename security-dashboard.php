@@ -207,6 +207,40 @@ foreach ($reports as $report) {
 // Get recent IPs
 $recentIPs = array_slice(array_unique(array_column($reports, 'ip')), 0, 10);
 
+// Security headers
+header('X-Frame-Options: DENY');
+header('X-Content-Type-Options: nosniff');
+header('X-XSS-Protection: 1; mode=block');
+header('Content-Security-Policy: default-src \'self\'; script-src \'self\' \'unsafe-inline\' \'unsafe-eval\'; style-src \'self\' \'unsafe-inline\';');
+header('Strict-Transport-Security: max-age=31536000; includeSubDomains; preload');
+
+// Get security statistics without exposing sensitive data
+$security_log = file_exists('logs/security.log') ? file('logs/security.log') : [];
+$rate_limit = json_decode(file_get_contents('logs/rate_limit.json'), true) ?? [];
+
+// Anonymize data for display
+$failed_attempts = array_filter($security_log, function($entry) {
+    $data = json_decode($entry, true);
+    return isset($data['status']) && $data['status'] === 'failed';
+});
+
+$security_stats = [
+    'total_requests' => count($security_log),
+    'failed_attempts' => count($failed_attempts),
+    'blocked_ips' => count($rate_limit),
+    'last_incident' => end($security_log) ? json_decode(end($security_log), true)['timestamp'] : 'None'
+];
+
+// Sanitize log entries for display
+$recent_events = array_map(function($entry) {
+    $data = json_decode($entry, true);
+    return [
+        'timestamp' => $data['timestamp'] ?? '',
+        'action' => $data['action'] ?? '',
+        'status' => $data['status'] ?? '',
+        'session_id' => substr($data['session_id'] ?? '', 0, 8) . '...' // Truncate session ID
+    ];
+}, array_slice($security_log, -10));
 ?>
 <!DOCTYPE html>
 <html lang="en">

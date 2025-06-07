@@ -1,0 +1,84 @@
+# Security Policy for RescuePC Repairs
+
+## Reporting Security Vulnerabilities
+
+If you discover a security vulnerability, please report it to us at ***REMOVED***. We take all security reports seriously and will respond within 48 hours.
+
+## Security Measures
+
+1. Data Protection
+   - All data is encrypted in transit using TLS 1.3
+   - No personal data is stored unless explicitly required
+   - Regular security audits and penetration testing
+   - Automated vulnerability scanning
+
+2. Access Control
+   - Multi-factor authentication for admin access
+   - Role-based access control
+   - Session timeout after 30 minutes of inactivity
+   - IP-based rate limiting
+
+3. Security Headers
+   - Content Security Policy (CSP)
+   - HTTP Strict Transport Security (HSTS)
+   - X-Frame-Options
+   - X-Content-Type-Options
+   - Referrer-Policy
+   - Permissions-Policy
+
+4. Monitoring and Logging
+   - Security event logging
+   - Automated threat detection
+   - Regular log analysis
+   - Incident response procedures
+
+## Legal Protection
+
+1. Terms of Service
+   - Clear usage guidelines
+   - Prohibited activities
+   - Service limitations
+   - User responsibilities
+
+2. Privacy Policy
+   - Data collection practices
+   - Data usage and sharing
+   - User rights and choices
+   - Data retention policies
+
+3. Cookie Policy
+   - Types of cookies used
+   - Purpose of cookies
+   - User consent
+   - Cookie management
+
+4. GDPR Compliance
+   - Data subject rights
+   - Data processing agreements
+   - International data transfers
+   - Data protection impact assessments
+
+## Security Best Practices
+
+1. For Users
+   - Use strong, unique passwords
+   - Enable two-factor authentication
+   - Keep software updated
+   - Report suspicious activity
+
+2. For Administrators
+   - Regular security training
+   - Access control reviews
+   - Security policy updates
+   - Incident response drills
+
+## Contact Information
+
+For security-related inquiries:
+- Email: ***REMOVED***
+- Response Time: Within 48 hours
+- Encryption: PGP key available upon request
+
+## Updates
+
+This security policy is reviewed and updated quarterly. Last updated: <?php echo date('Y-m-d'); ?> 
