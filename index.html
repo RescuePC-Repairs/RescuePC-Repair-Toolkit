@@ -52,6 +52,164 @@
       .navbar-nav { position: fixed; top: 0; right: -100%; width: 85%; max-width: 320px; height: 100vh; background: #0f172a; flex-direction: column; padding: 5.5rem 1.5rem 2rem; transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); z-index: 1000; overflow-y: auto; }
       .navbar-nav.active { transform: translateX(-100%); }
     }
+    
+    /* Existing styles */
+    
+    /* Enhanced Pricing Section Styles */
+    .pricing-card {
+      background: linear-gradient(145deg, #ffffff, #f5f7fa);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      padding: 3rem;
+      max-width: 600px;
+      margin: 0 auto;
+      transition: transform 0.3s ease;
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .pricing-header {
+      padding: 3rem 2rem;
+      text-align: center;
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: #ffffff;
+    }
+
+    .pricing-title h2 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+
+    .pricing-title .subtitle {
+      font-size: 1.25rem;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 500;
+    }
+
+    .price-display .currency {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    .price-display .amount {
+      font-size: 4rem;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1;
+    }
+
+    .price-display .cents {
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .price-subtitle {
+      font-size: 1.125rem;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 500;
+    }
+
+    .pricing-features {
+      margin: 2rem 0;
+    }
+
+    .pricing-features ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .pricing-features li {
+      padding: 1rem 0;
+      border-bottom: 1px solid #e5e7eb;
+      color: #374151;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .pricing-features li:before {
+      content: "✓";
+      color: #2563eb;
+      font-weight: bold;
+      margin-right: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .pricing-features li:last-child {
+      border-bottom: none;
+    }
+
+    .stripe-button-container {
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    .stripe-button-container .cta-button {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: white;
+      padding: 1.2rem 2.5rem;
+      border-radius: 12px;
+      font-size: 1.3rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .stripe-button-container .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+      background: linear-gradient(135deg, #1d4ed8, #1e40af);
+    }
+
+    .stripe-button-container .cta-button i {
+      font-size: 1.4rem;
+    }
+
+    .secure-payment {
+      margin-top: 1rem;
+      color: #6b7280;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .secure-payment:before {
+      content: "🔒";
+      font-size: 1.1rem;
+    }
+
+    @media (max-width: 768px) {
+      .pricing-card {
+        padding: 2rem;
+        margin: 1rem;
+      }
+
+      .pricing-header h2 {
+        font-size: 2rem;
+      }
+
+      .price {
+        font-size: 3.5rem;
+      }
+
+      .price .amount {
+        font-size: 4rem;
+      }
+    }
   </style>
   <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com https://www.google-analytics.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; connect-src 'self' https://api.stripe.com https://www.google-analytics.com; frame-src 'self' https://js.stripe.com; object-src 'none'; base-uri 'self'; form-action 'self';">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
@@ -812,8 +970,8 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#buy-now" class="nav-link nav-cta">
-              <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+            <a href="https://buy.stripe.com/dRm6oHeFqfR4gXhbFm93y05" class="nav-link nav-cta" target="_blank" rel="noopener noreferrer" onclick="window.location.href='https://buy.stripe.com/dRm6oHeFqfR4gXhbFm93y05'; return false;">
+              <i class="fas fa-bolt"></i>
               <span>Buy Now</span>
             </a>
           </li>
@@ -863,8 +1021,8 @@
             </a>
           </li>
           <li class="nav-item nav-item-cta">
-            <a href="#buy-now" class="nav-link nav-cta">
-              <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+            <a href="https://buy.stripe.com/dRm6oHeFqfR4gXhbFm93y05" class="nav-link nav-cta" target="_blank" rel="noopener noreferrer" onclick="window.location.href='https://buy.stripe.com/dRm6oHeFqfR4gXhbFm93y05'; return false;">
+              <i class="fas fa-bolt"></i>
               <span>Buy Now</span>
             </a>
           </li>
@@ -1107,8 +1265,11 @@
       <div class="container">
         <div class="pricing-card">
           <div class="pricing-header">
-            <h2>RescuePC Repairs Lifetime License</h2>
-            <div class="price">
+            <div class="pricing-title">
+              <h2>RescuePC Repairs</h2>
+              <div class="subtitle">Lifetime License</div>
+            </div>
+            <div class="price-display">
               <span class="currency">$</span>
               <span class="amount">129</span>
               <span class="cents">.99</span>
@@ -1117,21 +1278,45 @@
           </div>
           <div class="pricing-features">
             <ul>
-              <li>Full Offline Driver Library (11GB)</li>
-              <li>Network & Wi-Fi Recovery Tools</li>
-              <li>Audio Restoration System</li>
-              <li>Windows Error Repair Module</li>
-              <li>Malware Scanner & Remover</li>
-              <li>Unlimited PC Repairs</li>
-              <li>Get your access password instantly via email / The download will begin instantly.</li>
+              <li>
+                <i class="fas fa-database"></i>
+                <span>Full Offline Driver Library (11GB)</span>
+              </li>
+              <li>
+                <i class="fas fa-wifi"></i>
+                <span>Network & Wi-Fi Recovery Tools</span>
+              </li>
+              <li>
+                <i class="fas fa-volume-up"></i>
+                <span>Audio Restoration System</span>
+              </li>
+              <li>
+                <i class="fas fa-tools"></i>
+                <span>Windows Error Repair Module</span>
+              </li>
+              <li>
+                <i class="fas fa-shield-alt"></i>
+                <span>Malware Scanner & Remover</span>
+              </li>
+              <li>
+                <i class="fas fa-infinity"></i>
+                <span>Unlimited PC Repairs</span>
+              </li>
+              <li>
+                <i class="fas fa-envelope"></i>
+                <span>Get your access password instantly via email / The download will begin instantly.</span>
+              </li>
             </ul>
           </div>
-          <div class="stripe-button-container">
-            <stripe-buy-button
-              buy-button-id="buy_btn_1RW3SzHddahti95eqUSVu7HM"
-              publishable-key="pk_live_51RHgNWHddahti95euP7f7D1c3KoGiTDwcqTr0NnUs9y2dXkLbIceXwbPNY3TyJWxnTympc9ZDolUXENQAJ1qkCJn00gzZcfHjb">
-            </stripe-buy-button>
-            <p class="secure-payment">Secure payment via Stripe</p> 
+          <div class="pricing-cta">
+            <a href="https://buy.stripe.com/dRm6oHeFqfR4gXhbFm93y05" class="cta-button">
+              <i class="fas fa-bolt"></i>
+              Get Instant Access
+            </a>
+            <p class="secure-payment">
+              <i class="fas fa-lock"></i>
+              Secure payment via Stripe
+            </p>
           </div>
         </div>
       </div>
@@ -1334,7 +1519,7 @@
           <h3 class="footer-heading">Support</h3>
           <ul class="footer-links">
             <li><a href="mailto:***REMOVED***">Email Support</a></li>
-            <li><a href="Knowledge-Base.html">Knowledge Base</a></li>
+            <li><a href="Knowledge-Base.html">How To Use</a></li>
             <li><a href="Portfolio/index.html">Portfolio</a></li>
             <li><a href="join-discord.html" target="_blank" rel="noopener noreferrer">Join Discord</a></li>
             <li><a href="RescuePC Repairs Flyer.pdf" target="_blank" rel="noopener">Flyer</a></li>
