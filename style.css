@@ -1876,34 +1876,35 @@ section {
 
 /* Email support specific styles */
 .support-card a[href^="mailto:"] {
-    background: #f8fafc;
-    color: #1e40af;
-    word-break: break-all;
-    font-size: 1rem;
-    border: 1px solid #e2e8f0;
-    padding: 0.875rem 1.75rem;
-    border-radius: 12px;
-    font-weight: 600;
-    transition: all 0.3s ease;
     display: inline-flex;
     align-items: center;
+    gap: 0.5rem;
+    color: var(--color-primary);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-md);
+    background: rgba(37, 99, 235, 0.1);
+    transition: all var(--transition-normal);
+    text-align: center;
+    min-width: 0;
+    flex: 1;
     justify-content: center;
-    width: 100%;
-    max-width: 220px;
+    max-width: 280px;
     margin: 0 auto;
 }
 
 .support-card a[href^="mailto:"]:hover {
-    background: #f1f5f9;
+    background: rgba(37, 99, 235, 0.15);
+    color: var(--color-primary-dark);
     transform: translateY(-2px);
-    border-color: #cbd5e1;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
 .support-card a[href^="mailto:"] i {
-    margin-right: 0.75rem;
-    font-size: 1.2rem;
-    color: #1e40af;
+    font-size: 0.875rem;
+    color: var(--color-primary);
+    flex-shrink: 0;
 }
 
 @media (max-width: 1024px) {
