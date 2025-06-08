@@ -1219,8 +1219,23 @@
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style">
   
+  <!-- Resource Preloader -->
+  <script type="module" src="/assets/js/utils/resource-preloader.js"></script>
+  
+  <!-- Performance Monitoring -->
+  <script type="module" src="/assets/js/utils/performance-monitor.js"></script>
+  
+  <!-- Font Awesome Configuration -->
+  <script type="module">
+    import FontAwesomeConfig from '/assets/js/utils/fontawesome-config.js';
+    window.FontAwesomeConfig = FontAwesomeConfig;
+  </script>
+  
   <!-- Font Awesome Loader -->
-  <script src="/assets/js/utils/fontawesome-loader.js" defer></script>
+  <script type="module" src="/assets/js/utils/fontawesome-loader.js"></script>
+
+  <!-- Service Registry -->
+  <script type="module" src="/assets/js/utils/service-registry.js"></script>
 </head>
 
 <body>
