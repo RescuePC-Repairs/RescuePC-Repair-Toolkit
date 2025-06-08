@@ -2189,5 +2189,13 @@
           console.log('Development mode: Security scripts loaded');
       }
   </script>
+  <script>
+    setTimeout(function() {
+      const secureMessage = document.getElementById('secure-message');
+      if (secureMessage) {
+        secureMessage.style.display = 'none';
+      }
+    }, 7000);
+  </script>
 </body>
 </html>
