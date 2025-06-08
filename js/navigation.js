@@ -19,9 +19,16 @@ document.addEventListener('DOMContentLoaded', function() {
   // Smooth scrolling for anchor links
   navLinksAll.forEach(link => {
     link.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      
+      // Skip external links
+      if (href.startsWith('http') || href.startsWith('https') || href.startsWith('mailto:')) {
+        return;
+      }
+      
       e.preventDefault();
       
-      const targetId = this.getAttribute('href');
+      const targetId = href;
       if (targetId === '#') return;
       
       const targetElement = document.querySelector(targetId);

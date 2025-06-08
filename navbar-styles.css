@@ -530,7 +530,7 @@ html {
   gap: 0.5rem;
   margin-top: 0.5rem;
   font-size: 0.9rem;
-  color: var(--nav-text);
+  color: black;
   opacity: 0.8;
 }
 
