@@ -1,7 +1,26 @@
-RescuePC Repairs™ is a trademark of Tyler Keesee.
+RescuePC Repairs - Copyright & Trademark Notice
 
-All source code, branding, assets, scripts, and compiled binaries in this project are © 2025 Tyler Keesee. All rights reserved.
+Copyright (c) 2024 RescuePC Repairs. All rights reserved.
 
-Unauthorized copying, modification, redistribution, or resale of any part of this toolkit or website is strictly prohibited.
+TRADEMARKS
+"RescuePC Repairs" and the RescuePC Repairs logo are trademarks of RescuePC Repairs.
+All other trademarks, service marks, and trade names referenced in this software
+are the property of their respective owners.
 
-This product contains digital fingerprinting technology to detect tampering or redistribution. Violations will be pursued under applicable copyright and trademark law, including but not limited to DMCA takedowns.
+COPYRIGHT NOTICE
+This software and its documentation are protected by copyright law. The software
+contains proprietary and confidential information of RescuePC Repairs and is
+protected by copyright laws and international treaty provisions.
+
+PERMITTED USE
+This software is licensed for personal use only. Any commercial use, distribution,
+or modification of this software without express written permission from
+RescuePC Repairs is strictly prohibited.
+
+THIRD-PARTY NOTICES
+This software may include third-party components with separate copyright notices
+and license terms. Your use of these components is subject to the terms and
+conditions of their respective licenses.
+
+For licensing inquiries, contact:
+***REMOVED***

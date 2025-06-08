@@ -1,0 +1,36 @@
+RescuePC Repairs Toolkit - Personal Use License
+
+Copyright (c) 2024 RescuePC Repairs. All rights reserved.
+
+This software and associated documentation files (the "Software") are licensed for personal use only.
+
+1. LICENSE GRANT
+   This is a personal use license that grants you the right to:
+   - Install and use the Software on one device per license purchased
+   - Use the Software for personal computer repair and maintenance
+   - Create one backup copy of the Software for archival purposes
+
+2. RESTRICTIONS
+   You may not:
+   - Modify, reverse engineer, decompile, or disassemble the Software
+   - Remove or alter any proprietary notices or branding
+   - Share, sublicense, or transfer the Software to third parties
+   - Use the Software for commercial purposes without a commercial license
+   - Create derivative works based on the Software
+   - Use the Software to provide services to others without a commercial license
+
+3. TERMINATION
+   This license terminates automatically if you breach any of its terms.
+   Upon termination, you must cease all use of the Software and destroy all copies.
+
+4. WARRANTY DISCLAIMER
+   The Software is provided "as is" without warranty of any kind.
+   RescuePC Repairs does not guarantee that the Software will meet your requirements
+   or that its operation will be uninterrupted or error-free.
+
+5. LIMITATION OF LIABILITY
+   In no event shall RescuePC Repairs be liable for any damages arising from the use
+   or inability to use the Software.
+
+For commercial use or redistribution rights, please contact:
+***REMOVED*** 
