@@ -1,36 +1,37 @@
-RescuePC Repairs Toolkit - Personal Use License
+RescuePC Repairs Toolkit License Agreement
+Copyright (c) 2025 Tyler / RescuePC Repairs
 
-Copyright (c) 2024 RescuePC Repairs. All rights reserved.
-
-This software and associated documentation files (the "Software") are licensed for personal use only.
+BY DOWNLOADING, INSTALLING, OR USING THE SOFTWARE, YOU AGREE TO BE BOUND BY THIS LICENSE AGREEMENT.
 
 1. LICENSE GRANT
-   This is a personal use license that grants you the right to:
-   - Install and use the Software on one device per license purchased
-   - Use the Software for personal computer repair and maintenance
-   - Create one backup copy of the Software for archival purposes
+This software ("RescuePC Repairs Toolkit") is licensed, not sold. The copyright holder ("Licensor") grants you ("User") a limited, non-transferable, non-sublicensable, non-exclusive license to install and use the Software on one device per license purchased.
 
 2. RESTRICTIONS
-   You may not:
-   - Modify, reverse engineer, decompile, or disassemble the Software
-   - Remove or alter any proprietary notices or branding
-   - Share, sublicense, or transfer the Software to third parties
-   - Use the Software for commercial purposes without a commercial license
-   - Create derivative works based on the Software
-   - Use the Software to provide services to others without a commercial license
+You may NOT:
+- Copy, modify, or distribute the Software or its source code
+- Reverse engineer, decompile, or disassemble any part of the Software
+- Use the Software in any way that violates applicable laws or regulations
+- Remove proprietary notices or branding
+- Share, sublicense, or transfer the Software to third parties
 
-3. TERMINATION
-   This license terminates automatically if you breach any of its terms.
-   Upon termination, you must cease all use of the Software and destroy all copies.
+3. INTELLECTUAL PROPERTY
+All rights to the Software, including source code, assets, names, trademarks ("RescuePC Repairs"), and design elements are the exclusive property of the Licensor.
 
-4. WARRANTY DISCLAIMER
-   The Software is provided "as is" without warranty of any kind.
-   RescuePC Repairs does not guarantee that the Software will meet your requirements
-   or that its operation will be uninterrupted or error-free.
+4. DISCLAIMER OF WARRANTY
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND. USE AT YOUR OWN RISK.
 
 5. LIMITATION OF LIABILITY
-   In no event shall RescuePC Repairs be liable for any damages arising from the use
-   or inability to use the Software.
+IN NO EVENT SHALL THE LICENSOR BE LIABLE FOR ANY DAMAGES, INCLUDING LOST PROFITS, LOST DATA, OR OTHER INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF USE OR INABILITY TO USE THE SOFTWARE.
 
-For commercial use or redistribution rights, please contact:
-***REMOVED*** 
+6. TERMINATION
+This license terminates automatically if the User breaches any term of this Agreement. Upon termination, all copies of the Software must be destroyed.
+
+7. GOVERNING LAW
+This Agreement shall be governed by the laws of the State of New York, USA.
+
+8. CONTACT
+For licensing inquiries, email: ***REMOVED***
+
+---
+
+
