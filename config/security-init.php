@@ -309,4 +309,51 @@ function checkRateLimit($ip, $action) {
     file_put_contents($rate_file, json_encode($rate_data));
     
     return $data['count'] <= $config['security']['max_login_attempts'];
+}
+
+// Set secure session parameters
+ini_set('session.cookie_secure', 1);
+ini_set('session.cookie_httponly', 1);
+ini_set('session.cookie_samesite', 'Strict');
+ini_set('session.use_strict_mode', 1);
+
+// Set secure headers
+header('Strict-Transport-Security: max-age=31536000; includeSubDomains; preload');
+header('X-Content-Type-Options: nosniff');
+header('X-Frame-Options: SAMEORIGIN');
+header('X-XSS-Protection: 1; mode=block');
+header('Referrer-Policy: strict-origin-when-cross-origin');
+
+// Prevent mixed content
+header("Content-Security-Policy: upgrade-insecure-requests");
+
+// Function to check if request is secure
+function isSecure() {
+    return (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+        || $_SERVER['SERVER_PORT'] == 443
+        || (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')
+        || (!empty($_SERVER['HTTP_X_FORWARDED_SSL']) && $_SERVER['HTTP_X_FORWARDED_SSL'] == 'on');
+}
+
+// Redirect to HTTPS if not secure
+if (!isSecure()) {
+    $redirect = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    header('HTTP/1.1 301 Moved Permanently');
+    header('Location: ' . $redirect);
+    exit();
+}
+
+// Log security events
+function logSecurityEvent($event, $severity = 'INFO') {
+    $logFile = __DIR__ . '/../logs/security.log';
+    $timestamp = date('Y-m-d H:i:s');
+    $ip = $_SERVER['REMOTE_ADDR'];
+    $userAgent = $_SERVER['HTTP_USER_AGENT'];
+    $logMessage = "[$timestamp] [$severity] [$ip] [$userAgent] $event\n";
+    error_log($logMessage, 3, $logFile);
+}
+
+// Log any non-HTTPS attempts
+if (!isSecure()) {
+    logSecurityEvent('Non-HTTPS access attempt', 'WARNING');
 } 
