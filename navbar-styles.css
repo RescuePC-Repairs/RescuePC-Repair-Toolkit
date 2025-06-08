@@ -11,6 +11,7 @@
   --nav-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   --nav-blur: blur(10px);
   --mobile-nav-bg: #000000;
+  --mobile-hamburger-color: #000000;
 }
 
 .navbar {
@@ -452,6 +453,10 @@
   
   .mobile-nav .stripe-button-container stripe-buy-button {
     max-width: 250px;
+  }
+
+  .hamburger-line {
+    background-color: var(--mobile-hamburger-color);
   }
 }
 
