@@ -1,5 +1,5 @@
-# RescuePC Repairs - Robots.txt
-# Last Updated: 2025-06-03
+# RescuePC Repairs - Professional Windows Repair Toolkit
+# Last Updated: 2024-03-19
 
 User-agent: *
 Allow: /$
@@ -7,32 +7,25 @@ Allow: /index.html$
 Allow: /services/$
 Allow: /about/$
 Allow: /contact/$
-Allow: /blog/$
+Allow: /support/$
 Allow: /sitemap.xml$
 Allow: /sitemap.html$
 
 # Sitemaps
 Sitemap: https://rescuepcrepairs.com/sitemap.xml
 
-# Disallow admin and sensitive areas
+# Disallow sensitive areas
 Disallow: /admin/
 Disallow: /cgi-bin/
-Disallow: /wp-admin/
-Disallow: /wp-includes/
-Disallow: /wp-content/plugins/
-Disallow: /wp-content/cache/
-Disallow: /wp-json/
-Disallow: /xmlrpc.php
-Disallow: /feed/
-Disallow: /trackback/
+Disallow: /config/
+Disallow: /logs/
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /.well-known/
 Disallow: /search/
 Disallow: /*?s=
 Disallow: /*&s=
 Disallow: /*?*
-Disallow: /*.css$
-Disallow: /*.js$
-
-# Crawl-delay: 10
 
 # Block image hotlinking
 <IfModule mod_rewrite.c>
@@ -60,20 +53,14 @@ Disallow: /
 
 User-agent: Baiduspider
 Disallow: /
-Disallow: /*?s=
-Disallow: /*&s=
-Disallow: /search
-Disallow: /private/
-Disallow: /includes/
-Disallow: /config/
 
 # Allow all robots to access these directories
 Allow: /assets/
 Allow: /css/
 Allow: /js/
 Allow: /images/
-
-# Crawl-delay: 10
+Allow: /video/
+Allow: /Portfolio/
 
 # Block specific files
 Disallow: /*.php$
@@ -82,12 +69,6 @@ Disallow: /*.log$
 Disallow: /*.sql$
 Disallow: /*.tpl$
 Disallow: /*.xml$
-
-# Block specific pages
-Disallow: /privacy-policy
-Disallow: /terms-of-service
-Disallow: /gdpr
-Disallow: /cookie-policy
 
 # Allow media files
 Allow: /*.css$
@@ -108,4 +89,3 @@ Host: rescuepcrepairs.com
 
 # Clean params
 Clean-param: ref /
-Sitemap: https://rescuepc-repairs.github.io/RescuePC-Repair-Toolkit/sitemap.xml
