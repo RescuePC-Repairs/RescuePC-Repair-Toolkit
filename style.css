@@ -1226,7 +1226,7 @@ section {
 }
 
 .resource-card p {
-  color: #64748b;
+  color: #000000;
   font-size: 1.1rem;
   line-height: 1.6;
   margin-bottom: 2rem;
@@ -1723,7 +1723,7 @@ section {
 }
 
 .trust-item p {
-  color: #666;
+  color: #000000;
   font-size: 0.95rem;
   line-height: 1.5;
 }
@@ -1778,7 +1778,7 @@ section {
 
 .support-section p {
     font-size: 1.25rem;
-    color: #64748b;
+    color: #000000;
     max-width: 600px;
     margin: 0 auto 2rem;
     line-height: 1.6;
@@ -1876,7 +1876,7 @@ section {
 }
 
 .support-card p {
-    color: #64748b;
+    color: #000000;
     margin-bottom: 1.75rem;
     line-height: 1.6;
     font-size: 1.05rem;
