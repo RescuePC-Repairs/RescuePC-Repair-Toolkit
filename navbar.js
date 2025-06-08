@@ -143,6 +143,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
     lastScroll = currentScroll;
   });
+
+  const socialLinks = [
+    { icon: 'fab fa-tiktok', url: 'https://www.tiktok.com/@rescuepcrepairs', label: 'TikTok' },
+    { icon: 'fab fa-youtube', url: 'https://www.youtube.com/@RescuePC-Repairs', label: 'YouTube' },
+    { icon: 'fab fa-twitch', url: 'https://www.twitch.tv/rescuepc_repairs', label: 'Twitch' },
+    { icon: 'fab fa-twitter', url: 'https://x.com/RescuePCRepair', label: 'Twitter' },
+    { icon: 'fas fa-gamepad', url: 'https://kick.com/rescuepc-repairs', label: 'Kick' }
+  ];
 });
 
 // Keyboard Navigation
