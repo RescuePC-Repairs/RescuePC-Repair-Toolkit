@@ -527,5 +527,19 @@
 
     <script src="main.js"></script>
     <script src="sw.js"></script>
+    <!-- Security Scripts -->
+    <script src="../js/https-enforcer.js"></script>
+    <script src="../js/secure-password-handler.js"></script>
+    <script src="js/portfolio-security.js"></script>
+    <link rel="stylesheet" href="../css/security-badge.css">
+    <link rel="stylesheet" href="../css/secure-password.css">
+    
+    <!-- Development Tools -->
+    <script>
+        // Enable console logging in development
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            console.log('Development mode: Security scripts loaded');
+        }
+    </script>
   </body>
 </html>
