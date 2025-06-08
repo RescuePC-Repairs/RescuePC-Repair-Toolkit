@@ -35,6 +35,15 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
           </li>
         </ul>
+
+        <!-- Desktop Buy Button -->
+        <div class="stripe-button-container desktop-only">
+          <stripe-buy-button
+            buy-button-id="buy_btn_1Q2w3e4r5t6y7u8i9o0p"
+            publishable-key="pk_live_51Q2w3e4r5t6y7u8i9o0p"
+          >
+          </stripe-buy-button>
+        </div>
       </div>
     </nav>
   `;
