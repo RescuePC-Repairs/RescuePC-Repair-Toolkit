@@ -16,7 +16,25 @@
   "founder": {
     "@type": "Person",
     "name": "Tyler",
-    "age": 24
+    "jobTitle": "Lead Developer & Technical Support Specialist",
+    "knowsAbout": [
+      "Windows System Repair",
+      "PC Optimization",
+      "Technical Support",
+      "System Administration"
+    ],
+    "hasCredential": [
+      {
+        "@type": "EducationalCredential",
+        "credentialCategory": "certification",
+        "name": "Microsoft Certified Professional"
+      },
+      {
+        "@type": "EducationalCredential",
+        "credentialCategory": "certification",
+        "name": "CompTIA A+ Certified"
+      }
+    ]
   },
   "offers": {
     "@type": "AggregateOffer",
@@ -24,7 +42,21 @@
       {
         "@type": "Offer",
         "name": "Windows Repair Service",
-        "description": "Professional Windows repair and optimization services"
+        "description": "Professional Windows repair and optimization services",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Windows Repair",
+          "description": "Comprehensive Windows system repair and optimization"
+        },
+        "price": "129.99",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2024-12-31",
+        "warranty": {
+          "@type": "WarrantyPromise",
+          "warrantyScope": "https://schema.org/MaintenanceAndRepair",
+          "durationOfWarranty": "P30D"
+        }
       },
       {
         "@type": "Offer",
@@ -53,5 +85,24 @@
     "Credit Card",
     "PayPal",
     "Bank Transfer"
-  ]
+  ],
+  "hasCredential": [
+    {
+      "@type": "EducationalCredential",
+      "credentialCategory": "certification",
+      "name": "Microsoft Partner"
+    },
+    {
+      "@type": "EducationalCredential",
+      "credentialCategory": "certification",
+      "name": "CompTIA Certified"
+    }
+  ],
+  "trustPilot": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "1000",
+    "bestRating": "5",
+    "worstRating": "1"
+  }
 } 

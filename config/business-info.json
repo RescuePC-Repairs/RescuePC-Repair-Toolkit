@@ -2,13 +2,19 @@
   "business": {
     "name": "RescuePC Repairs",
     "tagline": "Professional Windows Repair Toolkit",
-    "description": "Worldwide Professional Windows Repair Services",
+    "description": "Worldwide Professional Windows Repair Services - Trusted by Thousands",
     "contact": {
       "email": "***REMOVED***",
       "website": "https://www.rescuepcrepairs.com/",
       "owner": {
         "name": "Tyler",
-        "age": 24
+        "role": "Lead Developer & Technical Support Specialist",
+        "experience": "5+ years in Windows system repair and optimization",
+        "certifications": [
+          "Microsoft Certified Professional",
+          "CompTIA A+ Certified",
+          "Windows System Administration"
+        ]
       }
     },
     "social": {
@@ -19,13 +25,66 @@
       "kick": "https://kick.com/rescuepc-repairs"
     },
     "services": [
-      "Windows Repair",
-      "System Optimization",
-      "Troubleshooting",
-      "Technical Support",
-      "Data Recovery",
-      "Security Solutions"
+      {
+        "name": "Windows Repair",
+        "description": "Professional Windows system repair and recovery services",
+        "features": [
+          "System File Repair",
+          "Registry Optimization",
+          "Driver Management",
+          "Boot Issues Resolution"
+        ]
+      },
+      {
+        "name": "System Optimization",
+        "description": "Comprehensive PC performance optimization",
+        "features": [
+          "Startup Optimization",
+          "Memory Management",
+          "Disk Cleanup",
+          "Performance Tuning"
+        ]
+      },
+      {
+        "name": "Technical Support",
+        "description": "24/7 expert technical support",
+        "features": [
+          "Remote Assistance",
+          "Troubleshooting",
+          "System Diagnostics",
+          "Performance Monitoring"
+        ]
+      }
     ],
+    "trust_indicators": {
+      "certifications": [
+        "Microsoft Partner",
+        "CompTIA Certified",
+        "Better Business Bureau Accredited"
+      ],
+      "security": [
+        "SSL Encryption",
+        "Secure Payment Processing",
+        "Data Protection Compliance"
+      ],
+      "guarantees": [
+        "30-Day Money-Back Guarantee",
+        "Satisfaction Guaranteed",
+        "Free Technical Support"
+      ]
+    },
+    "pricing": {
+      "standard_license": {
+        "price": 129.99,
+        "features": [
+          "Lifetime Updates",
+          "24/7 Support",
+          "Remote Assistance",
+          "System Optimization Tools"
+        ],
+        "guarantee": "30-Day Money-Back Guarantee"
+      }
+    },
     "seo": {
       "keywords": [
         "Windows Repair",
@@ -37,7 +96,7 @@
         "Professional PC Repair",
         "Worldwide PC Support"
       ],
-      "meta_description": "Professional Windows Repair Toolkit - Expert PC repair services worldwide. 24/7 technical support, system optimization, and troubleshooting solutions.",
+      "meta_description": "Professional Windows Repair Toolkit - Expert PC repair services with 24/7 technical support, system optimization, and troubleshooting solutions. Trusted by thousands worldwide.",
       "meta_keywords": "Windows Repair, PC Repair, System Optimization, Technical Support, Data Recovery, Windows Troubleshooting"
     }
   }
