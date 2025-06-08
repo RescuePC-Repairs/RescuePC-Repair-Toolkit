@@ -26,24 +26,18 @@ document.addEventListener('DOMContentLoaded', function() {
           <li class="nav-item"><a href="Knowledge-Base.html" class="nav-link"><i class="fas fa-book"></i>Knowledge Base</a></li>
           <li class="nav-item"><a href="https://discord.gg/VgWkPazd" class="nav-link"><i class="fab fa-discord"></i>Join Discord</a></li>
           <li class="nav-item">
-            <div class="stripe-button-container">
-              <stripe-buy-button
-                buy-button-id="buy_btn_1Q2w3e4r5t6y7u8i9o0p"
-                publishable-key="pk_live_51Q2w3e4r5t6y7u8i9o0p"
-              >
-              </stripe-buy-button>
-            </div>
+            <a href="https://buy.stripe.com/5kQ7sLfJu48m8qLcJq93y04" class="nav-link nav-cta" target="_blank" rel="noopener noreferrer">
+              <i class="fas fa-bolt"></i>
+              <span>Buy Now</span>
+            </a>
           </li>
         </ul>
 
         <!-- Desktop Buy Button -->
-        <div class="stripe-button-container desktop-only">
-          <stripe-buy-button
-            buy-button-id="buy_btn_1Q2w3e4r5t6y7u8i9o0p"
-            publishable-key="pk_live_51Q2w3e4r5t6y7u8i9o0p"
-          >
-          </stripe-buy-button>
-        </div>
+        <a href="https://buy.stripe.com/5kQ7sLfJu48m8qLcJq93y04" class="nav-link nav-cta desktop-only" target="_blank" rel="noopener noreferrer">
+          <i class="fas fa-bolt"></i>
+          <span>Buy Now</span>
+        </a>
       </div>
     </nav>
   `;

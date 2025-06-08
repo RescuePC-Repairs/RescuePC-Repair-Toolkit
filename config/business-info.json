@@ -75,7 +75,8 @@
     },
     "pricing": {
       "standard_license": {
-        "price": 129.99,
+        "price": 99.99,
+        "currency": "USD",
         "features": [
           "Lifetime Updates",
           "24/7 Support",
