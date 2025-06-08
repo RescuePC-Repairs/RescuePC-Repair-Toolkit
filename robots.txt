@@ -1,7 +1,10 @@
 # RescuePC Repairs - Professional Windows Repair Toolkit
 # Last Updated: 2024-03-19
+# Enhanced for optimal SEO and security
 
+# Global directives
 User-agent: *
+Crawl-delay: 10
 Allow: /$
 Allow: /index.html$
 Allow: /services/$
@@ -10,9 +13,15 @@ Allow: /contact/$
 Allow: /support/$
 Allow: /sitemap.xml$
 Allow: /sitemap.html$
+Allow: /knowledge-base/$
+Allow: /windows-repair/$
+Allow: /windows-optimization/$
+Allow: /windows-troubleshooting/$
 
 # Sitemaps
 Sitemap: https://rescuepcrepairs.com/sitemap.xml
+Sitemap: https://rescuepcrepairs.com/sitemap-video.xml
+Sitemap: https://rescuepcrepairs.com/sitemap-image.xml
 
 # Disallow sensitive areas
 Disallow: /admin/
@@ -34,6 +43,25 @@ Disallow: /*?*
   RewriteCond %{HTTP_REFERER} !^https?://(www\.)?rescuepcrepairs\.com [NC]
   RewriteRule \.(jpe?g|png|gif|webp)$ - [NC,F,L]
 </IfModule>
+
+# Search engine specific rules
+User-agent: Googlebot
+Allow: /assets/
+Allow: /css/
+Allow: /js/
+Allow: /images/
+Allow: /video/
+Allow: /Portfolio/
+Crawl-delay: 5
+
+User-agent: Bingbot
+Allow: /assets/
+Allow: /css/
+Allow: /js/
+Allow: /images/
+Allow: /video/
+Allow: /Portfolio/
+Crawl-delay: 5
 
 # Block specific user agents (known bad bots)
 User-agent: MJ12bot
@@ -83,9 +111,13 @@ Allow: /*.woff$
 Allow: /*.woff2$
 Allow: /*.ttf$
 Allow: /*.eot$
+Allow: /*.pdf$
 
 # Host
 Host: rescuepcrepairs.com
 
 # Clean params
 Clean-param: ref /
+Clean-param: utm_source /
+Clean-param: utm_medium /
+Clean-param: utm_campaign /
