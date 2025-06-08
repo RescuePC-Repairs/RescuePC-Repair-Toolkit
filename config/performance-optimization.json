@@ -1,0 +1,161 @@
+{
+  "performance": {
+    "optimization": {
+      "critical_css": {
+        "enabled": true,
+        "inline": true,
+        "preload": true,
+        "files": [
+          "navbar-styles.css",
+          "hero-styles.css",
+          "footer-styles.css"
+        ]
+      },
+      "javascript": {
+        "optimization": {
+          "minify": true,
+          "bundle": true,
+          "tree_shaking": true,
+          "code_splitting": true,
+          "lazy_loading": true
+        },
+        "critical_scripts": [
+          "navbar.js",
+          "main.js"
+        ],
+        "defer_non_critical": true,
+        "async_loading": true
+      },
+      "images": {
+        "optimization": {
+          "webp": true,
+          "lazy_loading": true,
+          "responsive": true,
+          "quality": 85,
+          "compression": "mozjpeg"
+        },
+        "preload": {
+          "enabled": true,
+          "images": [
+            "/assets/images/hero-banner.jpg",
+            "/assets/images/logo.png"
+          ]
+        },
+        "sizes": [
+          "320w",
+          "640w",
+          "960w",
+          "1280w",
+          "1920w"
+        ]
+      },
+      "fonts": {
+        "optimization": {
+          "preload": true,
+          "display": "swap",
+          "subset": true,
+          "woff2": true
+        },
+        "preconnect": {
+          "enabled": true,
+          "domains": [
+            "fonts.googleapis.com",
+            "fonts.gstatic.com"
+          ]
+        }
+      },
+      "caching": {
+        "browser": {
+          "static_assets": 31536000,
+          "images": 2592000,
+          "fonts": 31536000,
+          "css": 86400,
+          "js": 86400
+        },
+        "server": {
+          "enabled": true,
+          "type": "redis",
+          "ttl": 3600
+        }
+      },
+      "compression": {
+        "enabled": true,
+        "types": [
+          "text/html",
+          "text/css",
+          "text/javascript",
+          "application/javascript",
+          "application/json",
+          "image/svg+xml",
+          "font/woff",
+          "font/woff2"
+        ],
+        "level": 6
+      },
+      "cdn": {
+        "enabled": true,
+        "provider": "cloudflare",
+        "domains": [
+          "rescuepcrepairs.com",
+          "www.rescuepcrepairs.com"
+        ],
+        "optimization": {
+          "auto_minify": true,
+          "brotli": true,
+          "early_hints": true,
+          "http3": true,
+          "minify": {
+            "css": true,
+            "js": true,
+            "html": true
+          }
+        }
+      }
+    },
+    "monitoring": {
+      "enabled": true,
+      "metrics": [
+        "first_contentful_paint",
+        "largest_contentful_paint",
+        "time_to_interactive",
+        "total_blocking_time",
+        "cumulative_layout_shift"
+      ],
+      "thresholds": {
+        "performance_score": 90,
+        "accessibility_score": 90,
+        "best_practices_score": 90,
+        "seo_score": 90
+      },
+      "reporting": {
+        "enabled": true,
+        "interval": "daily",
+        "channels": [
+          "email",
+          "dashboard"
+        ]
+      }
+    },
+    "service_worker": {
+      "enabled": true,
+      "caching": {
+        "strategies": {
+          "static": "CacheFirst",
+          "api": "NetworkFirst",
+          "images": "CacheFirst",
+          "fonts": "CacheFirst"
+        },
+        "precache": [
+          "/",
+          "/offline.html",
+          "/assets/css/critical.css",
+          "/assets/js/critical.js"
+        ]
+      },
+      "offline": {
+        "enabled": true,
+        "fallback": "/offline.html"
+      }
+    }
+  }
+} 
