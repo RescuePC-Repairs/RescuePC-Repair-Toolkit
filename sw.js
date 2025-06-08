@@ -351,3 +351,5 @@ self.addEventListener('notificationclose', event => {
   console.log('[Service Worker] Notification closed:', event.notification);
   // You might want to log this event for analytics
 });
+
+// Background sync implementation for offline support

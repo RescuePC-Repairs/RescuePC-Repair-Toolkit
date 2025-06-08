@@ -59,7 +59,7 @@ class LiveChat {
                 </div>
                 <div class="chat-messages"></div>
                 <div class="chat-input">
-                    <input type="text" placeholder="Type your message..." id="chat-message-input">
+                    <input type="text" placeholder="How can we help you today?" id="chat-message-input">
                     <button onclick="supportChat.sendMessage()">Send</button>
                 </div>
             </div>
