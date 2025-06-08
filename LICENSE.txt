@@ -1,1 +1,37 @@
+RescuePC Repairs Toolkit License Agreement
+Copyright (c) 2025 Tyler / RescuePC Repairs
+
+BY DOWNLOADING, INSTALLING, OR USING THE SOFTWARE, YOU AGREE TO BE BOUND BY THIS LICENSE AGREEMENT.
+
+1. LICENSE GRANT
+This software ("RescuePC Repairs Toolkit") is licensed, not sold. The copyright holder ("Licensor") grants you ("User") a limited, non-transferable, non-sublicensable, non-exclusive license to install and use the Software on one device per license purchased.
+
+2. RESTRICTIONS
+You may NOT:
+- Copy, modify, or distribute the Software or its source code
+- Reverse engineer, decompile, or disassemble any part of the Software
+- Use the Software in any way that violates applicable laws or regulations
+- Remove proprietary notices or branding
+- Share, sublicense, or transfer the Software to third parties
+
+3. INTELLECTUAL PROPERTY
+All rights to the Software, including source code, assets, names, trademarks ("RescuePC Repairs"), and design elements are the exclusive property of the Licensor.
+
+4. DISCLAIMER OF WARRANTY
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND. USE AT YOUR OWN RISK.
+
+5. LIMITATION OF LIABILITY
+IN NO EVENT SHALL THE LICENSOR BE LIABLE FOR ANY DAMAGES, INCLUDING LOST PROFITS, LOST DATA, OR OTHER INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF USE OR INABILITY TO USE THE SOFTWARE.
+
+6. TERMINATION
+This license terminates automatically if the User breaches any term of this Agreement. Upon termination, all copies of the Software must be destroyed.
+
+7. GOVERNING LAW
+This Agreement shall be governed by the laws of the State of New York, USA.
+
+8. CONTACT
+For licensing inquiries, email: ***REMOVED***
+
+---
+
 
