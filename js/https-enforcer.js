@@ -46,49 +46,17 @@ class SecurityEnforcer {
                 window.location.href = 'https://' + window.location.host + window.location.pathname + window.location.search;
             }
         }
-
-        // Add security badge to page
-        this.addSecurityBadge();
     }
+}
 
-    addSecurityBadge() {
-        const badge = document.createElement('div');
-        badge.className = 'security-badge';
-        badge.innerHTML = `
-            <div class="security-status">
-                <i class="fas fa-shield-alt"></i>
-                <span>${this.isDevelopment ? 'Development Mode' : 'Secure Connection'}</span>
-            </div>
-            <div class="security-details">
-                <div class="protocol">${window.location.protocol}</div>
-                <div class="certificate">${this.isDevelopment ? 'Development Environment' : 'Valid SSL Certificate'}</div>
-                <div class="environment">${this.isDevelopment ? 'Local Development' : 'Production'}</div>
-                ${this.isSafari ? '<div class="browser">Safari Browser</div>' : ''}
-            </div>
-        `;
-        document.body.appendChild(badge);
-    }
+// Initialize security enforcer
+document.addEventListener('DOMContentLoaded', () => {
+    new SecurityEnforcer();
+}); 
 
-    monitorSecurity() {
-        // Only run security checks in production
-        if (!this.isDevelopment) {
-            this.checkSecurityHeaders();
-            this.monitorMixedContent();
-            this.checkSSLCertificate();
-        } else {
-            console.log('Development mode: Security checks disabled');
-        }
-    }
+// Temporary fix for web-vitals error
+window.reportWebVitals = function() {};
 
-    async checkSecurityHeaders() {
-        try {
-            const response = await fetch(window.location.href, { method: 'HEAD' });
-            const headers = response.headers;
-            
-            const securityHeaders = {
-                'Content-Security-Policy': headers.get('Content-Security-Policy'),
-                'Strict-Transport-Security': headers.get('Strict-Transport-Security'),
-                'X-Content-Type-Options': headers.get('X-Content-Type-Options'),
                 'X-Frame-Options': headers.get('X-Frame-Options'),
                 'X-XSS-Protection': headers.get('X-XSS-Protection')
             };
