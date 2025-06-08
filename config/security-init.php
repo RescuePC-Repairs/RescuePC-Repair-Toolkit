@@ -95,7 +95,7 @@ ini_set('session.cookie_samesite', 'Strict');
 ini_set('session.use_strict_mode', 1);
 ini_set('session.use_only_cookies', 1);
 ini_set('session.cookie_lifetime', 0);
-ini_set('session.gc_maxlifetime', 1800); // 30 minutes
+ini_set('session.gc_maxlifetime', $config['session']['timeout']);
 ini_set('session.cookie_path', '/');
 ini_set('session.cookie_domain', '');
 ini_set('session.cookie_secure', 1);
@@ -105,13 +105,13 @@ ini_set('session.use_only_cookies', 1);
 ini_set('session.cookie_samesite', 'Strict');
 
 // Set secure headers
-header('X-Frame-Options: DENY');
-header('X-Content-Type-Options: nosniff');
-header('X-XSS-Protection: 1; mode=block');
-header('Content-Security-Policy: default-src \'self\'; script-src \'self\' \'unsafe-inline\' \'unsafe-eval\' https://www.google-analytics.com https://www.googletagmanager.com; style-src \'self\' \'unsafe-inline\' https://fonts.googleapis.com; font-src \'self\' https://fonts.gstatic.com; img-src \'self\' data: https:; connect-src \'self\' https://www.google-analytics.com; frame-ancestors \'none\'; form-action \'self\'; base-uri \'self\'; object-src \'none\';');
-header('Strict-Transport-Security: max-age=31536000; includeSubDomains; preload');
-header('Referrer-Policy: strict-origin-when-cross-origin');
-header('Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()');
+header('X-Frame-Options: ' . $config['headers']['x_frame_options']);
+header('X-Content-Type-Options: ' . $config['headers']['x_content_type_options']);
+header('X-XSS-Protection: ' . $config['headers']['x_xss_protection']);
+header('Content-Security-Policy: ' . $config['headers']['content_security_policy']);
+header('Strict-Transport-Security: ' . $config['headers']['strict_transport_security']);
+header('Referrer-Policy: ' . $config['headers']['referrer_policy']);
+header('Permissions-Policy: ' . $config['headers']['permissions_policy']);
 
 // Remove sensitive headers
 header_remove('X-Powered-By');
@@ -177,13 +177,136 @@ if (!isset($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
 
-// Set secure session parameters
-session_name('RESCUEPC_SECURE_SESSION');
+// Initialize secure session
+session_name($config['session']['name']);
 session_start();
 
 // Regenerate session ID periodically
 if (!isset($_SESSION['last_regeneration']) || 
-    time() - $_SESSION['last_regeneration'] > 300) { // 5 minutes
+    time() - $_SESSION['last_regeneration'] > $config['session']['regenerate_interval']) {
     session_regenerate_id(true);
     $_SESSION['last_regeneration'] = time();
+}
+
+// Set up error handling
+function secureErrorHandler($errno, $errstr, $errfile, $errline) {
+    if (!(error_reporting() & $errno)) {
+        return false;
+    }
+    
+    $error = [
+        'timestamp' => date('Y-m-d H:i:s'),
+        'type' => $errno,
+        'message' => $errstr,
+        'file' => $errfile,
+        'line' => $errline,
+        'ip' => $_SERVER['REMOTE_ADDR'] ?? 'unknown',
+        'user_agent' => $_SERVER['HTTP_USER_AGENT'] ?? 'unknown'
+    ];
+    
+    if ($config['logging']['enabled']) {
+        error_log(json_encode($error) . "\n", 3, $config['logging']['log_file']);
+    }
+    
+    return true;
+}
+
+set_error_handler('secureErrorHandler');
+
+// Set up exception handling
+function secureExceptionHandler($exception) {
+    $error = [
+        'timestamp' => date('Y-m-d H:i:s'),
+        'type' => get_class($exception),
+        'message' => $exception->getMessage(),
+        'file' => $exception->getFile(),
+        'line' => $exception->getLine(),
+        'trace' => $exception->getTraceAsString(),
+        'ip' => $_SERVER['REMOTE_ADDR'] ?? 'unknown',
+        'user_agent' => $_SERVER['HTTP_USER_AGENT'] ?? 'unknown'
+    ];
+    
+    if ($config['logging']['enabled']) {
+        error_log(json_encode($error) . "\n", 3, $config['logging']['log_file']);
+    }
+    
+    // Don't expose sensitive information in production
+    if (isset($_SERVER['SERVER_NAME']) && $_SERVER['SERVER_NAME'] === 'localhost') {
+        throw $exception;
+    } else {
+        header('HTTP/1.1 500 Internal Server Error');
+        echo 'An error occurred. Please try again later.';
+    }
+}
+
+set_exception_handler('secureExceptionHandler');
+
+// Log rotation
+if ($config['logging']['enabled'] && $config['logging']['rotate_logs']) {
+    $log_file = $config['logging']['log_file'];
+    if (file_exists($log_file) && filesize($log_file) > $config['logging']['max_log_size']) {
+        for ($i = $config['logging']['max_log_files'] - 1; $i >= 0; $i--) {
+            $old_file = $log_file . '.' . $i;
+            $new_file = $log_file . '.' . ($i + 1);
+            if (file_exists($old_file)) {
+                if ($i === $config['logging']['max_log_files'] - 1) {
+                    unlink($old_file);
+                } else {
+                    rename($old_file, $new_file);
+                }
+            }
+        }
+        rename($log_file, $log_file . '.0');
+    }
+}
+
+// CSRF Protection
+if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        header('HTTP/1.1 403 Forbidden');
+        die('Invalid CSRF token');
+    }
+}
+
+// XSS Protection
+function secureOutput($data) {
+    return htmlspecialchars($data, ENT_QUOTES, 'UTF-8');
+}
+
+// SQL Injection Protection
+function secureQuery($query, $params = []) {
+    global $config;
+    // Implement your database connection and prepared statement logic here
+    return $query;
+}
+
+// Rate Limiting
+function checkRateLimit($ip, $action) {
+    global $config;
+    $rate_file = __DIR__ . '/../logs/rate_limit.json';
+    $rate_data = file_exists($rate_file) ? json_decode(file_get_contents($rate_file), true) : [];
+    
+    if (!isset($rate_data[$ip][$action])) {
+        $rate_data[$ip][$action] = [
+            'count' => 0,
+            'last_reset' => time()
+        ];
+    }
+    
+    $data = &$rate_data[$ip][$action];
+    
+    if (time() - $data['last_reset'] > 3600) {
+        $data['count'] = 0;
+        $data['last_reset'] = time();
+    }
+    
+    $data['count']++;
+    
+    file_put_contents($rate_file, json_encode($rate_data));
+    
+    return $data['count'] <= $config['security']['max_login_attempts'];
 } 
