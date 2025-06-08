@@ -1252,10 +1252,19 @@
   <link rel="stylesheet" href="navbar-styles.css">
   <link rel="stylesheet" href="hero-styles.css">
   <link rel="stylesheet" href="footer-styles.css">
-</head>
 
-<body>
-  <!-- Google Tag Manager (noscript) -->
+  <!-- Add in head section after other meta tags -->
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
+
+  <!-- Add after other CSS links -->
+  <link rel="stylesheet" href="css/dark-mode.css">
+
+  <!-- Add before closing head tag -->
+  <script src="js/dark-mode.js" defer></script>
+
+  <!-- Add after other scripts in head section -->
+  <script src="js/dark-mode-button.js" defer></script>
 </head>
 
 <body>
