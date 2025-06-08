@@ -5,31 +5,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>RescuePC Repairs How To Use</title>
   <link rel="icon" href="assets/RescuePC_Icon.ico" type="image/x-icon" />
+  <link rel="preload" href="assets/RescuePC_Logo_Light.png" as="image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <style>
+    /* Critical CSS */
     body {
-      font-family: Arial, sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
       background: #f9f9f9;
       margin: 0;
       padding: 0;
       color: #2c3e50;
+      line-height: 1.6;
     }
 
     header {
       background-color: #1a1a1a;
       padding: 10px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
     .main-nav {
       display: flex;
       align-items: center;
       gap: 15px;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
     .main-nav a {
       color: #ffffff;
       text-decoration: none;
-      font-weight: bold;
-      transition: color 0.3s;
+      font-weight: 600;
+      transition: color 0.2s ease;
+      padding: 5px 10px;
     }
 
     .main-nav a:hover {
@@ -50,31 +61,45 @@
       text-align: center;
       color: #1a1a1a;
       margin-bottom: 40px;
+      font-size: 2.5rem;
     }
 
     .article {
       background: #ffffff;
-      border: 11 solid #e1e1e1;
+      border: 1px solid #e1e1e1;
       border-radius: 8px;
       padding: 20px;
       margin-bottom: 30px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .article:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
     .article h2 {
       margin-top: 0;
       color: #0056b3;
+      font-size: 1.5rem;
     }
 
     .article ol, .article ul {
       padding-left: 20px;
+      margin: 0;
+    }
+
+    .article li {
+      margin-bottom: 10px;
     }
 
     code {
       background: #eaeaea;
       padding: 2px 6px;
       border-radius: 4px;
-      font-family: monospace;
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 0.9em;
     }
 
     footer {
@@ -84,15 +109,52 @@
       padding: 15px 10px;
       margin-top: 40px;
     }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .main-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .content {
+        padding: 0 15px;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .article {
+        padding: 15px;
+      }
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        background: white;
+      }
+      
+      .article {
+        break-inside: avoid;
+        border: none;
+        box-shadow: none;
+      }
+      
+      footer {
+        display: none;
+      }
+    }
   </style>
 </head>
 <body>
   <header>
     <nav class="main-nav">
-      <a href="index.html"><img src="assets/RescuePC_Logo_Light.png" alt="RescuePC Repairs Logo" style="height: 30px; vertical-align: middle;"></a>
+      <a href="index.html"><img src="assets/RescuePC_Logo_Light.png" alt="RescuePC Repairs Logo" width="120" height="30" loading="eager" decoding="async"></a>
       <a href="index.html">Home</a>
       <a href="Knowledge-Base.html" class="active">How To Use</a>
-      <a href="https://discord.gg/VgWkPazd">Community</a>
+      <a href="https://discord.gg/VgWkPazd" rel="noopener">Community</a>
       <a href="License.html">License</a>
       <a href="RescuePC Repairs Flyer.pdf" target="_blank" rel="noopener" class="pdf-link">Flyer</a>
     </nav>
@@ -114,7 +176,7 @@
     <section class="article">
       <h2>2. RescuePC Repairs: Offline Driver Library Explained</h2>
       <ul>
-        <p>11GB library includes network, audio, and chipset drivers</li>
+        <li>11GB library includes network, audio, and chipset drivers</li>
         <li>Supports Dell, HP, Lenovo, ASUS, Acer and more</li>
         <li>No download needed — 100% offline operation</li>
       </ul>

@@ -21,17 +21,47 @@ ini_set('session.use_strict_mode', 1);
 ini_set('session.use_only_cookies', 1);
 ini_set('session.cookie_lifetime', 0);
 ini_set('session.gc_maxlifetime', $config['session']['timeout']);
+ini_set('session.cookie_path', '/');
+ini_set('session.cookie_domain', '');
+ini_set('session.cookie_secure', 1);
+ini_set('session.cookie_httponly', 1);
+ini_set('session.use_strict_mode', 1);
+ini_set('session.use_only_cookies', 1);
+ini_set('session.cookie_samesite', 'Strict');
 session_name($config['session']['name']);
 session_start();
 
-// IP-based access control
+// Enhanced IP-based access control with rate limiting
 function isAllowedIP() {
     global $config;
     $client_ip = $_SERVER['REMOTE_ADDR'];
+    
+    // Check rate limiting
+    $rate_limit_file = __DIR__ . '/logs/rate_limit.json';
+    $rate_limits = file_exists($rate_limit_file) ? json_decode(file_get_contents($rate_limit_file), true) : [];
+    
+    if (isset($rate_limits[$client_ip])) {
+        if (time() - $rate_limits[$client_ip]['last_attempt'] < 300) { // 5 minutes cooldown
+            if ($rate_limits[$client_ip]['attempts'] >= 5) {
+                error_log("IP $client_ip blocked due to too many attempts");
+                return false;
+            }
+        } else {
+            $rate_limits[$client_ip]['attempts'] = 0;
+        }
+    }
+    
+    $rate_limits[$client_ip] = [
+        'last_attempt' => time(),
+        'attempts' => ($rate_limits[$client_ip]['attempts'] ?? 0) + 1
+    ];
+    
+    file_put_contents($rate_limit_file, json_encode($rate_limits));
+    
     return in_array($client_ip, $config['allowed_ips']);
 }
 
-// Authentication check
+// Enhanced authentication check with brute force protection
 if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true || !isAllowedIP()) {
     if (!isAllowedIP()) {
         header("HTTP/1.0 404 Not Found");
@@ -39,18 +69,34 @@ if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true ||
     }
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $username = $_POST['username'] ?? '';
-        $password = $_POST['password'] ?? '';
+        $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+        $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
         
-        if ($username === $config['admin']['username'] && $password === $config['admin']['password']) {
+        // Log login attempt
+        $log_entry = [
+            'timestamp' => date('Y-m-d H:i:s'),
+            'ip' => $_SERVER['REMOTE_ADDR'],
+            'user_agent' => $_SERVER['HTTP_USER_AGENT'],
+            'username' => $username,
+            'status' => 'failed'
+        ];
+        
+        if ($username === $config['admin']['username'] && password_verify($password, $config['admin']['password_hash'])) {
             $_SESSION['authenticated'] = true;
             $_SESSION['last_activity'] = time();
             $_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
             $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
-        } else {
-            $error = 'Invalid credentials';
-            error_log("Failed login attempt");
+            $_SESSION['login_time'] = time();
+            
+            $log_entry['status'] = 'success';
         }
+        
+        // Write to security log
+        file_put_contents(
+            __DIR__ . '/logs/security.log',
+            json_encode($log_entry) . "\n",
+            FILE_APPEND
+        );
     }
     
     if (!isset($_SESSION['authenticated'])) {
@@ -149,16 +195,17 @@ if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true ||
     }
 }
 
-// Verify session hasn't been hijacked
+// Enhanced session security checks
 if (!isset($_SESSION['ip']) || $_SESSION['ip'] !== $_SERVER['REMOTE_ADDR'] ||
-    !isset($_SESSION['user_agent']) || $_SESSION['user_agent'] !== $_SERVER['HTTP_USER_AGENT']) {
+    !isset($_SESSION['user_agent']) || $_SESSION['user_agent'] !== $_SERVER['HTTP_USER_AGENT'] ||
+    !isset($_SESSION['login_time']) || (time() - $_SESSION['login_time'] > 86400)) { // 24 hour session limit
     session_unset();
     session_destroy();
     header("Location: security-dashboard.php");
     exit;
 }
 
-// Session timeout
+// Session timeout with activity check
 if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > $config['session']['timeout'])) {
     session_unset();
     session_destroy();

@@ -1,55 +1,43 @@
 # Security Headers
 <IfModule mod_headers.c>
   # X-Content-Type-Options
-  Header set X-Content-Type-Options "nosniff"
+  Header always set X-Content-Type-Options "nosniff"
   
   # X-Frame-Options
-  Header set X-Frame-Options "DENY"
+  Header always set X-Frame-Options "DENY"
   
   # X-XSS-Protection
-  Header set X-XSS-Protection "1; mode=block"
+  Header always set X-XSS-Protection "1; mode=block"
   
   # Referrer-Policy
-  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
   
   # Permissions-Policy
-  Header set Permissions-Policy "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+  Header always set Permissions-Policy "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()"
   
   # Content Security Policy (CSP)
-  Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google-analytics.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com; frame-ancestors 'none'; form-action 'self'; base-uri 'self';"
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google-analytics.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com; frame-ancestors 'none'; form-action 'self'; base-uri 'self'; object-src 'none';"
   
   # Strict-Transport-Security
-  Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
-    
-    # Permissions-Policy
-    Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
-    
-    # Content Security Policy (CSP)
-    Header set Content-Security-Policy "default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval';"
-
-  # Enhanced Permissions Policy
-  Header set Permissions-Policy "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()"
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
   
   # Cross-Origin Resource Policy
-  Header set Cross-Origin-Resource-Policy "same-origin"
+  Header always set Cross-Origin-Resource-Policy "same-origin"
   
   # Cross-Origin Opener Policy
-  Header set Cross-Origin-Opener-Policy "same-origin"
+  Header always set Cross-Origin-Opener-Policy "same-origin"
   
   # Cross-Origin Embedder Policy
-  Header set Cross-Origin-Embedder-Policy "require-corp"
+  Header always set Cross-Origin-Embedder-Policy "require-corp"
   
   # Clear-Site-Data
-  Header set Clear-Site-Data "\"cache\",\"cookies\",\"storage\""
+  Header always set Clear-Site-Data "\"cache\",\"cookies\",\"storage\""
   
-  # Expect-CT
-  Header set Expect-CT "max-age=7776000, enforce"
-
   # Remove sensitive headers
-  Header unset X-Powered-By
-  Header unset Server
-  Header unset X-AspNet-Version
-  Header unset X-AspNetMvc-Version
+  Header always unset X-Powered-By
+  Header always unset Server
+  Header always unset X-AspNet-Version
+  Header always unset X-AspNetMvc-Version
 </IfModule>
 
 # Enable Compression
@@ -88,378 +76,250 @@ ErrorDocument 404 /404.html
 # Last Updated: 2025-06-03
 # ============================================================
 
-# Force HTTPS
+# Performance and Security Optimizations
 <IfModule mod_rewrite.c>
-  RewriteEngine On
-  RewriteCond %{HTTPS} off
-  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-  
-  # Remove www (or add www if preferred)
-  RewriteCond %{HTTP_HOST} ^www\.rescuepcrepairs\.com [NC]
-  RewriteRule ^(.*)$ https://rescuepcrepairs.com/$1 [L,R=301]
-  
-  # Remove trailing slashes
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule ^(.*)/$ /$1 [L,R=301]
-  
-  # Redirect index.php to root
-  RewriteCond %{THE_REQUEST} ^.*/index\.(php|html|htm)
-  RewriteRule ^(.*)index\.(php|html|htm)$ /$1 [R=301,L]
-  
-  # Redirect non-www to www (uncomment if preferred)
-  # RewriteCond %{HTTP_HOST} !^www\. [NC]
-  # RewriteRule ^(.*)$ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+    RewriteEngine On
+    
+    # Force HTTPS
+    RewriteCond %{HTTPS} off
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+    
+    # Remove www (or add www if preferred)
+    RewriteCond %{HTTP_HOST} ^www\.rescuepcrepairs\.com [NC]
+    RewriteRule ^(.*)$ https://rescuepcrepairs.com/$1 [L,R=301]
+    
+    # Remove trailing slashes
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)/$ /$1 [L,R=301]
+    
+    # Redirect index.php to root
+    RewriteCond %{THE_REQUEST} ^.*/index\.(php|html|htm)
+    RewriteRule ^(.*)index\.(php|html|htm)$ /$1 [R=301,L]
+    
+    # Enable Keep-Alive
+    <IfModule mod_headers.c>
+        Header set Connection keep-alive
+    </IfModule>
 </IfModule>
 
-# ==================== SECURITY HEADERS ====================
+# Enhanced Security Headers
 <IfModule mod_headers.c>
-  # X-XSS-Protection
-  Header always set X-XSS-Protection "1; mode=block"
-  
-  # X-Frame-Options
-  Header always set X-Frame-Options "SAMEORIGIN"
-  
-  # X-Content-Type-Options
-  Header always set X-Content-Type-Options "nosniff"
-  
-  # Referrer-Policy
-  Header always set Referrer-Policy "strict-origin-when-cross-origin"
-  
-  # Permissions Policy
-  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
-  
-  # Content Security Policy (CSP)
-  Header set Content-Security-Policy "default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval';"
-  
-  # Feature Policy (legacy)
-  Header always set Feature-Policy "geolocation 'none'; microphone 'none'; camera 'none'"
-  
-  # Set HSTS (HTTP Strict Transport Security) - 1 year
-  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
-  
-  # Set X-Content-Type-Options
-  Header always set X-Content-Type-Options "nosniff"
-  
-  # Set X-Permitted-Cross-Domain-Policies
-  Header always set X-Permitted-Cross-Domain-Policies "none"
-  
-  # Set X-DNS-Prefetch-Control
-  Header set X-DNS-Prefetch-Control "on"
-  
-  # Remove X-Powered-By header
-  Header unset X-Powered-By
-  
-  # Remove Server header
-  Header unset Server
+    # HSTS (HTTP Strict Transport Security)
+    Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+    
+    # Content Security Policy
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google-analytics.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com; frame-ancestors 'none'; form-action 'self'; base-uri 'self'; object-src 'none';"
+    
+    # X-Frame-Options
+    Header always set X-Frame-Options "DENY"
+    
+    # X-Content-Type-Options
+    Header always set X-Content-Type-Options "nosniff"
+    
+    # X-XSS-Protection
+    Header always set X-XSS-Protection "1; mode=block"
+    
+    # Referrer-Policy
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    
+    # Permissions-Policy
+    Header always set Permissions-Policy "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()"
+    
+    # Cross-Origin Resource Policy
+    Header always set Cross-Origin-Resource-Policy "same-origin"
+    
+    # Cross-Origin Opener Policy
+    Header always set Cross-Origin-Opener-Policy "same-origin"
+    
+    # Cross-Origin Embedder Policy
+    Header always set Cross-Origin-Embedder-Policy "require-corp"
+    
+    # Remove sensitive headers
+    Header always unset X-Powered-By
+    Header always unset Server
+    Header always unset X-AspNet-Version
+    Header always unset X-AspNetMvc-Version
 </IfModule>
 
-# ==================== CACHING & COMPRESSION ====================
-# Enable GZIP Compression
+# TLS Configuration
+<IfModule mod_ssl.c>
+    # Enable TLS 1.3
+    SSLProtocol -all +TLSv1.3
+    
+    # Enable HSTS
+    Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+    
+    # Enable OCSP Stapling
+    SSLUseStapling on
+    SSLStaplingCache "shmcb:logs/ssl_stapling(32768)"
+    
+    # Strong Cipher Suites
+    SSLCipherSuite ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384
+    
+    # Enable Perfect Forward Secrecy
+    SSLHonorCipherOrder on
+    SSLCompression off
+    SSLSessionTickets off
+</IfModule>
+
+# Rate Limiting
+<IfModule mod_evasive20.c>
+    DOSHashTableSize 3097
+    DOSPageCount 2
+    DOSSiteCount 50
+    DOSPageInterval 1
+    DOSSiteInterval 1
+    DOSBlockingPeriod 10
+</IfModule>
+
+# Performance Optimizations
 <IfModule mod_deflate.c>
-  AddOutputFilterByType DEFLATE text/plain
-  AddOutputFilterByType DEFLATE text/html
-  AddOutputFilterByType DEFLATE text/xml
-  AddOutputFilterByType DEFLATE text/css
-  AddOutputFilterByType DEFLATE application/xml
-  AddOutputFilterByType DEFLATE application/xhtml+xml
-  AddOutputFilterByType DEFLATE application/rss+xml
-  AddOutputFilterByType DEFLATE application/javascript
-  AddOutputFilterByType DEFLATE application/x-javascript
-  AddOutputFilterByType DEFLATE application/json
-  AddOutputFilterByType DEFLATE application/ld+json
-  AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
-  AddOutputFilterByType DEFLATE application/x-font-ttf
-  AddOutputFilterByType DEFLATE font/opentype
-  AddOutputFilterByType DEFLATE image/svg+xml
-  AddOutputFilterByType DEFLATE image/x-icon
-  
-  # Remove browser bugs (only needed for really old browsers)
-  BrowserMatch ^Mozilla/4 gzip-only-text/html
-  BrowserMatch ^Mozilla/4\.0[678] no-gzip
-  BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
-  
-  # Compress HTML, CSS, JavaScript, Text, XML and fonts
-  AddOutputFilterByType DEFLATE application/javascript
-  AddOutputFilterByType DEFLATE application/rss+xml
-  AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
-  AddOutputFilterByType DEFLATE application/x-font
-  AddOutputFilterByType DEFLATE application/x-font-opentype
-  AddOutputFilterByType DEFLATE application/x-font-otf
-  AddOutputFilterByType DEFLATE application/x-font-truetype
-  AddOutputFilterByType DEFLATE application/x-font-ttf
-  AddOutputFilterByType DEFLATE application/x-javascript
-  AddOutputFilterByType DEFLATE application/xhtml+xml
-  AddOutputFilterByType DEFLATE application/xml
-  AddOutputFilterByType DEFLATE font/opentype
-  AddOutputFilterByType DEFLATE font/otf
-  AddOutputFilterByType DEFLATE font/ttf
-  AddOutputFilterByType DEFLATE image/svg+xml
-  AddOutputFilterByType DEFLATE image/x-icon
-  AddOutputFilterByType DEFLATE text/css
-  AddOutputFilterByType DEFLATE text/html
-  AddOutputFilterByType DEFLATE text/javascript
-  AddOutputFilterByType DEFLATE text/plain
-  AddOutputFilterByType DEFLATE text/xml
-  
-  # Remove browser bugs (only needed for really old browsers)
-  BrowserMatch ^Mozilla/4 gzip-only-text/html
-  BrowserMatch ^Mozilla/4\.0[678] no-gzip
-  BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
-  Header append Vary User-Agent
+    # Enable compression
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE text/javascript
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilterByType DEFLATE application/json
+    AddOutputFilterByType DEFLATE application/ld+json
+    AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
+    AddOutputFilterByType DEFLATE application/x-font-ttf
+    AddOutputFilterByType DEFLATE font/opentype
+    AddOutputFilterByType DEFLATE image/svg+xml
+    AddOutputFilterByType DEFLATE image/x-icon
+    
+    # Set compression level
+    DeflateCompressionLevel 9
+    
+    # Don't compress images
+    SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png|webp|avif)$ no-gzip dont-vary
 </IfModule>
 
 # Browser Caching
 <IfModule mod_expires.c>
-  ExpiresActive On
-  
-  # Default expiration: 2 days
-  ExpiresDefault "access plus 2 days"
-  
-  # HTML
-  ExpiresByType text/html "access plus 1 hour"
-  
-  # CSS, JavaScript
-  ExpiresByType text/css "access plus 1 year"
-  ExpiresByType text/javascript "access plus 1 year"
-  ExpiresByType application/javascript "access plus 1 year"
-  
-  # Web fonts
-  ExpiresByType application/font-woff "access plus 1 year"
-  ExpiresByType application/font-woff2 "access plus 1 year"
-  ExpiresByType application/x-font-ttf "access plus 1 year"
-  ExpiresByType font/opentype "access plus 1 year"
-  ExpiresByType image/svg+xml "access plus 1 year"
-  
-  # Media files
-  ExpiresByType image/jpg "access plus 1 year"
-  ExpiresByType image/jpeg "access plus 1 year"
-  ExpiresByType image/gif "access plus 1 year"
-  ExpiresByType image/png "access plus 1 year"
-  ExpiresByType image/webp "access plus 1 year"
-  ExpiresByType image/avif "access plus 1 year"
-  ExpiresByType image/x-icon "access plus 1 year"
-  
-  # Other
-  ExpiresByType application/pdf "access plus 1 month"
-  ExpiresByType application/x-shockwave-flash "access plus 1 month"
-  
-  # Disable caching for dynamic files
-  <FilesMatch "\.(pl|php|cgi|spl|scgi|fcgi)$">
-    Header set Cache-Control "private, no-cache, no-store, proxy-revalidate, no-transform"
-    Header set Pragma "no-cache"
-  </FilesMatch>
+    ExpiresActive On
+    
+    # Default expiration: 1 month
+    ExpiresDefault "access plus 1 month"
+    
+    # HTML
+    ExpiresByType text/html "access plus 1 hour"
+    
+    # CSS, JavaScript
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType text/javascript "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    
+    # Web fonts
+    ExpiresByType application/font-woff "access plus 1 year"
+    ExpiresByType application/font-woff2 "access plus 1 year"
+    ExpiresByType application/x-font-ttf "access plus 1 year"
+    ExpiresByType font/opentype "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    
+    # Media files
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/avif "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+    
+    # Other
+    ExpiresByType application/pdf "access plus 1 month"
+    ExpiresByType application/x-shockwave-flash "access plus 1 month"
+    
+    # Disable caching for dynamic files
+    <FilesMatch "\.(pl|php|cgi|spl|scgi|fcgi)$">
+        Header set Cache-Control "private, no-cache, no-store, proxy-revalidate, no-transform"
+        Header set Pragma "no-cache"
+    </FilesMatch>
 </IfModule>
 
-# ==================== ERROR PAGES ====================
-ErrorDocument 400 /error/400.html
-ErrorDocument 401 /error/401.html
-ErrorDocument 403 /error/403.html
-ErrorDocument 404 /error/404.html
-ErrorDocument 500 /error/500.html
-ErrorDocument 502 /error/502.html
-ErrorDocument 503 /error/503.html
-ErrorDocument 504 /error/504.html
-
-# ==================== PERFORMANCE ====================
 # Enable Keep-Alive
 <IfModule mod_headers.c>
-  Header set Connection keep-alive
+    Header set Connection keep-alive
 </IfModule>
 
-# Disable server signature
-ServerSignature Off
-
-# Disable directory browsing
-Options All -Indexes
-
-# Protect against clickjacking
-<IfModule mod_headers.c>
-  Header always append X-Frame-Options SAMEORIGIN
+# Enable HTTP/2 Server Push
+<IfModule mod_http2.c>
+    H2Push on
+    H2PushPriority * after
+    H2PushPriority text/css before
+    H2PushPriority image/jpeg after 32
+    H2PushPriority image/png after 32
+    H2PushPriority image/webp after 32
+    H2PushPriority image/avif after 32
 </IfModule>
 
-# Block access to hidden files and directories
-<IfModule mod_rewrite.c>
-  RewriteCond %{SCRIPT_FILENAME} -d [OR]
-  RewriteCond %{SCRIPT_FILENAME} -f
-  RewriteRule "(^|/)\." - [F]
+# Enable Brotli Compression
+<IfModule mod_brotli.c>
+    AddOutputFilterByType BROTLI_COMPRESS text/html text/plain text/xml text/css text/javascript application/javascript application/x-javascript application/json application/xml
+    BrotliFilterNote Input brotli_in
+    BrotliFilterNote Output brotli_out
+    BrotliFilterNote Ratio brotli_ratio
+    BrotliCompressionQuality 11
 </IfModule>
 
-# Block access to backup and source files
-<FilesMatch "(^#.*#|\.(bak|config|dist|fla|inc|ini|log|psd|sh|sql|sw[op])|~)$">
-  Order allow,deny
-  Deny from all
-  Satisfy All
-</FilesMatch>
-
-# ==================== MIME TYPES ====================
-<IfModule mod_mime.c>
-  AddType application/javascript          js
-  AddType application/vnd.ms-fontobject    eot
-  AddType application/x-font-ttf           ttf ttc
-  AddType font/opentype                    otf
-  AddType application/x-font-woff          woff
-  AddType image/svg+xml                    svg svgz 
-  AddEncoding gzip                         svgz
-  AddType image/webp                       webp
-  AddType image/avif                       avif
-  AddType application/x-httpd-php          .php
-  AddType application/x-httpd-php-source   .phps
+# Optimize SSL
+<IfModule mod_ssl.c>
+    SSLProtocol -all +TLSv1.3
+    SSLHonorCipherOrder on
+    SSLSessionCache "shmcb:logs/ssl_scache(512000)"
+    SSLSessionCacheTimeout 300
+    SSLOptions +StrictRequire
+    SSLCompression off
+    SSLSessionTickets off
+    SSLUseStapling on
+    SSLStaplingCache "shmcb:logs/ssl_stapling(32768)"
+    SSLStaplingResponseMaxAge 1800
+    SSLStaplingReturnResponderErrors off
+    SSLStaplingResponderTimeout 5
+    SSLStaplingFakeTryLater off
 </IfModule>
 
-# 404 Error Document
-ErrorDocument 404 /404.html
-
-# Additional Security Measures
-<IfModule mod_rewrite.c>
-  # Block access to sensitive files
-  RewriteRule ^(\.git|\.env|\.htaccess|\.htpasswd|\.user\.ini|\.well-known) - [F,L]
-  
-  # Block access to backup and source files
-  RewriteRule \.(bak|config|sql|fla|psd|ini|log|sh|inc|swp|dist|json|lock)$ - [F,L]
-  
-  # Block access to hidden files and directories
-  RewriteCond %{SCRIPT_FILENAME} -d [OR]
-  RewriteCond %{SCRIPT_FILENAME} -f
-  RewriteRule "(^|/)\." - [F,L]
-</IfModule>
-
-# PHP Security Settings
-<IfModule mod_php.c>
-  php_flag display_errors off
-  php_flag log_errors on
-  php_value error_log /path/to/error.log
-  php_flag allow_url_fopen off
-  php_flag allow_url_include off
-  php_flag expose_php off
-  php_flag session.cookie_httponly on
-  php_flag session.cookie_secure on
-  php_flag session.use_only_cookies on
-  php_value session.cookie_samesite "Strict"
-</IfModule>
-
-# Block access to sensitive directories
-<FilesMatch "^(\.htaccess|\.htpasswd|\.git|\.env|\.user\.ini|\.well-known)">
-  Order allow,deny
-  Deny from all
-</FilesMatch>
-
-# Block access to backup and source files
-<FilesMatch "\.(bak|config|sql|fla|psd|ini|log|sh|inc|swp|dist|json|lock)$">
-  Order allow,deny
-  Deny from all
-</FilesMatch>
-
-# Protect configuration directory
-<Directory "config">
-    Order Deny,Allow
-    Deny from all
-</Directory>
-
-# Protect security dashboard
-<Files "security-dashboard.php">
-    Order Deny,Allow
-    Deny from all
-    Allow from 192.168.1.142
-    Allow from 127.0.0.1
-    Allow from ::1
-</Files>
-
-<Files "security-report.php">
-    Order Deny,Allow
-    Deny from all
-    Allow from 192.168.1.142
-    Allow from 127.0.0.1
-    Allow from ::1
-</Files>
-
-<Files "security-reports.log">
-    Order Deny,Allow
-    Deny from all
-    Allow from 192.168.1.142
-    Allow from 127.0.0.1
-    Allow from ::1
-</Files>
-
-# Block access to all PHP files in config directory
-<FilesMatch "^config/.*\.php$">
-    Order Deny,Allow
+# Protect sensitive files
+<FilesMatch "^(\.htaccess|\.htpasswd|\.git|\.env|composer\.json|composer\.lock|package\.json|package-lock\.json|security-config\.php|security-init\.php)$">
+    Order Allow,Deny
     Deny from all
 </FilesMatch>
 
 # Prevent directory listing
 Options -Indexes
 
-# Block access to sensitive files
-<FilesMatch "^(security-dashboard\.php|security-report\.php|security-reports\.log|\.htaccess|\.htpasswd|config/.*)$">
-    Order allow,deny
-    Deny from all
-</FilesMatch>
+# Protect against XSS attacks
+<IfModule mod_headers.c>
+    Header set X-XSS-Protection "1; mode=block"
+</IfModule>
 
-# Block access to sensitive directories
-<DirectoryMatch "^/.*(\.git|\.svn|\.hg|\.bzr|\.config|\.env|\.well-known)/">
-    Order allow,deny
-    Deny from all
-</DirectoryMatch>
+# Prevent MIME-type sniffing
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+</IfModule>
 
-# Block suspicious user agents
+# Prevent clickjacking
+<IfModule mod_headers.c>
+    Header set X-Frame-Options "DENY"
+</IfModule>
+
+# Set default character set
+AddDefaultCharset UTF-8
+
+# Enable rewrite engine
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteCond %{HTTP_USER_AGENT} (havij|libwww-perl|wget|python|nikto|curl|scan|java|winhttp|clshttp|loader) [NC,OR]
-    RewriteCond %{HTTP_USER_AGENT} (<|>|'|%0A|%0D|%27|%3C|%3E|%00) [NC,OR]
-    RewriteCond %{HTTP_USER_AGENT} (;|<|>|'|"|\)|\(|%0A|%0D|%22|%27|%3C|%3E|%00).*(libwww-perl|wget|python|nikto|curl|scan|java|winhttp|HTTrack|clshttp|archiver|loader|email|harvest|extract|grab|miner) [NC]
-    RewriteRule .* - [F,L]
+    RewriteBase /
 </IfModule>
 
-# Enhanced Content Security Policy
-<IfModule mod_headers.c>
-    Header set Content-Security-Policy "default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval'; script-src 'self' https: 'unsafe-inline' 'unsafe-eval'; style-src 'self' https: 'unsafe-inline'; img-src 'self' https: data:; font-src 'self' https: data:; connect-src 'self' https:; frame-src 'self' https:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests; block-all-mixed-content;"
-    
-    # Additional Security Headers
-    Header set X-Content-Type-Options "nosniff"
-    Header set X-Frame-Options "SAMEORIGIN"
-    Header set X-XSS-Protection "1; mode=block"
-    Header set Referrer-Policy "strict-origin-when-cross-origin"
-    Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
-    Header set Cross-Origin-Embedder-Policy "require-corp"
-    Header set Cross-Origin-Opener-Policy "same-origin"
-    Header set Cross-Origin-Resource-Policy "same-origin"
-    Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
-</IfModule>
-
-# Block access to sensitive files
-<FilesMatch "^(\.htaccess|\.htpasswd|\.git|\.env|composer\.json|composer\.lock|package\.json|package-lock\.json|security-.*|config/.*|logs/.*)$">
-    Order Allow,Deny
-    Deny from all
-</FilesMatch>
-
-# Block access to backup and temporary files
-<FilesMatch "\.(bak|config|sql|fla|psd|ini|log|sh|inc|swp|dist|tmp|temp)$">
-    Order allow,deny
-    Deny from all
-    Satisfy All
-</FilesMatch>
-
-# Block access to hidden files and directories
-<IfModule mod_rewrite.c>
-    RewriteCond %{SCRIPT_FILENAME} -d [OR]
-    RewriteCond %{SCRIPT_FILENAME} -f
-    RewriteRule "(^|/)\." - [F]
-</IfModule>
-
-# Block access to sensitive directories
-RedirectMatch 403 ^/config/?$
-RedirectMatch 403 ^/logs/?$
-RedirectMatch 403 ^/\.git/?$
-RedirectMatch 403 ^/node_modules/?$
-
-# Block suspicious user agents
-RewriteCond %{HTTP_USER_AGENT} (havij|libwww-perl|wget|python|nikto|curl|scan|java|winhttp|clshttp|loader) [NC,OR]
-RewriteCond %{HTTP_USER_AGENT} (<|>|'|%0A|%0D|%27|%3C|%3E|%00) [NC,OR]
-RewriteCond %{HTTP_USER_AGENT} (;|<|>|'|"|\)|\(|%0A|%0D|%22|%27|%3C|%3E|%00).*(libwww-perl|wget|python|nikto|curl|scan|java|winhttp|HTTrack|clshttp|archiver|loader|email|harvest|extract|grab|miner) [NC]
-RewriteRule .* - [F,L]
-
-# Block access to sensitive file extensions
-<FilesMatch "\.(env|config.js|md|gitignore|gitattributes|lock)$">
-    Order allow,deny
-    Deny from all
-</FilesMatch>
+# Custom error pages
+ErrorDocument 400 /400.html
+ErrorDocument 401 /401.html
+ErrorDocument 403 /403.html
+ErrorDocument 404 /404.html
+ErrorDocument 500 /500.html
