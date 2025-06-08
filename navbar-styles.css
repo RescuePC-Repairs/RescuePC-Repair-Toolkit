@@ -180,18 +180,20 @@
   align-items: center;
   justify-content: center;
   margin-left: 1.5rem;
+  background: transparent;
 }
 
 .stripe-button-container stripe-buy-button {
   width: 140px !important;
   height: 45px;
   margin: 0;
+  background: transparent;
 }
 
 /* Mobile Menu Toggle */
 .mobile-menu-toggle {
   display: none;
-  background: none;
+  background: transparent;
   border: none;
   padding: 0.5rem;
   cursor: pointer;
@@ -375,6 +377,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background: transparent;
   }
 
   .navbar-nav {
@@ -393,12 +396,11 @@
   }
 
   .stripe-button-container {
-    margin-left: 1.25rem;
+    background: transparent;
   }
 
   .stripe-button-container stripe-buy-button {
-    width: 130px !important;
-    height: 42px;
+    background: transparent;
   }
 }
 
@@ -424,12 +426,11 @@
   }
 
   .stripe-button-container {
-    margin-left: 1rem;
+    background: transparent;
   }
 
   .stripe-button-container stripe-buy-button {
-    width: 120px !important;
-    height: 40px;
+    background: transparent;
   }
 
   .mobile-nav .nav-cta {
