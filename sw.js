@@ -212,8 +212,7 @@ const handleBackgroundSync = async (options = {}) => {
   
   try {
     // Check if there are any pending sync tasks in IndexedDB
-    // This is a placeholder - implement your actual sync logic here
-    const pendingTasks = []; // await getPendingTasksFromIndexedDB();
+    const pendingTasks = await getPendingTasksFromIndexedDB();
     
     if (pendingTasks && pendingTasks.length > 0) {
       console.log(`[Service Worker] Processing ${pendingTasks.length} pending tasks`);
@@ -222,10 +221,10 @@ const handleBackgroundSync = async (options = {}) => {
       for (const task of pendingTasks) {
         try {
           // Process the task (e.g., sync data with server)
-          // await processTask(task);
+          await processTask(task);
           
           // Remove from pending tasks if successful
-          // await removeTaskFromIndexedDB(task.id);
+          await removeTaskFromIndexedDB(task.id);
           
           console.log(`[Service Worker] Successfully processed task: ${task.id}`);
         } catch (error) {
