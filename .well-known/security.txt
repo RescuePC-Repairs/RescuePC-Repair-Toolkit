@@ -1,10 +1,10 @@
 # Security Policy for RescuePC Repairs
 # If you've discovered a security vulnerability, we appreciate your help in disclosing it to us responsibly.
 
-Contact: mailto:***REMOVED***
-Encryption: https://rescuepcrepairs.com/.well-known/pgp-key.txt
+Contact: mailto:security@rescuepcrepairs.com
+Encryption: https://rescuepcrepairs.com/pgp-key.txt
 Acknowledgments: https://rescuepcrepairs.com/security-hall-of-fame
-Policy: https://rescuepcrepairs.com/.well-known/security-policy.txt
+Policy: https://rescuepcrepairs.com/security-policy
 Hiring: https://rescuepcrepairs.com/careers
 
 # Our security address
