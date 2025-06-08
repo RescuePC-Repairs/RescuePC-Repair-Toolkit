@@ -62,6 +62,15 @@ document.addEventListener('DOMContentLoaded', function() {
             footer {
                 background-color: #f8f9fa !important;
             }
+
+            /* TikTok-specific hamburger menu styles */
+            .hamburger-line {
+                background-color: #000000 !important;
+            }
+            
+            .mobile-menu-toggle[aria-expanded="true"] .hamburger-line {
+                background-color: #000000 !important;
+            }
         `;
         document.head.appendChild(style);
         
