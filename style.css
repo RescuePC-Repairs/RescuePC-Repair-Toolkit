@@ -1343,7 +1343,7 @@ section {
 }
 
 .testimonial-rating {
-  color: var(--color-accent);
+  color: rgb(0, 0, 0);
   font-size: 1.2rem;
   margin-bottom: 1rem;
 }
