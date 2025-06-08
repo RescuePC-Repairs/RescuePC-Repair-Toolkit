@@ -1249,8 +1249,11 @@
   <link rel="stylesheet" href="footer-styles.css">
 
   <!-- Add in head section after other meta tags -->
-  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff">
+
+  <!-- Preload critical images -->
+  <link rel="preload" as="image" href="assets/images/logo.png" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/images/favicon.ico" fetchpriority="high">
 
   <!-- Add after other CSS links -->
   <link rel="stylesheet" href="css/dark-mode.css">
@@ -1260,6 +1263,7 @@
 
   <!-- Add after other scripts in head section -->
   <script src="js/dark-mode-button.js" defer></script>
+  <script src="js/tiktok-browser.js" defer></script>
 
   <!-- Preload critical images -->
   <link rel="preload" as="image" href="assets/images/logo.png" fetchpriority="high">

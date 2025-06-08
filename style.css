@@ -63,15 +63,28 @@
   --background-alt: #f8fafc;
   --border-color: #e2e8f0;
   --transition: all 0.3s ease;
-}
 
-/* Dark Mode */
-[data-theme="dark"] {
-  --color-text: #f3f4f6;
-  --color-text-light: #9ca3af;
-  --color-bg: #111827;
-  --color-bg-alt: #1f2937;
-  --color-border: #374151;
+  /* Light Theme Colors */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --text-primary: #333333;
+  --text-secondary: #666666;
+  --accent-color: #007bff;
+  --card-bg: #ffffff;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --nav-bg: rgba(255, 255, 255, 0.98);
+  --footer-bg: #f8f9fa;
+  --input-bg: #ffffff;
+  --input-border: #ced4da;
+  --button-bg: #007bff;
+  --button-text: #ffffff;
+  --hover-bg: #f8f9fa;
+  --transition-speed: 0.3s;
+  --hero-bg: #f8f9fa;
+  --section-bg: #ffffff;
+  --modal-bg: #ffffff;
+  --tooltip-bg: #333333;
+  --tooltip-text: #ffffff;
 }
 
 /* Reset & Base Styles */
@@ -89,11 +102,13 @@ html {
 
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  color: var(--text-color);
-  background: var(--background);
+  color: var(--text-primary);
+  background: var(--bg-primary);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color var(--transition-speed) ease,
+              color var(--transition-speed) ease;
 }
 
 /* Typography */
@@ -101,7 +116,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: 1rem;
-  color: var(--text-color);
+  color: var(--text-primary);
 }
 
 h1 { font-size: 2.5rem; }
@@ -116,13 +131,13 @@ p {
 }
 
 a {
-  color: var(--color-primary);
+  color: var(--accent-color);
   text-decoration: none;
-  transition: color var(--transition-fast);
+  transition: color var(--transition-speed) ease;
 }
 
 a:hover {
-  color: var(--color-primary-dark);
+  color: var(--button-bg);
 }
 
 /* Layout */
@@ -132,6 +147,9 @@ a:hover {
   margin-right: auto;
   padding-left: var(--space-4);
   padding-right: var(--space-4);
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+  box-shadow: 0 2px 10px var(--shadow-color);
 }
 
 @media (min-width: 640px) { .container { max-width: var(--container-sm); } }
@@ -186,7 +204,7 @@ a:hover {
   left: 0;
   right: 0;
   height: var(--nav-height);
-  background: rgba(15, 23, 42, 0.98);
+  background-color: var(--nav-bg);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   z-index: 1000;
@@ -234,7 +252,7 @@ a:hover {
 .nav-link {
   position: relative;
   padding: 0.5rem 1rem;
-  color: var(--text-color);
+  color: var(--text-primary);
   font-weight: 500;
   transition: var(--transition);
 }
@@ -507,7 +525,7 @@ a:hover {
 
 /* Cards */
 .card {
-  background: var(--background);
+  background: var(--card-bg);
   border-radius: 0.75rem;
   border: 1px solid var(--border-color);
   box-shadow: var(--shadow-sm);
@@ -522,7 +540,7 @@ a:hover {
 
 /* Footer */
 .site-footer {
-  background: var(--background-alt);
+  background: var(--footer-bg);
   padding: 4rem 0 2rem;
   background: var(--color-bg-alt);
   padding: var(--space-12) 0 var(--space-6);
@@ -1528,7 +1546,7 @@ section {
 
 .video-showcase .section-header h2 {
   font-size: 2.5rem;
-  color: var(--text-color);
+  color: var(--text-primary);
   margin-bottom: 1rem;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -2196,23 +2214,20 @@ img {
 
 /* Custom Scrollbar Styling */
 ::-webkit-scrollbar {
-    width: 12px;
-    height: 12px;
+    width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 6px;
+    background: var(--bg-secondary);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #2563eb;
-    border-radius: 6px;
-    border: 2px solid #f1f1f1;
+    background: var(--border-color);
+    border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #1d4ed8;
+    background: var(--accent-color);
 }
 
 /* Firefox Scrollbar */
@@ -2268,4 +2283,30 @@ img {
 
 .exit-popup-close:hover {
     color: #1e293b;
+}
+
+/* Print Styles */
+@media print {
+    :root {
+        --bg-primary: #ffffff;
+        --text-primary: #000000;
+        --text-secondary: #333333;
+    }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    :root {
+        --text-primary: #000000;
+        --text-secondary: #333333;
+        --accent-color: #0000ff;
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
 } 

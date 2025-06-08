@@ -828,32 +828,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   
-  // ===== Dark/Light mode toggle =====
-  const darkModeToggle = document.querySelector('.dark-mode-toggle');
-  if (darkModeToggle) {
-    darkModeToggle.addEventListener('click', () => {
-      document.body.classList.toggle('light-mode');
-      
-      // Save preference to localStorage
-      const isDarkMode = !document.body.classList.contains('light-mode');
-      localStorage.setItem('darkMode', isDarkMode);
-      
-      // Update toggle icon
-      const icon = darkModeToggle.querySelector('i');
-      if (icon) {
-        icon.className = isDarkMode ? 'fas fa-sun' : 'fas fa-moon';
-      }
-    });
-    
-    // Check for saved preference
-    const savedDarkMode = localStorage.getItem('darkMode');
-    if (savedDarkMode === 'false') {
-      document.body.classList.add('light-mode');
-      const icon = darkModeToggle.querySelector('i');
-      if (icon) icon.className = 'fas fa-moon';
-    }
-  }
-  
   // ===== Image lazy loading with blur-up effect =====
   const lazyImages = document.querySelectorAll('.lazy-image');
   
