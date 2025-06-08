@@ -1,7 +1,7 @@
 /* Footer Styles */
 .site-footer {
-  background: #0f172a;
-  color: #fff;
+  background: #ffffff;
+  color: #0f172a;
   padding: 4rem 0 2rem;
   margin-top: auto;
   width: 100%;
@@ -35,7 +35,7 @@
 }
 
 .footer-heading {
-  color: #fff;
+  color: #0f172a;
   font-size: 1.1rem;
   margin: 0 0 1.5rem 0;
   padding: 0;
@@ -73,7 +73,7 @@
 }
 
 .footer-links a {
-  color: #fff !important;
+  color: #0f172a !important;
   text-decoration: none;
   transition: all 0.2s ease;
   display: inline-block;
@@ -81,7 +81,7 @@
 }
 
 .footer-links a:hover {
-  color: #60a5fa !important;
+  color: #3b82f6 !important;
   transform: translateX(3px);
 }
 
@@ -98,7 +98,7 @@
 
 .footer-bottom p {
   margin: 0;
-  color: #000000 !important;
+  color: #0f172a !important;
   font-size: 0.9rem;
   opacity: 0.9;
 }
