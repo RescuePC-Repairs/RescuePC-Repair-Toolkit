@@ -1260,6 +1260,25 @@
 
   <!-- Add after other scripts in head section -->
   <script src="js/dark-mode-button.js" defer></script>
+
+  <!-- Preload critical images -->
+  <link rel="preload" as="image" href="assets/images/logo.png" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/images/favicon.ico" fetchpriority="high">
+  
+  <!-- Add loading="lazy" to non-critical images -->
+  <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          const images = document.querySelectorAll('img:not([loading])');
+          images.forEach(img => {
+              if (!img.hasAttribute('loading')) {
+                  img.setAttribute('loading', 'lazy');
+              }
+              if (!img.hasAttribute('decoding')) {
+                  img.setAttribute('decoding', 'async');
+              }
+          });
+      });
+  </script>
 </head>
 
 <body>
