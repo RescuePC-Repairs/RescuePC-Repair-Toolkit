@@ -1,0 +1,44 @@
+{
+  "business": {
+    "name": "RescuePC Repairs",
+    "tagline": "Professional Windows Repair Toolkit",
+    "description": "Worldwide Professional Windows Repair Services",
+    "contact": {
+      "email": "***REMOVED***",
+      "website": "https://www.rescuepcrepairs.com/",
+      "owner": {
+        "name": "Tyler",
+        "age": 24
+      }
+    },
+    "social": {
+      "tiktok": "https://www.tiktok.com/@rescuepcrepairs",
+      "youtube": "https://www.youtube.com/@RescuePC-Repairs",
+      "twitch": "https://www.twitch.tv/rescuepc_repairs",
+      "twitter": "https://x.com/RescuePCRepair",
+      "kick": "https://kick.com/rescuepc-repairs"
+    },
+    "services": [
+      "Windows Repair",
+      "System Optimization",
+      "Troubleshooting",
+      "Technical Support",
+      "Data Recovery",
+      "Security Solutions"
+    ],
+    "seo": {
+      "keywords": [
+        "Windows Repair",
+        "PC Repair",
+        "System Optimization",
+        "Technical Support",
+        "Data Recovery",
+        "Windows Troubleshooting",
+        "Professional PC Repair",
+        "Worldwide PC Support"
+      ],
+      "meta_description": "Professional Windows Repair Toolkit - Expert PC repair services worldwide. 24/7 technical support, system optimization, and troubleshooting solutions.",
+      "meta_keywords": "Windows Repair, PC Repair, System Optimization, Technical Support, Data Recovery, Windows Troubleshooting"
+    }
+  }
+} 
