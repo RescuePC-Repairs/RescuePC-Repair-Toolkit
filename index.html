@@ -1234,6 +1234,28 @@
 
   <!-- Service Registry -->
   <script type="module" src="/assets/js/utils/service-registry.js"></script>
+
+  <!-- Security Headers -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval';">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+  
+  <!-- Cache Control -->
+  <meta http-equiv="Cache-Control" content="public, max-age=31536000">
+  
+  <!-- Security Badges -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <!-- Existing stylesheets -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="navbar-styles.css">
+  <link rel="stylesheet" href="hero-styles.css">
+  <link rel="stylesheet" href="footer-styles.css">
+</head>
+
+<body>
+  <!-- Google Tag Manager (noscript) -->
 </head>
 
 <body>
@@ -2131,5 +2153,18 @@
   </script>
   <!-- Add before closing body tag -->
   <script src="js/security-monitor.js"></script>
+  
+  <!-- Test Scripts -->
+  <script src="js/security-verify.js"></script>
+  <script src="js/sw-test.js"></script>
+  <script src="js/lazy-load-test.js"></script>
+  
+  <!-- Development Tools -->
+  <script>
+      // Enable console logging in development
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+          console.log('Development mode: Test scripts loaded');
+      }
+  </script>
 </body>
 </html>
