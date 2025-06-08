@@ -14,6 +14,79 @@
   --mobile-hamburger-color: #000000;
 }
 
+/* TikTok in-app browser specific styles */
+@supports (-webkit-touch-callout: none) and (not (display: -webkit-box)) {
+  /* This specifically targets TikTok's in-app browser on iOS */
+  .navbar {
+    background-color: #0f172a !important; /* Dark blue background */
+    background-image: none !important;
+  }
+  
+  .navbar-container {
+    background-color: #0f172a !important;
+    background-image: none !important;
+  }
+  
+  .hamburger-line {
+    background-color: #ffffff !important;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5) !important;
+    opacity: 1 !important;
+  }
+  
+  .mobile-menu-toggle {
+    background-color: transparent !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  }
+  
+  .mobile-menu-toggle:before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: rgba(15, 23, 42, 0.5) !important;
+    border-radius: 50%;
+    z-index: -1;
+  }
+}
+
+/* TikTok WebView specific styles for Android */
+@supports (-webkit-overflow-scrolling: touch) and (not (display: -webkit-box)) {
+  .navbar {
+    background-color: #0f172a !important;
+    background-image: none !important;
+  }
+  
+  .navbar-container {
+    background-color: #0f172a !important;
+    background-image: none !important;
+  }
+  
+  .hamburger-line {
+    background-color: #ffffff !important;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5) !important;
+    opacity: 1 !important;
+  }
+  
+  .mobile-menu-toggle {
+    background-color: transparent !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  }
+  
+  .mobile-menu-toggle:before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: rgba(15, 23, 42, 0.5) !important;
+    border-radius: 50%;
+    z-index: -1;
+  }
+}
+
 .navbar {
   position: fixed;
   top: 0;
