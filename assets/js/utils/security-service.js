@@ -195,8 +195,20 @@ class SecurityService {
   }
 
   getClientIP() {
-    // Implement IP detection logic
-    return '127.0.0.1'; // Placeholder
+    // Get client IP from X-Forwarded-For header or remote address
+    const xForwardedFor = document.querySelector('meta[name="client-ip"]')?.content;
+    if (xForwardedFor) {
+      return xForwardedFor.split(',')[0].trim();
+    }
+    
+    // Fallback to remote address if available
+    const remoteAddr = document.querySelector('meta[name="remote-addr"]')?.content;
+    if (remoteAddr) {
+      return remoteAddr;
+    }
+    
+    // If no IP information is available, return null
+    return null;
   }
 
   getRequestPattern(request) {
