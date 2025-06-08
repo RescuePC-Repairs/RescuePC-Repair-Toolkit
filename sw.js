@@ -1,21 +1,23 @@
 // Service Worker for RescuePC Repair Toolkit - Optimized v3
 
-const CACHE_NAME = 'rescuepc-repairs-v3';
+const CACHE_NAME = 'rescuepc-cache-v1';
 const RUNTIME_CACHE = 'runtime-v3';
 const OFFLINE_URL = '/offline.html';
 const CACHE_EXPIRATION_DAYS = 30;
 
 // List of URLs to cache when the service worker is installed
-const PRECACHE_ASSETS = [
+const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
-  '/css/critical.css',
-  '/css/main.css',
-  '/js/pwa-install.js',
-  '/assets/RescuePC_Logo_Light.png',
-  OFFLINE_URL,
-  '/manifest.json',
-  '/browserconfig.xml'
+  '/style.css',
+  '/navbar-styles.css',
+  '/hero-styles.css',
+  '/footer-styles.css',
+  '/navbar.js',
+  '/main.js',
+  '/assets/images/logo.png',
+  '/assets/images/favicon.ico',
+  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css'
 ];
 
 // Cache first strategy for these file types
@@ -51,7 +53,7 @@ self.addEventListener('install', event => {
     caches.open(CACHE_NAME)
       .then(cache => {
         console.log('[Service Worker] Caching critical assets');
-        return cache.addAll(PRECACHE_ASSETS);
+        return cache.addAll(ASSETS_TO_CACHE);
       })
       .catch(error => {
         console.error('[Service Worker] Cache addAll error:', error);
