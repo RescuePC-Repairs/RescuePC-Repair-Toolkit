@@ -1,0 +1,234 @@
+/* Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ * Copyright 2024 Fonticons, Inc.
+ */
+
+/* ==========================================================================
+   Font Face Declarations with Performance Optimizations
+   ========================================================================== */
+@font-face {
+  font-family: 'Font Awesome 6 Free';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap; /* Optimize font loading */
+  src: url("../webfonts/fa-solid-900.woff2") format("woff2"),
+       url("../webfonts/fa-solid-900.ttf") format("truetype");
+  unicode-range: U+F000-F8FF; /* Optimize character range */
+}
+
+@font-face {
+  font-family: 'Font Awesome 6 Brands';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../webfonts/fa-brands-400.woff2") format("woff2"),
+       url("../webfonts/fa-brands-400.ttf") format("truetype");
+  unicode-range: U+F000-F8FF;
+}
+
+@font-face {
+  font-family: 'Font Awesome 6 Free';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../webfonts/fa-regular-400.woff2") format("woff2"),
+       url("../webfonts/fa-regular-400.ttf") format("truetype");
+  unicode-range: U+F000-F8FF;
+}
+
+/* ==========================================================================
+   Base Classes with Performance Optimizations
+   ========================================================================== */
+.fa,
+.fas,
+.far,
+.fal,
+.fab {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-rendering: optimizeLegibility; /* Optimize text rendering */
+  transform: translateZ(0); /* Force GPU acceleration */
+  backface-visibility: hidden; /* Optimize rendering */
+}
+
+/* ==========================================================================
+   Font Family Classes with Performance Optimizations
+   ========================================================================== */
+.fa,
+.fas {
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  will-change: transform; /* Optimize animations */
+}
+
+.far {
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 400;
+  will-change: transform;
+}
+
+.fab {
+  font-family: 'Font Awesome 6 Brands';
+  font-weight: 400;
+  will-change: transform;
+}
+
+/* ==========================================================================
+   Icon Definitions with Performance Optimizations
+   ========================================================================== */
+
+/* Solid Icons - Optimized for most used icons first */
+.fa-home:before { content: "\f015"; }
+.fa-star:before { content: "\f005"; }
+.fa-bolt:before { content: "\f0e7"; }
+.fa-lock:before { content: "\f023"; }
+.fa-shield-alt:before { content: "\f3ed"; }
+.fa-headset:before { content: "\f590"; }
+.fa-tools:before { content: "\f7d9"; }
+.fa-envelope:before { content: "\f0e0"; }
+.fa-play-circle:before { content: "\f144"; }
+.fa-quote-left:before { content: "\f10d"; }
+.fa-tags:before { content: "\f02c"; }
+.fa-question-circle:before { content: "\f059"; }
+.fa-network-wired:before { content: "\f6ff"; }
+.fa-microchip:before { content: "\f2db"; }
+.fa-tachometer-alt:before { content: "\f3fd"; }
+.fa-volume-up:before { content: "\f028"; }
+.fa-expand:before { content: "\f065"; }
+.fa-database:before { content: "\f1c0"; }
+.fa-wifi:before { content: "\f1eb"; }
+.fa-infinity:before { content: "\f534"; }
+.fa-info-circle:before { content: "\f05a"; }
+.fa-file-pdf:before { content: "\f1c1"; }
+.fa-download:before { content: "\f019"; }
+.fa-exclamation-triangle:before { content: "\f071"; }
+.fa-brain:before { content: "\f5dc"; }
+.fa-rocket:before { content: "\f135"; }
+.fa-graduation-cap:before { content: "\f19d"; }
+.fa-code:before { content: "\f121"; }
+.fa-laptop-code:before { content: "\f5fc"; }
+.fa-trophy:before { content: "\f091"; }
+.fa-paper-plane:before { content: "\f1d8"; }
+.fa-moon:before { content: "\f186"; }
+.fa-external-link-alt:before { content: "\f35d"; }
+.fa-book:before { content: "\f02d"; }
+.fa-file-alt:before { content: "\f15c"; }
+.fa-palette:before { content: "\f53f"; }
+
+/* Brand Icons - Optimized for most used icons first */
+.fa-facebook:before { content: "\f09a"; }
+.fa-twitter:before { content: "\f099"; }
+.fa-discord:before { content: "\f392"; }
+.fa-github:before { content: "\f09b"; }
+.fa-linkedin:before { content: "\f08c"; }
+.fa-python:before { content: "\f3e2"; }
+.fa-js:before { content: "\f3b8"; }
+.fa-react:before { content: "\f41b"; }
+.fa-rust:before { content: "\e07a"; }
+.fa-golang:before { content: "\e07b"; }
+.fa-x-twitter:before { content: "\e61b"; }
+
+/* Regular Icons */
+.fa-clock:before { content: "\f017"; }
+.fa-calendar:before { content: "\f133"; }
+
+/* ==========================================================================
+   Performance Optimizations for Animations
+   ========================================================================== */
+.fa-spin {
+  animation: fa-spin 2s infinite linear;
+  will-change: transform;
+}
+
+.fa-pulse {
+  animation: fa-spin 1s infinite steps(8);
+  will-change: transform;
+}
+
+@keyframes fa-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==========================================================================
+   Performance Optimizations for Sizing
+   ========================================================================== */
+.fa-xs {
+  font-size: 0.75em;
+  vertical-align: 0.125em;
+  line-height: 0;
+}
+
+.fa-sm {
+  font-size: 0.875em;
+  vertical-align: 0.07142857em;
+  line-height: 0;
+}
+
+.fa-lg {
+  font-size: 1.25em;
+  vertical-align: -0.075em;
+  line-height: 0;
+}
+
+.fa-2x {
+  font-size: 2em;
+  vertical-align: -0.125em;
+  line-height: 0;
+}
+
+.fa-3x {
+  font-size: 3em;
+  vertical-align: -0.1875em;
+  line-height: 0;
+}
+
+.fa-4x {
+  font-size: 4em;
+  vertical-align: -0.25em;
+  line-height: 0;
+}
+
+.fa-5x {
+  font-size: 5em;
+  vertical-align: -0.3125em;
+  line-height: 0;
+}
+
+.fa-6x {
+  font-size: 6em;
+  vertical-align: -0.375em;
+  line-height: 0;
+}
+
+.fa-7x {
+  font-size: 7em;
+  vertical-align: -0.4375em;
+  line-height: 0;
+}
+
+.fa-8x {
+  font-size: 8em;
+  vertical-align: -0.5em;
+  line-height: 0;
+}
+
+.fa-9x {
+  font-size: 9em;
+  vertical-align: -0.5625em;
+  line-height: 0;
+}
+
+.fa-10x {
+  font-size: 10em;
+  vertical-align: -0.625em;
+  line-height: 0;
+} 
