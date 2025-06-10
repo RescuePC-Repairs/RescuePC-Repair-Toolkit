@@ -1442,7 +1442,7 @@ section {
 }
 
 .testimonial-rating {
-  color: rgb(0, 0, 0);
+  color: #FFD700;
   font-size: 1.2rem;
   margin-bottom: 1rem;
 }
@@ -1481,11 +1481,11 @@ section {
 
 .author-name {
   font-weight: 600;
-  color: var(--color-text);
+  color: black;
 }
 
 .author-title {
-  color: var(--color-text-light);
+  color: black;
   font-size: 0.9rem;
 }
 
@@ -2598,7 +2598,7 @@ section + section {
 }
 
 .benefit-card ul li {
-  color: #475569;
+  color: #000000;
   padding: 0.5rem 0;
   font-size: 1.1rem;
   display: flex;
@@ -2606,11 +2606,7 @@ section + section {
   gap: 0.5rem;
 }
 
-.benefit-card ul li:before {
-  content: "✓";
-  color: #22c55e;
-  font-weight: bold;
-}
+/* Checkmarks are now handled by Font Awesome icons */
 
 .benefits-cta {
   text-align: center;
@@ -2727,7 +2723,7 @@ section + section {
 }
 
 .purchase-content {
-  color: #475569;
+  color: #000000;
 }
 
 /* Delivery Steps Styles */
