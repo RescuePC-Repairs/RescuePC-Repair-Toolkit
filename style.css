@@ -2364,7 +2364,7 @@ img {
 .support-section { padding: var(--section-padding) 0; }
 .about-section { padding: var(--section-padding) 0; }
 .pricing-section { padding: var(--section-padding) 0; }
-.purchase-process-section { padding: var(--section-padding) 0; }
+.purchase-process-section { padding: 5rem 1rem; }
 .resources-section { padding: var(--section-padding) 0; }
 
 /* Ensure proper spacing between sections */
@@ -2446,5 +2446,462 @@ section + section {
   .hero-description {
     font-size: 1rem;
     margin-bottom: var(--space-md);
+  }
+}
+
+/* Benefits Section Styles */
+.benefits-section {
+  padding: 4rem 1rem;
+  background: linear-gradient(to bottom, #f8fafc, #ffffff);
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 3rem auto;
+  padding: 0 1rem;
+}
+
+.benefit-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #e2e8f0;
+}
+
+.benefit-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.benefit-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.benefit-card h3 {
+  color: #1e293b;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+.benefit-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.benefit-card ul li {
+  color: #475569;
+  padding: 0.5rem 0;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.benefit-card ul li:before {
+  content: "✓";
+  color: #22c55e;
+  font-weight: bold;
+}
+
+.benefits-cta {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.benefits-cta .cta-button {
+  font-size: 1.2rem;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+}
+
+.benefits-cta .cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(37, 99, 235, 0.3);
+}
+
+.benefits-cta .cta-button i {
+  font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+  .benefits-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .benefit-card {
+    padding: 1.5rem;
+  }
+  
+  .benefit-card h3 {
+    font-size: 1.3rem;
+  }
+  
+  .benefit-card ul li {
+    font-size: 1rem;
+  }
+  
+  .benefits-cta .cta-button {
+    font-size: 1.1rem;
+    padding: 0.875rem 1.75rem;
+  }
+}
+
+/* Purchase Process & Licensing Section Styles */
+.purchase-process-section {
+  padding: 5rem 1rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+}
+
+.purchase-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 3rem auto;
+  padding: 0 1rem;
+}
+
+.purchase-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: 1px solid #e2e8f0;
+  position: relative;
+  overflow: hidden;
+}
+
+.purchase-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.purchase-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #2563eb, #1d4ed8);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.purchase-card:hover::before {
+  opacity: 1;
+}
+
+.purchase-icon {
+  font-size: 2.5rem;
+  color: #2563eb;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.purchase-card h3 {
+  color: #1e293b;
+  font-size: 1.75rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+.purchase-content {
+  color: #475569;
+}
+
+/* Delivery Steps Styles */
+.delivery-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.step {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.step i {
+  font-size: 1.5rem;
+  color: #2563eb;
+  background: #eff6ff;
+  padding: 0.75rem;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.step-content h4 {
+  color: #1e293b;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.step-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0 0;
+}
+
+.step-content ul li {
+  padding: 0.25rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.step-content ul li::before {
+  content: "✓";
+  color: #22c55e;
+  font-weight: bold;
+}
+
+.download-info {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.info-badge {
+  background: #f1f5f9;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #475569;
+}
+
+/* Usage Options Styles */
+.usage-options {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.option {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem;
+  background: #f8fafc;
+  border-radius: 12px;
+}
+
+.option i {
+  font-size: 1.5rem;
+  color: #2563eb;
+  background: #eff6ff;
+  padding: 0.75rem;
+  border-radius: 12px;
+}
+
+.option-content h4 {
+  color: #1e293b;
+  font-size: 1.25rem;
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+}
+
+.license-info {
+  margin-top: 1rem;
+  padding: 1.5rem;
+  background: #f8fafc;
+  border-radius: 12px;
+}
+
+.license-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #2563eb;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.license-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.license-info ul li {
+  padding: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.license-info ul li::before {
+  content: "✓";
+  color: #22c55e;
+  font-weight: bold;
+}
+
+/* Benefits List Styles */
+.benefits-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.benefit {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1rem;
+  background: #f8fafc;
+  border-radius: 12px;
+}
+
+.benefit i {
+  font-size: 1.5rem;
+  color: #2563eb;
+  background: #eff6ff;
+  padding: 0.75rem;
+  border-radius: 12px;
+}
+
+.benefit-content h4 {
+  color: #1e293b;
+  font-size: 1.25rem;
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+}
+
+/* License Notice Styles */
+.license-notice {
+  max-width: 800px;
+  margin: 3rem auto;
+  padding: 1.5rem;
+  background: #f8fafc;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+}
+
+.notice-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: #475569;
+}
+
+.notice-content i {
+  font-size: 1.5rem;
+  color: #2563eb;
+}
+
+.notice-content a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.notice-content a:hover {
+  text-decoration: underline;
+}
+
+/* Purchase CTA Styles */
+.purchase-cta {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.purchase-cta .cta-button {
+  font-size: 1.25rem;
+  padding: 1.25rem 2.5rem;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: white;
+  border-radius: 12px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+  font-weight: 600;
+}
+
+.purchase-cta .cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(37, 99, 235, 0.3);
+}
+
+.secure-badges {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #475569;
+  font-size: 0.875rem;
+}
+
+.badge i {
+  color: #2563eb;
+}
+
+@media (max-width: 768px) {
+  .purchase-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .purchase-card {
+    padding: 1.5rem;
+  }
+  
+  .purchase-card h3 {
+    font-size: 1.5rem;
+  }
+  
+  .step-content h4,
+  .option-content h4,
+  .benefit-content h4 {
+    font-size: 1.1rem;
+  }
+  
+  .purchase-cta .cta-button {
+    font-size: 1.1rem;
+    padding: 1rem 2rem;
+  }
+  
+  .secure-badges {
+    gap: 1rem;
+  }
+  
+  .badge {
+    font-size: 0.8rem;
   }
 } 
