@@ -106,7 +106,7 @@
 
   <!-- Primary Meta Tags -->
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <meta name="description" content="Professional Windows Repair Toolkit - Available Worldwide. Expert Windows troubleshooting, optimization, and repair solutions. 24/7 Global Support.">
   <meta name="author" content="Tyler">
   <meta name="keywords" content="Windows Repair, PC Repair, System Optimization, Technical Support, Data Recovery, Windows Troubleshooting, Global Support">
@@ -832,41 +832,148 @@
     getFID(sendToAnalytics);
     getLCP(sendToAnalytics);
   </script>
-</head>
-  
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://rescuepc-repairs.github.io/RescuePC-Repair-Toolkit/">
-  <meta property="og:title" content="RescuePC Repairs | The Ultimate Windows Repair Toolkit">
-  <meta property="og:description" content="Fix Windows issues instantly with RescuePC Repairs - The most comprehensive offline repair toolkit. Repair networks, drivers, audio, system errors, and optimize PC performance without requiring an internet connection.">
-  <meta property="og:image" content="https://rescuepc-repairs.github.io/RescuePC-Repair-Toolkit/assets/RescuePC_Logo_Light.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:site_name" content="RescuePC Repairs">
-  <meta property="og:locale" content="en_US">
-  
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://x.com/RescuePCRepair">
-  <meta name="twitter:title" content="RescuePC Repairs | The Ultimate Windows Repair Toolkit">
-  <meta name="twitter:description" content="Fix Windows issues instantly with RescuePC Repairs - The most comprehensive offline repair toolkit. Repair networks, drivers, audio, system errors, and optimize PC performance without requiring an internet connection.">
-  <meta name="twitter:image" content="https://rescuepc-repairs.github.io/RescuePC-Repair-Toolkit/assets/RescuePC_Logo_Light.png">
-  
-  <!-- Favicon & App Icons -->
-  <link rel="apple-touch-icon" sizes="180x180" href="Portfolio/favicon/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="Portfolio/favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="Portfolio/favicon/favicon-16x16.png">
-  <link rel="mask-icon" href="assets/safari-pinned-tab.svg" color="#0f172a">
-  <link rel="shortcut icon" href="assets/favicon.ico">
-  <meta name="msapplication-TileColor" content="#0f172a">
-  <meta name="theme-color" content="#0f172a">
+
+  <!-- Critical Performance Optimizations -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
   <!-- Preload Critical Resources -->
   <link rel="preload" href="/assets/RescuePC_Logo_Light.png" as="image" type="image/png" fetchpriority="high">
-  <link rel="preload" href="RescuePC_GUI.png" as="image">
-  <title>RescuePC Repairs</title>
-
-  <!-- Structured Data / JSON-LD -->
+  <link rel="preload" href="RescuePC_GUI.png" as="image" fetchpriority="high">
+  <link rel="preload" href="/css/critical.css" as="style">
+  <link rel="preload" href="/js/critical.js" as="script">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+  
+  <!-- Critical CSS -->
+  <style>
+    /* Critical path CSS for above-the-fold content */
+    :root {
+      --primary-color: #2563eb;
+      --secondary-color: #1d4ed8;
+      --text-color: #1e293b;
+      --background-color: #ffffff;
+      --section-padding: 5rem;
+    }
+    
+    /* Base styles for immediate rendering */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.5;
+      color: var(--text-color);
+      background: var(--background-color);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    /* Critical layout styles */
+    .centered-section {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    
+    /* Critical component styles */
+    .header {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem 1rem;
+      background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+    }
+    
+    /* Critical button styles */
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.2s ease;
+    }
+    
+    .cta-button.primary {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+    }
+    
+    /* Critical responsive styles */
+    @media (max-width: 768px) {
+      :root {
+        --section-padding: 3rem;
+      }
+      
+      .header {
+        min-height: 80vh;
+        padding: 1rem;
+      }
+      
+      .cta-button {
+        padding: 0.875rem 1.75rem;
+      }
+    }
+  </style>
+  
+  <!-- Defer Non-Critical CSS -->
+  <link rel="stylesheet" href="/css/non-critical.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/css/non-critical.css"></noscript>
+  
+  <!-- Performance Monitoring -->
+  <script>
+    // Performance monitoring
+    window.performanceData = {
+      startTime: performance.now(),
+      metrics: {}
+    };
+    
+    // Report Web Vitals
+    function reportWebVitals(metric) {
+      window.performanceData.metrics[metric.name] = metric.value;
+      console.log(metric);
+    }
+    
+    // Track Largest Contentful Paint
+    new PerformanceObserver((entryList) => {
+      const entries = entryList.getEntries();
+      const lastEntry = entries[entries.length - 1];
+      window.performanceData.metrics.lcp = lastEntry.startTime;
+      reportWebVitals({name: 'LCP', value: lastEntry.startTime});
+    }).observe({entryTypes: ['largest-contentful-paint']});
+    
+    // Track First Input Delay
+    new PerformanceObserver((entryList) => {
+      const entries = entryList.getEntries();
+      entries.forEach(entry => {
+        window.performanceData.metrics.fid = entry.processingStart - entry.startTime;
+        reportWebVitals({name: 'FID', value: entry.processingStart - entry.startTime});
+      });
+    }).observe({entryTypes: ['first-input']});
+    
+    // Track Cumulative Layout Shift
+    new PerformanceObserver((entryList) => {
+      let cls = 0;
+      for (const entry of entryList.getEntries()) {
+        if (!entry.hadRecentInput) {
+          cls += entry.value;
+        }
+      }
+      window.performanceData.metrics.cls = cls;
+      reportWebVitals({name: 'CLS', value: cls});
+    }).observe({entryTypes: ['layout-shift']});
+  </script>
+  
+  <!-- Resource Hints -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Existing meta tags and other head content -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -1584,6 +1691,67 @@
       </div>
     </section>
 
+    <!-- Cost & Time Benefits Section -->
+    <section id="benefits" class="benefits-section centered-section">
+      <div class="section-header centered-section">
+        <h2 class="text-center">Save Time & Money with RescuePC Repairs</h2>
+        <p class="text-center">Why pay hundreds for repair shop visits when you can fix your PC instantly?</p>
+      </div>
+      
+      <div class="benefits-grid centered-section">
+        <div class="benefit-card">
+          <div class="benefit-icon">💰</div>
+          <h3>Cost-Effective Solution</h3>
+          <ul>
+            <li>One-time $99.99 payment for lifetime use</li>
+            <li>No monthly subscriptions or hidden fees</li>
+            <li>Save $100+ per repair shop visit</li>
+            <li>Fix unlimited PCs with a single license</li>
+          </ul>
+        </div>
+        
+        <div class="benefit-card">
+          <div class="benefit-icon">⚡</div>
+          <h3>Instant Time Savings</h3>
+          <ul>
+            <li>Fix most issues in under 5 minutes</li>
+            <li>No waiting for repair shop appointments</li>
+            <li>No need to transport your PC</li>
+            <li>Works offline - no download delays</li>
+          </ul>
+        </div>
+        
+        <div class="benefit-card">
+          <div class="benefit-icon">🛠️</div>
+          <h3>Zero Maintenance Required</h3>
+          <ul>
+            <li>No software updates needed</li>
+            <li>No internet connection required</li>
+            <li>No technical knowledge necessary</li>
+            <li>Self-contained on USB drive</li>
+          </ul>
+        </div>
+        
+        <div class="benefit-card">
+          <div class="benefit-icon">📊</div>
+          <h3>Proven Results</h3>
+          <ul>
+            <li>1000+ successful repairs completed</li>
+            <li>4.9/5 average customer rating</li>
+            <li>24/7 expert support included</li>
+            <li>100% satisfaction guarantee</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="benefits-cta centered-section">
+        <a href="https://buy.stripe.com/5kQ7sLfJu48m8qLcJq93y04" class="cta-button primary">
+          <i class="fas fa-bolt"></i>
+          Get Started Now - Save $100+
+        </a>
+      </div>
+    </section>
+
     <!-- About Section -->
     <section id="about" class="about-section">
       <div class="about-content">
@@ -1721,72 +1889,137 @@
     </section>
 
     <!-- Purchase Process & Licensing Section -->
-    <section id="purchase-process" class="purchase-process-section">
-      <div class="container">
-        <h2 class="section-title">Purchase Process & Licensing</h2>
-        <div class="process-grid">
-          <!-- Instant Delivery Card -->
-          <div class="process-card">
-            <div class="card-icon">
-              <i class="fas fa-bolt"></i>
-            </div>
-            <h3 class="card-title">Instant Delivery</h3>
-            <div class="card-content">
-              <p class="card-subtitle">The email you enter during checkout will automatically receive:</p>
-              <ul class="feature-list">
-                <li><i class="fas fa-check"></i>Your license code</li>
-                <li><i class="fas fa-check"></i>Password for secure file access</li>
-                <li><i class="fas fa-check"></i>Download instructions</li>
-              </ul>
-            </div>
-          </div>
+    <section id="purchase-process" class="purchase-process-section centered-section">
+      <div class="section-header centered-section">
+        <h2 class="text-center">Purchase Process & Licensing</h2>
+        <p class="text-center">Professional-grade Windows repair toolkit with instant delivery and flexible usage options</p>
+      </div>
 
-          <!-- Quick Download Card -->
-          <div class="process-card">
-            <div class="card-icon">
-              <i class="fas fa-download"></i>
-            </div>
-            <h3 class="card-title">Quick Download</h3>
-            <div class="card-content">
-              <p class="card-description">Your download will start automatically and typically takes 5-10 minutes to complete, depending on your internet connection.</p>
-            </div>
+      <div class="purchase-grid centered-section">
+        <!-- Instant Delivery Card -->
+        <div class="purchase-card">
+          <div class="purchase-icon">
+            <i class="fas fa-bolt"></i>
           </div>
-
-          <!-- Flexible Usage Card -->
-          <div class="process-card">
-            <div class="card-icon">
-              <i class="fas fa-laptop"></i>
-            </div>
-            <h3 class="card-title">Flexible Usage</h3>
-            <div class="card-content">
-              <p class="card-subtitle">Run the desktop app directly or transfer to a flash drive to fix multiple computers. One license allows installation on:</p>
-              <ul class="feature-list">
-                <li><i class="fas fa-desktop"></i>One PC</li>
-                <li><i class="fas fa-usb"></i>One flash drive (for portable use)</li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Lifetime Access Card -->
-          <div class="process-card">
-            <div class="card-icon">
-              <i class="fas fa-infinity"></i>
-            </div>
-            <h3 class="card-title">Lifetime Access</h3>
-            <div class="card-content">
-              <p class="card-subtitle">Your purchase includes:</p>
-              <ul class="feature-list">
-                <li><i class="fas fa-check-circle"></i>Lifetime software access</li>
-                <li><i class="fas fa-check-circle"></i>No recurring payments</li>
-                <li><i class="fas fa-check-circle"></i>Free updates through Discord</li>
-              </ul>
+          <h3>Instant Digital Delivery</h3>
+          <div class="purchase-content">
+            <div class="delivery-steps">
+              <div class="step">
+                <i class="fas fa-envelope"></i>
+                <div class="step-content">
+                  <h4>License & Access</h4>
+                  <p>Immediate delivery to your email:</p>
+                  <ul>
+                    <li>Secure license code</li>
+                    <li>Password-protected access</li>
+                    <li>Download instructions</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="step">
+                <i class="fas fa-download"></i>
+                <div class="step-content">
+                  <h4>Quick Download</h4>
+                  <p>Automatic download starts instantly</p>
+                  <div class="download-info">
+                    <span class="info-badge"><i class="fas fa-clock"></i> 5-10 minutes</span>
+                    <span class="info-badge"><i class="fas fa-wifi"></i> Based on connection</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- License Notice -->
-        <div class="license-notice">
+        <!-- Flexible Usage Card -->
+        <div class="purchase-card">
+          <div class="purchase-icon">
+            <i class="fas fa-laptop"></i>
+          </div>
+          <h3>Flexible Usage Options</h3>
+          <div class="purchase-content">
+            <div class="usage-options">
+              <div class="option">
+                <i class="fas fa-desktop"></i>
+                <div class="option-content">
+                  <h4>Desktop Installation</h4>
+                  <p>Run directly on your PC</p>
+                </div>
+              </div>
+              <div class="option">
+                <i class="fas fa-usb"></i>
+                <div class="option-content">
+                  <h4>Portable USB Drive</h4>
+                  <p>Transfer to flash drive for mobile use</p>
+                </div>
+              </div>
+              <div class="license-info">
+                <div class="license-badge">
+                  <i class="fas fa-check-circle"></i>
+                  <span>One License Includes:</span>
+                </div>
+                <ul>
+                  <li>One PC installation</li>
+                  <li>One USB drive transfer</li>
+                  <li>Unlimited repairs</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lifetime Access Card -->
+        <div class="purchase-card">
+          <div class="purchase-icon">
+            <i class="fas fa-infinity"></i>
+          </div>
+          <h3>Lifetime Benefits</h3>
+          <div class="purchase-content">
+            <div class="benefits-list">
+              <div class="benefit">
+                <i class="fas fa-key"></i>
+                <div class="benefit-content">
+                  <h4>Lifetime Access</h4>
+                  <p>One-time payment, unlimited use</p>
+                </div>
+              </div>
+              <div class="benefit">
+                <i class="fas fa-sync-alt"></i>
+                <div class="benefit-content">
+                  <h4>Free Updates</h4>
+                  <p>Regular updates via Discord</p>
+                </div>
+              </div>
+              <div class="benefit">
+                <i class="fas fa-headset"></i>
+                <div class="benefit-content">
+                  <h4>24/7 Support</h4>
+                  <p>Expert assistance anytime</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- License Agreement Notice -->
+      <div class="license-notice centered-section">
+        <div class="notice-content">
+          <i class="fas fa-shield-alt"></i>
           <p>By purchasing, you agree to our <a href="License.html">License Agreement</a>. Each license is for one PC and one flash drive only. Redistribution is prohibited.</p>
+        </div>
+      </div>
+
+      <!-- Purchase CTA -->
+      <div class="purchase-cta centered-section">
+        <a href="https://buy.stripe.com/5kQ7sLfJu48m8qLcJq93y04" class="cta-button primary">
+          <i class="fas fa-shopping-cart"></i>
+          Get Started Now - $99.99
+        </a>
+        <div class="secure-badges">
+          <span class="badge"><i class="fas fa-lock"></i> Secure Checkout</span>
+          <span class="badge"><i class="fas fa-shield-alt"></i> Protected Purchase</span>
+          <span class="badge"><i class="fas fa-undo"></i> 30-Day Guarantee</span>
         </div>
       </div>
     </section>
