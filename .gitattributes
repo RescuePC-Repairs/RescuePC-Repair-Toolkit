@@ -1,0 +1,106 @@
+# Auto detect text files and perform LF normalization
+* text=auto eol=lf
+
+# Force these files to be CRLF (Windows) on checkout
+*.bat           text eol=crlf
+*.cmd           text eol=crlf
+*.ps1           text eol=crlf
+*.reg           text eol=crlf
+
+# Force these files to be LF (Unix) on checkout
+*.sh            text eol=lf
+*.bash          text eol=lf
+*.bashrc        text eol=lf
+*.bash_profile  text eol=lf
+*.bash_login    text eol=lf
+*.profile       text eol=lf
+*.zshrc         text eol=lf
+*.zsh           text eol=lf
+
+# Binary files (set to -text to prevent any line ending conversion)
+*.png           binary
+*.jpg           binary
+*.jpeg          binary
+*.gif           binary
+*.ico           binary
+*.svg           binary
+*.eot           binary
+*.ttf           binary
+*.woff          binary
+*.woff2         binary
+*.pdf           binary
+*.zip           binary
+*.gz            binary
+*.bz2           binary
+*.xz            binary
+*.tar           binary
+*.exe           binary
+*.dll           binary
+*.so            binary
+*.dylib         binary
+*.dmg           binary
+*.pkg           binary
+*.app           binary
+*.pyc           binary
+*.pyo           binary
+*.pyd           binary
+*.db            binary
+*.sqlite        binary
+*.sqlite3       binary
+*.db-journal    binary
+
+# Text files with specific diff handling
+*.sql           text diff=sql
+*.csv           text diff=csv
+*.tsv           text diff=tsv
+*.json          text diff=json
+*.xml           text diff=xml
+*.html          text diff=html
+*.css           text diff=css
+*.scss          text diff=scss
+*.sass          text diff=sass
+*.less          text diff=less
+*.js            text diff=javascript
+*.jsx           text diff=jsx
+*.ts            text diff=typescript
+*.tsx           text diff=tsx
+*.md            text diff=markdown
+*.markdown      text diff=markdown
+*.txt           text diff=text
+*.yml           text diff=yaml
+*.yaml          text diff=yaml
+*.toml          text diff=toml
+*.ini           text diff=ini
+*.conf          text diff=ini
+*.cfg           text diff=ini
+*.log           text diff=text
+*.lock          text diff=text
+*.patch         text diff=text
+*.diff          text diff=text
+*.gitattributes text diff=text
+*.gitignore     text diff=text
+.editorconfig   text diff=text
+*.eslintrc      text diff=json
+*.prettierrc    text diff=json
+*.stylelintrc   text diff=json
+*.babelrc       text diff=json
+*.browserslistrc text diff=text
+*.npmrc         text diff=text
+*.yarnrc        text diff=text
+*.pem           text diff=text
+*.crt           text diff=text
+*.key           text diff=text
+*.csr           text diff=text
+
+# Special files
+LICENSE         text
+CHANGELOG       text
+README*         text
+CHANGES         text
+HISTORY         text
+NOTICE          text
+VERSION         text
+AUTHORS         text
+CONTRIBUTING    text
+CODE_OF_CONDUCT text
+SECURITY        text

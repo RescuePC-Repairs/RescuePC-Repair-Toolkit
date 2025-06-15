@@ -1,0 +1,48 @@
+{
+  "name": "rescuepc-repairs",
+  "version": "1.0.0",
+  "description": "RescuePC Repairs - Professional PC Repair Toolkit",
+  "scripts": {
+    "preview": "vite preview",
+    "dev": "vite",
+    "build": "vite build",
+    "test": "vitest",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,css,md,html}\"",
+    "analyze": "vite-bundle-analyzer",
+    "generate-icons": "node generate-icons.js"
+  },
+  "dependencies": {
+    "@floating-ui/dom": "^1.5.1",
+    "@popperjs/core": "^2.11.8",
+    "alpinejs": "^3.13.3",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.32",
+    "tailwindcss": "^3.3.6"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-basic-ssl": "^1.0.1",
+    "@vitejs/plugin-legacy": "^5.0.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "@vitest/coverage-v8": "^0.34.6",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "prettier": "^3.1.1",
+    "vite": "^5.0.10",
+    "vite-bundle-analyzer": "^0.6.0",
+    "vite-plugin-compression": "^0.5.1",
+    "vite-plugin-pwa": "^0.17.4",
+    "vite-plugin-webp": "^1.0.0",
+    "vitest": "^0.34.6"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

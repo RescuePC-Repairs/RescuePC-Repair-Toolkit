@@ -1,0 +1,52 @@
+/* TEAM */
+  Site: RescuePC Repairs
+  Site: https://rescuepcrepairs.com
+  Contact: ***REMOVED***
+  Twitter: @RescuePCRepair
+
+/* TEAM */
+  Owner: Tyler
+  Position: Founder & Lead Technician
+  Contact: ***REMOVED***
+  Age: 24
+  Location: Worldwide
+  Service Areas: Global - Professional Windows Repair Toolkit
+
+  Social Media:
+  TikTok: https://www.tiktok.com/@rescuepcrepairs
+  YouTube: https://www.youtube.com/@RescuePC-Repairs
+  Twitch: https://www.twitch.tv/rescuepc_repairs
+  Twitter: https://x.com/RescuePCRepair
+  Kick: https://kick.com/rescuepc-repairs
+
+  Technician: Tyler
+  Position: Senior IT Specialist
+  Expertise: Windows Repair, System Optimization
+  
+  Support: Tyler
+  Position: Customer Support Specialist
+  Hours: 24/7 Global Support
+
+/* SITE */
+  Last updated: 2024/03/19
+  Language: English (en-US)
+  Web Standards: HTML5, CSS3, ECMAScript 2022
+  Components: Vanilla JavaScript, Service Workers, Web App Manifest
+  Software: Visual Studio Code, Git
+  Hosting: Netlify
+  CDN: Cloudflare
+  Analytics: Google Analytics 4
+  Search Console: Google Search Console, Bing Webmaster Tools
+  
+/* THANKS */
+  Font Awesome for the amazing icons
+  Google Fonts for beautiful typography
+  All our wonderful customers for their trust and support
+
+/* NOTE */
+  This website was built with care and attention to detail.
+  We're committed to providing the best Windows repair services worldwide.
+  
+  If you have any questions or need assistance, please don't hesitate to contact us!
+  
+  Made with ❤️ by RescuePC Repairs

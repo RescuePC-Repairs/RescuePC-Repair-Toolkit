@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GDPR Compliance | RescuePC Repairs</title>
+  <meta name="description" content="RescuePC Repairs' commitment to GDPR compliance. Learn about your data protection rights and how we handle your personal information.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="assets/favicon.ico">
+  <style>
+    body {
+      background: #0f172a;
+      color: #e2e8f0;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+    /* Navigation Styles */
+    .main-nav {
+      background: #1e293b;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo {
+      height: 40px;
+      width: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links a {
+      color: #e2e8f0;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: #60a5fa;
+    }
+
+    .mobile-menu-toggle {
+      display: none;
+    }
+
+    /* Main Content Styles */
+    .policy-container {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #1e293b;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .policy-header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .policy-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #60a5fa;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .policy-header p {
+      color: #94a3b8;
+      font-size: 1.1rem;
+    }
+
+    .policy-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .policy-section h2 {
+      color: #60a5fa;
+      margin: 2rem 0 1rem;
+      font-size: 1.5rem;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .policy-section h3 {
+      color: #e2e8f0;
+      margin: 1.5rem 0 0.75rem;
+      font-size: 1.2rem;
+    }
+
+    .policy-section p, .policy-section ul {
+      margin-bottom: 1.25rem;
+      color: #e2e8f0;
+    }
+
+    .policy-section ul, .policy-section ol {
+      padding-left: 1.5rem;
+    }
+
+    .policy-section li {
+      margin-bottom: 0.75rem;
+      color: #e2e8f0;
+    }
+
+    .highlight-box {
+      background: rgba(96, 165, 250, 0.1);
+      border-left: 4px solid #60a5fa;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-radius: 0 4px 4px 0;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .last-updated {
+      font-style: italic;
+      color: #94a3b8;
+      text-align: right;
+      margin-top: 3rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .policy-section a {
+      color: #60a5fa;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .policy-section a:hover {
+      color: #93c5fd;
+      text-decoration: underline;
+    }
+
+    /* Footer Styles */
+    .footer {
+      background: #1e293b;
+      padding: 3rem 0 1rem;
+      margin-top: 4rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+    }
+
+    .footer-logo img {
+      height: 40px;
+      width: auto;
+      margin-bottom: 1rem;
+    }
+
+    .footer-column h4 {
+      color: #60a5fa;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+
+    .footer-column ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-column ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-column ul li a {
+      color: #e2e8f0;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer-column ul li a:hover {
+      color: #60a5fa;
+    }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 2rem auto 0;
+      padding: 1.5rem 2rem 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      text-align: center;
+    }
+
+    .copyright {
+      color: #94a3b8;
+      font-size: 0.9rem;
+    }
+
+    .legal-links {
+      margin-top: 0.5rem;
+    }
+
+    .legal-links a {
+      color: #94a3b8;
+      text-decoration: none;
+      transition: color 0.2s ease;
+      margin: 0 0.5rem;
+    }
+
+    .legal-links a:hover {
+      color: #60a5fa;
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 768px) {
+      .nav-container {
+        padding: 0 1rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .mobile-menu-toggle {
+        display: block;
+        background: none;
+        border: none;
+        color: #e2e8f0;
+        cursor: pointer;
+        padding: 0.5rem;
+      }
+
+      .policy-container {
+        margin: 1rem;
+        padding: 1.5rem;
+        border-radius: 8px;
+      }
+
+      .policy-header h1 {
+        font-size: 2rem;
+      }
+
+      .highlight-box {
+        padding: 1rem;
+      }
+
+      .policy-section h2 {
+        font-size: 1.3rem;
+      }
+
+      .policy-section h3 {
+        font-size: 1.1rem;
+      }
+
+      .policy-section p, .policy-section li {
+        font-size: 0.95rem;
+      }
+
+      .footer-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .footer-logo {
+        text-align: center;
+      }
+
+      .footer-column {
+        margin-bottom: 2rem;
+      }
+    }
+
+    .mobile-home-button {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #3b82f6;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 25px;
+      text-decoration: none;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      z-index: 1000;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .mobile-home-button:hover {
+      background: #2563eb;
+      transform: translateX(-50%) translateY(-2px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    .mobile-home-button i {
+      margin-right: 8px;
+    }
+
+    @media (max-width: 768px) {
+      .mobile-home-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="mobile-home-button">
+    <i class="fas fa-home"></i>
+    Return Home
+  </a>
+  <nav class="main-nav">
+    <div class="nav-container">
+      <a href="index.html" class="logo-container">
+        <img src="assets/RescuePC_Logo_Light.png" alt="RescuePC Repairs Logo" class="logo">
+      </a>
+      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#features">Features</a></li>
+        <li><a href="index.html#ui-preview">UI Preview</a></li>
+        <li><a href="index.html#faq">FAQ</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <div class="policy-container">
+      <header class="policy-header">
+        <h1>GDPR Compliance</h1>
+        <p>Last Updated: June 8, 2025</p>
+      </header>
+
+      <div class="policy-section">
+        <p>At RescuePC Repairs, we are committed to protecting your privacy and ensuring the security of your personal data. This GDPR Compliance page outlines our commitment to the General Data Protection Regulation (GDPR) and how we handle your personal information.</p>
+      </div>
+
+      <div class="highlight-box">
+        <h3>Your Data Protection Rights Under GDPR</h3>
+        <p>Under the GDPR, you have the following rights regarding your personal data:</p>
+        <ul>
+          <li><strong>Right to Access</strong> - You have the right to request copies of your personal data.</li>
+          <li><strong>Right to Rectification</strong> - You have the right to request correction of any information you believe is inaccurate.</li>
+          <li><strong>Right to Restrict Processing</strong> - You have the right to request that we restrict the processing of your personal data.</li>
+          <li><strong>Right to Data Portability</strong> - You have the right to request that we transfer the data we have collected to another organization, or directly to you.</li>
+          <li><strong>Right to Object</strong> - You have the right to object to our processing of your personal data.</li>
+        </ul>
+      </div>
+
+      <div class="policy-section">
+        <h2>1. Data We Collect</h2>
+        <p>We collect minimal personal data, which is only required for payment processing through our secure payment provider, Stripe:</p>
+        <ul>
+          <li>Contact Information (name, email address) - Required for payment processing and license delivery</li>
+          <li>Payment Information - Processed securely through Stripe, we never store your payment details</li>
+        </ul>
+        <p class="highlight-box" style="margin-top: 1rem;">
+          <strong>Important Note:</strong> RescuePC Repairs is an offline tool that runs locally on your computer. We do not collect any personal data from your computer or system. The only data we collect is what is necessary for processing your payment and delivering your license.
+        </p>
+      </div>
+
+      <div class="policy-section">
+        <h2>2. How We Use Your Data</h2>
+        <p>We use your personal data solely for the following purposes:</p>
+        <ul>
+          <li>To process your payment securely through Stripe</li>
+          <li>To deliver your license key via email</li>
+          <li>To provide customer support when requested</li>
+        </ul>
+      </div>
+
+      <div class="policy-section">
+        <h2>3. Your Data Protection Rights Under GDPR</h2>
+        <p>Since RescuePC Repairs is an offline tool that runs locally on your computer, we do not collect, store, or process any personal data from your system. The only personal data we receive is through Stripe during the payment process, which is minimal and used solely for license delivery.</p>
+        
+        <p>Here's what you should know about your data rights in relation to RescuePC Repairs:</p>
+        
+        <ul>
+          <li><strong>Right to Access & Data Portability:</strong> We only have access to your email address (used for license delivery) and basic purchase information. This information is minimal and can be provided upon request.</li>
+          
+          <li><strong>Right to Rectification:</strong> If you need to update your email address for license delivery, you can contact us at <a href="mailto:***REMOVED***">***REMOVED***</a>.</li>
+          
+          <li><strong>Right to Restrict Processing & Object:</strong> Since we don't process any personal data from your computer (the tool runs completely offline), these rights don't apply to the software itself. For payment processing, these rights are handled by Stripe, our payment processor.</li>
+        </ul>
+
+        <p class="highlight-box">
+          <strong>Important Note:</strong> RescuePC Repairs is designed to run completely offline and does not have the capability to collect, store, or process any personal data from your computer. The only personal data we receive is what you provide during the payment process through Stripe, which is used solely for delivering your license and providing support if requested.
+        </p>
+      </div>
+
+      <div class="policy-section">
+        <h2>4. Right to Erasure</h2>
+        <p>Since RescuePC Repairs is an offline tool that runs locally on your computer, we do not store any personal data from your system. The only personal data we receive is your email address during the payment process through Stripe, which is used solely for license delivery.</p>
+        
+        <p>If you wish to have your email address removed from our records, you can contact us at <a href="mailto:***REMOVED***">***REMOVED***</a>. Please note that we may need to retain basic purchase information to comply with legal obligations related to your transaction.</p>
+        
+        <p class="highlight-box">
+          <strong>Important Note:</strong> RescuePC Repairs does not collect, store, or process any personal data from your computer. The tool runs completely offline and does not have the capability to access or transmit any personal information from your system. The only data we receive is what you provide during the payment process through Stripe.
+        </p>
+      </div>
+
+      <div class="policy-section">
+        <h2>5. International Data Transfers</h2>
+        <p>Your payment information is processed by Stripe, which may transfer data internationally. Stripe's processing is subject to their own privacy policy and security measures.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>6. Changes to This Policy</h2>
+        <p>We may update our GDPR Compliance page from time to time. We will notify you of any changes by posting the new policy on this page and updating the "Last Updated" date at the top of this policy.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>7. Contact Us</h2>
+        <p>If you have any questions about this GDPR Compliance page or wish to exercise any of your data protection rights, please contact us at:</p>
+        <p>
+          Email: <a href="mailto:***REMOVED***">***REMOVED***</a><br>
+          Subject: GDPR Request
+        </p>
+        <p>We will respond to all requests in accordance with applicable data protection laws.</p>
+      </div>
+
+      <div class="last-updated">
+        <p>Last Updated: June 8, 2025</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-logo">
+        <a href="index.html">
+          <img src="assets/RescuePC_Logo_Light.png" alt="RescuePC Repairs Logo">
+        </a>
+      </div>
+
+      <div class="footer-column">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="index.html#features">Features</a></li>
+          <li><a href="index.html#ui-preview">UI Preview</a></li>
+          <li><a href="index.html#faq">FAQ</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="mailto:***REMOVED***">Email Support</a></li>
+          <li><a href="Knowledge-Base.html">Knowledge Base</a></li>
+          <li><a href="Portfolio/index.html">Portfolio</a></li>
+          <li><a href="https://discord.gg/VgWkPazd">Join Discord</a></li>
+          <li><a href="RescuePC Repairs Flyer.pdf" target="_blank" rel="noopener">Flyer</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="License.html">License</a></li>
+          <li><a href="PrivacyPolicy.html">Privacy Policy</a></li>
+          <li><a href="TermOfService.html">Terms of Service</a></li>
+          <li><a href="CookiePolicy.html">Cookie Policy</a></li>
+          <li><a href="GDPR.html">GDPR Compliance</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="copyright">
+        <p>© 2025 RescuePC Repairs. All rights reserved.</p>
+        <div class="legal-links">
+          <a href="PrivacyPolicy.html">Privacy Policy</a>
+          <a href="TermOfService.html">Terms of Service</a>
+          <a href="GDPR.html">GDPR Compliance</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
