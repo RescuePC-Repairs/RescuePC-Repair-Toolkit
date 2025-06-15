@@ -1,0 +1,123 @@
+# RescuePC Repairs - Professional Windows Repair Toolkit
+# Last Updated: 2024-03-19
+# Enhanced for optimal SEO and security
+
+# Global directives
+User-agent: *
+Crawl-delay: 10
+Allow: /$
+Allow: /index.html$
+Allow: /services/$
+Allow: /about/$
+Allow: /contact/$
+Allow: /support/$
+Allow: /sitemap.xml$
+Allow: /sitemap.html$
+Allow: /knowledge-base/$
+Allow: /windows-repair/$
+Allow: /windows-optimization/$
+Allow: /windows-troubleshooting/$
+
+# Sitemaps
+Sitemap: https://rescuepcrepairs.com/sitemap.xml
+Sitemap: https://rescuepcrepairs.com/sitemap-video.xml
+Sitemap: https://rescuepcrepairs.com/sitemap-image.xml
+
+# Disallow sensitive areas
+Disallow: /admin/
+Disallow: /cgi-bin/
+Disallow: /config/
+Disallow: /logs/
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /.well-known/
+Disallow: /search/
+Disallow: /*?s=
+Disallow: /*&s=
+Disallow: /*?*
+
+# Block image hotlinking
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP_REFERER} !^$
+  RewriteCond %{HTTP_REFERER} !^https?://(www\.)?rescuepcrepairs\.com [NC]
+  RewriteRule \.(jpe?g|png|gif|webp)$ - [NC,F,L]
+</IfModule>
+
+# Search engine specific rules
+User-agent: Googlebot
+Allow: /assets/
+Allow: /css/
+Allow: /js/
+Allow: /images/
+Allow: /video/
+Allow: /Portfolio/
+Crawl-delay: 5
+
+User-agent: Bingbot
+Allow: /assets/
+Allow: /css/
+Allow: /js/
+Allow: /images/
+Allow: /video/
+Allow: /Portfolio/
+Crawl-delay: 5
+
+# Block specific user agents (known bad bots)
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: YandexBot
+Disallow: /
+
+User-agent: Baiduspider
+Disallow: /
+
+# Allow all robots to access these directories
+Allow: /assets/
+Allow: /css/
+Allow: /js/
+Allow: /images/
+Allow: /video/
+Allow: /Portfolio/
+
+# Block specific files
+Disallow: /*.php$
+Disallow: /*.inc$
+Disallow: /*.log$
+Disallow: /*.sql$
+Disallow: /*.tpl$
+Disallow: /*.xml$
+
+# Allow media files
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.png$
+Allow: /*.gif$
+Allow: /*.svg$
+Allow: /*.webp$
+Allow: /*.woff$
+Allow: /*.woff2$
+Allow: /*.ttf$
+Allow: /*.eot$
+Allow: /*.pdf$
+
+# Host
+Host: rescuepcrepairs.com
+
+# Clean params
+Clean-param: ref /
+Clean-param: utm_source /
+Clean-param: utm_medium /
+Clean-param: utm_campaign /
