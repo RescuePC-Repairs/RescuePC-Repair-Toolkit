@@ -258,8 +258,12 @@ ErrorDocument 404 /404.html
 </IfModule>
 
 # Protect sensitive files
+<<<<<<< HEAD
 # The following block is for Apache web server configuration only. PowerShell and other shells may show errors, but this is correct for .htaccess on Apache:
 <FilesMatch "^(\.htaccess|\.htpasswd|\.git|\.env|composer\.json|composer\.lock|package\.json|package-lock\.json|security-config\.php|security-init\.php|bot-protection\.php|session-security\.php|logging\.php|encryption\.key|backup|logs|config|backups)$">
+=======
+<FilesMatch "^(\.htaccess|\.htpasswd|\.git|\.env|composer\.json|composer\.lock|package\.json|package-lock\.json|security-config\.php|security-init\.php)$">
+>>>>>>> 1deb32113eb1d14cb1402a63f2534c549c6a23a1
     Order Allow,Deny
     Deny from all
 </FilesMatch>

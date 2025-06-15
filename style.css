@@ -2406,6 +2406,7 @@ img {
     color: var(--color-text);
 }
 
+<<<<<<< HEAD
 /* Next-Gen UI/UX Custom Animations */
 @keyframes gradient-move {
   0% { background-position: 0% 50%; }
@@ -2448,6 +2449,8 @@ img {
   animation: bounce 1.2s infinite cubic-bezier(.4,0,.2,1);
 }
 
+=======
+>>>>>>> 1deb32113eb1d14cb1402a63f2534c549c6a23a1
 /* Print Styles */
 @media print {
     :root {
