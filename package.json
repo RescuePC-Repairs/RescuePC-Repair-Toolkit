@@ -3,15 +3,9 @@
   "version": "1.0.0",
   "description": "RescuePC Repairs - Professional PC Repair Toolkit",
   "scripts": {
-<<<<<<< HEAD
     "preview": "vite preview",
     "dev": "vite",
     "build": "vite build",
-=======
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
->>>>>>> 1deb32113eb1d14cb1402a63f2534c549c6a23a1
     "test": "vitest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,css,md,html}\"",
