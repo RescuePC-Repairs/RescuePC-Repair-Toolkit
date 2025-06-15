@@ -1,0 +1,89 @@
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "RescuePC Repairs",
+  "applicationCategory": "Utility Software",
+  "operatingSystem": "Windows",
+  "offers": {
+    "@type": "Offer",
+    "price": "99.99",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock",
+    "validFrom": "2024-01-01",
+    "validThrough": "2024-12-31"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Tyler",
+    "age": 24
+  },
+  "description": "Professional Windows Repair Toolkit - Services Worldwide",
+  "email": "***REMOVED***",
+  "url": "https://www.rescuepcrepairs.com/",
+  "sameAs": [
+    "https://www.tiktok.com/@rescuepcrepairs",
+    "https://www.youtube.com/@RescuePC-Repairs",
+    "https://www.twitch.tv/rescuepc_repairs",
+    "https://x.com/RescuePCRepair",
+    "https://kick.com/rescuepc-repairs"
+  ],
+  "logo": "https://www.rescuepcrepairs.com/assets/images/logo.png",
+  "founder": {
+    "@type": "Person",
+    "name": "Tyler",
+    "jobTitle": "Lead Developer & Technical Support Specialist",
+    "knowsAbout": [
+      "Windows System Repair",
+      "PC Optimization",
+      "Technical Support",
+      "System Administration"
+    ],
+    "hasCredential": [
+      {
+        "@type": "EducationalCredential",
+        "credentialCategory": "certification",
+        "name": "Microsoft Certified Professional"
+      },
+      {
+        "@type": "EducationalCredential",
+        "credentialCategory": "certification",
+        "name": "CompTIA A+ Certified"
+      }
+    ]
+  },
+  "areaServed": "Worldwide",
+  "serviceType": [
+    "Windows Repair",
+    "System Optimization",
+    "Troubleshooting",
+    "Technical Support",
+    "Data Recovery",
+    "Security Solutions"
+  ],
+  "openingHours": "Mo-Su 00:00-23:59",
+  "priceRange": "$$",
+  "paymentAccepted": [
+    "Credit Card",
+    "PayPal",
+    "Bank Transfer"
+  ],
+  "hasCredential": [
+    {
+      "@type": "EducationalCredential",
+      "credentialCategory": "certification",
+      "name": "Microsoft Partner"
+    },
+    {
+      "@type": "EducationalCredential",
+      "credentialCategory": "certification",
+      "name": "CompTIA Certified"
+    }
+  ],
+  "trustPilot": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "1000",
+    "bestRating": "5",
+    "worstRating": "1"
+  }
+} 

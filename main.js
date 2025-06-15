@@ -460,6 +460,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // PDF link handling for better mobile experience
   const pdfLinks = document.querySelectorAll('a[href$=".pdf"]')
   
+<<<<<<< HEAD
   // Sticky Buy Now Button
   const stickyBuyNow = document.getElementById('sticky-buy-now');
   if (stickyBuyNow) {
@@ -484,6 +485,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+=======
+>>>>>>> 1deb32113eb1d14cb1402a63f2534c549c6a23a1
   pdfLinks.forEach(link => {
     // Remove any existing click event listeners to avoid conflicts
     const newLink = link.cloneNode(true);

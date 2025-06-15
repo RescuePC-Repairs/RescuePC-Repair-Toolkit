@@ -1,0 +1,164 @@
+{
+  "social_media": {
+    "platforms": {
+      "tiktok": {
+        "url": "https://www.tiktok.com/@rescuepcrepairs",
+        "handle": "@rescuepcrepairs",
+        "platform": "TikTok",
+        "content_type": "Short-form Video",
+        "primary_focus": "Tech Tips & Repairs",
+        "posting_frequency": "Daily",
+        "engagement_metrics": {
+          "followers": "tracked",
+          "views": "tracked",
+          "likes": "tracked",
+          "comments": "tracked"
+        }
+      },
+      "youtube": {
+        "url": "https://www.youtube.com/@RescuePC-Repairs",
+        "handle": "@RescuePC-Repairs",
+        "platform": "YouTube",
+        "content_type": "Tutorials & Reviews",
+        "primary_focus": "PC Repair Guides",
+        "posting_frequency": "Weekly",
+        "engagement_metrics": {
+          "subscribers": "tracked",
+          "views": "tracked",
+          "likes": "tracked",
+          "comments": "tracked"
+        }
+      },
+      "twitch": {
+        "url": "https://www.twitch.tv/rescuepc_repairs",
+        "handle": "rescuepc_repairs",
+        "platform": "Twitch",
+        "content_type": "Live Streams",
+        "primary_focus": "Live PC Repair Sessions",
+        "streaming_schedule": "Regular",
+        "engagement_metrics": {
+          "followers": "tracked",
+          "viewers": "tracked",
+          "chat_activity": "tracked"
+        }
+      },
+      "twitter": {
+        "url": "https://x.com/RescuePCRepair",
+        "handle": "@RescuePCRepair",
+        "platform": "X (Twitter)",
+        "content_type": "Updates & Tips",
+        "primary_focus": "Tech News & Support",
+        "posting_frequency": "Daily",
+        "engagement_metrics": {
+          "followers": "tracked",
+          "retweets": "tracked",
+          "likes": "tracked"
+        }
+      },
+      "kick": {
+        "url": "https://kick.com/rescuepc-repairs",
+        "handle": "rescuepc-repairs",
+        "platform": "Kick",
+        "content_type": "Live Streams",
+        "primary_focus": "PC Repair & Gaming",
+        "streaming_schedule": "Regular",
+        "engagement_metrics": {
+          "followers": "tracked",
+          "viewers": "tracked",
+          "chat_activity": "tracked"
+        }
+      }
+    },
+    "integration": {
+      "website_embed": {
+        "enabled": true,
+        "platforms": [
+          "youtube",
+          "twitch",
+          "kick"
+        ],
+        "display_options": {
+          "layout": "responsive",
+          "theme": "dark",
+          "autoplay": false
+        }
+      },
+      "social_share": {
+        "enabled": true,
+        "platforms": [
+          "tiktok",
+          "youtube",
+          "twitch",
+          "twitter",
+          "kick"
+        ],
+        "share_options": {
+          "title": "RescuePC Repairs",
+          "description": "Professional Windows Repair Toolkit",
+          "hashtags": ["PCRepair", "WindowsRepair", "TechSupport"]
+        }
+      },
+      "cross_posting": {
+        "enabled": true,
+        "rules": {
+          "youtube_to_tiktok": true,
+          "twitch_to_youtube": true,
+          "kick_to_twitch": true
+        }
+      }
+    },
+    "analytics": {
+      "tracking": {
+        "enabled": true,
+        "metrics": [
+          "engagement",
+          "reach",
+          "conversion",
+          "growth"
+        ]
+      },
+      "reporting": {
+        "frequency": "weekly",
+        "format": "automated",
+        "delivery": "email"
+      }
+    },
+    "content_strategy": {
+      "themes": [
+        "PC Repair Tips",
+        "Windows Optimization",
+        "Virus Removal",
+        "Hardware Troubleshooting",
+        "Software Solutions"
+      ],
+      "posting_schedule": {
+        "tiktok": "daily",
+        "youtube": "weekly",
+        "twitch": "regular",
+        "twitter": "daily",
+        "kick": "regular"
+      },
+      "content_mix": {
+        "educational": 40,
+        "entertainment": 30,
+        "promotional": 20,
+        "community": 10
+      }
+    },
+    "community_management": {
+      "moderation": {
+        "enabled": true,
+        "rules": "community-guidelines.html",
+        "automated_filters": true
+      },
+      "engagement": {
+        "response_time": "24 hours",
+        "priority_channels": [
+          "youtube",
+          "twitch",
+          "kick"
+        ]
+      }
+    }
+  }
+} 

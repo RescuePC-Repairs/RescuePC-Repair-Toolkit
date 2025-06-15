@@ -1,0 +1,117 @@
+{
+  "business_profile": {
+    "company": {
+      "name": "RescuePC Repairs",
+      "type": "Professional Windows Repair Toolkit",
+      "founder": "Tyler",
+      "age": 24,
+      "established": "2024",
+      "description": "Professional Windows Repair Toolkit providing worldwide computer repair and maintenance services.",
+      "website": "https://www.rescuepcrepairs.com/",
+      "email": "***REMOVED***"
+    },
+    "contact": {
+      "primary_email": "***REMOVED***",
+      "support_email": "***REMOVED***",
+      "business_email": "***REMOVED***"
+    },
+    "social_media": {
+      "tiktok": {
+        "url": "https://www.tiktok.com/@rescuepcrepairs",
+        "handle": "@rescuepcrepairs",
+        "platform": "TikTok"
+      },
+      "youtube": {
+        "url": "https://www.youtube.com/@RescuePC-Repairs",
+        "handle": "@RescuePC-Repairs",
+        "platform": "YouTube"
+      },
+      "twitch": {
+        "url": "https://www.twitch.tv/rescuepc_repairs",
+        "handle": "rescuepc_repairs",
+        "platform": "Twitch"
+      },
+      "twitter": {
+        "url": "https://x.com/RescuePCRepair",
+        "handle": "@RescuePCRepair",
+        "platform": "X (Twitter)"
+      },
+      "kick": {
+        "url": "https://kick.com/rescuepc-repairs",
+        "handle": "rescuepc-repairs",
+        "platform": "Kick"
+      }
+    },
+    "services": {
+      "primary": "Windows Repair Toolkit",
+      "scope": "Worldwide",
+      "type": "Professional",
+      "features": [
+        "System Diagnostics",
+        "Performance Optimization",
+        "Virus Removal",
+        "Data Recovery",
+        "System Maintenance",
+        "Hardware Troubleshooting"
+      ]
+    },
+    "branding": {
+      "logo": "assets/images/logo.png",
+      "colors": {
+        "primary": "#007bff",
+        "secondary": "#6c757d",
+        "accent": "#28a745"
+      },
+      "fonts": {
+        "primary": "Roboto",
+        "secondary": "Open Sans"
+      }
+    },
+    "legal": {
+      "terms_of_service": "TermOfService.html",
+      "privacy_policy": "PrivacyPolicy.html",
+      "license_agreement": "License.html",
+      "refund_policy": "RefundPolicy.html",
+      "cookie_policy": "CookiePolicy.html",
+      "gdpr_compliance": "GDPR.html"
+    },
+    "seo": {
+      "meta_description": "Professional Windows Repair Toolkit by RescuePC Repairs - Worldwide computer repair and maintenance services.",
+      "keywords": [
+        "Windows Repair",
+        "PC Repair",
+        "Computer Maintenance",
+        "System Optimization",
+        "Virus Removal",
+        "Data Recovery"
+      ],
+      "social_media_tags": {
+        "og_title": "RescuePC Repairs - Professional Windows Repair Toolkit",
+        "og_description": "Worldwide computer repair and maintenance services",
+        "og_image": "assets/images/og-image.png",
+        "twitter_card": "summary_large_image"
+      }
+    },
+    "support": {
+      "knowledge_base": "Knowledge-Base.html",
+      "support_page": "support.html",
+      "discord": "join-discord.html",
+      "documentation": {
+        "user_guide": "docs/user-guide.html",
+        "technical_specs": "docs/technical-specs.html",
+        "faq": "docs/faq.html"
+      }
+    },
+    "security": {
+      "verification": "security-verify.php",
+      "dashboard": "security-dashboard.php",
+      "report": "security-report.php",
+      "features": [
+        "Real-time Monitoring",
+        "Threat Detection",
+        "System Integrity Checks",
+        "Secure Updates"
+      ]
+    }
+  }
+} 

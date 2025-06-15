@@ -1,9 +1,12 @@
 # RescuePC Repairs™ - Offline Windows PC Repair Toolkit
 
+<<<<<<< HEAD
 ![Version](https://img.shields.io/badge/version-2025.06-blue)
 ![License](https://img.shields.io/badge/license-Proprietary-green)
 ![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
 
+=======
+>>>>>>> 1deb32113eb1d14cb1402a63f2534c549c6a23a1
 **RescuePC Repairs™** is the ultimate offline Windows PC repair toolkit designed to revive broken systems without needing internet access. Repair Wi-Fi, audio, drivers, and boost system performance instantly — all from a local download or portable USB drive.
 
 🛡️ **Trademark & Licensing Notice**  
@@ -68,12 +71,17 @@ RescuePC Repairs™, its software, and branding may not be copied, resold, or re
 
 **Email:** [***REMOVED***](mailto:***REMOVED***)  
 **Website:** [RescuePC Repairs Live Site](https://www.rescuepcrepairs.com)  
+<<<<<<< HEAD
 **Docs:** [Setup, Troubleshooting & FAQ](#documentation)
+=======
+**Docs:** Coming soon!
+>>>>>>> 1deb32113eb1d14cb1402a63f2534c549c6a23a1
 
 Need help with your download? Questions about RescuePC Repairs™?  
 Contact us — real support, real fast.
 
 ---
+<<<<<<< HEAD
 
 ## 📚 Documentation
 
@@ -108,3 +116,5 @@ A short demo video or animated GIF will appear here soon, showing RescuePC Repai
 ## 🤝 Contributing & Security
 
 This is a closed-source, proprietary project. Pull requests and issues are disabled. For responsible disclosure of vulnerabilities, see [SECURITY.md](./SECURITY.md).
+=======
+>>>>>>> 1deb32113eb1d14cb1402a63f2534c549c6a23a1
