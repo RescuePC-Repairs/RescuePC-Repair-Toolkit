@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
           <li class="nav-item"><a href="Knowledge-Base.html" class="nav-link"><i class="fas fa-book"></i>Knowledge Base</a></li>
           <li class="nav-item"><a href="https://discord.gg/VgWkPazd" class="nav-link"><i class="fab fa-discord"></i>Join Discord</a></li>
           <li class="nav-item">
-            <a href="https://buy.stripe.com/5kQ7sLfJu48m8qLcJq93y04" class="nav-link nav-cta" target="_blank" rel="noopener noreferrer">
+            <a href="https://buy.stripe.com/9B614m53s8i97y110j08g00" class="nav-link nav-cta" target="_blank" rel="noopener noreferrer">
               <i class="fas fa-bolt"></i>
               <span>Buy Now</span>
             </a>
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
         </ul>
 
         <!-- Desktop Buy Button -->
-        <a href="https://buy.stripe.com/5kQ7sLfJu48m8qLcJq93y04" class="nav-link nav-cta desktop-only" target="_blank" rel="noopener noreferrer">
+        <a href="https://buy.stripe.com/9B614m53s8i97y110j08g00" class="nav-link nav-cta desktop-only" target="_blank" rel="noopener noreferrer">
           <i class="fas fa-bolt"></i>
           <span>Buy Now</span>
         </a>
