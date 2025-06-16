@@ -3218,7 +3218,7 @@ section + section {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #475569;
+  color: #000000;
 }
 
 /* Usage Options Styles */
