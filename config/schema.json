@@ -6,7 +6,7 @@
   "operatingSystem": "Windows",
   "offers": {
     "@type": "Offer",
-    "price": "99.99",
+    "price": "79.99",
     "priceCurrency": "USD",
     "availability": "https://schema.org/InStock",
     "validFrom": "2024-01-01",
