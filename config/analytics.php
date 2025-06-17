@@ -154,7 +154,7 @@ class Analytics {
 // $analytics->trackEcommerce([
 //     'transaction_id' => '1234',
 //     'affiliation' => 'RescuePC Store',
-//     'value' => 99.99,
+//     'value' => 79.99,
 //     'currency' => 'USD'
 // ]);
 ?> 

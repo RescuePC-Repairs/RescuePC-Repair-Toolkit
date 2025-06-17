@@ -48,7 +48,7 @@ Use is subject to the [LICENSE](./LICENSE.txt) and [EULA](./EULA.txt) terms. Red
 ## 💳 Buy RescuePC Repairs™
 
 Ready to repair smarter?  
-👉 [Purchase RescuePC Repairs for $99.99](https://www.rescuepcrepairs.com/)
+👉 [Purchase RescuePC Repairs for $79.99](https://www.rescuepcrepairs.com/)
 
 After purchase, you'll be redirected to a secure download page.
 
