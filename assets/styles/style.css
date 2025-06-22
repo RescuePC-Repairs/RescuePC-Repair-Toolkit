@@ -1023,6 +1023,9 @@ section + .section,
   color: #000000;
   line-height: 1.6;
   font-size: var(--font-size-base);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 /* =============================================================================
@@ -1469,10 +1472,10 @@ section + .section,
   /* Nav links are already visible - no need to show/hide */
   
   .nav-link {
-    font-size: clamp(1.25rem, 3.5vw, 1.75rem) !important;
+    font-size: clamp(1.1rem, 3vw, 1.4rem) !important;
     font-weight: 600 !important;
     color: #ffffff !important;
-    padding: var(--space-lg) var(--space-2xl) !important;
+    padding: var(--space-md) var(--space-lg) !important;
     border-radius: var(--radius-lg) !important;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
     display: block !important;
@@ -1480,11 +1483,11 @@ section + .section,
     text-decoration: none !important;
     text-align: center !important;
     width: 100% !important;
-    max-width: 320px !important;
+    max-width: 280px !important;
     background: rgba(255, 255, 255, 0.1) !important;
     border: 2px solid rgba(255, 255, 255, 0.15) !important;
     backdrop-filter: blur(15px) !important;
-    margin: var(--space-sm) 0 !important;
+    margin: var(--space-xs) 0 !important;
     position: relative !important;
     overflow: hidden !important;
   }
@@ -1786,6 +1789,22 @@ section + .section,
     padding: var(--space-lg);
     max-width: 100%;
     overflow: hidden;
+  }
+  
+  .feature-card p,
+  .capability-card p {
+    font-size: var(--font-size-sm);
+    line-height: 1.5;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+  
+  .feature-card h3,
+  .capability-card h3 {
+    font-size: var(--font-size-xl);
+    line-height: 1.2;
+    word-break: break-word;
   }
   
   .value-proposition {
