@@ -14,7 +14,9 @@ from pathlib import Path
 
 class RescuePCGroqAssistant:
     def __init__(self):
-        self.api_key = "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"
+        self.api_key = os.getenv("GROQ_API_KEY")
+        if not self.api_key:
+            raise ValueError("❌ GROQ_API_KEY environment variable not set!")
         self.base_url = "https://api.groq.com/openai/v1/chat/completions"
         self.model = "llama3-70b-8192"  # Best free model
         

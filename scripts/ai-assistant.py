@@ -27,12 +27,18 @@ from datetime import datetime
 @dataclass
 class AIConfig:
     """AI Assistant Configuration"""
-    api_key: str = "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"
+    api_key: str = ""
     base_url: str = "https://api.groq.com/openai/v1/chat/completions"
     model: str = "meta-llama/llama-3.1-70b-versatile"  # Best for code analysis
     max_tokens: int = 4000
     temperature: float = 0.1  # Low for precise code analysis
     project_root: Path = Path(".")
+    
+    def __post_init__(self):
+        if not self.api_key:
+            self.api_key = os.getenv("GROQ_API_KEY", "")
+            if not self.api_key:
+                raise ValueError("❌ GROQ_API_KEY environment variable not set!")
 
 class RescuePCAIAssistant:
     """Ultra-Advanced AI Engineering Assistant for RescuePC Repairs"""
