@@ -122,7 +122,8 @@ h1, h2, h3, h4, h5, h6, p, span, div {
   max-width: 100%;
   word-wrap: break-word;
   overflow-wrap: break-word;
-  hyphens: auto;
+  hyphens: none;
+  word-break: normal;
 }
 
 /* Ensure all sections stay within bounds */
@@ -684,23 +685,14 @@ section + .section,
   font-size: 0.95rem;
 }
 
-/* Mobile/Desktop text switching - Accessibility-friendly */
-.mobile-text {
+/* Responsive text - No hidden content */
+.responsive-text {
   display: block;
-}
-
-.desktop-text {
-  display: none;
-}
-
-@media (min-width: 481px) {
-  .mobile-text {
-    display: none;
-  }
-  
-  .desktop-text {
-    display: block;
-  }
+  font-size: clamp(0.85rem, 2.5vw, 1rem);
+  line-height: 1.3;
+  word-break: normal;
+  overflow-wrap: break-word;
+  hyphens: none;
 }
 
 .security-indicators {
@@ -1025,7 +1017,8 @@ section + .section,
   font-size: var(--font-size-base);
   word-wrap: break-word;
   overflow-wrap: break-word;
-  hyphens: auto;
+  hyphens: none;
+  word-break: normal;
 }
 
 /* =============================================================================
@@ -1795,16 +1788,19 @@ section + .section,
   .capability-card p {
     font-size: var(--font-size-sm);
     line-height: 1.5;
-    word-break: break-word;
+    word-break: normal;
     overflow-wrap: break-word;
-    hyphens: auto;
+    hyphens: none;
+    white-space: normal;
   }
   
   .feature-card h3,
   .capability-card h3 {
     font-size: var(--font-size-xl);
     line-height: 1.2;
-    word-break: break-word;
+    word-break: normal;
+    overflow-wrap: break-word;
+    hyphens: none;
   }
   
   .value-proposition {
