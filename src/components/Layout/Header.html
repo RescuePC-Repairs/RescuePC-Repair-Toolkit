@@ -1,0 +1,232 @@
+<!-- =============================================================================
+     RESCUEPC REPAIRS - HEADER COMPONENT
+     Modern navigation with accessibility and mobile responsiveness
+     ============================================================================= -->
+
+<div class="header-container">
+  <div class="container">
+    <div class="header-content">
+      <!-- Logo -->
+      <div class="header-logo">
+        <img src="assets/RescuePC_Logo_Light.png" 
+             alt="RescuePC Repairs - Professional Windows Repair Toolkit" 
+             class="logo"
+             width="120"
+             height="40">
+      </div>
+      
+      <!-- Navigation -->
+      <nav class="header-nav" role="navigation" aria-label="Main navigation">
+        <ul class="nav-links">
+          <li><a href="#features" class="nav-link" data-scroll="features">Features</a></li>
+          <li><a href="#pricing" class="nav-link" data-scroll="pricing">Pricing</a></li>
+          <li><a href="#support" class="nav-link" data-scroll="support">Support</a></li>
+          <li><a href="#download" class="nav-link nav-link--cta" data-scroll="download">Download</a></li>
+        </ul>
+        
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-toggle" 
+                aria-label="Toggle mobile menu" 
+                aria-expanded="false"
+                aria-controls="mobile-menu">
+          <span class="mobile-menu-icon"></span>
+          <span class="mobile-menu-icon"></span>
+          <span class="mobile-menu-icon"></span>
+        </button>
+      </nav>
+      
+      <!-- Mobile Menu -->
+      <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+        <ul class="mobile-nav-links">
+          <li><a href="#features" class="mobile-nav-link" data-scroll="features">Features</a></li>
+          <li><a href="#pricing" class="mobile-nav-link" data-scroll="pricing">Pricing</a></li>
+          <li><a href="#support" class="mobile-nav-link" data-scroll="support">Support</a></li>
+          <li><a href="#download" class="mobile-nav-link mobile-nav-link--cta" data-scroll="download">Get RescuePC</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Component Loading Script -->
+<script>
+/**
+ * Header Component Controller
+ * Handles mobile navigation, scroll effects, and accessibility
+ */
+class HeaderComponent {
+  constructor() {
+    this.header = document.querySelector('.header');
+    this.navbar = document.querySelector('.navbar');
+    this.mobileToggle = document.getElementById('mobile-menu-toggle');
+    this.mobileClose = document.getElementById('mobile-menu-close');
+    this.overlay = document.getElementById('navbar-overlay');
+    this.trustBanner = document.querySelector('.header__trust-banner');
+    this.trustClose = document.getElementById('trust-banner-close');
+    
+    this.isMenuOpen = false;
+    this.scrollY = 0;
+    
+    this.init();
+  }
+  
+  init() {
+    this.bindEvents();
+    this.handleScrollEffect();
+    this.setupAccessibility();
+  }
+  
+  bindEvents() {
+    // Mobile menu toggle
+    this.mobileToggle?.addEventListener('click', () => this.toggleMobileMenu());
+    this.mobileClose?.addEventListener('click', () => this.closeMobileMenu());
+    
+    // Close menu when clicking overlay
+    this.overlay?.addEventListener('click', (e) => {
+      if (e.target === this.overlay) {
+        this.closeMobileMenu();
+      }
+    });
+    
+    // Trust banner close
+    this.trustClose?.addEventListener('click', () => this.closeTrustBanner());
+    
+    // Scroll effect
+    window.addEventListener('scroll', () => this.handleScrollEffect(), { passive: true });
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', this.handleKeyboardNav.bind(this));
+    
+    // Smooth scroll for anchor links
+    this.setupSmoothScroll();
+  }
+  
+  toggleMobileMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+    this.updateMobileMenuState();
+  }
+  
+  closeMobileMenu() {
+    this.isMenuOpen = false;
+    this.updateMobileMenuState();
+  }
+  
+  updateMobileMenuState() {
+    // Update aria attributes
+    this.mobileToggle?.setAttribute('aria-expanded', this.isMenuOpen.toString());
+    this.overlay?.setAttribute('aria-hidden', (!this.isMenuOpen).toString());
+    
+    // Update classes
+    this.overlay?.classList.toggle('navbar__overlay--active', this.isMenuOpen);
+    document.body.classList.toggle('nav-menu-open', this.isMenuOpen);
+    
+    // Manage focus
+    if (this.isMenuOpen) {
+      this.overlay?.focus();
+      document.body.style.overflow = 'hidden';
+    } else {
+      this.mobileToggle?.focus();
+      document.body.style.overflow = '';
+    }
+  }
+  
+  handleScrollEffect() {
+    const currentScrollY = window.scrollY;
+    
+    // Add scrolled class for styling
+    this.navbar?.classList.toggle('navbar--scrolled', currentScrollY > 50);
+    
+    // Hide/show navbar on scroll
+    if (currentScrollY > this.scrollY && currentScrollY > 100) {
+      this.navbar?.classList.add('navbar--hidden');
+    } else {
+      this.navbar?.classList.remove('navbar--hidden');
+    }
+    
+    this.scrollY = currentScrollY;
+  }
+  
+  closeTrustBanner() {
+    this.trustBanner?.classList.add('header__trust-banner--hidden');
+    localStorage.setItem('trustBannerClosed', 'true');
+  }
+  
+  setupAccessibility() {
+    // Set initial ARIA states
+    this.mobileToggle?.setAttribute('aria-expanded', 'false');
+    this.overlay?.setAttribute('aria-hidden', 'true');
+    
+    // Check if trust banner should be shown
+    if (localStorage.getItem('trustBannerClosed') === 'true') {
+      this.trustBanner?.classList.add('header__trust-banner--hidden');
+    }
+  }
+  
+  handleKeyboardNav(e) {
+    // Close mobile menu with Escape key
+    if (e.key === 'Escape' && this.isMenuOpen) {
+      this.closeMobileMenu();
+    }
+    
+    // Trap focus in mobile menu
+    if (this.isMenuOpen && e.key === 'Tab') {
+      this.trapFocus(e);
+    }
+  }
+  
+  trapFocus(e) {
+    const focusableElements = this.overlay?.querySelectorAll(
+      'a[href], button, [tabindex]:not([tabindex="-1"])'
+    );
+    
+    if (!focusableElements?.length) return;
+    
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+    
+    if (e.shiftKey && document.activeElement === firstElement) {
+      e.preventDefault();
+      lastElement.focus();
+    } else if (!e.shiftKey && document.activeElement === lastElement) {
+      e.preventDefault();
+      firstElement.focus();
+    }
+  }
+  
+  setupSmoothScroll() {
+    const navLinks = this.navbar?.querySelectorAll('a[href^="#"]');
+    
+    navLinks?.forEach(link => {
+      link.addEventListener('click', (e) => {
+        const targetId = link.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+          e.preventDefault();
+          
+          // Close mobile menu if open
+          if (this.isMenuOpen) {
+            this.closeMobileMenu();
+          }
+          
+          // Smooth scroll to target
+          targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+          
+          // Update URL without jumping
+          history.pushState(null, null, targetId);
+        }
+      });
+    });
+  }
+}
+
+// Initialize header component when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => new HeaderComponent());
+} else {
+  new HeaderComponent();
+}
+</script> 

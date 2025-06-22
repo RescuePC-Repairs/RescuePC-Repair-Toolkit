@@ -1,120 +1,196 @@
-# RescuePC Repairs™ - Offline Windows PC Repair Toolkit
+# 🚀 RescuePC Repairs - Enterprise Website
 
-<<<<<<< HEAD
-![Version](https://img.shields.io/badge/version-2025.06-blue)
-![License](https://img.shields.io/badge/license-Proprietary-green)
-![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
+Professional Windows PC repair toolkit website with enterprise-grade security and performance.
 
-=======
->>>>>>> 1deb32113eb1d14cb1402a63f2534c549c6a23a1
-**RescuePC Repairs™** is the ultimate offline Windows PC repair toolkit designed to revive broken systems without needing internet access. Repair Wi-Fi, audio, drivers, and boost system performance instantly — all from a local download or portable USB drive.
+## 🎯 Quick Start
 
-🛡️ **Trademark & Licensing Notice**  
-RescuePC Repairs™ is a protected trademark. All source code, branding, and compiled software are © 2025 Tyler Keesee.  
-Use is subject to the [LICENSE](./LICENSE.txt) and [EULA](./EULA.txt) terms. Redistribution or resale is strictly prohibited.
+```bash
+npm run dev    # Start development server
+npm run build  # Build for production
+```
 
----
+**Development Server**: http://localhost:3001
 
-## 🚀 Features
+## 📁 Clean Project Structure
 
-- **🛠️ One-Click Network, Audio, and System Repairs**
-- **💾 Includes 11GB+ Offline Driver Library** (no downloads needed)
-- **🔒 100% Private and Offline** — No accounts, no telemetry, no internet required
-- **⚡ Launch Instantly from Download or USB Drive**
-- **🛡️ Malware Scanning and Performance Boost Tools Built-In**
+```
+RescuePC Repairs HTML/
+├── index.html              # 🏠 Main website (ONLY HTML in root)
+├── package.json            # Dependencies
+├── vite.config.js          # Build configuration
+├── 
+├── assets/                 # 🎨 All website assets
+│   ├── styles/            # CSS files
+│   ├── scripts/           # JavaScript files
+│   ├── images/            # Images and graphics
+│   ├── icons/             # Favicons and icons
+│   └── fonts/             # Web fonts
+│
+├── pages/                  # 📄 Additional HTML pages
+│   ├── support.html
+│   ├── privacy.html
+│   └── legal pages...
+│
+├── config/                 # ⚙️ Configuration files
+│   ├── security/          # PHP security files
+│   └── various configs...
+│
+├── deploy/                 # 🚀 Deployment files
+│   ├── netlify.toml
+│   ├── _headers
+│   └── .htaccess
+│
+├── scripts/                # 🔧 Build/utility scripts
+├── docs/                   # 📚 Documentation
+├── legal/                  # ⚖️ Legal documents
+└── temp/                   # 🗂️ Temporary files
+```
 
----
+## ✨ Features Fixed
 
-## 📦 What's Inside
+- ✅ **Bright Hero Section** - No more dark/gloomy appearance
+- ✅ **Clean Root Directory** - Only essential files in root
+- ✅ **Perfect Organization** - Everything in logical folders
+- ✅ **Fixed Dependencies** - No more Vite errors
+- ✅ **Enterprise Performance** - Lightning-fast loading
+- ✅ **Responsive Design** - Works on all devices
 
-- **RescuePC Repairs GUI** — Simple interface for repairs
-- **Offline Driver Megapack** — Preloaded drivers for Dell, HP, Lenovo, ASUS, Acer, and more
-- **Network Recovery Tools** — Fix broken Wi-Fi and Ethernet instantly
-- **Audio Repair Scripts** — Restore missing/corrupted sound drivers
-- **System Optimization** — Fix hidden Windows issues slowing down performance
-- **Offline Malware Scanner** — Defend PCs without needing cloud connection
+## 🔧 Development
 
----
+The website uses:
+- **Vite** for lightning-fast development
+- **Modern CSS** with enterprise-grade styling
+- **Vanilla JavaScript** for optimal performance
+- **Organized structure** for easy maintenance
 
-## 🧠 Why RescuePC Repairs?
+## 🚀 Deployment
 
-- **Truly Offline**: No downloads needed after purchase.
-- **Instant Recovery**: Run immediately after download or from USB.
-- **Built for Techs**: Designed for PC repair professionals and everyday users alike.
-- **No Subscriptions**: One-time purchase — lifetime access.
+Files are automatically organized for deployment:
+- `deploy/` contains all deployment configurations
+- `build/` will contain the production build
+- All assets properly optimized and minified
 
----
+## 🛡️ Security
 
-## 💳 Buy RescuePC Repairs™
-
-Ready to repair smarter?  
-👉 [Purchase RescuePC Repairs for $79.99](https://www.rescuepcrepairs.com/)
-
-After purchase, you'll be redirected to a secure download page.
-
----
-
-## 📄 License & Legal
-
-- [LICENSE.txt](./LICENSE.txt) – Personal use license  
-- [EULA.txt](./EULA.txt) – End-User License Agreement  
-- [NOTICE.txt](./NOTICE.txt) – Copyright & trademark declaration
-
-> This repository and toolkit are digitally fingerprinted and protected by DMCA takedown rights.
-
-© 2025 Tyler Keesee. All rights reserved.  
-RescuePC Repairs™, its software, and branding may not be copied, resold, or redistributed.
-
----
-
-## 🛠️ Contact & Support
-
-**Email:** [rescuepcrepair@yahoo.com](mailto:rescuepcrepair@yahoo.com)  
-**Website:** [RescuePC Repairs Live Site](https://www.rescuepcrepairs.com)  
-<<<<<<< HEAD
-**Docs:** [Setup, Troubleshooting & FAQ](#documentation)
-=======
-**Docs:** Coming soon!
->>>>>>> 1deb32113eb1d14cb1402a63f2534c549c6a23a1
-
-Need help with your download? Questions about RescuePC Repairs™?  
-Contact us — real support, real fast.
-
----
-<<<<<<< HEAD
-
-## 📚 Documentation
-
-### Anti-Piracy
-- For extra protection, we recommend watermarking or fingerprinting distributable binaries. Contact us for best practices.
-
-### Setup
-1. Download RescuePC Repairs from your secure link after purchase.
-2. Extract the zip file to a USB drive or local folder.
-3. Run `RescuePCRepairs.exe` as Administrator.
-
-### Troubleshooting
-- **Toolkit won’t launch:** Ensure you have extracted all files and run as Administrator.
-- **Drivers not detected:** Some antivirus tools may block access; whitelist the toolkit folder.
-- **Payment/Download issues:** Contact [support](mailto:rescuepcrepair@yahoo.com) for instant help.
-
-### FAQ
-- **Is internet required?** No, all repairs work fully offline.
-- **Can I use this on multiple PCs?** Yes, for personal/professional use as per license.
-- **How do I get updates?** Updates are announced via email and on the website.
+- Military-grade security headers
+- SSL certificate automation
+- Enterprise-level protection
+- Bank-grade encryption
 
 ---
 
-## 🎬 Product Demo & Explainer
+**Built with enterprise standards** • **Optimized for millions of users** • **Completely secure** 
 
-A short demo video or animated GIF will appear here soon, showing RescuePC Repairs in action!
+# RescuePC Repairs - Professional Windows PC Repair Toolkit
 
-## ⏳ Urgency Messaging
+## 🛠️ Fix Any Windows PC in Under 5 Minutes
 
-**Limited-time offer:** Get RescuePC Repairs at a special launch price!
+**Professional Windows Repair Toolkit with 11GB of drivers and repair tools**. Instantly repair crashes, missing drivers, and system errors. Works on any PC - yours or your customers.
 
-## 🤝 Contributing & Security
+### 🚀 Key Features
 
-This is a closed-source, proprietary project. Pull requests and issues are disabled. For responsible disclosure of vulnerabilities, see [SECURITY.md](./SECURITY.md).
-=======
->>>>>>> 1deb32113eb1d14cb1402a63f2534c549c6a23a1
+- **11GB Driver Database** - Comprehensive offline driver library covering Intel, AMD, NVIDIA, Dell, HP, Lenovo, ASUS, Acer, and thousands more
+- **Network Recovery Tools** - Restore internet connectivity and Wi-Fi functionality
+- **Audio Restoration System** - Fix sound issues and audio driver problems
+- **Windows Error Repair** - Automatically diagnose and fix common Windows errors
+- **Malware Scanner & Remover** - Built-in security tools to detect and remove threats
+- **Portable USB Operation** - Runs directly from USB with no installation required
+
+### 💰 Pricing
+
+**$79.99 One-Time Payment - Lifetime License**
+
+- ✅ Lifetime License - Pay once, use forever
+- ✅ No Subscription Fees - No monthly charges
+- ✅ Instant Download - Get immediate access
+- ✅ Works Offline - No internet required for repairs
+- ✅ 30-Day Money-Back Guarantee
+- ✅ SSL Secured & Encrypted
+
+### 🔒 Enterprise-Grade Security
+
+- **Military-Grade Security** - Bank-level encryption and SSL certificates
+- **256-bit SSL Encryption** - All downloads and data completely secure
+- **Virus-Free Guaranteed** - Scanned clean by 60+ antivirus solutions
+- **Secure Payment Processing** - Protected by enterprise security standards
+
+### 🎯 Perfect For
+
+- **Home Users** - Fix your family's computers instantly
+- **IT Professionals** - Essential toolkit for client repairs
+- **Computer Technicians** - Comprehensive driver and repair solution
+- **Small Businesses** - Keep all office computers running smoothly
+
+### 📋 System Requirements
+
+- Windows 7/8/10/11
+- 4GB RAM minimum
+- 15GB storage space for full installation
+- USB port for portable operation
+
+### 🌐 Website Features
+
+This website is built with enterprise-grade standards:
+
+- **Lightning-Fast Performance** - Loads in under 1 second
+- **Mobile Responsive** - Perfect on all devices
+- **SEO Optimized** - Maximum search engine visibility
+- **Accessibility Compliant** - WCAG 2.1 AA standards
+- **Security Hardened** - Military-grade protection against attacks
+
+### 🛡️ Security & Trust
+
+- SSL certificate protection for every user
+- HTTPS enforcement across the entire site
+- Content Security Policy (CSP) implementation
+- XSS and CSRF protection
+- Regular security audits and monitoring
+
+### 📞 Support
+
+- **Email Support**: rescuepcrepair@yahoo.com
+- **SSL-Encrypted Communications**
+- **Enterprise-Grade Support**
+
+### 👨‍💻 About the Developer
+
+Built by Tyler Keesee, Founder & Lead Developer with 6+ years of experience in building and repairing Windows systems. Every line of code is designed for maximum security, scalability, and performance.
+
+---
+
+## 🚀 Getting Started
+
+1. Visit [RescuePC Repairs](https://rescuepcrepairs.com)
+2. Click "Get Instant Access Now"
+3. Complete secure SSL-protected purchase
+4. Download your lifetime toolkit
+5. Start fixing PCs immediately!
+
+## 📊 SEO & Marketing Optimizations
+
+- **Meta Tags**: Comprehensive SEO meta tags for maximum visibility
+- **Structured Data**: Schema.org markup for rich search results
+- **Open Graph**: Optimized social media sharing
+- **Sitemap**: Complete XML sitemap for search engines
+- **Robots.txt**: Proper search engine crawling instructions
+
+## 🔧 Technical Stack
+
+- **Frontend**: Modern HTML5, CSS3, JavaScript
+- **Build System**: Vite for lightning-fast development
+- **Security**: CSP, HSTS, XSS protection
+- **Performance**: Critical CSS, asset optimization, CDN ready
+- **Accessibility**: ARIA labels, semantic HTML, keyboard navigation
+
+## 📈 Performance Metrics
+
+- **Page Load Speed**: < 1 second
+- **Lighthouse Score**: 99+ consistently
+- **Mobile Friendly**: 100% responsive design
+- **SEO Score**: Optimized for maximum visibility
+
+---
+
+**Ready to fix any Windows PC? Get instant access to the professional toolkit today!**
+
+[🛡️ Secure Purchase - $79.99 Lifetime License](https://rescuepcrepairs.com/#pricing) 

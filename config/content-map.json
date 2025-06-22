@@ -145,11 +145,6 @@
           "name": "Product Flyer",
           "location": "RescuePC Repairs Flyer.pdf",
           "type": "Downloadable"
-        },
-        {
-          "name": "Portfolio",
-          "location": "Portfolio/",
-          "type": "Showcase"
         }
       ]
     },

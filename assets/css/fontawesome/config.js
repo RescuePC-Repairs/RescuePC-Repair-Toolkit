@@ -23,7 +23,7 @@ const config = {
       'book', 'file-alt', 'palette'
     ],
     brands: [
-      'facebook', 'twitter', 'discord', 'github', 'linkedin', 'python',
+      'facebook', 'twitter', '', 'github', 'linkedin', 'python',
       'js', 'react', 'rust', 'golang', 'x-twitter'
     ],
     regular: [
