@@ -684,6 +684,15 @@ section + .section,
   font-size: 0.95rem;
 }
 
+/* Mobile/Desktop text switching */
+.mobile-text {
+  display: none;
+}
+
+.desktop-text {
+  display: block;
+}
+
 .security-indicators {
   display: flex;
   justify-content: center;
@@ -1752,6 +1761,22 @@ section + .section,
     overflow: hidden;
   }
   
+  .benefit-item span {
+    font-size: 0.8rem !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+  
+  .mobile-text {
+    display: block !important;
+  }
+  
+  .desktop-text {
+    display: none !important;
+  }
+  
   .feature-card,
   .capability-card {
     padding: var(--space-lg);
@@ -1826,7 +1851,8 @@ section + .section,
   }
 
   .logo span {
-    display: none;
+    font-size: 0.9rem;
+    white-space: nowrap;
   }
 
   .nav {
