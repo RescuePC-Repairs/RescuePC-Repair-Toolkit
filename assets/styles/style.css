@@ -684,13 +684,23 @@ section + .section,
   font-size: 0.95rem;
 }
 
-/* Mobile/Desktop text switching */
+/* Mobile/Desktop text switching - Accessibility-friendly */
 .mobile-text {
-  display: none;
+  display: block;
 }
 
 .desktop-text {
-  display: block;
+  display: none;
+}
+
+@media (min-width: 481px) {
+  .mobile-text {
+    display: none;
+  }
+  
+  .desktop-text {
+    display: block;
+  }
 }
 
 .security-indicators {
@@ -1769,13 +1779,7 @@ section + .section,
     text-overflow: ellipsis !important;
   }
   
-  .mobile-text {
-    display: block !important;
-  }
-  
-  .desktop-text {
-    display: none !important;
-  }
+
   
   .feature-card,
   .capability-card {
