@@ -336,21 +336,21 @@ class UltraAdvancedApp {
    * Start monitoring systems
    */
   startMonitoring() {
-    // Performance monitoring
-    if (this.performance) {
-      setInterval(() => {
-        const metrics = this.performance.getPerformanceMetrics();
-        this.logger.debug('Performance metrics', metrics);
-      }, 30000); // Every 30 seconds
-    }
+    // Performance monitoring - DISABLED TO PREVENT FLASHING
+    // if (this.performance) {
+    //   setInterval(() => {
+    //     const metrics = this.performance.getPerformanceMetrics();
+    //     this.logger.debug('Performance metrics', metrics);
+    //   }, 30000); // Every 30 seconds
+    // }
 
-    // Security monitoring
-    if (this.security) {
-      setInterval(() => {
-        const metrics = this.security.getSecurityMetrics();
-        this.logger.debug('Security metrics', metrics);
-      }, 60000); // Every minute
-    }
+    // Security monitoring - DISABLED TO PREVENT FLASHING
+    // if (this.security) {
+    //   setInterval(() => {
+    //     const metrics = this.security.getSecurityMetrics();
+    //     this.logger.debug('Security metrics', metrics);
+    //   }, 60000); // Every minute
+    // }
 
     // Memory monitoring
     this.startMemoryMonitoring();
@@ -362,21 +362,22 @@ class UltraAdvancedApp {
    * Start memory monitoring
    */
   startMemoryMonitoring() {
-    if ('memory' in performance) {
-      setInterval(() => {
-        const memory = performance.memory;
-        const usage = {
-          used: Math.round(memory.usedJSHeapSize / 1048576), // MB
-          total: Math.round(memory.totalJSHeapSize / 1048576), // MB
-          limit: Math.round(memory.jsHeapSizeLimit / 1048576) // MB
-        };
+    // DISABLED TO PREVENT FLASHING
+    // if ('memory' in performance) {
+    //   setInterval(() => {
+    //     const memory = performance.memory;
+    //     const usage = {
+    //       used: Math.round(memory.usedJSHeapSize / 1048576), // MB
+    //       total: Math.round(memory.totalJSHeapSize / 1048576), // MB
+    //       limit: Math.round(memory.jsHeapSizeLimit / 1048576) // MB
+    //     };
 
-        if (usage.used / usage.limit > 0.8) {
-          this.logger.warn('High memory usage detected', usage);
-          this.optimizeMemoryUsage();
-        }
-      }, 60000); // Every minute
-    }
+    //     if (usage.used / usage.limit > 0.8) {
+    //       this.logger.warn('High memory usage detected', usage);
+    //       this.optimizeMemoryUsage();
+    //     }
+    //   }, 60000); // Every minute
+    // }
   }
 
   /**
