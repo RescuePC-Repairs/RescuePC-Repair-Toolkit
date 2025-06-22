@@ -8,12 +8,12 @@ if ('serviceWorker' in navigator) {
       .then(registration => {
         console.log('ServiceWorker registration successful with scope: ', registration.scope);
         
-        // Check for updates every hour
-        setInterval(() => {
-          registration.update().catch(err => 
-            console.log('Service worker update check failed: ', err)
-          );
-        }, 60 * 60 * 1000);
+        // Check for updates every hour - DISABLED TO PREVENT FLASHING
+        // setInterval(() => {
+        //   registration.update().catch(err => 
+        //     console.log('Service worker update check failed: ', err)
+        //   );
+        // }, 60 * 60 * 1000);
       })
       .catch(error => {
         console.error('ServiceWorker registration failed: ', error);
@@ -128,8 +128,8 @@ async function checkForUpdates() {
   }
 }
 
-// Check for updates every hour
-setInterval(checkForUpdates, 60 * 60 * 1000);
+// Check for updates every hour - DISABLED TO PREVENT FLASHING
+// setInterval(checkForUpdates, 60 * 60 * 1000);
 
 // Initial update check
 if ('serviceWorker' in navigator) {

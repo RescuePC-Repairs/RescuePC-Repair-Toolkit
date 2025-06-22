@@ -146,22 +146,17 @@ body {
 body::before {
   content: '';
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, 
-    var(--rescuepc-security-green) 0%, 
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg, 
+    var(--rescuepc-primary) 0%, 
     var(--rescuepc-primary) 50%, 
     var(--rescuepc-security-green) 100%
   );
   z-index: var(--rescuepc-z-security);
-  animation: securityPulse 3s ease-in-out infinite;
-}
-
-@keyframes securityPulse {
-  0%, 100% { opacity: 0.8; }
-  50% { opacity: 1; }
 }
 
 /* ========================================
@@ -375,13 +370,15 @@ a:hover {
   transform: translateY(-50%);
   color: var(--rescuepc-security-green);
   font-size: var(--rescuepc-text-lg);
-  animation: securityBlink 2s ease-in-out infinite;
+  /* REMOVED: animation: securityBlink 2s ease-in-out infinite; */
 }
 
+/* DISABLED FLASHING ANIMATION
 @keyframes securityBlink {
   0%, 100% { opacity: 0.7; }
   50% { opacity: 1; }
 }
+*/
 
 /* ========================================
    HERO SECTION - ULTRA-POWERFUL DESIGN
@@ -547,13 +544,15 @@ a:hover {
 .rescuepc-btn-hero {
   background: linear-gradient(135deg, var(--rescuepc-primary) 0%, var(--rescuepc-accent) 100%);
   box-shadow: var(--rescuepc-shadow-security);
-  animation: heroButtonPulse 3s ease-in-out infinite;
+  /* REMOVED: animation: heroButtonPulse 3s ease-in-out infinite; */
 }
 
+/* DISABLED FLASHING ANIMATION
 @keyframes heroButtonPulse {
   0%, 100% { box-shadow: var(--rescuepc-shadow-security); }
   50% { box-shadow: 0 0 30px rgba(30, 64, 175, 0.5); }
 }
+*/
 
 /* ========================================
    ANIMATIONS - ULTRA-SMOOTH

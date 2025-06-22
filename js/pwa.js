@@ -108,8 +108,8 @@ const checkForUpdates = async () => {
   }
 };
 
-// Check for updates every hour
-setInterval(checkForUpdates, 60 * 60 * 1000);
+    // Check for updates every hour - DISABLED TO PREVENT FLASHING
+    // setInterval(checkForUpdates, 60 * 60 * 1000);
 
 // Initial update check
 if ('serviceWorker' in navigator) {
