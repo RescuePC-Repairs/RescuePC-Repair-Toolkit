@@ -74,9 +74,9 @@
     0 4px 8px rgba(0, 0, 0, 0.2),
     0 8px 16px rgba(0, 0, 0, 0.1);
   
-  /* Prevent text overflow */
+  /* Prevent text overflow without hyphenation */
   word-wrap: break-word;
-  hyphens: auto;
+  hyphens: none;
 }
 
 /* Enhanced eyebrow text */

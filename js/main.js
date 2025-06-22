@@ -220,66 +220,19 @@ document.addEventListener('DOMContentLoaded', function() {
     observer.observe(el);
   });
   
-  // FAQ functionality - Enhanced with better error handling
+  // Simple FAQ - No interactions needed (now static display)
   function initializeFAQ() {
-    const faqQuestions = document.querySelectorAll('.faq-question');
+    const faqSimpleItems = document.querySelectorAll('.faq-simple-item');
     
-    if (faqQuestions.length === 0) {
-      console.log('No FAQ questions found');
+    if (faqSimpleItems.length === 0) {
+      console.log('No simple FAQ items found');
       return;
     }
     
-    faqQuestions.forEach((question, index) => {
-      // Set initial ARIA attributes
-      question.setAttribute('aria-expanded', 'false');
-      question.setAttribute('id', `faq-question-${index}`);
-      
-      const answer = question.nextElementSibling;
-      if (answer && answer.classList.contains('faq-answer')) {
-        answer.setAttribute('id', `faq-answer-${index}`);
-        question.setAttribute('aria-controls', `faq-answer-${index}`);
-      }
-      
-      question.addEventListener('click', function(e) {
-        e.preventDefault();
-        const faqItem = this.closest('.faq-item');
-        const answer = this.nextElementSibling;
-        const isActive = faqItem.classList.contains('active');
-        
-        // Close all other FAQ items
-        document.querySelectorAll('.faq-item').forEach(item => {
-          if (item !== faqItem) {
-            item.classList.remove('active');
-            const q = item.querySelector('.faq-question');
-            if (q) q.setAttribute('aria-expanded', 'false');
-          }
-        });
-        
-        // Toggle current item
-        if (!isActive) {
-          faqItem.classList.add('active');
-          this.setAttribute('aria-expanded', 'true');
-          console.log('FAQ opened:', this.textContent.trim());
-        } else {
-          faqItem.classList.remove('active');
-          this.setAttribute('aria-expanded', 'false');
-          console.log('FAQ closed:', this.textContent.trim());
-        }
-      });
-      
-      // Keyboard support
-      question.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          this.click();
-        }
-      });
-    });
-    
-    console.log(`✅ FAQ initialized with ${faqQuestions.length} questions`);
+    console.log(`✅ Simple FAQ loaded with ${faqSimpleItems.length} items - all visible`);
   }
   
-  // Initialize FAQ
+  // Initialize FAQ (now just for logging)
   initializeFAQ();
   
   // Button hover effects for better UX
