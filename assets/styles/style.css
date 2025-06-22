@@ -2231,7 +2231,7 @@ i.fas, i.far, i.fab, i.fa {
     flex-direction: column !important;
     justify-content: center !important;
     align-items: center !important;
-    padding: var(--space-3xl) var(--space-lg) !important;
+    padding: 60px 20px !important;
     transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
     z-index: 9999 !important;
     overflow-y: auto !important;
@@ -2250,10 +2250,10 @@ i.fas, i.far, i.fab, i.fa {
   /* Nav links are already visible - no need to show/hide */
   
   .nav-link {
-    font-size: clamp(1.1rem, 3vw, 1.4rem) !important;
+    font-size: clamp(1rem, 3vw, 1.2rem) !important;
     font-weight: 600 !important;
     color: #ffffff !important;
-    padding: var(--space-md) var(--space-lg) !important;
+    padding: 12px 20px !important;
     border-radius: var(--radius-lg) !important;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
     display: block !important;
@@ -2265,7 +2265,7 @@ i.fas, i.far, i.fab, i.fa {
     background: rgba(255, 255, 255, 0.1) !important;
     border: 2px solid rgba(255, 255, 255, 0.15) !important;
     backdrop-filter: blur(15px) !important;
-    margin: var(--space-xs) 0 !important;
+    margin: 2px 0 !important;
     position: relative !important;
     overflow: hidden !important;
   }
