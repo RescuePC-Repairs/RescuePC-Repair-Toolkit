@@ -247,32 +247,32 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
-  // Navbar scroll effects
+  // Auto-hiding navbar scroll effects
   let lastScroll = 0;
   const SCROLL_THRESHOLD = 10;
+  const header = document.querySelector('.header') || navbar;
   
   function handleScroll() {
     const currentScroll = window.pageYOffset;
     
     // Always show navbar at the top of the page
-    if (currentScroll <= 0) {
-      navbar.classList.remove('scrolled-up');
-      navbar.classList.remove('scrolled');
+    if (currentScroll <= 100) {
+      header.classList.remove('navbar-hidden');
+      header.classList.remove('scrolled');
+      lastScroll = currentScroll;
       return;
     }
     
-    // Add shadow when scrolled
-    navbar.classList.add('scrolled');
+    // Add scrolled class for styling
+    header.classList.add('scrolled');
     
-    // Hide/show navbar on scroll direction
-    if (currentScroll > lastScroll + SCROLL_THRESHOLD) {
-      // Scrolling down
-      navbar.classList.remove('scrolled-up');
-      navbar.classList.add('scrolled-down');
+    // Hide/show navbar based on scroll direction
+    if (currentScroll > lastScroll + SCROLL_THRESHOLD && currentScroll > 200) {
+      // Scrolling down - hide navbar
+      header.classList.add('navbar-hidden');
     } else if (currentScroll < lastScroll - SCROLL_THRESHOLD) {
-      // Scrolling up
-      navbar.classList.remove('scrolled-down');
-      navbar.classList.add('scrolled-up');
+      // Scrolling up - show navbar
+      header.classList.remove('navbar-hidden');
     }
     
     lastScroll = currentScroll;
