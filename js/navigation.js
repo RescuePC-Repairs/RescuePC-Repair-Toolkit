@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // Cache DOM elements
-  const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-  const mobileNav = document.querySelector('.mobile-nav');
-  const navOverlay = document.querySelector('.nav-overlay');
+  // Cache DOM elements - Updated for actual HTML structure
+  const mobileMenuToggle = document.querySelector('.mobile-toggle');
+  const mobileNav = document.querySelector('.nav');
+  const navOverlay = null; // Not used in current structure
   const body = document.body;
-  const navLinks = document.querySelectorAll('.mobile-nav .nav-link');
-  const navbar = document.querySelector('.navbar');
+  const navLinks = document.querySelectorAll('.nav-link');
+  const navbar = document.querySelector('.header');
   
   // State management
   let isMenuOpen = false;
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Initial call to set active state on page load
   highlightActiveSection();
   
-  // Toggle mobile menu with animations
+  // Toggle mobile menu with animations - Updated for simpler structure
   function toggleMenu(e) {
     if (e) e.stopPropagation();
     if (isAnimating) return;
@@ -88,47 +88,16 @@ document.addEventListener('DOMContentLoaded', function() {
     isMenuOpen = !isMenuOpen;
     
     // Update ARIA and state
-    mobileMenuToggle.setAttribute('aria-expanded', isMenuOpen);
-    mobileMenuToggle.classList.toggle('is-active', isMenuOpen);
-    
-    if (isMenuOpen) {
-      // Open menu
-      body.classList.add('menu-open');
-      navOverlay.style.display = 'block';
-      mobileNav.style.display = 'flex'; // Ensure flex display for proper layout
-      
-      // Force reflow to ensure the display property is applied
-      void navOverlay.offsetHeight;
-      
-      // Add active classes with slight delay for overlay
-      requestAnimationFrame(() => {
-        mobileNav.classList.add('active');
-        navOverlay.classList.add('active');
-      });
-      
-      // Focus management for accessibility
-      setTimeout(() => {
-        const firstLink = mobileNav.querySelector('a');
-        if (firstLink) firstLink.focus();
-      }, 100);
-      
-    } else {
-      // Close menu
-      mobileNav.classList.remove('active');
-      navOverlay.classList.remove('active');
-      body.classList.remove('menu-open');
-      
-      // Return focus to toggle button
-      setTimeout(() => {
-        mobileMenuToggle.focus();
-        
-        // Hide elements after animation
-        if (!mobileNav.classList.contains('active')) {
-          mobileNav.style.display = 'none';
-          navOverlay.style.display = 'none';
-        }
-      }, 300);
+    if (mobileMenuToggle) {
+      mobileMenuToggle.setAttribute('aria-expanded', isMenuOpen);
+      mobileMenuToggle.classList.toggle('is-active', isMenuOpen);
     }
+    
+    if (mobileNav) {
+      mobileNav.classList.toggle('active', isMenuOpen);
+    }
+    
+    body.classList.toggle('mobile-menu-open', isMenuOpen);
     
     // Reset animation lock
     setTimeout(() => {
@@ -136,15 +105,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 300);
   }
   
-  // Event Listeners
-  mobileMenuToggle.addEventListener('click', toggleMenu);
-  
-  // Close menu when clicking on overlay
-  navOverlay.addEventListener('click', function(e) {
-    if (isMenuOpen) {
-      toggleMenu(e);
-    }
-  });
+  // Event Listeners - Updated for simpler structure
+  if (mobileMenuToggle) {
+    mobileMenuToggle.addEventListener('click', toggleMenu);
+  }
   
   // Close menu when clicking on nav links
   navLinks.forEach(link => {
@@ -165,15 +129,8 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Close menu when window is resized to desktop
   function handleResize() {
-    if (window.innerWidth > 992 && isMenuOpen) {
+    if (window.innerWidth > 1024 && isMenuOpen) {
       toggleMenu();
-    } else {
-      // Reset mobile nav display property on larger screens
-      if (window.innerWidth > 992) {
-        mobileNav.style.display = 'none';
-        navOverlay.style.display = 'none';
-        body.classList.remove('menu-open');
-      }
     }
   }
   
@@ -183,12 +140,6 @@ document.addEventListener('DOMContentLoaded', function() {
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(handleResize, 100);
   });
-  
-  // Initial setup
-  if (window.innerWidth <= 992) {
-    mobileNav.style.display = 'none';
-    navOverlay.style.display = 'none';
-  }
   
   // Smooth scrolling for anchor links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
