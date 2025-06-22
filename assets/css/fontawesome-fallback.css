@@ -1,0 +1,36 @@
+/* FontAwesome Fallback - Essential Icons Only */
+@font-face {
+  font-family: 'Font Awesome 6 Free';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url('../fonts/fa-solid-900.woff2') format('woff2');
+}
+
+.fas {
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Essential icons for the website */
+.fa-shield-alt:before { content: "\f3ed"; }
+.fa-lock:before { content: "\f023"; }
+.fa-certificate:before { content: "\f0a3"; }
+.fa-check-circle:before { content: "\f058"; }
+.fa-tools:before { content: "\f7d9"; }
+.fa-magic:before { content: "\f0d0"; }
+.fa-shield-virus:before { content: "\e06c"; }
+.fa-rocket:before { content: "\f135"; }
+.fa-headset:before { content: "\f590"; }
+.fa-infinity:before { content: "\f534"; }
+.fa-star:before { content: "\f005"; }
+.fa-download:before { content: "\f019"; }
+.fa-credit-card:before { content: "\f09d"; }
+.fa-plus:before { content: "\f067"; }
+.fa-undo:before { content: "\f0e2"; } 

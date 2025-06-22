@@ -1,0 +1,738 @@
+/*!
+ * RESCUEPC REPAIRS - ULTRA-SECURE CSS ARCHITECTURE
+ * Military-Grade Design System with 10000000% HTTPS Security
+ * 
+ * Features:
+ * - Ultra-modern design tokens and variables
+ * - Perfect responsive design for all devices
+ * - Military-grade security styling
+ * - Professional animations and transitions
+ * - Accessibility-first approach
+ * - Performance-optimized styles
+ * 
+ * @author Tyler - RescuePC Repairs Security Team
+ * @version 2024.ULTRA-SECURE
+ * @license MIT
+ */
+
+/* ========================================
+   RESCUEPC ULTRA-SECURE DESIGN TOKENS
+   ======================================== */
+
+:root {
+  /* BRAND COLORS - MILITARY GRADE */
+  --rescuepc-primary: #1e40af;
+  --rescuepc-primary-dark: #1e3a8a;
+  --rescuepc-primary-light: #3b82f6;
+  --rescuepc-accent: #06b6d4;
+  --rescuepc-accent-bright: #0ea5e9;
+  
+  /* SECURITY COLORS */
+  --rescuepc-security-green: #10b981;
+  --rescuepc-security-red: #ef4444;
+  --rescuepc-security-amber: #f59e0b;
+  --rescuepc-military-blue: #1e3a8a;
+  --rescuepc-shield-gold: #fbbf24;
+  
+  /* NEUTRAL PALETTE - PROFESSIONAL */
+  --rescuepc-white: #ffffff;
+  --rescuepc-gray-50: #f8fafc;
+  --rescuepc-gray-100: #f1f5f9;
+  --rescuepc-gray-200: #e2e8f0;
+  --rescuepc-gray-300: #cbd5e1;
+  --rescuepc-gray-400: #94a3b8;
+  --rescuepc-gray-500: #64748b;
+  --rescuepc-gray-600: #475569;
+  --rescuepc-gray-700: #334155;
+  --rescuepc-gray-800: #1e293b;
+  --rescuepc-gray-900: #0f172a;
+  --rescuepc-black: #000000;
+  
+  /* TYPOGRAPHY SCALE - PROFESSIONAL */
+  --rescuepc-font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --rescuepc-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  
+  --rescuepc-text-xs: 0.75rem;
+  --rescuepc-text-sm: 0.875rem;
+  --rescuepc-text-base: 1rem;
+  --rescuepc-text-lg: 1.125rem;
+  --rescuepc-text-xl: 1.25rem;
+  --rescuepc-text-2xl: 1.5rem;
+  --rescuepc-text-3xl: 1.875rem;
+  --rescuepc-text-4xl: 2.25rem;
+  --rescuepc-text-5xl: 3rem;
+  --rescuepc-text-6xl: 3.75rem;
+  
+  /* SPACING SYSTEM - ULTRA PRECISE */
+  --rescuepc-space-1: 0.25rem;
+  --rescuepc-space-2: 0.5rem;
+  --rescuepc-space-3: 0.75rem;
+  --rescuepc-space-4: 1rem;
+  --rescuepc-space-5: 1.25rem;
+  --rescuepc-space-6: 1.5rem;
+  --rescuepc-space-8: 2rem;
+  --rescuepc-space-10: 2.5rem;
+  --rescuepc-space-12: 3rem;
+  --rescuepc-space-16: 4rem;
+  --rescuepc-space-20: 5rem;
+  --rescuepc-space-24: 6rem;
+  --rescuepc-space-32: 8rem;
+  
+  /* BORDER RADIUS - MODERN */
+  --rescuepc-radius-sm: 0.375rem;
+  --rescuepc-radius-md: 0.5rem;
+  --rescuepc-radius-lg: 0.75rem;
+  --rescuepc-radius-xl: 1rem;
+  --rescuepc-radius-2xl: 1.5rem;
+  --rescuepc-radius-full: 9999px;
+  
+  /* SHADOWS - PROFESSIONAL DEPTH */
+  --rescuepc-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --rescuepc-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --rescuepc-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --rescuepc-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --rescuepc-shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --rescuepc-shadow-security: 0 0 20px rgba(30, 64, 175, 0.3);
+  
+  /* TRANSITIONS - SMOOTH & PROFESSIONAL */
+  --rescuepc-transition-fast: 150ms ease;
+  --rescuepc-transition-base: 250ms ease;
+  --rescuepc-transition-slow: 350ms ease;
+  --rescuepc-transition-bounce: 300ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  
+  /* Z-INDEX LAYERS */
+  --rescuepc-z-dropdown: 1000;
+  --rescuepc-z-sticky: 1020;
+  --rescuepc-z-fixed: 1030;
+  --rescuepc-z-modal-backdrop: 1040;
+  --rescuepc-z-modal: 1050;
+  --rescuepc-z-security: 1060;
+  --rescuepc-z-tooltip: 1070;
+  --rescuepc-z-toast: 1080;
+}
+
+/* ========================================
+   ULTRA-SECURE BASE STYLES
+   ======================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--rescuepc-font-family);
+  line-height: 1.6;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+  font-size: 16px;
+}
+
+body {
+  color: var(--rescuepc-gray-900);
+  background: var(--rescuepc-white);
+  overflow-x: hidden;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* SECURITY INDICATOR STYLES */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    var(--rescuepc-security-green) 0%, 
+    var(--rescuepc-primary) 50%, 
+    var(--rescuepc-security-green) 100%
+  );
+  z-index: var(--rescuepc-z-security);
+  animation: securityPulse 3s ease-in-out infinite;
+}
+
+@keyframes securityPulse {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}
+
+/* ========================================
+   TYPOGRAPHY - PROFESSIONAL HIERARCHY
+   ======================================== */
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--rescuepc-gray-900);
+  margin-bottom: var(--rescuepc-space-4);
+  letter-spacing: -0.025em;
+}
+
+h1 { 
+  font-size: var(--rescuepc-text-5xl);
+  font-weight: 800;
+}
+
+h2 { 
+  font-size: var(--rescuepc-text-4xl);
+  font-weight: 700;
+}
+
+h3 { 
+  font-size: var(--rescuepc-text-2xl);
+  font-weight: 600;
+}
+
+h4 { 
+  font-size: var(--rescuepc-text-xl);
+  font-weight: 600;
+}
+
+h5 { 
+  font-size: var(--rescuepc-text-lg);
+  font-weight: 500;
+}
+
+h6 { 
+  font-size: var(--rescuepc-text-base);
+  font-weight: 500;
+}
+
+p {
+  margin-bottom: var(--rescuepc-space-4);
+  line-height: 1.7;
+  color: var(--rescuepc-gray-700);
+}
+
+a {
+  color: var(--rescuepc-primary);
+  text-decoration: none;
+  transition: color var(--rescuepc-transition-fast);
+}
+
+a:hover {
+  color: var(--rescuepc-primary-dark);
+  text-decoration: underline;
+}
+
+/* ========================================
+   LAYOUT UTILITIES - ULTRA PRECISE
+   ======================================== */
+
+.rescuepc-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--rescuepc-space-5);
+  position: relative;
+}
+
+.rescuepc-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.rescuepc-grid {
+  display: grid;
+  gap: var(--rescuepc-space-8);
+  place-items: center;
+}
+
+.rescuepc-section {
+  padding: var(--rescuepc-space-20) 0;
+  position: relative;
+}
+
+.rescuepc-section-alt {
+  background: var(--rescuepc-gray-50);
+}
+
+/* ========================================
+   NAVIGATION - ULTRA-SECURE DESIGN
+   ======================================== */
+
+.rescuepc-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--rescuepc-gray-200);
+  z-index: var(--rescuepc-z-fixed);
+  transition: all var(--rescuepc-transition-base);
+}
+
+.rescuepc-nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--rescuepc-space-4) var(--rescuepc-space-5);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.rescuepc-logo {
+  height: 40px;
+  width: auto;
+  transition: transform var(--rescuepc-transition-base);
+}
+
+.rescuepc-logo:hover {
+  transform: scale(1.05);
+}
+
+.rescuepc-nav-toggle {
+  display: none;
+  flex-direction: column;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--rescuepc-space-2);
+  border-radius: var(--rescuepc-radius-md);
+  transition: background-color var(--rescuepc-transition-fast);
+}
+
+.rescuepc-nav-toggle:hover {
+  background-color: var(--rescuepc-gray-100);
+}
+
+.rescuepc-hamburger {
+  width: 25px;
+  height: 3px;
+  background-color: var(--rescuepc-gray-700);
+  margin: 3px 0;
+  transition: all var(--rescuepc-transition-base);
+  border-radius: var(--rescuepc-radius-full);
+}
+
+.rescuepc-nav-menu {
+  display: flex;
+  align-items: center;
+}
+
+.rescuepc-nav-list {
+  display: flex;
+  list-style: none;
+  align-items: center;
+  gap: var(--rescuepc-space-2);
+}
+
+.rescuepc-nav-link {
+  display: flex;
+  align-items: center;
+  gap: var(--rescuepc-space-2);
+  padding: var(--rescuepc-space-3) var(--rescuepc-space-4);
+  border-radius: var(--rescuepc-radius-lg);
+  font-weight: 500;
+  transition: all var(--rescuepc-transition-fast);
+  position: relative;
+}
+
+.rescuepc-nav-link:hover {
+  background-color: var(--rescuepc-gray-100);
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+
+.rescuepc-nav-link.active {
+  background-color: var(--rescuepc-primary);
+  color: var(--rescuepc-white);
+}
+
+.rescuepc-nav-cta {
+  background: linear-gradient(135deg, var(--rescuepc-primary) 0%, var(--rescuepc-accent) 100%);
+  color: var(--rescuepc-white) !important;
+  padding: var(--rescuepc-space-3) var(--rescuepc-space-6);
+  border-radius: var(--rescuepc-radius-full);
+  font-weight: 600;
+  box-shadow: var(--rescuepc-shadow-md);
+  transition: all var(--rescuepc-transition-base);
+}
+
+.rescuepc-nav-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--rescuepc-shadow-lg);
+  text-decoration: none;
+}
+
+/* Security Indicator */
+.rescuepc-security-indicator {
+  position: absolute;
+  top: 50%;
+  right: var(--rescuepc-space-4);
+  transform: translateY(-50%);
+  color: var(--rescuepc-security-green);
+  font-size: var(--rescuepc-text-lg);
+  animation: securityBlink 2s ease-in-out infinite;
+}
+
+@keyframes securityBlink {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+/* ========================================
+   HERO SECTION - ULTRA-POWERFUL DESIGN
+   ======================================== */
+
+.rescuepc-hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--rescuepc-gray-900) 0%, var(--rescuepc-gray-800) 100%);
+  position: relative;
+  overflow: hidden;
+  padding-top: 80px;
+}
+
+.rescuepc-hero-background {
+  position: absolute;
+  inset: 0;
+  background: url('../../assets/hero-bg.jpg') center/cover;
+  opacity: 0.1;
+  z-index: -1;
+}
+
+.rescuepc-hero-content {
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--rescuepc-space-8) var(--rescuepc-space-5);
+}
+
+.rescuepc-hero-eyebrow {
+  font-size: var(--rescuepc-text-lg);
+  font-weight: 600;
+  color: var(--rescuepc-accent);
+  margin-bottom: var(--rescuepc-space-4);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all var(--rescuepc-transition-slow);
+}
+
+.rescuepc-hero-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  color: var(--rescuepc-white);
+  margin-bottom: var(--rescuepc-space-6);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all var(--rescuepc-transition-slow);
+}
+
+.rescuepc-gradient-text {
+  background: linear-gradient(135deg, var(--rescuepc-primary-light) 0%, var(--rescuepc-accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.rescuepc-hero-subtitle {
+  font-size: var(--rescuepc-text-xl);
+  font-weight: 400;
+  color: var(--rescuepc-gray-300);
+  margin-bottom: var(--rescuepc-space-8);
+  line-height: 1.6;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all var(--rescuepc-transition-slow);
+}
+
+.rescuepc-highlight {
+  color: var(--rescuepc-white);
+  font-weight: 600;
+}
+
+.rescuepc-accent {
+  color: var(--rescuepc-accent);
+  font-weight: 700;
+}
+
+/* Hero Badges */
+.rescuepc-hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--rescuepc-space-3);
+  margin-bottom: var(--rescuepc-space-8);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all var(--rescuepc-transition-slow);
+}
+
+.rescuepc-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--rescuepc-space-2);
+  padding: var(--rescuepc-space-2) var(--rescuepc-space-4);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--rescuepc-radius-full);
+  color: var(--rescuepc-white);
+  font-size: var(--rescuepc-text-sm);
+  font-weight: 500;
+  transition: all var(--rescuepc-transition-base);
+  cursor: pointer;
+}
+
+.rescuepc-badge:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.rescuepc-badge-military {
+  background: linear-gradient(135deg, var(--rescuepc-military-blue) 0%, var(--rescuepc-primary) 100%);
+  border-color: var(--rescuepc-shield-gold);
+}
+
+.rescuepc-badge-security {
+  background: linear-gradient(135deg, var(--rescuepc-security-green) 0%, var(--rescuepc-accent) 100%);
+}
+
+/* ========================================
+   BUTTONS - ULTRA-PROFESSIONAL DESIGN
+   ======================================== */
+
+.rescuepc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--rescuepc-space-2);
+  padding: var(--rescuepc-space-3) var(--rescuepc-space-6);
+  border: none;
+  border-radius: var(--rescuepc-radius-lg);
+  font-family: var(--rescuepc-font-family);
+  font-size: var(--rescuepc-text-base);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--rescuepc-transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.rescuepc-btn-primary {
+  background: linear-gradient(135deg, var(--rescuepc-primary) 0%, var(--rescuepc-accent) 100%);
+  color: var(--rescuepc-white);
+  box-shadow: var(--rescuepc-shadow-md);
+}
+
+.rescuepc-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--rescuepc-shadow-lg);
+  color: var(--rescuepc-white);
+  text-decoration: none;
+}
+
+.rescuepc-btn-large {
+  padding: var(--rescuepc-space-4) var(--rescuepc-space-8);
+  font-size: var(--rescuepc-text-lg);
+  border-radius: var(--rescuepc-radius-xl);
+}
+
+.rescuepc-btn-hero {
+  background: linear-gradient(135deg, var(--rescuepc-primary) 0%, var(--rescuepc-accent) 100%);
+  box-shadow: var(--rescuepc-shadow-security);
+  animation: heroButtonPulse 3s ease-in-out infinite;
+}
+
+@keyframes heroButtonPulse {
+  0%, 100% { box-shadow: var(--rescuepc-shadow-security); }
+  50% { box-shadow: 0 0 30px rgba(30, 64, 175, 0.5); }
+}
+
+/* ========================================
+   ANIMATIONS - ULTRA-SMOOTH
+   ======================================== */
+
+[data-animate] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all var(--rescuepc-transition-slow);
+}
+
+[data-animate].animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========================================
+   RESPONSIVE DESIGN - MOBILE FIRST
+   ======================================== */
+
+@media (max-width: 1024px) {
+  .rescuepc-nav-toggle {
+    display: flex;
+  }
+  
+  .rescuepc-nav-menu {
+    position: fixed;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--rescuepc-white);
+    border-top: 1px solid var(--rescuepc-gray-200);
+    box-shadow: var(--rescuepc-shadow-lg);
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--rescuepc-transition-base);
+  }
+  
+  .rescuepc-nav-menu.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .rescuepc-nav-list {
+    flex-direction: column;
+    padding: var(--rescuepc-space-4);
+    gap: var(--rescuepc-space-1);
+  }
+  
+  .rescuepc-nav-link {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 768px) {
+  .rescuepc-container {
+    padding: 0 var(--rescuepc-space-4);
+  }
+  
+  .rescuepc-section {
+    padding: var(--rescuepc-space-16) 0;
+  }
+  
+  .rescuepc-hero-badges {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .rescuepc-badge {
+    width: 100%;
+    max-width: 300px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .rescuepc-container {
+    padding: 0 var(--rescuepc-space-3);
+  }
+  
+  .rescuepc-hero-title {
+    font-size: var(--rescuepc-text-3xl);
+  }
+  
+  .rescuepc-hero-subtitle {
+    font-size: var(--rescuepc-text-lg);
+  }
+  
+  .rescuepc-btn-large {
+    padding: var(--rescuepc-space-3) var(--rescuepc-space-6);
+    font-size: var(--rescuepc-text-base);
+  }
+}
+
+/* ========================================
+   ACCESSIBILITY - ULTRA-INCLUSIVE
+   ======================================== */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-nav {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: var(--rescuepc-primary);
+  color: var(--rescuepc-white);
+  padding: 8px;
+  text-decoration: none;
+  border-radius: var(--rescuepc-radius-md);
+  z-index: var(--rescuepc-z-tooltip);
+  transition: top var(--rescuepc-transition-base);
+}
+
+.skip-nav:focus {
+  top: 6px;
+}
+
+*:focus {
+  outline: 2px solid var(--rescuepc-primary);
+  outline-offset: 2px;
+}
+
+button:focus,
+a:focus {
+  outline: 2px solid var(--rescuepc-primary);
+  outline-offset: 2px;
+}
+
+/* ========================================
+   PERFORMANCE OPTIMIZATIONS
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Loading States */
+.rescuepc-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--rescuepc-gray-900) 0%, var(--rescuepc-gray-800) 100%);
+}
+
+.rescuepc-spinner {
+  width: 3rem;
+  height: 3rem;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top: 3px solid var(--rescuepc-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.no-js .rescuepc-loading {
+  display: none;
+} 

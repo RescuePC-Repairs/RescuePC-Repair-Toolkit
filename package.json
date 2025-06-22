@@ -1,48 +1,92 @@
 {
-  "name": "rescuepc-repairs",
-  "version": "1.0.0",
-  "description": "RescuePC Repairs - Professional PC Repair Toolkit",
-  "scripts": {
-    "preview": "vite preview",
-    "dev": "vite",
-    "build": "vite build",
-    "test": "vitest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,css,md,html}\"",
-    "analyze": "vite-bundle-analyzer",
-    "generate-icons": "node generate-icons.js"
+  "name": "@rescuepc/professional-windows-repair-toolkit",
+  "version": "2.0.0",
+  "description": "Professional Windows PC repair toolkit with 11GB of drivers and repair tools. Fix crashes, missing drivers, and system errors instantly. Lifetime license for $79.99.",
+  "keywords": [
+    "windows repair software",
+    "pc repair toolkit",
+    "driver repair",
+    "system crash fix",
+    "windows diagnostic tool",
+    "computer repair software",
+    "pc troubleshooting",
+    "windows recovery",
+    "driver update tool",
+    "system repair utility",
+    "windows error fix",
+    "pc maintenance",
+    "computer diagnostics",
+    "windows repair",
+    "pc repair",
+    "driver database",
+    "system recovery",
+    "windows toolkit",
+    "pc support",
+    "computer repair"
+  ],
+  "author": {
+    "name": "Tyler Keesee",
+    "email": "***REMOVED***",
+    "url": "https://rescuepcrepairs.com"
   },
-  "dependencies": {
-    "@floating-ui/dom": "^1.5.1",
-    "@popperjs/core": "^2.11.8",
-    "alpinejs": "^3.13.3",
-    "autoprefixer": "^10.4.16",
-    "postcss": "^8.4.32",
-    "tailwindcss": "^3.3.6"
+  "license": "MIT",
+  "homepage": "https://rescuepcrepairs.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rescuepc/repairs-website"
+  },
+  "bugs": {
+    "url": "https://rescuepcrepairs.com/pages/support.html",
+    "email": "***REMOVED***"
+  },
+  "main": "index.html",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0 --port 3001 --open",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0 --port 4173",
+    "build:production": "vite build --mode production",
+    "analyze": "node scripts/ai-analyzer.js",
+    "security-check": "node js/security-check.js",
+    "performance-test": "lighthouse https://rescuepcrepairs.com --output html --output-path ./reports/lighthouse-report.html",
+    "seo-audit": "lighthouse https://rescuepcrepairs.com --only-categories=seo --output json --output-path ./reports/seo-audit.json",
+    "accessibility-test": "lighthouse https://rescuepcrepairs.com --only-categories=accessibility --output html --output-path ./reports/accessibility-report.html"
   },
   "devDependencies": {
-    "@vitejs/plugin-basic-ssl": "^1.0.1",
-    "@vitejs/plugin-legacy": "^5.0.0",
-    "@vitejs/plugin-react": "^4.2.1",
-    "@vitest/coverage-v8": "^0.34.6",
-    "eslint": "^8.56.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-prettier": "^5.0.1",
-    "prettier": "^3.1.1",
-    "vite": "^5.0.10",
-    "vite-bundle-analyzer": "^0.6.0",
-    "vite-plugin-compression": "^0.5.1",
-    "vite-plugin-pwa": "^0.17.4",
-    "vite-plugin-webp": "^1.0.0",
-    "vitest": "^0.34.6"
+    "vite": "^6.3.5"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
   },
   "browserslist": [
-    ">0.2%",
+    "> 1%",
+    "last 2 versions",
     "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+    "not ie 11"
+  ],
+  "seo": {
+    "title": "Professional Windows PC Repair Toolkit | RescuePC Repairs - $79.99 Lifetime License",
+    "description": "Professional Windows PC repair toolkit with 11GB of drivers and repair tools. Fix crashes, missing drivers, and system errors instantly. Lifetime license for $79.99 - works on any Windows PC.",
+    "keywords": "windows repair software, pc repair toolkit, driver repair, system crash fix, windows diagnostic tool",
+    "author": "Tyler Keesee - RescuePC Repairs",
+    "url": "https://rescuepcrepairs.com",
+    "image": "https://rescuepcrepairs.com/assets/images/RescuePC_Logo_Light.png",
+    "type": "website",
+    "siteName": "RescuePC Repairs"
+  },
+  "security": {
+    "ssl": true,
+    "https": true,
+    "csp": true,
+    "xss-protection": true,
+    "csrf-protection": true,
+    "security-headers": true
+  },
+  "performance": {
+    "critical-css": true,
+    "asset-optimization": true,
+    "cdn-ready": true,
+    "lazy-loading": true,
+    "compression": true
+  }
 }

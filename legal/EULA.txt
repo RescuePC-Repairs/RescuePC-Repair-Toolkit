@@ -1,0 +1,49 @@
+RescuePC Repairs Toolkit - End User License Agreement (EULA)
+
+IMPORTANT: READ THIS AGREEMENT CAREFULLY BEFORE USING THE SOFTWARE.
+
+1. ACCEPTANCE
+   By downloading, installing, or using the RescuePC Repairs Toolkit ("Software"),
+   you agree to be bound by the terms of this End User License Agreement ("EULA").
+   If you do not agree to these terms, do not use the Software.
+
+2. LICENSE
+   Subject to the terms of this EULA, RescuePC Repairs grants you a non-exclusive,
+   non-transferable license to use the Software for personal computer repair and
+   maintenance purposes only.
+
+3. RESTRICTIONS
+   You may not:
+   - Copy, modify, or create derivative works of the Software
+   - Reverse engineer, decompile, or disassemble the Software
+   - Remove or alter any proprietary notices or labels
+   - Use the Software for commercial purposes without a commercial license
+   - Transfer or sublicense the Software to any third party
+
+4. OWNERSHIP
+   The Software is protected by copyright laws and international treaties.
+   RescuePC Repairs retains all rights, title, and interest in and to the Software.
+
+5. UPDATES AND SUPPORT
+   - Software updates are provided at the discretion of RescuePC Repairs
+   - Technical support is available through official channels only
+   - No guarantee of future updates or support is provided
+
+6. DISCLAIMER OF WARRANTIES
+   THE SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND.
+   RESCUEPC REPAIRS DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED.
+
+7. LIMITATION OF LIABILITY
+   IN NO EVENT SHALL RESCUEPC REPAIRS BE LIABLE FOR ANY DAMAGES ARISING FROM
+   THE USE OR INABILITY TO USE THE SOFTWARE.
+
+8. TERMINATION
+   This EULA is effective until terminated. Your rights under this EULA will
+   terminate automatically without notice if you fail to comply with its terms.
+
+9. GOVERNING LAW
+   This EULA is governed by the laws of the United States and the State of New York.
+
+10. CONTACT
+    For questions about this EULA, contact:
+    ***REMOVED*** 

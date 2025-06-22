@@ -1,0 +1,208 @@
+# =============================================================================
+# RESCUEPC REPAIRS - ENTERPRISE NETLIFY CONFIGURATION
+# Military-grade security, lightning performance, million-user scalability
+# =============================================================================
+
+[build]
+  publish = "dist"
+  command = "npm run build"
+
+[build.environment]
+  NODE_VERSION = "18"
+  NPM_VERSION = "9"
+
+# =============================================================================
+# MILITARY-GRADE SECURITY HEADERS
+# =============================================================================
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # HTTPS Enforcement
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    
+    # Content Security Policy - Maximum Security
+    Content-Security-Policy = """
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://js.stripe.com;
+      style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com;
+      img-src 'self' data: https:;
+      font-src 'self' https://cdnjs.cloudflare.com;
+      connect-src 'self' https://api.stripe.com;
+      frame-src https://js.stripe.com;
+      object-src 'none';
+      base-uri 'self';
+      form-action 'self' https://checkout.stripe.com;
+      upgrade-insecure-requests;
+    """
+    
+    # XSS Protection
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    
+    # Referrer Policy
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    
+    # Permissions Policy
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+    
+    # Certificate Transparency
+    Expect-CT = "max-age=86400, enforce"
+    
+    # Additional Security
+    X-Permitted-Cross-Domain-Policies = "none"
+    Cross-Origin-Embedder-Policy = "require-corp"
+    Cross-Origin-Opener-Policy = "same-origin"
+    Cross-Origin-Resource-Policy = "same-origin"
+
+# =============================================================================
+# PERFORMANCE OPTIMIZATION HEADERS
+# =============================================================================
+
+[[headers]]
+  for = "*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    X-Content-Type-Options = "nosniff"
+
+[[headers]]
+  for = "*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    X-Content-Type-Options = "nosniff"
+
+[[headers]]
+  for = "*.woff2"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Cross-Origin-Resource-Policy = "cross-origin"
+
+[[headers]]
+  for = "*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.ico"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# =============================================================================
+# SSL CERTIFICATE CONFIGURATION
+# =============================================================================
+
+[context.production]
+  command = "npm run build"
+  
+[context.production.environment]
+  HTTPS = "true"
+  SSL_ENABLED = "true"
+  FORCE_HTTPS = "true"
+
+# =============================================================================
+# REDIRECTS FOR SECURITY AND SEO
+# =============================================================================
+
+# Force HTTPS
+[[redirects]]
+  from = "http://rescuepcrepairs.com/*"
+  to = "https://rescuepcrepairs.com/:splat"
+  status = 301
+  force = true
+
+# Redirect www to non-www
+[[redirects]]
+  from = "https://www.rescuepcrepairs.com/*"
+  to = "https://rescuepcrepairs.com/:splat"
+  status = 301
+  force = true
+
+# Security redirects
+[[redirects]]
+  from = "/.well-known/security.txt"
+  to = "/security.txt"
+  status = 200
+
+# =============================================================================
+# ENTERPRISE PERFORMANCE SETTINGS
+# =============================================================================
+
+[build.processing]
+  skip_processing = false
+
+[build.processing.css]
+  bundle = true
+  minify = true
+
+[build.processing.js]
+  bundle = true
+  minify = true
+
+[build.processing.html]
+  pretty_urls = true
+
+[build.processing.images]
+  compress = true
+
+# =============================================================================
+# EDGE FUNCTIONS FOR ENTERPRISE FEATURES
+# =============================================================================
+
+[[edge_functions]]
+  function = "security-headers"
+  path = "/*"
+
+[[edge_functions]]
+  function = "performance-monitor"
+  path = "/*"
+
+# =============================================================================
+# FORMS CONFIGURATION (if needed)
+# =============================================================================
+
+[build.forms]
+  spam_protection = true
+
+# =============================================================================
+# FUNCTIONS CONFIGURATION
+# =============================================================================
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+# =============================================================================
+# PLUGINS FOR ENTERPRISE FEATURES
+# =============================================================================
+
+[[plugins]]
+  package = "@netlify/plugin-lighthouse"
+  
+  [plugins.inputs]
+    performance_budget = 95
+    accessibility_budget = 95
+    best_practices_budget = 95
+    seo_budget = 95
+
+[[plugins]]
+  package = "netlify-plugin-minify-html"
+  
+  [plugins.inputs]
+    contexts = ["production"]
+
+[[plugins]]
+  package = "netlify-plugin-submit-sitemap"
+  
+  [plugins.inputs]
+    baseUrl = "https://rescuepcrepairs.com"
+    sitemapPath = "/sitemap.xml"
+    providers = [
+      "google",
+      "bing"
+    ]

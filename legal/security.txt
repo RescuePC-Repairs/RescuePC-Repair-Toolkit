@@ -1,0 +1,33 @@
+Contact: mailto:***REMOVED***
+Expires: 2025-12-31T23:59:59.000Z
+Encryption: https://rescuepcrepairs.com/pgp-key.txt
+Acknowledgments: https://rescuepcrepairs.com/security-acknowledgments
+Preferred-Languages: en
+Canonical: https://rescuepcrepairs.com/.well-known/security.txt
+Policy: https://rescuepcrepairs.com/security-policy
+
+# RescuePC Repairs Security Information
+# 
+# We take security seriously and appreciate responsible disclosure.
+# 
+# Security Features:
+# - Military-grade encryption (AES-256)
+# - SSL/TLS 1.3 certificates for all users
+# - Content Security Policy (CSP)
+# - HTTP Strict Transport Security (HSTS)
+# - Cross-Origin Resource Sharing (CORS) protection
+# - XSS protection
+# - CSRF protection
+# - Regular security audits
+# - Penetration testing
+# 
+# If you discover a security vulnerability, please:
+# 1. Email us at ***REMOVED***
+# 2. Include detailed information about the vulnerability
+# 3. Allow us 90 days to address the issue before public disclosure
+# 4. Do not access, modify, or delete data
+# 
+# We will acknowledge receipt within 24 hours and provide updates
+# on our progress toward a fix.
+# 
+# Thank you for helping keep RescuePC Repairs secure! 

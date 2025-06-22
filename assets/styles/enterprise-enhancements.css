@@ -1,0 +1,649 @@
+/**
+ * ENTERPRISE ENHANCEMENTS CSS
+ * Beautiful, scalable, maintainable styling for all sections
+ * Military-grade design system with perfect scalability
+ */
+
+/* =============================================================================
+   ENTERPRISE DESIGN TOKENS - Perfect Scalability
+   ============================================================================= */
+:root {
+  /* Enterprise Color Palette - Military Grade */
+  --enterprise-primary: #2563eb;
+  --enterprise-primary-dark: #1d4ed8;
+  --enterprise-primary-light: #3b82f6;
+  --enterprise-success: #10b981;
+  --enterprise-success-dark: #059669;
+  --enterprise-warning: #f59e0b;
+  --enterprise-danger: #ef4444;
+  --enterprise-info: #06b6d4;
+  
+  /* Enterprise Gradients - Beautiful & Professional */
+  --enterprise-gradient-primary: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #3b82f6 100%);
+  --enterprise-gradient-success: linear-gradient(135deg, #059669 0%, #10b981 50%, #34d399 100%);
+  --enterprise-gradient-hero: linear-gradient(135deg, #1e1b4b 0%, #312e81 25%, #1e40af 50%, #2563eb 75%, #3b82f6 100%);
+  
+  /* Enterprise Typography - Scalable & Readable */
+  --enterprise-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --enterprise-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  
+  /* Enterprise Spacing - Perfect Proportions */
+  --enterprise-space-xs: 0.25rem;
+  --enterprise-space-sm: 0.5rem;
+  --enterprise-space-md: 1rem;
+  --enterprise-space-lg: 1.5rem;
+  --enterprise-space-xl: 2rem;
+  --enterprise-space-2xl: 3rem;
+  --enterprise-space-3xl: 4rem;
+  
+  /* Enterprise Shadows - Depth & Elegance */
+  --enterprise-shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --enterprise-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --enterprise-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --enterprise-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --enterprise-shadow-glow: 0 0 30px rgba(37, 99, 235, 0.3);
+  
+  /* Enterprise Borders - Clean & Professional */
+  --enterprise-border-radius-sm: 0.375rem;
+  --enterprise-border-radius-md: 0.5rem;
+  --enterprise-border-radius-lg: 0.75rem;
+  --enterprise-border-radius-xl: 1rem;
+  --enterprise-border-radius-full: 9999px;
+  
+  /* Enterprise Animations - Smooth & Professional */
+  --enterprise-transition-fast: 0.15s ease-out;
+  --enterprise-transition-normal: 0.3s ease-out;
+  --enterprise-transition-slow: 0.5s ease-out;
+}
+
+/* =============================================================================
+   ENTERPRISE HERO SECTION - Ultimate Impact
+   ============================================================================= */
+.hero {
+  background: var(--enterprise-gradient-hero);
+  position: relative;
+  overflow: hidden;
+  min-height: 40vh;
+  padding: var(--enterprise-space-3xl) 0 var(--enterprise-space-2xl);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(16, 185, 129, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.hero-main-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: var(--enterprise-space-lg);
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-highlight {
+  display: block;
+  background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: var(--enterprise-space-sm);
+}
+
+.hero-subtitle {
+  display: block;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  color: #cbd5e1;
+  font-weight: 600;
+}
+
+.hero-description {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: var(--enterprise-space-2xl);
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* =============================================================================
+   ENTERPRISE BENEFITS - Visual Impact
+   ============================================================================= */
+.hero-benefits {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--enterprise-space-lg);
+  margin-bottom: var(--enterprise-space-2xl);
+}
+
+.benefit-item {
+  display: flex;
+  align-items: center;
+  gap: var(--enterprise-space-md);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--enterprise-border-radius-lg);
+  padding: var(--enterprise-space-lg);
+  transition: all var(--enterprise-transition-normal);
+}
+
+.benefit-item:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+  box-shadow: var(--enterprise-shadow-lg);
+}
+
+.benefit-item i {
+  font-size: 1.5rem;
+  color: var(--enterprise-success);
+  flex-shrink: 0;
+}
+
+.benefit-item span {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* =============================================================================
+   ENTERPRISE SECURITY INDICATORS - Trust Building
+   ============================================================================= */
+.security-indicators {
+  display: flex;
+  justify-content: center;
+  gap: var(--enterprise-space-lg);
+  margin-bottom: var(--enterprise-space-2xl);
+  flex-wrap: wrap;
+}
+
+.security-item {
+  display: flex;
+  align-items: center;
+  gap: var(--enterprise-space-sm);
+  background: rgba(16, 185, 129, 0.1);
+  border: 2px solid var(--enterprise-success);
+  border-radius: var(--enterprise-border-radius-full);
+  padding: var(--enterprise-space-md) var(--enterprise-space-lg);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all var(--enterprise-transition-normal);
+}
+
+.security-item:hover {
+  background: var(--enterprise-success);
+  transform: scale(1.05);
+  box-shadow: var(--enterprise-shadow-glow);
+}
+
+.security-item i {
+  color: var(--enterprise-success);
+  font-size: 1.2rem;
+}
+
+.security-item:hover i {
+  color: #ffffff;
+}
+
+/* =============================================================================
+   ENTERPRISE FEATURE CARDS - Professional Grid
+   ============================================================================= */
+.features-grid,
+.capabilities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: var(--enterprise-space-xl);
+  margin-top: var(--enterprise-space-2xl);
+}
+
+.feature-card,
+.capability-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border: 1px solid #e2e8f0;
+  border-radius: var(--enterprise-border-radius-xl);
+  padding: var(--enterprise-space-2xl);
+  text-align: center;
+  transition: all var(--enterprise-transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card::before,
+.capability-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--enterprise-gradient-primary);
+  transform: scaleX(0);
+  transition: transform var(--enterprise-transition-normal);
+}
+
+.feature-card:hover,
+.capability-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--enterprise-shadow-xl);
+  border-color: var(--enterprise-primary);
+}
+
+.feature-card:hover::before,
+.capability-card:hover::before {
+  transform: scaleX(1);
+}
+
+.feature-icon,
+.capability-icon {
+  width: 80px;
+  height: 80px;
+  background: var(--enterprise-gradient-primary);
+  border-radius: var(--enterprise-border-radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--enterprise-space-lg);
+  transition: all var(--enterprise-transition-normal);
+}
+
+.feature-card:hover .feature-icon,
+.capability-card:hover .capability-icon {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: var(--enterprise-shadow-glow);
+}
+
+.feature-icon i,
+.capability-icon i {
+  font-size: 2rem;
+  color: #ffffff;
+}
+
+.feature-card h3,
+.capability-card h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: var(--enterprise-space-md);
+  line-height: 1.3;
+}
+
+.feature-card p,
+.capability-card p {
+  color: #6b7280;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+/* =============================================================================
+   ENTERPRISE PRICING CARD - Conversion Optimized
+   ============================================================================= */
+.pricing-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border: 2px solid var(--enterprise-primary);
+  border-radius: var(--enterprise-border-radius-xl);
+  padding: var(--enterprise-space-3xl);
+  max-width: 500px;
+  margin: var(--enterprise-space-2xl) auto;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--enterprise-shadow-xl);
+}
+
+.pricing-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: var(--enterprise-gradient-primary);
+}
+
+.pricing-badge {
+  background: var(--enterprise-gradient-primary);
+  color: #ffffff;
+  padding: var(--enterprise-space-md) var(--enterprise-space-xl);
+  border-radius: var(--enterprise-border-radius-full);
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: var(--enterprise-space-xl);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--enterprise-space-sm);
+  box-shadow: var(--enterprise-shadow-lg);
+}
+
+.pricing-price {
+  margin-bottom: var(--enterprise-space-xl);
+}
+
+.pricing-amount {
+  font-size: 4rem;
+  font-weight: 800;
+  color: var(--enterprise-primary);
+  line-height: 1;
+  margin-bottom: var(--enterprise-space-sm);
+}
+
+.pricing-period {
+  color: #6b7280;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+/* =============================================================================
+   ENTERPRISE SECURITY GUARANTEES - Trust Indicators
+   ============================================================================= */
+.security-guarantees {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--enterprise-space-md);
+  margin-bottom: var(--enterprise-space-xl);
+}
+
+.security-guarantee {
+  display: flex;
+  align-items: center;
+  gap: var(--enterprise-space-sm);
+  background: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 100%);
+  border: 1px solid var(--enterprise-success);
+  border-radius: var(--enterprise-border-radius-md);
+  padding: var(--enterprise-space-md);
+  transition: all var(--enterprise-transition-normal);
+}
+
+.security-guarantee:hover {
+  background: var(--enterprise-success);
+  color: #ffffff;
+  transform: scale(1.02);
+}
+
+.security-guarantee i {
+  color: var(--enterprise-success);
+  font-size: 1.2rem;
+}
+
+.security-guarantee:hover i {
+  color: #ffffff;
+}
+
+.security-guarantee span {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* =============================================================================
+   ENTERPRISE FAQ SECTION - Interactive & Clean
+   ============================================================================= */
+.faq-list {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--enterprise-border-radius-lg);
+  margin-bottom: var(--enterprise-space-md);
+  overflow: hidden;
+  transition: all var(--enterprise-transition-normal);
+}
+
+.faq-item:hover {
+  border-color: var(--enterprise-primary);
+  box-shadow: var(--enterprise-shadow-md);
+}
+
+.faq-question {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: var(--enterprise-space-xl);
+  text-align: left;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1f2937;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all var(--enterprise-transition-normal);
+}
+
+.faq-question:hover {
+  background: #f8fafc;
+  color: var(--enterprise-primary);
+}
+
+.faq-icon {
+  font-size: 1.5rem;
+  color: var(--enterprise-primary);
+  transition: transform var(--enterprise-transition-normal);
+}
+
+.faq-item.active .faq-icon {
+  transform: rotate(45deg);
+}
+
+.faq-answer {
+  padding: 0 var(--enterprise-space-xl) var(--enterprise-space-xl);
+  color: #6b7280;
+  line-height: 1.6;
+  display: none;
+}
+
+.faq-item.active .faq-answer {
+  display: block;
+  animation: fadeInDown var(--enterprise-transition-normal);
+}
+
+/* =============================================================================
+   ENTERPRISE BUTTONS - Call-to-Action Excellence
+   ============================================================================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--enterprise-space-sm);
+  padding: var(--enterprise-space-md) var(--enterprise-space-xl);
+  border: none;
+  border-radius: var(--enterprise-border-radius-lg);
+  font-weight: 600;
+  text-decoration: none;
+  transition: all var(--enterprise-transition-normal);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary {
+  background: var(--enterprise-gradient-primary);
+  color: #ffffff;
+  box-shadow: var(--enterprise-shadow-lg);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--enterprise-shadow-xl), var(--enterprise-shadow-glow);
+}
+
+.btn-xl {
+  padding: var(--enterprise-space-lg) var(--enterprise-space-2xl);
+  font-size: 1.25rem;
+  border-radius: var(--enterprise-border-radius-xl);
+}
+
+.hero-cta {
+  background: var(--enterprise-gradient-success);
+  color: #ffffff;
+  padding: var(--enterprise-space-xl) var(--enterprise-space-3xl);
+  border-radius: var(--enterprise-border-radius-full);
+  font-size: 1.3rem;
+  font-weight: 700;
+  box-shadow: var(--enterprise-shadow-xl);
+  transition: all var(--enterprise-transition-normal);
+}
+
+.hero-cta:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(16, 185, 129, 0.4);
+}
+
+.cta-main {
+  display: block;
+  font-size: 1.3rem;
+  margin-bottom: 0.25rem;
+}
+
+.cta-sub {
+  display: block;
+  font-size: 0.9rem;
+  opacity: 0.9;
+  font-weight: 500;
+}
+
+/* =============================================================================
+   ENTERPRISE ANIMATIONS - Smooth & Professional
+   ============================================================================= */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(37, 99, 235, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(37, 99, 235, 0.6);
+  }
+}
+
+/* =============================================================================
+   ENTERPRISE RESPONSIVE DESIGN - Perfect on All Devices
+   ============================================================================= */
+@media (max-width: 768px) {
+  .hero {
+    padding: var(--enterprise-space-2xl) 0;
+    min-height: 50vh;
+  }
+  
+  .hero-benefits {
+    grid-template-columns: 1fr;
+    gap: var(--enterprise-space-md);
+  }
+  
+  .security-indicators {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--enterprise-space-md);
+  }
+  
+  .features-grid,
+  .capabilities-grid {
+    grid-template-columns: 1fr;
+    gap: var(--enterprise-space-lg);
+  }
+  
+  .security-guarantees {
+    grid-template-columns: 1fr;
+  }
+  
+  .pricing-card {
+    margin: var(--enterprise-space-lg) var(--enterprise-space-md);
+    padding: var(--enterprise-space-xl);
+  }
+  
+  .pricing-amount {
+    font-size: 3rem;
+  }
+}
+
+/* =============================================================================
+   ENTERPRISE ACCESSIBILITY - WCAG 2.1 AA Compliant
+   ============================================================================= */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus indicators for keyboard navigation */
+.btn:focus,
+.faq-question:focus {
+  outline: 2px solid var(--enterprise-primary);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .feature-card,
+  .capability-card,
+  .pricing-card {
+    border-width: 2px;
+  }
+  
+  .btn-primary {
+    border: 2px solid #ffffff;
+  }
+}
+
+/* =============================================================================
+   ENTERPRISE PRINT STYLES - Professional Documentation
+   ============================================================================= */
+@media print {
+  .hero {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  
+  .btn {
+    border: 2px solid #000000;
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  
+  .feature-card,
+  .capability-card,
+  .pricing-card {
+    break-inside: avoid;
+    border: 1px solid #000000;
+  }
+} 
