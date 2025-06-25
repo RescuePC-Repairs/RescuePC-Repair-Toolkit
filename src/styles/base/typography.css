@@ -83,6 +83,10 @@ p {
   line-height: var(--line-height-relaxed);
   color: var(--color-text-primary);
   margin: 0 0 var(--space-4);
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
 }
 
 .text-lg {
