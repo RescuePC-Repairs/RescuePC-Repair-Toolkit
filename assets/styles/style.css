@@ -1347,14 +1347,6 @@ section + .section,
   padding: 0 var(--space-xl) var(--space-xl) !important;
 }
 
-/* Alternative: Show first FAQ item by default */
-.faq-item:first-child {
-  /* This ensures at least one FAQ is visible */
-}
-
-.faq-item:first-child .faq-answer {
-  max-height: 500px;
-  padding: 0 var(--space-xl) var(--space-xl);
 }
 
 /* =============================================================================
@@ -2996,6 +2988,7 @@ i.fas, i.far, i.fab, i.fa {
   font-size: 1rem;
   transition: all var(--transition-normal);
   background: #ffffff;
+  color: #1f2937;
 }
 
 .form-input:focus {
@@ -3146,6 +3139,7 @@ i.fas, i.far, i.fab, i.fa {
   border-radius: var(--radius-md);
   font-size: 0.9rem;
   background: #ffffff;
+  color: #1f2937;
 }
 
 .floating-email-input:focus {
@@ -3219,4 +3213,169 @@ i.fas, i.far, i.fab, i.fa {
     font-size: 0.8rem;
     padding: var(--space-sm);
   }
+}
+
+/* =============================================================================
+   SSL NOTIFICATION SYSTEM - SECURITY ALERTS
+   ============================================================================= */
+
+.ssl-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #ffffff;
+  border: 2px solid #10b981;
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-2xl);
+  z-index: 10000;
+  max-width: 400px;
+  min-width: 300px;
+  animation: slideInRight 0.3s ease-out;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.ssl-notification-success {
+  border-color: #10b981;
+  background: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 100%);
+}
+
+.ssl-notification-warning {
+  border-color: #f59e0b;
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+}
+
+.ssl-notification-error {
+  border-color: #ef4444;
+  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+}
+
+.ssl-notification-info {
+  border-color: #3b82f6;
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+}
+
+.ssl-notification-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.ssl-notification-title {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.ssl-notification-title::before {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  font-size: 1.2rem;
+}
+
+.ssl-notification-success .ssl-notification-title::before {
+  content: "\f058";
+  color: #10b981;
+}
+
+.ssl-notification-warning .ssl-notification-title::before {
+  content: "\f071";
+  color: #f59e0b;
+}
+
+.ssl-notification-error .ssl-notification-title::before {
+  content: "\f057";
+  color: #ef4444;
+}
+
+.ssl-notification-info .ssl-notification-title::before {
+  content: "\f05a";
+  color: #3b82f6;
+}
+
+.ssl-notification-message {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #ffffff;
+  margin-bottom: var(--space-sm);
+}
+
+.ssl-notification-close {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #9ca3af;
+  cursor: pointer;
+  padding: var(--space-xs);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-normal);
+  line-height: 1;
+}
+
+.ssl-notification-close:hover {
+  background: rgba(0, 0, 0, 0.1);
+  color: #6b7280;
+}
+
+/* Animation for SSL notifications */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* Mobile responsive SSL notifications */
+@media (max-width: 768px) {
+  .ssl-notification {
+    top: 10px;
+    right: 10px;
+    left: 10px;
+    max-width: none;
+    min-width: auto;
+  }
+  
+  .ssl-notification-title {
+    font-size: 1rem;
+  }
+  
+  .ssl-notification-message {
+    font-size: 0.9rem;
+  }
+}
+
+/* Ensure SSL notifications are always visible */
+.ssl-notification[style*="display: none"] {
+  display: block !important;
+}
+
+.ssl-notification[style*="visibility: hidden"] {
+  visibility: visible !important;
+}
+
+.ssl-notification[style*="opacity: 0"] {
+  opacity: 1 !important;
 }
