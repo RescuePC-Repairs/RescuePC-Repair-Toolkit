@@ -467,7 +467,6 @@ class AIWebsiteAnalyzer {
 
         // Display results
         console.log('\n🛠️ RescuePC Repairs Assistant');
-        console.log('×');
         
         if (this.criticalIssues.length === 0 && this.warnings.length === 0 && this.suggestions.length === 0) {
             console.log('✅ ALL SYSTEMS OPERATIONAL');
