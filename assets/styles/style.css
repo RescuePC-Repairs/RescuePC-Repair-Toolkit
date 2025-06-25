@@ -3066,6 +3066,31 @@ i.fas, i.far, i.fab, i.fa {
   margin-bottom: var(--space-lg);
 }
 
+.flyer-delivery-info {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  margin: var(--space-lg) 0;
+  text-align: left;
+}
+
+.flyer-delivery-info p {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin: var(--space-sm) 0;
+  color: #374151;
+  font-size: 0.95rem;
+}
+
+.flyer-delivery-info i {
+  color: var(--primary-color);
+  font-size: 1rem;
+  width: 20px;
+  text-align: center;
+}
+
 /* Floating Email Bar */
 .floating-email-bar {
   position: fixed;
