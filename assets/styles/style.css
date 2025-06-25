@@ -4840,12 +4840,10 @@ body {
   overflow: hidden;
   box-shadow: var(--shadow-2xl);
   background: #ffffff;
-  transform: perspective(1000px) rotateY(-5deg) rotateX(5deg);
   transition: all var(--transition-normal);
 }
 
 .gui-image-wrapper:hover {
-  transform: perspective(1000px) rotateY(-2deg) rotateX(2deg) scale(1.02);
   box-shadow: var(--shadow-3xl);
 }
 
