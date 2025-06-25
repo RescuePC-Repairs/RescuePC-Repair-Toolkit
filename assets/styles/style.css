@@ -1794,7 +1794,7 @@ section + .section,
 .stat-card,
 .security-features,
 .security-feature {
-  overflow: visible !important;
+  overflow: hidden !important;
   max-width: 100% !important;
   box-sizing: border-box !important;
 }
@@ -1802,9 +1802,10 @@ section + .section,
 /* Specific fixes for pricing elements */
 .pricing-price,
 .pricing-amount {
-  overflow: visible !important;
-  word-wrap: normal !important;
-  white-space: nowrap !important;
+  overflow: hidden !important;
+  word-wrap: break-word !important;
+  white-space: normal !important;
+  text-overflow: ellipsis !important;
 }
 
 /* FontAwesome icon specific protection */
@@ -3378,3 +3379,93 @@ i.fas, i.far, i.fab, i.fa {
 .ssl-notification[style*="opacity: 0"] {
   opacity: 1 !important;
 }
+
+/* =============================================================================
+   COMPREHENSIVE OVERFLOW FIXES - ALL AFFECTED SELECTORS
+   ============================================================================= */
+
+/* Email Capture Form Overflow Fix */
+#email-capture-form,
+.email-form,
+.email-form-container {
+  overflow: hidden !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+}
+
+/* Pricing Elements Overflow Fix */
+.pricing-price,
+.pricing-amount {
+  overflow: hidden !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  word-wrap: break-word !important;
+  white-space: normal !important;
+  text-overflow: ellipsis !important;
+}
+
+/* About Content Overflow Fix */
+.about-content-grid,
+.about-content {
+  overflow: hidden !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+}
+
+/* Founder Title Overflow Fix */
+.founder-title {
+  overflow: hidden !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  word-wrap: break-word !important;
+  white-space: normal !important;
+  text-overflow: ellipsis !important;
+}
+
+/* Global Paragraph Overflow Fix */
+p {
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Security Features Overflow Fix */
+.security-features {
+  overflow: hidden !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+}
+
+.security-feature {
+  overflow: hidden !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Additional Container Overflow Protection */
+.founder-card,
+.founder-header,
+.project-stats,
+.stat-card {
+  overflow: hidden !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* FontAwesome Icon Protection */
+.fas, .far, .fab, .fa,
+i.fas, i.far, i.fab, i.fa {
+  overflow: visible !important;
+  max-width: none !important;
+  width: auto !important;
+  height: auto !important;
+  flex-shrink: 0 !important;
+}
+
+/* =============================================================================
+   COMPREHENSIVE OVERFLOW PROTECTION - ALL ELEMENTS
+   ============================================================================= */
