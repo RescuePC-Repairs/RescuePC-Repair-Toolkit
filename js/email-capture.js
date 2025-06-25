@@ -166,9 +166,9 @@ class EmailCaptureSystem {
       // Track conversion
       this.trackEvent('floating_email_captured', { email });
       
-      // Hide floating bar and redirect
+      // Hide floating bar and show success message
       this.hideFloatingBar();
-      this.redirectToPurchase();
+      this.showFloatingSuccessMessage(email);
       
     } catch (error) {
       console.error('Floating email submission error:', error);
@@ -183,7 +183,7 @@ class EmailCaptureSystem {
     // Replace this with your actual email service integration
     // Examples: Mailchimp, ConvertKit, ActiveCampaign, etc.
     
-    // For now, we'll simulate a successful submission
+    // For now, we'll simulate a successful submission and provide immediate PDF access
     return new Promise((resolve) => {
       setTimeout(() => {
         // Store in localStorage for demo purposes
@@ -192,13 +192,60 @@ class EmailCaptureSystem {
           name,
           email,
           timestamp: new Date().toISOString(),
-          source: 'rescuepc_repairs'
+          source: 'rescuepc_repairs',
+          flyer_delivered: true
         });
         localStorage.setItem('email_leads', JSON.stringify(leads));
+        
+        // Automatically deliver the RescuePC Repairs Flyer PDF
+        this.deliverFlyerPDF(name, email);
         
         resolve();
       }, 1000);
     });
+  }
+
+  deliverFlyerPDF(name, email) {
+    // Create a download link for the RescuePC Repairs Flyer
+    const flyerUrl = '/docs/RescuePC Repairs Flyer.pdf';
+    
+    // Create download element
+    const downloadLink = document.createElement('a');
+    downloadLink.href = flyerUrl;
+    downloadLink.download = 'RescuePC_Repairs_Flyer.pdf';
+    downloadLink.style.display = 'none';
+    
+    // Add to page and trigger download
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+    
+    // Track PDF delivery
+    this.trackEvent('flyer_pdf_delivered', { name, email });
+    
+    // Show success message with download confirmation
+    this.showFlyerDeliverySuccess();
+    
+    console.log('📄 RescuePC Repairs Flyer PDF delivered to:', email);
+  }
+
+  showFlyerDeliverySuccess() {
+    const success = document.getElementById('email-success');
+    if (success) {
+      success.innerHTML = `
+        <i class="fas fa-check-circle"></i>
+        <h3>Thank You, ${document.getElementById('email-name')?.value || 'Friend'}!</h3>
+        <p>Your <strong>RescuePC Repairs Flyer</strong> is downloading now!</p>
+        <div class="flyer-delivery-info">
+          <p><i class="fas fa-file-pdf"></i> <strong>RescuePC Repairs Flyer.pdf</strong> - Complete product overview</p>
+          <p><i class="fas fa-envelope"></i> Check your email for additional resources</p>
+        </div>
+        <a href="https://buy.stripe.com/9B614m53s8i97y110j08g00" class="btn btn-secondary">
+          <i class="fas fa-shopping-cart"></i>
+          Get Full Toolkit Now - $79.99
+        </a>
+      `;
+    }
   }
 
   showSuccessMessage() {
@@ -301,6 +348,66 @@ class EmailCaptureSystem {
     if (typeof gtag !== 'undefined') {
       gtag('event', eventName, data);
     }
+  }
+
+  showFloatingSuccessMessage(email) {
+    // Create a success notification
+    const notification = document.createElement('div');
+    notification.className = 'floating-success-notification';
+    notification.innerHTML = `
+      <div class="notification-content">
+        <i class="fas fa-check-circle"></i>
+        <div class="notification-text">
+          <h4>RescuePC Repairs Flyer Downloaded!</h4>
+          <p>Check your downloads folder for the PDF</p>
+        </div>
+        <button class="notification-close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    `;
+    
+    // Add styles
+    notification.style.cssText = `
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #10b981;
+      color: white;
+      padding: 16px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      z-index: 10000;
+      max-width: 350px;
+      animation: slideInRight 0.3s ease-out;
+    `;
+    
+    // Add animation styles
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes slideInRight {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+      }
+    `;
+    document.head.appendChild(style);
+    
+    // Add to page
+    document.body.appendChild(notification);
+    
+    // Auto-remove after 5 seconds
+    setTimeout(() => {
+      if (notification.parentNode) {
+        notification.style.animation = 'slideInRight 0.3s ease-out reverse';
+        setTimeout(() => notification.remove(), 300);
+      }
+    }, 5000);
+    
+    // Close button functionality
+    const closeBtn = notification.querySelector('.notification-close');
+    closeBtn.addEventListener('click', () => {
+      notification.remove();
+    });
   }
 }
 
