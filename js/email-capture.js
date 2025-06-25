@@ -441,8 +441,12 @@ To unsubscribe, reply with "UNSUBSCRIBE" in the subject line.`;
   }
 
   showFlyerDeliverySuccess() {
+    console.log('🔍 Attempting to show success message...');
     const success = document.getElementById('email-success');
+    console.log('🔍 Success div found:', success);
+    
     if (success) {
+      console.log('🔍 Setting success message content...');
       success.innerHTML = `
         <i class="fas fa-envelope-open"></i>
         <h3>Thank You, ${document.getElementById('email-name')?.value || 'Friend'}!</h3>
@@ -465,6 +469,7 @@ To unsubscribe, reply with "UNSUBSCRIBE" in the subject line.`;
         </div>
       `;
       
+      console.log('🔍 Calling showSuccessMessage...');
       // Show the success message
       this.showSuccessMessage();
       
@@ -473,16 +478,28 @@ To unsubscribe, reply with "UNSUBSCRIBE" in the subject line.`;
         email: document.getElementById('email-address')?.value,
         method: 'mailto_client'
       });
+      
+      console.log('✅ Success message should now be visible!');
+    } else {
+      console.error('❌ Success div not found!');
     }
   }
 
   showSuccessMessage() {
+    console.log('🔍 showSuccessMessage called...');
     const form = document.getElementById('email-capture-form');
     const success = document.getElementById('email-success');
     
+    console.log('🔍 Form found:', form);
+    console.log('🔍 Success div found:', success);
+    
     if (form && success) {
+      console.log('🔍 Hiding form and showing success...');
       form.style.display = 'none';
       success.style.display = 'block';
+      console.log('✅ Form hidden, success shown!');
+    } else {
+      console.error('❌ Form or success div not found!');
     }
   }
 
