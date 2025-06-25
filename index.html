@@ -470,6 +470,116 @@
     </section>
 
     <!-- =============================================================================
+         EMAIL CAPTURE SECTION - LEAD GENERATION SYSTEM
+         ============================================================================= -->
+    <section id="email-capture" class="email-capture-section">
+      <div class="container">
+        <div class="email-capture-content">
+          <div class="email-capture-left">
+            <h2 class="email-capture-title">
+              <i class="fas fa-gift"></i>
+              Get Your <span class="highlight">Free Windows Repair Guide</span>
+            </h2>
+            <p class="email-capture-description">
+              Join <strong>50,000+ IT professionals</strong> who get exclusive Windows repair tips, 
+              driver updates, and early access to new features. Plus, get our 
+              <strong>Complete Windows Troubleshooting Guide</strong> instantly.
+            </p>
+            <div class="email-benefits">
+              <div class="email-benefit">
+                <i class="fas fa-check-circle"></i>
+                <span>Free Windows Repair Guide (PDF)</span>
+              </div>
+              <div class="email-benefit">
+                <i class="fas fa-check-circle"></i>
+                <span>Weekly Driver Updates</span>
+              </div>
+              <div class="email-benefit">
+                <i class="fas fa-check-circle"></i>
+                <span>Exclusive Discounts</span>
+              </div>
+              <div class="email-benefit">
+                <i class="fas fa-check-circle"></i>
+                <span>Priority Support Access</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="email-capture-right">
+            <div class="email-form-container">
+              <form id="email-capture-form" class="email-form" action="#" method="POST">
+                <div class="form-group">
+                  <input 
+                    type="text" 
+                    id="email-name" 
+                    name="name" 
+                    placeholder="Your Name" 
+                    required
+                    class="form-input"
+                  >
+                </div>
+                <div class="form-group">
+                  <input 
+                    type="email" 
+                    id="email-address" 
+                    name="email" 
+                    placeholder="Your Email Address" 
+                    required
+                    class="form-input"
+                  >
+                </div>
+                <button type="submit" class="btn btn-primary btn-xl email-submit-btn">
+                  <i class="fas fa-download"></i>
+                  Get Free Guide Now
+                </button>
+                <p class="email-privacy">
+                  <i class="fas fa-shield-alt"></i>
+                  We respect your privacy. Unsubscribe anytime.
+                </p>
+              </form>
+              
+              <!-- Success Message -->
+              <div id="email-success" class="email-success" style="display: none;">
+                <i class="fas fa-check-circle"></i>
+                <h3>Thank You!</h3>
+                <p>Your free guide is on its way to your email.</p>
+                <a href="https://buy.stripe.com/9B614m53s8i97y110j08g00" class="btn btn-secondary">
+                  Get Full Toolkit Now
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================================================================
+         FLOATING EMAIL CAPTURE BAR - ALWAYS VISIBLE
+         ============================================================================= -->
+    <div id="floating-email-bar" class="floating-email-bar">
+      <div class="floating-email-content">
+        <div class="floating-email-text">
+          <i class="fas fa-gift"></i>
+          <span>Get Free Windows Repair Guide + 20% Off</span>
+        </div>
+        <div class="floating-email-form">
+          <input 
+            type="email" 
+            id="floating-email" 
+            placeholder="Enter your email" 
+            class="floating-email-input"
+          >
+          <button type="button" id="floating-submit" class="btn btn-primary btn-sm">
+            Get It Free
+          </button>
+        </div>
+        <button type="button" id="floating-close" class="floating-close-btn" aria-label="Close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- =============================================================================
          PRODUCT CAPABILITIES SECTION - What You Get
          ============================================================================= -->
     <section id="capabilities" class="capabilities section" aria-labelledby="capabilities-title">
@@ -1268,6 +1378,9 @@
   <!-- ENTERPRISE SSL CERTIFICATE GENERATOR -->
   <script src="assets/js/ssl-certificate-generator.js"></script>
   
+  <!-- EMAIL CAPTURE SYSTEM - LEAD GENERATION -->
+  <script src="js/email-capture.js"></script>
+  
   <script>
     // RescuePC Repairs Assistant INITIALIZATION
     console.log('🤖 RescuePC Repairs Assistant Commands:');
@@ -1280,6 +1393,11 @@
     console.log('• generateSSLCertificate() - Generate new SSL certificate');
     console.log('• getSSLStatus() - Check SSL certificate status');
     console.log('• verifySSL() - Verify certificate validity');
+    console.log('');
+    console.log('📧 Email Capture System Commands:');
+    console.log('• Check localStorage.email_leads for captured leads');
+    console.log('• Check localStorage.email_events for event tracking');
+    console.log('• Floating bar shows after 30 seconds or 70% scroll');
   </script>
 </body>
 </html>
