@@ -764,6 +764,7 @@ section + .section,
   gap: var(--space-lg);
   margin-bottom: var(--space-2xl);
   flex-wrap: wrap;
+  overflow: visible;
 }
 
 .security-item {
@@ -778,12 +779,15 @@ section + .section,
   font-weight: 600;
   font-size: 0.9rem;
   transition: all var(--transition-normal);
+  overflow: visible;
+  position: relative;
 }
 
 .security-item:hover {
   background: var(--secondary-color);
   transform: scale(1.05);
   box-shadow: var(--shadow-glow);
+  z-index: 10;
 }
 
 .security-item i {
@@ -2388,6 +2392,7 @@ i.fas, i.far, i.fab, i.fa {
     align-items: center;
     gap: var(--space-md);
     max-width: 100%;
+    overflow: visible;
   }
   
   .features-grid,
