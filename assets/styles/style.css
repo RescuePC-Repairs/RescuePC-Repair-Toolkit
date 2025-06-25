@@ -281,7 +281,7 @@ section, .section {
 /* Hero section - special case */
 .hero {
   margin: 0 !important;
-  padding: 8rem 0 4rem !important;
+  padding: 4rem 0 3rem !important;
   border-bottom: none;
 }
 
@@ -651,11 +651,11 @@ section + .section,
     radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
     linear-gradient(45deg, #1e293b 0%, #2563eb 50%, #1e40af 100%);
   color: white;
-  padding: 8rem 0 4rem;
+  padding: 4rem 0 3rem;
   text-align: center;
   position: relative;
   overflow: hidden;
-  min-height: 80vh;
+  min-height: 70vh;
   display: flex;
   align-items: center;
   animation: heroGlow 12s ease-in-out infinite alternate;
@@ -1803,6 +1803,8 @@ section + .section,
 .pricing-price,
 .pricing-amount {
   overflow: hidden !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
   word-wrap: break-word !important;
   white-space: normal !important;
   text-overflow: ellipsis !important;
@@ -3430,6 +3432,27 @@ p {
   word-break: break-word !important;
   max-width: 100% !important;
   box-sizing: border-box !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+/* Specific paragraph overflow fixes for different contexts */
+.hero-description p,
+.hero-content p,
+.about-content p,
+.founder-bio p,
+.security-content p,
+.feature-card p,
+.pricing-card p,
+.faq-answer p,
+.footer p {
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: normal !important;
 }
 
 /* Security Features Overflow Fix */
@@ -3469,3 +3492,55 @@ i.fas, i.far, i.fab, i.fa {
 /* =============================================================================
    COMPREHENSIVE OVERFLOW PROTECTION - ALL ELEMENTS
    ============================================================================= */
+
+/* =============================================================================
+   RESPONSIVE HERO ADJUSTMENTS - OPTIMIZED FOR ALL RESOLUTIONS
+   ============================================================================= */
+
+/* Large screens and portrait orientations */
+@media (min-width: 1440px) {
+  .hero {
+    padding: 3rem 0 2.5rem;
+    min-height: 65vh;
+  }
+}
+
+/* Standard desktop */
+@media (max-width: 1439px) and (min-width: 1024px) {
+  .hero {
+    padding: 3.5rem 0 3rem;
+    min-height: 70vh;
+  }
+}
+
+/* Tablet and smaller desktop */
+@media (max-width: 1023px) and (min-width: 768px) {
+  .hero {
+    padding: 3rem 0 2.5rem;
+    min-height: 65vh;
+  }
+}
+
+/* Mobile landscape */
+@media (max-width: 767px) and (min-width: 481px) {
+  .hero {
+    padding: 2.5rem 0 2rem;
+    min-height: 60vh;
+  }
+}
+
+/* Mobile portrait and small screens */
+@media (max-width: 480px) {
+  .hero {
+    padding: 2rem 0 1.5rem;
+    min-height: 55vh;
+  }
+}
+
+/* Portrait orientation adjustments */
+@media (orientation: portrait) and (min-height: 1000px) {
+  .hero {
+    padding: 2.5rem 0 2rem;
+    min-height: 60vh;
+  }
+}
