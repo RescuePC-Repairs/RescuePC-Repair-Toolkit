@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email System Test - RescuePC Repairs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .test-form {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            background: #2563eb;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #1d4ed8;
+        }
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 6px;
+        }
+        .success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+        .error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+        .info {
+            background: #dbeafe;
+            color: #1e40af;
+            border: 1px solid #bfdbfe;
+        }
+        .console-log {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 14px;
+            margin-top: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📧 Email System Test - RescuePC Repairs</h1>
+        
+        <div class="info status">
+            <h3>Test Instructions:</h3>
+            <ol>
+                <li>Enter your name and email address below</li>
+                <li>Click "Send Test Email"</li>
+                <li>Your email client will open with a pre-filled message</li>
+                <li>Click send in your email client to deliver the flyer</li>
+            </ol>
+        </div>
+
+        <div class="test-form">
+            <h3>Test Email Form</h3>
+            <form id="test-email-form">
+                <div class="form-group">
+                    <label for="test-name">Your Name:</label>
+                    <input type="text" id="test-name" name="name" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="test-email">Your Email:</label>
+                    <input type="email" id="test-email" name="email" placeholder="Enter your email" required>
+                </div>
+                <button type="submit">Send Test Email</button>
+            </form>
+        </div>
+
+        <div id="test-status"></div>
+        
+        <div class="console-log" id="console-output">
+            <div>Console logs will appear here...</div>
+        </div>
+
+        <div class="info status">
+            <h3>What's Working:</h3>
+            <ul>
+                <li>✅ Real email client integration (mailto:)</li>
+                <li>✅ Pre-filled email with flyer information</li>
+                <li>✅ Professional email template</li>
+                <li>✅ PDF flyer download link</li>
+                <li>✅ Security & rate limiting</li>
+                <li>✅ Success tracking</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
+    <!-- Email Capture System -->
+    <script src="js/email-capture.js"></script>
+    
+    <script>
+        // Override console.log to show in the page
+        const originalLog = console.log;
+        const originalError = console.error;
+        const consoleOutput = document.getElementById('console-output');
+        
+        function addToConsole(message, type = 'log') {
+            const div = document.createElement('div');
+            div.style.color = type === 'error' ? '#ef4444' : '#10b981';
+            div.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            consoleOutput.appendChild(div);
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        }
+        
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            addToConsole(args.join(' '));
+        };
+        
+        console.error = function(...args) {
+            originalError.apply(console, args);
+            addToConsole(args.join(' '), 'error');
+        };
+
+        // Test form handler
+        document.getElementById('test-email-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('test-name').value;
+            const email = document.getElementById('test-email').value;
+            const statusDiv = document.getElementById('test-status');
+            
+            statusDiv.innerHTML = '<div class="info status">Sending test email...</div>';
+            
+            try {
+                // Create a test instance of EmailCaptureSystem
+                const emailSystem = new EmailCaptureSystem();
+                
+                console.log('🧪 Starting email system test...');
+                console.log('📧 Test data:', { name, email });
+                
+                // Test the email sending
+                const result = await emailSystem.sendEmailWithFlyer(name, email);
+                
+                console.log('✅ Test email sent successfully!', result);
+                
+                statusDiv.innerHTML = `
+                    <div class="success status">
+                        <h3>✅ Test Email Sent Successfully!</h3>
+                        <p><strong>To:</strong> ${email}</p>
+                        <p><strong>Method:</strong> ${result.method || 'formspree'}</p>
+                        <p><strong>Status:</strong> Email should arrive within 2-3 minutes</p>
+                        <p><strong>Next:</strong> Check your inbox for the RescuePC Repairs flyer</p>
+                    </div>
+                `;
+                
+            } catch (error) {
+                console.error('❌ Test email failed:', error);
+                
+                statusDiv.innerHTML = `
+                    <div class="error status">
+                        <h3>❌ Test Email Failed</h3>
+                        <p><strong>Error:</strong> ${error.message}</p>
+                        <p>Check the console logs above for more details.</p>
+                    </div>
+                `;
+            }
+        });
+
+        // Initialize EmailJS
+        if (typeof emailjs !== 'undefined') {
+            emailjs.init('YOUR_PUBLIC_KEY');
+            console.log('📧 EmailJS initialized for testing');
+        }
+        
+        console.log('🧪 Email system test page loaded');
+        console.log('📧 Using mailto: approach - opens email client');
+        console.log('📧 Ready to test email functionality');
+    </script>
+</body>
+</html> 

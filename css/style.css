@@ -472,3 +472,125 @@
     display: block !important;
   }
 }
+
+/* Email Success Message Styling */
+.email-success {
+  text-align: center;
+  padding: var(--space-2xl);
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-2xl);
+}
+
+.email-success i {
+  font-size: 3rem;
+  color: #ffffff;
+  margin-bottom: var(--space-lg);
+}
+
+.email-success h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: var(--space-md);
+  color: #ffffff;
+}
+
+.email-success p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: var(--space-lg);
+  opacity: 0.95;
+}
+
+.flyer-delivery-info {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  margin: var(--space-lg) 0;
+  text-align: left;
+}
+
+.flyer-delivery-info p {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+  font-size: 0.95rem;
+}
+
+.flyer-delivery-info p:last-child {
+  margin-bottom: 0;
+}
+
+.flyer-delivery-info i {
+  color: #fbbf24;
+  font-size: 1rem;
+  min-width: 20px;
+}
+
+.email-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-top: var(--space-xl);
+}
+
+.email-actions .btn {
+  width: 100%;
+  justify-content: center;
+  font-weight: 600;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid #ffffff;
+  color: #ffffff;
+  transition: all var(--transition-normal);
+}
+
+.btn-outline:hover {
+  background: #ffffff;
+  color: #10b981;
+  transform: translateY(-2px);
+}
+
+/* Email Error Styling */
+.email-error {
+  color: #dc2626;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  margin: var(--space-md) 0;
+  font-size: 0.95rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Responsive Design for Email Success */
+@media (max-width: 768px) {
+  .email-success {
+    padding: var(--space-xl);
+  }
+  
+  .email-success h3 {
+    font-size: 1.5rem;
+  }
+  
+  .email-success p {
+    font-size: 1rem;
+  }
+  
+  .flyer-delivery-info {
+    padding: var(--space-md);
+  }
+  
+  .flyer-delivery-info p {
+    font-size: 0.9rem;
+  }
+  
+  .email-actions {
+    gap: var(--space-sm);
+  }
+}
