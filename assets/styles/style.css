@@ -421,11 +421,14 @@ section + .section,
 /* Security Guarantees - Better Styling */
 .security-guarantees {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: var(--space-md);
   margin: 0 auto !important;
-  max-width: 800px;
+  max-width: 100%;
+  width: 100%;
   overflow: visible;
+  padding: 0 var(--space-sm);
+  box-sizing: border-box;
 }
 
 .security-guarantee {
@@ -441,6 +444,9 @@ section + .section,
   justify-content: center;
   overflow: visible;
   position: relative;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .security-guarantee:hover {
@@ -453,6 +459,7 @@ section + .section,
 .security-guarantee i {
   color: var(--secondary-color);
   font-size: 1.2rem;
+  flex-shrink: 0;
 }
 
 .security-guarantee:hover i {
@@ -462,6 +469,9 @@ section + .section,
 .security-guarantee span {
   font-weight: 600;
   font-size: 0.9rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: none;
 }
 
 /* Security Badges - Enhanced */
@@ -1128,11 +1138,11 @@ section + .section,
   border: 2px solid var(--primary-color);
   border-radius: var(--radius-xl);
   padding: var(--space-3xl);
-  max-width: 500px;
+  max-width: 600px;
   margin: var(--space-2xl) auto;
   text-align: center;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   box-shadow: var(--shadow-xl);
 }
 
