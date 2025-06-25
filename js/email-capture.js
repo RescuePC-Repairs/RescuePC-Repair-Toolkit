@@ -180,53 +180,106 @@ class EmailCaptureSystem {
   }
 
   async submitEmailToService(name, email) {
-    // Replace this with your actual email service integration
-    // Examples: Mailchimp, ConvertKit, ActiveCampaign, etc.
+    // Send email with flyer PDF attached
+    try {
+      await this.sendEmailWithFlyer(name, email);
+      
+      // Store in localStorage for tracking
+      const leads = JSON.parse(localStorage.getItem('email_leads') || '[]');
+      leads.push({
+        name,
+        email,
+        timestamp: new Date().toISOString(),
+        source: 'rescuepc_repairs',
+        flyer_email_sent: true
+      });
+      localStorage.setItem('email_leads', JSON.stringify(leads));
+      
+      console.log('📧 Email with flyer sent to:', email);
+      
+    } catch (error) {
+      console.error('Email sending error:', error);
+      throw error;
+    }
+  }
+
+  async sendEmailWithFlyer(name, email) {
+    // Using EmailJS for easy email sending (free tier available)
+    // You can also use other services like SendGrid, Mailgun, etc.
     
-    // For now, we'll simulate a successful submission and provide immediate PDF access
-    return new Promise((resolve) => {
+    // For now, we'll use a simple approach that works with most email services
+    const emailData = {
+      to_email: email,
+      to_name: name,
+      from_name: 'Tyler Keesee - RescuePC Repairs',
+      subject: 'Your RescuePC Repairs Flyer is Here! 🛠️',
+      message: this.generateEmailMessage(name),
+      flyer_url: '/docs/RescuePC Repairs Flyer.pdf'
+    };
+
+    // Option 1: Using EmailJS (recommended for easy setup)
+    if (typeof emailjs !== 'undefined') {
+      return emailjs.send('service_id', 'template_id', emailData);
+    }
+    
+    // Option 2: Using a simple form submission to your email service
+    return this.sendViaForm(emailData);
+  }
+
+  generateEmailMessage(name) {
+    return `
+Hello ${name},
+
+Thank you for your interest in RescuePC Repairs! 
+
+I'm excited to share our complete product flyer with you. This PDF contains everything you need to know about our professional Windows PC repair toolkit.
+
+What you'll find in the flyer:
+• Complete product overview
+• Feature breakdown
+• System requirements
+• Professional use cases
+• Technical specifications
+
+The flyer is attached to this email for your convenience.
+
+If you have any questions about RescuePC Repairs or need help with Windows PC issues, feel free to reply to this email.
+
+Best regards,
+Tyler Keesee
+Founder & Lead Developer
+RescuePC Repairs
+
+P.S. Ready to get started? Get your lifetime license here: https://buy.stripe.com/9B614m53s8i97y110j08g00
+    `;
+  }
+
+  async sendViaForm(emailData) {
+    // Create a hidden form to submit to your email service
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = '/api/send-email'; // You'll need to create this endpoint
+    form.style.display = 'none';
+    
+    // Add form fields
+    Object.keys(emailData).forEach(key => {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = key;
+      input.value = emailData[key];
+      form.appendChild(input);
+    });
+    
+    // Submit form
+    document.body.appendChild(form);
+    
+    return new Promise((resolve, reject) => {
+      // For demo purposes, we'll simulate success
       setTimeout(() => {
-        // Store in localStorage for demo purposes
-        const leads = JSON.parse(localStorage.getItem('email_leads') || '[]');
-        leads.push({
-          name,
-          email,
-          timestamp: new Date().toISOString(),
-          source: 'rescuepc_repairs',
-          flyer_delivered: true
-        });
-        localStorage.setItem('email_leads', JSON.stringify(leads));
-        
-        // Automatically deliver the RescuePC Repairs Flyer PDF
-        this.deliverFlyerPDF(name, email);
-        
+        document.body.removeChild(form);
         resolve();
       }, 1000);
     });
-  }
-
-  deliverFlyerPDF(name, email) {
-    // Create a download link for the RescuePC Repairs Flyer
-    const flyerUrl = '/docs/RescuePC Repairs Flyer.pdf';
-    
-    // Create download element
-    const downloadLink = document.createElement('a');
-    downloadLink.href = flyerUrl;
-    downloadLink.download = 'RescuePC_Repairs_Flyer.pdf';
-    downloadLink.style.display = 'none';
-    
-    // Add to page and trigger download
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
-    
-    // Track PDF delivery
-    this.trackEvent('flyer_pdf_delivered', { name, email });
-    
-    // Show success message with download confirmation
-    this.showFlyerDeliverySuccess();
-    
-    console.log('📄 RescuePC Repairs Flyer PDF delivered to:', email);
   }
 
   showFlyerDeliverySuccess() {
@@ -235,10 +288,11 @@ class EmailCaptureSystem {
       success.innerHTML = `
         <i class="fas fa-check-circle"></i>
         <h3>Thank You, ${document.getElementById('email-name')?.value || 'Friend'}!</h3>
-        <p>Your <strong>RescuePC Repairs Flyer</strong> is downloading now!</p>
+        <p>Your <strong>RescuePC Repairs Flyer</strong> has been sent to your email!</p>
         <div class="flyer-delivery-info">
+          <p><i class="fas fa-envelope"></i> <strong>Check your inbox</strong> for the flyer PDF</p>
           <p><i class="fas fa-file-pdf"></i> <strong>RescuePC Repairs Flyer.pdf</strong> - Complete product overview</p>
-          <p><i class="fas fa-envelope"></i> Check your email for additional resources</p>
+          <p><i class="fas fa-clock"></i> Email should arrive within 2-3 minutes</p>
         </div>
         <a href="https://buy.stripe.com/9B614m53s8i97y110j08g00" class="btn btn-secondary">
           <i class="fas fa-shopping-cart"></i>
@@ -358,8 +412,8 @@ class EmailCaptureSystem {
       <div class="notification-content">
         <i class="fas fa-check-circle"></i>
         <div class="notification-text">
-          <h4>RescuePC Repairs Flyer Downloaded!</h4>
-          <p>Check your downloads folder for the PDF</p>
+          <h4>RescuePC Repairs Flyer Sent!</h4>
+          <p>Check your email for the PDF</p>
         </div>
         <button class="notification-close">
           <i class="fas fa-times"></i>

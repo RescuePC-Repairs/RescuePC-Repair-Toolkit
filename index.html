@@ -1380,6 +1380,16 @@
   <!-- EMAIL CAPTURE SYSTEM - LEAD GENERATION -->
   <script src="js/email-capture.js"></script>
   
+  <!-- EMAILJS - FOR SENDING EMAILS WITH ATTACHMENTS -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script>
+    // Initialize EmailJS (replace with your actual service ID)
+    (function() {
+      // Replace 'YOUR_SERVICE_ID' with your actual EmailJS service ID
+      emailjs.init('YOUR_SERVICE_ID');
+    })();
+  </script>
+  
   <script>
     // RescuePC Repairs Assistant INITIALIZATION
     console.log('🤖 RescuePC Repairs Assistant Commands:');
