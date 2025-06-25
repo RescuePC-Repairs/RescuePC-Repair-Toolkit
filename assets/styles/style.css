@@ -425,6 +425,7 @@ section + .section,
   gap: var(--space-md);
   margin: 0 auto !important;
   max-width: 800px;
+  overflow: visible;
 }
 
 .security-guarantee {
@@ -438,12 +439,15 @@ section + .section,
   transition: all var(--transition-normal);
   text-align: center;
   justify-content: center;
+  overflow: visible;
+  position: relative;
 }
 
 .security-guarantee:hover {
   background: var(--secondary-color);
   color: #ffffff;
   transform: scale(1.02);
+  z-index: 10;
 }
 
 .security-guarantee i {
@@ -467,6 +471,7 @@ section + .section,
   gap: var(--space-lg);
   margin: 0 auto !important;
   flex-wrap: wrap;
+  overflow: visible;
 }
 
 .security-badge-item {
@@ -479,11 +484,14 @@ section + .section,
   padding: var(--space-md) var(--space-lg);
   transition: all var(--transition-normal);
   text-align: center;
+  overflow: visible;
+  position: relative;
 }
 
 .security-badge-item:hover {
   background: rgba(255, 255, 255, 0.2);
   transform: translateY(-2px);
+  z-index: 10;
 }
 
 .security-badge-item span {
@@ -2410,12 +2418,14 @@ i.fas, i.far, i.fab, i.fa {
   .security-guarantees {
     grid-template-columns: 1fr;
     max-width: 100%;
+    overflow: visible;
   }
   
   .security-badges {
     flex-direction: column;
     gap: var(--space-md);
     max-width: 100%;
+    overflow: visible;
   }
   
   .pricing-card {
