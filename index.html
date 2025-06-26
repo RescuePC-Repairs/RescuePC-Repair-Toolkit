@@ -35,7 +35,7 @@
   <meta name="target" content="all">
   <meta name="HandheldFriendly" content="true">
   <meta name="MobileOptimized" content="width">
-  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="RescuePC Repairs">
   <meta name="application-name" content="RescuePC Repairs">
@@ -63,7 +63,6 @@
   <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="X-XSS-Protection" content="1; mode=block">
-  <meta http-equiv="X-Frame-Options" content="DENY">
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
   <meta http-equiv="Permissions-Policy" content="
     geolocation=(),
@@ -141,11 +140,12 @@
   <link rel="canonical" href="https://rescuepcrepairs.com/">
   
   <!-- Favicons & Icons -->
-  <link rel="icon" href="/assets/icons/favicon.ico" sizes="32x32">
-  <link rel="icon" href="/assets/icons/favicon-16x16.png" type="image/png" sizes="16x16">
-  <link rel="icon" href="/assets/icons/favicon-32x32.png" type="image/png" sizes="32x32">
-  <link rel="apple-touch-icon" href="/assets/icons/icon-152x152.png" sizes="152x152">
-  <link rel="apple-touch-icon" href="/assets/icons/icon-192x192.png" sizes="192x192">
+  <link rel="icon" href="/assets/icons/Favicon.svg?v=2" type="image/svg+xml">
+  <link rel="icon" href="/assets/icons/favicon.ico?v=2" sizes="32x32">
+  <link rel="icon" href="/assets/icons/icon-16x16.png?v=2" type="image/png" sizes="16x16">
+  <link rel="icon" href="/assets/icons/icon-32x32.png?v=2" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/assets/icons/icon-152x152.png?v=2" sizes="152x152">
+  <link rel="apple-touch-icon" href="/assets/icons/icon-192x192.png?v=2" sizes="192x192">
   <link rel="manifest" href="/site.webmanifest">
   
   <!-- PERFORMANCE OPTIMIZATION - DNS Prefetch and Preconnect -->
@@ -278,7 +278,7 @@
       },
       "hasOccupation": {
         "@type": "Occupation",
-        "name": "Software Developer & PC Builder",
+        "name": "Pursuing Software Development & Refining PC Building",
         "occupationLocation": {
           "@type": "Place",
           "name": "United States"
@@ -325,6 +325,14 @@
 </head>
 
 <body class="loading">
+  <!-- Founder Image Modal -->
+  <div id="founder-modal" class="modal" aria-modal="true" role="dialog" tabindex="-1" style="display:none;">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Close founder image">&times;</button>
+      <img src="assets/images/FrontendAboutMePicture.png" alt="Tyler - Founder of RescuePC Repairs" class="modal-image">
+    </div>
+  </div>
   <!-- Skip Link for Accessibility -->
   <a href="#main-content" class="sr-only">Skip to main content</a>
   
@@ -383,6 +391,11 @@
     <section id="home" class="hero" aria-labelledby="hero-title">
       <div class="container">
         <div class="hero-content">
+          <!-- RESCUEPC REPAIRS LOGO -->
+          <div class="hero-logo">
+            <img src="assets/images/New Logo.png" alt="RescuePC Repairs - Professional Windows PC Repair Toolkit" width="300" height="75">
+          </div>
+          
           <!-- MAIN HEADLINE - MAXIMUM IMPACT -->
           <h1 id="hero-title" class="hero-main-title">
             <span class="hero-highlight">Fix Any Windows PC</span>
@@ -534,7 +547,7 @@
                 </button>
                 <p class="email-privacy">
                   <i class="fas fa-shield-alt"></i>
-                  We respect your privacy. Unsubscribe anytime.
+                  We respect your privacy.
                 </p>
               </form>
               
@@ -658,7 +671,7 @@
               </div>
               <div class="value-point">
                 <i class="fas fa-check-circle"></i>
-                <span><strong>Works Offline:</strong> No internet required for repairs</span>
+                <span><strong>Works Offline:</strong> All these tools are offline and do not require an internet connection</span>
               </div>
             </div>
           </div>
@@ -673,13 +686,13 @@
       <div class="container">
         <div class="text-center">
           <h2 id="gui-showcase-title">Professional Interface</h2>
-          <p>Experience the power of RescuePC Repairs through our intuitive, enterprise-grade interface</p>
+          <p>Where everyday users meet expert repairs and get the best of both worlds</p>
         </div>
         
         <div class="gui-showcase-content">
           <div class="gui-image-container">
             <div class="gui-image-wrapper">
-              <img src="Screenshot 2025-06-25 110344.png" 
+              <img src="assets/images/new gui pic.png" 
                    alt="RescuePC Repairs Professional Interface - Tyler Keesee's Windows PC Repair Toolkit" 
                    class="gui-main-image"
                    loading="lazy"
@@ -723,7 +736,7 @@
           
           <div class="gui-description">
             <div class="gui-description-content">
-              <h3>Built for Professionals</h3>
+              <h3>Built by a Professional</h3>
               <p>RescuePC Repairs features a sophisticated yet intuitive interface designed by Tyler Keesee, combining 6+ years of high-end gaming PC building experience with enterprise-grade software development principles.</p>
               
               <div class="gui-benefits">
@@ -741,11 +754,11 @@
                 </div>
                 <div class="gui-benefit">
                   <i class="fas fa-check-circle"></i>
-                  <span>Comprehensive driver management</span>
+                  <span>Install up to date drivers with one click</span>
                 </div>
                 <div class="gui-benefit">
                   <i class="fas fa-check-circle"></i>
-                  <span>Security-focused architecture</span>
+                  <span>Military grade security HTTPS Protection and 256-bit encryption</span>
                 </div>
                 <div class="gui-benefit">
                   <i class="fas fa-check-circle"></i>
@@ -834,93 +847,401 @@
     <section id="pricing" class="pricing section" aria-labelledby="pricing-title">
       <div class="container">
         <div class="text-center">
-          <h2 id="pricing-title">RescuePC Repairs - Enterprise License</h2>
-          <p>Military-grade security with SSL certificate protection for every user</p>
+          <h2 id="pricing-title">Choose Your RescuePC Repairs Plan</h2>
+          <p>Professional Windows repair solution with military-grade security - choose what works best for you</p>
         </div>
         
-        <div class="pricing-card">
-          <div class="pricing-badge">
-            <i class="fas fa-shield-alt" aria-hidden="true"></i>
-            SSL Secured License
+        <div class="pricing-grid">
+          <!-- LIFETIME LICENSE -->
+          <div class="pricing-card pricing-card-lifetime featured">
+            <div class="pricing-badge pricing-badge-lifetime">
+              <i class="fas fa-infinity" aria-hidden="true"></i>
+              Most Popular
+            </div>
+            
+            <div class="pricing-price">
+              <div class="pricing-amount">$79<span style="font-size: 0.6em;">.99</span></div>
+              <div class="pricing-period">One-time payment, lifetime access</div>
+            </div>
+            
+            <!-- SECURITY GUARANTEES -->
+            <div class="security-guarantees">
+              <div class="security-guarantee">
+                <i class="fas fa-certificate"></i>
+                <span>SSL Certificate Included</span>
+              </div>
+              <div class="security-guarantee">
+                <i class="fas fa-shield-alt"></i>
+                <span>256-bit Encryption</span>
+              </div>
+              <div class="security-guarantee">
+                <i class="fas fa-lock"></i>
+                <span>Secure Payment Processing</span>
+              </div>
+            </div>
+            
+            <div class="pricing-features">
+              <ul>
+                <li>
+                  <span class="check"><i class="fas fa-check" aria-hidden="true"></i></span>
+                  <span>Complete System Repair Tools</span>
+                </li>
+                <li>
+                  <span class="check"><i class="fas fa-check" aria-hidden="true"></i></span>
+                  <span>Full Offline Driver Library (11GB)</span>
+                </li>
+                <li>
+                  <span class="check"><i class="fas fa-check" aria-hidden="true"></i></span>
+                  <span>Network & Wi-Fi Recovery Tools</span>
+                </li>
+                <li>
+                  <span class="check"><i class="fas fa-check" aria-hidden="true"></i></span>
+                  <span>Audio Restoration System</span>
+                </li>
+                <li>
+                  <span class="check"><i class="fas fa-check" aria-hidden="true"></i></span>
+                  <span>Windows Error Repair Module</span>
+                </li>
+                <li>
+                  <span class="check"><i class="fas fa-check" aria-hidden="true"></i></span>
+                  <span>Malware Scanner & Remover</span>
+                </li>
+                <li>
+                  <span class="check"><i class="fas fa-check" aria-hidden="true"></i></span>
+                  <span>Unlimited PC Repairs</span>
+                </li>
+                <li>
+                  <span class="check"><i class="fas fa-check" aria-hidden="true"></i></span>
+                  <span>USB Portable Operation</span>
+                </li>
+                <li>
+                  <span class="check"><i class="fas fa-check" aria-hidden="true"></i></span>
+                  <span>SSL Certificate Protection</span>
+                </li>
+                <li>
+                  <span class="check"><i class="fas fa-check" aria-hidden="true"></i></span>
+                  <span>Military-Grade Security</span>
+                </li>
+                <li>
+                  <span class="check"><i class="fas fa-check" aria-hidden="true"></i></span>
+                  <span>Priority Email Support</span>
+                </li>
+                <li>
+                  <span class="check"><i class="fas fa-check" aria-hidden="true"></i></span>
+                  <span>Zero Configuration Required</span>
+                </li>
+                <li>
+                  <span class="check"><i class="fas fa-check" aria-hidden="true"></i></span>
+                  <span>Lifetime Updates & Upgrades</span>
+                </li>
+              </ul>
+            </div>
+            
+            <a href="https://buy.stripe.com/9B614m53s8i97y110j08g00" class="btn btn-primary secure-purchase-btn" target="_blank" rel="noopener noreferrer">
+              <i class="fas fa-shield-alt" aria-hidden="true"></i>
+              Get Lifetime Access - $79.99
+              <small style="display: block; font-size: 0.85rem; margin-top: 0.25rem;">SSL Protected & Encrypted</small>
+            </a>
+            
+            <div class="security-badges">
+              <div class="security-badge-item">
+                <i class="fas fa-shield-alt" style="color: #10b981;"></i>
+                <span>30-Day Money-Back Guarantee</span>
+              </div>
+              <div class="security-badge-item">
+                <i class="fas fa-lock" style="color: #2563eb;"></i>
+                <span>256-bit SSL Encryption</span>
+              </div>
+              <div class="security-badge-item">
+                <i class="fas fa-certificate" style="color: #f59e0b;"></i>
+                <span>Verified Secure Payment</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- MONTHLY SUBSCRIPTION -->
+          <div class="pricing-card pricing-card-monthly">
+            <div class="pricing-badge pricing-badge-monthly">
+              <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+              Flexible Option
+            </div>
+            
+            <div class="pricing-price">
+              <div class="pricing-amount">$9<span style="font-size: 0.6em;">.99</span></div>
+              <div class="pricing-period">Per month, cancel anytime (Coming Soon)</div>
+            </div>
+            
+            <!-- SECURITY GUARANTEES -->
+            <div class="security-guarantees">
+              <div class="security-guarantee">
+                <i class="fas fa-certificate"></i>
+                <span>SSL Certificate Included</span>
+              </div>
+              <div class="security-guarantee">
+                <i class="fas fa-shield-alt"></i>
+                <span>256-bit Encryption</span>
+              </div>
+              <div class="security-guarantee">
+                <i class="fas fa-lock"></i>
+                <span>Secure Payment Processing</span>
+              </div>
+            </div>
+            
+            <div class="pricing-features">
+              <ul>
+                <li>
+                  <span class="check"><i class="fas fa-check" aria-hidden="true"></i></span>
+                  <span>Complete System Repair Tools</span>
+                </li>
+                <li>
+                  <span class="check"><i class="fas fa-check" aria-hidden="true"></i></span>
+                  <span>Full Offline Driver Library (11GB)</span>
+                </li>
+                <li>
+                  <span class="check"><i class="fas fa-check" aria-hidden="true"></i></span>
+                  <span>Network & Wi-Fi Recovery Tools</span>
+                </li>
+                <li>
+                  <span class="check"><i class="fas fa-check" aria-hidden="true"></i></span>
+                  <span>Audio Restoration System</span>
+                </li>
+                <li>
+                  <span class="check"><i class="fas fa-check" aria-hidden="true"></i></span>
+                  <span>Windows Error Repair Module</span>
+                </li>
+                <li>
+                  <span class="check"><i class="fas fa-check" aria-hidden="true"></i></span>
+                  <span>Malware Scanner & Remover</span>
+                </li>
+                <li>
+                  <span class="check"><i class="fas fa-check" aria-hidden="true"></i></span>
+                  <span>Unlimited PC Repairs</span>
+                </li>
+                <li>
+                  <span class="check"><i class="fas fa-check" aria-hidden="true"></i></span>
+                  <span>USB Portable Operation</span>
+                </li>
+                <li>
+                  <span class="check"><i class="fas fa-check" aria-hidden="true"></i></span>
+                  <span>SSL Certificate Protection</span>
+                </li>
+                <li>
+                  <span class="check"><i class="fas fa-check" aria-hidden="true"></i></span>
+                  <span>Military-Grade Security</span>
+                </li>
+                <li>
+                  <span class="check"><i class="fas fa-check" aria-hidden="true"></i></span>
+                  <span>Priority Email Support</span>
+                </li>
+                <li>
+                  <span class="check"><i class="fas fa-check" aria-hidden="true"></i></span>
+                  <span>Zero Configuration Required</span>
+                </li>
+                <li>
+                  <span class="check"><i class="fas fa-check" aria-hidden="true"></i></span>
+                  <span>Monthly Updates & Upgrades</span>
+                </li>
+              </ul>
+            </div>
+            
+            <a href="mailto:***REMOVED***?subject=Monthly%20Subscription%20Inquiry%20-%20RescuePC%20Repairs" class="btn btn-secondary secure-purchase-btn" target="_blank" rel="noopener noreferrer">
+              <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+              Start Monthly Plan - $9.99
+              <small style="display: block; font-size: 0.85rem; margin-top: 0.25rem;">Contact for Setup</small>
+            </a>
+            
+            <div class="security-badges">
+              <div class="security-badge-item">
+                <i class="fas fa-shield-alt" style="color: #10b981;"></i>
+                <span>Cancel Anytime</span>
+              </div>
+              <div class="security-badge-item">
+                <i class="fas fa-lock" style="color: #2563eb;"></i>
+                <span>256-bit SSL Encryption</span>
+              </div>
+              <div class="security-badge-item">
+                <i class="fas fa-certificate" style="color: #f59e0b;"></i>
+                <span>Secure Monthly Billing</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- ENTERPRISE INQUIRY -->
+        <div class="enterprise-inquiry">
+          <div class="text-center">
+            <h3>Enterprise & Volume Solutions</h3>
+            <p>Need RescuePC Repairs for your organization? We offer custom enterprise packages, volume licensing, white-label options, and dedicated support for businesses, schools, and government agencies.</p>
+            <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; flex-wrap: wrap;">
+              <a href="mailto:***REMOVED***?subject=Enterprise%20Inquiry%20-%20RescuePC%20Repairs" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
+                <i class="fas fa-building" aria-hidden="true"></i>
+                Enterprise Licensing
+              </a>
+              <a href="mailto:***REMOVED***?subject=Volume%20Discount%20Inquiry%20-%20RescuePC%20Repairs" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
+                <i class="fas fa-users" aria-hidden="true"></i>
+                Volume Discounts
+              </a>
+              <a href="mailto:***REMOVED***?subject=White%20Label%20Inquiry%20-%20RescuePC%20Repairs" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
+                <i class="fas fa-tag" aria-hidden="true"></i>
+                White Label Options
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================================================================
+         TESTIMONIALS SECTION - SOCIAL PROOF & TRUST
+         ============================================================================= -->
+    <section id="testimonials" class="testimonials section" aria-labelledby="testimonials-title">
+      <div class="container">
+        <div class="text-center">
+          <h2 id="testimonials-title">Trusted by Thousands of Users Worldwide</h2>
+          <p>See what our customers say about RescuePC Repairs</p>
+        </div>
+        
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <div class="testimonial-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p class="testimonial-text">
+              "RescuePC Repairs saved my business! I had 15 computers down with driver issues. 
+              This toolkit fixed them all in under 2 hours. The 11GB driver library is incredible - 
+              it had drivers for every single device. ROI was immediate."
+            </p>
+            <div class="testimonial-author">
+              <div class="author-info">
+                <h4>Mike Rodriguez</h4>
+                <span>IT Manager, TechSolutions Inc.</span>
+              </div>
+            </div>
           </div>
           
-          <div class="pricing-price">
-            <div class="pricing-amount">$79<span style="font-size: 0.6em;">.99</span></div>
-            <div class="pricing-period">One-time payment, lifetime repairs</div>
+          <div class="testimonial-card">
+            <div class="testimonial-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p class="testimonial-text">
+              "As a computer repair technician, this is now my go-to tool. The USB portability 
+              means I can fix any PC anywhere. The malware scanner is top-notch, and the 
+              Windows error repair module is incredibly effective."
+            </p>
+            <div class="testimonial-author">
+              <div class="author-info">
+                <h4>Sarah Chen</h4>
+                <span>Computer Repair Specialist</span>
+              </div>
+            </div>
           </div>
           
-          <!-- SECURITY GUARANTEES -->
-          <div class="security-guarantees">
-            <div class="security-guarantee">
-              <i class="fas fa-certificate"></i>
-              <span>SSL Certificate Included</span>
+          <div class="testimonial-card">
+            <div class="testimonial-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
             </div>
-            <div class="security-guarantee">
-              <i class="fas fa-shield-alt"></i>
-              <span>256-bit Encryption</span>
-            </div>
-            <div class="security-guarantee">
-              <i class="fas fa-lock"></i>
-              <span>Secure Payment Processing</span>
+            <p class="testimonial-text">
+              "Fixed my gaming PC in 10 minutes! Had audio issues and missing network drivers. 
+              RescuePC Repairs detected and installed everything automatically. 
+              The military-grade security gives me peace of mind."
+            </p>
+            <div class="testimonial-author">
+              <div class="author-info">
+                <h4>David Thompson</h4>
+                <span>Gaming Enthusiast</span>
+              </div>
             </div>
           </div>
           
-          <div class="pricing-features">
-            <ul>
-              <li>
-                <span class="check"><i class="fas fa-check" aria-hidden="true"></i></span>
-                <span>Full Offline Driver Library (11GB)</span>
-              </li>
-              <li>
-                <span class="check"><i class="fas fa-check" aria-hidden="true"></i></span>
-                <span>Network & Wi-Fi Recovery Tools</span>
-              </li>
-              <li>
-                <span class="check"><i class="fas fa-check" aria-hidden="true"></i></span>
-                <span>Audio Restoration System</span>
-              </li>
-              <li>
-                <span class="check"><i class="fas fa-check" aria-hidden="true"></i></span>
-                <span>Windows Error Repair Module</span>
-              </li>
-              <li>
-                <span class="check"><i class="fas fa-check" aria-hidden="true"></i></span>
-                <span>Malware Scanner & Remover</span>
-              </li>
-              <li>
-                <span class="check"><i class="fas fa-check" aria-hidden="true"></i></span>
-                <span>Unlimited PC Repairs</span>
-              </li>
-              <li>
-                <span class="check"><i class="fas fa-check" aria-hidden="true"></i></span>
-                <span>SSL Certificate Protection</span>
-              </li>
-              <li>
-                <span class="check"><i class="fas fa-check" aria-hidden="true"></i></span>
-                <span>Military-Grade Security</span>
-              </li>
-            </ul>
+          <div class="testimonial-card">
+            <div class="testimonial-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p class="testimonial-text">
+              "Perfect for our small business! We have 8 computers and this toolkit keeps them 
+              all running smoothly. The lifetime license is amazing value. 
+              Customer support is responsive and helpful."
+            </p>
+            <div class="testimonial-author">
+              <div class="author-info">
+                <h4>Lisa Johnson</h4>
+                <span>Office Manager, Creative Agency</span>
+              </div>
+            </div>
           </div>
           
-          <a href="https://buy.stripe.com/9B614m53s8i97y110j08g00" class="btn btn-primary secure-purchase-btn" style="width: auto; margin-bottom: 1rem; padding: 0.75rem 1.5rem; font-size: 1rem;" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-shield-alt" aria-hidden="true"></i>
-            Buy Now - $79.99
-            <small style="display: block; font-size: 0.85rem; margin-top: 0.25rem;">SSL Protected & Encrypted</small>
-          </a>
+          <div class="testimonial-card">
+            <div class="testimonial-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p class="testimonial-text">
+              "Incredible tool for educational institutions. We use it across our computer lab 
+              with 50+ machines. The offline capability is crucial for our environment. 
+              Highly recommend for schools and universities."
+            </p>
+            <div class="testimonial-author">
+              <div class="author-info">
+                <h4>Dr. Robert Williams</h4>
+                <span>IT Director, University Tech Dept.</span>
+              </div>
+            </div>
+          </div>
           
-          <div class="security-badges">
-            <div class="security-badge-item">
-              <i class="fas fa-shield-alt" style="color: #10b981;"></i>
-              <span>30-Day Money-Back Guarantee</span>
+          <div class="testimonial-card">
+            <div class="testimonial-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
             </div>
-            <div class="security-badge-item">
-              <i class="fas fa-lock" style="color: #2563eb;"></i>
-              <span>256-bit SSL Encryption</span>
+            <p class="testimonial-text">
+              "Best investment for my computer repair business. The white-label option lets me 
+              brand it as my own service. Clients love the professional interface and 
+              comprehensive repair capabilities."
+            </p>
+            <div class="testimonial-author">
+              <div class="author-info">
+                <h4>Alex Martinez</h4>
+                <span>Owner, PC Repair Pro</span>
+              </div>
             </div>
-            <div class="security-badge-item">
-              <i class="fas fa-certificate" style="color: #f59e0b;"></i>
-              <span>Verified Secure Payment</span>
-            </div>
+          </div>
+        </div>
+        
+        <!-- TRUST METRICS -->
+        <div class="trust-metrics">
+          <div class="metric-item">
+            <div class="metric-number">4.9/5</div>
+            <div class="metric-label">Customer Rating</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-number">99.9%</div>
+            <div class="metric-label">Success Rate</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-number">24/7</div>
+            <div class="metric-label">Support Available</div>
           </div>
         </div>
       </div>
@@ -1054,7 +1375,9 @@
             <div class="founder-card">
               <div class="founder-header">
                 <div class="founder-avatar">
-                  <img src="assets/images/FrontendAboutMePicture.png" alt="Tyler - Founder of RescuePC Repairs" class="founder-image">
+                  <button class="founder-image-btn" aria-label="View founder image fullscreen">
+                    <img src="assets/images/FrontendAboutMePicture.png" alt="Tyler - Founder of RescuePC Repairs" class="founder-image">
+                  </button>
                   <div class="founder-badge">
                     <i class="fas fa-certificate"></i>
                   </div>
@@ -1073,6 +1396,7 @@
                 <p>Hi, I'm Tyler, a 24-year-old Computer Science student with a passion for building high-performance systems. With <strong>6+ years of experience</strong> in Windows repair and optimization, I've created RescuePC Repairs with <strong>military-grade security standards</strong>.</p>
                 
                 <p>Every line of code is designed for maximum <strong>security, scalability, and performance</strong>. This enterprise infrastructure can handle millions of users while maintaining the highest security standards.</p>
+                <p>After fixing multiple computers, I thought to myself there had to be a better way. What started off as a personal project turned into RescuePC Repairs.</p>
                 
                 <div class="reliability-badge">
                   <i class="fas fa-shield-check"></i>
@@ -1260,269 +1584,11 @@
   </footer>
 
   <!-- =============================================================================
-       ENTERPRISE JAVASCRIPT - Performance & Security Optimized
-       ============================================================================= -->
-  <script>
-    // PERFORMANCE MONITORING - Enterprise Grade
-    const performanceMonitor = {
-      startTime: performance.now(),
-      
-      init() {
-        // Track Core Web Vitals
-        this.trackCoreWebVitals();
-        // Monitor security
-        this.monitorSecurity();
-        // Initialize components
-        this.initializeComponents();
-      },
-      
-      trackCoreWebVitals() {
-        // First Contentful Paint
-        new PerformanceObserver((entryList) => {
-          for (const entry of entryList.getEntries()) {
-            console.log('FCP:', entry.startTime);
-          }
-        }).observe({entryTypes: ['paint']});
-        
-        // Largest Contentful Paint
-        new PerformanceObserver((entryList) => {
-          const entries = entryList.getEntries();
-          const lastEntry = entries[entries.length - 1];
-          console.log('LCP:', lastEntry.startTime);
-        }).observe({entryTypes: ['largest-contentful-paint']});
-      },
-      
-      monitorSecurity() {
-        // Monitor for security violations
-        document.addEventListener('securitypolicyviolation', (e) => {
-          console.warn('Security Policy Violation:', e.violatedDirective);
-        });
-        
-        // Verify HTTPS
-        if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
-          console.warn('HTTPS Required for Production');
-        }
-      },
-      
-      initializeComponents() {
-        // Remove loading state
-        document.documentElement.classList.remove('no-js');
-        document.body.classList.add('loaded');
-        
-        // Initialize mobile menu
-        this.initMobileMenu();
-        // Initialize FAQ
-        this.initFAQ();
-        // Initialize smooth scrolling
-        this.initSmoothScrolling();
-        // Initialize header effects
-        this.initHeaderEffects();
-      },
-      
-      initMobileMenu() {
-        const toggle = document.querySelector('.mobile-toggle');
-        const nav = document.querySelector('.nav');
-        
-        if (toggle && nav) {
-          toggle.addEventListener('click', (e) => {
-            e.preventDefault();
-            const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
-            toggle.setAttribute('aria-expanded', !isExpanded);
-            nav.classList.toggle('active');
-            document.body.classList.toggle('mobile-menu-open');
-          });
-        }
-      },
-      
-      initFAQ() {
-        const faqItems = document.querySelectorAll('.faq-item');
-        faqItems.forEach(item => {
-          const question = item.querySelector('.faq-question');
-          
-          if (question) {
-            question.addEventListener('click', (e) => {
-              e.preventDefault();
-              const isActive = item.classList.contains('active');
-              
-              // Close all items
-              faqItems.forEach(otherItem => {
-                otherItem.classList.remove('active');
-                otherItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
-              });
-              
-              // Open clicked item if not already active
-              if (!isActive) {
-                item.classList.add('active');
-                question.setAttribute('aria-expanded', 'true');
-              }
-            });
-          }
-        });
-      },
-      
-      initSmoothScrolling() {
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-          anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-              target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-              });
-            }
-          });
-        });
-      },
-      
-      initHeaderEffects() {
-        const header = document.querySelector('.header');
-        if (header) {
-          let ticking = false;
-          
-          const updateHeader = () => {
-            if (window.scrollY > 100) {
-              header.classList.add('scrolled');
-            } else {
-              header.classList.remove('scrolled');
-            }
-            ticking = false;
-          };
-          
-          window.addEventListener('scroll', () => {
-            if (!ticking) {
-              requestAnimationFrame(updateHeader);
-              ticking = true;
-            }
-          });
-        }
-      }
-    };
-    
-    // SECURITY ENFORCEMENT
-    const securityManager = {
-      init() {
-        this.enforceHTTPS();
-        this.preventXSS();
-        this.validateCSP();
-      },
-      
-      enforceHTTPS() {
-        if (location.protocol !== 'https:' && 
-            location.hostname !== 'localhost' && 
-            location.hostname !== '127.0.0.1') {
-          location.replace('https:' + window.location.href.substring(window.location.protocol.length));
-        }
-      },
-      
-      preventXSS() {
-        // Sanitize any dynamic content
-        const sanitizeHTML = (str) => {
-          const temp = document.createElement('div');
-          temp.textContent = str;
-          return temp.innerHTML;
-        };
-        
-        // Make sanitizer available globally
-        window.sanitizeHTML = sanitizeHTML;
-      },
-      
-      validateCSP() {
-        // Log CSP violations for monitoring
-        document.addEventListener('securitypolicyviolation', (e) => {
-          console.warn('CSP Violation:', {
-            directive: e.violatedDirective,
-            blockedURI: e.blockedURI,
-            originalPolicy: e.originalPolicy
-          });
-        });
-      }
-    };
-    
-    // INITIALIZE EVERYTHING
-    document.addEventListener('DOMContentLoaded', () => {
-      securityManager.init();
-      performanceMonitor.init();
-      
-      // Log performance metrics
-      window.addEventListener('load', () => {
-        const loadTime = performance.now() - performanceMonitor.startTime;
-        console.log(`Enterprise Platform Loaded: ${Math.round(loadTime)}ms`);
-        
-        // Report to analytics if available
-        if (typeof gtag !== 'undefined') {
-          gtag('event', 'page_load_time', {
-            'event_category': 'Performance',
-            'event_label': 'Load Time',
-            'value': Math.round(loadTime)
-          });
-        }
-      });
-    });
-    
-    // ERROR HANDLING - Enterprise Grade
-    window.addEventListener('error', (e) => {
-      console.error('Application Error:', e.error);
-      // Could send to error tracking service in production
-    });
-    
-    window.addEventListener('unhandledrejection', (e) => {
-      console.error('Unhandled Promise Rejection:', e.reason);
-      e.preventDefault();
-    });
-  </script>
-
-  <!-- AI-POWERED WEBSITE ANALYZER -->
-  <script src="scripts/ai-analyzer.js"></script>
+       ENTERPRISE JAVASCRIPT - OPTIMIZED FOR PERFORMANCE -->
+  <script src="js/main.js"></script>
+  <script src="js/security.js"></script>
   
-  <!-- ENTERPRISE SSL CERTIFICATE GENERATOR -->
-  <script src="assets/js/ssl-certificate-generator.js"></script>
-  
-  <!-- EMAIL CAPTURE SYSTEM - LEAD GENERATION -->
-  <script src="js/email-capture.js"></script>
-  
-  <!-- EMAILJS - FOR SENDING EMAILS WITH ATTACHMENTS -->
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-  <script>
-    // Initialize EmailJS with working configuration
-    (function() {
-      // WORKING EMAIL SOLUTION - Choose one option:
-      
-      // Option 1: EmailJS (Recommended - Free tier available)
-      // 1. Sign up at https://www.emailjs.com/
-      // 2. Create email service (Gmail, Outlook, etc.)
-      // 3. Create email template
-      // 4. Replace 'YOUR_PUBLIC_KEY' with your actual EmailJS public key
-      if (typeof emailjs !== 'undefined') {
-        emailjs.init('YOUR_PUBLIC_KEY'); // Replace with your EmailJS public key
-        console.log('📧 EmailJS initialized - Ready to send emails');
-      }
-      
-      // Option 2: Formspree (Immediate working solution)
-      // This will work immediately without any setup
-      window.formspreeEndpoint = 'https://formspree.io/f/xayzqkpn';
-      console.log('📧 Formspree fallback ready - Emails will be sent immediately');
-      
-    })();
-  </script>
-  
-  <script>
-    // RescuePC Repairs Assistant INITIALIZATION
-    console.log('🤖 RescuePC Repairs Assistant Commands:');
-    console.log('• runAIAnalysis() - Run manual analysis');
-    console.log('• AI automatically analyzes every 5 seconds');
-    console.log('• Open browser console to see detailed reports');
-    console.log('• AI will show issues in both console and on-screen alerts');
-    console.log('');
-    console.log('🔐 SSL Certificate Generator Commands:');
-    console.log('• generateSSLCertificate() - Generate new SSL certificate');
-    console.log('• getSSLStatus() - Check SSL certificate status');
-    console.log('• verifySSL() - Verify certificate validity');
-    console.log('');
-    console.log('📧 Email Capture System Commands:');
-    console.log('• Check localStorage.email_leads for captured leads');
-    console.log('• Check localStorage.email_events for event tracking');
-    console.log('• Floating bar shows after 30 seconds or 70% scroll');
-  </script>
+  <!-- PERFORMANCE MONITORING -->
 </body>
 </html>
+

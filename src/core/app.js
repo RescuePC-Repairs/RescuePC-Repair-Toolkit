@@ -96,7 +96,14 @@ class RescuePCApp {
     }
     
     // Immediate HTTPS redirect
-    if (location.protocol !== 'https:') {
+    if (location.protocol !== 'https:' && 
+        location.hostname !== 'localhost' && 
+        location.hostname !== '127.0.0.1' && 
+        location.hostname !== '0.0.0.0' &&
+        !location.hostname.startsWith('192.168.') &&
+        !location.hostname.startsWith('10.') &&
+        !location.hostname.includes('localhost') &&
+        !location.hostname.includes('127.0.0.1')) {
       console.log('🔒 Forcing HTTPS redirect...');
       const httpsUrl = 'https:' + window.location.href.substring(window.location.protocol.length);
       location.replace(httpsUrl);

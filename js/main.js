@@ -310,6 +310,57 @@ document.addEventListener('DOMContentLoaded', function() {
       imageObserver.observe(img);
     });
   }
+
+  // Founder Image Modal Logic
+  (function() {
+    const founderBtn = document.querySelector('.founder-image-btn');
+    const modal = document.getElementById('founder-modal');
+    const closeBtn = modal ? modal.querySelector('.modal-close') : null;
+    const overlay = modal ? modal.querySelector('.modal-overlay') : null;
+    
+    if (!founderBtn) { console.log('Founder button not found'); return; }
+    if (!modal) { console.log('Founder modal not found'); return; }
+    if (!closeBtn) { console.log('Modal close button not found'); return; }
+    if (!overlay) { console.log('Modal overlay not found'); return; }
+
+    function openModal() {
+      modal.classList.add('show');
+      setTimeout(() => { modal.focus(); }, 10);
+      document.body.style.overflow = 'hidden';
+      closeBtn.focus();
+    }
+    
+    function closeModal() {
+      modal.classList.remove('show');
+      document.body.style.overflow = '';
+      founderBtn.focus();
+    }
+    
+    founderBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      openModal();
+    });
+    
+    closeBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      closeModal();
+    });
+    
+    overlay.addEventListener('click', function(e) {
+      e.preventDefault();
+      closeModal();
+    });
+    
+    document.addEventListener('keydown', function(e) {
+      if (modal.classList.contains('show') && (e.key === 'Escape' || e.key === 'Esc')) {
+        closeModal();
+      }
+      if (modal.classList.contains('show') && e.key === 'Tab') {
+        e.preventDefault();
+        closeBtn.focus();
+      }
+    });
+  })();
 });
 
 // Mobile menu styles are now in the main CSS file for better performance

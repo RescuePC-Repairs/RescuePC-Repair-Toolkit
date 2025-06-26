@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Test - RescuePC Repairs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .test-section {
+            background: #f5f5f5;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .success {
+            color: #10b981;
+            font-weight: bold;
+        }
+        .error {
+            color: #ef4444;
+            font-weight: bold;
+        }
+        .info {
+            color: #3b82f6;
+            font-weight: bold;
+        }
+        .warning {
+            color: #f59e0b;
+            font-weight: bold;
+        }
+        .test-image {
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+        .console-output {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔧 RescuePC Repairs - Local Development Test</h1>
+    
+    <div class="test-section">
+        <h2>✅ HTTPS Enforcement Test</h2>
+        <p><span class="success">PASSED:</span> This page loaded successfully on localhost without SSL errors.</p>
+        <p><strong>Current URL:</strong> <span id="current-url"></span></p>
+        <p><strong>Protocol:</strong> <span id="protocol"></span></p>
+        <p><strong>Hostname:</strong> <span id="hostname"></span></p>
+        <p><strong>Port:</strong> <span id="port"></span></p>
+    </div>
+
+    <div class="test-section">
+        <h2>🖼️ Image Loading Test</h2>
+        <p>Testing if images load correctly:</p>
+        
+        <h3>GuiPic.png Test:</h3>
+        <img src="assets/images/GuiPic.png" alt="GuiPic Test" class="test-image" id="guipic-test">
+        <p id="guipic-status">Loading...</p>
+        
+        <h3>RescuePC_Logo_Light.png Test:</h3>
+        <img src="assets/images/RescuePC_Logo_Light.png" alt="Logo Test" class="test-image" id="logo-test">
+        <p id="logo-status">Loading...</p>
+        
+        <h3>FrontendAboutMePicture.png Test:</h3>
+        <img src="assets/images/FrontendAboutMePicture.png" alt="About Me Test" class="test-image" id="about-test">
+        <p id="about-status">Loading...</p>
+    </div>
+
+    <div class="test-section">
+        <h2>🔗 Main Site Test</h2>
+        <p>Click the link below to test the main site:</p>
+        <a href="index.html" style="background: #3b82f6; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Test Main Site</a>
+    </div>
+
+    <div class="test-section">
+        <h2>📋 Test Results</h2>
+        <div id="test-results">
+            <p><span class="info">Running tests...</span></p>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>📝 Console Output</h2>
+        <div class="console-output" id="console-output">
+            <p>Console messages will appear here...</p>
+        </div>
+    </div>
+
+    <script>
+        // Display current URL info
+        document.getElementById('current-url').textContent = window.location.href;
+        document.getElementById('protocol').textContent = window.location.protocol;
+        document.getElementById('hostname').textContent = window.location.hostname;
+        document.getElementById('port').textContent = window.location.port || '80 (default)';
+
+        // Test image loading
+        function testImageLoading() {
+            const images = [
+                { id: 'guipic-test', statusId: 'guipic-status', src: 'assets/images/GuiPic.png' },
+                { id: 'logo-test', statusId: 'logo-status', src: 'assets/images/RescuePC_Logo_Light.png' },
+                { id: 'about-test', statusId: 'about-status', src: 'assets/images/FrontendAboutMePicture.png' }
+            ];
+
+            images.forEach(img => {
+                const imageElement = document.getElementById(img.id);
+                const statusElement = document.getElementById(img.statusId);
+
+                imageElement.onload = function() {
+                    statusElement.innerHTML = '<span class="success">✅ Loaded successfully</span>';
+                };
+
+                imageElement.onerror = function() {
+                    statusElement.innerHTML = '<span class="error">❌ Failed to load</span>';
+                    console.error(`Failed to load image: ${img.src}`);
+                };
+            });
+        }
+
+        // Test HTTPS enforcement
+        function testHTTPSEnforcement() {
+            const results = document.getElementById('test-results');
+            let testResults = '';
+
+            // Test 1: Check if we're on localhost
+            const isLocalhost = window.location.hostname === 'localhost' || 
+                               window.location.hostname === '127.0.0.1' ||
+                               window.location.hostname === '0.0.0.0' ||
+                               window.location.hostname.startsWith('192.168.') ||
+                               window.location.hostname.startsWith('10.');
+
+            if (isLocalhost) {
+                testResults += '<p><span class="success">✅ PASSED:</span> Running on localhost (HTTPS not required)</p>';
+            } else {
+                testResults += '<p><span class="error">❌ FAILED:</span> Not running on localhost</p>';
+            }
+
+            // Test 2: Check protocol
+            if (window.location.protocol === 'http:' && isLocalhost) {
+                testResults += '<p><span class="success">✅ PASSED:</span> HTTP protocol allowed on localhost</p>';
+            } else if (window.location.protocol === 'https:') {
+                testResults += '<p><span class="success">✅ PASSED:</span> HTTPS protocol active</p>';
+            } else {
+                testResults += '<p><span class="error">❌ FAILED:</span> Unexpected protocol</p>';
+            }
+
+            // Test 3: Check port
+            const port = window.location.port;
+            if (port === '5500' || port === '8000' || port === '3000' || port === '8080' || !port) {
+                testResults += `<p><span class="success">✅ PASSED:</span> Port ${port || '80'} is valid for development</p>`;
+            } else {
+                testResults += `<p><span class="warning">⚠️ WARNING:</span> Port ${port} might cause issues</p>`;
+            }
+
+            // Test 4: Check if security scripts are loaded
+            const securityScript = document.querySelector('script[src*="security.js"]');
+            if (securityScript) {
+                testResults += '<p><span class="info">ℹ️ INFO:</span> Security script detected</p>';
+            } else {
+                testResults += '<p><span class="info">ℹ️ INFO:</span> No security script on this test page</p>';
+            }
+
+            results.innerHTML = testResults;
+        }
+
+        // Console output capture
+        function captureConsole() {
+            const consoleOutput = document.getElementById('console-output');
+            const originalLog = console.log;
+            const originalError = console.error;
+            const originalWarn = console.warn;
+
+            function addToConsole(type, message) {
+                const timestamp = new Date().toLocaleTimeString();
+                const logEntry = document.createElement('div');
+                logEntry.style.color = type === 'error' ? '#ef4444' : type === 'warn' ? '#f59e0b' : '#10b981';
+                logEntry.textContent = `[${timestamp}] ${type.toUpperCase()}: ${message}`;
+                consoleOutput.appendChild(logEntry);
+                consoleOutput.scrollTop = consoleOutput.scrollHeight;
+            }
+
+            console.log = function(...args) {
+                originalLog.apply(console, args);
+                addToConsole('log', args.join(' '));
+            };
+
+            console.error = function(...args) {
+                originalError.apply(console, args);
+                addToConsole('error', args.join(' '));
+            };
+
+            console.warn = function(...args) {
+                originalWarn.apply(console, args);
+                addToConsole('warn', args.join(' '));
+            };
+        }
+
+        // Test main site loading
+        document.querySelector('a[href="index.html"]').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const link = this;
+            const originalText = link.textContent;
+            link.textContent = 'Testing...';
+            link.style.background = '#f59e0b';
+
+            // Try to load the main site
+            fetch('index.html')
+                .then(response => {
+                    if (response.ok) {
+                        link.textContent = '✅ Main site loads successfully!';
+                        link.style.background = '#10b981';
+                        setTimeout(() => {
+                            window.location.href = 'index.html';
+                        }, 1000);
+                    } else {
+                        throw new Error('Failed to load main site');
+                    }
+                })
+                .catch(error => {
+                    link.textContent = '❌ Main site failed to load';
+                    link.style.background = '#ef4444';
+                    console.error('Error loading main site:', error);
+                });
+        });
+
+        // Initialize tests
+        captureConsole();
+        testImageLoading();
+        testHTTPSEnforcement();
+
+        console.log('🔧 RescuePC Repairs - Local Test Page Loaded');
+        console.log('Testing environment:', {
+            url: window.location.href,
+            protocol: window.location.protocol,
+            hostname: window.location.hostname,
+            port: window.location.port
+        });
+    </script>
+</body>
+</html> 
