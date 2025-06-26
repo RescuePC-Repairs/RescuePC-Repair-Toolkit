@@ -286,7 +286,7 @@ section, .section {
     radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
     linear-gradient(45deg, #1e293b 0%, #2563eb 50%, #1e40af 100%);
   color: white;
-  padding: 6rem 0 3rem;
+  padding: 8rem 0 3rem;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -1995,7 +1995,7 @@ i.fas, i.far, i.fab, i.fa {
 
   .hero {
     margin: 0 !important;
-    padding: 6rem 0 3rem !important;
+    padding: 8rem 0 3rem !important; /* Increased from 6rem to 8rem to match desktop */
     min-height: 80vh;
     overflow-x: hidden;
   }
@@ -3338,7 +3338,7 @@ i.fas, i.far, i.fab, i.fa {
 /* Hero section - special case */
 .hero {
   margin: 0 !important;
-  padding: 6rem 0 3rem !important;
+  padding: 7rem 0 2.5rem !important; /* Increased from 5rem to 7rem for better spacing */
   border-bottom: none;
 }
 
