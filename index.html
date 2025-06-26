@@ -78,6 +78,8 @@
   <meta http-equiv="Cross-Origin-Embedder-Policy" content="require-corp">
   <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin">
   <meta http-equiv="Cross-Origin-Resource-Policy" content="cross-origin">
+  <meta http-equiv="Rate-Limit" content="100; window=60">
+  <meta http-equiv="Rate-Limit-Policy" content="100; window=60; burst=10">
   
   <!-- HTTPS ENFORCEMENT -->
   <script>
@@ -94,8 +96,10 @@
     
     // Development mode security notice
     if (location.protocol !== 'https:' && (location.hostname === 'localhost' || location.hostname === '127.0.0.1')) {
-      console.log('🔒 Development Mode: HTTPS not required for localhost');
-      console.log('ℹ️ For production deployment, ensure HTTPS is configured');
+      if (location.hostname === 'localhost') {
+        console.log('🔒 Development Mode: HTTPS not required for localhost');
+        console.log('ℹ️ For production deployment, ensure HTTPS is configured');
+      }
     }
     
     // CSP Cache Buster - Force refresh if CSP was updated
@@ -103,7 +107,9 @@
     const lastCSPVersion = localStorage.getItem('csp-version');
     if (lastCSPVersion !== cspVersion) {
       localStorage.setItem('csp-version', cspVersion);
-      console.log('🔄 CSP updated - clearing cache');
+      if (location.hostname === 'localhost') {
+        console.log('🔄 CSP updated - clearing cache');
+      }
       // Clear any cached resources that might conflict
       if ('caches' in window) {
         caches.keys().then(names => {
@@ -177,7 +183,9 @@
       
       // Set timeout for loading
       const timeout = setTimeout(() => {
-        console.log('🛠️ FontAwesome CDN timeout - using local fallback');
+        if (location.hostname === 'localhost') {
+          console.log('🛠️ FontAwesome CDN timeout - using local fallback');
+        }
         link.remove();
       }, 5000);
       
@@ -187,14 +195,18 @@
         const fallback = document.getElementById('fontawesome-fallback');
         if (fallback) {
           fallback.remove();
-          console.log('✅ FontAwesome CDN loaded successfully');
+          if (location.hostname === 'localhost') {
+            console.log('✅ FontAwesome CDN loaded successfully');
+          }
         }
       };
       
       link.onerror = () => {
         clearTimeout(timeout);
         // CDN failed, keep local fallback
-        console.log('🛠️ FontAwesome CDN failed - using local fallback');
+        if (location.hostname === 'localhost') {
+          console.log('🛠️ FontAwesome CDN failed - using local fallback');
+        }
         link.remove();
       };
       
@@ -202,7 +214,9 @@
       document.addEventListener('securitypolicyviolation', (e) => {
         if (e.blockedURI && e.blockedURI.includes('font-awesome')) {
           clearTimeout(timeout);
-          console.log('🛠️ FontAwesome CDN blocked by CSP - local fallback active');
+          if (location.hostname === 'localhost') {
+            console.log('🛠️ FontAwesome CDN blocked by CSP - local fallback active');
+          }
           link.remove();
         }
       });
