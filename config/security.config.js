@@ -158,7 +158,14 @@ export class RescuePCSecurityManager {
 
   // Force HTTPS everywhere
   enforceHTTPS() {
-    if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
+    if (location.protocol !== 'https:' && 
+        location.hostname !== 'localhost' && 
+        location.hostname !== '127.0.0.1' && 
+        location.hostname !== '0.0.0.0' &&
+        !location.hostname.startsWith('192.168.') &&
+        !location.hostname.startsWith('10.') &&
+        !location.hostname.includes('localhost') &&
+        !location.hostname.includes('127.0.0.1')) {
       location.replace(`https:${location.href.substring(location.protocol.length)}`);
     }
   }
