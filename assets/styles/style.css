@@ -6673,3 +6673,13 @@ body {
     padding: 0.75rem 1rem;
   }
 }
+
+/* Hero logo centering fix */
+.hero-logo {
+  text-align: center;
+}
+
+.hero-logo img {
+  margin: 0 auto;
+  display: block;
+}

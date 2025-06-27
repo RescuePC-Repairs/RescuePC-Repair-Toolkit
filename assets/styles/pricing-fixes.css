@@ -288,7 +288,7 @@
 
 .about-subtitle {
   font-size: 1.2rem !important;
-  color: #6b7280 !important;
+  color: #000000 !important;
   font-weight: 500 !important;
   margin: 0 !important;
 }
@@ -353,7 +353,6 @@
   padding: 0 !important;
   cursor: pointer !important;
   border-radius: 1rem !important;
-  overflow: hidden !important;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
   display: block !important;
   position: relative !important;
@@ -377,8 +376,8 @@
 
 .founder-badge {
   position: absolute !important;
-  top: -10px !important;
-  right: -10px !important;
+  top: -5px !important;
+  right: -5px !important;
   background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%) !important;
   color: white !important;
   width: 40px !important;
@@ -389,7 +388,8 @@
   justify-content: center !important;
   font-size: 1.2rem !important;
   box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3) !important;
-  z-index: 2 !important;
+  z-index: 10 !important;
+  border: 2px solid #ffffff !important;
 }
 
 .founder-info {
@@ -529,6 +529,14 @@
     height: 150px !important;
   }
   
+  .founder-badge {
+    top: 3px !important;
+    right: 3px !important;
+    width: 35px !important;
+    height: 35px !important;
+    font-size: 1rem !important;
+  }
+  
   .founder-name {
     font-size: 1.75rem !important;
   }
@@ -567,6 +575,14 @@
   .founder-image {
     width: 120px !important;
     height: 120px !important;
+  }
+  
+  .founder-badge {
+    top: 2px !important;
+    right: 2px !important;
+    width: 30px !important;
+    height: 30px !important;
+    font-size: 0.9rem !important;
   }
   
   .founder-name {
