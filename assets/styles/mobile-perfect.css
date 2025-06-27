@@ -774,7 +774,7 @@ p, h1, h2, h3, h4, h5, h6, span, div {
 }
 
 .feature-card p {
-  color: #6b7280;
+  color: #000000;
   line-height: 1.6;
   margin: 0;
 }
@@ -867,7 +867,7 @@ p, h1, h2, h3, h4, h5, h6, span, div {
 
 .pricing-period {
   font-size: 1rem;
-  color: #6b7280;
+  color: #020202;
   margin-top: 0.5rem;
 }
 
