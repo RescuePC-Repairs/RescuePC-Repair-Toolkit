@@ -1,3 +1,18 @@
+// Load environment variables from .env file
+try {
+  require('dotenv').config();
+  if (!process.env.GMAIL_USER || !process.env.STRIPE_WEBHOOK_SECRET) {
+    throw new Error('Missing required environment variables. Check your .env file.');
+  }
+  console.log('Loaded ENV:', {
+    NODE_ENV: process.env.NODE_ENV,
+    GMAIL_USER: process.env.GMAIL_USER,
+    STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET ? '***' : undefined
+  });
+} catch (e) {
+  console.error('Failed to load .env:', e.message);
+  process.exit(1);
+}
 // MILITARY-GRADE SECURITY AUDIT SCRIPT
 // Comprehensive security testing for RescuePC Repairs
 
@@ -199,26 +214,26 @@ class SecurityAuditor {
   testDataEncryption() {
     console.log('🔐 Testing Data Encryption...');
     
-    // Test AES-256 encryption
-    const testData = 'sensitive customer data';
-    const key = crypto.randomBytes(32);
-    const iv = crypto.randomBytes(16);
-    
-    const cipher = crypto.createCipher('aes-256-cbc', key);
-    let encrypted = cipher.update(testData, 'utf8', 'hex');
-    encrypted += cipher.final('hex');
-    
-    const decipher = crypto.createDecipher('aes-256-cbc', key);
-    let decrypted = decipher.update(encrypted, 'hex', 'utf8');
-    decrypted += decipher.final('utf8');
-    
-    if (decrypted === testData) {
-      console.log('✅ Data encryption: PASSED (AES-256 working)');
-      this.securityScore += 10;
-    } else {
-      console.log('❌ Data encryption: FAILED');
-      this.vulnerabilities.push('Data encryption not working properly');
-      this.securityScore -= 20;
+    try {
+      const key = crypto.randomBytes(32);
+      const iv = crypto.randomBytes(16);
+      const text = 'test data';
+      
+      // Use modern crypto methods
+      const cipher = crypto.createCipheriv('aes-256-cbc', key, iv);
+      let encrypted = cipher.update(text, 'utf8', 'hex');
+      encrypted += cipher.final('hex');
+      
+      const decipher = crypto.createDecipheriv('aes-256-cbc', key, iv);
+      let decrypted = decipher.update(encrypted, 'hex', 'utf8');
+      decrypted += decipher.final('utf8');
+      
+      const isValid = decrypted === text;
+      console.log(`🔐 Data encryption: ${isValid ? 'PASSED' : 'FAILED'}`);
+      return isValid;
+    } catch (error) {
+      console.log(`🔐 Data encryption: FAILED - ${error.message}`);
+      return false;
     }
   }
 

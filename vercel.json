@@ -1,18 +1,15 @@
 {
   "version": 2,
-  "functions": {
-    "api/webhook.js": {
-      "runtime": "nodejs18.x"
+  "builds": [
+    {
+      "src": "public/**/*",
+      "use": "@vercel/static"
     }
-  },
-  "env": {
-    "GMAIL_USER": "***REMOVED***",
-    "GMAIL_APP_PASSWORD": ""
-  },
+  ],
   "routes": [
     {
-      "src": "/api/webhook",
-      "dest": "/api/webhook.js"
+      "src": "/(.*)",
+      "dest": "/public/$1"
     }
   ]
 } 

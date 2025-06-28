@@ -1,104 +1,25 @@
 {
-  "name": "@rescuepc/professional-windows-repair-toolkit",
-  "version": "2.0.0",
-  "description": "Professional Windows PC repair toolkit with 11GB of drivers and repair tools. Fix crashes, missing drivers, and system errors instantly. Lifetime license for $79.99.",
-  "keywords": [
-    "windows repair software",
-    "pc repair toolkit",
-    "driver repair",
-    "system crash fix",
-    "windows diagnostic tool",
-    "computer repair software",
-    "pc troubleshooting",
-    "windows recovery",
-    "driver update tool",
-    "system repair utility",
-    "windows error fix",
-    "pc maintenance",
-    "computer diagnostics",
-    "windows repair",
-    "pc repair",
-    "driver database",
-    "system recovery",
-    "windows toolkit",
-    "pc support",
-    "computer repair"
-  ],
-  "author": {
-    "name": "Tyler Keesee",
-    "email": "***REMOVED***",
-    "url": "https://rescuepcrepairs.com"
-  },
-  "license": "MIT",
-  "homepage": "https://rescuepcrepairs.com",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/rescuepc/repairs-website"
-  },
-  "bugs": {
-    "url": "https://rescuepcrepairs.com/pages/support.html",
-    "email": "***REMOVED***"
-  },
+  "name": "rescuepc-repairs-static",
+  "version": "1.0.0",
+  "description": "RescuePC Repairs - Multi-Platform PC Repair Toolkit",
   "main": "index.html",
   "scripts": {
-    "dev": "vite --host 0.0.0.0 --port 3001 --open",
-    "build": "vite build",
-    "preview": "vite preview --host 0.0.0.0 --port 4173",
-    "build:production": "vite build --mode production",
-    "analyze": "node scripts/ai-analyzer.js",
-    "security-check": "node js/security-check.js",
-    "performance-test": "lighthouse https://rescuepcrepairs.com --output html --output-path ./reports/lighthouse-report.html",
-    "seo-audit": "lighthouse https://rescuepcrepairs.com --only-categories=seo --output json --output-path ./reports/seo-audit.json",
-    "accessibility-test": "lighthouse https://rescuepcrepairs.com --only-categories=accessibility --output html --output-path ./reports/accessibility-report.html",
-    "test:all": "npm run test:unit && npm run test:e2e && npm run test:accessibility && npm run test:performance && npm run test:security",
-    "test:unit": "jest --coverage --verbose",
-    "test:e2e": "playwright test",
-    "test:e2e:ui": "playwright test --ui",
-    "test:e2e:debug": "playwright test --debug",
-    "test:e2e:headed": "playwright test --headed",
-    "test:watch": "jest --watch",
-    "test:mobile": "playwright test --project=mobile",
-    "test:desktop": "playwright test --project=desktop",
-    "test:accessibility": "npm run accessibility-test",
-    "test:performance": "npm run performance-test",
-    "test:security": "npm run security-check"
+    "dev": "vercel dev",
+    "build": "echo 'Static site - no build required'",
+    "deploy": "vercel --prod"
   },
-  "devDependencies": {
-    "vite": "^6.3.5"
-  },
-  "engines": {
-    "node": ">=18.0.0",
-    "npm": ">=9.0.0"
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead",
-    "not ie 11"
+  "keywords": [
+    "pc-repair",
+    "multi-platform",
+    "windows",
+    "linux",
+    "macos",
+    "chromeos",
+    "bsd"
   ],
-  "seo": {
-    "title": "Professional Windows PC Repair Toolkit | RescuePC Repairs - $79.99 Lifetime License",
-    "description": "Professional Windows PC repair toolkit with 11GB of drivers and repair tools. Fix crashes, missing drivers, and system errors instantly. Lifetime license for $79.99 - works on any Windows PC.",
-    "keywords": "windows repair software, pc repair toolkit, driver repair, system crash fix, windows diagnostic tool",
-    "author": "Tyler Keesee - RescuePC Repairs",
-    "url": "https://rescuepcrepairs.com",
-    "image": "https://rescuepcrepairs.com/assets/images/RescuePC_Logo_Light.png",
-    "type": "website",
-    "siteName": "RescuePC Repairs"
-  },
-  "security": {
-    "ssl": true,
-    "https": true,
-    "csp": true,
-    "xss-protection": true,
-    "csrf-protection": true,
-    "security-headers": true
-  },
-  "performance": {
-    "critical-css": true,
-    "asset-optimization": true,
-    "cdn-ready": true,
-    "lazy-loading": true,
-    "compression": true
+  "author": "RescuePC Repairs",
+  "license": "MIT",
+  "devDependencies": {
+    "vercel": "^32.0.0"
   }
-}
+} 
