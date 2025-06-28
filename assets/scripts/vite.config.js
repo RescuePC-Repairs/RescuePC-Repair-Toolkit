@@ -82,7 +82,7 @@ export default defineConfig(({ command, mode }) => {
           main: resolve(__dirname, 'index.html'),
           support: resolve(__dirname, 'support.html'),
           privacy: resolve(__dirname, 'PrivacyPolicy.html'),
-          terms: resolve(__dirname, 'TermOfService.html'),
+          terms: resolve(__dirname, 'TermsOfService.html'),
           refund: resolve(__dirname, 'RefundPolicy.html'),
           license: resolve(__dirname, 'License.html'),
           knowledgeBase: resolve(__dirname, 'Knowledge-Base.html'),
