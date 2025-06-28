@@ -204,6 +204,7 @@ INSTALLATION INSTRUCTIONS:
 SUPPORT:
 Need help? Contact us at: support@rescuepcrepairs.com
 Website: https://rescuepcrepairs.com
+Documentation: https://rescuepcrepairs.com/docs
 
 Thank you for choosing RescuePC Repairs!
 
