@@ -2,11 +2,12 @@
   "name": "rescuepc-repairs-static",
   "version": "1.0.0",
   "description": "RescuePC Repairs - Multi-Platform PC Repair Toolkit",
-  "main": "index.html",
+  "main": "public/index.html",
   "scripts": {
     "dev": "vercel dev",
     "build": "echo 'Static site - no build required'",
-    "deploy": "vercel --prod"
+    "deploy": "vercel --prod",
+    "start": "vercel dev"
   },
   "keywords": [
     "pc-repair",
@@ -21,5 +22,8 @@
   "license": "MIT",
   "devDependencies": {
     "vercel": "^32.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 } 
