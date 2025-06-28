@@ -58,7 +58,7 @@ export default class FooterComponent {
               <h3 class="footer__title">Legal</h3>
               <ul class="footer__links">
                 <li><a href="/PrivacyPolicy.html">Privacy Policy</a></li>
-                <li><a href="/TermOfService.html">Terms of Service</a></li>
+                <li><a href="/TermsOfService.html">Terms of Service</a></li>
                 <li><a href="/RefundPolicy.html">Refund Policy</a></li>
                 <li><a href="/License.html">License</a></li>
               </ul>

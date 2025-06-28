@@ -1,0 +1,12 @@
+{
+  "name": "rescuepc-webhook-api",
+  "version": "1.0.0",
+  "description": "RescuePC Repairs webhook handler for Stripe payments",
+  "main": "webhook.js",
+  "dependencies": {
+    "nodemailer": "^6.9.7"
+  },
+  "engines": {
+    "node": "18.x"
+  }
+} 

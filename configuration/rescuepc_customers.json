@@ -1,0 +1,17 @@
+﻿{
+    "Price":  49.99,
+    "LicenseKey":  "RESCUE-A4C1E715-1751123347",
+    "CustomerName":  "Test Customer",
+    "CustomerEmail":  "test@rescuepcrepairs.com",
+    "CreatedDate":  "2025-06-28 11:09:07",
+    "LicenseType":  "yearly",
+    "Website":  "https://www.rescuepcrepairs.com/",
+    "Status":  "active",
+    "ProductName":  "Basic License",
+    "Features":  [
+                     "Single PC repair toolkit",
+                     "Basic driver database",
+                     "Standard support",
+                     "1-year license"
+                 ]
+}

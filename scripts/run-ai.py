@@ -22,13 +22,17 @@ def install_requirements():
 
 def run_assistant():
     """Run the AI assistant"""
-    if not os.path.exists("groq-assistant.py"):
-        print("❌ groq-assistant.py not found!")
+    # Get the directory where this script is located
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    groq_assistant_path = os.path.join(script_dir, "groq-assistant.py")
+    
+    if not os.path.exists(groq_assistant_path):
+        print(f"❌ groq-assistant.py not found at {groq_assistant_path}!")
         return
     
     try:
         print("🚀 Launching RescuePC AI Assistant...")
-        subprocess.run([sys.executable, "groq-assistant.py"])
+        subprocess.run([sys.executable, groq_assistant_path])
     except Exception as e:
         print(f"❌ Error running assistant: {e}")
 
