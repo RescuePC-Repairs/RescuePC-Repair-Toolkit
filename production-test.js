@@ -1,5 +1,18 @@
-// PRODUCTION TESTING SCRIPT FOR RESCUEPC REPAIRS
-// Comprehensive real-world testing with enterprise validation
+// Load environment variables from .env file
+try {
+  require('dotenv').config();
+  if (!process.env.GMAIL_USER || !process.env.STRIPE_WEBHOOK_SECRET) {
+    throw new Error('Missing required environment variables. Check your .env file.');
+  }
+  console.log('Loaded ENV:', {
+    NODE_ENV: process.env.NODE_ENV,
+    GMAIL_USER: process.env.GMAIL_USER,
+    STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET ? '***' : undefined
+  });
+} catch (e) {
+  console.error('Failed to load .env:', e.message);
+  process.exit(1);
+}
 
 const crypto = require('crypto');
 const https = require('https');
