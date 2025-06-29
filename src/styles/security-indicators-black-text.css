@@ -1,30 +1,70 @@
 /* =============================================================================
-   SECURITY INDICATORS BLACK TEXT - SPECIFIC TARGETING
-   Making only the specific four security indicators black text
+   SECURITY INDICATORS BLACK TEXT - ULTRA STRONG OVERRIDE
+   Making the four security indicators definitely black and visible
    ============================================================================= */
 
-/* SPECIFIC TARGETING - ONLY THE FOUR SECURITY INDICATORS */
-.enterprise-features .enterprise-feature:nth-child(1) h3,
-.enterprise-features .enterprise-feature:nth-child(1) p,
-.enterprise-features .enterprise-feature:nth-child(2) h3,
-.enterprise-features .enterprise-feature:nth-child(2) p,
-.enterprise-features .enterprise-feature:nth-child(3) h3,
-.enterprise-features .enterprise-feature:nth-child(3) p,
-.enterprise-features .enterprise-feature:nth-child(4) h3,
-.enterprise-features .enterprise-feature:nth-child(4) p {
+/* ULTRA STRONG OVERRIDE - HIGHEST SPECIFICITY */
+body .enterprise-features .enterprise-feature:nth-child(1) h3,
+body .enterprise-features .enterprise-feature:nth-child(1) p,
+body .enterprise-features .enterprise-feature:nth-child(2) h3,
+body .enterprise-features .enterprise-feature:nth-child(2) p,
+body .enterprise-features .enterprise-feature:nth-child(3) h3,
+body .enterprise-features .enterprise-feature:nth-child(3) p,
+body .enterprise-features .enterprise-feature:nth-child(4) h3,
+body .enterprise-features .enterprise-feature:nth-child(4) p {
   color: #000000 !important;
+  color: black !important;
+  font-weight: 600 !important;
+  text-shadow: none !important;
 }
 
-/* ALTERNATIVE SELECTOR - MORE SPECIFIC */
-.enterprise-features .enterprise-feature:first-child h3,
-.enterprise-features .enterprise-feature:first-child p,
-.enterprise-features .enterprise-feature:nth-of-type(2) h3,
-.enterprise-features .enterprise-feature:nth-of-type(2) p,
-.enterprise-features .enterprise-feature:nth-of-type(3) h3,
-.enterprise-features .enterprise-feature:nth-of-type(3) p,
-.enterprise-features .enterprise-feature:nth-of-type(4) h3,
-.enterprise-features .enterprise-feature:nth-of-type(4) p {
+/* ALTERNATIVE ULTRA SPECIFIC SELECTORS */
+html body .enterprise-features .enterprise-feature:nth-child(1) h3,
+html body .enterprise-features .enterprise-feature:nth-child(1) p,
+html body .enterprise-features .enterprise-feature:nth-child(2) h3,
+html body .enterprise-features .enterprise-feature:nth-child(2) p,
+html body .enterprise-features .enterprise-feature:nth-child(3) h3,
+html body .enterprise-features .enterprise-feature:nth-child(3) p,
+html body .enterprise-features .enterprise-feature:nth-child(4) h3,
+html body .enterprise-features .enterprise-feature:nth-child(4) p {
   color: #000000 !important;
+  color: black !important;
+  font-weight: 600 !important;
+  text-shadow: none !important;
+}
+
+/* BROAD OVERRIDE FOR ENTIRE ENTERPRISE FEATURES SECTION */
+.enterprise-features .enterprise-feature h3,
+.enterprise-features .enterprise-feature p {
+  color: #000000 !important;
+  color: black !important;
+  font-weight: 600 !important;
+  text-shadow: none !important;
+}
+
+/* EVEN BROADER OVERRIDE */
+.enterprise-features * {
+  color: #000000 !important;
+  color: black !important;
+}
+
+/* SPECIFIC TEXT CONTENT TARGETING */
+.enterprise-feature h3:contains("256-bit Encryption"),
+.enterprise-feature h3:contains("HTTPS Enforcement"),
+.enterprise-feature h3:contains("Content Security Policy"),
+.enterprise-feature h3:contains("Real-time Monitoring") {
+  color: #000000 !important;
+  color: black !important;
+  font-weight: 700 !important;
+}
+
+/* FORCE BLACK TEXT WITH MULTIPLE APPROACHES */
+.enterprise-features .enterprise-feature:nth-child(1) *,
+.enterprise-features .enterprise-feature:nth-child(2) *,
+.enterprise-features .enterprise-feature:nth-child(3) *,
+.enterprise-features .enterprise-feature:nth-child(4) * {
+  color: #000000 !important;
+  color: black !important;
 }
 
 /* ENSURE ICONS REMAIN THEIR ORIGINAL COLOR */
@@ -34,51 +74,42 @@
 
 /* RESPONSIVE DESIGN - MAINTAIN BLACK TEXT ON ALL SCREENS */
 @media (max-width: 768px) {
-  .enterprise-features .enterprise-feature:nth-child(1) h3,
-  .enterprise-features .enterprise-feature:nth-child(1) p,
-  .enterprise-features .enterprise-feature:nth-child(2) h3,
-  .enterprise-features .enterprise-feature:nth-child(2) p,
-  .enterprise-features .enterprise-feature:nth-child(3) h3,
-  .enterprise-features .enterprise-feature:nth-child(3) p,
-  .enterprise-features .enterprise-feature:nth-child(4) h3,
-  .enterprise-features .enterprise-feature:nth-child(4) p {
+  body .enterprise-features .enterprise-feature:nth-child(1) h3,
+  body .enterprise-features .enterprise-feature:nth-child(1) p,
+  body .enterprise-features .enterprise-feature:nth-child(2) h3,
+  body .enterprise-features .enterprise-feature:nth-child(2) p,
+  body .enterprise-features .enterprise-feature:nth-child(3) h3,
+  body .enterprise-features .enterprise-feature:nth-child(3) p,
+  body .enterprise-features .enterprise-feature:nth-child(4) h3,
+  body .enterprise-features .enterprise-feature:nth-child(4) p {
     color: #000000 !important;
+    color: black !important;
+    font-weight: 600 !important;
   }
 }
 
 @media (max-width: 480px) {
-  .enterprise-features .enterprise-feature:nth-child(1) h3,
-  .enterprise-features .enterprise-feature:nth-child(1) p,
-  .enterprise-features .enterprise-feature:nth-child(2) h3,
-  .enterprise-features .enterprise-feature:nth-child(2) p,
-  .enterprise-features .enterprise-feature:nth-child(3) h3,
-  .enterprise-features .enterprise-feature:nth-child(3) p,
-  .enterprise-features .enterprise-feature:nth-child(4) h3,
-  .enterprise-features .enterprise-feature:nth-child(4) p {
+  body .enterprise-features .enterprise-feature:nth-child(1) h3,
+  body .enterprise-features .enterprise-feature:nth-child(1) p,
+  body .enterprise-features .enterprise-feature:nth-child(2) h3,
+  body .enterprise-features .enterprise-feature:nth-child(2) p,
+  body .enterprise-features .enterprise-feature:nth-child(3) h3,
+  body .enterprise-features .enterprise-feature:nth-child(3) p,
+  body .enterprise-features .enterprise-feature:nth-child(4) h3,
+  body .enterprise-features .enterprise-feature:nth-child(4) p {
     color: #000000 !important;
+    color: black !important;
+    font-weight: 600 !important;
   }
 }
 
-/* ENSURE ACCESSIBILITY - MAINTAIN CONTRAST */
-.enterprise-feature h3,
-.enterprise-feature p {
+/* FINAL NUCLEAR OPTION - OVERRIDE EVERYTHING */
+.enterprise-features .enterprise-feature h3,
+.enterprise-features .enterprise-feature p {
   color: #000000 !important;
-  font-weight: 600;
-}
-
-/* OVERRIDE ANY INHERITED COLORS */
-.enterprise-features * {
-  color: #000000 !important;
-}
-
-.enterprise-feature * {
-  color: #000000 !important;
-}
-
-/* SPECIFIC TARGETING FOR THE FOUR SECURITY INDICATORS ONLY */
-.enterprise-features .enterprise-feature:nth-child(1) *,
-.enterprise-features .enterprise-feature:nth-child(2) *,
-.enterprise-features .enterprise-feature:nth-child(3) *,
-.enterprise-features .enterprise-feature:nth-child(4) * {
-  color: #000000 !important;
+  color: black !important;
+  font-weight: 600 !important;
+  text-shadow: none !important;
+  -webkit-text-fill-color: #000000 !important;
+  -webkit-text-fill-color: black !important;
 } 
