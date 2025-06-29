@@ -1,0 +1,507 @@
+/* =============================================================================
+   MASTER PERFECTION - FORTUNE 500 ENTERPRISE DESIGN SYSTEM
+   World-Class Professional Design by the Best Engineers
+   ============================================================================= */
+
+/* Import Foundation Files */
+@import url('_variables.css');
+@import url('_reset.css');
+@import url('_typography.css');
+@import url('_layout.css');
+@import url('_navigation.css');
+@import url('_hero.css');
+
+/* =============================================================================
+   PERFECT CENTERING & CONSISTENCY SYSTEM
+   ============================================================================= */
+
+/* ========== GLOBAL FOUNDATION ========== */
+
+* {
+  box-sizing: border-box !important;
+}
+
+html {
+  scroll-behavior: smooth !important;
+  font-size: 16px !important;
+  line-height: 1.5 !important;
+}
+
+body {
+  font-family: var(--f500-font-family-primary) !important;
+  font-size: var(--f500-font-size-base) !important;
+  font-weight: var(--f500-font-weight-normal) !important;
+  line-height: var(--f500-line-height-normal) !important;
+  color: var(--f500-gray-900) !important;
+  background-color: var(--f500-white) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: hidden !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  text-rendering: optimizeLegibility !important;
+}
+
+/* ========== PERFECT CONTAINER SYSTEM ========== */
+
+.container,
+.hero .container,
+.section .container,
+main .container,
+footer .container {
+  width: 100% !important;
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  padding: 0 2rem !important;
+  position: relative !important;
+}
+
+/* ========== PERFECT SECTION CENTERING ========== */
+
+.section,
+section,
+.hero,
+.features,
+.pricing,
+.faq,
+.about,
+.footer,
+footer {
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  padding: 5rem 0 !important;
+  position: relative !important;
+}
+
+/* ========== PERFECT CONTENT CENTERING ========== */
+
+.section-content,
+.hero-content,
+.features-content,
+.pricing-content,
+.faq-content,
+.about-content {
+  width: 100% !important;
+  max-width: 1000px !important;
+  margin: 0 auto !important;
+  text-align: center !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* ========== PERFECT HEADING SYSTEM ========== */
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  width: 100% !important;
+  text-align: center !important;
+  margin: 0 auto 2rem auto !important;
+  font-family: var(--f500-font-family-primary) !important;
+  font-weight: var(--f500-font-weight-bold) !important;
+  line-height: 1.25 !important;
+  color: var(--f500-gray-900) !important;
+  letter-spacing: -0.025em !important;
+}
+
+h1, .h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem) !important;
+  font-weight: var(--f500-font-weight-extrabold) !important;
+  margin-bottom: 1.5rem !important;
+}
+
+h2, .h2 {
+  font-size: clamp(2rem, 4vw, 3rem) !important;
+  font-weight: var(--f500-font-weight-bold) !important;
+  margin-bottom: 1.25rem !important;
+}
+
+h3, .h3 {
+  font-size: clamp(1.5rem, 3vw, 2.25rem) !important;
+  font-weight: var(--f500-font-weight-semibold) !important;
+  margin-bottom: 1rem !important;
+}
+
+h4, .h4 {
+  font-size: clamp(1.25rem, 2.5vw, 1.875rem) !important;
+  font-weight: var(--f500-font-weight-semibold) !important;
+  margin-bottom: 0.75rem !important;
+}
+
+/* ========== PERFECT PARAGRAPH SYSTEM ========== */
+
+p, .text-base {
+  width: 100% !important;
+  max-width: 800px !important;
+  margin: 0 auto 1.5rem auto !important;
+  text-align: center !important;
+  font-size: clamp(1rem, 1.25vw, 1.125rem) !important;
+  line-height: 1.6 !important;
+  color: var(--f500-gray-700) !important;
+  font-weight: var(--f500-font-weight-normal) !important;
+}
+
+.lead {
+  font-size: clamp(1.125rem, 1.5vw, 1.375rem) !important;
+  font-weight: var(--f500-font-weight-medium) !important;
+  color: var(--f500-gray-600) !important;
+  margin-bottom: 2rem !important;
+}
+
+/* ========== PERFECT GRID SYSTEM ========== */
+
+.grid,
+.features-grid,
+.pricing-grid,
+.faq-grid,
+.benefits-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
+  gap: 2rem !important;
+  width: 100% !important;
+  max-width: 1200px !important;
+  margin: 3rem auto !important;
+  padding: 0 !important;
+  justify-items: center !important;
+  align-items: start !important;
+}
+
+/* ========== PERFECT CARD SYSTEM ========== */
+
+.card,
+.feature-card,
+.pricing-card,
+.faq-card,
+.benefit-card {
+  width: 100% !important;
+  max-width: 400px !important;
+  background: var(--f500-white) !important;
+  border: 1px solid var(--f500-gray-200) !important;
+  border-radius: var(--f500-radius-lg) !important;
+  padding: 2rem !important;
+  text-align: center !important;
+  box-shadow: var(--f500-shadow-md) !important;
+  transition: all 0.3s ease !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  height: auto !important;
+  min-height: 300px !important;
+}
+
+.card:hover,
+.feature-card:hover,
+.pricing-card:hover,
+.faq-card:hover,
+.benefit-card:hover {
+  transform: translateY(-5px) !important;
+  box-shadow: var(--f500-shadow-xl) !important;
+  border-color: var(--f500-primary) !important;
+}
+
+/* ========== PERFECT BUTTON SYSTEM ========== */
+
+.btn,
+button,
+a.btn,
+input[type="submit"],
+input[type="button"] {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.5rem !important;
+  padding: 0.75rem 2rem !important;
+  font-family: var(--f500-font-family-primary) !important;
+  font-size: var(--f500-font-size-base) !important;
+  font-weight: var(--f500-font-weight-semibold) !important;
+  line-height: 1 !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  border: 2px solid transparent !important;
+  border-radius: var(--f500-radius-lg) !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  white-space: nowrap !important;
+  user-select: none !important;
+  background: var(--f500-primary) !important;
+  color: var(--f500-white) !important;
+  box-shadow: var(--f500-shadow-md) !important;
+}
+
+.btn:hover,
+button:hover,
+a.btn:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: var(--f500-shadow-lg) !important;
+  background: var(--f500-primary-dark) !important;
+}
+
+.btn-lg {
+  padding: 1rem 2.5rem !important;
+  font-size: var(--f500-font-size-lg) !important;
+}
+
+.btn-primary {
+  background: var(--f500-primary) !important;
+  color: var(--f500-white) !important;
+}
+
+.btn-secondary {
+  background: var(--f500-white) !important;
+  color: var(--f500-primary) !important;
+  border-color: var(--f500-primary) !important;
+}
+
+/* ========== PERFECT LIST SYSTEM ========== */
+
+ul, ol {
+  width: 100% !important;
+  max-width: 600px !important;
+  margin: 1.5rem auto !important;
+  padding: 0 !important;
+  list-style: none !important;
+  text-align: left !important;
+}
+
+li {
+  position: relative !important;
+  padding: 0.5rem 0 0.5rem 2rem !important;
+  font-size: var(--f500-font-size-base) !important;
+  line-height: 1.6 !important;
+  color: var(--f500-gray-700) !important;
+  margin-bottom: 0.5rem !important;
+}
+
+li::before {
+  content: '✓' !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 0.5rem !important;
+  color: var(--f500-success) !important;
+  font-weight: var(--f500-font-weight-bold) !important;
+  font-size: 1.125rem !important;
+}
+
+/* ========== PERFECT IMAGE SYSTEM ========== */
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block !important;
+  max-width: 100% !important;
+  height: auto !important;
+  margin: 0 auto !important;
+  border-radius: var(--f500-radius-md) !important;
+}
+
+/* ========== PERFECT RESPONSIVE SYSTEM ========== */
+
+/* Large Desktop */
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1200px !important;
+    padding: 0 2rem !important;
+  }
+  
+  .grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 2.5rem !important;
+  }
+}
+
+/* Desktop */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .container {
+    max-width: 960px !important;
+    padding: 0 1.5rem !important;
+  }
+  
+  .grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 2rem !important;
+  }
+}
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 991px) {
+  .container {
+    max-width: 720px !important;
+    padding: 0 1.5rem !important;
+  }
+  
+  .section {
+    padding: 4rem 0 !important;
+  }
+  
+  .grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1.5rem !important;
+  }
+  
+  .card {
+    min-height: 250px !important;
+  }
+}
+
+/* Mobile Large */
+@media (min-width: 576px) and (max-width: 767px) {
+  .container {
+    max-width: 540px !important;
+    padding: 0 1rem !important;
+  }
+  
+  .section {
+    padding: 3rem 0 !important;
+  }
+  
+  .grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+  
+  .card {
+    max-width: 100% !important;
+    min-height: 200px !important;
+  }
+}
+
+/* Mobile */
+@media (max-width: 575px) {
+  .container {
+    max-width: 100% !important;
+    padding: 0 1rem !important;
+  }
+  
+  .section {
+    padding: 2.5rem 0 !important;
+  }
+  
+  .grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+    margin: 2rem auto !important;
+  }
+  
+  .card {
+    max-width: 100% !important;
+    min-height: auto !important;
+    padding: 1.5rem !important;
+  }
+  
+  .btn {
+    width: 100% !important;
+    max-width: 300px !important;
+  }
+  
+  h1, .h1 {
+    font-size: 2.5rem !important;
+  }
+  
+  h2, .h2 {
+    font-size: 2rem !important;
+  }
+  
+  h3, .h3 {
+    font-size: 1.5rem !important;
+  }
+}
+
+/* ========== PERFECT ACCESSIBILITY ========== */
+
+*:focus-visible {
+  outline: 2px solid var(--f500-primary) !important;
+  outline-offset: 2px !important;
+  border-radius: var(--f500-radius-sm) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ========== PERFECT PRINT STYLES ========== */
+
+@media print {
+  * {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  
+  .section {
+    padding: 1rem 0 !important;
+  }
+  
+  .card {
+    border: 1px solid #000 !important;
+    box-shadow: none !important;
+  }
+}
+
+/* =============================================================================
+   SECURITY INDICATORS - PERFECT BLACK TEXT VISIBILITY
+   ============================================================================= */
+
+.security-indicators,
+.security-item,
+.security-badge,
+.security-features {
+  color: #000000 !important;
+  background-color: #ffffff !important;
+  text-shadow: none !important;
+  -webkit-text-fill-color: #000000 !important;
+  font-weight: 600 !important;
+}
+
+.security-indicators .security-item span,
+.security-badge span,
+.security-features span {
+  color: #000000 !important;
+  background-color: transparent !important;
+  text-shadow: none !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+/* =============================================================================
+   PERFECT LOADING STATE
+   ============================================================================= */
+
+.loading {
+  opacity: 0 !important;
+  transition: opacity 0.5s ease !important;
+}
+
+.loaded {
+  opacity: 1 !important;
+}
+
+/* =============================================================================
+   PERFECT ANIMATIONS
+   ============================================================================= */
+
+@keyframes perfectFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-in {
+  animation: perfectFadeIn 0.6s ease-out forwards !important;
+} 
