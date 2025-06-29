@@ -136,6 +136,9 @@
   overflow-wrap: break-word !important;
   line-height: 1.3 !important;
   white-space: normal !important;
+  hyphens: auto;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .feature-card p {
@@ -636,6 +639,8 @@
   word-wrap: break-word;
   overflow-wrap: break-word;
   hyphens: auto;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .feature-card p {
@@ -937,4 +942,239 @@ a:hover {
 * {
   transition-property: transform, box-shadow, border-color, background-color;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Fix: Always center the last feature card if alone in a row */
+.features-grid {
+  justify-items: center !important;
+}
+
+.feature-card {
+  min-height: 420px !important;
+  align-self: stretch !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+}
+
+/* On small screens, ensure single cards are centered */
+@media (max-width: 900px) {
+  .features-grid {
+    justify-items: stretch !important;
+  }
+  .feature-card {
+    min-width: 0 !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+  }
+}
+
+/* Professional Interface GUI Showcase - Make GUI image large, centered, and visually prominent */
+.interface-image-container, .gui-showcase-content, .interface-content {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-bottom: 2.5rem !important;
+}
+
+.interface-image-wrapper, .gui-image-wrapper {
+  max-width: 900px !important;
+  width: 100% !important;
+  margin: 0 auto 2rem auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 12px 48px rgba(37,99,235,0.15), 0 1.5px 8px rgba(0,0,0,0.08) !important;
+  border-radius: 24px !important;
+  background: linear-gradient(135deg, #f8fafc 0%, #e0e7ef 100%) !important;
+  padding: 2.5rem !important;
+}
+
+.interface-main-image, .gui-main-image {
+  width: 100% !important;
+  max-width: 800px !important;
+  height: auto !important;
+  border-radius: 18px !important;
+  box-shadow: 0 8px 32px rgba(37,99,235,0.12) !important;
+  border: 3px solid #2563eb !important;
+  background: #fff !important;
+}
+
+.interface-features, .gui-features {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: stretch !important;
+  gap: 2.5rem !important;
+  margin-top: 2.5rem !important;
+  width: 100%;
+  max-width: 900px;
+}
+
+.interface-feature, .gui-feature {
+  background: #fff !important;
+  border: 2px solid #e5e7eb !important;
+  border-radius: 16px !important;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.08) !important;
+  padding: 2rem 1.5rem !important;
+  flex: 1 1 0;
+  min-width: 220px;
+  text-align: center !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  transition: box-shadow 0.3s;
+}
+
+.interface-feature:hover, .gui-feature:hover {
+  box-shadow: 0 12px 40px rgba(37,99,235,0.15) !important;
+  border-color: #2563eb !important;
+}
+
+.interface-feature-icon, .gui-feature-icon {
+  font-size: 2.5rem !important;
+  color: #2563eb !important;
+  margin-bottom: 1rem !important;
+}
+
+.interface-feature-content h4, .gui-feature-content h4 {
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 0.5rem !important;
+  color: #000 !important;
+}
+
+.interface-feature-content p, .gui-feature-content p {
+  font-size: 1rem !important;
+  color: #000 !important;
+  margin-bottom: 0 !important;
+}
+
+@media (max-width: 900px) {
+  .interface-features, .gui-features {
+    flex-direction: column !important;
+    gap: 1.5rem !important;
+    align-items: center !important;
+  }
+  .interface-image-wrapper, .gui-image-wrapper {
+    padding: 1rem !important;
+  }
+}
+
+/* GUI Showcase - Always center GUI image above cards */
+.interface-content, .gui-showcase-content {
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.interface-image-container, .gui-image-container {
+  width: 100%;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 auto 2.5rem auto !important;
+}
+.interface-image-wrapper, .gui-image-wrapper {
+  margin: 0 auto 2rem auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+@media (max-width: 900px) {
+  .interface-features, .gui-features {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  .interface-image-wrapper, .gui-image-wrapper {
+    margin: 0 auto 1rem auto !important;
+  }
+}
+
+/* PROFESSIONAL INTERFACE - GUI SHOWCASE PERFECT CENTERING */
+.interface-gui-showcase {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 3rem auto;
+  width: 100%;
+}
+.interface-gui-image-wrapper {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto 2.5rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 12px 48px rgba(37,99,235,0.15), 0 1.5px 8px rgba(0,0,0,0.08);
+  border-radius: 24px;
+  background: linear-gradient(135deg, #f8fafc 0%, #e0e7ef 100%);
+  padding: 2.5rem;
+}
+.interface-gui-image {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(37,99,235,0.12);
+  border: 3px solid #2563eb;
+  background: #fff;
+}
+.interface-feature-cards {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  gap: 2.5rem;
+  width: 100%;
+  max-width: 900px;
+}
+.interface-feature-card {
+  background: #fff;
+  border: 2px solid #e5e7eb;
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+  padding: 2rem 1.5rem;
+  flex: 1 1 0;
+  min-width: 220px;
+  min-height: 220px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  transition: box-shadow 0.3s;
+}
+.interface-feature-card:hover {
+  box-shadow: 0 12px 40px rgba(37,99,235,0.15);
+  border-color: #2563eb;
+}
+.interface-feature-icon {
+  font-size: 2.5rem;
+  color: #2563eb;
+  margin-bottom: 1rem;
+}
+.interface-feature-card h4 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #000;
+}
+.interface-feature-card p {
+  font-size: 1rem;
+  color: #000;
+  margin-bottom: 0;
+}
+@media (max-width: 900px) {
+  .interface-feature-cards {
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  .interface-gui-image-wrapper {
+    padding: 1rem;
+  }
 } 
