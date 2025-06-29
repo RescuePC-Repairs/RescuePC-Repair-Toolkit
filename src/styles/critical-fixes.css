@@ -4,23 +4,9 @@
    ============================================================================= */
 
 /* MOST POPULAR BADGE - PERFECT ORANGE BUBBLE POSITIONING */
-.featured-badge {
-  background: linear-gradient(135deg, #f59e0b, #ea580c) !important;
-  color: #ffffff !important;
-  font-size: 0.875rem !important;
-  font-weight: 700 !important;
-  padding: 0.5rem 1rem !important;
-  position: absolute !important;
-  right: 1rem !important;
-  top: 1rem !important;
-  border-radius: 20px !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.5px !important;
-  z-index: 10 !important;
-  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3) !important;
-  border: 2px solid #ffffff !important;
-  white-space: nowrap !important;
-  overflow: visible !important;
+.featured-badge,
+.pricing-badge {
+  display: none !important;
 }
 
 /* LICENSE CARD FEATURED STYLING - ENTERPRISE GRADE */
@@ -284,4 +270,301 @@
   will-change: transform !important;
   transform: translateZ(0) !important;
   backface-visibility: hidden !important;
+}
+
+/* Fix text cutoff issues in all sections */
+.license-card,
+.feature-card,
+.enterprise-feature-card,
+.included-card,
+.upgrade-card {
+  min-height: 400px;
+  height: auto;
+  overflow: visible;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  line-height: 1.6;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/* Ensure all text is visible and properly wrapped */
+.license-card h4,
+.feature-card h3,
+.enterprise-feature-card h4,
+.included-card h4,
+.upgrade-card h5 {
+  color: #000000;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.license-card p,
+.feature-card p,
+.enterprise-feature-card p,
+.included-card p,
+.upgrade-card p {
+  color: #000000;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+/* Fix list items text cutoff */
+.license-card ul,
+.enterprise-feature-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+}
+
+.license-card ul li,
+.enterprise-feature-card ul li {
+  color: #000000;
+  padding: 0.5rem 0;
+  line-height: 1.6;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.license-card ul li:before,
+.enterprise-feature-card ul li:before {
+  content: "✓";
+  color: #2563eb;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+}
+
+/* Make all pricing cards the same size */
+.license-card {
+  flex: 1 1 300px;
+  max-width: 350px;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border: 2px solid #e2e8f0;
+}
+
+.license-card.featured {
+  border: 2px solid #2563eb;
+  background: linear-gradient(135deg, #ffffff 0%, #eff6ff 100%);
+}
+
+.license-card.lifetime {
+  border: 2px solid #059669;
+  background: linear-gradient(135deg, #ffffff 0%, #ecfdf5 100%);
+}
+
+/* Fix pricing section layout */
+.license-types-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+  align-items: stretch;
+}
+
+/* Fix enterprise features grid */
+.enterprise-features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+  align-items: stretch;
+}
+
+/* Fix included components grid */
+.included-components-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+  align-items: stretch;
+}
+
+/* Fix upgrade paths grid */
+.upgrade-paths-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+  align-items: stretch;
+}
+
+/* Fix features grid */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+  align-items: stretch;
+}
+
+/* Ensure all cards have consistent spacing */
+.license-card > *,
+.feature-card > *,
+.enterprise-feature-card > *,
+.included-card > *,
+.upgrade-card > * {
+  margin-bottom: 1rem;
+}
+
+.license-card > *:last-child,
+.feature-card > *:last-child,
+.enterprise-feature-card > *:last-child,
+.included-card > *:last-child,
+.upgrade-card > *:last-child {
+  margin-bottom: 0;
+}
+
+/* Fix price display */
+.license-price {
+  text-align: center;
+  margin: 1.5rem 0;
+}
+
+.license-price .price {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #000000;
+  display: block;
+}
+
+.license-price .period {
+  font-size: 1rem;
+  color: #6b7280;
+  display: block;
+  margin-top: 0.5rem;
+}
+
+/* Fix CTA buttons */
+.license-cta {
+  margin-top: auto;
+  text-align: center;
+}
+
+.license-cta .btn {
+  width: 100%;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+/* Responsive fixes for mobile */
+@media (max-width: 768px) {
+  .license-types-grid,
+  .enterprise-features-grid,
+  .included-components-grid,
+  .upgrade-paths-grid,
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .license-card,
+  .feature-card,
+  .enterprise-feature-card,
+  .included-card,
+  .upgrade-card {
+    min-height: auto;
+    padding: 1.5rem;
+  }
+  
+  .license-price .price {
+    font-size: 2rem;
+  }
+}
+
+/* Ensure no text is cut off in any container */
+.container,
+.section {
+  overflow: visible;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Fix any remaining text cutoff issues */
+* {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+/* Professional hover effects */
+.license-card:hover,
+.feature-card:hover,
+.enterprise-feature-card:hover,
+.included-card:hover,
+.upgrade-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Ensure all text is black for maximum readability */
+.license-card *,
+.feature-card *,
+.enterprise-feature-card *,
+.included-card *,
+.upgrade-card * {
+  color: #000000 !important;
+}
+
+/* Fix any icon colors */
+.license-card i,
+.feature-card i,
+.enterprise-feature-card i,
+.included-card i,
+.upgrade-card i {
+  color: #2563eb !important;
+}
+
+/* Ensure proper spacing for all elements */
+.license-card h4,
+.feature-card h3,
+.enterprise-feature-card h4,
+.included-card h4,
+.upgrade-card h5 {
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+/* Fix any remaining layout issues */
+.license-card,
+.feature-card,
+.enterprise-feature-card,
+.included-card,
+.upgrade-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+/* Ensure buttons are at the bottom */
+.license-cta,
+.feature-card .btn,
+.enterprise-feature-card .btn {
+  margin-top: auto;
+  padding-top: 1rem;
 } 
