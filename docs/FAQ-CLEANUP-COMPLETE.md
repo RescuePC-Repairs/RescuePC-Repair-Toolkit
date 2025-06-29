@@ -59,7 +59,7 @@ New clean, professional styling:
 .faq-simple-answer {
   font-size: var(--font-size-base);
   line-height: 1.7;
-  color: #374151;
+  color:rgb(0, 0, 0);
   hyphens: none;
 }
 ```
