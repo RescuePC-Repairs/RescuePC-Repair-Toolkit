@@ -1,0 +1,248 @@
+/* =============================================================================
+   ENTERPRISE RELIABILITY FIXES - SPECIFIC TEXT COLORING & LAYOUT
+   Making specific enterprise reliability text black and fixing layout issues
+   ============================================================================= */
+
+/* ENTERPRISE RELIABILITY SECTION - FIX LAYOUT & TEXT CUTOFF */
+.enterprise-reliability {
+  background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%);
+  color: #ffffff;
+  padding: 4rem 0;
+  overflow: hidden; /* Prevent text cutoff */
+}
+
+.enterprise-reliability h2 {
+  color: #ffffff !important;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  word-wrap: break-word; /* Prevent text cutoff */
+}
+
+.enterprise-reliability > p {
+  color: #ffffff !important;
+  font-size: 1.25rem;
+  margin-bottom: 3rem;
+  text-align: center;
+  opacity: 0.9;
+  word-wrap: break-word; /* Prevent text cutoff */
+}
+
+/* ENTERPRISE STATS - FIX LAYOUT & MAKE SPECIFIC TEXT BLACK */
+.enterprise-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Increased min-width */
+  gap: 2rem;
+  margin: 0 auto;
+  max-width: 1200px; /* Increased max-width */
+  padding: 0 2rem;
+}
+
+.enterprise-stat {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  min-height: 200px; /* Ensure consistent height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.enterprise-stat h3 {
+  color: #ffffff !important;
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  word-wrap: break-word; /* Prevent text cutoff */
+}
+
+.enterprise-stat h4 {
+  color: #ffffff !important;
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  opacity: 0.9;
+  word-wrap: break-word; /* Prevent text cutoff */
+}
+
+.enterprise-stat p {
+  color: #ffffff !important;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  opacity: 0.8;
+  word-wrap: break-word; /* Prevent text cutoff */
+}
+
+/* ENTERPRISE FEATURES - FIX LAYOUT & MAKE SPECIFIC TEXT BLACK */
+.enterprise-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Increased min-width */
+  gap: 2rem;
+  margin: 3rem auto 0;
+  max-width: 1200px; /* Increased max-width */
+  padding: 0 2rem;
+}
+
+.enterprise-feature {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  min-height: 150px; /* Ensure consistent height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.enterprise-feature h3 {
+  color: #000000 !important; /* SPECIFIC TEXT BLACK */
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  word-wrap: break-word; /* Prevent text cutoff */
+}
+
+.enterprise-feature p {
+  color: #000000 !important; /* SPECIFIC TEXT BLACK */
+  font-size: 0.875rem;
+  line-height: 1.6;
+  opacity: 0.9;
+  word-wrap: break-word; /* Prevent text cutoff */
+}
+
+/* SPECIFIC ENTERPRISE FEATURE TARGETING */
+.enterprise-feature:nth-child(1) h3,
+.enterprise-feature:nth-child(1) p {
+  color: #000000 !important; /* 256-bit Encryption section */
+}
+
+.enterprise-feature:nth-child(2) h3,
+.enterprise-feature:nth-child(2) p {
+  color: #000000 !important; /* HTTPS Enforcement section */
+}
+
+.enterprise-feature:nth-child(3) h3,
+.enterprise-feature:nth-child(3) p {
+  color: #000000 !important; /* Content Security Policy section */
+}
+
+.enterprise-feature:nth-child(4) h3,
+.enterprise-feature:nth-child(4) p {
+  color: #000000 !important; /* Real-time Monitoring section */
+}
+
+/* ENTERPRISE STATS SPECIFIC TARGETING */
+.enterprise-stat:nth-child(1) h3,
+.enterprise-stat:nth-child(1) h4,
+.enterprise-stat:nth-child(1) p {
+  color: #ffffff !important; /* 13.3 GB section - keep white */
+}
+
+.enterprise-stat:nth-child(2) h3,
+.enterprise-stat:nth-child(2) h4,
+.enterprise-stat:nth-child(2) p {
+  color: #ffffff !important; /* Enterprise Security section - keep white */
+}
+
+.enterprise-stat:nth-child(3) h3,
+.enterprise-stat:nth-child(3) h4,
+.enterprise-stat:nth-child(3) p {
+  color: #ffffff !important; /* SSL Certified section - keep white */
+}
+
+.enterprise-stat:nth-child(4) h3,
+.enterprise-stat:nth-child(4) h4,
+.enterprise-stat:nth-child(4) p {
+  color: #ffffff !important; /* High Performance section - keep white */
+}
+
+.enterprise-stat:nth-child(5) h3,
+.enterprise-stat:nth-child(5) h4,
+.enterprise-stat:nth-child(5) p {
+  color: #ffffff !important; /* Scalable section - keep white */
+}
+
+/* RESPONSIVE DESIGN - FIX TEXT CUTOFF ON MOBILE */
+@media (max-width: 768px) {
+  .enterprise-reliability {
+    padding: 2rem 0;
+  }
+  
+  .enterprise-reliability h2 {
+    font-size: 2rem;
+    padding: 0 1rem;
+  }
+  
+  .enterprise-reliability > p {
+    font-size: 1.125rem;
+    padding: 0 1rem;
+  }
+  
+  .enterprise-stats {
+    grid-template-columns: 1fr;
+    padding: 0 1rem;
+    gap: 1.5rem;
+  }
+  
+  .enterprise-stat {
+    min-height: auto;
+    padding: 1.5rem;
+  }
+  
+  .enterprise-stat h3 {
+    font-size: 1.75rem;
+  }
+  
+  .enterprise-stat h4 {
+    font-size: 1rem;
+  }
+  
+  .enterprise-stat p {
+    font-size: 0.875rem;
+  }
+  
+  .enterprise-features {
+    grid-template-columns: 1fr;
+    padding: 0 1rem;
+    gap: 1.5rem;
+  }
+  
+  .enterprise-feature {
+    min-height: auto;
+    padding: 1.5rem;
+  }
+  
+  .enterprise-feature h3 {
+    font-size: 1.125rem;
+  }
+  
+  .enterprise-feature p {
+    font-size: 0.875rem;
+  }
+}
+
+/* ENSURE NO TEXT CUTOFF */
+.enterprise-reliability * {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+/* SPECIFIC TEXT COLOR OVERRIDES */
+.enterprise-feature h3,
+.enterprise-feature p {
+  color: #000000 !important;
+}
+
+/* ENSURE ENTERPRISE STATS REMAIN WHITE */
+.enterprise-stat h3,
+.enterprise-stat h4,
+.enterprise-stat p {
+  color: #ffffff !important;
+} 
