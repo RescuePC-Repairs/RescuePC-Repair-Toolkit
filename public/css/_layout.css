@@ -1,0 +1,233 @@
+/* =============================================================================
+   FORTUNE 500 LAYOUT SYSTEM
+   Professional Layout for Enterprise-Grade Design
+   ============================================================================= */
+
+/* ========== CONTAINER SYSTEM ========== */
+
+.container {
+  width: 100%;
+  max-width: var(--f500-container-xl);
+  margin: 0 auto;
+  padding: 0 var(--f500-space-6);
+}
+
+.container-sm {
+  max-width: var(--f500-container-sm);
+}
+
+.container-md {
+  max-width: var(--f500-container-md);
+}
+
+.container-lg {
+  max-width: var(--f500-container-lg);
+}
+
+.container-xl {
+  max-width: var(--f500-container-xl);
+}
+
+.container-2xl {
+  max-width: var(--f500-container-2xl);
+}
+
+.container-fluid {
+  max-width: none;
+  width: 100%;
+}
+
+/* ========== SECTION SYSTEM ========== */
+
+.section {
+  padding: var(--f500-space-20) 0;
+  position: relative;
+}
+
+.section-sm {
+  padding: var(--f500-space-12) 0;
+}
+
+.section-lg {
+  padding: var(--f500-space-32) 0;
+}
+
+.section-xl {
+  padding: var(--f500-space-40) 0;
+}
+
+/* ========== GRID SYSTEM ========== */
+
+.grid {
+  display: grid;
+  gap: var(--f500-space-6);
+}
+
+.grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
+.grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+.grid-cols-5 { grid-template-columns: repeat(5, 1fr); }
+.grid-cols-6 { grid-template-columns: repeat(6, 1fr); }
+
+/* ========== FLEXBOX SYSTEM ========== */
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-nowrap {
+  flex-wrap: nowrap;
+}
+
+/* Justify Content */
+.justify-start { justify-content: flex-start; }
+.justify-end { justify-content: flex-end; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.justify-around { justify-content: space-around; }
+.justify-evenly { justify-content: space-evenly; }
+
+/* Align Items */
+.items-start { align-items: flex-start; }
+.items-end { align-items: flex-end; }
+.items-center { align-items: center; }
+.items-baseline { align-items: baseline; }
+.items-stretch { align-items: stretch; }
+
+/* ========== SPACING SYSTEM ========== */
+
+/* Margin */
+.m-0 { margin: 0; }
+.m-1 { margin: var(--f500-space-1); }
+.m-2 { margin: var(--f500-space-2); }
+.m-3 { margin: var(--f500-space-3); }
+.m-4 { margin: var(--f500-space-4); }
+.m-5 { margin: var(--f500-space-5); }
+.m-6 { margin: var(--f500-space-6); }
+.m-8 { margin: var(--f500-space-8); }
+.m-10 { margin: var(--f500-space-10); }
+.m-12 { margin: var(--f500-space-12); }
+
+/* Margin Top */
+.mt-0 { margin-top: 0; }
+.mt-1 { margin-top: var(--f500-space-1); }
+.mt-2 { margin-top: var(--f500-space-2); }
+.mt-3 { margin-top: var(--f500-space-3); }
+.mt-4 { margin-top: var(--f500-space-4); }
+.mt-5 { margin-top: var(--f500-space-5); }
+.mt-6 { margin-top: var(--f500-space-6); }
+.mt-8 { margin-top: var(--f500-space-8); }
+.mt-10 { margin-top: var(--f500-space-10); }
+.mt-12 { margin-top: var(--f500-space-12); }
+
+/* Margin Bottom */
+.mb-0 { margin-bottom: 0; }
+.mb-1 { margin-bottom: var(--f500-space-1); }
+.mb-2 { margin-bottom: var(--f500-space-2); }
+.mb-3 { margin-bottom: var(--f500-space-3); }
+.mb-4 { margin-bottom: var(--f500-space-4); }
+.mb-5 { margin-bottom: var(--f500-space-5); }
+.mb-6 { margin-bottom: var(--f500-space-6); }
+.mb-8 { margin-bottom: var(--f500-space-8); }
+.mb-10 { margin-bottom: var(--f500-space-10); }
+.mb-12 { margin-bottom: var(--f500-space-12); }
+
+/* Padding */
+.p-0 { padding: 0; }
+.p-1 { padding: var(--f500-space-1); }
+.p-2 { padding: var(--f500-space-2); }
+.p-3 { padding: var(--f500-space-3); }
+.p-4 { padding: var(--f500-space-4); }
+.p-5 { padding: var(--f500-space-5); }
+.p-6 { padding: var(--f500-space-6); }
+.p-8 { padding: var(--f500-space-8); }
+.p-10 { padding: var(--f500-space-10); }
+.p-12 { padding: var(--f500-space-12); }
+
+/* ========== POSITIONING ========== */
+
+.relative { position: relative; }
+.absolute { position: absolute; }
+.fixed { position: fixed; }
+.sticky { position: sticky; }
+.static { position: static; }
+
+/* ========== DISPLAY ========== */
+
+.block { display: block; }
+.inline-block { display: inline-block; }
+.inline { display: inline; }
+.hidden { display: none; }
+
+/* ========== RESPONSIVE LAYOUT ========== */
+
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 var(--f500-space-4);
+  }
+  
+  .section {
+    padding: var(--f500-space-16) 0;
+  }
+  
+  .grid {
+    gap: var(--f500-space-4);
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 var(--f500-space-4);
+  }
+  
+  .section {
+    padding: var(--f500-space-12) 0;
+  }
+  
+  .grid-cols-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .grid-cols-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .grid-cols-5 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .grid-cols-6 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 var(--f500-space-3);
+  }
+  
+  .section {
+    padding: var(--f500-space-8) 0;
+  }
+  
+  .grid-cols-2,
+  .grid-cols-3,
+  .grid-cols-4,
+  .grid-cols-5,
+  .grid-cols-6 {
+    grid-template-columns: 1fr;
+  }
+} 
