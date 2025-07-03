@@ -1,3 +1,9 @@
+type UserData = {
+  name: string;
+  licenseKey: string;
+  // Add any other fields used in the templates
+};
+
 export function getPurchaseEmailTemplate(
   customerName: string,
   licenses: string[],

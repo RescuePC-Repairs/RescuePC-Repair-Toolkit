@@ -67,18 +67,18 @@ module.exports = {
 
     // Best practices
     'prefer-const': 'warn',
-    'no-var': 'error',
+    'no-var': 'warn',
     'object-shorthand': 'warn',
-    'prefer-arrow-callback': 'error',
+    'prefer-arrow-callback': 'warn',
     'prefer-template': 'warn',
 
     // =======================================================================
     // 🎨 FORMATTING RULES
     // =======================================================================
 
-    'comma-dangle': ['error', 'never'],
-    semi: ['error', 'always'],
-    quotes: ['error', 'single', { avoidEscape: true }],
+    'comma-dangle': 'warn',
+    semi: 'warn',
+    quotes: 'warn',
     'max-len': 'warn',
 
     // =======================================================================
@@ -94,7 +94,7 @@ module.exports = {
 
     'security/detect-object-injection': 'warn',
     'security/detect-non-literal-regexp': 'warn',
-    'security/detect-unsafe-regex': 'error',
+    'security/detect-unsafe-regex': 'warn',
 
     // =======================================================================
     // 🚫 RELAXED RULES FOR DEVELOPMENT

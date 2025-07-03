@@ -13,6 +13,7 @@ interface SecurityEvent {
 }
 
 type SecurityEventType =
+  | 'AUTH_SUCCESS'
   | 'AUTH_FAILURE'
   | 'BRUTE_FORCE_ATTEMPT'
   | 'INVALID_TOKEN'
@@ -36,6 +37,7 @@ export class SecurityMonitor {
   private readonly metricsStream: WriteStream;
 
   private readonly ALERT_THRESHOLDS = {
+    AUTH_SUCCESS: 100,
     AUTH_FAILURE: 5,
     BRUTE_FORCE_ATTEMPT: 3,
     INVALID_TOKEN: 10,
@@ -168,7 +170,7 @@ export class SecurityMonitor {
       await new Promise((resolve, reject) => {
         this.alertStream.write(`${JSON.stringify(alert)}\n`, (error) => {
           if (error) reject(error);
-          else resolve();
+          else resolve(undefined);
         });
       });
 

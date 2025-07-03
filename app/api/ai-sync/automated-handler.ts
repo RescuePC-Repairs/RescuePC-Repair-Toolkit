@@ -1,6 +1,5 @@
 import { WebSocket } from 'ws';
 import nodemailer from 'nodemailer';
-import { generateSEOContent } from '../ai-integration/route';
 // import { createCheckoutSession } from '../create-checkout-session/route'
 import { validateLicense } from '@/utils/license';
 import { createHmac } from 'crypto';
@@ -172,11 +171,12 @@ export class AutomatedHandler {
 
   private async updateSEO(data: any) {
     try {
-      const seoContent = await generateSEOContent({
-        target: data.target,
-        keywords: data.keywords,
-        type: data.type
-      });
+      // Generate basic SEO content
+      const seoContent = {
+        title: `${data.target} - RescuePC Repairs`,
+        description: `Expert ${data.target} services with advanced features`,
+        content: `Professional ${data.target} solutions with ${data.keywords.join(', ')}`
+      };
 
       this.metrics.seoUpdates++;
       this.notifyOtherAI('SEO_UPDATED', { target: data.target, content: seoContent });

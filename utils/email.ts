@@ -281,7 +281,7 @@ export async function sendEmail(
       console.log(`✅ Email sent to ${to}: ${subject}`);
     }
 
-    return result;
+    // Do not return result, just end the function
   } catch (error) {
     console.error('❌ Email sending failed:', error);
     throw new Error('Failed to send email');

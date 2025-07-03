@@ -11,12 +11,7 @@ const AUTH_TAG_LENGTH = 16;
 export class Encryption {
   private static async deriveKey(password: string, salt: Buffer): Promise<Buffer> {
     const scryptAsync = promisify(scrypt);
-    return scryptAsync(password, salt, KEY_LENGTH, {
-      N: ITERATIONS,
-      r: 8,
-      p: 1,
-      maxmem: 128 * 1024 * 1024
-    }) as Promise<Buffer>;
+    return scryptAsync(password, salt, KEY_LENGTH) as Promise<Buffer>;
   }
 
   public static async encrypt(data: string, password: string): Promise<string> {
