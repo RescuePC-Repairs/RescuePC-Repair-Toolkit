@@ -161,7 +161,9 @@ async function _handlePaymentProcessing(data: any) {
             type: packageType,
             status: 'active',
             expiresAt:
-              packageType === 'lifetime' ? undefined : new Date(Date.now() + 365 * 24 * 60 * 60 * 1000), // 1 year
+              packageType === 'lifetime'
+                ? undefined
+                : new Date(Date.now() + 365 * 24 * 60 * 60 * 1000), // 1 year
             paymentId: payment.id
           }
         })

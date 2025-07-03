@@ -12,13 +12,15 @@ export const metadata: Metadata = {
 // Professional layout component
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div style={{
-      fontFamily: 'Inter, system-ui, sans-serif',
-      backgroundColor: '#111827',
-      color: '#ffffff',
-      margin: 0,
-      padding: 0
-    }}>
+    <div
+      style={{
+        fontFamily: 'Inter, system-ui, sans-serif',
+        backgroundColor: '#111827',
+        color: '#ffffff',
+        margin: 0,
+        padding: 0
+      }}
+    >
       <Suspense fallback={<div style={{ padding: '2rem', textAlign: 'center' }}>Loading...</div>}>
         {children}
       </Suspense>

@@ -29,9 +29,13 @@ export function generateTokens(payload: Omit<CustomJwtPayload, 'iat' | 'exp'>): 
   refreshToken: string;
 } {
   const accessToken = sign(payload as object, JWT_SECRET, { expiresIn: TOKEN_EXPIRY as string });
-  const refreshToken = sign({ ...payload, tokenVersion: payload.tokenVersion || 0 } as object, JWT_SECRET, {
-    expiresIn: REFRESH_TOKEN_EXPIRY as string
-  });
+  const refreshToken = sign(
+    { ...payload, tokenVersion: payload.tokenVersion || 0 } as object,
+    JWT_SECRET,
+    {
+      expiresIn: REFRESH_TOKEN_EXPIRY as string
+    }
+  );
 
   return { accessToken, refreshToken };
 }
