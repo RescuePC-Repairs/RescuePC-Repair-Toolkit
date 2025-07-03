@@ -1,4 +1,3 @@
-/// <reference types="jest" />
 import '@testing-library/jest-dom';
 import { TextEncoder, TextDecoder } from 'util';
 import { Headers, Request, Response } from 'node-fetch';
@@ -18,29 +17,19 @@ declare global {
       Response: typeof Response;
     }
   }
-  // Add Jest types
-  const jest: typeof import('@jest/globals').jest;
-  const expect: typeof import('@jest/globals').expect;
-  const test: typeof import('@jest/globals').test;
-  const describe: typeof import('@jest/globals').describe;
-  const beforeAll: typeof import('@jest/globals').beforeAll;
-  const beforeEach: typeof import('@jest/globals').beforeEach;
-  const afterAll: typeof import('@jest/globals').afterAll;
-  const afterEach: typeof import('@jest/globals').afterEach;
-  const it: typeof import('@jest/globals').it;
 }
 
 // Mock global fetch
-global.fetch = jest.fn();
+global.fetch = jest.fn() as any;
 
 // Mock Headers, Request, Response
-global.Headers = Headers;
-global.Request = Request;
-global.Response = Response;
+global.Headers = Headers as any;
+global.Request = Request as any;
+global.Response = Response as any;
 
 // Mock TextEncoder/TextDecoder
 global.TextEncoder = TextEncoder;
-global.TextDecoder = TextDecoder;
+global.TextDecoder = TextDecoder as any;
 
 // Mock environment variables
 process.env = {
@@ -85,7 +74,7 @@ beforeEach(() => {
 });
 
 // Mock crypto for CSRF tokens
-const mockCrypto = {
+const mockCryptoForCSRF = {
   randomBytes: (size: number) => Buffer.from('a'.repeat(size)),
   createHmac: () => ({
     update: () => ({
@@ -94,7 +83,7 @@ const mockCrypto = {
   })
 };
 
-jest.mock('crypto', () => mockCrypto);
+jest.mock('crypto', () => mockCryptoForCSRF);
 
 // Mock Next.js router
 jest.mock('next/router', () => ({

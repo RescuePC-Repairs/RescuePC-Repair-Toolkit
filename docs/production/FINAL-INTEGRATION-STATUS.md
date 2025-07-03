@@ -212,7 +212,7 @@ Your RescuePC Repairs automated license distribution system is **completely inte
 ### **Customer Support**
 
 - **Email**: support@rescuepcrepairs.com
-- **Business**: ***REMOVED***
+- **Business**: **_REMOVED_**
 - **Website**: https://www.rescuepcrepairs.com/
 - **Documentation**: Complete technical and user guides
 

@@ -124,8 +124,7 @@ function generateCustomerEmail(
   productName: string,
   amount: number
 ): string {
-  const downloadLink =
-    '***REMOVED***';
+  const downloadLink = '***REMOVED***';
 
   return `
 <!DOCTYPE html>

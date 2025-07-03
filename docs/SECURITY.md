@@ -4,7 +4,7 @@
 
 If you discover a security vulnerability in RescuePC Repairs, please report it privately and responsibly. Do **not** disclose it publicly until it has been addressed.
 
-- **Contact:** ***REMOVED***
+- **Contact:** **_REMOVED_**
 - **Response Time:** We aim to respond within 48 hours.
 - **Scope:** All code, scripts, and downloadable files in this repository and the RescuePC Repairs website are protected by DMCA and all disclosures must comply with applicable laws.
 

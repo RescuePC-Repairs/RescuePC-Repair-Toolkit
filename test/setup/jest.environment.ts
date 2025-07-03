@@ -10,58 +10,58 @@ class CustomEnvironment extends TestEnvironment {
       this.global.TextEncoder = TextEncoder;
     }
     if (typeof this.global.TextDecoder === 'undefined') {
-      this.global.TextDecoder = TextDecoder;
+      this.global.TextDecoder = TextDecoder as any;
     }
 
     // Add fetch-related globals
     if (typeof this.global.Headers === 'undefined') {
       const { Headers, Request, Response } = await import('node-fetch');
-      this.global.Headers = Headers;
-      this.global.Request = Request;
-      this.global.Response = Response;
+      this.global.Headers = Headers as any;
+      this.global.Request = Request as any;
+      this.global.Response = Response as any;
     }
 
     // Add crypto for CSRF tokens
     if (typeof this.global.crypto === 'undefined') {
       const { webcrypto } = await import('node:crypto');
-      this.global.crypto = webcrypto;
+      this.global.crypto = webcrypto as any;
     }
 
     // Add URL and URLSearchParams
     if (typeof this.global.URL === 'undefined') {
       const { URL, URLSearchParams } = await import('url');
-      this.global.URL = URL;
-      this.global.URLSearchParams = URLSearchParams;
+      this.global.URL = URL as any;
+      this.global.URLSearchParams = URLSearchParams as any;
     }
 
     // Add FormData
     if (typeof this.global.FormData === 'undefined') {
       const { FormData } = await import('formdata-node');
-      this.global.FormData = FormData;
+      this.global.FormData = FormData as any;
     }
 
     // Add Blob
     if (typeof this.global.Blob === 'undefined') {
       const { Blob } = await import('buffer');
-      this.global.Blob = Blob;
+      this.global.Blob = Blob as any;
     }
 
     // Add File
     if (typeof this.global.File === 'undefined') {
       const { File } = await import('buffer');
-      this.global.File = File;
+      this.global.File = File as any;
     }
 
     // Add AbortController
     if (typeof this.global.AbortController === 'undefined') {
       const { AbortController } = await import('abort-controller');
-      this.global.AbortController = AbortController;
+      this.global.AbortController = AbortController as any;
     }
 
     // Add performance
     if (typeof this.global.performance === 'undefined') {
       const { performance } = await import('perf_hooks');
-      this.global.performance = performance;
+      this.global.performance = performance as any;
     }
 
     // Add console methods if not defined
@@ -72,7 +72,7 @@ class CustomEnvironment extends TestEnvironment {
         warn: jest.fn(),
         info: jest.fn(),
         debug: jest.fn()
-      };
+      } as any;
     }
   }
 

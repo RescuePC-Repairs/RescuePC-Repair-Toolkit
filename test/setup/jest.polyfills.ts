@@ -11,7 +11,7 @@ import { performance } from 'perf_hooks';
 
 // Polyfill TextEncoder/TextDecoder
 global.TextEncoder = TextEncoder;
-global.TextDecoder = TextDecoder;
+global.TextDecoder = TextDecoder as any;
 
 // Polyfill Buffer
 global.Buffer = Buffer;
@@ -45,13 +45,13 @@ global.crypto = mockCrypto as unknown as Crypto;
 
 // Polyfill fetch
 global.fetch = jest.fn();
-global.Request = Request;
-global.Response = Response;
-global.Headers = Headers;
+global.Request = Request as any;
+global.Response = Response as any;
+global.Headers = Headers as any;
 
 // Polyfill URL
-global.URL = URL;
-global.URLSearchParams = URLSearchParams;
+global.URL = URL as any;
+global.URLSearchParams = URLSearchParams as any;
 
 // Polyfill performance
 global.performance = {
@@ -124,20 +124,20 @@ afterAll(() => {
 });
 
 // Add FormData
-global.FormData = FormData;
+global.FormData = FormData as any;
 
 // Add Blob and File
-global.Blob = Blob;
-global.File = File;
+global.Blob = Blob as any;
+global.File = File as any;
 
 // Add AbortController
-global.AbortController = AbortController;
+global.AbortController = AbortController as any;
 
 // Add crypto
-global.crypto = webcrypto;
+global.crypto = webcrypto as any;
 
 // Add performance
-global.performance = performance;
+global.performance = performance as any;
 
 // Add fetch
 global.fetch = jest.fn();

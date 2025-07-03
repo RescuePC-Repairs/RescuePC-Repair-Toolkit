@@ -14,7 +14,7 @@ RescuePC Repairs is a cutting-edge, fully automated multi-OS repair toolkit that
 
 ### **🚀 LIVE DEPLOYMENTS**
 
-- **Main Application**: https://***REMOVED***
+- **Main Application**: https://**_REMOVED_**
 - **Webhook Handler**: https://cloud-webhook-handler-6s83chitd-rescuepc-repairs-projects.vercel.app
 
 ### **✅ PRODUCTION STATUS**
@@ -244,8 +244,8 @@ vercel --prod
 
 ### **Technical Support**
 
-- **Email**: ***REMOVED***
-- **Business**: ***REMOVED***
+- **Email**: **_REMOVED_**
+- **Business**: **_REMOVED_**
 - **Documentation**: [Project Wiki](link-to-wiki)
 
 ### **Emergency Contact**

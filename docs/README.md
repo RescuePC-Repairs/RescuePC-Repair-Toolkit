@@ -324,7 +324,7 @@ npm run deploy:netlify
 
 ### **24/7 Support**
 
-- **Email**: ***REMOVED***
+- **Email**: **_REMOVED_**
 - **Response Time**: <1 hour
 - **Resolution Time**: <24 hours
 - **Escalation**: Immediate for critical issues
