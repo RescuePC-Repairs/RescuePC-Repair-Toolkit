@@ -108,8 +108,8 @@ npm run dev
 
 ```env
 # Stripe Configuration
-STRIPE_SECRET_KEY=***REMOVED***
-STRIPE_WEBHOOK_SECRET=***REMOVED***
+STRIPE_SECRET_KEY=sk_live_xxx
+STRIPE_WEBHOOK_SECRET=whsec_xxx
 
 # Email Configuration
 GMAIL_USER=***REMOVED***

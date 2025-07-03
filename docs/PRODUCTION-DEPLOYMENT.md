@@ -28,8 +28,8 @@ RescuePC Repairs is deployed as a fully automated, production-ready system with 
 NODE_ENV=production
 VERCEL_ENV=production
 DATABASE_URL=postgresql://...
-STRIPE_SECRET_KEY=***REMOVED***
-STRIPE_WEBHOOK_SECRET=***REMOVED***
+STRIPE_SECRET_KEY=sk_live_xxx
+STRIPE_WEBHOOK_SECRET=whsec_xxx
 GMAIL_USER=***REMOVED***
 GMAIL_APP_PASSWORD=***REMOVED***
 YAHOO_USER=***REMOVED***
