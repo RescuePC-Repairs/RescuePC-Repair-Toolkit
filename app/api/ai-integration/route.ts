@@ -45,7 +45,7 @@ function validateEnvironment() {
   const requiredEnvVars = ['STRIPE_SECRET_KEY', 'SUPPORT_EMAIL', 'GMAIL_APP_PASSWORD'];
 
   const missingVars = requiredEnvVars.filter((varName) => !process.env[varName]);
-  if (missingVars.length > 0) {
+  if (missingVars.length > 0 && typeof window === 'undefined' && process.env.NODE_ENV === 'production') {
     console.warn(`Missing environment variables: ${missingVars.join(', ')}`);
   }
 }

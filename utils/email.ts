@@ -13,10 +13,12 @@ const emailTransporter = nodemailer.createTransport({
 });
 
 // Validate email configuration on startup
-if (!process.env.SUPPORT_EMAIL || !process.env.GMAIL_APP_PASSWORD) {
-  throw new Error(
-    'CRITICAL: Email configuration missing. Set SUPPORT_EMAIL and GMAIL_APP_PASSWORD environment variables.'
-  );
+if (typeof window === 'undefined' && process.env.NODE_ENV === 'production') {
+  if (!process.env.SUPPORT_EMAIL || !process.env.GMAIL_APP_PASSWORD) {
+    throw new Error(
+      'CRITICAL: Email configuration missing. Set SUPPORT_EMAIL and GMAIL_APP_PASSWORD environment variables.'
+    );
+  }
 }
 
 // FREE EMAIL SENDING FUNCTION

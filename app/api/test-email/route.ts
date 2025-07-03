@@ -3,19 +3,31 @@ import { sendLicenseEmail } from '../../../utils/email';
 
 export async function GET() {
   try {
-    // Verify required environment variables
-    if (
-      !process.env.SUPPORT_EMAIL ||
-      !process.env.GMAIL_APP_PASSWORD ||
-      !process.env.BUSINESS_EMAIL ||
-      !process.env.PCLOUD_DOWNLOAD_LINK
-    ) {
-      throw new Error('Missing required environment variables for email configuration');
+    // Validate email configuration
+    if (typeof window === 'undefined' && process.env.NODE_ENV === 'production') {
+      if (
+        !process.env.SUPPORT_EMAIL ||
+        !process.env.GMAIL_APP_PASSWORD ||
+        !process.env.BUSINESS_EMAIL
+      ) {
+        return NextResponse.json(
+          { error: 'Email configuration missing' },
+          { status: 500 }
+        );
+      }
     }
 
     // Send test email
+    const businessEmail = process.env.BUSINESS_EMAIL;
+    if (!businessEmail) {
+      return NextResponse.json(
+        { error: 'Business email not configured' },
+        { status: 500 }
+      );
+    }
+
     await sendLicenseEmail(
-      process.env.BUSINESS_EMAIL, // Send to business email for testing
+      businessEmail, // Send to business email for testing
       'TEST-LICENSE-KEY-2024',
       'Professional License',
       'Test Customer'

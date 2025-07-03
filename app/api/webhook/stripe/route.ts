@@ -12,10 +12,13 @@ if (!process.env.STRIPE_WEBHOOK_SECRET) {
   throw new Error('CRITICAL: STRIPE_WEBHOOK_SECRET environment variable is required');
 }
 
-if (!process.env.SUPPORT_EMAIL || !process.env.GMAIL_APP_PASSWORD) {
-  throw new Error(
-    'CRITICAL: Email configuration missing. Set SUPPORT_EMAIL and GMAIL_APP_PASSWORD environment variables.'
-  );
+// Validate email configuration
+if (typeof window === 'undefined' && process.env.NODE_ENV === 'production') {
+  if (!process.env.SUPPORT_EMAIL || !process.env.GMAIL_APP_PASSWORD) {
+    throw new Error(
+      'CRITICAL: Email configuration missing. Set SUPPORT_EMAIL and GMAIL_APP_PASSWORD environment variables.'
+    );
+  }
 }
 
 // SECURE STRIPE INITIALIZATION
