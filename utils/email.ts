@@ -12,15 +12,6 @@ const emailTransporter = nodemailer.createTransport({
   requireTLS: true
 });
 
-// Validate email configuration on startup
-if (typeof window === 'undefined' && process.env.NODE_ENV === 'production') {
-  if (!process.env.SUPPORT_EMAIL || !process.env.GMAIL_APP_PASSWORD) {
-    throw new Error(
-      'CRITICAL: Email configuration missing. Set SUPPORT_EMAIL and GMAIL_APP_PASSWORD environment variables.'
-    );
-  }
-}
-
 // FREE EMAIL SENDING FUNCTION
 export async function sendTransactionalEmail({
   to,
@@ -36,6 +27,12 @@ export async function sendTransactionalEmail({
   replyTo?: string;
 }): Promise<void> {
   try {
+    // Validate email configuration only during actual sending
+    if (!process.env.SUPPORT_EMAIL || !process.env.GMAIL_APP_PASSWORD) {
+      console.error('CRITICAL: Email configuration missing. Set SUPPORT_EMAIL and GMAIL_APP_PASSWORD environment variables.');
+      return; // Don't throw, just log and return
+    }
+
     await emailTransporter.sendMail({
       from: from || `"RescuePC Repairs" <${process.env.SUPPORT_EMAIL}>`,
       to,

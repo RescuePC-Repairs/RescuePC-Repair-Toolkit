@@ -12,15 +12,6 @@ if (!process.env.STRIPE_WEBHOOK_SECRET) {
   throw new Error('CRITICAL: STRIPE_WEBHOOK_SECRET environment variable is required');
 }
 
-// Validate email configuration
-if (typeof window === 'undefined' && process.env.NODE_ENV === 'production') {
-  if (!process.env.SUPPORT_EMAIL || !process.env.GMAIL_APP_PASSWORD) {
-    throw new Error(
-      'CRITICAL: Email configuration missing. Set SUPPORT_EMAIL and GMAIL_APP_PASSWORD environment variables.'
-    );
-  }
-}
-
 // SECURE STRIPE INITIALIZATION
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: '2025-06-30.basil',
@@ -291,6 +282,12 @@ export async function POST(request: NextRequest) {
     if (!signature) {
       console.error('[WEBHOOK_ERROR] Missing Stripe signature');
       return NextResponse.json({ error: 'Missing signature' }, { status: 400 });
+    }
+
+    // Validate email configuration only during actual API calls
+    if (!process.env.SUPPORT_EMAIL || !process.env.GMAIL_APP_PASSWORD) {
+      console.error('CRITICAL: Email configuration missing. Set SUPPORT_EMAIL and GMAIL_APP_PASSWORD environment variables.');
+      return NextResponse.json({ error: 'Email configuration missing' }, { status: 500 });
     }
 
     // VERIFY WEBHOOK SIGNATURE

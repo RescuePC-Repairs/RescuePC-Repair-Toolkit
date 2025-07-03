@@ -42,15 +42,15 @@ const _AI_INTEGRATION_SECRET = process.env.AI_INTEGRATION_SECRET || 'ai-secret-k
 
 // Validate required environment variables
 function validateEnvironment() {
+  // Only log warnings, don't throw errors during build
   const requiredEnvVars = ['STRIPE_SECRET_KEY', 'SUPPORT_EMAIL', 'GMAIL_APP_PASSWORD'];
-
   const missingVars = requiredEnvVars.filter((varName) => !process.env[varName]);
-  if (missingVars.length > 0 && typeof window === 'undefined' && process.env.NODE_ENV === 'production') {
+  if (missingVars.length > 0) {
     console.warn(`Missing environment variables: ${missingVars.join(', ')}`);
   }
 }
 
-// Validate environment variables on startup
+// Validate environment variables on startup (non-blocking)
 validateEnvironment();
 
 /**
