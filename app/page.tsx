@@ -149,9 +149,7 @@ function HomePage() {
               RESCUEPC REPAIRS
             </h1>
           </div>
-          <p className="text-xl md:text-2xl text-gray-300 mb-4">
-            Where Expertise Meets Automation
-          </p>
+          <p className="text-xl md:text-2xl text-gray-300 mb-4">Where Expertise Meets Automation</p>
           <div className="text-lg text-yellow-400 mb-8 font-bold">
             📊 200+ SPECIALIZED SCRIPTS • 🔍 100% VERIFIED CAPABILITIES • 🛡️ MILITARY-GRADE SECURITY
           </div>

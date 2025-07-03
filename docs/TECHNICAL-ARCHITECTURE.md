@@ -9,6 +9,7 @@ RescuePC Repairs is a fully automated, production-ready multi-OS repair toolkit 
 ## 🏛️ **Architecture Layers**
 
 ### **Frontend Layer**
+
 - **Framework**: Next.js 14 with App Router
 - **UI Library**: React 18 with TypeScript
 - **Styling**: Tailwind CSS with custom components
@@ -16,6 +17,7 @@ RescuePC Repairs is a fully automated, production-ready multi-OS repair toolkit 
 - **Performance**: Server-side rendering and optimization
 
 ### **Backend Layer**
+
 - **API Routes**: Next.js serverless functions
 - **Database**: PostgreSQL with Prisma ORM
 - **Authentication**: JWT with zero-trust security
@@ -23,6 +25,7 @@ RescuePC Repairs is a fully automated, production-ready multi-OS repair toolkit 
 - **Queue System**: Background job processing
 
 ### **Integration Layer**
+
 - **Payment**: Stripe with webhook automation
 - **Email**: Nodemailer with professional templates
 - **Storage**: PCloud integration for file management
@@ -32,6 +35,7 @@ RescuePC Repairs is a fully automated, production-ready multi-OS repair toolkit 
 ## 🔧 **Core Components**
 
 ### **1. Payment Processing System**
+
 ```typescript
 // Automated Stripe integration
 interface PaymentFlow {
@@ -43,6 +47,7 @@ interface PaymentFlow {
 ```
 
 ### **2. License Management**
+
 ```typescript
 // Instant license generation
 interface LicenseSystem {
@@ -54,6 +59,7 @@ interface LicenseSystem {
 ```
 
 ### **3. Email Automation**
+
 ```typescript
 // Professional email delivery
 interface EmailSystem {
@@ -65,6 +71,7 @@ interface EmailSystem {
 ```
 
 ### **4. Security Framework**
+
 ```typescript
 // Military-grade protection
 interface SecuritySystem {
@@ -78,6 +85,7 @@ interface SecuritySystem {
 ## 🗄️ **Database Schema**
 
 ### **Core Tables**
+
 ```sql
 -- License management
 CREATE TABLE licenses (
@@ -109,6 +117,7 @@ CREATE TABLE users (
 ## 🔄 **Data Flow**
 
 ### **Payment Processing Flow**
+
 1. **Customer Selection** → License package chosen
 2. **Stripe Checkout** → Payment session created
 3. **Webhook Processing** → Payment confirmed
@@ -117,6 +126,7 @@ CREATE TABLE users (
 6. **Access Granted** → Customer receives access
 
 ### **Security Validation Flow**
+
 1. **Request Received** → Input validation
 2. **Authentication** → JWT verification
 3. **Authorization** → Permission checking
@@ -127,18 +137,21 @@ CREATE TABLE users (
 ## 🛡️ **Security Architecture**
 
 ### **Zero-Trust Security Model**
+
 - **Every Request Validated**: No implicit trust
 - **Multi-Factor Authentication**: Multiple verification layers
 - **Context-Aware Access**: Dynamic permission evaluation
 - **Continuous Monitoring**: Real-time threat detection
 
 ### **Encryption Standards**
+
 - **Data at Rest**: AES-256-GCM encryption
 - **Data in Transit**: TLS 1.3 with perfect forward secrecy
 - **Key Management**: Hardware security modules
 - **Key Rotation**: Automated key lifecycle management
 
 ### **Access Control**
+
 - **Role-Based Access**: Granular permission system
 - **Time-Based Access**: Temporary access tokens
 - **Geographic Restrictions**: IP-based access control
@@ -147,18 +160,21 @@ CREATE TABLE users (
 ## 📊 **Performance Optimization**
 
 ### **Frontend Optimization**
+
 - **Code Splitting**: Dynamic imports for faster loading
 - **Image Optimization**: Next.js automatic optimization
 - **Caching Strategy**: Aggressive caching with invalidation
 - **Bundle Analysis**: Webpack optimization monitoring
 
 ### **Backend Optimization**
+
 - **Database Indexing**: Optimized query performance
 - **Connection Pooling**: Efficient database connections
 - **Caching Layer**: Redis for frequently accessed data
 - **Load Balancing**: Horizontal scaling capability
 
 ### **Monitoring & Metrics**
+
 - **Real-Time Monitoring**: System health tracking
 - **Performance Metrics**: Response time monitoring
 - **Error Tracking**: Automated error reporting
@@ -167,35 +183,38 @@ CREATE TABLE users (
 ## 🔌 **API Design**
 
 ### **RESTful Endpoints**
+
 ```typescript
 // Payment processing
-POST /api/create-checkout-session
-POST /api/webhook/stripe
+POST / api / create - checkout - session;
+POST / api / webhook / stripe;
 
 // License management
-POST /api/validate-license
-GET /api/license/status
+POST / api / validate - license;
+GET / api / license / status;
 
 // Email automation
-POST /api/email/send
-GET /api/email/status
+POST / api / email / send;
+GET / api / email / status;
 
 // System health
-GET /api/health
-GET /api/status
+GET / api / health;
+GET / api / status;
 ```
 
 ### **WebSocket Connections**
+
 ```typescript
 // Real-time communication
-WS /api/ai-sync/websocket
-WS /api/automation/status
-WS /api/monitoring/alerts
+WS / api / ai - sync / websocket;
+WS / api / automation / status;
+WS / api / monitoring / alerts;
 ```
 
 ## 🚀 **Deployment Architecture**
 
 ### **Production Environment**
+
 - **Platform**: Vercel with edge functions
 - **Database**: PostgreSQL with connection pooling
 - **CDN**: Global content delivery network
@@ -203,6 +222,7 @@ WS /api/monitoring/alerts
 - **Backup**: Automated disaster recovery
 
 ### **Development Environment**
+
 - **Local Development**: Next.js dev server
 - **Database**: Local PostgreSQL instance
 - **Testing**: Jest with comprehensive coverage
@@ -212,6 +232,7 @@ WS /api/monitoring/alerts
 ## 🔧 **Configuration Management**
 
 ### **Environment Variables**
+
 ```env
 # Production Configuration
 NODE_ENV=production
@@ -232,6 +253,7 @@ YAHOO_USER=***REMOVED***
 ```
 
 ### **Feature Flags**
+
 ```typescript
 // Dynamic feature management
 interface FeatureFlags {
@@ -245,12 +267,14 @@ interface FeatureFlags {
 ## 📈 **Scalability Design**
 
 ### **Horizontal Scaling**
+
 - **Stateless Design**: No server-side state
 - **Load Balancing**: Automatic traffic distribution
 - **Database Sharding**: Horizontal data partitioning
 - **CDN Integration**: Global content distribution
 
 ### **Vertical Scaling**
+
 - **Resource Optimization**: Efficient memory usage
 - **Connection Pooling**: Database connection management
 - **Caching Strategy**: Multi-layer caching
@@ -259,6 +283,7 @@ interface FeatureFlags {
 ## 🔍 **Testing Strategy**
 
 ### **Test Types**
+
 - **Unit Tests**: Individual component testing
 - **Integration Tests**: API endpoint testing
 - **E2E Tests**: Complete user flow testing
@@ -266,6 +291,7 @@ interface FeatureFlags {
 - **Performance Tests**: Load and stress testing
 
 ### **Test Coverage**
+
 - **Code Coverage**: 90%+ coverage target
 - **Security Coverage**: All security features tested
 - **Performance Coverage**: Response time validation
@@ -274,12 +300,14 @@ interface FeatureFlags {
 ## 📚 **Documentation Standards**
 
 ### **Code Documentation**
+
 - **JSDoc Comments**: Function and class documentation
 - **TypeScript Types**: Comprehensive type definitions
 - **API Documentation**: OpenAPI/Swagger specs
 - **Architecture Diagrams**: System design documentation
 
 ### **User Documentation**
+
 - **Installation Guide**: Step-by-step setup
 - **Configuration Guide**: Environment setup
 - **API Reference**: Complete endpoint documentation
@@ -288,12 +316,14 @@ interface FeatureFlags {
 ## 🔄 **Maintenance & Updates**
 
 ### **Automated Maintenance**
+
 - **Dependency Updates**: Automated security patches
 - **Database Migrations**: Automated schema updates
 - **Performance Monitoring**: Continuous optimization
 - **Security Audits**: Regular vulnerability assessments
 
 ### **Update Strategy**
+
 - **Zero-Downtime Deployments**: Blue-green deployment
 - **Feature Flags**: Gradual feature rollouts
 - **Rollback Capability**: Quick issue resolution
@@ -301,4 +331,4 @@ interface FeatureFlags {
 
 ---
 
-**This architecture ensures maximum reliability, security, and maintainability for the RescuePC Repairs Multi-OS Toolkit.** 
+**This architecture ensures maximum reliability, security, and maintainability for the RescuePC Repairs Multi-OS Toolkit.**

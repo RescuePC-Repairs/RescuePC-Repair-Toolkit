@@ -5,15 +5,17 @@
 ## 🎯 **Quick Start**
 
 ### **Prerequisites**
+
 ```bash
 # Required software
-Node.js 18+ 
+Node.js 18+
 npm 9+
 Git
 PostgreSQL 14+
 ```
 
 ### **Initial Setup**
+
 ```bash
 # Clone repository
 git clone [repository-url]
@@ -60,6 +62,7 @@ rescuepc-repairs-store/
 ## 🔧 **Development Workflow**
 
 ### **1. Feature Development**
+
 ```bash
 # Create feature branch
 git checkout -b feature/new-feature
@@ -77,6 +80,7 @@ git push origin feature/new-feature
 ```
 
 ### **2. Code Quality**
+
 ```bash
 # Linting
 npm run lint
@@ -92,6 +96,7 @@ npm run security:audit
 ```
 
 ### **3. Testing**
+
 ```bash
 # Run all tests
 npm test
@@ -109,6 +114,7 @@ npm run test:security
 ## 🏗️ **Component Development**
 
 ### **Creating New Components**
+
 ```typescript
 // components/common/NewComponent.tsx
 import React from 'react';
@@ -135,6 +141,7 @@ export const NewComponent: React.FC<NewComponentProps> = ({
 ```
 
 ### **Component Testing**
+
 ```typescript
 // test/components/NewComponent.test.tsx
 import { render, screen } from '@testing-library/react';
@@ -157,6 +164,7 @@ describe('NewComponent', () => {
 ## 🔌 **API Development**
 
 ### **Creating API Routes**
+
 ```typescript
 // app/api/new-endpoint/route.ts
 import { NextRequest, NextResponse } from 'next/server';
@@ -177,15 +185,13 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ success: true, data: result });
   } catch (error) {
-    return NextResponse.json(
-      { error: 'Invalid request' },
-      { status: 400 }
-    );
+    return NextResponse.json({ error: 'Invalid request' }, { status: 400 });
   }
 }
 ```
 
 ### **API Testing**
+
 ```typescript
 // test/api/new-endpoint.test.ts
 import { POST } from '@/app/api/new-endpoint/route';
@@ -210,6 +216,7 @@ describe('POST /api/new-endpoint', () => {
 ## 🗄️ **Database Development**
 
 ### **Schema Changes**
+
 ```sql
 -- prisma/schema.prisma
 model NewTable {
@@ -222,6 +229,7 @@ model NewTable {
 ```
 
 ### **Migrations**
+
 ```bash
 # Create migration
 npx prisma migrate dev --name add_new_table
@@ -234,6 +242,7 @@ npx prisma generate
 ```
 
 ### **Database Operations**
+
 ```typescript
 // utils/database.ts
 import { PrismaClient } from '@prisma/client';
@@ -256,6 +265,7 @@ export async function getUserByEmail(email: string) {
 ## 🔐 **Security Development**
 
 ### **Input Validation**
+
 ```typescript
 // utils/validation.ts
 import { z } from 'zod';
@@ -272,6 +282,7 @@ export function validateUserInput(data: unknown) {
 ```
 
 ### **Authentication**
+
 ```typescript
 // utils/auth.ts
 import jwt from 'jsonwebtoken';
@@ -295,27 +306,32 @@ export function verifyToken(token: string) {
 ## 📧 **Email Development**
 
 ### **Creating Email Templates**
+
 ```html
 <!-- emails/new_template.html -->
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>{{subject}}</title>
-</head>
-<body>
-  <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-    <h1>{{title}}</h1>
-    <p>{{message}}</p>
-    <a href="{{actionUrl}}" style="background: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
-      {{actionText}}
-    </a>
-  </div>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <title>{{subject}}</title>
+  </head>
+  <body>
+    <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+      <h1>{{title}}</h1>
+      <p>{{message}}</p>
+      <a
+        href="{{actionUrl}}"
+        style="background: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;"
+      >
+        {{actionText}}
+      </a>
+    </div>
+  </body>
 </html>
 ```
 
 ### **Email Sending**
+
 ```typescript
 // utils/email.ts
 import nodemailer from 'nodemailer';
@@ -347,6 +363,7 @@ export async function sendEmail(to: string, template: string, data: object) {
 ## 🧪 **Testing Strategy**
 
 ### **Unit Tests**
+
 ```typescript
 // test/utils/validation.test.ts
 import { validateUserInput } from '@/utils/validation';
@@ -376,6 +393,7 @@ describe('validateUserInput', () => {
 ```
 
 ### **Integration Tests**
+
 ```typescript
 // test/integration/payment.test.ts
 import { createCheckoutSession } from '@/utils/stripe';
@@ -395,23 +413,24 @@ describe('Payment Integration', () => {
 ```
 
 ### **E2E Tests**
+
 ```typescript
 // test/e2e/payment-flow.test.ts
 import { test, expect } from '@playwright/test';
 
 test('complete payment flow', async ({ page }) => {
   await page.goto('http://localhost:3000');
-  
+
   // Select package
   await page.click('[data-testid="professional-package"]');
-  
+
   // Fill payment form
   await page.fill('[data-testid="email"]', 'test@example.com');
   await page.fill('[data-testid="card-number"]', '4242424242424242');
-  
+
   // Submit payment
   await page.click('[data-testid="pay-button"]');
-  
+
   // Verify success
   await expect(page).toHaveURL(/success/);
 });
@@ -420,6 +439,7 @@ test('complete payment flow', async ({ page }) => {
 ## 🚀 **Deployment**
 
 ### **Local Testing**
+
 ```bash
 # Build application
 npm run build
@@ -432,6 +452,7 @@ npm run test:production
 ```
 
 ### **Staging Deployment**
+
 ```bash
 # Deploy to staging
 vercel --env staging
@@ -441,6 +462,7 @@ npm run test:staging
 ```
 
 ### **Production Deployment**
+
 ```bash
 # Deploy to production
 vercel --prod
@@ -452,6 +474,7 @@ npm run health-check
 ## 🔍 **Debugging**
 
 ### **Local Debugging**
+
 ```typescript
 // Add debugging
 console.log('Debug info:', { data, timestamp: new Date() });
@@ -461,6 +484,7 @@ debugger;
 ```
 
 ### **Error Tracking**
+
 ```typescript
 // utils/error-tracking.ts
 export function logError(error: Error, context?: object) {
@@ -474,12 +498,10 @@ export function logError(error: Error, context?: object) {
 ```
 
 ### **Performance Monitoring**
+
 ```typescript
 // utils/performance.ts
-export function measurePerformance<T>(
-  name: string,
-  fn: () => Promise<T>
-): Promise<T> {
+export function measurePerformance<T>(name: string, fn: () => Promise<T>): Promise<T> {
   const start = performance.now();
   return fn().finally(() => {
     const duration = performance.now() - start;
@@ -491,24 +513,28 @@ export function measurePerformance<T>(
 ## 📚 **Best Practices**
 
 ### **Code Organization**
+
 - Keep components small and focused
 - Use TypeScript for type safety
 - Follow naming conventions
 - Document complex logic
 
 ### **Performance**
+
 - Optimize images and assets
 - Use code splitting
 - Implement caching strategies
 - Monitor bundle size
 
 ### **Security**
+
 - Validate all inputs
 - Sanitize outputs
 - Use HTTPS everywhere
 - Implement rate limiting
 
 ### **Testing**
+
 - Write tests for all features
 - Maintain high coverage
 - Test edge cases
@@ -517,6 +543,7 @@ export function measurePerformance<T>(
 ## 🔄 **Maintenance**
 
 ### **Dependency Updates**
+
 ```bash
 # Check for updates
 npm outdated
@@ -530,6 +557,7 @@ npm install
 ```
 
 ### **Database Maintenance**
+
 ```bash
 # Backup database
 pg_dump database_name > backup.sql
@@ -542,6 +570,7 @@ VACUUM ANALYZE;
 ```
 
 ### **Monitoring**
+
 ```bash
 # Check system health
 npm run health-check
@@ -555,4 +584,4 @@ npm run metrics
 
 ---
 
-**This development guide ensures consistent, high-quality development practices for the RescuePC Repairs Multi-OS Toolkit.** 
+**This development guide ensures consistent, high-quality development practices for the RescuePC Repairs Multi-OS Toolkit.**
