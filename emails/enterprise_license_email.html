@@ -1,134 +1,245 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Your RescuePC Repairs Enterprise License</title>
     <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; }
-        .container { max-width: 600px; margin: 0 auto; background: #ffffff; }
-        .header { background: linear-gradient(135deg, #f59e0b, #d97706); color: white; padding: 30px; text-align: center; }
-        .header h1 { margin: 0; font-size: 28px; }
-        .header h2 { margin: 10px 0 0 0; font-size: 20px; font-weight: normal; }
-        .content { padding: 30px; background: #f9fafb; }
-        .license-box { background: white; border: 3px solid #f59e0b; padding: 20px; margin: 20px 0; border-radius: 8px; text-align: center; }
-        .license-key { font-family: 'Courier New', monospace; font-size: 18px; font-weight: bold; color: #f59e0b; background: #fffbeb; padding: 10px; border-radius: 5px; }
-        .step { margin: 20px 0; padding: 15px; background: white; border-left: 5px solid #f59e0b; border-radius: 0 5px 5px 0; }
-        .step h4 { margin: 0 0 10px 0; color: #f59e0b; }
-        .package-details { background: white; padding: 20px; margin: 20px 0; border-radius: 8px; border: 1px solid #e5e7eb; }
-        .footer { text-align: center; padding: 30px; background: #1f2937; color: #d1d5db; }
-        .footer a { color: #60a5fa; text-decoration: none; }
-        .footer a:hover { text-decoration: underline; }
-        .highlight { background: #fef3c7; padding: 15px; border-radius: 5px; margin: 15px 0; }
-        ul { margin: 10px 0; padding-left: 20px; }
-        li { margin: 5px 0; }
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        background: #ffffff;
+      }
+      .header {
+        background: linear-gradient(135deg, #f59e0b, #d97706);
+        color: white;
+        padding: 30px;
+        text-align: center;
+      }
+      .header h1 {
+        margin: 0;
+        font-size: 28px;
+      }
+      .header h2 {
+        margin: 10px 0 0 0;
+        font-size: 20px;
+        font-weight: normal;
+      }
+      .content {
+        padding: 30px;
+        background: #f9fafb;
+      }
+      .license-box {
+        background: white;
+        border: 3px solid #f59e0b;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 8px;
+        text-align: center;
+      }
+      .license-key {
+        font-family: 'Courier New', monospace;
+        font-size: 18px;
+        font-weight: bold;
+        color: #f59e0b;
+        background: #fffbeb;
+        padding: 10px;
+        border-radius: 5px;
+      }
+      .step {
+        margin: 20px 0;
+        padding: 15px;
+        background: white;
+        border-left: 5px solid #f59e0b;
+        border-radius: 0 5px 5px 0;
+      }
+      .step h4 {
+        margin: 0 0 10px 0;
+        color: #f59e0b;
+      }
+      .package-details {
+        background: white;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 8px;
+        border: 1px solid #e5e7eb;
+      }
+      .footer {
+        text-align: center;
+        padding: 30px;
+        background: #1f2937;
+        color: #d1d5db;
+      }
+      .footer a {
+        color: #60a5fa;
+        text-decoration: none;
+      }
+      .footer a:hover {
+        text-decoration: underline;
+      }
+      .highlight {
+        background: #fef3c7;
+        padding: 15px;
+        border-radius: 5px;
+        margin: 15px 0;
+      }
+      ul {
+        margin: 10px 0;
+        padding-left: 20px;
+      }
+      li {
+        margin: 5px 0;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <div class="header">
-            <h1>🔧 RescuePC Repairs</h1>
-            <h2>Your Enterprise License is Ready!</h2>
-            <p>25 PC repair toolkits for enterprise deployment</p>
+      <div class="header">
+        <h1>🔧 RescuePC Repairs</h1>
+        <h2>Your Enterprise License is Ready!</h2>
+        <p>25 PC repair toolkits for enterprise deployment</p>
+      </div>
+
+      <div class="content">
+        <p>Hello <strong>{{CUSTOMER_NAME}}</strong>,</p>
+
+        <p>
+          🎉 <strong>Welcome to RescuePC Repairs Enterprise!</strong> Your enterprise license
+          provides 25 PC repair toolkits, perfect for medium to large organizations, IT departments,
+          and managed service providers.
+        </p>
+
+        <div class="package-details">
+          <h3>📦 Your Enterprise License Package:</h3>
+          <ul>
+            <li><strong>License Type:</strong> Enterprise License (1 Year)</li>
+            <li><strong>Installations:</strong> 25 PCs</li>
+            <li><strong>Support:</strong> Enterprise Email Support</li>
+            <li><strong>Updates:</strong> All updates for 1 year</li>
+            <li>
+              <strong>Features:</strong> Complete driver database, enterprise repair tools,
+              multi-platform support
+            </li>
+          </ul>
         </div>
-        
-        <div class="content">
-            <p>Hello <strong>{{CUSTOMER_NAME}}</strong>,</p>
-            
-            <p>🎉 <strong>Welcome to RescuePC Repairs Enterprise!</strong> Your enterprise license provides 25 PC repair toolkits, perfect for medium to large organizations, IT departments, and managed service providers.</p>
-            
-            <div class="package-details">
-                <h3>📦 Your Enterprise License Package:</h3>
-                <ul>
-                    <li><strong>License Type:</strong> Enterprise License (1 Year)</li>
-                    <li><strong>Installations:</strong> 25 PCs</li>
-                    <li><strong>Support:</strong> Enterprise Email Support</li>
-                    <li><strong>Updates:</strong> All updates for 1 year</li>
-                    <li><strong>Features:</strong> Complete driver database, enterprise repair tools, multi-platform support</li>
-                </ul>
-            </div>
-            
-            <h3>🔑 Your Enterprise License Key:</h3>
-            <div class="license-box">
-                <div class="license-key">{{LICENSE_KEY}}</div>
-                <p><em>This key is valid for 25 PC installations</em></p>
-            </div>
-            
-            <div class="highlight">
-                <strong>💡 Enterprise Tip:</strong> This license key can be used across your entire organization on up to 25 computers. Perfect for IT departments and managed service providers!
-            </div>
-            
-            <h3>🚀 Getting Started with Your Enterprise Toolkit:</h3>
-            
-            <div class="step">
-                <h4>🔽 Step 1: Download 7-Zip</h4>
-                <p>You'll need 7-Zip to extract your RescuePC Repairs toolkit.</p>
-                <p>👉 <a href="https://www.microsoft.com/store/apps/9NBLGGH388N8" style="color: #f59e0b; font-weight: bold;">Download 7-Zip from Microsoft Store</a></p>
-            </div>
-            
-            <div class="step">
-                <h4>📦 Step 2: Extract Your Toolkit</h4>
-                <ul>
-                    <li>Open the 7-Zip application</li>
-                    <li>Navigate to your downloaded RescuePC Repairs zip file</li>
-                    <li>Right-click the file → "Open with 7-Zip" → Click "Extract"</li>
-                    <li>Enter this password when prompted: <strong>FixMyPC!2025</strong></li>
-                </ul>
-            </div>
-            
-            <div class="step">
-                <h4>🛠️ Step 3: Launch & Activate</h4>
-                <ul>
-                    <li>Open the newly extracted RescuePC Repairs folder</li>
-                    <li>Double-click <strong>rescuepcrepairs.exe</strong> to start the program</li>
-                    <li>When prompted, enter your license key: <strong>{{LICENSE_KEY}}</strong></li>
-                    <li>Install on up to 25 computers using the same key</li>
-                </ul>
-            </div>
-            
-            <div class="step">
-                <h4>🏢 Enterprise Deployment Strategy:</h4>
-                <ul>
-                    <li><strong>Network Deployment:</strong> Extract toolkit to shared network folder</li>
-                    <li><strong>IT Department Use:</strong> Install on IT workstations for client support</li>
-                    <li><strong>Managed Services:</strong> Use for client PC repair services</li>
-                    <li><strong>Department Distribution:</strong> Allocate licenses across departments</li>
-                </ul>
-            </div>
-            
-            <div class="step">
-                <h4>🔧 Enterprise Features:</h4>
-                <ul>
-                    <li><strong>Centralized Management:</strong> Manage all installations from one location</li>
-                    <li><strong>Batch Operations:</strong> Repair multiple PCs simultaneously</li>
-                    <li><strong>Advanced Reporting:</strong> Generate repair and maintenance reports</li>
-                    <li><strong>Enterprise Security:</strong> Advanced malware detection and removal</li>
-                </ul>
-            </div>
-            
-            <div class="step">
-                <h4>📊 License Management:</h4>
-                <ul>
-                    <li><strong>Track Usage:</strong> Monitor which computers have the software installed</li>
-                    <li><strong>Reallocation:</strong> Move licenses between computers as needed</li>
-                    <li><strong>Backup Strategy:</strong> Keep spare installations for emergency use</li>
-                    <li><strong>Compliance:</strong> Ensure license compliance across organization</li>
-                </ul>
-            </div>
-            
-            <p>If you need assistance with enterprise deployment, license management, or run into any issues, our enterprise support team is here for you. You can reply to this email or visit us at <a href="https://rescuepcrepairs.com" style="color: #f59e0b;">rescuepcrepairs.com</a>.</p>
-            
-            <p>Thank you for choosing RescuePC Repairs Enterprise. Here's to efficient IT management and excellent organizational support!</p>
-            
-            <p>Best regards,<br>
-            <strong>Tyler Keesee</strong><br>
-            CEO, RescuePC Repairs</p>
+
+        <h3>🔑 Your Enterprise License Key:</h3>
+        <div class="license-box">
+          <div class="license-key">{{LICENSE_KEY}}</div>
+          <p><em>This key is valid for 25 PC installations</em></p>
         </div>
-        
-        <div class="footer">
-            <p><strong>📧 Support:</strong> <a href="mailto:***REMOVED***">***REMOVED***</a><br>
-            <strong>🌐 Website:</strong> <a href="https://rescuepcrepairs.com">rescuepcrepairs.com</a><br>
-            <strong>🔧 Enterprise Support:</strong> Dedicated email support for enterprise customers</p>
+
+        <div class="highlight">
+          <strong>💡 Enterprise Tip:</strong> This license key can be used across your entire
+          organization on up to 25 computers. Perfect for IT departments and managed service
+          providers!
         </div>
+
+        <h3>🚀 Getting Started with Your Enterprise Toolkit:</h3>
+
+        <div class="step">
+          <h4>🔽 Step 1: Download 7-Zip</h4>
+          <p>You'll need 7-Zip to extract your RescuePC Repairs toolkit.</p>
+          <p>
+            👉
+            <a
+              href="https://www.microsoft.com/store/apps/9NBLGGH388N8"
+              style="color: #f59e0b; font-weight: bold"
+              >Download 7-Zip from Microsoft Store</a
+            >
+          </p>
+        </div>
+
+        <div class="step">
+          <h4>📦 Step 2: Extract Your Toolkit</h4>
+          <ul>
+            <li>Open the 7-Zip application</li>
+            <li>Navigate to your downloaded RescuePC Repairs zip file</li>
+            <li>Right-click the file → "Open with 7-Zip" → Click "Extract"</li>
+            <li>Enter this password when prompted: <strong>FixMyPC!2025</strong></li>
+          </ul>
+        </div>
+
+        <div class="step">
+          <h4>🛠️ Step 3: Launch & Activate</h4>
+          <ul>
+            <li>Open the newly extracted RescuePC Repairs folder</li>
+            <li>Double-click <strong>rescuepcrepairs.exe</strong> to start the program</li>
+            <li>When prompted, enter your license key: <strong>{{LICENSE_KEY}}</strong></li>
+            <li>Install on up to 25 computers using the same key</li>
+          </ul>
+        </div>
+
+        <div class="step">
+          <h4>🏢 Enterprise Deployment Strategy:</h4>
+          <ul>
+            <li><strong>Network Deployment:</strong> Extract toolkit to shared network folder</li>
+            <li>
+              <strong>IT Department Use:</strong> Install on IT workstations for client support
+            </li>
+            <li><strong>Managed Services:</strong> Use for client PC repair services</li>
+            <li><strong>Department Distribution:</strong> Allocate licenses across departments</li>
+          </ul>
+        </div>
+
+        <div class="step">
+          <h4>🔧 Enterprise Features:</h4>
+          <ul>
+            <li>
+              <strong>Centralized Management:</strong> Manage all installations from one location
+            </li>
+            <li><strong>Batch Operations:</strong> Repair multiple PCs simultaneously</li>
+            <li><strong>Advanced Reporting:</strong> Generate repair and maintenance reports</li>
+            <li><strong>Enterprise Security:</strong> Advanced malware detection and removal</li>
+          </ul>
+        </div>
+
+        <div class="step">
+          <h4>📊 License Management:</h4>
+          <ul>
+            <li>
+              <strong>Track Usage:</strong> Monitor which computers have the software installed
+            </li>
+            <li><strong>Reallocation:</strong> Move licenses between computers as needed</li>
+            <li><strong>Backup Strategy:</strong> Keep spare installations for emergency use</li>
+            <li><strong>Compliance:</strong> Ensure license compliance across organization</li>
+          </ul>
+        </div>
+
+        <p>
+          If you need assistance with enterprise deployment, license management, or run into any
+          issues, our enterprise support team is here for you. You can reply to this email or visit
+          us at
+          <a href="https://rescuepcrepairs.com" style="color: #f59e0b">rescuepcrepairs.com</a>.
+        </p>
+
+        <p>
+          Thank you for choosing RescuePC Repairs Enterprise. Here's to efficient IT management and
+          excellent organizational support!
+        </p>
+
+        <p>
+          Best regards,<br />
+          <strong>Tyler Keesee</strong><br />
+          CEO, RescuePC Repairs
+        </p>
+      </div>
+
+      <div class="footer">
+        <p>
+          <strong>📧 Support:</strong>
+          <a href="mailto:***REMOVED***">***REMOVED***</a><br />
+          <strong>🌐 Website:</strong> <a href="https://rescuepcrepairs.com">rescuepcrepairs.com</a
+          ><br />
+          <strong>🔧 Enterprise Support:</strong> Dedicated email support for enterprise customers
+        </p>
+      </div>
     </div>
-</body>
-</html> 
+  </body>
+</html>

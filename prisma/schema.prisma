@@ -1,0 +1,179 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String         @id @default(uuid())
+  email         String         @unique
+  name          String?
+  passwordHash  String
+  role          String         @default("user")
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  licenses      License[]
+  payments      Payment[]
+  subscriptions Subscription[]
+  sessions      Session[]
+  apiKeys       ApiKey[]
+  auditLogs     AuditLog[]
+
+  @@index([email])
+}
+
+model License {
+  id            String    @id @default(uuid())
+  customerId    String
+  type          String
+  status        String
+  expiresAt     DateTime
+  activatedAt   DateTime?
+  deactivatedAt DateTime?
+  paymentId     String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  user          User      @relation(fields: [customerId], references: [id])
+  payment       Payment?  @relation(fields: [paymentId], references: [id])
+  auditLogs     AuditLog[] @relation("LicenseAuditLogs")
+
+  @@index([customerId])
+  @@index([status])
+  @@index([type])
+}
+
+model Payment {
+  id              String    @id @default(uuid())
+  stripePaymentId String    @unique
+  stripeCustomerId String
+  amount          Int
+  currency        String
+  status          String
+  metadata        Json?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  user            User      @relation(fields: [stripeCustomerId], references: [id])
+  license         License[]
+  auditLogs       AuditLog[] @relation("PaymentAuditLogs")
+
+  @@index([stripePaymentId])
+  @@index([stripeCustomerId])
+  @@index([status])
+}
+
+model Subscription {
+  id                  String   @id @default(uuid())
+  stripeSubscriptionId String  @unique
+  stripeCustomerId    String
+  status              String
+  currentPeriodEnd    DateTime
+  cancelAtPeriodEnd   Boolean  @default(false)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  user                User     @relation(fields: [stripeCustomerId], references: [id])
+  auditLogs           AuditLog[] @relation("SubscriptionAuditLogs")
+
+  @@index([stripeSubscriptionId])
+  @@index([stripeCustomerId])
+  @@index([status])
+}
+
+model Session {
+  id           String   @id @default(uuid())
+  userId       String
+  token        String   @unique
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+  lastActivity DateTime @default(now())
+  ipAddress    String?
+  userAgent    String?
+  user         User     @relation(fields: [userId], references: [id])
+  auditLogs    AuditLog[] @relation("SessionAuditLogs")
+
+  @@index([userId])
+  @@index([token])
+  @@index([expiresAt])
+}
+
+model ApiKey {
+  id        String    @id @default(uuid())
+  userId    String
+  key       String    @unique
+  name      String
+  expiresAt DateTime?
+  lastUsed  DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  user      User      @relation(fields: [userId], references: [id])
+  auditLogs AuditLog[] @relation("ApiKeyAuditLogs")
+
+  @@index([userId])
+  @@index([key])
+}
+
+model AuditLog {
+  id            String    @id @default(uuid())
+  userId        String
+  action        String
+  resourceType  String
+  resourceId    String
+  changes       Json?
+  ipAddress     String?
+  userAgent     String?
+  createdAt     DateTime  @default(now())
+  user          User      @relation(fields: [userId], references: [id])
+  license       License?  @relation("LicenseAuditLogs", fields: [resourceId], references: [id], map: "AuditLog_licenseId_fkey")
+  payment       Payment?  @relation("PaymentAuditLogs", fields: [resourceId], references: [id], map: "AuditLog_paymentId_fkey")
+  subscription  Subscription? @relation("SubscriptionAuditLogs", fields: [resourceId], references: [id], map: "AuditLog_subscriptionId_fkey")
+  session       Session?  @relation("SessionAuditLogs", fields: [resourceId], references: [id], map: "AuditLog_sessionId_fkey")
+  apiKey        ApiKey?   @relation("ApiKeyAuditLogs", fields: [resourceId], references: [id], map: "AuditLog_apiKeyId_fkey")
+  webhookEvent  WebhookEvent? @relation("WebhookEventAuditLogs", fields: [resourceId], references: [id], map: "AuditLog_webhookEventId_fkey")
+  emailDelivery EmailDelivery? @relation("EmailDeliveryAuditLogs", fields: [resourceId], references: [id], map: "AuditLog_emailDeliveryId_fkey")
+
+  @@index([userId])
+  @@index([action])
+  @@index([resourceType])
+  @@index([resourceId])
+  @@index([createdAt])
+}
+
+model WebhookEvent {
+  id          String   @id @default(uuid())
+  type        String
+  status      String
+  payload     Json?
+  error       String?
+  processedAt DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  auditLogs   AuditLog[] @relation("WebhookEventAuditLogs")
+
+  @@index([type])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model EmailDelivery {
+  id          String   @id @default(uuid())
+  recipient   String
+  subject     String
+  template    String
+  status      String
+  error       String?
+  metadata    Json?
+  sentAt      DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  auditLogs   AuditLog[] @relation("EmailDeliveryAuditLogs")
+
+  @@index([recipient])
+  @@index([template])
+  @@index([status])
+  @@index([createdAt])
+} 

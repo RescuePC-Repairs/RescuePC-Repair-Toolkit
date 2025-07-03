@@ -1,0 +1,23 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "types": ["jest", "@testing-library/jest-dom", "node"],
+    "esModuleInterop": true,
+    "isolatedModules": false,
+    "noEmit": true,
+    "jsx": "react-jsx"
+  },
+  "include": [
+    "../test/**/*.ts",
+    "../test/**/*.tsx",
+    "../app/**/*.ts",
+    "../app/**/*.tsx",
+    "../components/**/*.ts",
+    "../components/**/*.tsx",
+    "../utils/**/*.ts",
+    "../utils/**/*.tsx"
+  ],
+  "exclude": ["node_modules"]
+}

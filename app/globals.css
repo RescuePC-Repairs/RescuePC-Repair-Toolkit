@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom global styles */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family:
+      'Inter',
+      system-ui,
+      -apple-system,
+      sans-serif;
+    background-color: #111827;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@layer components {
+  /* Custom component styles */
+  .gradient-text {
+    @apply bg-gradient-to-r from-blue-400 via-purple-500 to-green-400 bg-clip-text text-transparent;
+  }
+
+  .glass-effect {
+    @apply bg-white/10 backdrop-blur-md border border-white/20;
+  }
+
+  .security-badge {
+    @apply bg-green-500/20 border border-green-500/40 text-green-400;
+  }
+}
+
+@layer utilities {
+  /* Custom utility classes */
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .animate-pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+}

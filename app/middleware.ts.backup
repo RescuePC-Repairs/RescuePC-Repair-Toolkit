@@ -1,0 +1,725 @@
+import { NextRequest, NextResponse } from 'next/server'
+import { headers } from 'next/headers'
+import { createRateLimit } from '@/utils/rate-limiter'
+import { validateCSRFRequest } from '@/utils/csrf'
+import { validateAuthRequest } from '@/utils/auth'
+import crypto from 'crypto'
+import { detectBot } from '@/utils/botDetection'
+import { validateOrigin } from '@/utils/originValidation'
+import { validateJWT } from '@/utils/auth'
+import { validateCSRFToken } from '@/utils/csrf'
+import { Ratelimit } from '@upstash/ratelimit'
+import { Redis } from '@upstash/redis'
+import { apiLimiter, globalLimiter } from '@/utils/rate-limiter'
+import { securityConfig } from '@/config/security'
+const csrf = require('csrf')
+
+// Initialize CSRF tokens
+const tokens = new csrf()
+
+// Initialize rate limiters
+const globalRateLimiter = createRateLimit(500, '1 m', 'global')
+const apiRateLimiter = createRateLimit(100, '1 m', 'api')
+
+// Define secure routes that require authentication
+const secureRoutes = [
+  '/api/admin',
+  '/api/user',
+  '/api/settings',
+  '/api/billing'
+]
+
+// Define routes that require CSRF protection
+const csrfProtectedRoutes = [
+  '/api/create-checkout-session',
+  '/api/email-capture',
+  '/api/validate-license',
+  '/api/update-profile'
+]
+
+// Rate limiting with sliding window
+interface RateLimitInfo {
+  count: number
+  windowStart: number
+}
+
+const rateLimit = new Map<string, RateLimitInfo>()
+
+// Clean up rate limit entries older than window
+function cleanupRateLimit() {
+  const now = Date.now()
+  for (const entry of Array.from(rateLimit.entries())) {
+    const [ip, info] = entry
+    if (now - info.windowStart >= securityConfig.rateLimit.windowMs) {
+      rateLimit.delete(ip)
+    }
+  }
+}
+
+// Check if request is rate limited
+function isRateLimited(ip: string): boolean {
+  const now = Date.now()
+  const info = rateLimit.get(ip)
+  
+  if (!info) {
+    rateLimit.set(ip, { count: 1, windowStart: now })
+    return false
+  }
+
+  if (now - info.windowStart >= securityConfig.rateLimit.windowMs) {
+    // Reset window
+    rateLimit.set(ip, { count: 1, windowStart: now })
+    return false
+  }
+
+  info.count++
+  return info.count > securityConfig.rateLimit.max
+}
+
+// Get client IP with proxy support
+function getClientIp(request: NextRequest): string {
+  const forwardedFor = request.headers.get('x-forwarded-for')
+  if (forwardedFor) {
+    // Take the first IP in case of multiple proxies
+    const ips = forwardedFor.split(',')
+    return ips[0].trim()
+  }
+  const realIp = request.headers.get('x-real-ip')
+  return realIp || request.ip || 'unknown'
+}
+
+// Generate strong nonce for CSP
+const generateNonce = () => {
+  return crypto.randomBytes(32).toString('base64')
+}
+
+// Protected routes that require authentication
+const PROTECTED_ROUTES = [
+  '/api/dashboard',
+  '/api/settings',
+  '/api/admin'
+]
+
+// Routes that require CSRF protection
+const CSRF_PROTECTED_METHODS = ['POST', 'PUT', 'DELETE', 'PATCH']
+
+// Rate limiting setup - 10 requests per 10 seconds
+const ratelimit = new Ratelimit({
+  redis: Redis.fromEnv(),
+  limiter: Ratelimit.slidingWindow(10, '10 s'),
+  analytics: true
+})
+
+// =============================================================================
+// MILITARY-GRADE SECURITY MIDDLEWARE
+// Advanced DDoS Protection, Bot Detection, and Hack Attack Prevention
+// =============================================================================
+
+// Security configuration
+const SECURITY_CONFIG = {
+  // Rate limiting
+  MAX_REQUESTS_PER_MINUTE: 60,
+  MAX_REQUESTS_PER_HOUR: 1000,
+  MAX_REQUESTS_PER_DAY: 10000,
+  
+  // DDoS protection
+  BURST_LIMIT: 10,
+  BURST_WINDOW: 1000, // 1 second
+  
+  // Bot detection
+  SUSPICIOUS_USER_AGENTS: [
+    'bot', 'crawler', 'spider', 'scraper', 'curl', 'wget', 'python', 'java',
+    'perl', 'ruby', 'php', 'go-http-client', 'okhttp', 'apache-httpclient',
+    'nmap', 'sqlmap', 'nikto', 'dirb', 'gobuster', 'wfuzz', 'burp', 'zap'
+  ],
+  
+  // IP blacklist (add known malicious IPs)
+  BLACKLISTED_IPS: new Set([
+    // Add known malicious IPs here
+  ]),
+  
+  // Request size limits
+  MAX_REQUEST_SIZE: 1024 * 1024, // 1MB
+  MAX_HEADER_SIZE: 8192, // 8KB
+  
+  // Security headers
+  SECURITY_HEADERS: {
+    'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload',
+    'X-Content-Type-Options': 'nosniff',
+    'X-Frame-Options': 'DENY',
+    'X-XSS-Protection': '1; mode=block',
+    'Referrer-Policy': 'strict-origin-when-cross-origin',
+    'Permissions-Policy': 'geolocation=(), microphone=(), camera=(), magnetometer=(), gyroscope=(), speaker=(), vibrate=(), fullscreen=(self), payment=()',
+    'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com https://checkout.stripe.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.stripe.com https://checkout.stripe.com; frame-src https://js.stripe.com https://checkout.stripe.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests;",
+    'Cross-Origin-Embedder-Policy': 'require-corp',
+    'Cross-Origin-Opener-Policy': 'same-origin',
+    'Cross-Origin-Resource-Policy': 'same-origin'
+  }
+}
+
+// In-memory rate limiting store (use Redis in production)
+const rateLimitStore = new Map<string, { count: number; resetTime: number }>()
+const burstStore = new Map<string, { count: number; resetTime: number }>()
+
+// Clean up old entries every 5 minutes
+setInterval(() => {
+  const now = Date.now()
+  for (const [key, value] of rateLimitStore.entries()) {
+    if (now > value.resetTime) {
+      rateLimitStore.delete(key)
+    }
+  }
+  for (const [key, value] of burstStore.entries()) {
+    if (now > value.resetTime) {
+      burstStore.delete(key)
+    }
+  }
+}, 5 * 60 * 1000)
+
+// =============================================================================
+// SECURITY UTILITY FUNCTIONS
+// =============================================================================
+
+function getClientIP(request: NextRequest): string {
+  const forwarded = request.headers.get('x-forwarded-for')
+  const realIP = request.headers.get('x-real-ip')
+  const cfConnectingIP = request.headers.get('cf-connecting-ip')
+  
+  if (cfConnectingIP) return cfConnectingIP
+  if (realIP) return realIP
+  if (forwarded) return forwarded.split(',')[0].trim()
+  
+  return request.ip || 'unknown'
+}
+
+function isSuspiciousUserAgent(userAgent: string): boolean {
+  const ua = userAgent.toLowerCase()
+  return SECURITY_CONFIG.SUSPICIOUS_USER_AGENTS.some(suspicious => 
+    ua.includes(suspicious.toLowerCase())
+  )
+}
+
+function isMaliciousRequest(request: NextRequest): boolean {
+  const url = request.url.toLowerCase()
+  const path = request.nextUrl.pathname.toLowerCase()
+  
+  // Check for common attack patterns
+  const attackPatterns = [
+    /\.\.\//, // Directory traversal
+    /<script/i, // XSS attempts
+    /union\s+select/i, // SQL injection
+    /eval\s*\(/i, // Code injection
+    /document\.cookie/i, // Cookie theft attempts
+    /javascript:/i, // Protocol injection
+    /vbscript:/i,
+    /data:text\/html/i,
+    /on\w+\s*=/i, // Event handler injection
+    /<iframe/i, // Iframe injection
+    /<object/i,
+    /<embed/i,
+    /<form/i,
+    /<input/i,
+    /<textarea/i,
+    /<select/i,
+    /<button/i,
+    /<link/i,
+    /<meta/i,
+    /<base/i,
+    /<bgsound/i,
+    /<xmp/i,
+    /<plaintext/i,
+    /<listing/i,
+    /<comment/i,
+    /<noscript/i,
+    /<noframes/i,
+    /<noframe/i,
+    /<ilayer/i,
+    /<layer/i,
+    /<blink/i,
+    /<marquee/i,
+    /<keygen/i,
+    /<isindex/i,
+    /<applet/i,
+    /<acronym/i,
+    /<big/i,
+    /<center/i,
+    /<dir/i,
+    /<font/i,
+    /<frame/i,
+    /<frameset/i,
+    /<hgroup/i,
+    /<listing/i,
+    /<multicol/i,
+    /<nextid/i,
+    /<noembed/i,
+    /<nobr/i,
+    /<noindex/i,
+    /<nokeygen/i,
+    /<nolayer/i,
+    /<nosmartquotes/i,
+    /<nospaces/i,
+    /<notab/i,
+    /<nott/i,
+    /<plaintext/i,
+    /<rb/i,
+    /<rtc/i,
+    /<ruby/i,
+    /<s/i,
+    /<strike/i,
+    /<tt/i,
+    /<u/i,
+    /<wbr/i,
+    /<xmp/i
+  ]
+  
+  return attackPatterns.some(pattern => pattern.test(url) || pattern.test(path))
+}
+
+function checkRateLimit(identifier: string, limit: number, window: number): boolean {
+  const now = Date.now()
+  const key = `${identifier}:${Math.floor(now / window)}`
+  
+  const current = rateLimitStore.get(key) || { count: 0, resetTime: now + window }
+  
+  if (now > current.resetTime) {
+    current.count = 1
+    current.resetTime = now + window
+  } else {
+    current.count++
+  }
+  
+  rateLimitStore.set(key, current)
+  return current.count <= limit
+}
+
+function checkBurstLimit(identifier: string): boolean {
+  const now = Date.now()
+  const key = `${identifier}:burst`
+  
+  const current = burstStore.get(key) || { count: 0, resetTime: now + SECURITY_CONFIG.BURST_WINDOW }
+  
+  if (now > current.resetTime) {
+    current.count = 1
+    current.resetTime = now + SECURITY_CONFIG.BURST_WINDOW
+  } else {
+    current.count++
+  }
+  
+  burstStore.set(key, current)
+  return current.count <= SECURITY_CONFIG.BURST_LIMIT
+}
+
+function validateRequest(request: NextRequest): { valid: boolean; reason?: string } {
+  const clientIP = getClientIP(request)
+  const userAgent = request.headers.get('user-agent') || ''
+  const contentLength = parseInt(request.headers.get('content-length') || '0')
+  
+  // Check blacklisted IPs
+  if (SECURITY_CONFIG.BLACKLISTED_IPS.has(clientIP)) {
+    return { valid: false, reason: 'IP blacklisted' }
+  }
+  
+  // Check request size
+  if (contentLength > SECURITY_CONFIG.MAX_REQUEST_SIZE) {
+    return { valid: false, reason: 'Request too large' }
+  }
+  
+  // Check for malicious patterns
+  if (isMaliciousRequest(request)) {
+    return { valid: false, reason: 'Malicious request detected' }
+  }
+  
+  // Check suspicious user agents
+  if (isSuspiciousUserAgent(userAgent)) {
+    return { valid: false, reason: 'Suspicious user agent' }
+  }
+  
+  return { valid: true }
+}
+
+// Enhanced security checks
+function validateRequestSignature(request: NextRequest): boolean {
+  try {
+    const signature = request.headers.get('x-request-signature');
+    if (!signature) return false;
+    
+    const payload = request.body ? JSON.stringify(request.body) : '';
+    const timestamp = request.headers.get('x-request-timestamp');
+    const nonce = request.headers.get('x-request-nonce');
+    
+    if (!timestamp || !nonce) return false;
+    
+    // Verify timestamp is within 5 minutes
+    const requestTime = parseInt(timestamp);
+    if (Date.now() - requestTime > 300000) return false;
+    
+    // Verify signature
+    const data = `${payload}${timestamp}${nonce}`;
+    const expectedSignature = crypto
+      .createHmac('sha256', process.env.JWT_SECRET!)
+      .update(data)
+      .digest('hex');
+    
+    return crypto.timingSafeEqual(
+      Buffer.from(signature),
+      Buffer.from(expectedSignature)
+    );
+  } catch {
+    return false;
+  }
+}
+
+// Enhanced bot detection
+function isAdvancedBot(request: NextRequest): boolean {
+  const userAgent = request.headers.get('user-agent') || '';
+  const clientHints = {
+    mobile: request.headers.get('sec-ch-ua-mobile'),
+    platform: request.headers.get('sec-ch-ua-platform'),
+    brand: request.headers.get('sec-ch-ua-brand')
+  };
+  
+  // Check for inconsistent client hints
+  if (clientHints.mobile === '?0' && userAgent.includes('Mobile')) return true;
+  if (clientHints.platform && !userAgent.toLowerCase().includes(clientHints.platform.toLowerCase())) return true;
+  
+  // Check request anomalies
+  const acceptHeader = request.headers.get('accept');
+  const acceptLanguage = request.headers.get('accept-language');
+  const acceptEncoding = request.headers.get('accept-encoding');
+  
+  if (!acceptHeader || !acceptLanguage || !acceptEncoding) return true;
+  if (acceptHeader === '*/*') return true;
+  
+  return false;
+}
+
+// Enhanced DDoS protection
+function isDDoSAttempt(ip: string): boolean {
+  const now = Date.now();
+  const requests = requestLog.get(ip) || [];
+  
+  // Clean old requests
+  while (requests.length && now - requests[0] > 60000) {
+    requests.shift();
+  }
+  
+  // Add current request
+  requests.push(now);
+  requestLog.set(ip, requests);
+  
+  // Check patterns
+  const burstCount = requests.filter(time => now - time < 1000).length;
+  const minuteCount = requests.length;
+  
+  return burstCount > 10 || minuteCount > 100;
+}
+
+// Military-grade request validation
+async function validateSecureRequest(request: NextRequest): Promise<boolean> {
+  const ip = getClientIP(request);
+  
+  // 1. Check if IP is blacklisted
+  if (SECURITY_CONFIG.BLACKLISTED_IPS.has(ip)) return false;
+  
+  // 2. Validate request signature
+  if (!validateRequestSignature(request)) return false;
+  
+  // 3. Check for advanced bots
+  if (isAdvancedBot(request)) return false;
+  
+  // 4. Check for DDoS patterns
+  if (isDDoSAttempt(ip)) {
+    SECURITY_CONFIG.BLACKLISTED_IPS.add(ip);
+    return false;
+  }
+  
+  // 5. Validate request size
+  const contentLength = parseInt(request.headers.get('content-length') || '0');
+  if (contentLength > SECURITY_CONFIG.MAX_REQUEST_SIZE) return false;
+  
+  // 6. Check for suspicious headers
+  for (const [key, value] of request.headers.entries()) {
+    if (key.length > 50 || value.length > SECURITY_CONFIG.MAX_HEADER_SIZE) return false;
+  }
+  
+  return true;
+}
+
+// Military-grade security middleware
+export function middleware(request: NextRequest) {
+  const response = NextResponse.next();
+
+  // Force HTTPS in production
+  if (process.env.NODE_ENV === 'production') {
+    const hostname = request.headers.get('host') || '';
+    const isHttps = request.headers.get('x-forwarded-proto') === 'https';
+    
+    if (!isHttps && !hostname.includes('localhost') && !hostname.includes('127.0.0.1')) {
+      const httpsUrl = `https://${hostname}${request.nextUrl.pathname}${request.nextUrl.search}`;
+      return NextResponse.redirect(httpsUrl, 301);
+    }
+  }
+
+  // Military-grade security headers
+  const securityHeaders = {
+    // Content Security Policy - Restrictive and secure
+    'Content-Security-Policy': [
+      "default-src 'self'",
+      "script-src 'self' 'unsafe-inline' https://js.stripe.com https://www.googletagmanager.com https://www.google-analytics.com",
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+      "img-src 'self' data: https: https://www.google-analytics.com https://www.clarity.ms",
+      "font-src 'self' data: https://fonts.gstatic.com",
+      "connect-src 'self' https://api.stripe.com https://www.google-analytics.com https://vitals.vercel-insights.com https://www.clarity.ms",
+      "frame-src 'self' https://js.stripe.com",
+      "object-src 'none'",
+      "base-uri 'self'",
+      "form-action 'self'",
+      "frame-ancestors 'none'",
+      "upgrade-insecure-requests"
+    ].join('; '),
+
+    // XSS Protection
+    'X-XSS-Protection': '1; mode=block',
+    
+    // Content Type Options
+    'X-Content-Type-Options': 'nosniff',
+    
+    // Frame Options
+    'X-Frame-Options': 'DENY',
+    
+    // Referrer Policy
+    'Referrer-Policy': 'strict-origin-when-cross-origin',
+    
+    // Permissions Policy
+    'Permissions-Policy': 'camera=(), microphone=(), geolocation=(), interest-cohort=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()',
+    
+    // Strict Transport Security
+    'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload',
+    
+    // Cross-Origin Embedder Policy
+    'Cross-Origin-Embedder-Policy': 'require-corp',
+    
+    // Cross-Origin Opener Policy
+    'Cross-Origin-Opener-Policy': 'same-origin',
+    
+    // Cross-Origin Resource Policy
+    'Cross-Origin-Resource-Policy': 'same-origin',
+    
+    // Origin Agent Cluster
+    'Origin-Agent-Cluster': '?1',
+    
+    // Clear Site Data (for logout)
+    'Clear-Site-Data': '"cache", "cookies", "storage"',
+  };
+
+  // Apply security headers
+  Object.entries(securityHeaders).forEach(([key, value]) => {
+    response.headers.set(key, value);
+  });
+
+  // Rate limiting headers
+  const clientIP = request.ip || request.headers.get('x-forwarded-for') || 'unknown';
+  const userAgent = request.headers.get('user-agent') || '';
+  
+  // Bot detection and blocking
+  const suspiciousPatterns = [
+    /bot/i,
+    /crawler/i,
+    /spider/i,
+    /scraper/i,
+    /curl/i,
+    /wget/i,
+    /python/i,
+    /java/i,
+    /perl/i,
+    /ruby/i,
+    /php/i,
+    /go-http-client/i,
+    /httpclient/i,
+    /okhttp/i,
+    /apache-httpclient/i,
+    /requests/i,
+    /urllib/i,
+    /mechanize/i,
+    /scrapy/i,
+    /selenium/i,
+    /puppeteer/i,
+    /playwright/i,
+    /cypress/i,
+    /testcafe/i,
+    /headless/i,
+    /phantomjs/i,
+    /nightmare/i,
+    /casperjs/i,
+    /zombie/i,
+    /dalekjs/i,
+    /webdriver/i,
+    /chromedriver/i,
+    /geckodriver/i,
+    /iedriver/i,
+    /safaridriver/i,
+    /edgedriver/i,
+    /operadriver/i,
+    /appium/i,
+    /robot/i,
+    /automation/i,
+    /script/i,
+    /macro/i,
+    /auto/i,
+    /cron/i,
+    /scheduler/i,
+    /task/i,
+    /job/i,
+    /worker/i,
+    /daemon/i,
+    /service/i,
+    /agent/i,
+    /monitor/i,
+    /scanner/i,
+    /probe/i,
+    /checker/i,
+    /validator/i,
+    /tester/i,
+    /debugger/i,
+    /profiler/i,
+    /analyzer/i,
+    /inspector/i,
+    /examiner/i,
+    /auditor/i,
+    /reviewer/i,
+    /assessor/i,
+    /evaluator/i,
+    /appraiser/i,
+    /estimator/i,
+    /calculator/i,
+    /computer/i,
+    /processor/i,
+    /engine/i,
+    /machine/i,
+    /device/i,
+    /tool/i,
+    /utility/i,
+    /helper/i,
+    /assistant/i,
+    /guide/i,
+    /wizard/i,
+    /expert/i,
+    /specialist/i,
+    /consultant/i,
+    /advisor/i,
+    /counselor/i,
+    /therapist/i,
+    /doctor/i,
+    /nurse/i,
+    /paramedic/i,
+    /technician/i,
+    /engineer/i,
+    /architect/i,
+    /designer/i,
+    /developer/i,
+    /programmer/i,
+    /coder/i,
+    /hacker/i,
+    /cracker/i,
+    /phreaker/i,
+    /lamer/i,
+    /script kiddie/i,
+    /newbie/i,
+    /noob/i,
+    /n00b/i,
+    /l33t/i,
+    /h4x0r/i,
+    /w4r3z/i,
+    /c0d3r/i,
+    /pr0gr4mm3r/i,
+    /h4ck3r/i,
+    /cr4ck3r/i,
+    /phr34k3r/i,
+    /l4m3r/i,
+    /n3wb13/i,
+    /n00b13/i,
+    /l33t13/i,
+    /h4x0r13/i,
+    /w4r3z13/i,
+    /c0d3r13/i,
+    /pr0gr4mm3r13/i,
+    /h4ck3r13/i,
+    /cr4ck3r13/i,
+    /phr34k3r13/i,
+    /l4m3r13/i,
+  ];
+
+  const isSuspiciousBot = suspiciousPatterns.some(pattern => pattern.test(userAgent));
+  
+  if (isSuspiciousBot) {
+    // Log suspicious activity
+    console.log(`🚨 Suspicious bot detected: ${userAgent} from ${clientIP}`);
+    
+    // Return 403 Forbidden for suspicious bots
+    return new NextResponse('Access Denied', { status: 403 });
+  }
+
+  // DDoS protection - simple rate limiting
+  const requestCount = getRequestCount(clientIP);
+  if (requestCount > 100) { // 100 requests per minute
+    console.log(`🚨 Rate limit exceeded: ${clientIP}`);
+    return new NextResponse('Too Many Requests', { status: 429 });
+  }
+
+  // CSRF protection for POST requests
+  if (request.method === 'POST') {
+    const origin = request.headers.get('origin');
+    const referer = request.headers.get('referer');
+    
+    if (!origin || !referer) {
+      console.log(`🚨 CSRF attempt detected: ${clientIP}`);
+      return new NextResponse('Forbidden', { status: 403 });
+    }
+    
+    // Validate origin matches expected domain
+    const allowedOrigins = [
+      'https://rescuepcrepairs.com',
+      'https://www.rescuepcrepairs.com',
+      'https://***REMOVED***'
+    ];
+    
+    if (!allowedOrigins.some(allowed => origin.startsWith(allowed))) {
+      console.log(`🚨 Invalid origin: ${origin} from ${clientIP}`);
+      return new NextResponse('Forbidden', { status: 403 });
+    }
+  }
+
+  return response;
+}
+
+// Simple in-memory rate limiting (in production, use Redis)
+const requestCounts = new Map<string, { count: number; resetTime: number }>();
+
+function getRequestCount(clientIP: string): number {
+  const now = Date.now();
+  const minute = 60 * 1000;
+  
+  const record = requestCounts.get(clientIP);
+  if (!record || now > record.resetTime) {
+    requestCounts.set(clientIP, { count: 1, resetTime: now + minute });
+    return 1;
+  }
+  
+  record.count++;
+  return record.count;
+}
+
+// Configure which paths should be processed by middleware
+export const config = {
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (API routes)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     * - public folder
+     */
+    '/((?!api|_next/static|_next/image|favicon.ico|public).*)',
+  ],
+}; 

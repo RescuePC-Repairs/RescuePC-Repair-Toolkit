@@ -13,6 +13,7 @@ Your Groq API key was exposed in the repository. **IMMEDIATE ACTIONS REQUIRED:**
 ### 2. 🔧 SET UP ENVIRONMENT VARIABLES
 
 1. Create a `.env` file in your project root:
+
 ```bash
 # .env (never commit this file!)
 GROQ_API_KEY=your_new_groq_api_key_here
@@ -62,10 +63,11 @@ python scripts/groq-assistant.py
 ### 7. 🔍 SECURITY SCAN
 
 Consider using tools like:
+
 - `git-secrets` to prevent future exposures
 - `truffleHog` to scan for exposed secrets
 - GitHub secret scanning (should have caught this)
 
 ---
 
-**Remember:** Security is an ongoing process, not a one-time setup! 🔐 
+**Remember:** Security is an ongoing process, not a one-time setup! 🔐

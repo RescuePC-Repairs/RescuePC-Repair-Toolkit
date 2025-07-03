@@ -1,0 +1,501 @@
+/// <reference types="jest" />
+import '@testing-library/jest-dom';
+import { TextEncoder, TextDecoder } from 'util';
+import { Headers, Request, Response } from 'node-fetch';
+import React from 'react';
+import { jest } from '@jest/globals';
+
+// Add Jest types to global scope
+declare global {
+  var global: typeof globalThis;
+  namespace NodeJS {
+    interface Global {
+      TextEncoder: typeof TextEncoder;
+      TextDecoder: typeof TextDecoder;
+      fetch: typeof fetch;
+      Headers: typeof Headers;
+      Request: typeof Request;
+      Response: typeof Response;
+    }
+  }
+  // Add Jest types
+  const jest: typeof import('@jest/globals').jest;
+  const expect: typeof import('@jest/globals').expect;
+  const test: typeof import('@jest/globals').test;
+  const describe: typeof import('@jest/globals').describe;
+  const beforeAll: typeof import('@jest/globals').beforeAll;
+  const beforeEach: typeof import('@jest/globals').beforeEach;
+  const afterAll: typeof import('@jest/globals').afterAll;
+  const afterEach: typeof import('@jest/globals').afterEach;
+  const it: typeof import('@jest/globals').it;
+}
+
+// Mock global fetch
+global.fetch = jest.fn();
+
+// Mock Headers, Request, Response
+global.Headers = Headers;
+global.Request = Request;
+global.Response = Response;
+
+// Mock TextEncoder/TextDecoder
+global.TextEncoder = TextEncoder;
+global.TextDecoder = TextDecoder;
+
+// Mock environment variables
+process.env = {
+  ...process.env,
+  NODE_ENV: 'test',
+  STRIPE_SECRET_KEY: 'test_stripe_secret_key',
+  STRIPE_WEBHOOK_SECRET: 'test_stripe_webhook_secret',
+  STRIPE_PUBLISHABLE_KEY: 'test_stripe_publishable_key',
+  AWS_ACCESS_KEY_ID: 'test_aws_access_key_id',
+  AWS_SECRET_ACCESS_KEY: 'test_aws_secret_access_key',
+  AWS_REGION: 'us-east-1',
+  EMAIL_SIGNING_SECRET: 'test_email_signing_secret',
+  DEFAULT_FROM_EMAIL: 'test@rescuepcrepairs.com',
+  DEFAULT_REPLY_TO_EMAIL: 'testreply@rescuepcrepairs.com',
+  JWT_SECRET: 'test_jwt_secret',
+  CSRF_SECRET: 'test_csrf_secret',
+  TOKEN_EXPIRY: '1h',
+  REFRESH_TOKEN_EXPIRY: '7d',
+  RATE_LIMIT_WINDOW: '60000',
+  RATE_LIMIT_MAX_REQUESTS: '100',
+  DATABASE_URL: 'postgresql://postgres:postgres@localhost:5432/rescuepc_test?schema=public',
+  ENCRYPTION_KEY: 'test-key-32-chars-long-for-testing',
+  MFA_SECRET: 'test-mfa-secret-key-for-testing'
+};
+
+// Mock console methods
+const originalConsole = { ...console };
+beforeAll(() => {
+  global.console.log = jest.fn();
+  global.console.info = jest.fn();
+  global.console.warn = jest.fn();
+  global.console.error = jest.fn();
+});
+
+afterAll(() => {
+  global.console = originalConsole;
+});
+
+// Clear all mocks between tests
+beforeEach(() => {
+  jest.clearAllMocks();
+});
+
+// Mock crypto for CSRF tokens
+const mockCrypto = {
+  randomBytes: (size: number) => Buffer.from('a'.repeat(size)),
+  createHmac: () => ({
+    update: () => ({
+      digest: () => 'mock-hmac-digest'
+    })
+  })
+};
+
+jest.mock('crypto', () => mockCrypto);
+
+// Mock Next.js router
+jest.mock('next/router', () => ({
+  useRouter: () => ({
+    push: jest.fn(),
+    replace: jest.fn(),
+    prefetch: jest.fn(),
+    back: jest.fn(),
+    reload: jest.fn(),
+    pathname: '/',
+    query: {},
+    asPath: '/',
+    events: {
+      on: jest.fn(),
+      off: jest.fn(),
+      emit: jest.fn()
+    }
+  })
+}));
+
+// Mock Next.js headers
+jest.mock('next/headers', () => ({
+  headers: () => new Headers(),
+  cookies: () => new Map()
+}));
+
+// Mock Stripe
+jest.mock('stripe', () => {
+  return jest.fn().mockImplementation(() => ({
+    webhooks: {
+      constructEvent: jest.fn()
+    },
+    customers: {
+      retrieve: jest.fn()
+    },
+    paymentIntents: {
+      create: jest.fn(),
+      retrieve: jest.fn()
+    },
+    subscriptions: {
+      create: jest.fn(),
+      update: jest.fn(),
+      cancel: jest.fn()
+    }
+  }));
+});
+
+// Mock Prisma
+jest.mock('@prisma/client', () => {
+  const mockPrisma = {
+    user: {
+      create: jest.fn(),
+      findUnique: jest.fn(),
+      update: jest.fn(),
+      delete: jest.fn()
+    },
+    license: {
+      create: jest.fn(),
+      findUnique: jest.fn(),
+      update: jest.fn(),
+      delete: jest.fn()
+    },
+    payment: {
+      create: jest.fn(),
+      findUnique: jest.fn(),
+      update: jest.fn(),
+      delete: jest.fn()
+    },
+    subscription: {
+      create: jest.fn(),
+      findUnique: jest.fn(),
+      update: jest.fn(),
+      delete: jest.fn(),
+      upsert: jest.fn()
+    },
+    session: {
+      create: jest.fn(),
+      findUnique: jest.fn(),
+      update: jest.fn(),
+      delete: jest.fn()
+    },
+    apiKey: {
+      create: jest.fn(),
+      findUnique: jest.fn(),
+      update: jest.fn(),
+      delete: jest.fn()
+    },
+    auditLog: {
+      create: jest.fn(),
+      findMany: jest.fn()
+    }
+  };
+
+  return {
+    PrismaClient: jest.fn(() => mockPrisma)
+  };
+});
+
+// Mock window properties that are not available in JSDOM
+Object.defineProperty(window, 'matchMedia', {
+  writable: true,
+  value: jest.fn().mockImplementation((query) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: jest.fn(),
+    removeListener: jest.fn(),
+    addEventListener: jest.fn(),
+    removeEventListener: jest.fn(),
+    dispatchEvent: jest.fn()
+  }))
+});
+
+// Mock IntersectionObserver
+class MockIntersectionObserver {
+  observe = jest.fn();
+  unobserve = jest.fn();
+  disconnect = jest.fn();
+}
+
+Object.defineProperty(window, 'IntersectionObserver', {
+  writable: true,
+  value: MockIntersectionObserver
+});
+
+// Mock ResizeObserver
+class MockResizeObserver {
+  observe = jest.fn();
+  unobserve = jest.fn();
+  disconnect = jest.fn();
+}
+
+Object.defineProperty(window, 'ResizeObserver', {
+  writable: true,
+  value: MockResizeObserver
+});
+
+// Mock scrollTo
+Object.defineProperty(window, 'scrollTo', {
+  writable: true,
+  value: jest.fn()
+});
+
+// Mock localStorage
+const localStorageMock = (() => {
+  let store: { [key: string]: string } = {};
+  return {
+    getItem: (key: string) => store[key] || null,
+    setItem: (key: string, value: string) => {
+      store[key] = value.toString();
+    },
+    removeItem: (key: string) => {
+      delete store[key];
+    },
+    clear: () => {
+      store = {};
+    },
+    key: (index: number) => Object.keys(store)[index] || null,
+    length: () => Object.keys(store).length
+  };
+})();
+
+Object.defineProperty(window, 'localStorage', {
+  value: localStorageMock
+});
+
+// Clean up after each test
+afterEach(() => {
+  jest.clearAllMocks();
+  localStorage.clear();
+});
+
+// Global error handler
+const originalConsoleError = console.error;
+console.error = (...args: any[]) => {
+  if (args[0]?.includes('Warning: ReactDOM.render is no longer supported')) {
+    return;
+  }
+  originalConsoleError(...args);
+};
+
+// Extend Jest matchers
+expect.extend({
+  toHaveBeenCalledOnceWith(received: jest.Mock, ...args: any[]) {
+    const pass =
+      received.mock.calls.length === 1 &&
+      JSON.stringify(received.mock.calls[0]) === JSON.stringify(args);
+    return {
+      pass,
+      message: () =>
+        pass
+          ? `Expected function not to have been called once with ${args}`
+          : `Expected function to have been called once with ${args}`
+    };
+  }
+});
+
+// Mock crypto for tests
+const mockCrypto = {
+  getRandomValues: (buffer: Uint8Array) => buffer.map(() => Math.floor(Math.random() * 256)),
+  randomBytes: (size: number) =>
+    Buffer.from(
+      Array(size)
+        .fill(0)
+        .map(() => Math.floor(Math.random() * 256))
+    ),
+  subtle: {
+    digest: jest.fn(),
+    encrypt: jest.fn(),
+    decrypt: jest.fn(),
+    sign: jest.fn(),
+    verify: jest.fn(),
+    generateKey: jest.fn(),
+    deriveKey: jest.fn(),
+    deriveBits: jest.fn(),
+    importKey: jest.fn(),
+    exportKey: jest.fn(),
+    wrapKey: jest.fn(),
+    unwrapKey: jest.fn()
+  }
+};
+
+// Mock global crypto
+global.crypto = mockCrypto as unknown as Crypto;
+
+// Mock Headers for tests
+class MockHeaders {
+  private headers: Map<string, string>;
+
+  constructor(init?: Record<string, string>) {
+    this.headers = new Map();
+    if (init) {
+      Object.entries(init).forEach(([key, value]) => {
+        this.set(key.toLowerCase(), value);
+      });
+    }
+  }
+
+  get(name: string): string | null {
+    return this.headers.get(name.toLowerCase()) || null;
+  }
+
+  set(name: string, value: string): void {
+    this.headers.set(name.toLowerCase(), value);
+  }
+
+  has(name: string): boolean {
+    return this.headers.has(name.toLowerCase());
+  }
+
+  delete(name: string): void {
+    this.headers.delete(name.toLowerCase());
+  }
+
+  append(name: string, value: string): void {
+    const existing = this.get(name);
+    this.set(name, existing ? `${existing}, ${value}` : value);
+  }
+
+  entries(): IterableIterator<[string, string]> {
+    return this.headers.entries();
+  }
+
+  keys(): IterableIterator<string> {
+    return this.headers.keys();
+  }
+
+  values(): IterableIterator<string> {
+    return this.headers.values();
+  }
+
+  forEach(callback: (value: string, key: string) => void): void {
+    this.headers.forEach((value, key) => callback(value, key));
+  }
+}
+
+// Mock NextRequest and NextResponse
+global.NextRequest = class extends Request {
+  constructor(input: string | URL, init?: RequestInit) {
+    super(input, init);
+    this.headers = new MockHeaders(init?.headers as Record<string, string>);
+  }
+
+  get nextUrl(): URL {
+    return new URL(this.url);
+  }
+
+  get ip(): string {
+    return '127.0.0.1';
+  }
+
+  get cookies(): Map<string, string> {
+    return new Map();
+  }
+} as unknown as typeof NextRequest;
+
+global.NextResponse = class extends Response {
+  constructor(body?: BodyInit | null, init?: ResponseInit) {
+    super(body, init);
+    this.headers = new MockHeaders(init?.headers as Record<string, string>);
+  }
+
+  get cookies(): Map<string, string> {
+    return new Map();
+  }
+
+  static json(data: unknown, init?: ResponseInit): Response {
+    return new Response(JSON.stringify(data), {
+      ...init,
+      headers: {
+        'Content-Type': 'application/json',
+        ...(init?.headers || {})
+      }
+    });
+  }
+} as unknown as typeof NextResponse;
+
+// Extend expect matchers
+declare global {
+  namespace jest {
+    interface Matchers<R> {
+      toHaveSecureHeaders(): R;
+      toBeValidJWT(): R;
+      toBeValidCSRFToken(): R;
+    }
+  }
+}
+
+// Add custom matchers
+expect.extend({
+  toHaveSecureHeaders(received: Response) {
+    const headers = received.headers;
+    const requiredHeaders = {
+      'X-Frame-Options': 'DENY',
+      'X-Content-Type-Options': 'nosniff',
+      'X-XSS-Protection': '1; mode=block',
+      'Referrer-Policy': 'strict-origin-when-cross-origin',
+      'Content-Security-Policy': expect.stringContaining("default-src 'self'"),
+      'Strict-Transport-Security': expect.stringContaining('max-age='),
+      'Permissions-Policy': expect.any(String)
+    };
+
+    const missing = Object.entries(requiredHeaders)
+      .filter(([key]) => !headers.get(key))
+      .map(([key]) => key);
+
+    const pass = missing.length === 0;
+    return {
+      pass,
+      message: () =>
+        pass
+          ? 'Expected response to not have all secure headers'
+          : `Expected response to have all secure headers. Missing: ${missing.join(', ')}`
+    };
+  },
+
+  toBeValidJWT(received: string) {
+    const jwtPattern = /^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/;
+    const pass = jwtPattern.test(received);
+    return {
+      pass,
+      message: () =>
+        pass ? 'Expected token to not be a valid JWT' : 'Expected token to be a valid JWT'
+    };
+  },
+
+  toBeValidCSRFToken(received: string) {
+    const csrfPattern = /^[A-Za-z0-9+/=_-]{32,}$/;
+    const pass = csrfPattern.test(received);
+    return {
+      pass,
+      message: () =>
+        pass
+          ? 'Expected token to not be a valid CSRF token'
+          : 'Expected token to be a valid CSRF token'
+    };
+  }
+});
+
+// Mock crypto for consistent testing
+const mockRandomBytes = jest.fn().mockImplementation((size: number) => {
+  return Buffer.from('a'.repeat(size));
+});
+
+jest.mock('crypto', () => ({
+  ...jest.requireActual('crypto'),
+  randomBytes: mockRandomBytes
+}));
+
+// Mock file system operations
+jest.mock('fs', () => ({
+  ...jest.requireActual('fs'),
+  writeFileSync: jest.fn(),
+  readFileSync: jest.fn(),
+  existsSync: jest.fn().mockReturnValue(true),
+  mkdirSync: jest.fn(),
+  createWriteStream: jest.fn().mockReturnValue({
+    write: jest.fn().mockImplementation((data, callback) => callback()),
+    end: jest.fn().mockImplementation((callback) => callback())
+  })
+}));
+
+// Global test timeout
+jest.setTimeout(30000);
