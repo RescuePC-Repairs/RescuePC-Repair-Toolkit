@@ -140,7 +140,7 @@ function HomePage() {
           <div className="flex flex-col sm:flex-row items-center justify-center mb-4">
             <img
               src="/rescuepc-logo.png"
-alt="RescuePC Repairs Logo"
+              alt="RescuePC Repairs Logo"
               className="h-16 md:h-20 lg:h-24 mb-4 sm:mb-0 sm:mr-4"
               onError={(e) => {
                 // Fallback to assets folder if root logo fails

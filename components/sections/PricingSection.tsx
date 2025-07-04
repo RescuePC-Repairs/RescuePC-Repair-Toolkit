@@ -29,7 +29,9 @@ export function PricingSection() {
                 {formatPrice(license.price, license.interval)}
               </div>
               <div className="text-lg text-blue-200 mb-4">
-                {license.interval === 'once' ? 'One-time Payment' : `${license.pcLimit} License${license.pcLimit > 1 ? 's' : ''}`}
+                {license.interval === 'once'
+                  ? 'One-time Payment'
+                  : `${license.pcLimit} License${license.pcLimit > 1 ? 's' : ''}`}
               </div>
               <ul className="text-white/90 text-left mb-6 space-y-3 text-lg">
                 {license.features.map((feature, i) => (

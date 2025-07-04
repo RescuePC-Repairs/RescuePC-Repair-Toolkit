@@ -156,7 +156,7 @@ export function formatPrice(price: number, interval: string = 'month'): string {
     style: 'currency',
     currency: 'USD'
   }).format(price);
-  
+
   if (interval === 'once') {
     return `${formattedPrice} (One-time)`;
   } else if (interval === 'month') {
