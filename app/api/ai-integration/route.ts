@@ -39,7 +39,7 @@ interface EmailDelivery {
 // AI Integration Secret Key (from environment variables)
 const _AI_INTEGRATION_SECRET = process.env.AI_INTEGRATION_SECRET || 'ai-secret-key-12345-rescuepc';
 
-// Validate required environment variables
+// Validate required environment variables - BUILD SAFE
 function validateEnvironment() {
   // Only log warnings, don't throw errors during build
   const requiredEnvVars = ['STRIPE_SECRET_KEY', 'SUPPORT_EMAIL', 'GMAIL_APP_PASSWORD'];
@@ -49,12 +49,17 @@ function validateEnvironment() {
   }
 }
 
-// Validate environment variables on startup (non-blocking)
-validateEnvironment();
+// BUILD SAFE: Only validate during runtime, not build time
+if (typeof window === 'undefined' && process.env.NODE_ENV !== 'production') {
+  validateEnvironment();
+}
 
-// Ensure API key is available for build - don't throw errors during build
-if (!process.env.AI_INTEGRATION_SECRET) {
-  console.warn('AI_INTEGRATION_SECRET not set, using default for build');
+// BUILD SAFE: Don't initialize anything during build
+if (typeof window === 'undefined' && process.env.NODE_ENV === 'production') {
+  // Production runtime only
+  if (!process.env.AI_INTEGRATION_SECRET) {
+    console.warn('AI_INTEGRATION_SECRET not set, using default for production');
+  }
 }
 
 /**
@@ -62,6 +67,11 @@ if (!process.env.AI_INTEGRATION_SECRET) {
  * Allows other AI systems to communicate and automate tasks
  */
 export async function POST(request: NextRequest) {
+  // BUILD SAFE: Only run during actual requests, not build time
+  if (process.env.NODE_ENV === 'development' && !request.url) {
+    return NextResponse.json({ error: 'Build time access not allowed' }, { status: 400 });
+  }
+
   try {
     const body = await request.text();
     const signature = request.headers.get('x-ai-signature');
@@ -472,6 +482,11 @@ function _validateApiKey(request: NextRequest): boolean {
 }
 
 export async function GET(request: NextRequest) {
+  // BUILD SAFE: Only run during actual requests, not build time
+  if (process.env.NODE_ENV === 'development' && !request.url) {
+    return NextResponse.json({ error: 'Build time access not allowed' }, { status: 400 });
+  }
+
   try {
     const { searchParams } = new URL(request.url);
     const action = searchParams.get('action');
