@@ -139,13 +139,20 @@ function HomePage() {
         {/* Hero Section */}
         <div className="text-center mb-12">
           <div className="flex flex-col sm:flex-row items-center justify-center mb-4">
-            <Image
+            <img
               src="/rescuepc-logo.png"
               alt="RescuePC Repairs Logo"
-              width={96}
-              height={96}
               className="h-16 md:h-20 lg:h-24 mb-4 sm:mb-0 sm:mr-4"
-              priority
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                console.error('Logo failed to load:', target.src);
+                // Try alternative paths
+                if (target.src.includes('rescuepc-logo.png')) {
+                  target.src = '/favicon.ico';
+                } else if (target.src.includes('favicon.ico')) {
+                  target.src = '/apple-touch-icon.png';
+                }
+              }}
             />
             <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold leading-tight text-center sm:text-left">
               RESCUEPC REPAIRS
