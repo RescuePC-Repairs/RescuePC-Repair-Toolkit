@@ -8,12 +8,9 @@ const nextConfig = {
     forceSwcTransforms: false
   },
 
-  // GitHub Pages configuration
-  output: 'export',
-  trailingSlash: true,
-  images: {
-    unoptimized: true
-  },
+  // Vercel deployment configuration (supports dynamic features)
+  // GitHub Pages requires static export, but our app is dynamic
+  // For GitHub Pages, we'll create a separate static landing page
 
   // Configure webpack
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
