@@ -139,13 +139,13 @@ function HomePage() {
         <div className="text-center mb-12">
           <div className="flex flex-col sm:flex-row items-center justify-center mb-4">
             <img
-              src="/rescuepc-logo.png"
+              src="public/rescuepc-logo.png"
               alt="RescuePC Repairs Logo"
               className="h-16 md:h-20 lg:h-24 mb-4 sm:mb-0 sm:mr-4"
               onError={(e) => {
                 // Fallback to assets folder if root logo fails
                 const target = e.target as HTMLImageElement;
-                target.src = '/assets/RescuePC_Logo_Light.png';
+                target.src = 'public/rescuepc-logo.png';
               }}
             />
             <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold leading-tight text-center sm:text-left">
