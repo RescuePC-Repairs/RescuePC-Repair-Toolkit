@@ -2,6 +2,9 @@
 
 import React from 'react';
 
+// Force dynamic rendering to prevent static generation errors
+export const dynamic = 'force-dynamic';
+
 // PAYMENT CONFIGURATION - COMPLETE AUTOMATION SYSTEM
 interface PaymentPackage {
   name: string;

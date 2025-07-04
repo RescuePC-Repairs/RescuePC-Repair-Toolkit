@@ -1,8 +1,7 @@
 import React from 'react';
 
-// Force dynamic rendering
+// Force dynamic rendering to prevent static generation errors
 export const dynamic = 'force-dynamic';
-export const revalidate = false;
 
 // PAYMENT CONFIGURATION - TEST PAGE
 interface PaymentPackage {

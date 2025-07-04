@@ -8,9 +8,13 @@ const nextConfig = {
     forceSwcTransforms: false
   },
 
-  // Vercel deployment configuration (supports dynamic features)
-  // GitHub Pages requires static export, but our app is dynamic
-  // For GitHub Pages, we'll create a separate static landing page
+  // Force all pages to be dynamic to prevent static generation errors
+  experimental: {
+    forceSwcTransforms: false,
+  },
+  
+  // Disable static generation completely
+  output: 'standalone',
 
   // Configure webpack
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {

@@ -3,6 +3,9 @@
 import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 
+// Force dynamic rendering to prevent static generation errors
+export const dynamic = 'force-dynamic';
+
 function SuccessPageContent() {
   const searchParams = useSearchParams();
   const sessionId = searchParams?.get('session_id') ?? '';
