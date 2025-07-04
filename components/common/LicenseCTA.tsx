@@ -39,7 +39,7 @@ export function LicenseCTA({
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          licenseId: licenseId,
+          licenseId,
           priceId: license.stripePaymentLink,
           successUrl: `${window.location.origin}/success`,
           cancelUrl: `${window.location.origin}/pricing`
@@ -53,7 +53,7 @@ export function LicenseCTA({
       const { sessionId } = await response.json();
 
       // Redirect to Stripe Checkout
-      const stripe = await loadStripe(process.env['NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY']!);
+      const stripe = await loadStripeClient(process.env['NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY']!);
       if (stripe) {
         await stripe.redirectToCheckout({ sessionId });
       }
@@ -151,7 +151,7 @@ export function LicenseCTA({
 }
 
 // Stripe loader function
-async function loadStripe(publishableKey: string) {
+async function loadStripeClient(publishableKey: string) {
   if (typeof window === 'undefined') return null;
 
   try {

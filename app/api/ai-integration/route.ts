@@ -52,7 +52,7 @@ function validateEnvironment() {
 // Validate environment variables on startup (non-blocking)
 validateEnvironment();
 
-// Ensure API key is available for build
+// Ensure API key is available for build - don't throw errors during build
 if (!process.env.AI_INTEGRATION_SECRET) {
   console.warn('AI_INTEGRATION_SECRET not set, using default for build');
 }

@@ -159,7 +159,9 @@ function HomePage() {
               RESCUEPC REPAIRS
             </h1>
           </div>
-          <p className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-4 px-4">Where Expertise Meets Automation</p>
+          <p className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-4 px-4">
+            Where Expertise Meets Automation
+          </p>
           <div className="text-sm sm:text-lg text-yellow-400 mb-8 font-bold px-4">
             📊 200+ SPECIALIZED SCRIPTS • 🔍 100% VERIFIED CAPABILITIES • 🛡️ MILITARY-GRADE SECURITY
           </div>
@@ -175,8 +177,12 @@ function HomePage() {
             <div className="text-green-400 text-xs sm:text-sm">
               • Professional Driver Repository (50K+ Drivers)
             </div>
-            <div className="text-green-400 text-xs sm:text-sm">• AI-Driven Performance Optimization</div>
-            <div className="text-green-400 text-xs sm:text-sm">• Enterprise SOC2/ISO27001 Compliance</div>
+            <div className="text-green-400 text-xs sm:text-sm">
+              • AI-Driven Performance Optimization
+            </div>
+            <div className="text-green-400 text-xs sm:text-sm">
+              • Enterprise SOC2/ISO27001 Compliance
+            </div>
           </div>
         </div>
 
