@@ -8,13 +8,10 @@ const nextConfig = {
     forceSwcTransforms: false
   },
 
-  // Force all pages to be dynamic to prevent static generation errors
+  // Vercel deployment configuration
   experimental: {
     forceSwcTransforms: false,
   },
-  
-  // Disable static generation completely
-  output: 'standalone',
 
   // Configure webpack
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
