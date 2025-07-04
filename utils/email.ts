@@ -29,7 +29,9 @@ export async function sendTransactionalEmail({
   try {
     // Validate email configuration only during actual sending
     if (!process.env.SUPPORT_EMAIL || !process.env.GMAIL_APP_PASSWORD) {
-      console.error('CRITICAL: Email configuration missing. Set SUPPORT_EMAIL and GMAIL_APP_PASSWORD environment variables.');
+      console.error(
+        'CRITICAL: Email configuration missing. Set SUPPORT_EMAIL and GMAIL_APP_PASSWORD environment variables.'
+      );
       return; // Don't throw, just log and return
     }
 

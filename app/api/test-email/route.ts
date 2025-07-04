@@ -4,20 +4,18 @@ import { sendLicenseEmail } from '../../../utils/email';
 export async function GET() {
   try {
     // Validate email configuration only during actual API calls
-    if (!process.env.SUPPORT_EMAIL || !process.env.GMAIL_APP_PASSWORD || !process.env.BUSINESS_EMAIL) {
-      return NextResponse.json(
-        { error: 'Email configuration missing' },
-        { status: 500 }
-      );
+    if (
+      !process.env.SUPPORT_EMAIL ||
+      !process.env.GMAIL_APP_PASSWORD ||
+      !process.env.BUSINESS_EMAIL
+    ) {
+      return NextResponse.json({ error: 'Email configuration missing' }, { status: 500 });
     }
 
     // Send test email
     const businessEmail = process.env.BUSINESS_EMAIL;
     if (!businessEmail) {
-      return NextResponse.json(
-        { error: 'Business email not configured' },
-        { status: 500 }
-      );
+      return NextResponse.json({ error: 'Business email not configured' }, { status: 500 });
     }
 
     await sendLicenseEmail(

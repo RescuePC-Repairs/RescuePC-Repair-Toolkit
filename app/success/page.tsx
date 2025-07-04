@@ -3,10 +3,6 @@
 import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 
-// Force dynamic rendering
-export const dynamic = 'force-dynamic';
-export const revalidate = false;
-
 function SuccessPageContent() {
   const searchParams = useSearchParams();
   const sessionId = searchParams?.get('session_id') ?? '';
@@ -298,11 +294,13 @@ function SuccessPageContent() {
 
 export default function SuccessPage() {
   return (
-    <Suspense fallback={
-      <div className="min-h-screen bg-gray-900 flex items-center justify-center">
-        <div className="text-white">Loading...</div>
-      </div>
-    }>
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-gray-900 flex items-center justify-center">
+          <div className="text-white">Loading...</div>
+        </div>
+      }
+    >
       <SuccessPageContent />
     </Suspense>
   );

@@ -286,7 +286,9 @@ export async function POST(request: NextRequest) {
 
     // Validate email configuration only during actual API calls
     if (!process.env.SUPPORT_EMAIL || !process.env.GMAIL_APP_PASSWORD) {
-      console.error('CRITICAL: Email configuration missing. Set SUPPORT_EMAIL and GMAIL_APP_PASSWORD environment variables.');
+      console.error(
+        'CRITICAL: Email configuration missing. Set SUPPORT_EMAIL and GMAIL_APP_PASSWORD environment variables.'
+      );
       return NextResponse.json({ error: 'Email configuration missing' }, { status: 500 });
     }
 
