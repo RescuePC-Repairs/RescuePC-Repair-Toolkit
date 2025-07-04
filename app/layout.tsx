@@ -6,7 +6,11 @@ import './globals.css';
 // Professional metadata with SEO optimization
 export const metadata: Metadata = {
   title: 'RescuePC Repairs - Professional Multi-Platform PC Repair Toolkit',
-  description: 'Professional-grade multi-platform PC repair toolkit with military-grade security.'
+  description: 'Professional-grade multi-platform PC repair toolkit with military-grade security.',
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+  },
 };
 
 // Professional layout component

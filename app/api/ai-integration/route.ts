@@ -36,8 +36,6 @@ interface EmailDelivery {
   error: string | null;
 }
 
-
-
 // AI Integration Secret Key (from environment variables)
 const _AI_INTEGRATION_SECRET = process.env.AI_INTEGRATION_SECRET || 'ai-secret-key-12345-rescuepc';
 

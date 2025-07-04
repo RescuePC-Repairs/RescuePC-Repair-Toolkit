@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '../../../../utils/prisma';
 
-
-
 export async function GET(request: NextRequest) {
   try {
     // Get automation status - 100% FREE AND AUTOMATED
