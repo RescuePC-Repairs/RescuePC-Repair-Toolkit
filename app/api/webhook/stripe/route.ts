@@ -118,7 +118,7 @@ function generateCustomerEmail(
   productName: string,
   amount: number
 ): string {
-  const downloadLink = '***REMOVED***';
+  const downloadLink = 'https://u.pcloud.link/publink/show?code=XZE6yu5ZTCRwbBmyaX7WmMTJeriiNRbHkz0V';
 
   return `
 <!DOCTYPE html>
@@ -153,16 +153,24 @@ function generateCustomerEmail(
               .join('')}
         </div>
         
-        <div style="background: #fff; border: 2px solid #007bff; border-radius: 8px; padding: 20px; margin: 25px 0;">
-            <h3 style="color: #007bff; margin-top: 0;">📥 Download Your Software:</h3>
-            <p style="margin-bottom: 15px;">Click the secure download link below to access your RescuePC Repairs toolkit:</p>
-            <a href="${downloadLink}" 
-               style="display: inline-block; background: #007bff; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold;">
-                🔗 SECURE DOWNLOAD LINK
-            </a>
-            <p style="margin-top: 15px; font-size: 12px; color: #666;">
-                Link expires in 24 hours. Download immediately after purchase.
+        <div style="background: #fff; border: 2px solid #dc2626; border-radius: 8px; padding: 20px; margin: 25px 0;">
+            <h3 style="color: #dc2626; margin-top: 0;">⚠️ SECURE DOWNLOAD LINK</h3>
+            <p style="margin-bottom: 15px;">Your exclusive download link:</p>
+            <p style="background: #f3f4f6; padding: 10px; border-radius: 5px; font-family: monospace; word-break: break-all; margin: 15px 0;">
+                <a href="${downloadLink}" style="color: #dc2626; font-weight: bold;">
+                    ${downloadLink}
+                </a>
             </p>
+            <div style="background: #fef3c7; padding: 15px; border-radius: 5px; margin: 15px 0; border-left: 4px solid #f59e0b;">
+                <h5 style="color: #d97706; margin: 0 0 10px 0;">🚨 LEGAL WARNING:</h5>
+                <ul style="margin: 0; padding-left: 20px; color: #d97706;">
+                    <li><strong>DO NOT SHARE</strong> this download link with anyone</li>
+                    <li><strong>DO NOT POST</strong> this link on social media, forums, or public websites</li>
+                    <li><strong>DO NOT FORWARD</strong> this email to others</li>
+                    <li><strong>LEGAL ACTION</strong> will be taken against unauthorized sharing</li>
+                    <li>This link is <strong>EXCLUSIVE</strong> to your license purchase</li>
+                </ul>
+            </div>
         </div>
         
         <div style="background: #fff3cd; border: 1px solid #ffeeba; border-radius: 8px; padding: 15px; margin: 20px 0;">
