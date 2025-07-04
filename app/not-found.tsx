@@ -1,3 +1,6 @@
+// Force dynamic rendering to prevent static generation errors
+export const dynamic = 'force-dynamic';
+
 export default function NotFound() {
   return (
     <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center">

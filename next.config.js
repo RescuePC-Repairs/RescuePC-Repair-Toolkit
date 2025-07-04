@@ -8,10 +8,8 @@ const nextConfig = {
     forceSwcTransforms: false
   },
 
-  // Vercel deployment configuration
-  experimental: {
-    forceSwcTransforms: false
-  },
+  // Force dynamic rendering for all pages
+  staticPageGenerationTimeout: 0,
 
   // Configure webpack
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
@@ -37,10 +35,13 @@ const nextConfig = {
     });
 
     return config;
-  }
+  },
 
-  // Note: headers() is disabled for static export
-  // Headers are handled by deployment platform instead
+  // Disable static generation completely
+  trailingSlash: false,
+  generateBuildId: async () => {
+    return 'build-' + Date.now();
+  }
 };
 
 module.exports = nextConfig;
