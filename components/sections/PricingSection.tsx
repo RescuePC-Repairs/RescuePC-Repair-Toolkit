@@ -15,27 +15,27 @@ export function PricingSection() {
               className={`glass-card p-8 flex flex-col items-center text-center shadow-glass-lg ${license.popular ? 'border-2 border-success-500 scale-105' : ''} ${license.enterprise ? 'border-2 border-blue-700' : ''}`}
             >
               {license.popular && (
-                <span className="mt-2 mb-4 inline-block px-3 py-1 bg-success-500/80 text-white text-xs font-bold rounded-full uppercase tracking-wider">
-                  Most Popular
+                <span className="mt-2 mb-4 inline-block px-3 py-1 bg-success-500/80 text-white text-sm font-bold rounded-full uppercase tracking-wider">
+                  ⭐ MOST POPULAR
                 </span>
               )}
               {license.enterprise && !license.popular && (
-                <span className="mt-2 mb-4 inline-block px-3 py-1 bg-blue-700/80 text-white text-xs font-bold rounded-full uppercase tracking-wider">
-                  Enterprise
+                <span className="mt-2 mb-4 inline-block px-3 py-1 bg-blue-700/80 text-white text-sm font-bold rounded-full uppercase tracking-wider">
+                  👑 ENTERPRISE
                 </span>
               )}
               <h3 className="text-2xl font-semibold text-white mb-2">{license.name}</h3>
               <div className="text-4xl font-bold text-success-400 mb-2">
-                {formatPrice(license.price)}
+                {formatPrice(license.price, license.interval)}
               </div>
-              <div className="text-sm text-blue-200 mb-4">
-                {license.interval === 'once' ? 'Lifetime Access' : 'Annual License'}
+              <div className="text-lg text-blue-200 mb-4">
+                {license.interval === 'once' ? 'One-time Payment' : `${license.pcLimit} License${license.pcLimit > 1 ? 's' : ''}`}
               </div>
-              <ul className="text-white/90 text-left mb-6 space-y-2">
+              <ul className="text-white/90 text-left mb-6 space-y-3 text-lg">
                 {license.features.map((feature, i) => (
-                  <li key={i} className="flex items-center gap-2">
-                    <span className="inline-block w-2 h-2 bg-success-400 rounded-full"></span>
-                    <span>{feature}</span>
+                  <li key={i} className="flex items-center gap-3">
+                    <span className="inline-block w-3 h-3 bg-success-400 rounded-full flex-shrink-0"></span>
+                    <span className="text-base">{feature}</span>
                   </li>
                 ))}
               </ul>

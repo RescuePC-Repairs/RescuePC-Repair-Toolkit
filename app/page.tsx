@@ -139,8 +139,8 @@ function HomePage() {
         <div className="text-center mb-12">
           <div className="flex flex-col sm:flex-row items-center justify-center mb-4">
             <img
-              src="/RescuePC Repairs Logo.png"
-              alt="RescuePC Repairs Logo"
+              src="/rescuepc-logo.png"
+alt="RescuePC Repairs Logo"
               className="h-16 md:h-20 lg:h-24 mb-4 sm:mb-0 sm:mr-4"
               onError={(e) => {
                 // Fallback to assets folder if root logo fails
@@ -952,21 +952,21 @@ function HomePage() {
               <div className="text-center p-8 bg-gray-800 border border-gray-700 rounded-xl">
                 <div className="text-4xl mb-4">📧</div>
                 <h3 className="text-xl font-bold mb-4">Email Support</h3>
-                <p className="text-gray-300 mb-2">***REMOVED***</p>
+                <p className="text-gray-300 mb-2 text-lg">rescuepcrepairs@gmail.com</p>
                 <p className="text-sm text-gray-400">Response within 2 hours</p>
               </div>
 
               <div className="text-center p-8 bg-gray-800 border border-gray-700 rounded-xl">
                 <div className="text-4xl mb-4">💬</div>
                 <h3 className="text-xl font-bold mb-4">Business Support</h3>
-                <p className="text-gray-300 mb-2">***REMOVED***</p>
+                <p className="text-gray-300 mb-2 text-lg">rescuepcrepair@yahoo.com</p>
                 <p className="text-sm text-gray-400">Enterprise inquiries</p>
               </div>
 
               <div className="text-center p-8 bg-gray-800 border border-gray-700 rounded-xl">
                 <div className="text-4xl mb-4">📥</div>
                 <h3 className="text-xl font-bold mb-4">Download Center</h3>
-                <p className="text-gray-300 mb-2">Secure PCloud Access</p>
+                <p className="text-gray-300 mb-2 text-lg">Secure PCloud Access</p>
                 <p className="text-sm text-gray-400">Included with purchase</p>
               </div>
             </div>

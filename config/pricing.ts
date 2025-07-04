@@ -4,7 +4,7 @@
 interface LicenseTier {
   name: string;
   price: number;
-  interval: 'year' | 'once';
+  interval: 'month' | 'year' | 'once';
   pcLimit: number;
   features: string[];
   popular?: boolean;
@@ -30,42 +30,43 @@ export const PRICING_CONFIG: PricingConfig = {
     basic: {
       name: 'Basic License',
       price: 49.99,
-      interval: 'year',
+      interval: 'month',
       pcLimit: 1,
       features: [
-        'Single PC License',
-        'Core Functionality',
-        'Basic Support',
-        '1 Year Updates',
-        'Email Support'
+        'Single PC Repair License',
+        'Core Repair Functionality',
+        'Basic Email Support',
+        'Monthly Updates',
+        'Standard Response Time'
       ]
     },
     professional: {
       name: 'Professional License',
       price: 199.99,
-      interval: 'year',
+      interval: 'month',
       pcLimit: 5,
       popular: true,
       features: [
-        '5 PC Licenses',
-        'Advanced Features',
-        'Priority Support',
-        '1 Year Updates',
+        '5 PC Repair Licenses',
+        'Advanced Repair Features',
+        'Priority Email Support',
+        'Monthly Updates',
         'API Access',
-        'Phone Support'
+        'Phone Support',
+        'Faster Response Time'
       ]
     },
     enterprise: {
       name: 'Enterprise License',
       price: 499.99,
-      interval: 'year',
+      interval: 'month',
       pcLimit: 25,
       enterprise: true,
       features: [
-        '25 PC Licenses',
-        'All Features',
-        'Dedicated Support',
-        '5 Years Updates',
+        '25 PC Repair Licenses',
+        'All Repair Features',
+        'Dedicated Support Team',
+        'Monthly Updates',
         'Custom Integration',
         'SLA Guarantee',
         '24/7 Support'
@@ -74,13 +75,13 @@ export const PRICING_CONFIG: PricingConfig = {
     government: {
       name: 'Government License',
       price: 999.99,
-      interval: 'year',
+      interval: 'month',
       pcLimit: 100,
       enterprise: true,
       features: [
-        '100 PC Licenses',
+        '100 PC Repair Licenses',
         'All Enterprise Features',
-        'Compliance Features',
+        'Compliance & Security',
         'Audit Logging',
         'Custom Deployment',
         'Dedicated Account Manager',
@@ -91,11 +92,11 @@ export const PRICING_CONFIG: PricingConfig = {
       name: 'Lifetime Enterprise',
       price: 499.99,
       interval: 'once',
-      pcLimit: -1, // Unlimited
+      pcLimit: 1, // Single license, unlimited repairs
       popular: true,
       enterprise: true,
       features: [
-        'Unlimited PC Licenses',
+        '1 License - Unlimited Repairs',
         'Lifetime Updates',
         'All Enterprise Features',
         'Priority Development',
@@ -150,11 +151,19 @@ export function getEnterpriseLicenses(): LicenseTier[] {
   return Object.values(PRICING_CONFIG.tiers).filter((tier) => tier.enterprise);
 }
 
-export function formatPrice(price: number): string {
-  return new Intl.NumberFormat('en-US', {
+export function formatPrice(price: number, interval: string = 'month'): string {
+  const formattedPrice = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD'
   }).format(price);
+  
+  if (interval === 'once') {
+    return `${formattedPrice} (One-time)`;
+  } else if (interval === 'month') {
+    return `${formattedPrice}/month`;
+  } else {
+    return `${formattedPrice}/year`;
+  }
 }
 
 export function getPackageByPaymentLink(paymentLink: string): LicenseTier | undefined {
