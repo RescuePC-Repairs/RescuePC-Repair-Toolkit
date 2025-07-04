@@ -93,6 +93,7 @@ export async function POST(request: NextRequest) {
       customer_email: undefined, // Let customer enter email
       allow_promotion_codes: true,
       billing_address_collection: 'required',
+      customer_creation: 'always',
 
       // METADATA FOR WEBHOOK PROCESSING
       metadata: {

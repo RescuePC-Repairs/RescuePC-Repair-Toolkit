@@ -39,8 +39,8 @@ export function LicenseCTA({
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          licenseId,
-          priceId: license.stripePaymentLink,
+          packageType: licenseId,
+          packageName: license.name,
           successUrl: `${window.location.origin}/success`,
           cancelUrl: `${window.location.origin}/pricing`
         })

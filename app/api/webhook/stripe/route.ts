@@ -137,7 +137,7 @@ function generateCustomerEmail(
     <div style="background: #f8f9fa; padding: 30px; border-radius: 0 0 10px 10px; border: 2px solid #e9ecef;">
         <h2 style="color: #28a745; margin-top: 0;">🎉 Payment Successful!</h2>
         
-        <p><strong>Dear ${customerName},</strong></p>
+        <p><strong>Dear ${customerName || 'Valued Customer'},</strong></p>
         
         <p>Thank you for purchasing <strong>${productName}</strong>! Your payment of <strong>$${amount}</strong> has been processed successfully.</p>
         
@@ -197,7 +197,7 @@ function generateCustomerEmail(
         
         <div style="text-align: center; margin: 30px 0;">
             <h4>Need Help? We're Here For You!</h4>
-            <p>📧 <strong>Support:</strong> <a href="mailto:***REMOVED***">***REMOVED***</a></p>
+            <p>📧 <strong>Support:</strong> <a href="mailto:rescuepcrepair@yahoo.com">rescuepcrepair@yahoo.com</a></p>
             <p>💼 <strong>Business:</strong> <a href="mailto:***REMOVED***">***REMOVED***</a></p>
             <p style="font-size: 12px; color: #666;">Response time: Within 2 hours</p>
         </div>
@@ -343,10 +343,13 @@ async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session) 
   console.log(`[CHECKOUT_COMPLETED] Processing session: ${session.id}`);
 
   try {
+    // Extract customer information from multiple sources
     const customerEmail = session.customer_email || session.customer_details?.email;
     const customerName = session.customer_details?.name || 'Valued Customer';
     const packageType = session.metadata?.packageType || 'basic';
     const amount = (session.amount_total || 0) / 100;
+
+    console.log(`[CUSTOMER_INFO] Email: ${customerEmail}, Name: ${customerName}, Package: ${packageType}, Amount: $${amount}`);
 
     if (!customerEmail) {
       console.error('[CHECKOUT_ERROR] No customer email found');
@@ -386,7 +389,7 @@ async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session) 
       amount
     );
     await sendAutomatedEmail(
-      '***REMOVED***',
+      'rescuepcrepair@yahoo.com',
       `💰 AUTOMATED SALE: ${licenseInfo.name} - $${amount} - ${customerEmail}`,
       adminEmailContent
     );
