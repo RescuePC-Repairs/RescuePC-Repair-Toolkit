@@ -138,11 +138,12 @@ function HomePage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Hero Section */}
         <div className="text-center mb-12">
-          <div className="flex flex-col sm:flex-row items-center justify-center mb-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center mb-4 px-4">
             <img
               src="/rescuepc-logo.png"
               alt="RescuePC Repairs Logo"
-              className="h-16 md:h-20 lg:h-24 mb-4 sm:mb-0 sm:mr-4"
+              className="h-12 w-auto sm:h-16 md:h-20 lg:h-24 mb-4 sm:mb-0 sm:mr-4 max-w-full"
+              style={{ maxWidth: '200px' }}
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
                 console.error('Logo failed to load:', target.src);
@@ -154,40 +155,40 @@ function HomePage() {
                 }
               }}
             />
-            <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold leading-tight text-center sm:text-left">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold leading-tight text-center sm:text-left">
               RESCUEPC REPAIRS
             </h1>
           </div>
-          <p className="text-xl md:text-2xl text-gray-300 mb-4">Where Expertise Meets Automation</p>
-          <div className="text-lg text-yellow-400 mb-8 font-bold">
+          <p className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-4 px-4">Where Expertise Meets Automation</p>
+          <div className="text-sm sm:text-lg text-yellow-400 mb-8 font-bold px-4">
             📊 200+ SPECIALIZED SCRIPTS • 🔍 100% VERIFIED CAPABILITIES • 🛡️ MILITARY-GRADE SECURITY
           </div>
 
-          <div className="inline-block px-6 py-3 bg-green-500/10 border border-green-500/30 rounded-full mb-4">
-            <span className="text-green-400 font-bold">
+          <div className="inline-block px-4 sm:px-6 py-2 sm:py-3 bg-green-500/10 border border-green-500/30 rounded-full mb-4 mx-4">
+            <span className="text-green-400 font-bold text-sm sm:text-base">
               🛡️ MILITARY-GRADE SECURITY FRAMEWORK ACTIVE
             </span>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8 max-w-4xl mx-auto">
-            <div className="text-green-400 text-sm">• Advanced Antivirus Engine</div>
-            <div className="text-green-400 text-sm">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mt-8 max-w-4xl mx-auto px-4">
+            <div className="text-green-400 text-xs sm:text-sm">• Advanced Antivirus Engine</div>
+            <div className="text-green-400 text-xs sm:text-sm">
               • Professional Driver Repository (50K+ Drivers)
             </div>
-            <div className="text-green-400 text-sm">• AI-Driven Performance Optimization</div>
-            <div className="text-green-400 text-sm">• Enterprise SOC2/ISO27001 Compliance</div>
+            <div className="text-green-400 text-xs sm:text-sm">• AI-Driven Performance Optimization</div>
+            <div className="text-green-400 text-xs sm:text-sm">• Enterprise SOC2/ISO27001 Compliance</div>
           </div>
         </div>
 
         {/* System Status */}
-        <div className="bg-green-500/10 border border-green-500/30 rounded-xl p-6 mb-12 text-center">
-          <h3 className="text-2xl font-bold text-green-400 mb-4">
+        <div className="bg-green-500/10 border border-green-500/30 rounded-xl p-4 sm:p-6 mb-12 text-center mx-4">
+          <h3 className="text-xl sm:text-2xl font-bold text-green-400 mb-4">
             🟢 FULLY AUTOMATED SYSTEM STATUS
           </h3>
-          <p className="text-gray-300 mb-6 text-sm">
+          <p className="text-gray-300 mb-6 text-xs sm:text-sm px-4">
             All systems operational with military-grade security and instant processing
           </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
             <div className="text-sm">
               <div className="text-green-400 font-bold">Payment Processing</div>
               <div className="text-gray-300">✅ Active & Secure</div>
@@ -208,16 +209,17 @@ function HomePage() {
         </div>
 
         {/* Navigation Tabs */}
-        <div className="flex justify-center gap-2 mb-12 flex-wrap">
+        <div className="flex flex-wrap justify-center gap-2 mb-12 px-2">
           {['features', 'pricing', 'security', 'automation', 'support'].map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`px-6 py-3 rounded-lg font-bold text-sm transition-all duration-300 ${
+              className={`px-3 py-2 sm:px-6 sm:py-3 rounded-lg font-bold text-xs sm:text-sm transition-all duration-300 touch-manipulation ${
                 activeTab === tab
                   ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg'
-                  : 'bg-transparent text-gray-400 border border-gray-600 hover:border-blue-500 hover:text-blue-400'
+                  : 'bg-transparent text-gray-400 border border-gray-600 hover:border-blue-500 hover:text-blue-400 active:bg-blue-600/20'
               }`}
+              style={{ minHeight: '44px', minWidth: '80px' }}
             >
               {tab === 'features' && '🚀 Features'}
               {tab === 'pricing' && '💰 Pricing'}
