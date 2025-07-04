@@ -1,17 +1,19 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Disable SWC minifier temporarily to avoid Html import issues
-  swcMinify: false,
+  // Enable SWC minifier for faster builds
+  swcMinify: true,
 
-  // Disable static optimization to prevent prerendering errors
+  // Optimize for production
   experimental: {
-    forceSwcTransforms: false
+    forceSwcTransforms: true,
+    optimizeCss: true,
+    optimizePackageImports: ['lucide-react', '@stripe/stripe-js']
   },
 
-  // Force dynamic rendering for all pages
-  staticPageGenerationTimeout: 0,
+  // Optimize build performance
+  staticPageGenerationTimeout: 60,
 
-  // Configure webpack
+  // Configure webpack for faster builds
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     if (!isServer) {
       config.resolve.fallback = {
@@ -22,7 +24,7 @@ const nextConfig = {
       };
     }
 
-    // Exclude Jest files from build
+    // Exclude test files from build
     config.module.rules.push({
       test: /\.(test|spec)\.(js|jsx|ts|tsx)$/,
       use: 'ignore-loader'
@@ -34,14 +36,35 @@ const nextConfig = {
       'test/**': 'commonjs test/**'
     });
 
+    // Optimize bundle size
+    if (!dev) {
+      config.optimization = {
+        ...config.optimization,
+        splitChunks: {
+          chunks: 'all',
+          cacheGroups: {
+            vendor: {
+              test: /[\\/]node_modules[\\/]/,
+              name: 'vendors',
+              chunks: 'all'
+            }
+          }
+        }
+      };
+    }
+
     return config;
   },
 
-  // Disable static generation completely
+  // Optimize for production
   trailingSlash: false,
   generateBuildId: async () => {
     return 'build-' + Date.now();
-  }
+  },
+
+  // Reduce build time
+  compress: true,
+  poweredByHeader: false
 };
 
 module.exports = nextConfig;
