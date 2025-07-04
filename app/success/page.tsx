@@ -1,12 +1,16 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 
-export default function SuccessPage() {
+// Force dynamic rendering
+export const dynamic = 'force-dynamic';
+export const revalidate = false;
+
+function SuccessPageContent() {
   const searchParams = useSearchParams();
-  const sessionId = searchParams.get('session_id');
-  const packageType = searchParams.get('package');
+  const sessionId = searchParams?.get('session_id') ?? '';
+  const packageType = searchParams?.get('package') ?? '';
 
   const [customerData, setCustomerData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -51,16 +55,12 @@ export default function SuccessPage() {
   };
 
   useEffect(() => {
-    // Simulate loading customer data
-    const timer = setTimeout(() => {
-      setCustomerData({
-        email: 'customer@example.com', // In real app, fetch from session
-        name: 'Valued Customer'
-      });
+    if (sessionId) {
+      // Fetch customer data logic here
       setLoading(false);
-    }, 2000);
-
-    return () => clearTimeout(timer);
+    } else {
+      setLoading(false);
+    }
   }, [sessionId]);
 
   const currentPackage = packageType ? PACKAGE_INFO[packageType] : PACKAGE_INFO.basic;
@@ -293,5 +293,17 @@ export default function SuccessPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function SuccessPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-900 flex items-center justify-center">
+        <div className="text-white">Loading...</div>
+      </div>
+    }>
+      <SuccessPageContent />
+    </Suspense>
   );
 }

@@ -2,6 +2,10 @@
 
 import React from 'react';
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic';
+export const revalidate = false;
+
 // PAYMENT CONFIGURATION - COMPLETE AUTOMATION SYSTEM
 interface PaymentPackage {
   name: string;
