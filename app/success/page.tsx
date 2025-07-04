@@ -1,10 +1,72 @@
-import { CheckCircle, Download, Smartphone, Monitor, Shield, Zap } from 'lucide-react';
+import {
+  CheckCircle,
+  Download,
+  Smartphone,
+  Monitor,
+  Shield,
+  Zap,
+  AlertTriangle
+} from 'lucide-react';
+import { redirect } from 'next/navigation';
+import { getSession } from '@/utils/stripe';
 
 // Force dynamic rendering to prevent static generation errors
 export const dynamic = 'force-dynamic';
 
-// Static page - no client-side hooks
-export default function SuccessPage() {
+// Server-side payment verification
+async function verifyPayment(sessionId: string | null) {
+  if (!sessionId) {
+    return { valid: false, error: 'No session ID provided' };
+  }
+
+  try {
+    const result = await getSession(sessionId);
+
+    if (!result.success || !result.session) {
+      return { valid: false, error: 'Invalid session' };
+    }
+
+    const session = result.session;
+
+    // Check if payment was successful
+    if (session.payment_status !== 'paid') {
+      return { valid: false, error: 'Payment not completed' };
+    }
+
+    // Check if session is not expired (24 hours)
+    const sessionAge = Date.now() - session.created * 1000;
+    const maxAge = 24 * 60 * 60 * 1000; // 24 hours
+
+    if (sessionAge > maxAge) {
+      return { valid: false, error: 'Session expired' };
+    }
+
+    return {
+      valid: true,
+      session,
+      customerEmail: session.customer_email || session.customer_details?.email,
+      amount: session.amount_total ? session.amount_total / 100 : 0
+    };
+  } catch (error) {
+    console.error('Payment verification failed:', error);
+    return { valid: false, error: 'Verification failed' };
+  }
+}
+
+// Static page with server-side verification
+export default async function SuccessPage({
+  searchParams
+}: {
+  searchParams: { session_id?: string };
+}) {
+  // Verify payment before showing success page
+  const verification = await verifyPayment(searchParams.session_id || null);
+
+  if (!verification.valid) {
+    // Redirect to home page with error
+    redirect('/?error=invalid_payment');
+  }
+
   const downloadLink =
     'https://u.pcloud.link/publink/show?code=XZE6yu5ZTCRwbBmyaX7WmMTJeriiNRbHkz0V';
 
@@ -21,6 +83,25 @@ export default function SuccessPage() {
             <p className="text-lg text-gray-600">
               Thank you for your purchase. Your license has been generated and sent to your email.
             </p>
+            {verification.customerEmail && (
+              <p className="text-sm text-gray-500 mt-2">
+                Confirmation sent to: {verification.customerEmail}
+              </p>
+            )}
+          </div>
+
+          {/* Security Notice */}
+          <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+            <div className="flex items-start space-x-3">
+              <Shield className="w-5 h-5 text-green-600 mt-1" />
+              <div>
+                <h4 className="font-semibold text-green-800 mb-1">Payment Verified</h4>
+                <p className="text-green-700 text-sm">
+                  Your payment of ${verification.amount} has been confirmed. This page is only
+                  accessible to verified customers.
+                </p>
+              </div>
+            </div>
           </div>
 
           {/* Main Content Card */}
@@ -55,9 +136,7 @@ export default function SuccessPage() {
                   <div className="flex items-start space-x-3">
                     <Smartphone className="w-5 h-5 text-yellow-600 mt-1" />
                     <div>
-                      <h4 className="font-semibold text-yellow-800 mb-1">
-                        Mobile Device Notice
-                      </h4>
+                      <h4 className="font-semibold text-yellow-800 mb-1">Mobile Device Notice</h4>
                       <p className="text-yellow-700 text-sm">
                         This software is designed for Windows PCs. For the best experience, please
                         download from a desktop or laptop computer.

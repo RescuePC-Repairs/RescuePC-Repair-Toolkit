@@ -2,10 +2,7 @@
 const nextConfig = {
   // Basic configuration
   swcMinify: true,
-  
-  // Disable static generation completely
-  output: 'standalone',
-  
+
   // Basic webpack config
   webpack: (config, { isServer }) => {
     if (!isServer) {
