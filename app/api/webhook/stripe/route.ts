@@ -126,6 +126,7 @@ function generateCustomerEmail(
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RescuePC Repairs - License Delivery</title>
 </head>
 <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
@@ -195,30 +196,19 @@ function generateCustomerEmail(
             </ul>
         </div>
         
+        <div style="background: #e3f2fd; border: 1px solid #bbdefb; border-radius: 8px; padding: 15px; margin: 20px 0;">
+            <h4 style="color: #1565c0; margin-top: 0;">📱 Mobile Users:</h4>
+            <p style="color: #1565c0; margin: 0;">
+                <strong>Note:</strong> This software is designed for Windows PCs. If you're on mobile, 
+                please access the download link from a desktop or laptop computer for the best experience.
+            </p>
+        </div>
+        
         <div style="text-align: center; margin: 30px 0;">
             <h4>Need Help? We're Here For You!</h4>
             <p>📧 <strong>Support:</strong> <a href="mailto:rescuepcrepair@yahoo.com">rescuepcrepair@yahoo.com</a></p>
-            <p>💼 <strong>Business:</strong> <a href="mailto:***REMOVED***">***REMOVED***</a></p>
             <p style="font-size: 12px; color: #666;">Response time: Within 2 hours</p>
         </div>
-        
-        <div style="background: #f8f9fa; border-radius: 8px; padding: 15px; margin: 20px 0; text-align: center;">
-            <h4 style="margin-top: 0;">🎯 What's Included:</h4>
-            <p style="margin: 5px 0;">• ${licenses.length} ${licenses.length === 1 ? 'License' : 'Licenses'} for PC Repair</p>
-            <p style="margin: 5px 0;">• Lifetime Technical Support</p>
-            <p style="margin: 5px 0;">• Free Updates & Patches</p>
-            <p style="margin: 5px 0;">• Priority Support Queue</p>
-            <p style="margin: 5px 0;">• Money-Back Guarantee (30 days)</p>
-        </div>
-        
-        <p style="margin-top: 30px;">Thank you for choosing RescuePC Repairs for your cybersecurity and PC optimization needs!</p>
-        
-        <p style="margin-bottom: 0;">
-            Best regards,<br>
-            <strong>Tyler Keesee</strong><br>
-            CEO, RescuePC Repairs<br>
-            <em>Enterprise-Grade PC Repair Solutions</em>
-        </p>
     </div>
     
     <div style="text-align: center; padding: 15px; font-size: 12px; color: #666;">
@@ -349,7 +339,9 @@ async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session) 
     const packageType = session.metadata?.packageType || 'basic';
     const amount = (session.amount_total || 0) / 100;
 
-    console.log(`[CUSTOMER_INFO] Email: ${customerEmail}, Name: ${customerName}, Package: ${packageType}, Amount: $${amount}`);
+    console.log(
+      `[CUSTOMER_INFO] Email: ${customerEmail}, Name: ${customerName}, Package: ${packageType}, Amount: $${amount}`
+    );
 
     if (!customerEmail) {
       console.error('[CHECKOUT_ERROR] No customer email found');

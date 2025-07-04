@@ -88,7 +88,8 @@ export async function POST(request: NextRequest) {
       ],
       mode: packageInfo.interval === 'year' ? 'subscription' : 'payment',
       success_url:
-        successUrl || `${process.env.NEXT_PUBLIC_DOMAIN}/success?session_id={CHECKOUT_SESSION_ID}`,
+        successUrl ||
+        `${process.env.NEXT_PUBLIC_DOMAIN || 'https://rescuepcrepairs.com'}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: cancelUrl || `${process.env.NEXT_PUBLIC_DOMAIN}/pricing`,
       customer_email: undefined, // Let customer enter email
       allow_promotion_codes: true,
