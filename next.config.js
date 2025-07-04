@@ -10,7 +10,7 @@ const nextConfig = {
 
   // Vercel deployment configuration
   experimental: {
-    forceSwcTransforms: false,
+    forceSwcTransforms: false
   },
 
   // Configure webpack
@@ -37,7 +37,7 @@ const nextConfig = {
     });
 
     return config;
-  },
+  }
 
   // Note: headers() is disabled for static export
   // Headers are handled by deployment platform instead

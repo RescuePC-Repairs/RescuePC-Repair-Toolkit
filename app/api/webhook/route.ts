@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { headers } from 'next/headers';
 import { createHmac } from 'crypto';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../../../utils/prisma';
 import { sendTransactionalEmail } from '../../../utils/email';
 import { validateOrigin } from '@/utils/originValidation';
 
@@ -14,7 +14,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: '2025-06-30.basil'
 });
 
-const prisma = new PrismaClient();
+
 
 const webhookSecret = process.env['STRIPE_WEBHOOK_SECRET']!;
 

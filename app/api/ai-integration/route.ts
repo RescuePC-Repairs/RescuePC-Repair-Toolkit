@@ -2,7 +2,7 @@
 // @ts-nocheck
 import { NextRequest, NextResponse } from 'next/server';
 import crypto from 'crypto';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../../../utils/prisma';
 import { sendTransactionalEmail } from '../../../utils/email';
 import { stripe } from '../../../utils/stripe';
 
@@ -36,7 +36,7 @@ interface EmailDelivery {
   error: string | null;
 }
 
-const prisma = new PrismaClient();
+
 
 // AI Integration Secret Key (from environment variables)
 const _AI_INTEGRATION_SECRET = process.env.AI_INTEGRATION_SECRET || 'ai-secret-key-12345-rescuepc';
