@@ -9,8 +9,8 @@ export const metadata: Metadata = {
   description: 'Professional-grade multi-platform PC repair toolkit with military-grade security.',
   icons: {
     icon: '/favicon.ico',
-    apple: '/apple-touch-icon.png',
-  },
+    apple: '/apple-touch-icon.png'
+  }
 };
 
 // Professional layout component
