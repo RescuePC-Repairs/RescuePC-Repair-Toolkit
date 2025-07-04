@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 
 // Force dynamic rendering to prevent static generation errors
 export const dynamic = 'force-dynamic';
@@ -138,15 +139,13 @@ function HomePage() {
         {/* Hero Section */}
         <div className="text-center mb-12">
           <div className="flex flex-col sm:flex-row items-center justify-center mb-4">
-            <img
-              src="/images/RescuePC Repairs Logo.png"
+            <Image
+              src="/rescuepc-logo.png"
               alt="RescuePC Repairs Logo"
+              width={96}
+              height={96}
               className="h-16 md:h-20 lg:h-24 mb-4 sm:mb-0 sm:mr-4"
-              onError={(e) => {
-                // Fallback to assets folder if root logo fails
-                const target = e.target as HTMLImageElement;
-                target.src = '/images/RescuePC Repairs Logo.png';
-              }}
+              priority
             />
             <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold leading-tight text-center sm:text-left">
               RESCUEPC REPAIRS
