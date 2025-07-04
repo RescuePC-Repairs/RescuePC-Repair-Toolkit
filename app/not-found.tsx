@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 // Force dynamic rendering to prevent static generation errors
 export const dynamic = 'force-dynamic';
 

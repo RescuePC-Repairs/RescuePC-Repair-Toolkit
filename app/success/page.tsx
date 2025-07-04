@@ -1,33 +1,10 @@
-'use client';
-
-import { useEffect, useState } from 'react';
 import { CheckCircle, Download, Smartphone, Monitor, Shield, Zap } from 'lucide-react';
 
 // Force dynamic rendering to prevent static generation errors
 export const dynamic = 'force-dynamic';
 
+// Static page - no client-side hooks
 export default function SuccessPage() {
-  const [isMobile, setIsMobile] = useState(false);
-  const [sessionId, setSessionId] = useState<string | null>(null);
-
-  useEffect(() => {
-    // Check if user is on mobile
-    const checkMobile = () => {
-      const userAgent = navigator.userAgent || navigator.vendor || (window as any).opera;
-      const isMobileDevice = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
-        userAgent.toLowerCase()
-      );
-      setIsMobile(isMobileDevice);
-    };
-
-    // Get session ID from URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const session = urlParams.get('session_id');
-    setSessionId(session);
-
-    checkMobile();
-  }, []);
-
   const downloadLink =
     'https://u.pcloud.link/publink/show?code=XZE6yu5ZTCRwbBmyaX7WmMTJeriiNRbHkz0V';
 
@@ -74,39 +51,20 @@ export default function SuccessPage() {
                 </div>
 
                 {/* Mobile Warning */}
-                {isMobile && (
-                  <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-                    <div className="flex items-start space-x-3">
-                      <Smartphone className="w-5 h-5 text-yellow-600 mt-1" />
-                      <div>
-                        <h4 className="font-semibold text-yellow-800 mb-1">
-                          Mobile Device Detected
-                        </h4>
-                        <p className="text-yellow-700 text-sm">
-                          This software is designed for Windows PCs. For the best experience, please
-                          download from a desktop or laptop computer.
-                        </p>
-                      </div>
+                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                  <div className="flex items-start space-x-3">
+                    <Smartphone className="w-5 h-5 text-yellow-600 mt-1" />
+                    <div>
+                      <h4 className="font-semibold text-yellow-800 mb-1">
+                        Mobile Device Notice
+                      </h4>
+                      <p className="text-yellow-700 text-sm">
+                        This software is designed for Windows PCs. For the best experience, please
+                        download from a desktop or laptop computer.
+                      </p>
                     </div>
                   </div>
-                )}
-
-                {/* Desktop Recommendation */}
-                {!isMobile && (
-                  <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-                    <div className="flex items-start space-x-3">
-                      <Monitor className="w-5 h-5 text-green-600 mt-1" />
-                      <div>
-                        <h4 className="font-semibold text-green-800 mb-1">
-                          Perfect! You're on Desktop
-                        </h4>
-                        <p className="text-green-700 text-sm">
-                          You can download and install the software directly on this computer.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                )}
+                </div>
               </div>
 
               {/* Right Column - Features */}

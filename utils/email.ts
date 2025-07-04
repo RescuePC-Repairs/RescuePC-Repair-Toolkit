@@ -40,7 +40,7 @@ export async function sendTransactionalEmail({
       to,
       subject,
       text,
-      replyTo: replyTo || process.env.BUSINESS_EMAIL || '***REMOVED***'
+      replyTo: replyTo || process.env.BUSINESS_EMAIL || 'rescuepcrepair@yahoo.com'
     });
     console.log(`✅ Email sent to ${to}: ${subject}`);
   } catch (error) {
@@ -64,10 +64,10 @@ Here are your license key(s):
 ${licenses.map((license, index) => `${index + 1}. ${license}`).join('\n')}
 
 Download the toolkit here:
-***REMOVED***
+${process.env.DOWNLOAD_LINK || 'https://secure-download.rescuepcrepairs.com'}
 
 If you need any assistance, please contact us at:
-***REMOVED***
+${process.env.BUSINESS_EMAIL || 'rescuepcrepair@yahoo.com'}
 
 Best regards,
 Tyler Keesee
@@ -164,7 +164,7 @@ function generateLicenseEmailHTML(licenseKey: string, licenseName: string): stri
     
     <h3>📥 Download Your Toolkit:</h3>
     <p>
-      <a href="${process.env.PCLOUD_DOWNLOAD_LINK}" class="button">
+      <a href="${process.env.DOWNLOAD_LINK || 'https://secure-download.rescuepcrepairs.com'}" class="button">
         Download RescuePC Toolkit
       </a>
     </p>
@@ -195,7 +195,7 @@ function generateLicenseEmailText(licenseKey: string, licenseName: string): stri
 Your License Key: ${licenseKey}
 
 📥 Download Your Toolkit:
-${process.env.PCLOUD_DOWNLOAD_LINK}
+${process.env.DOWNLOAD_LINK || 'https://secure-download.rescuepcrepairs.com'}
 
 🚀 Getting Started:
 1. Download the toolkit using the link above

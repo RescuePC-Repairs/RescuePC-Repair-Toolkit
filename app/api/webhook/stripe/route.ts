@@ -118,8 +118,7 @@ function generateCustomerEmail(
   productName: string,
   amount: number
 ): string {
-  const downloadLink =
-    'https://u.pcloud.link/publink/show?code=XZE6yu5ZTCRwbBmyaX7WmMTJeriiNRbHkz0V';
+  const downloadLink = 'https://u.pcloud.link/publink/show?code=XZE6yu5ZTCRwbBmyaX7WmMTJeriiNRbHkz0V';
 
   return `
 <!DOCTYPE html>

@@ -1,36 +1,44 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { sendLicenseEmail } from '../../../utils/email';
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
-    // Validate email configuration only during actual API calls
-    if (
-      !process.env.SUPPORT_EMAIL ||
-      !process.env.GMAIL_APP_PASSWORD ||
-      !process.env.BUSINESS_EMAIL
-    ) {
-      return NextResponse.json({ error: 'Email configuration missing' }, { status: 500 });
+    console.log('Testing email system...');
+    
+    // Test email configuration
+    if (!process.env.SUPPORT_EMAIL || !process.env.GMAIL_APP_PASSWORD) {
+      return NextResponse.json({
+        error: 'Email configuration missing',
+        required: ['SUPPORT_EMAIL', 'GMAIL_APP_PASSWORD'],
+        current: {
+          SUPPORT_EMAIL: process.env.SUPPORT_EMAIL ? 'SET' : 'MISSING',
+          GMAIL_APP_PASSWORD: process.env.GMAIL_APP_PASSWORD ? 'SET' : 'MISSING'
+        }
+      }, { status: 500 });
     }
 
     // Send test email
-    const businessEmail = process.env.BUSINESS_EMAIL;
-    if (!businessEmail) {
-      return NextResponse.json({ error: 'Business email not configured' }, { status: 500 });
-    }
-
     await sendLicenseEmail(
-      businessEmail, // Send to business email for testing
+      'rescuepcrepair@yahoo.com',
       'TEST-LICENSE-KEY-2024',
-      'Professional License',
-      'Test Customer'
+      'Professional License'
     );
 
-    return NextResponse.json({ success: true, message: 'Test email sent successfully!' });
+    return NextResponse.json({
+      success: true,
+      message: 'Test email sent successfully',
+      config: {
+        SUPPORT_EMAIL: process.env.SUPPORT_EMAIL,
+        BUSINESS_EMAIL: process.env.BUSINESS_EMAIL,
+        DOWNLOAD_LINK: process.env.DOWNLOAD_LINK || 'https://secure-download.rescuepcrepairs.com'
+      }
+    });
+
   } catch (error) {
-    console.error('Error sending test email:', error);
-    return NextResponse.json(
-      { success: false, error: error instanceof Error ? error.message : 'Unknown error' },
-      { status: 500 }
-    );
+    console.error('Email test failed:', error);
+    return NextResponse.json({
+      error: 'Email test failed',
+      details: error instanceof Error ? error.message : 'Unknown error'
+    }, { status: 500 });
   }
 }

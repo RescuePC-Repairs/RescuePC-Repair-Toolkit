@@ -27,6 +27,7 @@
     "@upstash/redis": "^1.35.1",
     "abort-controller": "^3.0.0",
     "bcrypt": "^6.0.0",
+    "critters": "^0.0.23",
     "cross-fetch": "^4.1.0",
     "dotenv": "^17.0.1",
     "formdata-node": "^6.0.3",
