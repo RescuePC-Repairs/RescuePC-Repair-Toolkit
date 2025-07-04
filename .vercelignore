@@ -1,0 +1,36 @@
+# Test files and directories
+test/
+tests/
+__tests__/
+**/*.test.js
+**/*.test.ts
+**/*.test.tsx
+**/*.spec.js
+**/*.spec.ts
+**/*.spec.tsx
+
+# Jest configuration
+jest.config.js
+jest.setup.js
+tsconfig.jest.json
+
+# Coverage reports
+coverage/
+.nyc_output/
+
+# Development files
+.env.local
+.env.development.local
+.env.test.local
+
+# IDE files
+.vscode/
+.idea/
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+.tmp/
+temp/ 

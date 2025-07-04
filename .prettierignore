@@ -1,0 +1,71 @@
+# Dependencies and virtual environments
+node_modules/
+.venv/
+venv/
+env/
+.env/
+
+# Build outputs
+.next/
+out/
+dist/
+build/
+coverage/
+
+# Logs
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Test files
+__tests__/
+*.test.js
+*.test.ts
+*.test.tsx
+*.spec.js
+*.spec.ts
+*.spec.tsx
+
+# Package files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Binary files
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.ico
+*.svg
+*.eot
+*.ttf
+*.woff
+*.woff2
+*.pdf
+*.zip
+*.gz
+*.bz2
+*.xz
+*.tar
+*.exe
+*.dll
+*.so
+*.dylib
+
+# HTML files with syntax errors
+*.html
+*.htm
+
+# Temporary files
+*.tmp
+*.temp
+.tmp/
+temp/ 
