@@ -2,15 +2,21 @@ import { describe, expect, it, jest, beforeEach, afterEach } from '@jest/globals
 import { generateTokens, validateJWT, hashPassword, verifyPassword } from '@/utils/auth';
 
 // Mock jsonwebtoken
+const mockSign = jest.fn(() => 'mock.jwt.token');
+const mockVerify = jest.fn(() => ({ id: '123', email: 'test@example.com', role: 'user' }));
+
 jest.mock('jsonwebtoken', () => ({
-  sign: jest.fn(() => 'mock.jwt.token'),
-  verify: jest.fn(() => ({ id: '123', email: 'test@example.com', role: 'user' }))
+  sign: mockSign,
+  verify: mockVerify
 }));
 
 // Mock bcrypt
+const mockHash = jest.fn(() => Promise.resolve('hashed_password'));
+const mockCompare = jest.fn(() => Promise.resolve(true));
+
 jest.mock('bcrypt', () => ({
-  hash: jest.fn(() => Promise.resolve('hashed_password')),
-  compare: jest.fn(() => Promise.resolve(true))
+  hash: mockHash,
+  compare: mockCompare
 }));
 
 describe('Authentication', () => {
@@ -95,7 +101,7 @@ describe('Authentication', () => {
 
     it('should throw error if JWT_SECRET is not set', () => {
       const originalJwtSecret = process.env.JWT_SECRET;
-      process.env.JWT_SECRET = undefined;
+      (process.env as any).JWT_SECRET = undefined;
       expect(() => validateJWT(mockToken)).toThrow('JWT_SECRET is required');
       process.env.JWT_SECRET = originalJwtSecret;
     });
