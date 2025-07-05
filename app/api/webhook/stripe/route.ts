@@ -111,7 +111,7 @@ async function sendAutomatedEmail(to: string, subject: string, htmlContent: stri
 }
 
 // FORTUNE 500 CUSTOMER EMAIL GENERATION
-export function generateCustomerEmail(
+function generateCustomerEmail(
   customerName: string,
   customerEmail: string,
   licenses: string[],
@@ -240,7 +240,7 @@ export function generateCustomerEmail(
 }
 
 // FORTUNE 500 ADMIN NOTIFICATION
-export function generateAdminNotification(
+function generateAdminNotification(
   customerEmail: string,
   customerName: string,
   licenseInfo: any,
@@ -298,8 +298,8 @@ export function generateAdminNotification(
   `;
 }
 
-// Export function for tests with correct signature
-export function getLicenseInfo(productId: string): any {
+// Helper function for getting license info
+function getLicenseInfo(productId: string): any {
   const productMap: Record<string, any> = {
     prod_basic_license: {
       name: 'Basic License',
@@ -483,7 +483,7 @@ export async function GET() {
 
 // Polyfill Response.json for test environment
 if (typeof Response !== 'undefined' && !Response.json) {
-  Response.json = function (data: any, init?: ResponseInit) {
+  Response.json = function (data: any, init?: any) {
     return new Response(JSON.stringify(data), {
       headers: { 'Content-Type': 'application/json' },
       ...init
