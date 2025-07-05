@@ -3,11 +3,38 @@ import Stripe from 'stripe';
 import { headers } from 'next/headers';
 import { sendLicenseEmail } from '../../../utils/email';
 
-const stripe = new Stripe(process.env['STRIPE_SECRET_KEY']!, {
-  apiVersion: '2025-06-30.basil'
-});
+// Force dynamic rendering to prevent static generation errors
+export const dynamic = 'force-dynamic';
 
-const webhookSecret = process.env['STRIPE_WEBHOOK_SECRET']!;
+// SECURE STRIPE INITIALIZATION - Moved to runtime
+let stripe: Stripe | null = null;
+let webhookSecret: string | null = null;
+
+function getStripe(): Stripe {
+  if (!process.env.STRIPE_SECRET_KEY) {
+    throw new Error('CRITICAL: STRIPE_SECRET_KEY environment variable is required');
+  }
+  
+  if (!stripe) {
+    stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+      apiVersion: '2025-06-30.basil'
+    });
+  }
+  
+  return stripe;
+}
+
+function getWebhookSecret(): string {
+  if (!process.env.STRIPE_WEBHOOK_SECRET) {
+    throw new Error('CRITICAL: STRIPE_WEBHOOK_SECRET environment variable is required');
+  }
+  
+  if (!webhookSecret) {
+    webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+  }
+  
+  return webhookSecret;
+}
 
 interface EnterprisePackage {
   id: string;
@@ -57,6 +84,10 @@ const ENTERPRISE_PACKAGES: Record<string, EnterprisePackage> = {
 
 export async function POST(request: NextRequest) {
   try {
+    // Initialize Stripe and webhook secret at runtime
+    const stripe = getStripe();
+    const webhookSecret = getWebhookSecret();
+    
     const body = await request.text();
     const headersList = await headers();
     const signature = headersList.get('stripe-signature');

@@ -1,3 +1,4 @@
+// NOTE: In the app directory, use lowercase <html> and <body> only. Do NOT import Html from next/document.
 import React from 'react';
 import type { Metadata } from 'next';
 import { Suspense } from 'react';

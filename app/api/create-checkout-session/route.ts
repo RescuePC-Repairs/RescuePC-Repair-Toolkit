@@ -9,14 +9,14 @@ function getStripe(): Stripe {
   if (!process.env.STRIPE_SECRET_KEY) {
     throw new Error('CRITICAL: STRIPE_SECRET_KEY environment variable is required');
   }
-  
+
   if (!stripe) {
     stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
       apiVersion: '2025-06-30.basil',
       typescript: true
     });
   }
-  
+
   return stripe;
 }
 
@@ -58,7 +58,7 @@ export async function POST(request: NextRequest) {
   try {
     // Initialize Stripe at runtime
     const stripe = getStripe();
-    
+
     const body = await request.json();
     const { packageType, packageName, licenseCount, successUrl, cancelUrl } = body;
 

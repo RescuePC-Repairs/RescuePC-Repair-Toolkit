@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
+// Force dynamic rendering to prevent static generation errors
+export const dynamic = 'force-dynamic';
+
 // AUTOMATED EMAIL CONFIGURATION
 const transporter = nodemailer.createTransport({
   service: 'gmail',

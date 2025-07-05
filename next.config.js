@@ -6,18 +6,24 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true
   },
-
-  // Disable static generation completely
-  output: 'export',
-  trailingSlash: true,
-  
-  // Force dynamic rendering for error pages
+  // Use standalone output for dynamic serverless deployment
+  output: 'standalone',
+  // Remove all static export/output/export-related config
+  // trailingSlash, generateStaticParams, etc. are not needed for dynamic app
+  swcMinify: true,
   async rewrites() {
     return [];
   },
-  // Disable static optimization for error pages
   generateBuildId: async () => {
     return 'build-' + Date.now();
+  },
+  // Disable static optimization for error pages
+  generateStaticParams: async () => {
+    return [];
+  },
+  // Force all pages to be dynamic
+  experimental: {
+    missingSuspenseWithCSRError: false
   },
   // Basic configuration
   swcMinify: true,

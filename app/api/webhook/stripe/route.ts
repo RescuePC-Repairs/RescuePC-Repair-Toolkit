@@ -3,6 +3,9 @@ import Stripe from 'stripe';
 import crypto from 'crypto';
 import nodemailer from 'nodemailer';
 
+// Force dynamic rendering to prevent static generation errors
+export const dynamic = 'force-dynamic';
+
 // Validate required environment variables
 if (!process.env.STRIPE_SECRET_KEY) {
   throw new Error('CRITICAL: STRIPE_SECRET_KEY environment variable is required');
