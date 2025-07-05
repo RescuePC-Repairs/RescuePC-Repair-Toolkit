@@ -1,0 +1,8 @@
+﻿{
+    "Event":  "Payment Processed",
+    "Source":  "Test",
+    "Timestamp":  "2025-06-28 11:09:07",
+    "Amount":  49.99,
+    "Package":  "Basic License",
+    "CustomerEmail":  "test@rescuepcrepairs.com"
+}

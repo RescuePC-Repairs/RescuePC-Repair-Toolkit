@@ -34,9 +34,14 @@ config/*.php
 config/*.json
 
 # Security logs and reports
-logs/
+logs/*.log
+logs/**/*.log
 *.log
 security-reports.log
+
+# Keep log directories but ignore log files
+!logs/
+!logs/*/
 
 # Backups and encryption keys
 backups/
@@ -71,8 +76,7 @@ next-env.d.ts
 # Vite
 *.local
 
-# Logs
-logs
+# Log files (but not directories)
 *.log
 
 # Runtime data
