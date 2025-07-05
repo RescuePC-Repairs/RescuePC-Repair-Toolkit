@@ -26,29 +26,37 @@ export function sanitizeInput(input: string | null | undefined): string {
   if (!input) {
     return '';
   }
-
-  // First escape HTML entities
-  let sanitized = escape(input);
-
-  // Remove potentially dangerous patterns
-  sanitized = sanitized
-    // Remove script tags and content
+  
+  // Remove only dangerous script tags and event handlers
+  let sanitized = input
     .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
-    // Remove onclick and similar
     .replace(/ on\w+="[^"]*"/g, '')
-    // Remove javascript: URLs
     .replace(/javascript:[^\s]*/g, '')
-    // Remove data: URLs
     .replace(/data:[^\s]*/g, '')
-    // Remove eval() and similar
     .replace(/eval\([^)]*\)/g, '')
-    // Remove SQL injection attempts
     .replace(/(\b)(on\S+)(\s*)=/g, '')
-    .replace(
-      /(javascript|jscript|vbscript|expression|applet|meta|xml|blink|link|style|script|embed|object|iframe|frame|frameset|ilayer|layer|bgsound|title|base):/g,
-      ''
-    );
-
+    .replace(/(javascript|jscript|vbscript|expression|applet|meta|xml|blink|link|style|script|embed|object|iframe|frame|frameset|ilayer|layer|bgsound|title|base):/g, '');
+  
+  // Remove dangerous SQL injection patterns
+  sanitized = sanitized.replace(/--/g, '&#45;&#45;');
+  sanitized = sanitized.replace(/;/g, '&#59;');
+  
+  // Only escape quotes outside of HTML tags
+  sanitized = sanitized.replace(/(["'])/g, (match, p1, offset, str) => {
+    // Check if we're inside an HTML tag
+    const before = str.slice(0, offset);
+    const openTag = before.lastIndexOf('<');
+    const closeTag = before.lastIndexOf('>');
+    
+    // If we're inside a tag, don't escape
+    if (openTag > closeTag) return p1;
+    
+    // Escape quotes outside tags
+    if (p1 === '"') return '&quot;';
+    if (p1 === "'") return '&#39;';
+    return p1;
+  });
+  
   return sanitized;
 }
 

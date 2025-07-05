@@ -45,7 +45,7 @@ const SECURITY_HEADERS_STRICT = process.env.SECURITY_HEADERS_STRICT === 'true';
 const HSTS_MAX_AGE = parseInt(process.env.HSTS_MAX_AGE || '31536000', 10);
 const ALLOWED_ORIGINS = process.env.ALLOWED_ORIGINS || '';
 
-export const securityConfig: SecurityConfig = {
+export const securityConfig = {
   rateLimit: {
     max: 10,
     windowMs: 10000, // 10 seconds
@@ -232,10 +232,10 @@ export const securityConfig: SecurityConfig = {
   download: {
     url: process.env.PCLOUD_DOWNLOAD_LINK
   }
-};
+} as any;
 
 // Validate configuration at runtime
-function validateConfig(config: SecurityConfig): void {
+function validateConfig(config: any): void {
   // Validate rate limiting
   if (config.rateLimit.windowMs < 1000) {
     throw new Error('Rate limit window must be at least 1 second');
@@ -275,30 +275,44 @@ export type Config = typeof securityConfig;
 
 // Utility functions
 export function getCSPDirectives(nonce?: string): string {
-  const { cspDirectives } = securityConfig
-  const directives = { ...cspDirectives }
+  const cspDirectives = securityConfig.cspDirectives as any;
+  const directives = { ...cspDirectives };
 
   if (nonce) {
-    directives.scriptSrc = [...directives.scriptSrc, `'nonce-${nonce}'`]
+    directives.scriptSrc = [...directives.scriptSrc, `'nonce-${nonce}'`];
   }
+
+  // Add upgrade-insecure-requests for HTTPS enforcement
+  directives.upgradeInsecureRequests = true;
 
   return Object.entries(directives)
     .map(([key, values]) => {
-      const directive = key.replace(/[A-Z]/g, m => '-' + m.toLowerCase())
-      return `${directive} ${values.join(' ')}`
+      const directive = key.replace(/[A-Z]/g, m => '-' + m.toLowerCase());
+      if (typeof values === 'boolean') {
+        return values ? directive : '';
+      }
+      return `${directive} ${(values as string[]).join(' ')}`;
     })
-    .join('; ')
+    .filter(Boolean)
+    .join('; ');
 }
 
 export function getCORSHeaders(origin?: string | null): Record<string, string> {
-  const { allowedOrigins, allowedMethods, allowedHeaders, corsMaxAge } = securityConfig
+  const { allowedMethods, allowedHeaders, corsMaxAge } = securityConfig
 
-  if (!origin || !allowedOrigins.includes(origin)) {
+  // Always allow localhost in development
+  const allowedOrigin = origin && (origin.includes('localhost') || origin.includes('127.0.0.1')) 
+    ? origin 
+    : securityConfig.allowedOrigins.includes(origin || '') 
+      ? origin 
+      : null;
+
+  if (!allowedOrigin) {
     return {}
   }
 
   return {
-    'Access-Control-Allow-Origin': origin,
+    'Access-Control-Allow-Origin': allowedOrigin,
     'Access-Control-Allow-Methods': allowedMethods.join(', '),
     'Access-Control-Allow-Headers': allowedHeaders.join(', '),
     'Access-Control-Max-Age': corsMaxAge.toString()

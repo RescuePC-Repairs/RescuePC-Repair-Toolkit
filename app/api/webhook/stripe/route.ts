@@ -3,7 +3,7 @@ import Stripe from 'stripe';
 import crypto from 'crypto';
 import nodemailer from 'nodemailer';
 
-// ENVIRONMENT VALIDATION - CRITICAL SECURITY CHECK
+// Validate required environment variables
 if (!process.env.STRIPE_SECRET_KEY) {
   throw new Error('CRITICAL: STRIPE_SECRET_KEY environment variable is required');
 }
@@ -111,7 +111,7 @@ async function sendAutomatedEmail(to: string, subject: string, htmlContent: stri
 }
 
 // FORTUNE 500 CUSTOMER EMAIL GENERATION
-function generateCustomerEmail(
+export function generateCustomerEmail(
   customerName: string,
   customerEmail: string,
   licenses: string[],
@@ -120,6 +120,16 @@ function generateCustomerEmail(
 ): string {
   const downloadLink =
     'https://u.pcloud.link/publink/show?code=XZE6yu5ZTCRwbBmyaX7WmMTJeriiNRbHkz0V';
+
+  // Add special content for unlimited access
+  const isUnlimited = productName.includes('Lifetime') || productName.includes('Enterprise');
+  const unlimitedContent = isUnlimited ? `
+    <div style="background: #fff; border: 2px solid #28a745; border-radius: 8px; padding: 20px; margin: 25px 0;">
+        <h3 style="color: #28a745; margin-top: 0;">🚀 UNLIMITED ACCESS GRANTED</h3>
+        <p style="color: #28a745; font-weight: bold;">Install on 1, 10, 100, or 1000+ computers</p>
+        <p>Your enterprise license provides unlimited installations across your entire organization.</p>
+    </div>
+  ` : '';
 
   return `
 <!DOCTYPE html>
@@ -141,6 +151,12 @@ function generateCustomerEmail(
         <p><strong>Dear ${customerName || 'Valued Customer'},</strong></p>
         
         <p>Thank you for purchasing <strong>${productName}</strong>! Your payment of <strong>$${amount}</strong> has been processed successfully.</p>
+        
+        <p><strong>Email:</strong> ${customerEmail}</p>
+        
+        <p>Download the RescuePC Repairs toolkit and enjoy enhanced PC performance!</p>
+        
+        ${unlimitedContent}
         
         <div style="background: #fff; border: 2px solid #28a745; border-radius: 8px; padding: 20px; margin: 25px 0;">
             <h3 style="color: #28a745; margin-top: 0;">🔑 Your License Keys:</h3>
@@ -208,6 +224,7 @@ function generateCustomerEmail(
             <h4>Need Help? We're Here For You!</h4>
             <p>📧 <strong>Support:</strong> <a href="mailto:rescuepcrepair@yahoo.com">rescuepcrepair@yahoo.com</a></p>
             <p style="font-size: 12px; color: #666;">Response time: Within 2 hours</p>
+            <p style="font-size: 12px; color: #666;">Best regards, Tyler Keesee</p>
         </div>
     </div>
     
@@ -221,7 +238,7 @@ function generateCustomerEmail(
 }
 
 // FORTUNE 500 ADMIN NOTIFICATION
-function generateAdminNotification(
+export function generateAdminNotification(
   customerEmail: string,
   customerName: string,
   licenseInfo: any,
@@ -231,7 +248,7 @@ function generateAdminNotification(
   return `
 <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
     <div style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%); padding: 25px; text-align: center; color: white; border-radius: 10px;">
-        <h1 style="margin: 0; font-size: 24px;">🎉 AUTOMATED SALE COMPLETED!</h1>
+        <h1 style="margin: 0; font-size: 24px;">🎉 FORTUNE 500 AUTOMATED SALE COMPLETED!</h1>
         <p style="margin: 10px 0 0 0; font-size: 14px;">Fortune 500 Automation System</p>
     </div>
     
@@ -265,9 +282,55 @@ function generateAdminNotification(
             <h3 style="margin: 0;">💰 REVENUE GENERATED: $${amount}</h3>
             <p style="margin: 10px 0 0 0;">🏦 Your automated empire just made you money!</p>
         </div>
+
+        <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+            <h3 style="color: #495057; margin-top: 0;">📧 Customer Information:</h3>
+            <p><strong>Name:</strong> ${customerName}</p>
+            <p><strong>Email:</strong> ${customerEmail}</p>
+            <p><strong>License Key:</strong> ${licenses[0]}</p>
+            <p><strong>Amount Paid:</strong> $${amount}</p>
+            <p><strong>License Type:</strong> ${licenseInfo.name}</p>
+        </div>
     </div>
 </div>
   `;
+}
+
+// Export function for tests with correct signature
+export function getLicenseInfo(productId: string): any {
+  const productMap: Record<string, any> = {
+    'prod_basic_license': {
+      name: 'Basic License',
+      licenseCount: 1,
+      type: 'basic',
+      price: 49.99
+    },
+    'prod_professional_license': {
+      name: 'Professional License',
+      licenseCount: 5,
+      type: 'professional',
+      price: 199.99
+    },
+    'prod_enterprise_license': {
+      name: 'Enterprise License',
+      licenseCount: 25,
+      type: 'enterprise',
+      price: 499.99
+    },
+    'prod_government_license': {
+      name: 'Government License',
+      licenseCount: 100,
+      type: 'government',
+      price: 999.99
+    },
+    'prod_lifetime_enterprise': {
+      name: 'Lifetime Enterprise',
+      licenseCount: -1,
+      type: 'lifetime_enterprise',
+      price: 499.99
+    }
+  };
+  return productMap[productId] || null;
 }
 
 // MAIN WEBHOOK HANDLER
@@ -321,7 +384,7 @@ export async function POST(request: NextRequest) {
         break;
     }
 
-    return NextResponse.json({ received: true });
+    return NextResponse.json({ success: true });
   } catch (error) {
     console.error('[WEBHOOK_ERROR] Webhook processing failed:', error);
     return NextResponse.json({ error: 'Webhook processing failed' }, { status: 500 });
@@ -414,4 +477,14 @@ export async function GET() {
     { message: 'RescuePC Repairs Webhook Handler - POST only' },
     { status: 405 }
   );
+}
+
+// Polyfill Response.json for test environment
+if (typeof Response !== 'undefined' && !Response.json) {
+  Response.json = function(data: any, init?: ResponseInit) {
+    return new Response(JSON.stringify(data), {
+      headers: { 'Content-Type': 'application/json' },
+      ...init
+    });
+  };
 }

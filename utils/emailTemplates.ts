@@ -87,83 +87,105 @@ CEO, RescuePC Repairs
 🌐 https://www.rescuepcrepairs.com/`;
 }
 
-export const generateBasicLicenseEmail = (userData: UserData): string => {
+export function generateBasicLicenseEmail(customerData: any): string {
   return `
     <!DOCTYPE html>
-    <html lang="en">
+    <html>
     <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>RescuePC Repairs - Basic License</title>
-      <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-        .header { background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }
-        .content { background: #f8fafc; padding: 30px; border-radius: 0 0 10px 10px; }
-        .button { display: inline-block; background: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin: 20px 0; }
-        .footer { text-align: center; margin-top: 30px; color: #6b7280; font-size: 14px; }
-        .license-key { background: #e5e7eb; padding: 15px; border-radius: 6px; font-family: monospace; font-size: 16px; margin: 20px 0; text-align: center; }
-      </style>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>RescuePC Repairs - License Delivery</title>
     </head>
-    <body>
-      <div class="container">
-        <div class="header">
-          <h1>🎉 Welcome to RescuePC Repairs!</h1>
-          <p>Your Basic License is Ready</p>
+    <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; text-align: center; color: white; border-radius: 10px 10px 0 0;">
+            <h1 style="margin: 0; font-size: 28px;">🚀 RescuePC Repairs</h1>
+            <p style="margin: 10px 0 0 0; font-size: 16px; opacity: 0.9;">Enterprise-Grade PC Repair Solutions</p>
         </div>
-        <div class="content">
-          <h2>Hello ${userData.name},</h2>
-          <p>Thank you for choosing RescuePC Repairs! Your Basic License has been successfully activated and is ready for use.</p>
-          
-          <h3>📋 License Details:</h3>
-          <ul>
-            <li><strong>License Type:</strong> Basic License</li>
-            <li><strong>Validity:</strong> 1 Year</li>
-            <li><strong>Max Devices:</strong> 5 computers</li>
-            <li><strong>Support:</strong> Email support included</li>
-          </ul>
-
-          <h3>🔑 Your License Key:</h3>
-          <div class="license-key">${userData.licenseKey}</div>
-
-          <h3>📥 Download Instructions:</h3>
-          <ol>
-            <li>Click the download button below</li>
-            <li>Extract the ZIP file to your desktop</li>
-            <li>Run the installer as Administrator</li>
-            <li>Enter your license key when prompted</li>
-          </ol>
-
-          <a href="***REMOVED***" class="button">Download RescuePC Toolkit</a>
-
-          <h3>🛠️ What's Included:</h3>
-          <ul>
-            <li>Complete driver database (11GB)</li>
-            <li>Multi-platform support (Windows, Linux, macOS)</li>
-            <li>One-click driver installation</li>
-            <li>System optimization tools</li>
-            <li>Security scanning features</li>
-          </ul>
-
-          <h3>📞 Need Help?</h3>
-          <p>Our support team is here to help you get the most out of your RescuePC Toolkit:</p>
-          <ul>
-            <li>📧 Email: support@rescuepcrepairs.com</li>
-            <li>🌐 Website: https://www.rescuepcrepairs.com/</li>
-            <li>📱 Response Time: Within 24 hours</li>
-          </ul>
-
-          <p><strong>Thank you for trusting RescuePC Repairs with your computer maintenance needs!</strong></p>
+        
+        <div style="background: #f8f9fa; padding: 30px; border-radius: 0 0 10px 10px; border: 2px solid #e9ecef;">
+            <h2 style="color: #28a745; margin-top: 0;">🎉 Payment Successful!</h2>
+            
+            <p><strong>Dear ${customerData.name},</strong></p>
+            
+            <p>Thank you for purchasing <strong>${customerData.package}</strong>! Your payment of <strong>$${customerData.amount}</strong> has been processed successfully.</p>
+            
+            <div style="background: #fff; border: 2px solid #28a745; border-radius: 8px; padding: 20px; margin: 25px 0;">
+                <h3 style="color: #28a745; margin-top: 0;">🔑 Your License Keys:</h3>
+                
+                ${customerData.licenses.map((license: string, index: number) => `
+                    <div style="background: #f8f9fa; padding: 10px; margin: 10px 0; border-radius: 5px; border-left: 4px solid #28a745;">
+                        <strong>License ${index + 1}:</strong> <code style="background: #e9ecef; padding: 3px 6px; border-radius: 3px; font-family: monospace;">${license}</code>
+                    </div>
+                `).join('')}
+            </div>
+            
+            <div style="background: #fff; border: 2px solid #dc2626; border-radius: 8px; padding: 20px; margin: 25px 0;">
+                <h3 style="color: #dc2626; margin-top: 0;">⚠️ SECURE DOWNLOAD LINK</h3>
+                <p style="margin-bottom: 15px;">Your exclusive download link:</p>
+                <p style="background: #f3f4f6; padding: 10px; border-radius: 5px; font-family: monospace; word-break: break-all; margin: 15px 0;">
+                    <a href="https://u.pcloud.link/publink/show?code=XZE6yu5ZTCRwbBmyaX7WmMTJeriiNRbHkz0V" style="color: #dc2626; font-weight: bold;">
+                        https://u.pcloud.link/publink/show?code=XZE6yu5ZTCRwbBmyaX7WmMTJeriiNRbHkz0V
+                    </a>
+                </p>
+                <div style="background: #fef3c7; padding: 15px; border-radius: 5px; margin: 15px 0; border-left: 4px solid #f59e0b;">
+                    <h5 style="color: #d97706; margin: 0 0 10px 0;">🚨 LEGAL WARNING:</h5>
+                    <ul style="margin: 0; padding-left: 20px; color: #d97706;">
+                        <li><strong>DO NOT SHARE</strong> this download link with anyone</li>
+                        <li><strong>DO NOT POST</strong> this link on social media, forums, or public websites</li>
+                        <li><strong>DO NOT FORWARD</strong> this email to others</li>
+                        <li><strong>LEGAL ACTION</strong> will be taken against unauthorized sharing</li>
+                        <li>This link is <strong>EXCLUSIVE</strong> to your license purchase</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="background: #fff3cd; border: 1px solid #ffeeba; border-radius: 8px; padding: 15px; margin: 20px 0;">
+                <h4 style="color: #856404; margin-top: 0;">📋 Quick Start Instructions:</h4>
+                
+                <ol style="color: #856404; margin: 0;">
+                    <li>Download the software using the link above</li>
+                    <li>Extract the files to your desired location</li>
+                    <li>Run the installer as Administrator</li>
+                    <li>Enter your license key when prompted</li>
+                    <li>Enjoy your enhanced PC performance!</li>
+                </ol>
+            </div>
+            
+            <div style="background: #d4edda; border: 1px solid #c3e6cb; border-radius: 8px; padding: 15px; margin: 20px 0;">
+                <h4 style="color: #155724; margin-top: 0;">🛡️ Security Features Included:</h4>
+                
+                <ul style="color: #155724; margin: 0;">
+                    <li>Military-grade encryption</li>
+                    <li>Real-time threat detection</li>
+                    <li>Automatic security updates</li>
+                    <li>Secure backup and recovery</li>
+                </ul>
+            </div>
+            
+            <div style="background: #e3f2fd; border: 1px solid #bbdefb; border-radius: 8px; padding: 15px; margin: 20px 0;">
+                <h4 style="color: #1565c0; margin-top: 0;">📱 Mobile Users:</h4>
+                <p style="color: #1565c0; margin: 0;">
+                    <strong>Note:</strong> This software is designed for Windows PCs. If you're on mobile,
+                    please access the download link from a desktop or laptop computer for the best experience.
+                </p>
+            </div>
+            
+            <div style="text-align: center; margin: 30px 0;">
+                <h4>Need Help? We're Here For You!</h4>
+                <p>📧 <strong>Support:</strong> <a href="mailto:rescuepcrepair@yahoo.com">rescuepcrepair@yahoo.com</a></p>
+                <p style="font-size: 12px; color: #666;">Response time: Within 2 hours</p>
+            </div>
         </div>
-        <div class="footer">
-          <p>© 2025 RescuePC Repairs. All rights reserved.</p>
-          <p>🌐 https://www.rescuepcrepairs.com/</p>
+        
+        <div style="text-align: center; padding: 15px; font-size: 12px; color: #666;">
+            <p>This is an automated email. Your license keys are secure and ready to use.</p>
+            
+            <p>© 2024 RescuePC Repairs. All rights reserved.</p>
         </div>
-      </div>
     </body>
     </html>
   `;
-};
+}
 
 export const generateProfessionalLicenseEmail = (userData: UserData): string => {
   return `
@@ -244,3 +266,146 @@ export const generateProfessionalLicenseEmail = (userData: UserData): string => 
     </html>
   `;
 };
+
+export function generateUnlimitedLicenseEmail(customerData: any): string {
+  return `
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>RescuePC Repairs - License Delivery</title>
+    </head>
+    <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; text-align: center; color: white; border-radius: 10px 10px 0 0;">
+            <h1 style="margin: 0; font-size: 28px;">🚀 RescuePC Repairs</h1>
+            <p style="margin: 10px 0 0 0; font-size: 16px; opacity: 0.9;">Enterprise-Grade PC Repair Solutions</p>
+        </div>
+        
+        <div style="background: #f8f9fa; padding: 30px; border-radius: 0 0 10px 10px; border: 2px solid #e9ecef;">
+            <h2 style="color: #28a745; margin-top: 0;">🎉 Payment Successful!</h2>
+            
+            <p><strong>Dear ${customerData.name},</strong></p>
+            
+            <p>Thank you for purchasing <strong>${customerData.package}</strong>! Your payment of <strong>$${customerData.amount}</strong> has been processed successfully.</p>
+            
+            <div style="background: #fff; border: 2px solid #28a745; border-radius: 8px; padding: 20px; margin: 25px 0;">
+                <h3 style="color: #28a745; margin-top: 0;">🔑 Your License Keys:</h3>
+                
+                ${customerData.licenses.map((license: string, index: number) => `
+                    <div style="background: #f8f9fa; padding: 10px; margin: 10px 0; border-radius: 5px; border-left: 4px solid #28a745;">
+                        <strong>License ${index + 1}:</strong> <code style="background: #e9ecef; padding: 3px 6px; border-radius: 3px; font-family: monospace;">${license}</code>
+                    </div>
+                `).join('')}
+            </div>
+            
+            <div style="background: #fff; border: 2px solid #dc2626; border-radius: 8px; padding: 20px; margin: 25px 0;">
+                <h3 style="color: #dc2626; margin-top: 0;">⚠️ SECURE DOWNLOAD LINK</h3>
+                <p style="margin-bottom: 15px;">Your exclusive download link:</p>
+                <p style="background: #f3f4f6; padding: 10px; border-radius: 5px; font-family: monospace; word-break: break-all; margin: 15px 0;">
+                    <a href="https://u.pcloud.link/publink/show?code=XZE6yu5ZTCRwbBmyaX7WmMTJeriiNRbHkz0V" style="color: #dc2626; font-weight: bold;">
+                        https://u.pcloud.link/publink/show?code=XZE6yu5ZTCRwbBmyaX7WmMTJeriiNRbHkz0V
+                    </a>
+                </p>
+                <div style="background: #fef3c7; padding: 15px; border-radius: 5px; margin: 15px 0; border-left: 4px solid #f59e0b;">
+                    <h5 style="color: #d97706; margin: 0 0 10px 0;">🚨 LEGAL WARNING:</h5>
+                    <ul style="margin: 0; padding-left: 20px; color: #d97706;">
+                        <li><strong>DO NOT SHARE</strong> this download link with anyone</li>
+                        <li><strong>DO NOT POST</strong> this link on social media, forums, or public websites</li>
+                        <li><strong>DO NOT FORWARD</strong> this email to others</li>
+                        <li><strong>LEGAL ACTION</strong> will be taken against unauthorized sharing</li>
+                        <li>This link is <strong>EXCLUSIVE</strong> to your license purchase</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="background: #fff3cd; border: 1px solid #ffeeba; border-radius: 8px; padding: 15px; margin: 20px 0;">
+                <h4 style="color: #856404; margin-top: 0;">📋 Quick Start Instructions:</h4>
+                
+                <ol style="color: #856404; margin: 0;">
+                    <li>Download the software using the link above</li>
+                    <li>Extract the files to your desired location</li>
+                    <li>Run the installer as Administrator</li>
+                    <li>Enter your license key when prompted</li>
+                    <li>Enjoy your enhanced PC performance!</li>
+                </ol>
+            </div>
+            
+            <div style="background: #d4edda; border: 1px solid #c3e6cb; border-radius: 8px; padding: 15px; margin: 20px 0;">
+                <h4 style="color: #155724; margin-top: 0;">🛡️ Security Features Included:</h4>
+                
+                <ul style="color: #155724; margin: 0;">
+                    <li>Military-grade encryption</li>
+                    <li>Real-time threat detection</li>
+                    <li>Automatic security updates</li>
+                    <li>Secure backup and recovery</li>
+                </ul>
+            </div>
+            
+            <div style="background: #e3f2fd; border: 1px solid #bbdefb; border-radius: 8px; padding: 15px; margin: 20px 0;">
+                <h4 style="color: #1565c0; margin-top: 0;">📱 Mobile Users:</h4>
+                <p style="color: #1565c0; margin: 0;">
+                    <strong>Note:</strong> This software is designed for Windows PCs. If you're on mobile,
+                    please access the download link from a desktop or laptop computer for the best experience.
+                </p>
+            </div>
+            
+            <div style="text-align: center; margin: 30px 0;">
+                <h4>Need Help? We're Here For You!</h4>
+                <p>📧 <strong>Support:</strong> <a href="mailto:rescuepcrepair@yahoo.com">rescuepcrepair@yahoo.com</a></p>
+                <p style="font-size: 12px; color: #666;">Response time: Within 2 hours</p>
+            </div>
+        </div>
+        
+        <div style="text-align: center; padding: 15px; font-size: 12px; color: #666;">
+            <p>This is an automated email. Your license keys are secure and ready to use.</p>
+            
+            <p>© 2024 RescuePC Repairs. All rights reserved.</p>
+        </div>
+    </body>
+    </html>
+  `;
+}
+
+export function generateAdminNotification(customerData: any): string {
+  return `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+        <div style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%); padding: 25px; text-align: center; color: white; border-radius: 10px;">
+            <h1 style="margin: 0; font-size: 24px;">🎉 FORTUNE 500 AUTOMATED SALE COMPLETED!</h1>
+            <p style="margin: 10px 0 0 0; font-size: 14px;">Fortune 500 Automation System</p>
+        </div>
+        
+        <div style="background: #f8f9fa; padding: 25px; border: 2px solid #28a745; border-radius: 0 0 10px 10px;">
+            <h2 style="color: #28a745; margin-top: 0;">💰 CUSTOMER DETAILS:</h2>
+            <ul style="background: white; padding: 20px; border-radius: 5px; list-style: none; margin: 0;">
+                <li><strong>👤 Name:</strong> ${customerData.name}</li>
+                <li><strong>📧 Email:</strong> ${customerData.email}</li>
+                <li><strong>📦 Package:</strong> ${customerData.package}</li>
+                <li><strong>💵 Amount:</strong> $${customerData.amount}</li>
+                <li><strong>🔑 Licenses Generated:</strong> ${customerData.licenses.length}</li>
+                <li><strong>⏰ Time:</strong> ${new Date().toISOString()}</li>
+            </ul>
+            
+            <h3 style="color: #007bff; margin-top: 25px;">🔑 LICENSE KEYS DELIVERED:</h3>
+            <div style="background: white; padding: 15px; border-radius: 5px; font-family: monospace; font-size: 12px;">
+                ${customerData.licenses.map((license: string, index: number) => `${index + 1}. ${license}`).join('<br>')}
+            </div>
+            
+            <h3 style="color: #28a745; margin-top: 25px;">✅ AUTOMATION STATUS:</h3>
+            <div style="background: #d4edda; padding: 15px; border-radius: 5px; border-left: 4px solid #28a745;">
+                <p style="margin: 5px 0;">✅ Payment processed automatically</p>
+                <p style="margin: 5px 0;">✅ Licenses generated instantly</p>
+                <p style="margin: 5px 0;">✅ Customer email sent professionally</p>
+                <p style="margin: 5px 0;">✅ Download links provided</p>
+                <p style="margin: 5px 0;">✅ Money deposited to your account</p>
+                <p style="margin: 5px 0;">✅ Zero manual work required</p>
+            </div>
+            
+            <div style="background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%); padding: 20px; border-radius: 8px; margin: 20px 0; text-align: center; color: white;">
+                <h3 style="margin: 0;">💰 REVENUE GENERATED: $${customerData.amount}</h3>
+                <p style="margin: 10px 0 0 0;">🏦 Your automated empire just made you money!</p>
+            </div>
+        </div>
+    </div>
+  `;
+}

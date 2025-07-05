@@ -76,6 +76,11 @@ export class ZeroTrustSecurity {
 
   public async validateRequest(context: SecurityContext): Promise<boolean> {
     try {
+      // Validate required fields
+      if (!context.requestId || !context.clientId || !context.ipAddress || !context.userAgent) {
+        return false;
+      }
+
       // Check if client is locked out
       if (this.isLockedOut(context.clientId)) {
         throw new Error('Account temporarily locked due to suspicious activity');

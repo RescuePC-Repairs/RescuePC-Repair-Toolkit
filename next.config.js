@@ -3,6 +3,11 @@ const nextConfig = {
   // Basic configuration
   swcMinify: true,
 
+  // Disable static generation for error pages
+  generateBuildId: async () => {
+    return 'build-' + Date.now();
+  },
+
   // Basic webpack config
   webpack: (config, { isServer }) => {
     if (!isServer) {

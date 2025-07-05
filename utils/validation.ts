@@ -284,3 +284,46 @@ export async function activateLicense(licenseKey: string, pcIdentifier: string):
     return false;
   }
 }
+
+// File validation functions
+export function validateFileType(
+  filename: string | null | undefined,
+  mimeType: string,
+  allowedTypes: string[] = defaultFileConfig.allowedTypes
+): boolean {
+  if (!filename || typeof filename !== 'string') return false;
+  
+  const extension = filename.split('.').pop()?.toLowerCase();
+  const allowedExtensions = defaultFileConfig.allowedExtensions[mimeType];
+  return (allowedTypes.includes(mimeType) && allowedExtensions?.includes(extension || '')) || false;
+}
+
+export function validateFileSize(size: number): boolean {
+  if (size < 0 || isNaN(size)) return false;
+  return size <= defaultFileConfig.maxSize;
+}
+
+export function validateFileContent(
+  content: Buffer | null | undefined,
+  declaredType: string
+): boolean {
+  if (!content || typeof content.toString !== 'function') return false;
+  
+  const magicNumbers: Record<string, string[]> = {
+    'application/pdf': ['25504446', '255044462D'], // %PDF- and %PDF-
+    'image/jpeg': ['FFD8FF'],
+    'image/png': ['89504E47'],
+    'image/gif': ['47494638']
+  };
+  
+  const magic = content.toString('hex').toUpperCase().slice(0, 8);
+  const validMagic = magicNumbers[declaredType]?.some((m) => magic.startsWith(m));
+  
+  // For PDF, also check the ASCII representation
+  if (declaredType === 'application/pdf' && !validMagic) {
+    const ascii = content.toString('ascii', 0, 5);
+    if (ascii.startsWith('%PDF-')) return true;
+  }
+  
+  return validMagic ?? false;
+}

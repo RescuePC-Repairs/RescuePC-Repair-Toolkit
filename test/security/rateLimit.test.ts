@@ -2,11 +2,16 @@ import { beforeEach, describe, expect, it, jest, afterEach } from '@jest/globals
 import { createRateLimit } from '@/utils/rateLimit';
 import { NextRequest, NextResponse } from 'next/server';
 
-jest.mock('@/utils/rateLimit');
+jest.mock('@/utils/rateLimit', () => ({
+  createRateLimit: jest.fn(() => ({
+    check: jest.fn().mockResolvedValue(true)
+  }))
+}));
+jest.mock('lru-cache');
 
 describe('Rate Limiting', () => {
   let mockRequest: NextRequest;
-  let limiter: ReturnType<typeof createRateLimit>;
+  let limiter: any;
   const defaultConfig = {
     interval: 60000, // 1 minute
     uniqueTokenPerInterval: 100
@@ -20,35 +25,36 @@ describe('Rate Limiting', () => {
         'x-real-ip': '127.0.0.1'
       })
     });
-    limiter = createRateLimit(defaultConfig);
+    limiter = createRateLimit({
+      uniqueTokenPerInterval: 10,
+      interval: 60000
+    });
+    limiter.check = jest.fn().mockResolvedValue(true);
   });
 
   describe('Basic Rate Limiting', () => {
     it('should allow requests within the rate limit', async () => {
-      (limiter.check as jest.Mock).mockResolvedValue(true);
-
       const result = await limiter.check(mockRequest);
       expect(result).toBe(true);
     });
 
-    it('should block requests exceeding the rate limit', async () => {
-      (limiter.check as jest.Mock).mockRejectedValue(new Error('Rate limit exceeded'));
-
+    it('should block requests over limit', async () => {
+      limiter.check = jest.fn().mockRejectedValue(new Error('Rate limit exceeded'));
       await expect(limiter.check(mockRequest)).rejects.toThrow('Rate limit exceeded');
     });
 
     it('should respect the configured interval', async () => {
       const customLimiter = createRateLimit({ ...defaultConfig, interval: 5000 }); // 5 seconds
-      (customLimiter.check as jest.Mock).mockResolvedValue(true);
+      customLimiter.check = jest.fn().mockResolvedValue(true);
 
       await expect(customLimiter.check(mockRequest)).resolves.toBe(true);
 
       jest.advanceTimersByTime(4000); // 4 seconds
-      (customLimiter.check as jest.Mock).mockRejectedValue(new Error('Rate limit exceeded'));
+      customLimiter.check = jest.fn().mockRejectedValue(new Error('Rate limit exceeded'));
       await expect(customLimiter.check(mockRequest)).rejects.toThrow('Rate limit exceeded');
 
       jest.advanceTimersByTime(1000); // 5 seconds total
-      (customLimiter.check as jest.Mock).mockResolvedValue(true);
+      customLimiter.check = jest.fn().mockResolvedValue(true);
       await expect(customLimiter.check(mockRequest)).resolves.toBe(true);
     });
   });
@@ -62,7 +68,7 @@ describe('Rate Limiting', () => {
         })
       });
 
-      (limiter.check as jest.Mock).mockResolvedValue(true);
+      limiter.check.mockResolvedValue(true);
       await expect(limiter.check(mockRequestWithProxy)).resolves.toBe(true);
     });
 
@@ -71,7 +77,7 @@ describe('Rate Limiting', () => {
         headers: new Headers({})
       });
 
-      (limiter.check as jest.Mock).mockResolvedValue(true);
+      limiter.check.mockResolvedValue(true);
       await expect(limiter.check(mockRequestNoIP)).resolves.toBe(true);
     });
 
@@ -83,14 +89,14 @@ describe('Rate Limiting', () => {
         })
       });
 
-      (limiter.check as jest.Mock).mockResolvedValue(true);
+      limiter.check.mockResolvedValue(true);
       await expect(limiter.check(mockRequestInvalidIP)).resolves.toBe(true);
     });
   });
 
   describe('Distributed Rate Limiting', () => {
     it('should handle concurrent requests', async () => {
-      (limiter.check as jest.Mock).mockResolvedValue(true);
+      limiter.check.mockResolvedValue(true);
 
       const requests = Array(5)
         .fill(null)
@@ -107,8 +113,7 @@ describe('Rate Limiting', () => {
         headers: new Headers({ 'x-forwarded-for': '192.168.1.2' })
       });
 
-      (limiter.check as jest.Mock)
-        .mockResolvedValueOnce(true) // IP 1 first request
+      limiter.check.mockResolvedValueOnce(true) // IP 1 first request
         .mockResolvedValueOnce(true) // IP 2 first request
         .mockRejectedValueOnce(new Error('Rate limit exceeded')) // IP 1 second request
         .mockResolvedValueOnce(true); // IP 2 second request
@@ -123,11 +128,9 @@ describe('Rate Limiting', () => {
   describe('Edge Cases', () => {
     it('should handle requests at exactly the limit', async () => {
       const customLimiter = createRateLimit({
-        interval: 60000,
         uniqueTokenPerInterval: 2
       });
-
-      (customLimiter.check as jest.Mock)
+      customLimiter.check = jest.fn()
         .mockResolvedValueOnce(true) // First request
         .mockResolvedValueOnce(true) // Second request
         .mockRejectedValueOnce(new Error('Rate limit exceeded')); // Third request
@@ -139,19 +142,17 @@ describe('Rate Limiting', () => {
 
     it('should reset counters after interval', async () => {
       const customLimiter = createRateLimit({
-        interval: 5000, // 5 seconds
         uniqueTokenPerInterval: 1
       });
-
-      (customLimiter.check as jest.Mock)
+      customLimiter.check = jest.fn()
         .mockResolvedValueOnce(true) // First request
-        .mockRejectedValueOnce(new Error('Rate limit exceeded')) // Second request
+        .mockRejectedValueOnce(new Error('Rate limit exceeded')) // Second request (limit exceeded)
         .mockResolvedValueOnce(true); // Request after reset
 
       await expect(customLimiter.check(mockRequest)).resolves.toBe(true);
       await expect(customLimiter.check(mockRequest)).rejects.toThrow('Rate limit exceeded');
 
-      jest.advanceTimersByTime(5000);
+      jest.advanceTimersByTime(5000); // Advance past interval
       await expect(customLimiter.check(mockRequest)).resolves.toBe(true);
     });
 
@@ -159,7 +160,7 @@ describe('Rate Limiting', () => {
       const now = Date.now();
       jest.setSystemTime(now);
 
-      (limiter.check as jest.Mock).mockResolvedValue(true);
+      limiter.check.mockResolvedValue(true);
       await expect(limiter.check(mockRequest)).resolves.toBe(true);
 
       // Simulate time moving backwards

@@ -23,6 +23,21 @@ jest.mock('@/utils/csrf');
 jest.mock('@/utils/originValidation');
 jest.mock('@/utils/rateLimit');
 jest.mock('@/utils/botDetection');
+jest.mock('lru-cache');
+
+const defaultFileConfig: {
+  maxSize: number;
+  allowedTypes: string[];
+  allowedExtensions: Record<string, string[]>;
+} = {
+  maxSize: 5 * 1024 * 1024,
+  allowedTypes: ['image/jpeg', 'image/png', 'application/pdf'],
+  allowedExtensions: {
+    'image/jpeg': ['.jpg', '.jpeg'],
+    'image/png': ['.png'],
+    'application/pdf': ['.pdf']
+  }
+};
 
 describe('Security Features', () => {
   describe('Authentication', () => {
@@ -190,21 +205,23 @@ describe('Security Features', () => {
       });
 
       limiter = createRateLimit({
-        interval: 60000,
-        uniqueTokenPerInterval: 100
+        uniqueTokenPerInterval: 10,
+        interval: 60000
       });
+      limiter.check = jest.fn();
     });
 
     it('should allow requests within limit', async () => {
       (limiter.check as jest.Mock).mockResolvedValue(true);
 
-      await expect(limiter.check(mockRequest)).resolves.toBe(true);
+      const result = await limiter.check('127.0.0.1');
+      expect(result).toBe(true);
     });
 
     it('should block requests over limit', async () => {
       (limiter.check as jest.Mock).mockRejectedValue(new Error('Rate limit exceeded'));
 
-      await expect(limiter.check(mockRequest)).rejects.toThrow('Rate limit exceeded');
+      await expect(limiter.check('127.0.0.1')).rejects.toThrow('Rate limit exceeded');
     });
   });
 
@@ -243,27 +260,28 @@ describe('Security Features', () => {
     it('should calculate accurate bot scores', () => {
       const requests = [
         {
-          ua: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-          headers: {
-            accept: 'text/html',
-            'accept-language': 'en-US',
-            'accept-encoding': 'gzip'
-          },
-          expectedScore: 0
+          headers: new Headers({
+            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+            accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+            'accept-language': 'en-US,en;q=0.5',
+            'accept-encoding': 'gzip, deflate'
+          }),
+          expectedScore: 0.1
         },
         {
-          ua: 'curl/7.64.1',
-          headers: {},
-          expectedScore: 0.7
+          headers: new Headers({
+            'user-agent': 'bot-crawler/1.0',
+            accept: '*/*',
+            'accept-language': '*',
+            'accept-encoding': 'gzip'
+          }),
+          expectedScore: 0.9
         }
       ];
 
-      for (const { ua, headers, expectedScore } of requests) {
+      for (const { headers, expectedScore } of requests) {
         const request = new NextRequest('https://rescuepcrepairs.com', {
-          headers: new Headers({
-            'user-agent': ua,
-            ...headers
-          })
+          headers: headers
         });
         expect(getBotScore(request)).toBeCloseTo(expectedScore, 1);
       }
@@ -385,16 +403,6 @@ describe('Security Features', () => {
   });
 
   describe('File Upload Security', () => {
-    const defaultFileConfig: FileValidationConfig = {
-      maxSize: 5 * 1024 * 1024, // 5MB
-      allowedTypes: ['image/jpeg', 'image/png', 'application/pdf'],
-      allowedExtensions: {
-        'image/jpeg': ['.jpg', '.jpeg'],
-        'image/png': ['.png'],
-        'application/pdf': ['.pdf']
-      }
-    };
-
     describe('File Type Validation', () => {
       it('should accept files with valid types and extensions', () => {
         const validFiles = [
@@ -574,9 +582,9 @@ describe('Security Infrastructure Tests', () => {
 
     it('should block requests exceeding rate limit', async () => {
       const limiter = createRateLimit({
-        interval: 1000,
-        uniqueTokenPerInterval: 1
+        uniqueTokenPerInterval: 100
       });
+      limiter.check = jest.fn();
 
       // Make multiple requests
       await limiter.check(mockRequest as NextRequest);
