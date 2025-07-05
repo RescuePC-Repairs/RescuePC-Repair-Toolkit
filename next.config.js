@@ -1,14 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: true
   },
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: true
   },
   experimental: {
     // Disable static generation for error pages to fix Html import issue
-    staticPageGenerationTimeout: 1000,
+    staticPageGenerationTimeout: 1000
   },
   // Force dynamic rendering for error pages
   async rewrites() {
