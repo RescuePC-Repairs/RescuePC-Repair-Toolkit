@@ -23,7 +23,12 @@ export function middleware(request: NextRequest) {
     const hostname = request.headers.get('host') || '';
     const isHttps = request.headers.get('x-forwarded-proto') === 'https';
 
-    if (!isHttps && hostname && !hostname.includes('localhost') && !hostname.includes('127.0.0.1')) {
+    if (
+      !isHttps &&
+      hostname &&
+      !hostname.includes('localhost') &&
+      !hostname.includes('127.0.0.1')
+    ) {
       // Fix the URL construction to avoid malformed URLs
       const protocol = 'https:';
       const host = hostname;

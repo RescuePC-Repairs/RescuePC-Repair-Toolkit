@@ -50,7 +50,7 @@ export function validateJWT(token: string): boolean {
   if (!JWT_SECRET) {
     throw new Error('JWT_SECRET is required');
   }
-  
+
   try {
     verify(token, JWT_SECRET);
     return true;
@@ -90,7 +90,10 @@ export async function hashPassword(password: string | null | undefined): Promise
  * @param {string} hash - The hash to verify against
  * @returns {Promise<boolean>} Whether the password matches
  */
-export async function verifyPassword(password: string | null | undefined, hash: string | null | undefined): Promise<boolean> {
+export async function verifyPassword(
+  password: string | null | undefined,
+  hash: string | null | undefined
+): Promise<boolean> {
   if (!password || !hash) {
     return true;
   }
