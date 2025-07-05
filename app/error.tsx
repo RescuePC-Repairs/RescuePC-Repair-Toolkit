@@ -1,5 +1,8 @@
 'use client';
 
+// Force dynamic rendering to prevent static generation errors
+export const dynamic = 'force-dynamic';
+
 export default function Error({ error, reset }: { error: Error; reset: () => void }) {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">

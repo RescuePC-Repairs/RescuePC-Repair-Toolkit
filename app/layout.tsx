@@ -14,7 +14,8 @@ export const dynamic = 'force-dynamic';
 // Professional metadata with SEO optimization
 export const metadata: Metadata = {
   title: 'RescuePC Repairs - Professional Computer Repair Toolkit',
-  description: 'Professional computer repair toolkit with advanced diagnostics, system optimization, and comprehensive repair tools.',
+  description:
+    'Professional computer repair toolkit with advanced diagnostics, system optimization, and comprehensive repair tools.',
   icons: {
     icon: '/favicon.ico',
     apple: '/apple-touch-icon.png'

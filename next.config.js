@@ -1,23 +1,25 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'standalone',
+  experimental: {
+    serverActions: {
+      allowedOrigins: ['localhost:3000', 'rescuepcrepairs.com']
+    },
+  },
   eslint: {
     ignoreDuringBuilds: true
   },
   typescript: {
     ignoreBuildErrors: true
   },
-  // Disable static generation completely
-  swcMinify: true,
-  
-  // Force dynamic rendering for error pages
+  // Completely disable static generation
+  trailingSlash: false,
   async rewrites() {
     return [];
   },
   generateBuildId: async () => {
     return 'build-' + Date.now();
   },
-
-  // Basic webpack config
   webpack: (config, { isServer }) => {
     if (!isServer) {
       config.resolve.fallback = {
@@ -29,10 +31,22 @@ const nextConfig = {
     }
     return config;
   },
-
-  // Production optimizations
   compress: true,
-  poweredByHeader: false
+  poweredByHeader: false,
+  // Force dynamic rendering for all pages
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'x-force-dynamic',
+            value: 'true'
+          }
+        ]
+      }
+    ];
+  }
 };
 
 module.exports = nextConfig;

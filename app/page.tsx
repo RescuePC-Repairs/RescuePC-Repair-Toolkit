@@ -107,11 +107,11 @@ export default function HomePage({ searchParams }: { searchParams: { error?: str
       const response = await fetch('/api/create-checkout-session', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          licenseType,
-        }),
+          licenseType
+        })
       });
 
       const { url } = await response.json();

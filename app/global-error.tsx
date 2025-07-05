@@ -2,7 +2,6 @@
 
 // Force dynamic rendering to prevent static generation errors
 export const dynamic = 'force-dynamic';
-export const runtime = 'nodejs';
 
 export default function GlobalError({
   error,
@@ -12,15 +11,17 @@ export default function GlobalError({
   reset: () => void;
 }) {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center">
-      <h1 className="text-3xl font-bold mb-4">500 - Internal Server Error</h1>
-      <p className="mb-4">{error.message || 'An unexpected error occurred.'}</p>
-      <button
-        onClick={reset}
-        className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      >
-        Retry
-      </button>
+    <div className="bg-gray-900 text-white min-h-screen flex items-center justify-center">
+      <div className="text-center">
+        <h2 className="text-2xl font-bold mb-4">Something went wrong!</h2>
+        <p className="text-gray-400 mb-4">An error occurred while loading the application.</p>
+        <button
+          onClick={() => reset()}
+          className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Try again
+        </button>
+      </div>
     </div>
   );
 }

@@ -40,7 +40,7 @@ export function middleware(request: NextRequest) {
   }
 
   // Rate limiting headers
-  const clientIP = request.ip || request.headers?.get('x-forwarded-for') || 'unknown';
+  const clientIP = request.headers?.get('x-forwarded-for') || 'unknown';
   const userAgent = request.headers?.get('user-agent') || '';
 
   // Bot detection and blocking
@@ -209,7 +209,9 @@ export function middleware(request: NextRequest) {
   }
 
   // Allow the request to continue
-  return undefined;
+  const response = NextResponse.next();
+  response.headers.set('x-force-dynamic', 'true');
+  return response;
 }
 
 // Configure which paths should be processed by middleware
