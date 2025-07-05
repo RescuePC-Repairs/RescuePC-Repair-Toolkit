@@ -133,5 +133,10 @@ export function getOriginTrustScore(request: NextRequest): number {
     }
   }
 
+  // If no origin or referer, return low score
+  if (!origin && !referer) {
+    return 0.5;
+  }
+
   return Math.min(score, 1);
 }

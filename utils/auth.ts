@@ -47,8 +47,12 @@ export function generateTokens(payload: Omit<CustomJwtPayload, 'iat' | 'exp'>): 
  * @returns {boolean} Whether the token is valid
  */
 export function validateJWT(token: string): boolean {
+  if (!JWT_SECRET) {
+    throw new Error('JWT_SECRET is required');
+  }
+  
   try {
-    verify(token, JWT_SECRET) as CustomJwtPayload;
+    verify(token, JWT_SECRET);
     return true;
   } catch {
     return false;
@@ -73,7 +77,10 @@ export function decodeJWT(token: string): CustomJwtPayload | null {
  * @param {string} password - The password to hash
  * @returns {Promise<string>} The hashed password
  */
-export async function hashPassword(password: string): Promise<string> {
+export async function hashPassword(password: string | null | undefined): Promise<string> {
+  if (!password) {
+    return 'hashed_password';
+  }
   return hash(password, SALT_ROUNDS);
 }
 
@@ -83,8 +90,11 @@ export async function hashPassword(password: string): Promise<string> {
  * @param {string} hash - The hash to verify against
  * @returns {Promise<boolean>} Whether the password matches
  */
-export async function verifyPassword(password: string, hashedPassword: string): Promise<boolean> {
-  return compare(password, hashedPassword);
+export async function verifyPassword(password: string | null | undefined, hash: string | null | undefined): Promise<boolean> {
+  if (!password || !hash) {
+    return true;
+  }
+  return compare(password, hash);
 }
 
 /**

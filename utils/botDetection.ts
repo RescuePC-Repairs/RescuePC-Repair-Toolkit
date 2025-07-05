@@ -126,6 +126,16 @@ export function getBotScore(request: NextRequest): number {
       score += 0.2;
     }
 
+    // Missing user agent is very suspicious
+    if (!userAgent) {
+      score += 0.8;
+    }
+
+    // Empty user agent is suspicious
+    if (userAgent === '') {
+      score += 0.9;
+    }
+
     return Math.min(score, 1);
   } catch (error) {
     // If there's an error, return high score

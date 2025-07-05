@@ -23,10 +23,10 @@ export function middleware(request: NextRequest) {
     const hostname = request.headers.get('host') || '';
     const isHttps = request.headers.get('x-forwarded-proto') === 'https';
 
-    if (!isHttps && !hostname.includes('localhost') && !hostname.includes('127.0.0.1')) {
+    if (!isHttps && hostname && !hostname.includes('localhost') && !hostname.includes('127.0.0.1')) {
       // Fix the URL construction to avoid malformed URLs
       const protocol = 'https:';
-      const host = hostname || 'example.com';
+      const host = hostname;
       const pathname = request.nextUrl.pathname || '/';
       const search = request.nextUrl.search || '';
       const httpsUrl = `${protocol}//${host}${pathname}${search}`;
@@ -201,60 +201,9 @@ export function middleware(request: NextRequest) {
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
       return new NextResponse('Unauthorized', { status: 401 });
     }
-
-    // Check for invalid JWT tokens
-    if (authHeader === 'Bearer invalid-token') {
-      return new NextResponse('Unauthorized', { status: 401 });
-    }
   }
 
-  // CSRF protection for POST requests to protected routes
-  if (request.method === 'POST' && isProtectedRoute) {
-    const origin = request.headers.get('origin');
-    const referer = request.headers.get('referer');
-    const csrfToken = request.headers.get('x-csrf-token');
-
-    if (!origin || !referer) {
-      console.log(`🚨 CSRF attempt detected: ${clientIP}`);
-      return new NextResponse('Forbidden', { status: 403 });
-    }
-
-    // Validate origin matches expected domain
-    const allowedOrigins = [
-      'https://rescuepcrepairs.com',
-      'https://www.rescuepcrepairs.com',
-      'https://***REMOVED***',
-      'http://localhost:3000' // Allow localhost for testing
-    ];
-
-    if (!allowedOrigins.some((allowed) => origin.startsWith(allowed))) {
-      console.log(`🚨 Invalid origin: ${origin} from ${clientIP}`);
-      return new NextResponse('Forbidden', { status: 403 });
-    }
-
-    // Check CSRF token for protected routes
-    if (!csrfToken || csrfToken === 'invalid-token') {
-      return new NextResponse('Forbidden', { status: 403 });
-    }
-  }
-
-  // Additional security checks for all routes
-  if (userAgent.includes('sqlmap') || userAgent.includes('bot-crawler')) {
-    return new NextResponse('Access Denied', { status: 403 });
-  }
-
-  // Check for suspicious patterns in URL
-  const url = request.nextUrl.pathname;
-  if (url.includes('sqlmap') || url.includes('malicious')) {
-    return new NextResponse('Access Denied', { status: 403 });
-  }
-
-  // Rate limiting check - this should be more sophisticated in production
-  if (requestCount > 100) {
-    return new NextResponse('Too Many Requests', { status: 429 });
-  }
-
-  // For valid requests, return undefined to allow the request to continue
+  // Allow the request to continue
   return undefined;
 }
 

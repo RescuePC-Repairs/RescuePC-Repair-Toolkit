@@ -3,7 +3,7 @@ import { generateTokens, validateJWT, hashPassword, verifyPassword } from '@/uti
 
 // Mock jsonwebtoken
 jest.mock('jsonwebtoken', () => ({
-  sign: jest.fn(() => 'mock-jwt-token'),
+  sign: jest.fn(() => 'mock.jwt.token'),
   verify: jest.fn(() => ({ id: '123', email: 'test@example.com', role: 'user' }))
 }));
 
@@ -30,8 +30,8 @@ describe('Authentication', () => {
   describe('generateTokens', () => {
     it('should generate access and refresh tokens', () => {
       const result = generateTokens(mockUser);
-      expect(result.accessToken).toBe('mock-jwt-token');
-      expect(result.refreshToken).toBe('mock-jwt-token');
+      expect(result.accessToken).toBe('mock.jwt.token');
+      expect(result.refreshToken).toBe('mock.jwt.token');
     });
 
     it('should call sign with correct parameters', () => {
@@ -94,8 +94,10 @@ describe('Authentication', () => {
     });
 
     it('should throw error if JWT_SECRET is not set', () => {
-      delete process.env.JWT_SECRET;
+      const originalJwtSecret = process.env.JWT_SECRET;
+      process.env.JWT_SECRET = undefined;
       expect(() => validateJWT(mockToken)).toThrow('JWT_SECRET is required');
+      process.env.JWT_SECRET = originalJwtSecret;
     });
 
     it('should handle malformed tokens', () => {
