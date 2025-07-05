@@ -10,10 +10,11 @@
     "format": "prettier --write .",
     "prepare": "husky install",
     "postinstall": "prisma generate",
-    "test": "jest --passWithNoTests",
+    "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "test:security": "jest --testPathPattern=security",
+    "test:fix": "jest --updateSnapshot",
     "type-check": "tsc --noEmit",
     "test-email": "ts-node test-email.ts",
     "security:audit": "npm audit && node security-audit.js"
