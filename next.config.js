@@ -6,10 +6,11 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true
   },
-  experimental: {
-    // Disable static generation for error pages to fix Html import issue
-    staticPageGenerationTimeout: 1000
-  },
+
+  // Disable static generation completely
+  output: 'export',
+  trailingSlash: true,
+  
   // Force dynamic rendering for error pages
   async rewrites() {
     return [];

@@ -2,16 +2,23 @@ import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 // Import pricing config when available
 
-// ENVIRONMENT VALIDATION - CRITICAL SECURITY CHECK
-if (!process.env.STRIPE_SECRET_KEY) {
-  throw new Error('CRITICAL: STRIPE_SECRET_KEY environment variable is required');
-}
+// SECURE STRIPE INITIALIZATION - Moved to runtime
+let stripe: Stripe | null = null;
 
-// SECURE STRIPE INITIALIZATION
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: '2025-06-30.basil',
-  typescript: true
-});
+function getStripe(): Stripe {
+  if (!process.env.STRIPE_SECRET_KEY) {
+    throw new Error('CRITICAL: STRIPE_SECRET_KEY environment variable is required');
+  }
+  
+  if (!stripe) {
+    stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+      apiVersion: '2025-06-30.basil',
+      typescript: true
+    });
+  }
+  
+  return stripe;
+}
 
 // PAYMENT PACKAGE CONFIGURATION - MATCHES FRONTEND
 const PAYMENT_PACKAGES = {
@@ -49,6 +56,9 @@ const PAYMENT_PACKAGES = {
 
 export async function POST(request: NextRequest) {
   try {
+    // Initialize Stripe at runtime
+    const stripe = getStripe();
+    
     const body = await request.json();
     const { packageType, packageName, licenseCount, successUrl, cancelUrl } = body;
 
