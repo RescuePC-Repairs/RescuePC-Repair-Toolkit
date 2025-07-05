@@ -2,6 +2,7 @@
 
 // Force dynamic rendering to prevent static generation errors
 export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
 
 export default function GlobalError({
   error,

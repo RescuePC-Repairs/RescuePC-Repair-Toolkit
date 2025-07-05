@@ -5,6 +5,8 @@ import nodemailer from 'nodemailer';
 
 // Force dynamic rendering to prevent static generation errors
 export const dynamic = 'force-dynamic';
+export const fetchCache = 'force-no-store';
+export const runtime = 'nodejs';
 
 // Validate required environment variables
 if (!process.env.STRIPE_SECRET_KEY) {
@@ -136,109 +138,29 @@ function generateCustomerEmail(
   `
     : '';
 
+  // Use simple text email instead of HTML to avoid static generation issues
   return `
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RescuePC Repairs - License Delivery</title>
-</head>
-<body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
-    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; text-align: center; color: white; border-radius: 10px 10px 0 0;">
-        <h1 style="margin: 0; font-size: 28px;">🚀 RescuePC Repairs</h1>
-        <p style="margin: 10px 0 0 0; font-size: 16px; opacity: 0.9;">Enterprise-Grade PC Repair Solutions</p>
-    </div>
-    
-    <div style="background: #f8f9fa; padding: 30px; border-radius: 0 0 10px 10px; border: 2px solid #e9ecef;">
-        <h2 style="color: #28a745; margin-top: 0;">🎉 Payment Successful!</h2>
-        
-        <p><strong>Dear ${customerName || 'Valued Customer'},</strong></p>
-        
-        <p>Thank you for purchasing <strong>${productName}</strong>! Your payment of <strong>$${amount}</strong> has been processed successfully.</p>
-        
-        <p><strong>Email:</strong> ${customerEmail}</p>
-        
-        <p>Download the RescuePC Repairs toolkit and enjoy enhanced PC performance!</p>
-        
-        ${unlimitedContent}
-        
-        <div style="background: #fff; border: 2px solid #28a745; border-radius: 8px; padding: 20px; margin: 25px 0;">
-            <h3 style="color: #28a745; margin-top: 0;">🔑 Your License Keys:</h3>
-            ${licenses
-              .map(
-                (license, index) => `
-                <div style="background: #f8f9fa; padding: 10px; margin: 10px 0; border-radius: 5px; border-left: 4px solid #28a745;">
-                    <strong>License ${index + 1}:</strong> <code style="background: #e9ecef; padding: 3px 6px; border-radius: 3px; font-family: monospace;">${license}</code>
-                </div>
-            `
-              )
-              .join('')}
-        </div>
-        
-        <div style="background: #fff; border: 2px solid #dc2626; border-radius: 8px; padding: 20px; margin: 25px 0;">
-            <h3 style="color: #dc2626; margin-top: 0;">⚠️ SECURE DOWNLOAD LINK</h3>
-            <p style="margin-bottom: 15px;">Your exclusive download link:</p>
-            <p style="background: #f3f4f6; padding: 10px; border-radius: 5px; font-family: monospace; word-break: break-all; margin: 15px 0;">
-                <a href="${downloadLink}" style="color: #dc2626; font-weight: bold;">
-                    ${downloadLink}
-                </a>
-            </p>
-            <div style="background: #fef3c7; padding: 15px; border-radius: 5px; margin: 15px 0; border-left: 4px solid #f59e0b;">
-                <h5 style="color: #d97706; margin: 0 0 10px 0;">🚨 LEGAL WARNING:</h5>
-                <ul style="margin: 0; padding-left: 20px; color: #d97706;">
-                    <li><strong>DO NOT SHARE</strong> this download link with anyone</li>
-                    <li><strong>DO NOT POST</strong> this link on social media, forums, or public websites</li>
-                    <li><strong>DO NOT FORWARD</strong> this email to others</li>
-                    <li><strong>LEGAL ACTION</strong> will be taken against unauthorized sharing</li>
-                    <li>This link is <strong>EXCLUSIVE</strong> to your license purchase</li>
-                </ul>
-            </div>
-        </div>
-        
-        <div style="background: #fff3cd; border: 1px solid #ffeeba; border-radius: 8px; padding: 15px; margin: 20px 0;">
-            <h4 style="color: #856404; margin-top: 0;">📋 Quick Start Instructions:</h4>
-            <ol style="color: #856404; margin: 0;">
-                <li>Download the software using the link above</li>
-                <li>Extract the files to your desired location</li>
-                <li>Run the installer as Administrator</li>
-                <li>Enter your license key when prompted</li>
-                <li>Enjoy your enhanced PC performance!</li>
-            </ol>
-        </div>
-        
-        <div style="background: #d4edda; border: 1px solid #c3e6cb; border-radius: 8px; padding: 15px; margin: 20px 0;">
-            <h4 style="color: #155724; margin-top: 0;">🛡️ Security Features Included:</h4>
-            <ul style="color: #155724; margin: 0;">
-                <li>Military-grade encryption</li>
-                <li>Real-time threat detection</li>
-                <li>Automatic security updates</li>
-                <li>Secure backup and recovery</li>
-            </ul>
-        </div>
-        
-        <div style="background: #e3f2fd; border: 1px solid #bbdefb; border-radius: 8px; padding: 15px; margin: 20px 0;">
-            <h4 style="color: #1565c0; margin-top: 0;">📱 Mobile Users:</h4>
-            <p style="color: #1565c0; margin: 0;">
-                <strong>Note:</strong> This software is designed for Windows PCs. If you're on mobile, 
-                please access the download link from a desktop or laptop computer for the best experience.
-            </p>
-        </div>
-        
-        <div style="text-align: center; margin: 30px 0;">
-            <h4>Need Help? We're Here For You!</h4>
-            <p>📧 <strong>Support:</strong> <a href="mailto:rescuepcrepair@yahoo.com">rescuepcrepair@yahoo.com</a></p>
-            <p style="font-size: 12px; color: #666;">Response time: Within 2 hours</p>
-            <p style="font-size: 12px; color: #666;">Best regards, Tyler Keesee</p>
-        </div>
-    </div>
-    
-    <div style="text-align: center; padding: 15px; font-size: 12px; color: #666;">
-        <p>This is an automated email. Your license keys are secure and ready to use.</p>
-        <p>© 2024 RescuePC Repairs. All rights reserved.</p>
-    </div>
-</body>
-</html>
+Dear ${customerName || 'Valued Customer'},
+
+Thank you for purchasing ${productName}! Your payment of $${amount} has been processed successfully.
+
+Email: ${customerEmail}
+
+Download the RescuePC Repairs toolkit and enjoy enhanced PC performance!
+
+${unlimitedContent}
+
+Your License Keys:
+${licenses.map((license, index) => `License ${index + 1}: ${license}`).join('\n')}
+
+Download Link: ${downloadLink}
+
+Need Help? We're Here For You!
+Support: rescuepcrepair@yahoo.com
+Response time: Within 2 hours
+
+Best regards, Tyler Keesee
+© 2024 RescuePC Repairs. All rights reserved.
   `;
 }
 
@@ -251,53 +173,36 @@ function generateAdminNotification(
   amount: number
 ): string {
   return `
-<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-    <div style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%); padding: 25px; text-align: center; color: white; border-radius: 10px;">
-        <h1 style="margin: 0; font-size: 24px;">🎉 FORTUNE 500 AUTOMATED SALE COMPLETED!</h1>
-        <p style="margin: 10px 0 0 0; font-size: 14px;">Fortune 500 Automation System</p>
-    </div>
-    
-    <div style="background: #f8f9fa; padding: 25px; border: 2px solid #28a745; border-radius: 0 0 10px 10px;">
-        <h2 style="color: #28a745; margin-top: 0;">💰 CUSTOMER DETAILS:</h2>
-        <ul style="background: white; padding: 20px; border-radius: 5px; list-style: none; margin: 0;">
-            <li><strong>👤 Name:</strong> ${customerName}</li>
-            <li><strong>📧 Email:</strong> ${customerEmail}</li>
-            <li><strong>📦 Package:</strong> ${licenseInfo.name}</li>
-            <li><strong>💵 Amount:</strong> $${amount}</li>
-            <li><strong>🔑 Licenses Generated:</strong> ${licenses.length}</li>
-            <li><strong>⏰ Time:</strong> ${new Date().toISOString()}</li>
-        </ul>
-        
-        <h3 style="color: #007bff; margin-top: 25px;">🔑 LICENSE KEYS DELIVERED:</h3>
-        <div style="background: white; padding: 15px; border-radius: 5px; font-family: monospace; font-size: 12px;">
-            ${licenses.map((license, index) => `${index + 1}. ${license}`).join('<br>')}
-        </div>
-        
-        <h3 style="color: #28a745; margin-top: 25px;">✅ AUTOMATION STATUS:</h3>
-        <div style="background: #d4edda; padding: 15px; border-radius: 5px; border-left: 4px solid #28a745;">
-            <p style="margin: 5px 0;">✅ Payment processed automatically</p>
-            <p style="margin: 5px 0;">✅ Licenses generated instantly</p>
-            <p style="margin: 5px 0;">✅ Customer email sent professionally</p>
-            <p style="margin: 5px 0;">✅ Download links provided</p>
-            <p style="margin: 5px 0;">✅ Money deposited to your account</p>
-            <p style="margin: 5px 0;">✅ Zero manual work required</p>
-        </div>
-        
-        <div style="background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%); padding: 20px; border-radius: 8px; margin: 20px 0; text-align: center; color: white;">
-            <h3 style="margin: 0;">💰 REVENUE GENERATED: $${amount}</h3>
-            <p style="margin: 10px 0 0 0;">🏦 Your automated empire just made you money!</p>
-        </div>
+🎉 FORTUNE 500 AUTOMATED SALE COMPLETED!
 
-        <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
-            <h3 style="color: #495057; margin-top: 0;">📧 Customer Information:</h3>
-            <p><strong>Name:</strong> ${customerName}</p>
-            <p><strong>Email:</strong> ${customerEmail}</p>
-            <p><strong>License Key:</strong> ${licenses[0]}</p>
-            <p><strong>Amount Paid:</strong> $${amount}</p>
-            <p><strong>License Type:</strong> ${licenseInfo.name}</p>
-        </div>
-    </div>
-</div>
+💰 CUSTOMER DETAILS:
+- Name: ${customerName}
+- Email: ${customerEmail}
+- Package: ${licenseInfo.name}
+- Amount: $${amount}
+- Licenses Generated: ${licenses.length}
+- Time: ${new Date().toISOString()}
+
+🔑 LICENSE KEYS DELIVERED:
+${licenses.map((license, index) => `${index + 1}. ${license}`).join('\n')}
+
+✅ AUTOMATION STATUS:
+✅ Payment processed automatically
+✅ Licenses generated instantly
+✅ Customer email sent professionally
+✅ Download links provided
+✅ Money deposited to your account
+✅ Zero manual work required
+
+💰 REVENUE GENERATED: $${amount}
+🏦 Your automated empire just made you money!
+
+📧 Customer Information:
+Name: ${customerName}
+Email: ${customerEmail}
+License Key: ${licenses[0]}
+Amount Paid: $${amount}
+License Type: ${licenseInfo.name}
   `;
 }
 

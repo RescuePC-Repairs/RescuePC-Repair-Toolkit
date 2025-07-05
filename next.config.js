@@ -6,27 +6,16 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true
   },
-  // Use standalone output for dynamic serverless deployment
-  output: 'standalone',
-  // Remove all static export/output/export-related config
-  // trailingSlash, generateStaticParams, etc. are not needed for dynamic app
+  // Disable static generation completely
   swcMinify: true,
+  
+  // Force dynamic rendering for error pages
   async rewrites() {
     return [];
   },
   generateBuildId: async () => {
     return 'build-' + Date.now();
   },
-  // Disable static optimization for error pages
-  generateStaticParams: async () => {
-    return [];
-  },
-  // Force all pages to be dynamic
-  experimental: {
-    missingSuspenseWithCSRError: false
-  },
-  // Basic configuration
-  swcMinify: true,
 
   // Basic webpack config
   webpack: (config, { isServer }) => {

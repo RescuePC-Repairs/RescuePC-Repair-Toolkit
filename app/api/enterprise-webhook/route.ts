@@ -5,6 +5,8 @@ import { sendLicenseEmail } from '../../../utils/email';
 
 // Force dynamic rendering to prevent static generation errors
 export const dynamic = 'force-dynamic';
+export const fetchCache = 'force-no-store';
+export const runtime = 'nodejs';
 
 // SECURE STRIPE INITIALIZATION - Moved to runtime
 let stripe: Stripe | null = null;
@@ -14,13 +16,13 @@ function getStripe(): Stripe {
   if (!process.env.STRIPE_SECRET_KEY) {
     throw new Error('CRITICAL: STRIPE_SECRET_KEY environment variable is required');
   }
-  
+
   if (!stripe) {
     stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
       apiVersion: '2025-06-30.basil'
     });
   }
-  
+
   return stripe;
 }
 
@@ -28,11 +30,11 @@ function getWebhookSecret(): string {
   if (!process.env.STRIPE_WEBHOOK_SECRET) {
     throw new Error('CRITICAL: STRIPE_WEBHOOK_SECRET environment variable is required');
   }
-  
+
   if (!webhookSecret) {
     webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
   }
-  
+
   return webhookSecret;
 }
 
@@ -87,7 +89,7 @@ export async function POST(request: NextRequest) {
     // Initialize Stripe and webhook secret at runtime
     const stripe = getStripe();
     const webhookSecret = getWebhookSecret();
-    
+
     const body = await request.text();
     const headersList = await headers();
     const signature = headersList.get('stripe-signature');
@@ -321,61 +323,33 @@ function generateEnterpriseEmailHTML(
     )
     .join('');
 
+  // Use simple text email instead of HTML to avoid static generation issues
   return `
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <meta charset="utf-8">
-      <title>Enterprise License Package - RescuePC Repairs</title>
-    </head>
-    <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
-      <div style="max-width: 800px; margin: 0 auto; padding: 20px;">
-        <h1 style="color: #2563eb;">Enterprise License Package - RescuePC Repairs</h1>
-        
-        <p>Thank you for purchasing the <strong>${enterprisePackage.name}</strong> package for <strong>${companyName}</strong>!</p>
-        
-        <h2>Package Details:</h2>
-        <ul>
-          <li><strong>Package:</strong> ${enterprisePackage.name}</li>
-          <li><strong>Users:</strong> ${enterprisePackage.userCount === -1 ? 'Unlimited' : enterprisePackage.userCount}</li>
-          <li><strong>Duration:</strong> ${enterprisePackage.duration === 'lifetime' ? 'Lifetime' : '1 Year'}</li>
-          <li><strong>Price:</strong> $${enterprisePackage.price}</li>
-        </ul>
-        
-        <h2>License Keys:</h2>
-        <p>Below are your enterprise license keys. Each employee should use their assigned key:</p>
-        
-        <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
-          <thead>
-            <tr style="background: #f8f9fa;">
-              <th style="padding: 8px; border: 1px solid #ddd;">#</th>
-              <th style="padding: 8px; border: 1px solid #ddd;">License Key</th>
-              <th style="padding: 8px; border: 1px solid #ddd;">Assigned To</th>
-              <th style="padding: 8px; border: 1px solid #ddd;">Expires</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${licenseTable}
-          </tbody>
-        </table>
-        
-        <h3>Next Steps:</h3>
-        <ol>
-          <li>Distribute license keys to your employees</li>
-          <li>Download RescuePC Repairs from our website</li>
-          <li>Install the software on each computer</li>
-          <li>Enter the assigned license key when prompted</li>
-          <li>Start repairing and optimizing your PCs!</li>
-        </ol>
-        
-        <p>If you have any questions, please contact us at ***REMOVED***</p>
-        
-        <p>Best regards,<br>
-        Tyler Keesee<br>
-        RescuePC Repairs</p>
-      </div>
-    </body>
-    </html>
+Enterprise License Package - RescuePC Repairs
+
+Thank you for purchasing the ${enterprisePackage.name} package for ${companyName}!
+
+Package Details:
+- Package: ${enterprisePackage.name}
+- Users: ${enterprisePackage.userCount === -1 ? 'Unlimited' : enterprisePackage.userCount}
+- Duration: ${enterprisePackage.duration === 'lifetime' ? 'Lifetime' : '1 Year'}
+- Price: $${enterprisePackage.price}
+
+License Keys:
+${licenses.map((license, index) => `${index + 1}. ${license.licenseKey} - ${license.assignedTo} - ${license.expiryDate ? new Date(license.expiryDate).toLocaleDateString() : 'Lifetime'}`).join('\n')}
+
+Next Steps:
+1. Distribute license keys to your employees
+2. Download RescuePC Repairs from our website
+3. Install the software on each computer
+4. Enter the assigned license key when prompted
+5. Start repairing and optimizing your PCs!
+
+If you have any questions, please contact us at ***REMOVED***
+
+Best regards,
+Tyler Keesee
+RescuePC Repairs
   `;
 }
 

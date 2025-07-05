@@ -1,4 +1,7 @@
-import React from 'react';
+'use client';
+
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { Hero } from '@/components/sections/Hero';
 import { FeatureCards } from '@/components/sections/FeatureCards';
@@ -95,6 +98,30 @@ const PAYMENT_PACKAGES: Record<string, PaymentPackage> = {
 };
 
 export default function HomePage({ searchParams }: { searchParams: { error?: string } }) {
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+
+  const handlePurchase = async (licenseType: string) => {
+    setIsLoading(true);
+    try {
+      const response = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          licenseType,
+        }),
+      });
+
+      const { url } = await response.json();
+      router.push(url);
+    } catch (error) {
+      console.error('Error creating checkout session:', error);
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white">
       {/* Error Alert for Invalid Payment */}
