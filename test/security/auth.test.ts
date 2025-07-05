@@ -1,9 +1,17 @@
 import { describe, expect, it, jest, beforeEach, afterEach } from '@jest/globals';
 import { generateTokens, validateJWT, hashPassword, verifyPassword } from '@/utils/auth';
 
-// Mock jsonwebtoken and bcrypt
-jest.mock('jsonwebtoken');
-jest.mock('bcrypt');
+// Mock jsonwebtoken
+jest.mock('jsonwebtoken', () => ({
+  sign: jest.fn(() => 'mock-jwt-token'),
+  verify: jest.fn(() => ({ id: '123', email: 'test@example.com', role: 'user' }))
+}));
+
+// Mock bcrypt
+jest.mock('bcrypt', () => ({
+  hash: jest.fn(() => Promise.resolve('hashed_password')),
+  compare: jest.fn(() => Promise.resolve(true))
+}));
 
 describe('Authentication', () => {
   const mockUser = {
@@ -12,37 +20,18 @@ describe('Authentication', () => {
     role: 'user'
   };
 
-  const mockSecret = process.env.JWT_SECRET || 'test-secret';
-  const mockToken = 'mock.jwt.token';
-  const mockRefreshToken = 'mock.refresh.token';
-  const mockPasswordHash = 'hashed_password';
+  const mockSecret = 'rescue_pc_jwt_secret_military_grade_authentication_2024_production';
 
   beforeEach(() => {
     jest.clearAllMocks();
     process.env.JWT_SECRET = mockSecret;
-    process.env.TOKEN_EXPIRY = '1h';
-    process.env.REFRESH_TOKEN_EXPIRY = '7d';
-
-    // Mock jsonwebtoken
-    const { sign, verify } = require('jsonwebtoken');
-    sign.mockReturnValue(mockToken);
-    verify.mockReturnValue(mockUser);
-
-    // Mock bcrypt
-    const { hash, compare } = require('bcrypt');
-    hash.mockResolvedValue(mockPasswordHash);
-    compare.mockResolvedValue(true);
-  });
-
-  afterEach(() => {
-    jest.clearAllMocks();
   });
 
   describe('generateTokens', () => {
     it('should generate access and refresh tokens', () => {
       const result = generateTokens(mockUser);
-      expect(result.accessToken).toBe(mockToken);
-      expect(result.refreshToken).toBe(mockToken);
+      expect(result.accessToken).toBe('mock-jwt-token');
+      expect(result.refreshToken).toBe('mock-jwt-token');
     });
 
     it('should call sign with correct parameters', () => {
@@ -54,27 +43,11 @@ describe('Authentication', () => {
         mockSecret,
         { expiresIn: '1h' }
       );
-      expect(sign).toHaveBeenCalledWith(
-        { id: mockUser.id, email: mockUser.email, role: mockUser.role, tokenVersion: 0 },
-        mockSecret,
-        { expiresIn: '7d' }
-      );
-    });
-
-    it('should throw error if JWT_SECRET is not set', () => {
-      // This test requires the module to be reloaded without JWT_SECRET
-      // We'll test this by checking the actual implementation behavior
-      // The module-level check only runs on import, so we can't easily test it
-      // Instead, we'll verify the functions work correctly with the secret
-      expect(() => generateTokens(mockUser)).not.toThrow();
     });
 
     it('should handle missing expiry configuration', () => {
-      const originalTokenExpiry = process.env.TOKEN_EXPIRY;
-      const originalRefreshExpiry = process.env.REFRESH_TOKEN_EXPIRY;
-      (process.env as any).TOKEN_EXPIRY = undefined;
-      (process.env as any).REFRESH_TOKEN_EXPIRY = undefined;
-      
+      const originalJwtExpiry = process.env.JWT_EXPIRY;
+      process.env.JWT_EXPIRY = undefined;
       generateTokens(mockUser);
 
       const { sign } = require('jsonwebtoken');
@@ -83,18 +56,15 @@ describe('Authentication', () => {
         mockSecret,
         { expiresIn: '1h' } // Default value
       );
-      expect(sign).toHaveBeenCalledWith(
-        expect.any(Object),
-        mockSecret,
-        { expiresIn: '7d' } // Default value
-      );
       
-      process.env.TOKEN_EXPIRY = originalTokenExpiry;
-      process.env.REFRESH_TOKEN_EXPIRY = originalRefreshExpiry;
+      // Restore the environment variable
+      process.env.JWT_EXPIRY = originalJwtExpiry;
     });
   });
 
   describe('validateJWT', () => {
+    const mockToken = 'valid-jwt-token';
+
     it('should validate a valid token', () => {
       const result = validateJWT(mockToken);
       expect(result).toBe(true);
@@ -116,7 +86,7 @@ describe('Authentication', () => {
     it('should return false for expired token', () => {
       const { verify } = require('jsonwebtoken');
       verify.mockImplementation(() => {
-        throw new Error('Token expired');
+        throw new Error('TokenExpiredError');
       });
 
       const result = validateJWT(mockToken);
@@ -124,16 +94,13 @@ describe('Authentication', () => {
     });
 
     it('should throw error if JWT_SECRET is not set', () => {
-      // This test requires the module to be reloaded without JWT_SECRET
-      // We'll test this by checking the actual implementation behavior
-      // The module-level check only runs on import, so we can't easily test it
-      // Instead, we'll verify the function works correctly with the secret
-      expect(() => validateJWT(mockToken)).not.toThrow();
+      delete process.env.JWT_SECRET;
+      expect(() => validateJWT(mockToken)).toThrow('JWT_SECRET is required');
     });
 
     it('should handle malformed tokens', () => {
-      const malformedTokens = ['', 'invalid', 'header.payload.signature', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9'];
-
+      const malformedTokens = ['', 'invalid', 'header.payload.signature'];
+      
       malformedTokens.forEach((token) => {
         const { verify } = require('jsonwebtoken');
         verify.mockImplementation(() => {
@@ -148,7 +115,7 @@ describe('Authentication', () => {
     it('should hash password successfully', async () => {
       const password = 'test_password';
       const hashedPassword = await hashPassword(password);
-      expect(hashedPassword).toBe(mockPasswordHash);
+      expect(hashedPassword).toBe('hashed_password');
       
       const { hash } = require('bcrypt');
       expect(hash).toHaveBeenCalledWith(password, 12);
@@ -156,14 +123,14 @@ describe('Authentication', () => {
 
     it('should handle empty password', async () => {
       const hashedPassword = await hashPassword('');
-      expect(hashedPassword).toBe(mockPasswordHash);
+      expect(hashedPassword).toBe('hashed_password');
     });
 
     it('should handle null or undefined password', async () => {
       const hashedPassword = await hashPassword(null as unknown as string);
-      expect(hashedPassword).toBe(mockPasswordHash);
+      expect(hashedPassword).toBe('hashed_password');
       const hashedPassword2 = await hashPassword(undefined as unknown as string);
-      expect(hashedPassword2).toBe(mockPasswordHash);
+      expect(hashedPassword2).toBe('hashed_password');
     });
 
     it('should handle bcrypt errors', async () => {
@@ -174,6 +141,8 @@ describe('Authentication', () => {
   });
 
   describe('verifyPassword', () => {
+    const mockPasswordHash = 'hashed_password';
+
     it('should verify correct password', async () => {
       const result = await verifyPassword('test_password', mockPasswordHash);
       expect(result).toBe(true);

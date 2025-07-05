@@ -112,11 +112,15 @@ export function generateBasicLicenseEmail(customerData: any): string {
             <div style="background: #fff; border: 2px solid #28a745; border-radius: 8px; padding: 20px; margin: 25px 0;">
                 <h3 style="color: #28a745; margin-top: 0;">🔑 Your License Keys:</h3>
                 
-                ${customerData.licenses.map((license: string, index: number) => `
+                ${customerData.licenses
+                  .map(
+                    (license: string, index: number) => `
                     <div style="background: #f8f9fa; padding: 10px; margin: 10px 0; border-radius: 5px; border-left: 4px solid #28a745;">
                         <strong>License ${index + 1}:</strong> <code style="background: #e9ecef; padding: 3px 6px; border-radius: 3px; font-family: monospace;">${license}</code>
                     </div>
-                `).join('')}
+                `
+                  )
+                  .join('')}
             </div>
             
             <div style="background: #fff; border: 2px solid #dc2626; border-radius: 8px; padding: 20px; margin: 25px 0;">
@@ -292,11 +296,15 @@ export function generateUnlimitedLicenseEmail(customerData: any): string {
             <div style="background: #fff; border: 2px solid #28a745; border-radius: 8px; padding: 20px; margin: 25px 0;">
                 <h3 style="color: #28a745; margin-top: 0;">🔑 Your License Keys:</h3>
                 
-                ${customerData.licenses.map((license: string, index: number) => `
+                ${customerData.licenses
+                  .map(
+                    (license: string, index: number) => `
                     <div style="background: #f8f9fa; padding: 10px; margin: 10px 0; border-radius: 5px; border-left: 4px solid #28a745;">
                         <strong>License ${index + 1}:</strong> <code style="background: #e9ecef; padding: 3px 6px; border-radius: 3px; font-family: monospace;">${license}</code>
                     </div>
-                `).join('')}
+                `
+                  )
+                  .join('')}
             </div>
             
             <div style="background: #fff; border: 2px solid #dc2626; border-radius: 8px; padding: 20px; margin: 25px 0;">

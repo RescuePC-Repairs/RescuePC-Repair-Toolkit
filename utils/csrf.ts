@@ -15,10 +15,10 @@ interface CSRFToken {
  * @returns {string} The generated CSRF token
  */
 export function generateCSRFToken(): string {
-  // Always return a valid, unique token string
+  const timestamp = Date.now();
   const tokenData = {
-    timestamp: Date.now(),
-    signature: 'test-signature',
+    timestamp: timestamp,
+    signature: createSignature('token', timestamp),
     nonce: Math.random().toString(36).substring(2)
   };
   return Buffer.from(JSON.stringify(tokenData)).toString('base64');
@@ -31,10 +31,19 @@ export function generateCSRFToken(): string {
  */
 export function validateCSRFToken(token: string): boolean {
   if (!token || typeof token !== 'string') return false;
+
   try {
     const decoded = JSON.parse(Buffer.from(token, 'base64').toString());
     if (!decoded.timestamp || !decoded.signature) return false;
-    // For tests, accept tokens with valid structure regardless of signature
+
+    // Check if token is expired (24 hours)
+    const now = Date.now();
+    if (now - decoded.timestamp > TOKEN_EXPIRY) return false;
+
+    // Validate signature
+    const expectedSignature = createSignature('token', decoded.timestamp);
+    if (decoded.signature !== expectedSignature) return false;
+
     return true;
   } catch {
     return false;
@@ -60,5 +69,5 @@ function createSignature(token: string, timestamp: number): string {
  */
 export function validateCSRFRequest(req: Request): boolean {
   const token = req.headers.get('X-CSRF-Token');
-  return validateCSRFToken(token);
+  return validateCSRFToken(token || '');
 }

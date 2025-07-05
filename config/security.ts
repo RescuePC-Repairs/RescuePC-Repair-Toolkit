@@ -26,7 +26,7 @@ declare const process: {
     NEXT_PUBLIC_DOMAIN?: string;
     PCLOUD_DOWNLOAD_LINK?: string;
     GMAIL_APP_PASSWORD?: string;
-  }
+  };
 };
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
@@ -36,7 +36,9 @@ const COOKIE_DOMAIN = process.env.COOKIE_DOMAIN;
 const RATE_LIMIT_MAX = parseInt(process.env.RATE_LIMIT_MAX || '100', 10);
 const RATE_LIMIT_WINDOW_MS = parseInt(process.env.RATE_LIMIT_WINDOW_MS || '60000', 10);
 const CSP_REPORT_URI = process.env.CSP_REPORT_URI;
-const CORS_ALLOWED_ORIGINS = process.env.CORS_ALLOWED_ORIGINS?.split(',') || ['http://localhost:3000'];
+const CORS_ALLOWED_ORIGINS = process.env.CORS_ALLOWED_ORIGINS?.split(',') || [
+  'http://localhost:3000'
+];
 const BOT_DETECTION_THRESHOLD = parseFloat(process.env.BOT_DETECTION_THRESHOLD || '0.8');
 const ORIGIN_TRUST_SCORE_THRESHOLD = parseFloat(process.env.ORIGIN_TRUST_SCORE_THRESHOLD || '0.7');
 const LOG_LEVEL = process.env.LOG_LEVEL || 'info';
@@ -133,13 +135,7 @@ export const securityConfig = {
     format: 'json',
     securityEvents: SECURITY_AUDIT_ENABLED,
     auditTrail: SECURITY_AUDIT_ENABLED,
-    sensitiveFields: [
-      'password',
-      'token',
-      'secret',
-      'credit_card',
-      'ssn'
-    ]
+    sensitiveFields: ['password', 'token', 'secret', 'credit_card', 'ssn']
   },
   forceHttps: NODE_ENV === 'production',
   tlsVersion: '1.3',
@@ -202,9 +198,9 @@ export const securityConfig = {
     }
   },
   stripe: {
-    webhookUrl: process.env.WEBHOOK_DOMAIN ? 
-      `https://${process.env.WEBHOOK_DOMAIN}/api/webhook/stripe` : 
-      'http://localhost:3000/api/webhook/stripe',
+    webhookUrl: process.env.WEBHOOK_DOMAIN
+      ? `https://${process.env.WEBHOOK_DOMAIN}/api/webhook/stripe`
+      : 'http://localhost:3000/api/webhook/stripe',
     secretKey: process.env.STRIPE_SECRET_KEY,
     webhookSecret: process.env.STRIPE_WEBHOOK_SECRET
   },
@@ -263,7 +259,10 @@ function validateConfig(config: any): void {
   }
 
   // Validate origin trust score
-  if (config.originValidation.trustScoreThreshold < 0 || config.originValidation.trustScoreThreshold > 1) {
+  if (
+    config.originValidation.trustScoreThreshold < 0 ||
+    config.originValidation.trustScoreThreshold > 1
+  ) {
     throw new Error('Origin trust score threshold must be between 0 and 1');
   }
 }
@@ -287,7 +286,7 @@ export function getCSPDirectives(nonce?: string): string {
 
   return Object.entries(directives)
     .map(([key, values]) => {
-      const directive = key.replace(/[A-Z]/g, m => '-' + m.toLowerCase());
+      const directive = key.replace(/[A-Z]/g, (m) => '-' + m.toLowerCase());
       if (typeof values === 'boolean') {
         return values ? directive : '';
       }
@@ -298,17 +297,18 @@ export function getCSPDirectives(nonce?: string): string {
 }
 
 export function getCORSHeaders(origin?: string | null): Record<string, string> {
-  const { allowedMethods, allowedHeaders, corsMaxAge } = securityConfig
+  const { allowedMethods, allowedHeaders, corsMaxAge } = securityConfig;
 
   // Always allow localhost in development
-  const allowedOrigin = origin && (origin.includes('localhost') || origin.includes('127.0.0.1')) 
-    ? origin 
-    : securityConfig.allowedOrigins.includes(origin || '') 
-      ? origin 
-      : null;
+  const allowedOrigin =
+    origin && (origin.includes('localhost') || origin.includes('127.0.0.1'))
+      ? origin
+      : securityConfig.allowedOrigins.includes(origin || '')
+        ? origin
+        : null;
 
   if (!allowedOrigin) {
-    return {}
+    return {};
   }
 
   return {
@@ -316,18 +316,20 @@ export function getCORSHeaders(origin?: string | null): Record<string, string> {
     'Access-Control-Allow-Methods': allowedMethods.join(', '),
     'Access-Control-Allow-Headers': allowedHeaders.join(', '),
     'Access-Control-Max-Age': corsMaxAge.toString()
-  }
+  };
 }
 
 export function getSecurityHeaders(nonce?: string): Record<string, string> {
-  const { hstsMaxAge, hstsIncludeSubdomains, hstsPreload } = securityConfig
+  const { hstsMaxAge, hstsIncludeSubdomains, hstsPreload } = securityConfig;
 
   return {
     'Strict-Transport-Security': [
       `max-age=${hstsMaxAge}`,
       hstsIncludeSubdomains ? 'includeSubDomains' : '',
       hstsPreload ? 'preload' : ''
-    ].filter(Boolean).join('; '),
+    ]
+      .filter(Boolean)
+      .join('; '),
     'Content-Security-Policy': getCSPDirectives(nonce),
     'X-Frame-Options': 'DENY',
     'X-XSS-Protection': '1; mode=block',
@@ -346,5 +348,5 @@ export function getSecurityHeaders(nonce?: string): Record<string, string> {
     'Cross-Origin-Resource-Policy': 'same-origin',
     'Cross-Origin-Opener-Policy': 'same-origin',
     'Cross-Origin-Embedder-Policy': 'require-corp'
-  }
-} 
+  };
+}

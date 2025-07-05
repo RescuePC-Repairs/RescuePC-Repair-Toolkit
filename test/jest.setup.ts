@@ -55,7 +55,7 @@ jest.mock('lru-cache', () => ({
 if (typeof global.Headers === 'undefined') {
   (global as any).Headers = class {
     private headers: Map<string, string> = new Map();
-    
+
     constructor(init?: Record<string, string>) {
       if (init) {
         Object.entries(init).forEach(([key, value]) => {
@@ -63,23 +63,23 @@ if (typeof global.Headers === 'undefined') {
         });
       }
     }
-    
+
     set(name: string, value: string): void {
       this.headers.set(name.toLowerCase(), value);
     }
-    
+
     get(name: string): string | null {
       return this.headers.get(name.toLowerCase()) || null;
     }
-    
+
     has(name: string): boolean {
       return this.headers.has(name.toLowerCase());
     }
-    
+
     delete(name: string): void {
       this.headers.delete(name.toLowerCase());
     }
-    
+
     append(name: string, value: string): void {
       const existing = this.headers.get(name.toLowerCase());
       if (existing) {
@@ -96,18 +96,18 @@ if (typeof global.Response === 'undefined') {
     public headers: any;
     public status: number;
     public statusText: string;
-    
+
     constructor(body?: any, init?: any) {
       this.headers = new (global as any).Headers(init?.headers);
       this.status = init?.status || 200;
       this.statusText = init?.statusText || 'OK';
     }
-    
+
     static redirect(url: string, status: number = 302): any {
       return new (global as any).Response(null, {
         status,
         headers: {
-          'Location': url
+          Location: url
         }
       });
     }

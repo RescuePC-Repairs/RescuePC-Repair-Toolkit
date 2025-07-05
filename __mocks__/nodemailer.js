@@ -9,4 +9,4 @@ const createTransport = jest.fn(() => mockTransporter);
 
 module.exports = createTransport;
 module.exports.default = createTransport;
-module.exports.createTransport = createTransport; 
+module.exports.createTransport = createTransport;

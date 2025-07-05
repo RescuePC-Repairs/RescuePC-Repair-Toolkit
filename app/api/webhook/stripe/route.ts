@@ -123,13 +123,15 @@ export function generateCustomerEmail(
 
   // Add special content for unlimited access
   const isUnlimited = productName.includes('Lifetime') || productName.includes('Enterprise');
-  const unlimitedContent = isUnlimited ? `
+  const unlimitedContent = isUnlimited
+    ? `
     <div style="background: #fff; border: 2px solid #28a745; border-radius: 8px; padding: 20px; margin: 25px 0;">
         <h3 style="color: #28a745; margin-top: 0;">🚀 UNLIMITED ACCESS GRANTED</h3>
         <p style="color: #28a745; font-weight: bold;">Install on 1, 10, 100, or 1000+ computers</p>
         <p>Your enterprise license provides unlimited installations across your entire organization.</p>
     </div>
-  ` : '';
+  `
+    : '';
 
   return `
 <!DOCTYPE html>
@@ -299,31 +301,31 @@ export function generateAdminNotification(
 // Export function for tests with correct signature
 export function getLicenseInfo(productId: string): any {
   const productMap: Record<string, any> = {
-    'prod_basic_license': {
+    prod_basic_license: {
       name: 'Basic License',
       licenseCount: 1,
       type: 'basic',
       price: 49.99
     },
-    'prod_professional_license': {
+    prod_professional_license: {
       name: 'Professional License',
       licenseCount: 5,
       type: 'professional',
       price: 199.99
     },
-    'prod_enterprise_license': {
+    prod_enterprise_license: {
       name: 'Enterprise License',
       licenseCount: 25,
       type: 'enterprise',
       price: 499.99
     },
-    'prod_government_license': {
+    prod_government_license: {
       name: 'Government License',
       licenseCount: 100,
       type: 'government',
       price: 999.99
     },
-    'prod_lifetime_enterprise': {
+    prod_lifetime_enterprise: {
       name: 'Lifetime Enterprise',
       licenseCount: -1,
       type: 'lifetime_enterprise',
@@ -481,7 +483,7 @@ export async function GET() {
 
 // Polyfill Response.json for test environment
 if (typeof Response !== 'undefined' && !Response.json) {
-  Response.json = function(data: any, init?: ResponseInit) {
+  Response.json = function (data: any, init?: ResponseInit) {
     return new Response(JSON.stringify(data), {
       headers: { 'Content-Type': 'application/json' },
       ...init

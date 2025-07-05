@@ -40,12 +40,13 @@ export function createRateLimit(options: RateLimitConfig): RateLimiter {
 
   return {
     check: async (req: Request): Promise<void> => {
-      const ip = req.headers.get('x-forwarded-for') || 
-                 req.headers.get('x-real-ip') || 
-                 'unknown';
-      
-      const tokenCount = (tokenCache.get(ip) || { count: 0, resetTime: Date.now() + options.interval });
-      
+      const ip = req.headers.get('x-forwarded-for') || req.headers.get('x-real-ip') || 'unknown';
+
+      const tokenCount = tokenCache.get(ip) || {
+        count: 0,
+        resetTime: Date.now() + options.interval
+      };
+
       if (tokenCount.count > options.uniqueTokenPerInterval) {
         throw new Error('Rate limit exceeded');
       }
@@ -56,4 +57,4 @@ export function createRateLimit(options: RateLimitConfig): RateLimiter {
       });
     }
   };
-} 
+}

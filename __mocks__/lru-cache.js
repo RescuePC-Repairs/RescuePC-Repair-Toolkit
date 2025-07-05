@@ -11,4 +11,4 @@ module.exports = LRUCache;
 module.exports.default = LRUCache;
 module.exports.LRUCache = LRUCache;
 export default LRUCache;
-export { LRUCache }; 
+export { LRUCache };

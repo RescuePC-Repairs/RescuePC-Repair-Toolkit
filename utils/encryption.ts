@@ -85,7 +85,7 @@ export class Encryption {
       return decrypted.toString('utf8');
     } catch (error) {
       console.error('Decryption error:', error);
-      throw new Error('Decryption failed - data may be corrupted or tampered with');
+      throw new Error('Data integrity check failed');
     }
   }
 

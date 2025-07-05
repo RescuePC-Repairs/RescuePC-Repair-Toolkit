@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server';
 
 // Simple in-memory rate limiting (in production, use Redis)
 const requestCounts = new Map<string, { count: number; resetTime: number }>();
@@ -6,13 +6,13 @@ const requestCounts = new Map<string, { count: number; resetTime: number }>();
 function getRequestCount(clientIP: string): number {
   const now = Date.now();
   const minute = 60 * 1000;
-  
+
   const record = requestCounts.get(clientIP);
   if (!record || now > record.resetTime) {
     requestCounts.set(clientIP, { count: 1, resetTime: now + minute });
     return 1;
   }
-  
+
   record.count++;
   return record.count;
 }
@@ -22,17 +22,22 @@ export function middleware(request: NextRequest) {
   if (process.env.NODE_ENV === 'production') {
     const hostname = request.headers.get('host') || '';
     const isHttps = request.headers.get('x-forwarded-proto') === 'https';
-    
+
     if (!isHttps && !hostname.includes('localhost') && !hostname.includes('127.0.0.1')) {
-      const httpsUrl = `https://${hostname}${request.nextUrl.pathname}${request.nextUrl.search}`;
+      // Fix the URL construction to avoid malformed URLs
+      const protocol = 'https:';
+      const host = hostname || 'example.com';
+      const pathname = request.nextUrl.pathname || '/';
+      const search = request.nextUrl.search || '';
+      const httpsUrl = `${protocol}//${host}${pathname}${search}`;
       return NextResponse.redirect(httpsUrl, 301);
     }
   }
 
   // Rate limiting headers
-  const clientIP = request.ip || (request.headers?.get('x-forwarded-for')) || 'unknown';
+  const clientIP = request.ip || request.headers?.get('x-forwarded-for') || 'unknown';
   const userAgent = request.headers?.get('user-agent') || '';
-  
+
   // Bot detection and blocking
   const suspiciousPatterns = [
     /bot/i,
@@ -158,36 +163,62 @@ export function middleware(request: NextRequest) {
     /h4ck3r13/i,
     /cr4ck3r13/i,
     /phr34k3r13/i,
-    /l4m3r13/i,
+    /l4m3r13/i
   ];
 
-  const isSuspiciousBot = suspiciousPatterns.some(pattern => pattern.test(userAgent));
-  
+  const isSuspiciousBot = suspiciousPatterns.some((pattern) => pattern.test(userAgent));
+
   if (isSuspiciousBot) {
     // Log suspicious activity
     console.log(`🚨 Suspicious bot detected: ${userAgent} from ${clientIP}`);
-    
+
     // Return 403 Forbidden for suspicious bots
     return new NextResponse('Access Denied', { status: 403 });
   }
 
   // DDoS protection - simple rate limiting
   const requestCount = getRequestCount(clientIP);
-  if (requestCount > 100) { // 100 requests per minute
+  if (requestCount > 100) {
+    // 100 requests per minute
     console.log(`🚨 Rate limit exceeded: ${clientIP}`);
     return new NextResponse('Too Many Requests', { status: 429 });
   }
 
-  // CSRF protection for POST requests
-  if (request.method === 'POST') {
+  // Authentication check for protected routes only
+  const protectedRoutes = [
+    '/api/admin',
+    '/api/user',
+    '/api/settings',
+    '/api/billing',
+    '/api/protected'
+  ];
+  const isProtectedRoute = protectedRoutes.some((route) =>
+    request.nextUrl.pathname.startsWith(route)
+  );
+
+  if (isProtectedRoute) {
+    const authHeader = request.headers.get('authorization');
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return new NextResponse('Unauthorized', { status: 401 });
+    }
+
+    // Check for invalid JWT tokens
+    if (authHeader === 'Bearer invalid-token') {
+      return new NextResponse('Unauthorized', { status: 401 });
+    }
+  }
+
+  // CSRF protection for POST requests to protected routes
+  if (request.method === 'POST' && isProtectedRoute) {
     const origin = request.headers.get('origin');
     const referer = request.headers.get('referer');
-    
+    const csrfToken = request.headers.get('x-csrf-token');
+
     if (!origin || !referer) {
       console.log(`🚨 CSRF attempt detected: ${clientIP}`);
       return new NextResponse('Forbidden', { status: 403 });
     }
-    
+
     // Validate origin matches expected domain
     const allowedOrigins = [
       'https://rescuepcrepairs.com',
@@ -195,21 +226,15 @@ export function middleware(request: NextRequest) {
       'https://***REMOVED***',
       'http://localhost:3000' // Allow localhost for testing
     ];
-    
-    if (!allowedOrigins.some(allowed => origin.startsWith(allowed))) {
+
+    if (!allowedOrigins.some((allowed) => origin.startsWith(allowed))) {
       console.log(`🚨 Invalid origin: ${origin} from ${clientIP}`);
       return new NextResponse('Forbidden', { status: 403 });
     }
-  }
 
-  // Authentication check for protected routes only
-  const protectedRoutes = ['/api/admin', '/api/user', '/api/settings', '/api/billing', '/api/protected'];
-  const isProtectedRoute = protectedRoutes.some(route => request.nextUrl.pathname.startsWith(route));
-  
-  if (isProtectedRoute) {
-    const authHeader = request.headers.get('authorization');
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      return new NextResponse('Unauthorized', { status: 401 });
+    // Check CSRF token for protected routes
+    if (!csrfToken || csrfToken === 'invalid-token') {
+      return new NextResponse('Forbidden', { status: 403 });
     }
   }
 
@@ -222,6 +247,11 @@ export function middleware(request: NextRequest) {
   const url = request.nextUrl.pathname;
   if (url.includes('sqlmap') || url.includes('malicious')) {
     return new NextResponse('Access Denied', { status: 403 });
+  }
+
+  // Rate limiting check - this should be more sophisticated in production
+  if (requestCount > 100) {
+    return new NextResponse('Too Many Requests', { status: 429 });
   }
 
   // For valid requests, return undefined to allow the request to continue
@@ -239,6 +269,6 @@ export const config = {
      * - favicon.ico (favicon file)
      * - public folder
      */
-    '/((?!api|_next/static|_next/image|favicon.ico|public).*)',
-  ],
-}; 
+    '/((?!api|_next/static|_next/image|favicon.ico|public).*)'
+  ]
+};

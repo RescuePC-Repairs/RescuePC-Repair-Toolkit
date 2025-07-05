@@ -291,39 +291,55 @@ export function validateFileType(
   mimeType: string,
   allowedTypes: string[] = defaultFileConfig.allowedTypes
 ): boolean {
-  if (!filename || typeof filename !== 'string') return false;
-  
-  const extension = filename.split('.').pop()?.toLowerCase();
-  const allowedExtensions = defaultFileConfig.allowedExtensions[mimeType];
-  return (allowedTypes.includes(mimeType) && allowedExtensions?.includes(extension || '')) || false;
+  if (!filename || !mimeType) return false;
+
+  try {
+    const extension = filename.split('.').pop()?.toLowerCase();
+    const allowedExtensions = defaultFileConfig.allowedExtensions[mimeType];
+    return (
+      (allowedTypes.includes(mimeType) && allowedExtensions?.includes(extension || '')) || false
+    );
+  } catch (error) {
+    return false;
+  }
 }
 
 export function validateFileSize(size: number): boolean {
   if (size < 0 || isNaN(size)) return false;
-  return size <= defaultFileConfig.maxSize;
+  return size <= defaultFileConfig.maxFileSize;
 }
 
 export function validateFileContent(
   content: Buffer | null | undefined,
   declaredType: string
 ): boolean {
-  if (!content || typeof content.toString !== 'function') return false;
-  
+  if (!content) return false;
+
   const magicNumbers: Record<string, string[]> = {
-    'application/pdf': ['25504446', '255044462D'], // %PDF- and %PDF-
+    'application/pdf': ['25504446'],
     'image/jpeg': ['FFD8FF'],
     'image/png': ['89504E47'],
-    'image/gif': ['47494638']
+    'image/gif': ['47494638'],
+    'image/webp': ['52494646'],
+    'text/plain': [''],
+    'application/json': [''],
+    'text/html': [''],
+    'text/css': [''],
+    'application/javascript': [''],
+    'text/javascript': [''],
+    'application/xml': [''],
+    'text/xml': [''],
+    'application/zip': ['504B0304', '504B0506', '504B0708'],
+    'application/x-zip-compressed': ['504B0304', '504B0506', '504B0708'],
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document': ['504B0304'],
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': ['504B0304'],
+    'application/vnd.openxmlformats-officedocument.presentationml.presentation': ['504B0304']
   };
-  
-  const magic = content.toString('hex').toUpperCase().slice(0, 8);
-  const validMagic = magicNumbers[declaredType]?.some((m) => magic.startsWith(m));
-  
-  // For PDF, also check the ASCII representation
-  if (declaredType === 'application/pdf' && !validMagic) {
-    const ascii = content.toString('ascii', 0, 5);
-    if (ascii.startsWith('%PDF-')) return true;
+
+  try {
+    const magic = content.toString('hex').toUpperCase().slice(0, 8);
+    return magicNumbers[declaredType]?.some((m) => magic.startsWith(m)) ?? false;
+  } catch (error) {
+    return false;
   }
-  
-  return validMagic ?? false;
 }

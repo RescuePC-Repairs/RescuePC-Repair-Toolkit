@@ -1,22 +1,22 @@
 import { describe, expect, it, jest, beforeEach } from '@jest/globals';
-import { validateOrigin } from '@/utils/originValidation';
+import { validateOrigin, getOriginTrustScore } from '@/utils/originValidation';
+import type { NextRequest } from 'next/server';
 
 describe('Origin Validation', () => {
-  let mockRequest: any;
+  let mockRequest: NextRequest;
 
   beforeEach(() => {
     mockRequest = {
       headers: {
-        get: jest.fn((name: string) => {
+        get: jest.fn((key: string) => {
           const headers: { [key: string]: string } = {
             'origin': 'https://rescuepcrepairs.com',
-            'referer': 'https://rescuepcrepairs.com/dashboard'
+            'referer': 'https://rescuepcrepairs.com/page'
           };
-          return headers[name] || null;
+          return headers[key] || null;
         })
-      },
-      url: 'https://rescuepcrepairs.com/api/secure'
-    };
+      }
+    } as any;
   });
 
   describe('validateOrigin', () => {
@@ -26,10 +26,8 @@ describe('Origin Validation', () => {
     });
 
     it('should allow requests from valid subdomains', () => {
-      mockRequest.headers.get = jest.fn((name: string) => {
-        if (name === 'origin') {
-          return 'https://app.rescuepcrepairs.com';
-        }
+      mockRequest.headers.get = jest.fn((key: string) => {
+        if (key === 'origin') return 'https://api.rescuepcrepairs.com';
         return null;
       });
 
@@ -38,10 +36,8 @@ describe('Origin Validation', () => {
     });
 
     it('should reject requests from invalid origins', () => {
-      mockRequest.headers.get = jest.fn((name: string) => {
-        if (name === 'origin') {
-          return 'https://malicious-site.com';
-        }
+      mockRequest.headers.get = jest.fn((key: string) => {
+        if (key === 'origin') return 'https://malicious-site.com';
         return null;
       });
 
@@ -50,17 +46,18 @@ describe('Origin Validation', () => {
     });
 
     it('should handle missing origin header', () => {
-      mockRequest.headers.get = jest.fn(() => null);
+      mockRequest.headers.get = jest.fn((key: string) => {
+        if (key === 'origin') return null;
+        return null;
+      });
 
       const result = validateOrigin(mockRequest);
       expect(result).toBe(false);
     });
 
     it('should handle empty origin header', () => {
-      mockRequest.headers.get = jest.fn((name: string) => {
-        if (name === 'origin') {
-          return '';
-        }
+      mockRequest.headers.get = jest.fn((key: string) => {
+        if (key === 'origin') return '';
         return null;
       });
 
@@ -69,10 +66,8 @@ describe('Origin Validation', () => {
     });
 
     it('should handle malformed origin URLs', () => {
-      mockRequest.headers.get = jest.fn((name: string) => {
-        if (name === 'origin') {
-          return 'not-a-valid-url';
-        }
+      mockRequest.headers.get = jest.fn((key: string) => {
+        if (key === 'origin') return 'not-a-valid-url';
         return null;
       });
 
@@ -81,12 +76,10 @@ describe('Origin Validation', () => {
     });
 
     it('should validate origin against referer', () => {
-      mockRequest.headers.get = jest.fn((name: string) => {
-        const headers: { [key: string]: string } = {
-          'origin': 'https://rescuepcrepairs.com',
-          'referer': 'https://rescuepcrepairs.com/dashboard'
-        };
-        return headers[name] || null;
+      mockRequest.headers.get = jest.fn((key: string) => {
+        if (key === 'origin') return null;
+        if (key === 'referer') return 'https://rescuepcrepairs.com/page';
+        return null;
       });
 
       const result = validateOrigin(mockRequest);
@@ -94,15 +87,14 @@ describe('Origin Validation', () => {
     });
 
     it('should handle missing referer header', () => {
-      mockRequest.headers.get = jest.fn((name: string) => {
-        if (name === 'origin') {
-          return 'https://rescuepcrepairs.com';
-        }
+      mockRequest.headers.get = jest.fn((key: string) => {
+        if (key === 'origin') return null;
+        if (key === 'referer') return null;
         return null;
       });
 
       const result = validateOrigin(mockRequest);
-      expect(result).toBe(true);
+      expect(result).toBe(false);
     });
 
     it('should handle null or undefined headers', () => {
@@ -113,10 +105,8 @@ describe('Origin Validation', () => {
     });
 
     it('should validate against allowed origins list', () => {
-      mockRequest.headers.get = jest.fn((name: string) => {
-        if (name === 'origin') {
-          return 'https://rescuepcrepairs.com';
-        }
+      mockRequest.headers.get = jest.fn((key: string) => {
+        if (key === 'origin') return 'https://www.rescuepcrepairs.com';
         return null;
       });
 
@@ -125,15 +115,40 @@ describe('Origin Validation', () => {
     });
 
     it('should handle requests with multiple origin headers', () => {
-      mockRequest.headers.get = jest.fn((name: string) => {
-        if (name === 'origin') {
-          return 'https://rescuepcrepairs.com';
-        }
+      mockRequest.headers.get = jest.fn((key: string) => {
+        if (key === 'origin') return 'https://rescuepcrepairs.com';
         return null;
       });
 
       const result = validateOrigin(mockRequest);
       expect(result).toBe(true);
+    });
+  });
+
+  describe('getOriginTrustScore', () => {
+    it('should return perfect score for exact match', () => {
+      const score = getOriginTrustScore(mockRequest);
+      expect(score).toBe(1);
+    });
+
+    it('should return lower score for subdomain', () => {
+      mockRequest.headers.get = jest.fn((key: string) => {
+        if (key === 'origin') return 'https://api.rescuepcrepairs.com';
+        return null;
+      });
+
+      const score = getOriginTrustScore(mockRequest);
+      expect(score).toBeGreaterThan(0.4);
+    });
+
+    it('should return zero for invalid origin', () => {
+      mockRequest.headers.get = jest.fn((key: string) => {
+        if (key === 'origin') return 'https://malicious-site.com';
+        return null;
+      });
+
+      const score = getOriginTrustScore(mockRequest);
+      expect(score).toBe(0);
     });
   });
 });
