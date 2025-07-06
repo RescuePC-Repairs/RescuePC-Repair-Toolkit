@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { Check, Star, Crown, Shield } from 'lucide-react';
 
 interface PricingTier {
@@ -99,16 +99,50 @@ const PRICING_TIERS: PricingTier[] = [
 
 export function PricingSection() {
   const [isLoading, setIsLoading] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
-  const handlePurchase = async (tier: PricingTier) => {
+  const handlePurchase = useCallback(async (tier: PricingTier) => {
+    if (isLoading) return; // Prevent multiple clicks
+    
     setIsLoading(tier.name);
+    setError(null);
+    
     try {
-      window.open(tier.stripePaymentLink, '_blank');
-    } catch (error) {
-      console.error('Error opening payment link:', error);
+      // Validate the payment link
+      if (!tier.stripePaymentLink || !tier.stripePaymentLink.startsWith('https://')) {
+        throw new Error('Invalid payment link');
+      }
+      
+      // Open payment link in new tab
+      const newWindow = window.open(tier.stripePaymentLink, '_blank', 'noopener,noreferrer');
+      
+      if (!newWindow) {
+        throw new Error('Popup blocked. Please allow popups for this site.');
+      }
+      
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Failed to open payment link';
+      setError(errorMessage);
+      console.error('Payment link error:', err);
     } finally {
+      // Reset loading state after a delay
       setTimeout(() => setIsLoading(null), 2000);
     }
+  }, [isLoading]);
+
+  const formatPrice = (price: number): string => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2
+    }).format(price);
+  };
+
+  const formatLicenses = (licenses: number | string): string => {
+    if (typeof licenses === 'number') {
+      return `${licenses} License${licenses > 1 ? 's' : ''}`;
+    }
+    return licenses;
   };
 
   return (
@@ -129,10 +163,17 @@ export function PricingSection() {
           </p>
         </div>
 
+        {/* Error Message */}
+        {error && (
+          <div className="mb-8 p-4 bg-red-500/20 border border-red-500/40 rounded-lg text-red-200 text-center">
+            {error}
+          </div>
+        )}
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8">
           {PRICING_TIERS.map((tier, index) => (
             <div
-              key={index}
+              key={`${tier.name}-${index}`}
               className={`relative pricing-card transform hover:scale-[1.02] transition-all duration-300 ${
                 tier.popular ? 'popular' : ''
               } ${tier.enterprise ? 'border-blue-400/40' : ''}`}
@@ -164,11 +205,9 @@ export function PricingSection() {
                 <h3 className="text-2xl font-bold text-white mb-2">{tier.name}</h3>
                 <p className="text-white/60 text-sm mb-4">{tier.description}</p>
                 <div className="mb-4">
-                  <div className="text-4xl font-bold text-white">${tier.price}</div>
+                  <div className="text-4xl font-bold text-white">{formatPrice(tier.price)}</div>
                   <div className="text-white/60 text-sm">
-                    {typeof tier.licenses === 'number'
-                      ? `${tier.licenses} License${tier.licenses > 1 ? 's' : ''}`
-                      : tier.licenses}
+                    {formatLicenses(tier.licenses)}
                   </div>
                 </div>
               </div>
@@ -177,7 +216,7 @@ export function PricingSection() {
               <div className="mb-8 flex-1">
                 <ul className="space-y-3">
                   {tier.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-start gap-3">
+                    <li key={`${tier.name}-feature-${featureIndex}`} className="flex items-start gap-3">
                       <Check className="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" />
                       <span className="text-white/90 text-sm">{feature}</span>
                     </li>
@@ -189,7 +228,7 @@ export function PricingSection() {
               <button
                 onClick={() => handlePurchase(tier)}
                 disabled={isLoading === tier.name}
-                className={`w-full py-3 px-6 rounded-xl font-semibold transition-all duration-300 mt-auto mb-2 shadow-lg
+                className={`w-full py-3 px-6 rounded-xl font-semibold transition-all duration-300 mt-auto mb-2 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed
                   ${
                     tier.popular
                       ? 'bg-gradient-to-r from-yellow-400 to-orange-400 hover:from-yellow-500 hover:to-orange-500 text-black'
@@ -197,6 +236,7 @@ export function PricingSection() {
                         ? 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white'
                         : 'bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-500 hover:to-gray-600 text-white'
                   }`}
+                aria-label={`Purchase ${tier.name} license`}
               >
                 {isLoading === tier.name ? (
                   <div className="flex items-center justify-center gap-2">

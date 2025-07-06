@@ -89,7 +89,7 @@ const nextConfig = {
         net: false,
         tls: false
       };
-      
+
       // Exclude Nodemailer from client bundle
       config.externals = config.externals || [];
       config.externals.push('nodemailer');
