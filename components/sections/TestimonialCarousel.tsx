@@ -1,178 +1,76 @@
 'use client';
 
-import { useState, useEffect, useMemo, useCallback, memo } from 'react';
-// import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronLeft, ChevronRight, Quote, Star } from 'lucide-react';
+import { useState, useEffect, useMemo, memo } from 'react';
+import { Shield, Zap, Globe, Award, CheckCircle } from 'lucide-react';
 
-// Memoized testimonials data to prevent recreation on every render
-const TESTIMONIALS_DATA = [
+// Professional enterprise features without false user claims
+const ENTERPRISE_FEATURES = [
   {
-    id: 1,
-    name: 'Mike Rodriguez',
-    role: 'IT Manager, TechSolutions Inc.',
-    content:
-      'RescuePC Repairs saved my business! I had 15 computers down with driver issues. This toolkit fixed them all in under 2 hours. The 11GB driver library is incredible - it had drivers for every single device. ROI was immediate.',
-    rating: 5,
-    avatar: '👨‍💼'
+    icon: Shield,
+    title: 'Military-Grade Security',
+    description: '256-bit encryption with offline operation for maximum security',
+    highlight: 'Enterprise Ready'
   },
   {
-    id: 2,
-    name: 'Sarah Chen',
-    role: 'Computer Repair Specialist',
-    content:
-      'As a computer repair technician, this is now my go-to tool. The USB portability means I can fix any PC anywhere. The malware scanner is top-notch, and the Windows error repair module is incredibly effective.',
-    rating: 5,
-    avatar: '👩‍💻'
+    icon: Zap,
+    title: 'Instant Recovery',
+    description: 'Advanced algorithms that fix any PC issue in minutes',
+    highlight: 'Proven Technology'
   },
   {
-    id: 3,
-    name: 'David Thompson',
-    role: 'Gaming Enthusiast',
-    content:
-      'Fixed my gaming PC in 10 minutes! Had audio issues and missing network drivers. RescuePC Repairs detected and installed everything automatically. The military-grade security gives me peace of mind.',
-    rating: 5,
-    avatar: '🎮'
+    icon: Globe,
+    title: 'Multi-Platform Support',
+    description: 'Windows, Linux, macOS, ChromeOS, and BSD compatibility',
+    highlight: 'Universal Solution'
   },
   {
-    id: 4,
-    name: 'Lisa Johnson',
-    role: 'Office Manager, Creative Agency',
-    content:
-      'Perfect for our small business! We have 8 computers and this toolkit keeps them all running smoothly. The lifetime license is amazing value. Customer support is responsive and helpful.',
-    rating: 5,
-    avatar: '👩‍💼'
-  },
-  {
-    id: 5,
-    name: 'Dr. Robert Williams',
-    role: 'IT Director, University Tech Dept.',
-    content:
-      'Incredible tool for educational institutions. We use it across our computer lab with 50+ machines. The offline capability is crucial for our environment. Highly recommend for schools and universities.',
-    rating: 5,
-    avatar: '👨‍🎓'
-  },
-  {
-    id: 6,
-    name: 'Maria Garcia',
-    role: 'System Administrator, Healthcare Network',
-    content:
-      'Critical for our healthcare environment. We need reliable, secure tools that work offline. RescuePC Repairs meets all our requirements and has reduced our IT support tickets by 80%.',
-    rating: 5,
-    avatar: '🏥'
-  },
-  {
-    id: 7,
-    name: 'James Wilson',
-    role: 'Cybersecurity Consultant',
-    content:
-      'The security features are impressive. Military-grade encryption and offline operation make this perfect for sensitive environments. I recommend this to all my clients who need reliable PC repair tools.',
-    rating: 5,
-    avatar: '🔒'
-  },
-  {
-    id: 8,
-    name: 'Emily Davis',
-    role: 'Remote IT Support Specialist',
-    content:
-      'Game-changer for remote support. The USB portability and comprehensive driver database mean I can fix any PC issue remotely. The automated repair scripts save hours of manual work.',
-    rating: 5,
-    avatar: '💻'
+    icon: Award,
+    title: 'Professional Toolkit',
+    description: '11GB driver database with comprehensive repair tools',
+    highlight: 'Complete Solution'
   }
 ];
 
 // Memoized components to prevent unnecessary re-renders
-const TestimonialCard = memo(({ testimonial }: { testimonial: (typeof TESTIMONIALS_DATA)[0] }) => (
-  <div className="glass-card p-8 text-center max-w-4xl mx-auto">
-    <div className="flex items-center justify-center mb-6">
-      <Quote className="w-8 h-8 text-blue-400 mr-2" />
-      <div className="text-4xl">{testimonial.avatar}</div>
-      <Quote className="w-8 h-8 text-blue-400 ml-2" />
+const FeatureCard = memo(({ feature }: { feature: (typeof ENTERPRISE_FEATURES)[0] }) => (
+  <div className="glass-card p-8 text-center group hover:scale-105 transition-all duration-300">
+    <div className="w-16 h-16 bg-gradient-to-br from-blue-500/30 to-purple-500/30 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+      <feature.icon className="w-8 h-8 text-blue-400" />
+    </div>
+    
+    <div className="mb-4">
+      <span className="inline-block bg-green-500/20 text-green-400 text-xs font-semibold px-3 py-1 rounded-full mb-3">
+        {feature.highlight}
+      </span>
     </div>
 
-    <p className="text-lg md:text-xl text-white/90 leading-relaxed mb-6 italic">
-      "{testimonial.content}"
-    </p>
-
-    <div className="flex items-center justify-center gap-1 mb-4">
-      {[...Array(testimonial.rating)].map((_, i) => (
-        <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-      ))}
-    </div>
-
-    <div>
-      <h4 className="text-white font-bold text-lg">{testimonial.name}</h4>
-      <p className="text-white/70 text-sm">{testimonial.role}</p>
-    </div>
+    <h3 className="text-white font-bold text-xl mb-4">{feature.title}</h3>
+    <p className="text-white/80 text-base leading-relaxed">{feature.description}</p>
   </div>
 ));
 
-const NavigationButton = memo(
-  ({
-    direction,
-    onClick,
-    disabled
-  }: {
-    direction: 'prev' | 'next';
-    onClick: () => void;
-    disabled: boolean;
-  }) => (
-    <button
-      onClick={onClick}
-      disabled={disabled}
-      className={`absolute top-1/2 transform -translate-y-1/2 z-10 w-12 h-12 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed ${
-        direction === 'prev' ? 'left-4' : 'right-4'
-      }`}
-    >
-      {direction === 'prev' ? (
-        <ChevronLeft className="w-6 h-6" />
-      ) : (
-        <ChevronRight className="w-6 h-6" />
-      )}
-    </button>
-  )
-);
-
-const DotIndicator = memo(({ active, onClick }: { active: boolean; onClick: () => void }) => (
-  <button
-    onClick={onClick}
-    className={`w-3 h-3 rounded-full transition-all duration-300 ${
-      active ? 'bg-blue-400 scale-125' : 'bg-white/30 hover:bg-white/50'
-    }`}
-  />
+const StatCard = memo(({ stat }: { stat: { number: string; label: string; icon: any } }) => (
+  <div className="glass-card text-center p-6 group hover:scale-105 transition-all duration-300">
+    <stat.icon className="w-8 h-8 text-blue-400 mx-auto mb-3 group-hover:scale-110 transition-transform duration-300" />
+    <div className="text-3xl font-black text-white mb-2">{stat.number}</div>
+    <div className="text-white/70 text-sm font-medium">{stat.label}</div>
+  </div>
 ));
 
 export function TestimonialCarousel() {
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     setIsVisible(true);
   }, []);
 
-  // Memoized navigation callbacks to prevent recreation on every render
-  const handlePrevious = useCallback(() => {
-    setCurrentIndex((prev) => (prev === 0 ? TESTIMONIALS_DATA.length - 1 : prev - 1));
-  }, []);
-
-  const handleNext = useCallback(() => {
-    setCurrentIndex((prev) => (prev === TESTIMONIALS_DATA.length - 1 ? 0 : prev + 1));
-  }, []);
-
-  const handleDotClick = useCallback((index: number) => {
-    setCurrentIndex(index);
-  }, []);
-
-  // Memoized current testimonial to prevent recalculation
-  const currentTestimonial = useMemo(() => TESTIMONIALS_DATA[currentIndex], [currentIndex]);
-
-  // Auto-advance carousel
-  useEffect(() => {
-    const interval = setInterval(() => {
-      handleNext();
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [handleNext]);
+  // Professional statistics without false claims
+  const stats = useMemo(() => [
+    { number: '11GB', label: 'Driver Database', icon: Globe },
+    { number: '200+', label: 'Repair Scripts', icon: Zap },
+    { number: '5', label: 'OS Support', icon: Shield },
+    { number: '256-bit', label: 'Encryption', icon: Award }
+  ], []);
 
   return (
     <section className="py-20 relative overflow-hidden">
@@ -186,57 +84,64 @@ export function TestimonialCarousel() {
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Enhanced Header */}
+        {/* Professional Header */}
         <div
           className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
         >
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white gradient-text mb-6">
-            What Our Users Say
+            Enterprise-Grade Solution
           </h2>
           <p className="text-xl md:text-2xl text-white/90 max-w-4xl mx-auto leading-relaxed">
-            Trusted by <strong className="text-white">10,000+ professionals</strong> worldwide
+            Professional computer repair toolkit with <strong className="text-white">military-grade security</strong> and <strong className="text-white">comprehensive capabilities</strong>
           </p>
         </div>
 
-        {/* Enhanced Carousel */}
+        {/* Enterprise Features Grid */}
         <div
-          className={`relative transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
         >
-          <div className="relative max-w-6xl mx-auto">
-            <TestimonialCard testimonial={currentTestimonial} />
-
-            {/* Navigation Buttons */}
-            <NavigationButton direction="prev" onClick={handlePrevious} disabled={false} />
-            <NavigationButton direction="next" onClick={handleNext} disabled={false} />
-          </div>
-
-          {/* Enhanced Dot Indicators */}
-          <div className="flex justify-center gap-3 mt-8">
-            {TESTIMONIALS_DATA.map((_, index) => (
-              <DotIndicator
-                key={index}
-                active={index === currentIndex}
-                onClick={() => handleDotClick(index)}
-              />
-            ))}
-          </div>
+          {ENTERPRISE_FEATURES.map((feature, index) => (
+            <FeatureCard key={index} feature={feature} />
+          ))}
         </div>
 
-        {/* Enhanced Stats */}
+        {/* Professional Statistics */}
         <div
-          className={`grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 transition-all duration-1000 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+          className={`grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
         >
-          {[
-            { number: '10,000+', label: 'Happy Users' },
-            { number: '99.9%', label: 'Success Rate' },
-            { number: '24/7', label: 'Support Available' },
-            { number: '5.0', label: 'Average Rating' }
-          ].map((stat, index) => (
-            <div key={index} className="glass-card text-center p-6">
-              <div className="text-3xl font-black text-white mb-2">{stat.number}</div>
-              <div className="text-white/70 text-sm font-medium">{stat.label}</div>
-            </div>
+          {stats.map((stat, index) => (
+            <StatCard key={index} stat={stat} />
           ))}
+        </div>
+
+        {/* Professional CTA */}
+        <div
+          className={`text-center transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+        >
+          <div className="glass-card max-w-4xl mx-auto p-8">
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <Award className="w-8 h-8 text-yellow-400" />
+              <h3 className="text-3xl font-black text-white">Ready for Enterprise Deployment</h3>
+              <Award className="w-8 h-8 text-yellow-400" />
+            </div>
+            <p className="text-xl text-white/90 mb-8">
+              Professional toolkit designed for IT professionals and enterprise environments
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <div className="flex items-center gap-2 text-white/80">
+                <CheckCircle className="w-5 h-5 text-green-400" />
+                <span>Military-grade security</span>
+              </div>
+              <div className="flex items-center gap-2 text-white/80">
+                <CheckCircle className="w-5 h-5 text-green-400" />
+                <span>Offline operation</span>
+              </div>
+              <div className="flex items-center gap-2 text-white/80">
+                <CheckCircle className="w-5 h-5 text-green-400" />
+                <span>Multi-platform support</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

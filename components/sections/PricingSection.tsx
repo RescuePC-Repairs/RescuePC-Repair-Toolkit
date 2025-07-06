@@ -22,6 +22,27 @@ import {
 // Memoized plans data to prevent recreation on every render
 const PLANS_DATA = [
   {
+    id: 'basic',
+    name: 'Basic License',
+    price: '$49.99',
+    originalPrice: '$99.99',
+    period: 'year',
+    description: 'Essential features for individual users',
+    features: [
+      'Core diagnostic tools',
+      'Basic repair scripts',
+      'Email support',
+      '1-year updates included',
+      'Standard security protocols',
+      'Single device support',
+      'Basic repair profiles'
+    ],
+    icon: Shield,
+    color: 'from-blue-500 to-blue-600',
+    popular: false,
+    stripeLink: 'https://buy.stripe.com/5kQfZggMacypcSl9wP08g05'
+  },
+  {
     id: 'professional',
     name: 'Professional License',
     price: '$199.99',
@@ -114,9 +135,9 @@ const PLANS_DATA = [
 
 const INDICATORS_DATA = [
   { icon: Shield, text: 'Military-Grade Security', desc: '256-bit encryption' },
-  { icon: Users, text: 'Trusted by 10,000+ Users', desc: 'Enterprise verified' },
+  { icon: Globe, text: 'Multi-Platform Support', desc: 'Windows, Linux, macOS' },
   { icon: Clock, text: 'Instant Download', desc: 'No waiting time' },
-  { icon: TrendingUp, text: '99.9% Success Rate', desc: 'Proven results' }
+  { icon: Zap, text: 'Advanced Algorithms', desc: 'Proven technology' }
 ];
 
 // Memoized components to prevent unnecessary re-renders
