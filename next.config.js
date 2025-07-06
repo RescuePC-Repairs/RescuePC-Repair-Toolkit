@@ -89,6 +89,10 @@ const nextConfig = {
         net: false,
         tls: false
       };
+      
+      // Exclude Nodemailer from client bundle
+      config.externals = config.externals || [];
+      config.externals.push('nodemailer');
     }
 
     // Ignore specific HTML files in project directories
@@ -97,10 +101,10 @@ const nextConfig = {
       use: 'ignore-loader'
     });
 
-    // Handle JSON files from node_modules
+    // Ignore JSON files in node_modules to prevent bundling issues
     config.module.rules.push({
       test: /node_modules\/.*\.json$/,
-      type: 'javascript/auto'
+      use: 'ignore-loader'
     });
 
     return config;
