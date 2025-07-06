@@ -38,6 +38,7 @@ export async function POST(request: NextRequest) {
 
     // Send welcome email directly here
     try {
+      // Dynamically import nodemailer only on the server
       const nodemailer = await import('nodemailer');
       const transporter = nodemailer.createTransport({
         service: 'gmail',
