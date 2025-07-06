@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Shield,
   Download,
@@ -11,86 +11,110 @@ import {
   CheckCircle,
   Star,
   Zap,
-  Globe
+  Globe,
+  Award,
+  Users,
+  TrendingUp,
+  Sparkles
 } from 'lucide-react';
 import Image from 'next/image';
 
 export function Hero() {
   const [isLoading, setIsLoading] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
 
   const handleGetStarted = () => {
     setIsLoading(true);
-    // Scroll to pricing section
     document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
     setTimeout(() => setIsLoading(false), 1000);
   };
 
   return (
-    <section className="hero">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div className="max-w-6xl mx-auto text-center">
-          {/* Main Headline with Logo */}
-          <div className="mb-8 flex flex-col items-center justify-center">
-            <div className="flex items-center justify-center gap-4 mb-2">
-              <Image
-                src="/RescuePC Repairs Logo.png"
-                alt="RescuePC Repairs Logo"
-                width={64}
-                height={64}
-                className="rounded-full shadow-lg border border-blue-500 bg-white p-1"
-                priority
-              />
-              <span className="text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-tight whitespace-nowrap">
-                RescuePC Repairs
-              </span>
-            </div>
-            <p className="text-xl md:text-2xl text-blue-100 max-w-4xl mx-auto leading-relaxed mb-2 font-medium">
-              Where Expertise Meets Automation
-            </p>
-          </div>
+    <section className="hero relative overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-green-500/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '4s' }}></div>
+      </div>
 
-          {/* Hero Description */}
-          <div className="mb-12">
-            <p className="text-lg md:text-xl text-white/90 max-w-5xl mx-auto leading-relaxed">
-              <strong className="text-white">
-                🔧 Professional Multi-Platform PC Repair Toolkit
-              </strong>{' '}
-              with <strong className="text-white">military-grade security</strong> and{' '}
-              <strong className="text-white">comprehensive driver database</strong>. Complete
-              toolkit: <strong className="text-white">11GB of drivers and repair tools</strong>{' '}
-              including everything you need to fix any PC.
-            </p>
-          </div>
-
-          {/* Key Features Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            <div className="feature-card text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Globe className="w-8 h-8 text-blue-400" />
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-7xl mx-auto text-center">
+          {/* Main Headline with Enhanced Logo */}
+          <div className={`mb-12 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <div className="flex items-center justify-center gap-6 mb-6">
+              <div className="relative">
+                <Image
+                  src="/RescuePC Repairs Logo.png"
+                  alt="RescuePC Repairs Logo"
+                  width={80}
+                  height={80}
+                  className="rounded-2xl shadow-2xl border-2 border-blue-500/30 bg-white/10 backdrop-blur-xl p-2 animate-scale-in"
+                  priority
+                />
+                <div className="absolute -inset-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-2xl blur-xl animate-pulse"></div>
               </div>
-              <h3 className="text-white font-semibold text-lg mb-2">Multi-Platform Support</h3>
-              <p className="text-white/80 text-sm">Windows, Linux, macOS, ChromeOS, BSD</p>
-            </div>
-
-            <div className="feature-card text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Shield className="w-8 h-8 text-green-400" />
+              <div className="text-center">
+                <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-tight whitespace-nowrap gradient-text">
+                  RescuePC Repairs
+                </h1>
+                <p className="text-xl md:text-2xl text-blue-100 max-w-4xl mx-auto leading-relaxed font-medium animate-fade-in">
+                  Where Expertise Meets Automation
+                </p>
               </div>
-              <h3 className="text-white font-semibold text-lg mb-2">Military-Grade Security</h3>
-              <p className="text-white/80 text-sm">256-bit encryption & offline operation</p>
-            </div>
-
-            <div className="feature-card text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Zap className="w-8 h-8 text-purple-400" />
-              </div>
-              <h3 className="text-white font-semibold text-lg mb-2">Instant Recovery</h3>
-              <p className="text-white/80 text-sm">Fix any PC issue in minutes</p>
             </div>
           </div>
 
-          {/* Professional Features */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-12">
+          {/* Enhanced Hero Description */}
+          <div className={`mb-16 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <div className="glass-card max-w-6xl mx-auto">
+              <p className="text-xl md:text-2xl text-white/95 leading-relaxed mb-6">
+                <strong className="text-white text-2xl md:text-3xl">
+                  🔧 Professional Multi-Platform PC Repair Toolkit
+                </strong>
+              </p>
+              <p className="text-lg md:text-xl text-white/90 leading-relaxed">
+                with <strong className="text-white">military-grade security</strong> and{' '}
+                <strong className="text-white">comprehensive driver database</strong>. Complete
+                toolkit: <strong className="text-white">11GB of drivers and repair tools</strong>{' '}
+                including everything you need to fix any PC.
+              </p>
+            </div>
+          </div>
+
+          {/* Enhanced Key Features Grid */}
+          <div className={`grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <div className="feature-card text-center group">
+              <div className="w-20 h-20 bg-gradient-to-br from-blue-500/30 to-purple-500/30 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                <Globe className="w-10 h-10 text-blue-400" />
+              </div>
+              <h3 className="text-white font-bold text-xl mb-4">Multi-Platform Support</h3>
+              <p className="text-white/80 text-base leading-relaxed">Windows, Linux, macOS, ChromeOS, BSD</p>
+            </div>
+
+            <div className="feature-card text-center group">
+              <div className="w-20 h-20 bg-gradient-to-br from-green-500/30 to-emerald-500/30 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                <Shield className="w-10 h-10 text-green-400" />
+              </div>
+              <h3 className="text-white font-bold text-xl mb-4">Military-Grade Security</h3>
+              <p className="text-white/80 text-base leading-relaxed">256-bit encryption & offline operation</p>
+            </div>
+
+            <div className="feature-card text-center group">
+              <div className="w-20 h-20 bg-gradient-to-br from-purple-500/30 to-pink-500/30 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                <Zap className="w-10 h-10 text-purple-400" />
+              </div>
+              <h3 className="text-white font-bold text-xl mb-4">Instant Recovery</h3>
+              <p className="text-white/80 text-base leading-relaxed">Fix any PC issue in minutes</p>
+            </div>
+          </div>
+
+          {/* Enhanced Professional Features */}
+          <div className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 mb-16 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             {[
               { icon: '🩺', text: 'Professional diagnostics' },
               { icon: '📊', text: 'Real-time monitoring' },
@@ -99,17 +123,17 @@ export function Hero() {
               { icon: '🛡️', text: 'Security protection' },
               { icon: '🔧', text: 'Enterprise ready' }
             ].map((feature, index) => (
-              <div key={index} className="glass-card text-center p-4">
-                <div className="text-2xl mb-2">{feature.icon}</div>
-                <span className="text-white text-sm font-medium">{feature.text}</span>
+              <div key={index} className="glass-card text-center p-6 group hover:scale-105 transition-all duration-300">
+                <div className="text-3xl mb-3 group-hover:scale-110 transition-transform duration-300">{feature.icon}</div>
+                <span className="text-white text-sm font-semibold leading-tight">{feature.text}</span>
               </div>
             ))}
           </div>
 
-          {/* Platform Support Preview */}
-          <div className="mb-12">
-            <h3 className="text-2xl font-bold text-white mb-6">Supported Platforms</h3>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+          {/* Enhanced Platform Support Preview */}
+          <div className={`mb-16 transition-all duration-1000 delay-900 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <h3 className="text-3xl font-bold text-white mb-8 gradient-text">Supported Platforms</h3>
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
               {[
                 { name: 'Windows', icon: '🪟', versions: '7, 8, 10, 11' },
                 { name: 'Linux', icon: '🐧', versions: 'Ubuntu, Debian, Fedora' },
@@ -117,102 +141,111 @@ export function Hero() {
                 { name: 'ChromeOS', icon: '🌐', versions: '80+ to 100+' },
                 { name: 'BSD', icon: '🔧', versions: 'FreeBSD, OpenBSD' }
               ].map((platform, index) => (
-                <div key={index} className="platform-card text-center">
-                  <div className="text-3xl mb-2">{platform.icon}</div>
-                  <h4 className="text-white font-semibold mb-1">{platform.name}</h4>
-                  <p className="text-white/60 text-xs">{platform.versions}</p>
+                <div key={index} className="platform-card text-center group">
+                  <div className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">{platform.icon}</div>
+                  <h4 className="text-white font-bold text-lg mb-2">{platform.name}</h4>
+                  <p className="text-white/70 text-sm leading-tight">{platform.versions}</p>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Security Features */}
-          <div className="mb-12">
-            <h3 className="text-2xl font-bold text-white mb-6">Security Features</h3>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          {/* Enhanced Security Features */}
+          <div className={`mb-16 transition-all duration-1000 delay-1100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <h3 className="text-3xl font-bold text-white mb-8 gradient-text">Security Features</h3>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
               {[
                 { icon: Lock, title: '256-bit Encryption', desc: 'Bank-level security' },
                 { icon: Download, title: 'Offline Operation', desc: 'No data transmission' },
                 { icon: Shield, title: 'Privacy First', desc: 'No tracking or collection' },
                 { icon: Server, title: 'Secure Environment', desc: 'Isolated execution' }
               ].map((feature, index) => (
-                <div key={index} className="glass-card text-center">
-                  <feature.icon className="w-8 h-8 text-green-400 mx-auto mb-3" />
-                  <h4 className="text-white font-semibold mb-1">{feature.title}</h4>
-                  <p className="text-white/60 text-sm">{feature.desc}</p>
+                <div key={index} className="glass-card text-center group">
+                  <feature.icon className="w-10 h-10 text-green-400 mx-auto mb-4 group-hover:scale-110 transition-transform duration-300" />
+                  <h4 className="text-white font-bold text-lg mb-2">{feature.title}</h4>
+                  <p className="text-white/70 text-sm leading-relaxed">{feature.desc}</p>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* CTA Section */}
-          <div className="mb-12">
-            <div className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 border border-blue-400/30 rounded-2xl p-8 mb-6">
-              <h2 className="text-3xl font-bold text-white mb-4">Get Your Lifetime Enterprise</h2>
-              <p className="text-xl text-white/90 mb-6">One-time payment, lifetime access</p>
+          {/* Enhanced CTA Section */}
+          <div className={`mb-16 transition-all duration-1000 delay-1300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <div className="bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-indigo-600/20 border border-blue-400/30 rounded-3xl p-10 mb-8 backdrop-blur-xl">
+              <div className="flex items-center justify-center gap-3 mb-6">
+                <Award className="w-8 h-8 text-yellow-400" />
+                <h2 className="text-4xl font-black text-white">Get Your Lifetime Enterprise</h2>
+                <Award className="w-8 h-8 text-yellow-400" />
+              </div>
+              <p className="text-2xl text-white/90 mb-8 font-medium">One-time payment, lifetime access</p>
 
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-8">
                 <div className="text-center">
-                  <div className="text-4xl font-bold text-white">$499.99</div>
-                  <div className="text-white/60">One-time payment</div>
+                  <div className="text-5xl font-black text-white mb-2">$499.99</div>
+                  <div className="text-white/70 text-lg">One-time payment</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-white">1 License</div>
-                  <div className="text-white/60">Unlimited Repairs</div>
+                  <div className="text-3xl font-black text-white mb-2">1 License</div>
+                  <div className="text-white/70 text-lg">Unlimited Repairs</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-white">Lifetime</div>
-                  <div className="text-white/60">Updates Included</div>
+                  <div className="text-3xl font-black text-white mb-2">Lifetime</div>
+                  <div className="text-white/70 text-lg">Updates Included</div>
                 </div>
               </div>
 
               <button
                 onClick={handleGetStarted}
                 disabled={isLoading}
-                className="cta-button animate-glow"
+                className="cta-button animate-glow group"
               >
                 {isLoading ? (
-                  <div className="flex items-center gap-2">
-                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                    Loading...
+                  <div className="flex items-center gap-3">
+                    <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                    <span className="text-lg">Loading...</span>
                   </div>
                 ) : (
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-5 h-5" />
-                    Get Lifetime Enterprise
+                  <div className="flex items-center gap-3">
+                    <CheckCircle className="w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
+                    <span className="text-lg font-bold">Get Lifetime Enterprise</span>
+                    <Sparkles className="w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
                   </div>
                 )}
               </button>
             </div>
           </div>
 
-          {/* Trust Badges */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          {/* Enhanced Trust Badges */}
+          <div className={`grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 transition-all duration-1000 delay-1500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             {[
               { icon: Shield, text: 'Military-Grade Security Certified' },
               { icon: Server, text: 'Enterprise Container Platform' },
               { icon: Clock, text: '99.9% Uptime Guarantee' },
-              { icon: UserCog, text: 'Built by enterprise experts' }
+              { icon: Users, text: 'Built by enterprise experts' }
             ].map((badge, index) => (
               <div
                 key={index}
-                className="glass-card text-center p-4 hover:bg-green-500/10 transition-all duration-300"
+                className="glass-card text-center p-6 hover:bg-green-500/10 transition-all duration-300 group"
               >
-                <badge.icon className="w-8 h-8 text-green-400 mx-auto mb-2" />
-                <span className="text-white text-sm font-medium">{badge.text}</span>
+                <badge.icon className="w-8 h-8 text-green-400 mx-auto mb-3 group-hover:scale-110 transition-transform duration-300" />
+                <span className="text-white text-sm font-semibold leading-tight">{badge.text}</span>
               </div>
             ))}
           </div>
 
-          {/* Urgency Section */}
-          <div className="bg-gradient-to-r from-red-600/20 to-orange-600/20 border border-red-400/30 rounded-2xl p-6">
-            <div className="flex items-center justify-center gap-3">
-              <Clock className="w-6 h-6 text-yellow-400 animate-pulse" />
-              <p className="text-white text-lg font-semibold">
-                <strong className="text-yellow-400">Limited Time Offer:</strong> Get professional
-                multi-platform repair toolkit at current price
-              </p>
-            </div>
+          {/* Enhanced Stats Section */}
+          <div className={`grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 transition-all duration-1000 delay-1700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            {[
+              { number: '11GB', label: 'Driver Database' },
+              { number: '200+', label: 'Repair Scripts' },
+              { number: '5', label: 'OS Support' },
+              { number: '99.9%', label: 'Success Rate' }
+            ].map((stat, index) => (
+              <div key={index} className="glass-card text-center p-6">
+                <div className="text-3xl font-black text-white mb-2">{stat.number}</div>
+                <div className="text-white/70 text-sm font-medium">{stat.label}</div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
