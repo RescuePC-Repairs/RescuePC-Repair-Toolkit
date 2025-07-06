@@ -1,0 +1,66 @@
+<nav class="fixed top-0 left-0 right-0 z-50 bg-primary-950/95 backdrop-blur-md border-b border-primary-800">
+  <div class="container mx-auto px-4">
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo -->
+      <div class="flex items-center gap-3">
+        <span class="text-2xl">🛡️</span>
+        <span class="text-xl font-bold text-white">RescuePC Repairs</span>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center gap-8">
+        <a
+          *ngFor="let item of navigation"
+          [href]="item.href"
+          (click)="scrollToSection(item.href); $event.preventDefault()"
+          class="text-white/80 hover:text-white transition-colors cursor-pointer"
+        >
+          {{ item.name }}
+        </a>
+      </div>
+
+      <!-- CTA Button -->
+      <div class="hidden md:flex items-center gap-4">
+        <a 
+          href="#download" 
+          class="btn btn-primary flex items-center gap-2"
+          (click)="scrollToSection('#download'); $event.preventDefault()"
+        >
+          <span class="text-lg">⬇️</span>
+          Download Now
+        </a>
+      </div>
+
+      <!-- Mobile menu button -->
+      <button
+        (click)="toggleMobileMenu()"
+        class="md:hidden text-white p-2"
+      >
+        <span *ngIf="mobileMenuOpen" class="text-2xl">✕</span>
+        <span *ngIf="!mobileMenuOpen" class="text-2xl">☰</span>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div *ngIf="mobileMenuOpen" class="md:hidden py-4 border-t border-primary-800">
+      <div class="flex flex-col gap-4">
+        <a
+          *ngFor="let item of navigation"
+          [href]="item.href"
+          (click)="scrollToSection(item.href); $event.preventDefault()"
+          class="text-white/80 hover:text-white transition-colors cursor-pointer"
+        >
+          {{ item.name }}
+        </a>
+        <a
+          href="#download"
+          class="btn btn-primary flex items-center gap-2 justify-center"
+          (click)="scrollToSection('#download'); $event.preventDefault()"
+        >
+          <span class="text-lg">⬇️</span>
+          Download Now
+        </a>
+      </div>
+    </div>
+  </div>
+</nav> 

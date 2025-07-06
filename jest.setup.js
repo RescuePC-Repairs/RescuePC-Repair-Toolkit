@@ -67,8 +67,8 @@ jest.mock('jsonwebtoken', () => ({
   verify: jest.fn(() => ({ id: 'mocked', email: 'mocked', role: 'user' }))
 }));
 
-// Mock bcrypt
-jest.mock('bcrypt', () => ({
+// Mock bcryptjs
+jest.mock('bcryptjs', () => ({
   hash: jest.fn(() => Promise.resolve('hashed_password')),
   compare: jest.fn(() => Promise.resolve(true))
 }));

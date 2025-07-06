@@ -1,4 +1,4 @@
-# 🛡️ RescuePC Repairs - ENTERPRISE PLATFORM
+# 🛡️ RescuePC Repairs - ENTERPRISE PLATFORM (Angular/Nx)
 
 ## ⚡ **ENTERPRISE STATUS: MILITARY-GRADE SECURITY & LIGHTNING PERFORMANCE**
 
@@ -49,8 +49,8 @@
 
 ### 🧠 **MAINTAINABLE & SCALABLE CODE**
 
-- **Clean Architecture**: Enterprise-grade structure
-- **Component-based**: Modular design
+- **Clean Architecture**: Nx monorepo, Angular Universal SSR, Express API
+- **Component-based**: Modular Angular design
 - **Self-documenting**: Clear, readable code
 - **Best Practices**: Industry standards
 - **Type Safety**: Comprehensive validation
@@ -62,36 +62,35 @@
 
 ## 🎯 **QUICK START**
 
-### Development Server
+### Nx Monorepo Setup
 
 ```bash
-# Start enterprise development server
-npm run dev
-# Server available at: http://localhost:3001
+npx create-nx-workspace@latest rescuepc-angular --preset=apps --defaultBase=main
+cd rescuepc-angular
+npx nx generate @nrwl/angular:application frontend --routing --style=css --ssr
+npx nx generate @nrwl/express:application api
 ```
 
-### Production Build
+### Folder Structure
 
-```bash
-# Build for production with all optimizations
-npm run build
-
-# Deploy to production
-npm run deploy
+```
+rescuepc-angular/
+├── apps/
+│   ├── api/                     # Express backend
+│   └── frontend/                # Angular SSR frontend
+├── libs/
+│   └── shared/                  # Shared utils, types, etc.
+├── tools/
+├── nx.json
+├── angular.json
+├── workspace.json
+├── tailwind.config.js
+└── package.json
 ```
 
-### Security Verification
+### Migration Plan
 
-```bash
-# Verify SSL certificates
-npm run ssl:verify
-
-# Run security audit
-npm run security:audit
-
-# Validate security headers
-npm run security:headers
-```
+See [MIGRATION-CHECKLIST.md](../MIGRATION-CHECKLIST.md) for the full step-by-step migration and conversion plan.
 
 ---
 
@@ -160,12 +159,26 @@ npm run security:headers
 
 ### **Infrastructure**
 
-- **CDN**: Global edge locations
-- **Load Balancers**: Multi-region
-- **Auto-scaling**: Dynamic capacity
-- **Monitoring**: 24/7 surveillance
-- **Logging**: Comprehensive audit trail
-- **Backup**: Automated redundancy
+- **Frontend**: Angular Universal (SSR)
+- **Backend**: Express API (apps/api)
+- **Monorepo**: Nx workspace
+- **Styling**: Tailwind CSS
+- **Payment**: Stripe integration (Express API)
+- **Email**: Nodemailer (Express API)
+- **Database**: Prisma ORM (PostgreSQL)
+- **Deployment**: Vercel/Cloud
+- **Security**: Custom middleware, CSP, HTTPS enforcement
+
+### Project Structure
+
+```
+rescuepc-angular/
+├── apps/
+│   ├── api/         # Express API
+│   └── frontend/    # Angular Universal SSR
+├── libs/shared/     # Shared logic, types, utils
+├── ...
+```
 
 ### **Security Layers**
 
@@ -209,93 +222,27 @@ npm run security:headers
 
 ## 🧪 **TESTING & QUALITY**
 
-### **Comprehensive Testing**
-
-```bash
-# Run all tests
-npm run test
-
-# Unit tests
-npm run test:unit
-
-# End-to-end tests
-npm run test:e2e
-
-# Security tests
-npm run test:security
-```
-
-### **Quality Assurance**
-
-- ✅ Automated testing
-- ✅ Performance testing
-- ✅ Security testing
-- ✅ Accessibility testing
-- ✅ Cross-browser testing
-- ✅ Mobile testing
+- **Unit Tests**: Angular (Jest/Karma)
+- **Integration Tests**: Express API
+- **E2E Tests**: Playwright/Cypress
+- **Security Tests**: Auth, validation, rate limiting
 
 ---
 
 ## 🔧 **DEVELOPMENT WORKFLOW**
 
-### **Code Quality**
-
-```bash
-# Lint code
-npm run lint
-
-# Format code
-npm run format
-
-# Validate everything
-npm run validate
-```
-
-### **Performance Monitoring**
-
-```bash
-# Lighthouse audit
-npm run perf:lighthouse
-
-# Bundle analysis
-npm run perf:bundle-analyzer
-
-# Performance monitoring
-npm run monitor
-```
-
-### **Security Operations**
-
-```bash
-# Security scan
-npm run security:scan
-
-# SSL verification
-npm run ssl:verify
-
-# Health check
-npm run health:check
-```
+- **Nx CLI**: `npx nx serve frontend` / `npx nx serve api`
+- **Build**: `npx nx build frontend` / `npx nx build api`
+- **Test**: `npx nx test frontend` / `npx nx test api`
+- **Lint**: `npx nx lint frontend` / `npx nx lint api`
 
 ---
 
 ## 🚀 **DEPLOYMENT**
 
-### **Production Deployment**
-
-```bash
-# Build and deploy
-npm run deploy
-
-# Netlify deployment
-npm run deploy:netlify
-```
-
-### **Environment Configuration**
-
-- **Development**: http://localhost:3001
-- **Staging**: https://staging.rescuepcrepairs.com
-- **Production**: https://rescuepcrepairs.com
+- **Production**: Deploy Angular SSR and Express API to Vercel/Cloud
+- **CI/CD**: Nx + GitHub Actions
+- **Environment**: Use `.env` files for secrets
 
 ---
 

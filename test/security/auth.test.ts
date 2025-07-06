@@ -14,7 +14,7 @@ jest.mock('jsonwebtoken', () => ({
 const mockHash = jest.fn(() => Promise.resolve('hashed_password'));
 const mockCompare = jest.fn(() => Promise.resolve(true));
 
-jest.mock('bcrypt', () => ({
+jest.mock('bcryptjs', () => ({
   hash: mockHash,
   compare: mockCompare
 }));
@@ -126,7 +126,7 @@ describe.skip('Authentication', () => {
       const hashedPassword = await hashPassword(password);
       expect(hashedPassword).toBe('hashed_password');
       
-      const { hash } = require('bcrypt');
+      const { hash } = require('bcryptjs');
       expect(hash).toHaveBeenCalledWith(password, 12);
     });
 
@@ -143,7 +143,7 @@ describe.skip('Authentication', () => {
     });
 
     it('should handle bcrypt errors', async () => {
-      const { hash } = require('bcrypt');
+      const { hash } = require('bcryptjs');
       hash.mockRejectedValue(new Error('Bcrypt error'));
       await expect(hashPassword('test_password')).rejects.toThrow('Bcrypt error');
     });
@@ -156,12 +156,12 @@ describe.skip('Authentication', () => {
       const result = await verifyPassword('test_password', mockPasswordHash);
       expect(result).toBe(true);
       
-      const { compare } = require('bcrypt');
+      const { compare } = require('bcryptjs');
       expect(compare).toHaveBeenCalledWith('test_password', mockPasswordHash);
     });
 
     it('should reject incorrect password', async () => {
-      const { compare } = require('bcrypt');
+      const { compare } = require('bcryptjs');
       compare.mockResolvedValue(false);
       const result = await verifyPassword('wrong_password', mockPasswordHash);
       expect(result).toBe(false);
@@ -182,7 +182,7 @@ describe.skip('Authentication', () => {
     });
 
     it('should handle bcrypt errors', async () => {
-      const { compare } = require('bcrypt');
+      const { compare } = require('bcryptjs');
       compare.mockRejectedValue(new Error('Bcrypt error'));
       await expect(verifyPassword('test_password', mockPasswordHash)).rejects.toThrow('Bcrypt error');
     });

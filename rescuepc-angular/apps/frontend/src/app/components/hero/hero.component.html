@@ -1,0 +1,237 @@
+<section class="hero relative overflow-hidden">
+  <!-- Animated Background Elements -->
+  <div class="absolute inset-0 overflow-hidden">
+    <div class="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl animate-float"></div>
+    <div
+      class="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl animate-float"
+      style="animation-delay: 2s"
+    ></div>
+    <div
+      class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-green-500/5 rounded-full blur-3xl animate-float"
+      style="animation-delay: 4s"
+    ></div>
+  </div>
+
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="max-w-7xl mx-auto text-center">
+      <!-- Main Headline with Enhanced Logo -->
+      <div
+        class="mb-12 transition-all duration-1000"
+        [class]="isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'"
+      >
+        <div class="flex items-center justify-center gap-6 mb-6">
+          <div class="relative">
+            <img
+              src="/assets/RescuePC Repairs Logo.png"
+              alt="RescuePC Repairs Logo"
+              width="80"
+              height="80"
+              class="rounded-2xl shadow-2xl border-2 border-blue-500/30 bg-white/10 backdrop-blur-xl p-2 animate-scale-in"
+            />
+            <div class="absolute -inset-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-2xl blur-xl animate-pulse"></div>
+          </div>
+          <div class="text-center">
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-tight whitespace-nowrap gradient-text">
+              RescuePC Repairs
+            </h1>
+            <p class="text-xl md:text-2xl text-blue-100 max-w-4xl mx-auto leading-relaxed font-medium animate-fade-in">
+              Where Expertise Meets Automation
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Enhanced Hero Description -->
+      <div
+        class="mb-16 transition-all duration-1000 delay-300"
+        [class]="isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'"
+      >
+        <div class="glass-card max-w-6xl mx-auto">
+          <p class="text-xl md:text-2xl text-white/95 leading-relaxed mb-6">
+            <strong class="text-white text-2xl md:text-3xl">
+              🔧 Professional Multi-Platform PC Repair Toolkit
+            </strong>
+          </p>
+          <p class="text-lg md:text-xl text-white/90 leading-relaxed">
+            with <strong class="text-white">military-grade security</strong> and
+            <strong class="text-white">comprehensive driver database</strong>. Complete
+            toolkit: <strong class="text-white">11GB of drivers and repair tools</strong>
+            including everything you need to fix any PC.
+          </p>
+        </div>
+      </div>
+
+      <!-- Enhanced Key Features Grid -->
+      <div
+        class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 transition-all duration-1000 delay-500"
+        [class]="isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'"
+      >
+        <div class="feature-card text-center group">
+          <div class="w-20 h-20 bg-gradient-to-br from-blue-500/30 to-purple-500/30 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+            <span class="text-4xl">🌐</span>
+          </div>
+          <h3 class="text-white font-bold text-xl mb-4">Multi-Platform Support</h3>
+          <p class="text-white/80 text-base leading-relaxed">
+            Windows, Linux, macOS, ChromeOS, BSD
+          </p>
+        </div>
+
+        <div class="feature-card text-center group">
+          <div class="w-20 h-20 bg-gradient-to-br from-green-500/30 to-emerald-500/30 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+            <span class="text-4xl">🛡️</span>
+          </div>
+          <h3 class="text-white font-bold text-xl mb-4">Military-Grade Security</h3>
+          <p class="text-white/80 text-base leading-relaxed">
+            256-bit encryption & offline operation
+          </p>
+        </div>
+
+        <div class="feature-card text-center group">
+          <div class="w-20 h-20 bg-gradient-to-br from-purple-500/30 to-pink-500/30 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+            <span class="text-4xl">⚡</span>
+          </div>
+          <h3 class="text-white font-bold text-xl mb-4">Instant Recovery</h3>
+          <p class="text-white/80 text-base leading-relaxed">Fix any PC issue in minutes</p>
+        </div>
+      </div>
+
+      <!-- Enhanced Professional Features -->
+      <div
+        class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 mb-16 transition-all duration-1000 delay-700"
+        [class]="isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'"
+      >
+        <div
+          *ngFor="let feature of features; let i = index"
+          class="glass-card text-center p-6 group hover:scale-105 transition-all duration-300"
+        >
+          <div class="text-3xl mb-3 group-hover:scale-110 transition-transform duration-300">
+            {{ feature.icon }}
+          </div>
+          <span class="text-white text-sm font-semibold leading-tight">
+            {{ feature.text }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Enhanced Platform Support Preview -->
+      <div
+        class="mb-16 transition-all duration-1000 delay-900"
+        [class]="isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'"
+      >
+        <h3 class="text-3xl font-bold text-white mb-8 gradient-text">
+          Supported Platforms
+        </h3>
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
+          <div
+            *ngFor="let platform of platforms; let i = index"
+            class="platform-card text-center group"
+          >
+            <div class="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">
+              {{ platform.icon }}
+            </div>
+            <h4 class="text-white font-bold text-lg mb-2">{{ platform.name }}</h4>
+            <p class="text-white/70 text-sm leading-tight">{{ platform.versions }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Enhanced Security Features -->
+      <div
+        class="mb-16 transition-all duration-1000 delay-1100"
+        [class]="isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'"
+      >
+        <h3 class="text-3xl font-bold text-white mb-8 gradient-text">Security Features</h3>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <div
+            *ngFor="let feature of securityFeatures; let i = index"
+            class="glass-card text-center group"
+          >
+            <span class="text-4xl text-green-400 mx-auto mb-4 block group-hover:scale-110 transition-transform duration-300">
+              {{ feature.icon }}
+            </span>
+            <h4 class="text-white font-bold text-lg mb-2">{{ feature.title }}</h4>
+            <p class="text-white/70 text-sm leading-relaxed">{{ feature.desc }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Enhanced CTA Section -->
+      <div
+        class="mb-16 transition-all duration-1000 delay-1300"
+        [class]="isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'"
+      >
+        <div class="bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-indigo-600/20 border border-blue-400/30 rounded-3xl p-10 mb-8 backdrop-blur-xl">
+          <div class="flex items-center justify-center gap-3 mb-6">
+            <span class="text-3xl">🏆</span>
+            <h2 class="text-4xl font-black text-white">Get Your Lifetime Enterprise</h2>
+            <span class="text-3xl">🏆</span>
+          </div>
+          <p class="text-2xl text-white/90 mb-8 font-medium">
+            One-time payment, lifetime access
+          </p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-8">
+            <div class="text-center">
+              <div class="text-5xl font-black text-white mb-2">$499.99</div>
+              <div class="text-white/70 text-lg">One-time payment</div>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl font-black text-white mb-2">1 License</div>
+              <div class="text-white/70 text-lg">Unlimited Repairs</div>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl font-black text-white mb-2">Lifetime</div>
+              <div class="text-white/70 text-lg">Updates Included</div>
+            </div>
+          </div>
+
+          <button
+            (click)="handleGetStarted()"
+            [disabled]="isLoading"
+            class="cta-button animate-glow group"
+          >
+            <div *ngIf="isLoading" class="flex items-center gap-3">
+              <div class="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+              <span class="text-lg">Loading...</span>
+            </div>
+            <div *ngIf="!isLoading" class="flex items-center gap-3">
+              <span class="text-2xl group-hover:scale-110 transition-transform duration-300">✅</span>
+              <span class="text-lg font-bold">Get Lifetime Enterprise</span>
+              <span class="text-2xl group-hover:scale-110 transition-transform duration-300">✨</span>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Enhanced Trust Badges -->
+      <div
+        class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 transition-all duration-1000 delay-1500"
+        [class]="isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'"
+      >
+        <div
+          *ngFor="let badge of trustBadges; let i = index"
+          class="glass-card text-center p-6 hover:bg-green-500/10 transition-all duration-300 group"
+        >
+          <span class="text-3xl text-green-400 mx-auto mb-3 block group-hover:scale-110 transition-transform duration-300">
+            {{ badge.icon }}
+          </span>
+          <span class="text-white text-sm font-semibold leading-tight">{{ badge.text }}</span>
+        </div>
+      </div>
+
+      <!-- Enhanced Stats Section -->
+      <div
+        class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 transition-all duration-1000 delay-1700"
+        [class]="isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'"
+      >
+        <div
+          *ngFor="let stat of stats; let i = index"
+          class="glass-card text-center p-6"
+        >
+          <div class="text-3xl font-black text-white mb-2">{{ stat.number }}</div>
+          <div class="text-white/70 text-sm font-medium">{{ stat.label }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> 

@@ -21,7 +21,6 @@
     "test:security": "jest --testPathPattern=security",
     "test:fix": "jest --updateSnapshot",
     "type-check": "tsc --noEmit",
-    "test-email": "ts-node test-email.ts",
     "security:audit": "npm audit && node security-audit.js"
   },
   "dependencies": {
@@ -31,7 +30,6 @@
     "@upstash/ratelimit": "^2.0.5",
     "@upstash/redis": "^1.35.1",
     "abort-controller": "^3.0.0",
-    "bcrypt": "^6.0.0",
     "bcryptjs": "^2.4.3",
     "critters": "^0.0.23",
     "cross-fetch": "^4.1.0",
@@ -63,7 +61,6 @@
     "@tailwindcss/typography": "^0.5.16",
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.2.1",
-    "@types/bcrypt": "^5.0.2",
     "@types/bcryptjs": "^2.4.6",
     "@types/html-escaper": "^3.0.4",
     "@types/jest": "^29.5.12",
