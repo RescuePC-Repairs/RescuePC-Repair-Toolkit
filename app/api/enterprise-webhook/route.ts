@@ -85,9 +85,6 @@ const ENTERPRISE_PACKAGES: Record<string, EnterprisePackage> = {
 
 export async function POST(request: NextRequest) {
   try {
-    // Dynamically import email function to prevent bundling issues
-    const { sendLicenseEmail } = await import('../../../utils/email');
-
     // Initialize Stripe and webhook secret at runtime
     const stripe = getStripe();
     const webhookSecret = getWebhookSecret();
