@@ -36,7 +36,6 @@ export function PricingSection() {
       period: 'year',
       description: 'Advanced features for IT professionals',
       features: [
-        'Everything in Professional, plus:',
         'Advanced diagnostic algorithms',
         'Automated repair scripts',
         'Priority email support',
@@ -158,19 +157,19 @@ export function PricingSection() {
           </p>
         </div>
 
-        {/* Enhanced Pricing Cards */}
+        {/* Fixed Pricing Cards Grid */}
         <div
-          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 mb-16 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-16 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
         >
           {plans.map((plan, index) => (
             <div
               key={plan.id}
-              className={`pricing-card relative group ${plan.popular ? 'popular' : ''} transition-all duration-500 delay-${index * 200}`}
+              className={`pricing-card relative group h-full flex flex-col ${plan.popular ? 'popular scale-105 lg:scale-110' : ''} transition-all duration-500 delay-${index * 200}`}
             >
               {/* Popular Badge */}
               {plan.popular && (
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <div className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-6 py-2 rounded-full font-bold text-sm flex items-center gap-2">
+                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-20">
+                  <div className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-6 py-2 rounded-full font-bold text-sm flex items-center gap-2 shadow-lg">
                     <Star className="w-4 h-4" />
                     MOST POPULAR
                   </div>
@@ -178,26 +177,26 @@ export function PricingSection() {
               )}
 
               {/* Plan Header */}
-              <div className="text-center mb-8">
+              <div className="text-center mb-6 flex-shrink-0">
                 <div
-                  className={`w-20 h-20 bg-gradient-to-br ${plan.color} rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300`}
+                  className={`w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br ${plan.color} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300`}
                 >
-                  <plan.icon className="w-10 h-10 text-white" />
+                  <plan.icon className="w-8 h-8 md:w-10 md:h-10 text-white" />
                 </div>
-                <h3 className="text-2xl font-black text-white mb-2">{plan.name}</h3>
-                <p className="text-white/70 text-base leading-relaxed">{plan.description}</p>
+                <h3 className="text-xl md:text-2xl font-black text-white mb-2">{plan.name}</h3>
+                <p className="text-white/70 text-sm md:text-base leading-relaxed">{plan.description}</p>
               </div>
 
               {/* Enhanced Pricing */}
-              <div className="text-center mb-8">
+              <div className="text-center mb-6 flex-shrink-0">
                 <div className="flex items-center justify-center gap-2 mb-2">
-                  <span className="text-4xl md:text-5xl font-black text-white">{plan.price}</span>
-                  <span className="text-white/60 text-lg">/{plan.period}</span>
+                  <span className="text-3xl md:text-4xl lg:text-5xl font-black text-white">{plan.price}</span>
+                  <span className="text-white/60 text-base md:text-lg">/{plan.period}</span>
                 </div>
                 {plan.originalPrice && (
                   <div className="flex items-center justify-center gap-2">
-                    <span className="text-white/50 line-through text-lg">{plan.originalPrice}</span>
-                    <span className="bg-green-500/20 text-green-300 px-3 py-1 rounded-full text-sm font-bold">
+                    <span className="text-white/50 line-through text-base md:text-lg">{plan.originalPrice}</span>
+                    <span className="bg-green-500/20 text-green-300 px-2 py-1 rounded-full text-xs md:text-sm font-bold">
                       SAVE{' '}
                       {Math.round(
                         ((parseFloat(plan.originalPrice.replace('$', '')) -
@@ -212,16 +211,16 @@ export function PricingSection() {
               </div>
 
               {/* Enhanced Features List */}
-              <div className="space-y-4 mb-8">
+              <div className="space-y-3 mb-6 flex-grow">
                 {plan.features.map((feature, featureIndex) => (
                   <div
                     key={featureIndex}
-                    className="flex items-start gap-3 group-hover:translate-x-2 transition-transform duration-300"
+                    className="flex items-start gap-3 group-hover:translate-x-1 transition-transform duration-300"
                   >
-                    <div className="w-6 h-6 bg-green-500/20 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <Check className="w-4 h-4 text-green-400" />
+                    <div className="w-5 h-5 md:w-6 md:h-6 bg-green-500/20 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Check className="w-3 h-3 md:w-4 md:h-4 text-green-400" />
                     </div>
-                    <span className="text-white/90 text-sm leading-relaxed">{feature}</span>
+                    <span className="text-white/90 text-xs md:text-sm leading-relaxed">{feature}</span>
                   </div>
                 ))}
               </div>
@@ -229,16 +228,16 @@ export function PricingSection() {
               {/* Enhanced CTA Button */}
               <button
                 onClick={() => handlePurchase(plan.stripeLink)}
-                className={`w-full cta-button group relative overflow-hidden ${
+                className={`w-full cta-button group relative overflow-hidden mt-auto flex-shrink-0 ${
                   plan.popular
                     ? 'bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 hover:from-yellow-600 hover:via-orange-600 hover:to-red-600'
                     : ''
                 }`}
               >
-                <div className="flex items-center justify-center gap-3">
-                  <Crown className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
-                  <span className="font-bold">Get {plan.name}</span>
-                  <Sparkles className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
+                <div className="flex items-center justify-center gap-2 md:gap-3">
+                  <Crown className="w-4 h-4 md:w-5 md:h-5 group-hover:scale-110 transition-transform duration-300" />
+                  <span className="font-bold text-sm md:text-base">Get {plan.name}</span>
+                  <Sparkles className="w-4 h-4 md:w-5 md:h-5 group-hover:scale-110 transition-transform duration-300" />
                 </div>
               </button>
             </div>
@@ -247,7 +246,7 @@ export function PricingSection() {
 
         {/* Enhanced Trust Indicators */}
         <div
-          className={`grid grid-cols-1 md:grid-cols-4 gap-6 mb-12 transition-all duration-1000 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+          className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-12 transition-all duration-1000 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
         >
           {[
             { icon: Shield, text: 'Military-Grade Security', desc: '256-bit encryption' },
@@ -257,11 +256,11 @@ export function PricingSection() {
           ].map((indicator, index) => (
             <div
               key={index}
-              className="glass-card text-center p-6 group hover:scale-105 transition-all duration-300"
+              className="glass-card text-center p-4 md:p-6 group hover:scale-105 transition-all duration-300"
             >
-              <indicator.icon className="w-8 h-8 text-blue-400 mx-auto mb-3 group-hover:scale-110 transition-transform duration-300" />
-              <h4 className="text-white font-bold text-lg mb-1">{indicator.text}</h4>
-              <p className="text-white/70 text-sm">{indicator.desc}</p>
+              <indicator.icon className="w-6 h-6 md:w-8 md:h-8 text-blue-400 mx-auto mb-3 group-hover:scale-110 transition-transform duration-300" />
+              <h4 className="text-white font-bold text-base md:text-lg mb-1">{indicator.text}</h4>
+              <p className="text-white/70 text-xs md:text-sm">{indicator.desc}</p>
             </div>
           ))}
         </div>
@@ -270,19 +269,19 @@ export function PricingSection() {
         <div
           className={`mb-12 transition-all duration-1000 delay-900 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
         >
-          <h3 className="text-3xl font-bold text-white text-center mb-8 gradient-text">
+          <h3 className="text-2xl md:text-3xl font-bold text-white text-center mb-8 gradient-text">
             Feature Comparison
           </h3>
           <div className="glass-card overflow-hidden">
             <div className="overflow-x-auto">
-              <table className="w-full">
+              <table className="w-full min-w-[800px]">
                 <thead>
                   <tr className="border-b border-white/10">
-                    <th className="text-left p-6 text-white font-bold">Feature</th>
-                    <th className="text-center p-6 text-white font-bold">Professional</th>
-                    <th className="text-center p-6 text-white font-bold">Enterprise</th>
-                    <th className="text-center p-6 text-white font-bold">Government</th>
-                    <th className="text-center p-6 text-white font-bold">Lifetime</th>
+                    <th className="text-left p-4 md:p-6 text-white font-bold text-sm md:text-base">Feature</th>
+                    <th className="text-center p-4 md:p-6 text-white font-bold text-sm md:text-base">Professional</th>
+                    <th className="text-center p-4 md:p-6 text-white font-bold text-sm md:text-base">Enterprise</th>
+                    <th className="text-center p-4 md:p-6 text-white font-bold text-sm md:text-base">Government</th>
+                    <th className="text-center p-4 md:p-6 text-white font-bold text-sm md:text-base">Lifetime</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -355,13 +354,13 @@ export function PricingSection() {
                       key={index}
                       className="border-b border-white/5 hover:bg-white/5 transition-colors duration-200"
                     >
-                      <td className="p-6 text-white font-medium">{row.feature}</td>
-                      <td className="p-6 text-center text-white/70">{row.professional}</td>
-                      <td className="p-6 text-center text-white font-bold bg-gradient-to-r from-yellow-500/10 to-orange-500/10">
+                      <td className="p-4 md:p-6 text-white font-medium text-sm md:text-base">{row.feature}</td>
+                      <td className="p-4 md:p-6 text-center text-white/70 text-sm md:text-base">{row.professional}</td>
+                      <td className="p-4 md:p-6 text-center text-white font-bold bg-gradient-to-r from-yellow-500/10 to-orange-500/10 text-sm md:text-base">
                         {row.enterprise}
                       </td>
-                      <td className="p-6 text-center text-white/70">{row.government}</td>
-                      <td className="p-6 text-center text-white/70">{row.lifetime}</td>
+                      <td className="p-4 md:p-6 text-center text-white/70 text-sm md:text-base">{row.government}</td>
+                      <td className="p-4 md:p-6 text-center text-white/70 text-sm md:text-base">{row.lifetime}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -374,10 +373,10 @@ export function PricingSection() {
         <div
           className={`transition-all duration-1000 delay-1200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
         >
-          <h3 className="text-3xl font-bold text-white text-center mb-8 gradient-text">
+          <h3 className="text-2xl md:text-3xl font-bold text-white text-center mb-8 gradient-text">
             Frequently Asked Questions
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {[
               {
                 question: 'What payment methods do you accept?',
@@ -404,7 +403,7 @@ export function PricingSection() {
                 <h4 className="text-white font-bold text-lg mb-3 group-hover:text-blue-300 transition-colors duration-300">
                   {faq.question}
                 </h4>
-                <p className="text-white/70 leading-relaxed">{faq.answer}</p>
+                <p className="text-white/70 leading-relaxed text-sm md:text-base">{faq.answer}</p>
               </div>
             ))}
           </div>

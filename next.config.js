@@ -141,8 +141,8 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'rescuepcrepairs.com',
         port: '',
-        pathname: '/**',
-      },
+        pathname: '/**'
+      }
     ],
     formats: ['image/webp', 'image/avif'],
     minimumCacheTTL: 31536000
