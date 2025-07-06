@@ -147,9 +147,42 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'License key parameter is required' }, { status: 400 });
     }
 
-    // Use the same validation logic as POST
-    const response = await POST(request);
-    return response;
+    // Check if license exists in mock database
+    const license = mockLicenses[licenseKey];
+    
+    if (!license) {
+      return NextResponse.json(
+        {
+          valid: false,
+          error: 'License not found',
+          code: 'LICENSE_NOT_FOUND'
+        },
+        { status: 404 }
+      );
+    }
+
+    // Check if license is expired
+    if (license.expiryDate && new Date(license.expiryDate) < new Date()) {
+      return NextResponse.json(
+        {
+          valid: false,
+          error: 'License expired',
+          code: 'LICENSE_EXPIRED'
+        },
+        { status: 400 }
+      );
+    }
+
+    return NextResponse.json({
+      valid: true,
+      license: {
+        key: license.licenseKey,
+        type: license.licenseType,
+        email: license.userEmail,
+        status: license.status,
+        features: getFeaturesForLicenseType(license.licenseType)
+      }
+    });
   } catch (error) {
     console.error('License validation error:', error);
     return NextResponse.json(

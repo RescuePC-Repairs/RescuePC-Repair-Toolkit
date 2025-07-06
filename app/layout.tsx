@@ -115,14 +115,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="dns-prefetch" href="//js.stripe.com" />
 
         {/* Preload critical resources */}
-        <link rel="preload" href="/RescuePC-Repairs-Logo.png" as="image" type="image/png" />
-        <link
-          rel="preload"
-          href="/fonts/inter-var.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
 
         {/* Resource hints for faster loading */}
         <link rel="prefetch" href="/api/health" />
