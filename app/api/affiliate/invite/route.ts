@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { sendTransactionalEmail } from '../../../../utils/emailService';
+import { sendEmail } from '../../../../utils/emailService';
 import { getPurchaseEmailTemplate } from '../../../../utils/emailTemplates';
 
 export async function POST(request: NextRequest) {
@@ -14,11 +14,11 @@ export async function POST(request: NextRequest) {
     }
 
     // Send affiliate invitation email
-    await sendTransactionalEmail({
-      to: influencerEmail,
-      subject: 'Exclusive Affiliate Partnership Invitation - RescuePC Repairs',
-      text: getPurchaseEmailTemplate(influencerName, ['N/A'], 'Affiliate Invite')
-    });
+    await sendEmail(
+      influencerEmail,
+      'Exclusive Affiliate Partnership Invitation - RescuePC Repairs',
+      getPurchaseEmailTemplate(influencerName, ['N/A'], 'Affiliate Invite')
+    );
 
     return NextResponse.json({
       success: true,

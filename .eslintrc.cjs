@@ -29,7 +29,7 @@ module.exports = {
   // ==========================================================================
 
   extends: [
-    'next/core-web-vitals', 
+    'next/core-web-vitals',
     'plugin:security/recommended',
     'plugin:@typescript-eslint/recommended'
   ],

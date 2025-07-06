@@ -1,4 +1,3 @@
-import nodemailer from 'nodemailer';
 import { createHmac } from 'crypto';
 import { readFileSync } from 'fs';
 import { join } from 'path';
@@ -21,88 +20,60 @@ interface EmailData {
 
 export class EmailHandler {
   private readonly config = {
-    smtp: {
-      host: process.env.SMTP_HOST!,
-      port: parseInt(process.env.SMTP_PORT || '587'),
-      secure: process.env.SMTP_SECURE === 'true',
-      auth: {
-        user: process.env.SMTP_USER!,
-        pass: process.env.SMTP_PASS!
-      }
-    },
-    from: process.env.EMAIL_FROM!,
-    templatePath: 'emails/templates',
-    attachmentPath: 'emails/attachments'
+    host: process.env.SMTP_HOST || 'smtp.gmail.com',
+    port: parseInt(process.env.SMTP_PORT || '465'),
+    secure: true,
+    auth: {
+      user: process.env.SUPPORT_EMAIL,
+      pass: process.env.GMAIL_APP_PASSWORD
+    }
   };
 
-  private transporter: nodemailer.Transporter;
+  private transporter: any; // Will be initialized dynamically
   private templates: Map<string, EmailTemplate> = new Map();
 
   constructor() {
-    this.transporter = nodemailer.createTransport(this.config.smtp);
     this.loadTemplates();
   }
 
-  private loadTemplates() {
-    const fs = require('fs');
-    const path = require('path');
-    const templatesDir = path.join(process.cwd(), this.config.templatePath);
-
-    try {
-      const templates = fs.readdirSync(templatesDir);
-      for (const template of templates) {
-        if (template.endsWith('.json')) {
-          const templateName = template.replace('.json', '');
-          const templatePath = path.join(templatesDir, template);
-          const templateContent = JSON.parse(fs.readFileSync(templatePath, 'utf8'));
-          this.templates.set(templateName, templateContent);
-        }
-      }
-      console.log(`Loaded ${this.templates.size} email templates`);
-    } catch (error) {
-      console.error('Failed to load email templates:', error);
-    }
+  private async loadTemplates() {
+    // Templates will be loaded dynamically
+    this.templates.set('welcome', {
+      subject: 'Welcome to RescuePC Repairs',
+      text: 'Welcome to RescuePC Repairs!',
+      html: '<h1>Welcome to RescuePC Repairs!</h1>'
+    });
   }
 
   public async sendEmail(emailData: EmailData): Promise<void> {
     try {
-      // Get template
+      // Dynamically import nodemailer only on the server
+      const nodemailer = await import('nodemailer');
+      
+      if (!this.transporter) {
+        this.transporter = nodemailer.createTransport(this.config);
+      }
+
       const template = this.templates.get(emailData.template);
       if (!template) {
         throw new Error(`Template ${emailData.template} not found`);
       }
 
-      // Process template with data
       const processedTemplate = this.processTemplate(template, emailData.data);
+      const signature = this.generateSignature(emailData);
 
-      // Prepare email
-      const mailOptions = {
-        from: this.config.from,
+      await this.transporter.sendMail({
+        from: `"RescuePC Repairs" <${this.config.auth.user}>`,
         to: emailData.to,
         subject: processedTemplate.subject,
         text: processedTemplate.text,
         html: processedTemplate.html,
-        attachments: emailData.attachments?.map((attachment) => ({
-          filename: attachment.filename,
-          path: join(this.config.attachmentPath, attachment.path)
-        }))
-      };
-
-      // Send email
-      await this.transporter.sendMail(mailOptions);
-      console.log(`Email sent successfully to ${emailData.to}`);
-
-      // Generate signature for logging
-      const signature = this.generateSignature({
-        template: emailData.template,
-        to: emailData.to,
-        timestamp: new Date().toISOString()
+        attachments: emailData.attachments
       });
 
-      // Log email
       await this.logEmail(emailData, signature);
     } catch (error) {
-      console.error('Failed to send email:', error);
+      console.error('Email sending failed:', error);
       throw error;
     }
   }

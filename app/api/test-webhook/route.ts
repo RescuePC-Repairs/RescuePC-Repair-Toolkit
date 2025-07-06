@@ -1,21 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
 
 // Force dynamic rendering to prevent static generation errors
 export const dynamic = 'force-dynamic';
 
-// AUTOMATED EMAIL CONFIGURATION
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.SUPPORT_EMAIL,
-    pass: process.env.GMAIL_APP_PASSWORD
-  }
-});
-
 // AUTOMATED EMAIL SYSTEM
 async function sendAutomatedEmail(to: string, subject: string, htmlContent: string) {
   try {
+    // Dynamically import nodemailer only on the server
+    const nodemailer = await import('nodemailer');
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.SUPPORT_EMAIL,
+        pass: process.env.GMAIL_APP_PASSWORD
+      }
+    });
+
     await transporter.sendMail({
       from: `"RescuePC Repairs" <${process.env.SUPPORT_EMAIL}>`,
       to: to,

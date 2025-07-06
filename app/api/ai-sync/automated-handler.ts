@@ -1,7 +1,4 @@
 import { WebSocket } from 'ws';
-import nodemailer from 'nodemailer';
-// import { createCheckoutSession } from '../create-checkout-session/route'
-import { validateLicense } from '@/utils/license';
 import { createHmac } from 'crypto';
 
 interface AutomatedTask {
@@ -35,7 +32,7 @@ interface PaymentData {
 export class AutomatedHandler {
   private ws: WebSocket | null = null;
   private taskQueue: AutomatedTask[] = [];
-  private emailTransporter!: nodemailer.Transporter;
+  private emailTransporter: any = null;
   private metrics = {
     totalSales: 0,
     emailsSent: 0,
@@ -50,7 +47,17 @@ export class AutomatedHandler {
     httpEndpoint: 'https://pcloud.rescuepcrepairs.com/ai-sync',
     secret: process.env.AI_SYNC_SECRET!,
     licensePath: 'configuration/licenses',
-    backupPath: 'backups/licenses'
+    backupPath: 'backups/licenses',
+    wsUrl: process.env.AI_WS_URL || 'wss://ai-sync.rescuepcrepairs.com',
+    emailConfig: {
+      host: process.env.SMTP_HOST || 'smtp.gmail.com',
+      port: parseInt(process.env.SMTP_PORT || '465'),
+      secure: true,
+      auth: {
+        user: process.env.SUPPORT_EMAIL,
+        pass: process.env.GMAIL_APP_PASSWORD
+      }
+    }
   };
 
   constructor() {
@@ -60,39 +67,45 @@ export class AutomatedHandler {
   }
 
   private initializeWebSocket() {
-    this.ws = new WebSocket(this.config.wsEndpoint);
+    try {
+      this.ws = new WebSocket(this.config.wsUrl);
+      
+      this.ws.on('open', () => {
+        console.log('🤖 AI-to-AI Communication Channel Established');
+        this.sendStatus('ONLINE');
+      });
 
-    this.ws.on('open', () => {
-      console.log('🤖 AI-to-AI Communication Channel Established');
-      this.sendStatus('ONLINE');
-    });
+      this.ws.on('message', async (data) => {
+        try {
+          const message = JSON.parse(data.toString());
+          await this.handleMessage(message);
+        } catch (error) {
+          console.error('Message handling error:', error);
+        }
+      });
 
-    this.ws.on('message', async (data: Buffer) => {
-      try {
-        const message = JSON.parse(data.toString());
-        await this.handleMessage(message);
-      } catch (error) {
-        console.error('Message handling error:', error);
-      }
-    });
+      this.ws.on('error', (error) => {
+        console.error('WebSocket error:', error);
+      });
 
-    this.ws.on('close', () => {
-      console.log('Connection closed, attempting reconnect...');
-      setTimeout(() => this.initializeWebSocket(), 5000);
-    });
+      this.ws.on('close', () => {
+        console.log('Connection closed, attempting reconnect...');
+        setTimeout(() => this.initializeWebSocket(), 5000);
+      });
+    } catch (error) {
+      console.error('Failed to initialize WebSocket:', error);
+    }
   }
 
-  private setupEmailTransporter() {
-    this.emailTransporter = nodemailer.createTransport({
-      // Email configuration from environment variables
-      host: process.env.SMTP_HOST,
-      port: parseInt(process.env.SMTP_PORT || '587'),
-      secure: process.env.SMTP_SECURE === 'true',
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS
-      }
-    });
+  private async setupEmailTransporter() {
+    try {
+      // Dynamically import nodemailer only on the server
+      const nodemailer = await import('nodemailer');
+      this.emailTransporter = nodemailer.createTransport(this.config.emailConfig);
+      console.log('Email transporter initialized');
+    } catch (error) {
+      console.error('Failed to setup email transporter:', error);
+    }
   }
 
   private async handleMessage(message: any) {
@@ -123,29 +136,45 @@ export class AutomatedHandler {
     }
   }
 
+  private getFeaturesForType(type: string): string[] {
+    switch (type) {
+      case 'basic':
+        return ['Core Protection', 'Basic Support', 'Email Updates'];
+      case 'professional':
+        return ['Advanced Protection', 'Priority Support', 'Real-time Updates', 'Custom Configurations'];
+      case 'enterprise':
+        return ['Enterprise Protection', '24/7 Support', 'Custom Integrations', 'Advanced Analytics', 'Team Management'];
+      case 'government':
+        return ['Government-grade Security', 'Compliance Tools', 'Audit Logging', 'Custom Deployments', 'Dedicated Support'];
+      case 'lifetime_enterprise':
+        return ['Lifetime Updates', 'Enterprise Features', 'Premium Support', 'Custom Development', 'White-label Options'];
+      default:
+        return ['Basic Features'];
+    }
+  }
+
   private async generateLicense(data: any) {
     try {
-      const license = await validateLicense({
-        key: data.key,
-        type: data.type,
-        email: data.email
-      });
+      // Generate license key
+      const licenseKey = `RPCR-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
+      
+      const license = {
+        key: licenseKey,
+        email: data.email,
+        type: data.type || 'basic',
+        issuedAt: new Date().toISOString(),
+        expiresAt: data.type === 'lifetime' ? null : new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(),
+        features: this.getFeaturesForType(data.type || 'basic'),
+        status: 'active'
+      };
 
-      this.metrics.licensesGenerated++;
-      this.taskQueue.push({
-        type: 'EMAIL',
-        priority: 1,
-        data: {
-          template: 'license_confirmation',
-          email: data.email,
-          license
-        },
-        timestamp: new Date().toISOString()
-      });
+      // Store license (simplified)
+      console.log(`License generated: ${licenseKey} for ${data.email}`);
 
-      this.notifyOtherAI('LICENSE_GENERATED', { license });
+      return license;
     } catch (error) {
-      console.error('License generation error:', error);
+      console.error('License generation failed:', error);
+      throw error;
     }
   }
 

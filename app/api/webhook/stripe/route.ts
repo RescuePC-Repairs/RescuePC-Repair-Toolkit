@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import crypto from 'crypto';
-import nodemailer from 'nodemailer';
 
 // Force dynamic rendering to prevent static generation errors
 export const dynamic = 'force-dynamic';
@@ -21,15 +20,6 @@ if (!process.env.STRIPE_WEBHOOK_SECRET) {
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: '2025-06-30.basil',
   typescript: true
-});
-
-// AUTOMATED EMAIL CONFIGURATION [[memory:564836]]
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.SUPPORT_EMAIL, // ***REMOVED***
-    pass: process.env.GMAIL_APP_PASSWORD // ***REMOVED***
-  }
 });
 
 // FORTUNE 500 AUTOMATED LICENSE SYSTEM - ZERO CLOUD COSTS
@@ -96,6 +86,15 @@ function generateLicenseKeys(customerEmail: string, licenseInfo: any): string[] 
 // AUTOMATED EMAIL SYSTEM - PRODUCTION READY [[memory:564836]]
 async function sendAutomatedEmail(to: string, subject: string, htmlContent: string) {
   try {
+    const nodemailer = await import('nodemailer');
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.SUPPORT_EMAIL, // ***REMOVED***
+        pass: process.env.GMAIL_APP_PASSWORD // ***REMOVED***
+      }
+    });
+
     await transporter.sendMail({
       from: `"RescuePC Repairs" <${process.env.SUPPORT_EMAIL}>`,
       to: to,
