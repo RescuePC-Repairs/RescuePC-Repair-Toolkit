@@ -5,34 +5,11 @@ import crypto from 'crypto';
 import { prisma } from '../../../utils/prisma';
 import { stripe } from '../../../utils/stripe';
 
-interface LicenseTypeCount {
-  type: string;
-  _count: number;
-}
-
 interface WebhookHealthCheck {
   status: string;
   lastSuccess: Date | null;
   successRate: number;
   averageLatency: number;
-}
-
-interface WebhookEvent {
-  id: string;
-  type: string;
-  status: string;
-  processedAt: Date | null;
-  error: string | null;
-  createdAt: Date;
-}
-
-interface EmailDelivery {
-  id: string;
-  recipient: string;
-  template: string;
-  status: string;
-  sentAt: Date | null;
-  error: string | null;
 }
 
 // AI Integration Secret Key (from environment variables)
@@ -166,7 +143,7 @@ async function _handlePaymentProcessing(data: any) {
     });
 
     // Store licenses
-    const _licenseRecords = await Promise.all(
+    await Promise.all(
       licenses.map((licenseKey) =>
         prisma.license.create({
           data: {
@@ -190,7 +167,7 @@ async function _handlePaymentProcessing(data: any) {
     return NextResponse.json({
       success: true,
       paymentId: payment.id,
-      licenses: licenses,
+      licenses,
       message: 'Payment processed successfully'
     });
   } catch (error) {
@@ -222,7 +199,6 @@ async function generateLicensesForPackage(
       break;
     }
     case 'enterprise': {
-      const _quantity = 5;
       for (let i = 0; i < 5; i++) {
         licenses.push(
           `RPCR-ENT-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`
@@ -231,7 +207,6 @@ async function generateLicensesForPackage(
       break;
     }
     case 'government': {
-      const _quantity = 10;
       for (let i = 0; i < 10; i++) {
         licenses.push(
           `RPCR-GOV-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`
@@ -240,7 +215,6 @@ async function generateLicensesForPackage(
       break;
     }
     case 'lifetime_enterprise': {
-      const _quantity = 1;
       licenses.push(
         `RPCR-LIFE-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`
       );
@@ -252,13 +226,13 @@ async function generateLicensesForPackage(
 }
 
 async function _handleLicenseGeneration(data: any) {
-  const { customerEmail, packageType, quantity } = data;
+  const { customerEmail, packageType } = data;
 
   try {
     const licenses = await generateLicensesForPackage(customerEmail, packageType);
 
     // Store licenses in database
-    const licenseRecords = await Promise.all(
+    await Promise.all(
       licenses.map((licenseKey) =>
         prisma.license.create({
           data: {
@@ -278,7 +252,7 @@ async function _handleLicenseGeneration(data: any) {
 
     return NextResponse.json({
       success: true,
-      licenses: licenses,
+      licenses,
       message: 'Licenses generated successfully'
     });
   } catch (error) {
