@@ -139,8 +139,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 if ('performance' in window) {
                   const perfData = performance.getEntriesByType('navigation')[0];
                   if (perfData) {
-                    console.log('Page Load Time:', perfData.loadEventEnd - perfData.loadEventStart, 'ms');
-                    console.log('DOM Content Loaded:', perfData.domContentLoadedEventEnd - perfData.domContentLoadedEventStart, 'ms');
+                    const loadTime = Math.max(0, perfData.loadEventEnd - perfData.loadEventStart);
+                    const domContentLoaded = Math.max(0, perfData.domContentLoadedEventEnd - perfData.domContentLoadedEventStart);
+                    console.log('Page Load Time:', loadTime, 'ms');
+                    console.log('DOM Content Loaded:', domContentLoaded, 'ms');
                   }
                 }
               });
@@ -148,13 +150,32 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               // Service Worker registration for offline support
               if ('serviceWorker' in navigator) {
                 window.addEventListener('load', function() {
-                  navigator.serviceWorker.register('/sw.js')
+                  // Check if we're in a secure context (required for service workers)
+                  if (window.location.protocol === 'https:' || window.location.hostname === 'localhost') {
+                    navigator.serviceWorker.register('/sw.js', {
+                      scope: '/',
+                      updateViaCache: 'none'
+                    })
                     .then(function(registration) {
-                      console.log('SW registered: ', registration);
+                      console.log('SW registered successfully:', registration);
+                      
+                      // Check for updates
+                      registration.addEventListener('updatefound', function() {
+                        const newWorker = registration.installing;
+                        newWorker.addEventListener('statechange', function() {
+                          if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                            console.log('New service worker available');
+                          }
+                        });
+                      });
                     })
                     .catch(function(registrationError) {
-                      console.log('SW registration failed: ', registrationError);
+                      console.error('SW registration failed:', registrationError);
+                      // Don't show error to user, just log it
                     });
+                  } else {
+                    console.log('Service Worker not registered: HTTPS required');
+                  }
                 });
               }
             `
