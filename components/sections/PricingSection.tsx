@@ -311,7 +311,14 @@ export function PricingSection() {
                 </thead>
                 <tbody>
                   {[
-                    { feature: 'Multi-Platform Support', basic: '✓', pro: '✓', enterprise: '✓', government: '✓', lifetime: '✓' },
+                    {
+                      feature: 'Multi-Platform Support',
+                      basic: '✓',
+                      pro: '✓',
+                      enterprise: '✓',
+                      government: '✓',
+                      lifetime: '✓'
+                    },
                     {
                       feature: 'Military-Grade Security',
                       basic: 'Basic',
@@ -320,7 +327,14 @@ export function PricingSection() {
                       government: 'Military',
                       lifetime: 'Full'
                     },
-                    { feature: 'Automated Repairs', basic: '✗', pro: '✓', enterprise: '✓', government: '✓', lifetime: '✓' },
+                    {
+                      feature: 'Automated Repairs',
+                      basic: '✗',
+                      pro: '✓',
+                      enterprise: '✓',
+                      government: '✓',
+                      lifetime: '✓'
+                    },
                     {
                       feature: 'Lifetime Updates',
                       basic: '1 Year',
@@ -337,10 +351,38 @@ export function PricingSection() {
                       government: 'Dedicated',
                       lifetime: 'Priority'
                     },
-                    { feature: 'API Access', basic: '✗', pro: '✗', enterprise: '✓', government: '✓', lifetime: '✓' },
-                    { feature: 'White-Label License', basic: '✗', pro: '✗', enterprise: '✓', government: '✓', lifetime: '✓' },
-                    { feature: 'Government Compliance', basic: '✗', pro: '✗', enterprise: '✗', government: '✓', lifetime: '✗' },
-                    { feature: 'Transferable License', basic: '✗', pro: '✗', enterprise: '✗', government: '✗', lifetime: '✓' }
+                    {
+                      feature: 'API Access',
+                      basic: '✗',
+                      pro: '✗',
+                      enterprise: '✓',
+                      government: '✓',
+                      lifetime: '✓'
+                    },
+                    {
+                      feature: 'White-Label License',
+                      basic: '✗',
+                      pro: '✗',
+                      enterprise: '✓',
+                      government: '✓',
+                      lifetime: '✓'
+                    },
+                    {
+                      feature: 'Government Compliance',
+                      basic: '✗',
+                      pro: '✗',
+                      enterprise: '✗',
+                      government: '✓',
+                      lifetime: '✗'
+                    },
+                    {
+                      feature: 'Transferable License',
+                      basic: '✗',
+                      pro: '✗',
+                      enterprise: '✗',
+                      government: '✗',
+                      lifetime: '✓'
+                    }
                   ].map((row, index) => (
                     <tr
                       key={index}
