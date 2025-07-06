@@ -4,11 +4,13 @@
   "installCommand": "pnpm install",
   "framework": "nextjs",
   "env": {
-    "ENABLE_EXPERIMENTAL_COREPACK": "1"
+    "ENABLE_EXPERIMENTAL_COREPACK": "1",
+    "VERCEL_FORCE_NO_BUILD_CACHE": "1"
   },
   "build": {
     "env": {
-      "ENABLE_EXPERIMENTAL_COREPACK": "1"
+      "ENABLE_EXPERIMENTAL_COREPACK": "1",
+      "VERCEL_FORCE_NO_BUILD_CACHE": "1"
     }
   }
 }

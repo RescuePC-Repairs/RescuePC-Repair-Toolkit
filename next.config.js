@@ -78,7 +78,8 @@ const nextConfig = {
       }
     ];
   },
-  generateBuildId: async () => {
+  // Fixed generateBuildId function
+  generateBuildId: () => {
     return 'build-' + Date.now();
   },
   webpack: (config, { isServer }) => {
