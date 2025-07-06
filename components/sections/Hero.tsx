@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo, useCallback, memo } from 'react';
 import {
   Shield,
   Download,
@@ -19,6 +19,89 @@ import {
 } from 'lucide-react';
 import Image from 'next/image';
 
+// Memoized feature data to prevent recreation on every render
+const FEATURE_DATA = [
+  { icon: '🩺', text: 'Professional diagnostics' },
+  { icon: '📊', text: 'Real-time monitoring' },
+  { icon: '⚙️', text: 'Advanced algorithms' },
+  { icon: '⬇️', text: 'One-click drivers' },
+  { icon: '🛡️', text: 'Security protection' },
+  { icon: '🔧', text: 'Enterprise ready' }
+];
+
+const PLATFORM_DATA = [
+  { name: 'Windows', icon: '🪟', versions: '7, 8, 10, 11' },
+  { name: 'Linux', icon: '🐧', versions: 'Ubuntu, Debian, Fedora' },
+  { name: 'macOS', icon: '🍎', versions: '10.14+ to 13+' },
+  { name: 'ChromeOS', icon: '🌐', versions: '80+ to 100+' },
+  { name: 'BSD', icon: '🔧', versions: 'FreeBSD, OpenBSD' }
+];
+
+const SECURITY_FEATURES = [
+  { icon: Lock, title: '256-bit Encryption', desc: 'Bank-level security' },
+  { icon: Download, title: 'Offline Operation', desc: 'No data transmission' },
+  { icon: Shield, title: 'Privacy First', desc: 'No tracking or collection' },
+  { icon: Server, title: 'Secure Environment', desc: 'Isolated execution' }
+];
+
+const STATS_DATA = [
+  { number: '11GB', label: 'Driver Database' },
+  { number: '200+', label: 'Repair Scripts' },
+  { number: '5', label: 'OS Support' },
+  { number: '99.9%', label: 'Success Rate' }
+];
+
+const BADGE_DATA = [
+  { icon: Shield, text: 'Military-Grade Security Certified' },
+  { icon: Server, text: 'Enterprise Container Platform' },
+  { icon: Clock, text: '99.9% Uptime Guarantee' },
+  { icon: Users, text: 'Built by enterprise experts' }
+];
+
+// Memoized components to prevent unnecessary re-renders
+const FeatureCard = memo(({ icon, text }: { icon: string; text: string }) => (
+  <div className="glass-card text-center p-6 group hover:scale-105 transition-all duration-300">
+    <div className="text-3xl mb-3 group-hover:scale-110 transition-transform duration-300">
+      {icon}
+    </div>
+    <span className="text-white text-sm font-semibold leading-tight">
+      {text}
+    </span>
+  </div>
+));
+
+const PlatformCard = memo(({ platform }: { platform: typeof PLATFORM_DATA[0] }) => (
+  <div className="platform-card text-center group">
+    <div className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">
+      {platform.icon}
+    </div>
+    <h4 className="text-white font-bold text-lg mb-2">{platform.name}</h4>
+    <p className="text-white/70 text-sm leading-tight">{platform.versions}</p>
+  </div>
+));
+
+const SecurityFeatureCard = memo(({ feature }: { feature: typeof SECURITY_FEATURES[0] }) => (
+  <div className="glass-card text-center group">
+    <feature.icon className="w-10 h-10 text-green-400 mx-auto mb-4 group-hover:scale-110 transition-transform duration-300" />
+    <h4 className="text-white font-bold text-lg mb-2">{feature.title}</h4>
+    <p className="text-white/70 text-sm leading-relaxed">{feature.desc}</p>
+  </div>
+));
+
+const StatCard = memo(({ stat }: { stat: typeof STATS_DATA[0] }) => (
+  <div className="glass-card text-center p-6">
+    <div className="text-3xl font-black text-white mb-2">{stat.number}</div>
+    <div className="text-white/70 text-sm font-medium">{stat.label}</div>
+  </div>
+));
+
+const BadgeCard = memo(({ badge }: { badge: typeof BADGE_DATA[0] }) => (
+  <div className="glass-card text-center p-6 hover:bg-green-500/10 transition-all duration-300 group">
+    <badge.icon className="w-8 h-8 text-green-400 mx-auto mb-3 group-hover:scale-110 transition-transform duration-300" />
+    <span className="text-white text-sm font-semibold leading-tight">{badge.text}</span>
+  </div>
+));
+
 export function Hero() {
   const [isLoading, setIsLoading] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -27,11 +110,18 @@ export function Hero() {
     setIsVisible(true);
   }, []);
 
-  const handleGetStarted = () => {
+  // Memoized callback to prevent recreation on every render
+  const handleGetStarted = useCallback(() => {
     setIsLoading(true);
     document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
     setTimeout(() => setIsLoading(false), 1000);
-  };
+  }, []);
+
+  // Memoized animation styles to prevent recalculation
+  const animationStyles = useMemo(() => ({
+    delay2s: { animationDelay: '2s' },
+    delay4s: { animationDelay: '4s' }
+  }), []);
 
   return (
     <section className="hero relative overflow-hidden">
@@ -40,11 +130,11 @@ export function Hero() {
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl animate-float"></div>
         <div
           className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl animate-float"
-          style={{ animationDelay: '2s' }}
+          style={animationStyles.delay2s}
         ></div>
         <div
           className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-green-500/5 rounded-full blur-3xl animate-float"
-          style={{ animationDelay: '4s' }}
+          style={animationStyles.delay4s}
         ></div>
       </div>
 
@@ -133,25 +223,8 @@ export function Hero() {
           <div
             className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 mb-16 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
           >
-            {[
-              { icon: '🩺', text: 'Professional diagnostics' },
-              { icon: '📊', text: 'Real-time monitoring' },
-              { icon: '⚙️', text: 'Advanced algorithms' },
-              { icon: '⬇️', text: 'One-click drivers' },
-              { icon: '🛡️', text: 'Security protection' },
-              { icon: '🔧', text: 'Enterprise ready' }
-            ].map((feature, index) => (
-              <div
-                key={index}
-                className="glass-card text-center p-6 group hover:scale-105 transition-all duration-300"
-              >
-                <div className="text-3xl mb-3 group-hover:scale-110 transition-transform duration-300">
-                  {feature.icon}
-                </div>
-                <span className="text-white text-sm font-semibold leading-tight">
-                  {feature.text}
-                </span>
-              </div>
+            {FEATURE_DATA.map((feature, index) => (
+              <FeatureCard key={index} icon={feature.icon} text={feature.text} />
             ))}
           </div>
 
@@ -163,20 +236,8 @@ export function Hero() {
               Supported Platforms
             </h3>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
-              {[
-                { name: 'Windows', icon: '🪟', versions: '7, 8, 10, 11' },
-                { name: 'Linux', icon: '🐧', versions: 'Ubuntu, Debian, Fedora' },
-                { name: 'macOS', icon: '🍎', versions: '10.14+ to 13+' },
-                { name: 'ChromeOS', icon: '🌐', versions: '80+ to 100+' },
-                { name: 'BSD', icon: '🔧', versions: 'FreeBSD, OpenBSD' }
-              ].map((platform, index) => (
-                <div key={index} className="platform-card text-center group">
-                  <div className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">
-                    {platform.icon}
-                  </div>
-                  <h4 className="text-white font-bold text-lg mb-2">{platform.name}</h4>
-                  <p className="text-white/70 text-sm leading-tight">{platform.versions}</p>
-                </div>
+              {PLATFORM_DATA.map((platform, index) => (
+                <PlatformCard key={index} platform={platform} />
               ))}
             </div>
           </div>
@@ -187,17 +248,8 @@ export function Hero() {
           >
             <h3 className="text-3xl font-bold text-white mb-8 gradient-text">Security Features</h3>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-              {[
-                { icon: Lock, title: '256-bit Encryption', desc: 'Bank-level security' },
-                { icon: Download, title: 'Offline Operation', desc: 'No data transmission' },
-                { icon: Shield, title: 'Privacy First', desc: 'No tracking or collection' },
-                { icon: Server, title: 'Secure Environment', desc: 'Isolated execution' }
-              ].map((feature, index) => (
-                <div key={index} className="glass-card text-center group">
-                  <feature.icon className="w-10 h-10 text-green-400 mx-auto mb-4 group-hover:scale-110 transition-transform duration-300" />
-                  <h4 className="text-white font-bold text-lg mb-2">{feature.title}</h4>
-                  <p className="text-white/70 text-sm leading-relaxed">{feature.desc}</p>
-                </div>
+              {SECURITY_FEATURES.map((feature, index) => (
+                <SecurityFeatureCard key={index} feature={feature} />
               ))}
             </div>
           </div>
@@ -256,19 +308,8 @@ export function Hero() {
           <div
             className={`grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 transition-all duration-1000 delay-1500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
           >
-            {[
-              { icon: Shield, text: 'Military-Grade Security Certified' },
-              { icon: Server, text: 'Enterprise Container Platform' },
-              { icon: Clock, text: '99.9% Uptime Guarantee' },
-              { icon: Users, text: 'Built by enterprise experts' }
-            ].map((badge, index) => (
-              <div
-                key={index}
-                className="glass-card text-center p-6 hover:bg-green-500/10 transition-all duration-300 group"
-              >
-                <badge.icon className="w-8 h-8 text-green-400 mx-auto mb-3 group-hover:scale-110 transition-transform duration-300" />
-                <span className="text-white text-sm font-semibold leading-tight">{badge.text}</span>
-              </div>
+            {BADGE_DATA.map((badge, index) => (
+              <BadgeCard key={index} badge={badge} />
             ))}
           </div>
 
@@ -276,16 +317,8 @@ export function Hero() {
           <div
             className={`grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 transition-all duration-1000 delay-1700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
           >
-            {[
-              { number: '11GB', label: 'Driver Database' },
-              { number: '200+', label: 'Repair Scripts' },
-              { number: '5', label: 'OS Support' },
-              { number: '99.9%', label: 'Success Rate' }
-            ].map((stat, index) => (
-              <div key={index} className="glass-card text-center p-6">
-                <div className="text-3xl font-black text-white mb-2">{stat.number}</div>
-                <div className="text-white/70 text-sm font-medium">{stat.label}</div>
-              </div>
+            {STATS_DATA.map((stat, index) => (
+              <StatCard key={index} stat={stat} />
             ))}
           </div>
         </div>

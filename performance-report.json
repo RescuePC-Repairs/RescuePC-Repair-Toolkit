@@ -1,0 +1,54 @@
+{
+  "timestamp": "2025-07-06T14:08:27.223Z",
+  "summary": {
+    "totalBundleSize": 0,
+    "averageBundleSize": 0,
+    "lighthouseScore": 0,
+    "reactOptimizations": {
+      "memoizedComponents": 4,
+      "useCallbackUsage": 4,
+      "useMemoUsage": 4,
+      "lazyLoadedComponents": 0,
+      "virtualizedLists": 0
+    }
+  },
+  "details": {
+    "timestamp": "2025-07-06T14:08:27.223Z",
+    "bundleSize": {
+      "chunks": {
+        "size": 0,
+        "sizeInKB": 0,
+        "sizeInMB": 0
+      },
+      "css": {
+        "size": 0,
+        "sizeInKB": 0,
+        "sizeInMB": 0
+      },
+      "media": {
+        "size": 0,
+        "sizeInKB": 0,
+        "sizeInMB": 0
+      },
+      "OzRBaJyVIErBgMbZdYixe": {
+        "size": 0,
+        "sizeInKB": 0,
+        "sizeInMB": 0
+      }
+    },
+    "lighthouse": {},
+    "reactOptimizations": {
+      "memoizedComponents": 4,
+      "useCallbackUsage": 4,
+      "useMemoUsage": 4,
+      "lazyLoadedComponents": 0,
+      "virtualizedLists": 0
+    },
+    "coreWebVitals": {
+      "firstContentfulPaint": 0,
+      "largestContentfulPaint": 0,
+      "firstInputDelay": 0,
+      "cumulativeLayoutShift": 0
+    }
+  }
+}

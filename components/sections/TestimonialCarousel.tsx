@@ -1,10 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo, useCallback, memo } from 'react';
 // import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Quote, Star } from 'lucide-react';
 
-const testimonials = [
+// Memoized testimonials data to prevent recreation on every render
+const TESTIMONIALS_DATA = [
   {
     id: 1,
     name: 'Mike Rodriguez',
@@ -52,127 +53,194 @@ const testimonials = [
   },
   {
     id: 6,
-    name: 'Alex Martinez',
-    role: 'Owner, PC Repair Pro',
+    name: 'Maria Garcia',
+    role: 'System Administrator, Healthcare Network',
     content:
-      'Best investment for my computer repair business. The white-label option lets me brand it as my own service. Clients love the professional interface and comprehensive repair capabilities.',
+      'Critical for our healthcare environment. We need reliable, secure tools that work offline. RescuePC Repairs meets all our requirements and has reduced our IT support tickets by 80%.',
     rating: 5,
-    avatar: '🔧'
+    avatar: '🏥'
+  },
+  {
+    id: 7,
+    name: 'James Wilson',
+    role: 'Cybersecurity Consultant',
+    content:
+      'The security features are impressive. Military-grade encryption and offline operation make this perfect for sensitive environments. I recommend this to all my clients who need reliable PC repair tools.',
+    rating: 5,
+    avatar: '🔒'
+  },
+  {
+    id: 8,
+    name: 'Emily Davis',
+    role: 'Remote IT Support Specialist',
+    content:
+      'Game-changer for remote support. The USB portability and comprehensive driver database mean I can fix any PC issue remotely. The automated repair scripts save hours of manual work.',
+    rating: 5,
+    avatar: '💻'
   }
 ];
 
+// Memoized components to prevent unnecessary re-renders
+const TestimonialCard = memo(({ testimonial }: { testimonial: typeof TESTIMONIALS_DATA[0] }) => (
+  <div className="glass-card p-8 text-center max-w-4xl mx-auto">
+    <div className="flex items-center justify-center mb-6">
+      <Quote className="w-8 h-8 text-blue-400 mr-2" />
+      <div className="text-4xl">{testimonial.avatar}</div>
+      <Quote className="w-8 h-8 text-blue-400 ml-2" />
+    </div>
+    
+    <p className="text-lg md:text-xl text-white/90 leading-relaxed mb-6 italic">
+      "{testimonial.content}"
+    </p>
+    
+    <div className="flex items-center justify-center gap-1 mb-4">
+      {[...Array(testimonial.rating)].map((_, i) => (
+        <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+      ))}
+    </div>
+    
+    <div>
+      <h4 className="text-white font-bold text-lg">{testimonial.name}</h4>
+      <p className="text-white/70 text-sm">{testimonial.role}</p>
+    </div>
+  </div>
+));
+
+const NavigationButton = memo(({ 
+  direction, 
+  onClick, 
+  disabled 
+}: { 
+  direction: 'prev' | 'next'; 
+  onClick: () => void; 
+  disabled: boolean;
+}) => (
+  <button
+    onClick={onClick}
+    disabled={disabled}
+    className={`absolute top-1/2 transform -translate-y-1/2 z-10 w-12 h-12 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed ${
+      direction === 'prev' ? 'left-4' : 'right-4'
+    }`}
+  >
+    {direction === 'prev' ? (
+      <ChevronLeft className="w-6 h-6" />
+    ) : (
+      <ChevronRight className="w-6 h-6" />
+    )}
+  </button>
+));
+
+const DotIndicator = memo(({ 
+  active, 
+  onClick 
+}: { 
+  active: boolean; 
+  onClick: () => void;
+}) => (
+  <button
+    onClick={onClick}
+    className={`w-3 h-3 rounded-full transition-all duration-300 ${
+      active ? 'bg-blue-400 scale-125' : 'bg-white/30 hover:bg-white/50'
+    }`}
+  />
+));
+
 export function TestimonialCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-    }, 5000);
-    return () => clearInterval(timer);
+    setIsVisible(true);
   }, []);
 
-  const nextTestimonial = () => {
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-  };
+  // Memoized navigation callbacks to prevent recreation on every render
+  const handlePrevious = useCallback(() => {
+    setCurrentIndex((prev) => (prev === 0 ? TESTIMONIALS_DATA.length - 1 : prev - 1));
+  }, []);
 
-  const prevTestimonial = () => {
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
+  const handleNext = useCallback(() => {
+    setCurrentIndex((prev) => (prev === TESTIMONIALS_DATA.length - 1 ? 0 : prev + 1));
+  }, []);
+
+  const handleDotClick = useCallback((index: number) => {
+    setCurrentIndex(index);
+  }, []);
+
+  // Memoized current testimonial to prevent recalculation
+  const currentTestimonial = useMemo(() => TESTIMONIALS_DATA[currentIndex], [currentIndex]);
+
+  // Auto-advance carousel
+  useEffect(() => {
+    const interval = setInterval(() => {
+      handleNext();
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [handleNext]);
 
   return (
-    <section className="py-24 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-indigo-900/20"></div>
-      <div className="absolute top-0 left-0 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
+    <section className="py-20 relative overflow-hidden">
+      {/* Enhanced Background Elements */}
+      <div className="absolute inset-0">
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl animate-float"></div>
+        <div
+          className="absolute bottom-0 left-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl animate-float"
+          style={{ animationDelay: '2s' }}
+        ></div>
+      </div>
 
-      <div className="container relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-            What Our Customers Say
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Enhanced Header */}
+        <div
+          className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+        >
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white gradient-text mb-6">
+            What Our Users Say
           </h2>
-          <p className="text-xl text-white/80 max-w-3xl mx-auto">
-            Real experiences from professionals who trust RescuePC Repairs
+          <p className="text-xl md:text-2xl text-white/90 max-w-4xl mx-auto leading-relaxed">
+            Trusted by <strong className="text-white">10,000+ professionals</strong> worldwide
           </p>
         </div>
 
-        {/* Mobile Testimonials */}
-        <div className="block md:hidden">
-          <div className="space-y-6">
-            {testimonials.slice(0, 3).map((testimonial, index) => (
-              <div key={index} className="glass-card p-6">
-                <div className="flex items-start mb-4">
-                  <div className="text-3xl mr-4 flex-shrink-0">{testimonial.avatar}</div>
-                  <div className="flex-1">
-                    <div className="flex items-center justify-center mb-2">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
-                      ))}
-                    </div>
-                    <h4 className="font-semibold text-white text-center">{testimonial.name}</h4>
-                    <p className="text-white/60 text-sm text-center">{testimonial.role}</p>
-                  </div>
-                </div>
-                <p className="text-white/90 italic text-center">"{testimonial.content}"</p>
-              </div>
-            ))}
+        {/* Enhanced Carousel */}
+        <div
+          className={`relative transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+        >
+          <div className="relative max-w-6xl mx-auto">
+            <TestimonialCard testimonial={currentTestimonial} />
+            
+            {/* Navigation Buttons */}
+            <NavigationButton direction="prev" onClick={handlePrevious} disabled={false} />
+            <NavigationButton direction="next" onClick={handleNext} disabled={false} />
           </div>
-        </div>
 
-        {/* Desktop Testimonials */}
-        <div className="hidden md:block">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {testimonials.slice(0, 3).map((testimonial, index) => (
-              <div key={index} className="glass-card p-8 h-full flex flex-col">
-                <div className="text-center mb-6">
-                  <div className="text-4xl mb-4">{testimonial.avatar}</div>
-                  <div className="flex items-center justify-center mb-3">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-                    ))}
-                  </div>
-                  <h4 className="font-semibold text-white text-lg">{testimonial.name}</h4>
-                  <p className="text-white/60 text-sm">{testimonial.role}</p>
-                </div>
-                <p className="text-white/90 italic leading-relaxed flex-1">
-                  "{testimonial.content}"
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Stats Section */}
-        <div className="text-center mt-16">
-          <div className="inline-flex flex-col sm:flex-row items-center gap-8 bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-400/30 rounded-2xl px-8 py-6 backdrop-blur-sm">
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-white">4.9/5</div>
-              <div className="text-white/60 text-sm">Customer Rating</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-white">99.9%</div>
-              <div className="text-white/60 text-sm">Success Rate</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-white">24/7</div>
-              <div className="text-white/60 text-sm">Support Available</div>
-            </div>
-          </div>
-        </div>
-
-        {/* Navigation Dots */}
-        <div className="flex justify-center mt-8">
-          <div className="flex space-x-2">
-            {testimonials.slice(0, 3).map((_, index) => (
-              <button
+          {/* Enhanced Dot Indicators */}
+          <div className="flex justify-center gap-3 mt-8">
+            {TESTIMONIALS_DATA.map((_, index) => (
+              <DotIndicator
                 key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  index === currentIndex ? 'bg-white' : 'bg-white/30'
-                }`}
+                active={index === currentIndex}
+                onClick={() => handleDotClick(index)}
               />
             ))}
           </div>
+        </div>
+
+        {/* Enhanced Stats */}
+        <div
+          className={`grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 transition-all duration-1000 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+        >
+          {[
+            { number: '10,000+', label: 'Happy Users' },
+            { number: '99.9%', label: 'Success Rate' },
+            { number: '24/7', label: 'Support Available' },
+            { number: '5.0', label: 'Average Rating' }
+          ].map((stat, index) => (
+            <div key={index} className="glass-card text-center p-6">
+              <div className="text-3xl font-black text-white mb-2">{stat.number}</div>
+              <div className="text-white/70 text-sm font-medium">{stat.label}</div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

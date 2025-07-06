@@ -1,97 +1,139 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  eslint: {
-    ignoreDuringBuilds: false
+  // Performance Optimization - World Class
+  experimental: {
+    // Enable advanced optimizations
+    optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
+    turbo: {
+      rules: {
+        '*.svg': {
+          loaders: ['@svgr/webpack'],
+          as: '*.js',
+        },
+      },
+    },
   },
-  typescript: {
-    ignoreBuildErrors: false
+
+  // Advanced Image Optimization
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'rescuepcrepairs.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
+    formats: ['image/webp', 'image/avif'],
+    minimumCacheTTL: 31536000, // 1 year cache
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
-  // Security and HTTPS Enforcement
+
+  // Advanced Compression & Caching
+  compress: true,
+  poweredByHeader: false,
+  generateEtags: false,
+
+  // Security Headers
   async headers() {
     return [
       {
         source: '/(.*)',
         headers: [
           {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff'
-          },
-          {
             key: 'X-Frame-Options',
-            value: 'DENY'
+            value: 'DENY',
           },
           {
-            key: 'X-XSS-Protection',
-            value: '1; mode=block'
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
           },
           {
             key: 'Referrer-Policy',
-            value: 'strict-origin-when-cross-origin'
+            value: 'origin-when-cross-origin',
           },
           {
-            key: 'Permissions-Policy',
-            value: 'camera=(), microphone=(), geolocation=(), payment=()'
-          },
-          {
-            key: 'Cross-Origin-Embedder-Policy',
-            value: 'require-corp'
-          },
-          {
-            key: 'Cross-Origin-Opener-Policy',
-            value: 'same-origin'
-          },
-          {
-            key: 'Cross-Origin-Resource-Policy',
-            value: 'same-origin'
+            key: 'X-XSS-Protection',
+            value: '1; mode=block',
           },
           {
             key: 'Strict-Transport-Security',
-            value: 'max-age=31536000; includeSubDomains; preload'
+            value: 'max-age=31536000; includeSubDomains',
           },
           {
             key: 'Content-Security-Policy',
-            value:
-              "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.stripe.com https://fonts.googleapis.com; frame-src 'self' https://js.stripe.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
-          }
-        ]
-      },
-      {
-        source: '/favicon.ico',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable'
-          }
-        ]
-      },
-      {
-        source: '/sw.js',
-        headers: [
-          {
-            key: 'Content-Type',
-            value: 'application/javascript'
+            value: "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://js.stripe.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.stripe.com https://js.stripe.com; frame-src https://js.stripe.com;",
           },
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=0, must-revalidate'
-          }
-        ]
+        ],
       },
-      {
-        source: '/manifest.json',
-        headers: [
-          {
-            key: 'Content-Type',
-            value: 'application/manifest+json'
-          },
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable'
-          }
-        ]
-      }
     ];
   },
+
+  // Webpack Optimization
+  webpack: (config, { dev, isServer }) => {
+    // Production optimizations
+    if (!dev && !isServer) {
+      // Enable tree shaking
+      config.optimization.usedExports = true;
+      config.optimization.sideEffects = false;
+      
+      // Split chunks for better caching
+      config.optimization.splitChunks = {
+        chunks: 'all',
+        cacheGroups: {
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendors',
+            chunks: 'all',
+          },
+          common: {
+            name: 'common',
+            minChunks: 2,
+            chunks: 'all',
+            enforce: true,
+          },
+        },
+      };
+    }
+
+    // Optimize bundle size
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      'react': 'react',
+      'react-dom': 'react-dom',
+    };
+
+    return config;
+  },
+
+  // Bundle Analyzer (optional)
+  ...(process.env.ANALYZE === 'true' && {
+    webpack: (config) => {
+      config.plugins.push(
+        new (require('@next/bundle-analyzer'))({
+          enabled: true,
+        })
+      );
+      return config;
+    },
+  }),
+
+  // TypeScript and ESLint
+  eslint: {
+    ignoreDuringBuilds: false
+  },
+  typescript: {
+    ignoreBuildErrors: false
+  },
+
+  // Output optimization - temporarily disabled for Windows compatibility
+  // output: 'standalone',
+  trailingSlash: false,
+  skipTrailingSlashRedirect: true,
+
   // Configure proper dynamic rendering
   staticPageGenerationTimeout: 120,
   // Configure proper error page handling
@@ -103,51 +145,7 @@ const nextConfig = {
         permanent: true
       }
     ];
-  },
-  // Fixed generateBuildId function
-  generateBuildId: () => {
-    return 'build-' + Date.now();
-  },
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      config.resolve.fallback = {
-        ...config.resolve.fallback,
-        fs: false,
-        net: false,
-        tls: false
-      };
-
-      // Exclude Nodemailer from client bundle
-      config.externals = config.externals || [];
-      config.externals.push('nodemailer');
-    }
-
-    return config;
-  },
-  compress: true,
-  poweredByHeader: false,
-  // Core settings
-  distDir: '.next',
-  reactStrictMode: true,
-  pageExtensions: ['tsx', 'ts', 'jsx', 'js'],
-  // HTTPS and Security
-  env: {
-    CUSTOM_KEY: process.env.CUSTOM_KEY
-  },
-  // Image optimization
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'rescuepcrepairs.com',
-        port: '',
-        pathname: '/**'
-      }
-    ],
-    formats: ['image/webp', 'image/avif'],
-    minimumCacheTTL: 31536000
   }
-  // PWA support removed - service worker should be served directly from public directory
 };
 
 module.exports = nextConfig;

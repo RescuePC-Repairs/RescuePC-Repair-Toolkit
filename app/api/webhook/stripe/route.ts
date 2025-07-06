@@ -13,8 +13,8 @@ if (!process.env.STRIPE_WEBHOOK_SECRET) {
 }
 
 // SECURE STRIPE INITIALIZATION
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: '2025-06-30.basil',
+let stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+  apiVersion: '2023-10-16',
   typescript: true
 });
 

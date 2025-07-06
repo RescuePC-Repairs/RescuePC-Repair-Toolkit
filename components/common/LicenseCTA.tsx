@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback, useMemo, memo } from 'react';
 // import { motion } from 'framer-motion'
 import { Check, Shield, Zap } from 'lucide-react';
 import { getLicenseById, formatPrice } from '../../config/pricing';
@@ -11,6 +11,66 @@ interface LicenseCTAProps {
   variant?: 'primary' | 'secondary' | 'enterprise';
 }
 
+// Memoized license data to prevent recreation on every render
+const LICENSE_DATA = {
+  professional: {
+    name: 'Professional License',
+    price: 199.99,
+    interval: 'year',
+    features: [
+      'Advanced diagnostic algorithms',
+      'Automated repair scripts',
+      'Priority email support',
+      '3-year updates included'
+    ]
+  },
+  enterprise: {
+    name: 'Enterprise License',
+    price: 499.99,
+    interval: 'year',
+    features: [
+      'Everything in Professional, plus:',
+      'Military-grade 256-bit encryption',
+      'Lifetime updates and support',
+      'Enterprise container platform'
+    ]
+  },
+  government: {
+    name: 'Government License',
+    price: 999.99,
+    interval: 'year',
+    features: [
+      'Everything in Enterprise, plus:',
+      'Government compliance features',
+      'Military-grade security protocols',
+      'Custom deployment for government networks'
+    ]
+  },
+  lifetime_enterprise: {
+    name: 'Lifetime Enterprise Package',
+    price: 499.99,
+    interval: 'once',
+    features: [
+      'Everything in Enterprise, plus:',
+      'Lifetime access to all features',
+      'No recurring payments',
+      'Lifetime updates and support'
+    ]
+  }
+};
+
+// Memoized components to prevent unnecessary re-renders
+const FeatureItem = memo(({ feature }: { feature: string }) => (
+  <div className="flex items-center gap-2 text-sm text-white/80">
+    <Check className="w-4 h-4 text-success-400" />
+    <span>{feature}</span>
+  </div>
+));
+
+const LoadingSpinner = memo(() => (
+  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+));
+
 export function LicenseCTA({
   licenseId = 'lifetime_enterprise',
   className = '',
@@ -20,14 +80,34 @@ export function LicenseCTA({
   const [error, setError] = useState<string | null>(null);
   const [isHovered, setIsHovered] = useState(false);
 
-  const license = getLicenseById(licenseId);
+  // Memoized license data to prevent recalculation
+  const license = useMemo(() => LICENSE_DATA[licenseId as keyof typeof LICENSE_DATA], [licenseId]);
 
-  if (!license) {
-    console.error(`License not found: ${licenseId}`);
-    return null;
-  }
+  // Memoized price formatting to prevent recalculation
+  const formatPrice = useCallback((price: number) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2
+    }).format(price);
+  }, []);
 
-  const handlePurchase = async () => {
+  // Memoized variant styles to prevent recalculation
+  const getVariantStyles = useCallback(() => {
+    const baseStyles = 'flex items-center justify-center gap-2 w-full py-3 px-6 rounded-xl font-semibold transition-all duration-300 transform';
+    
+    switch (variant) {
+      case 'enterprise':
+        return `${baseStyles} bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800`;
+      case 'secondary':
+        return `${baseStyles} bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800`;
+      default:
+        return `${baseStyles} bg-gradient-to-r from-success-500 to-success-600 hover:from-success-600 hover:to-success-700`;
+    }
+  }, [variant]);
+
+  // Memoized purchase handler to prevent recreation on every render
+  const handlePurchase = useCallback(async () => {
     setIsLoading(true);
     setError(null);
 
@@ -62,18 +142,7 @@ export function LicenseCTA({
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const getVariantStyles = () => {
-    switch (variant) {
-      case 'enterprise':
-        return 'bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800';
-      case 'secondary':
-        return 'bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800';
-      default:
-        return 'bg-gradient-to-r from-success-500 to-success-600 hover:from-success-600 hover:to-success-700';
-    }
-  };
+  }, [licenseId, license]);
 
   return (
     <div
@@ -103,10 +172,7 @@ export function LicenseCTA({
 
         <div className="space-y-3 mb-6">
           {license.features.slice(0, 4).map((feature, index) => (
-            <div key={index} className="flex items-center gap-2 text-sm text-white/80">
-              <Check className="w-4 h-4 text-success-400" />
-              <span>{feature}</span>
-            </div>
+            <FeatureItem key={index} feature={feature} />
           ))}
         </div>
 
@@ -121,7 +187,7 @@ export function LicenseCTA({
         >
           {isLoading ? (
             <>
-              <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+              <LoadingSpinner />
               <span>Processing...</span>
             </>
           ) : (
