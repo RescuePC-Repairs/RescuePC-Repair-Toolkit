@@ -205,23 +205,7 @@ export class AutomatedHandler {
   }
 
   private async sendEmail(data: any) {
-    try {
-      const { template, email, context } = data;
-      const emailTemplate = await this.loadEmailTemplate(template);
-      const compiledEmail = this.compileEmailTemplate(emailTemplate, context);
-
-      await this.emailTransporter.sendMail({
-        from: process.env.SMTP_FROM,
-        to: email,
-        subject: compiledEmail.subject,
-        html: compiledEmail.html
-      });
-
-      this.metrics.emailsSent++;
-      this.notifyOtherAI('EMAIL_SENT', { email, template });
-    } catch (error) {
-      console.error('Email sending error:', error);
-    }
+    // Nodemailer logic removed. All email sending must be handled directly in API route files only.
   }
 
   private async updateSEO(data: any) {

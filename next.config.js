@@ -96,18 +96,6 @@ const nextConfig = {
       config.externals.push('nodemailer');
     }
 
-    // Ignore specific HTML files in project directories
-    config.module.rules.push({
-      test: /(emails|private-emails)\/.*\.html$/,
-      use: 'ignore-loader'
-    });
-
-    // Ignore JSON files in node_modules to prevent bundling issues
-    config.module.rules.push({
-      test: /node_modules\/.*\.json$/,
-      use: 'ignore-loader'
-    });
-
     return config;
   },
   compress: true,

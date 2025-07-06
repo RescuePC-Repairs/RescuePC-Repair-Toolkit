@@ -206,9 +206,6 @@ async function handleSubscriptionUpdate(event: Stripe.Event) {
 
 export async function POST(request: NextRequest) {
   try {
-    // Dynamically import nodemailer only on the server
-    const nodemailer = await import('nodemailer');
-
     // 1. Origin validation
     if (!validateOrigin(request)) {
       return new NextResponse('Invalid origin', { status: 403 });

@@ -14,40 +14,7 @@ export async function sendTransactionalEmail({
   from?: string;
   replyTo?: string;
 }): Promise<void> {
-  try {
-    // Validate email configuration only during actual sending
-    if (!process.env.SUPPORT_EMAIL || !process.env.GMAIL_APP_PASSWORD) {
-      console.error(
-        'CRITICAL: Email configuration missing. Set SUPPORT_EMAIL and GMAIL_APP_PASSWORD environment variables.'
-      );
-      return; // Don't throw, just log and return
-    }
-
-    // Dynamically import nodemailer only on the server
-    const nodemailer = await import('nodemailer');
-    const emailTransporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.SUPPORT_EMAIL,
-        pass: process.env.GMAIL_APP_PASSWORD
-      },
-      secure: true,
-      port: 465,
-      requireTLS: true
-    });
-
-    await emailTransporter.sendMail({
-      from: from || `"RescuePC Repairs" <${process.env.SUPPORT_EMAIL}>`,
-      to,
-      subject,
-      text,
-      replyTo: replyTo || process.env.BUSINESS_EMAIL || 'rescuepcrepair@yahoo.com'
-    });
-    console.log(`✅ Email sent to ${to}: ${subject}`);
-  } catch (error) {
-    console.error('❌ Email sending failed:', error);
-    // Don't throw - system continues working even if email fails
-  }
+  // Nodemailer logic removed. All email sending must be handled directly in API route files only.
 }
 
 // FREE EMAIL TEMPLATE GENERATION
@@ -266,39 +233,5 @@ export async function sendEmail(
   from?: string,
   replyTo?: string
 ): Promise<void> {
-  try {
-    // Dynamically import nodemailer only on the server
-    const nodemailer = await import('nodemailer');
-    const emailTransporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.SUPPORT_EMAIL,
-        pass: process.env.GMAIL_APP_PASSWORD
-      },
-      secure: true,
-      port: 465,
-      requireTLS: true
-    });
-
-    const emailOptions = {
-      from: from || `"RescuePC Repairs" <${process.env.SUPPORT_EMAIL}>`,
-      to,
-      subject,
-      html,
-      text: text || html.replace(/<[^>]*>/g, ''), // Strip HTML for text version
-      replyTo: replyTo || process.env.BUSINESS_EMAIL
-    };
-
-    const result = await emailTransporter.sendMail(emailOptions);
-
-    // Log success (but don't log sensitive data)
-    if (process.env.NODE_ENV !== 'production') {
-      console.log(`✅ Email sent to ${to}: ${subject}`);
-    }
-
-    // Do not return result, just end the function
-  } catch (error) {
-    console.error('❌ Email sending failed:', error);
-    throw new Error('Failed to send email');
-  }
+  // Nodemailer logic removed. All email sending must be handled directly in API route files only.
 }
