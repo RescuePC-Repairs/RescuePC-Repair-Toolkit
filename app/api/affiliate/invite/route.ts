@@ -1,6 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { sendEmail } from '../../../../utils/emailService';
-import { getPurchaseEmailTemplate } from '../../../../utils/emailTemplates';
 
 export async function POST(request: NextRequest) {
   try {
@@ -12,6 +10,10 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
+
+    // Dynamically import email functions to prevent bundling issues
+    const { sendEmail } = await import('../../../../utils/emailService');
+    const { getPurchaseEmailTemplate } = await import('../../../../utils/emailTemplates');
 
     // Send affiliate invitation email
     await sendEmail(

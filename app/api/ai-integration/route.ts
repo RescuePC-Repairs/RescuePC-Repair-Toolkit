@@ -3,7 +3,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import crypto from 'crypto';
 import { prisma } from '../../../utils/prisma';
-import { sendTransactionalEmail } from '../../../utils/email';
 import { stripe } from '../../../utils/stripe';
 
 interface LicenseTypeCount {
@@ -73,6 +72,9 @@ export async function POST(request: NextRequest) {
   }
 
   try {
+    // Dynamically import email function to prevent bundling issues
+    const { sendTransactionalEmail } = await import('../../../utils/email');
+
     const body = await request.text();
     const signature = request.headers.get('x-ai-signature');
 

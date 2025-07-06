@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { headers } from 'next/headers';
-import { sendLicenseEmail } from '../../../utils/email';
 
 // Force dynamic rendering to prevent static generation errors
 export const dynamic = 'force-dynamic';
@@ -86,6 +85,9 @@ const ENTERPRISE_PACKAGES: Record<string, EnterprisePackage> = {
 
 export async function POST(request: NextRequest) {
   try {
+    // Dynamically import email function to prevent bundling issues
+    const { sendLicenseEmail } = await import('../../../utils/email');
+
     // Initialize Stripe and webhook secret at runtime
     const stripe = getStripe();
     const webhookSecret = getWebhookSecret();

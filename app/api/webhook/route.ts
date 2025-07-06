@@ -3,7 +3,6 @@ import Stripe from 'stripe';
 import { headers } from 'next/headers';
 import { createHmac } from 'crypto';
 import { prisma } from '../../../utils/prisma';
-import { sendTransactionalEmail } from '../../../utils/email';
 import { validateOrigin } from '@/utils/originValidation';
 
 if (!process.env.STRIPE_SECRET_KEY || !process.env.STRIPE_WEBHOOK_SECRET) {
@@ -73,6 +72,7 @@ async function handlePaymentSuccess(event: Stripe.Event) {
     });
 
     // Send confirmation email
+    const { sendTransactionalEmail } = await import('../../../utils/email');
     await sendTransactionalEmail({
       to: customer.email!,
       subject: '🎉 Payment Successful - RescuePC Repairs',
@@ -113,6 +113,7 @@ async function handlePaymentFailure(event: Stripe.Event) {
     }
 
     // Send failure notification
+    const { sendTransactionalEmail } = await import('../../../utils/email');
     await sendTransactionalEmail({
       to: customer.email!,
       subject: '❌ Payment Failed - RescuePC Repairs',
@@ -160,6 +161,7 @@ async function handleSubscriptionUpdate(event: Stripe.Event) {
     }
 
     // Send subscription status email
+    const { sendTransactionalEmail } = await import('../../../utils/email');
     await sendTransactionalEmail({
       to: customer.email!,
       subject: '📅 Subscription Update - RescuePC Repairs',
@@ -175,6 +177,9 @@ async function handleSubscriptionUpdate(event: Stripe.Event) {
 
 export async function POST(request: NextRequest) {
   try {
+    // Dynamically import email function to prevent bundling issues
+    const { sendTransactionalEmail } = await import('../../../utils/email');
+
     // 1. Origin validation
     if (!validateOrigin(request)) {
       return new NextResponse('Invalid origin', { status: 403 });
