@@ -20,9 +20,9 @@ export function Navbar() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex items-center gap-3">
-            <Shield className="w-8 h-8 text-primary-400" />
-            <span className="text-xl font-bold text-white">RescuePC Repairs</span>
+          <div className="flex items-center gap-2 sm:gap-3">
+            <Shield className="w-6 h-6 sm:w-8 sm:h-8 text-primary-400" />
+            <span className="text-lg sm:text-xl font-bold text-white">RescuePC Repairs</span>
           </div>
 
           {/* Desktop Navigation */}

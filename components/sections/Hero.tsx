@@ -145,23 +145,23 @@ export function Hero() {
           <div
             className={`mb-12 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
           >
-            <div className="flex items-center justify-center gap-6 mb-6">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-6">
               <div className="relative">
                 <Image
                   src="/RescuePC-Repairs-Logo.png"
                   alt="RescuePC Repairs Logo"
-                  width={80}
-                  height={80}
-                  className="rounded-2xl shadow-2xl border-2 border-blue-500/30 bg-white/10 backdrop-blur-xl p-2 animate-scale-in"
+                  width={60}
+                  height={60}
+                  className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 rounded-xl sm:rounded-2xl shadow-2xl border-2 border-blue-500/30 bg-white/10 backdrop-blur-xl p-1 sm:p-2 animate-scale-in"
                   priority
                 />
-                <div className="absolute -inset-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-2xl blur-xl animate-pulse"></div>
+                <div className="absolute -inset-1 sm:-inset-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-xl sm:rounded-2xl blur-xl animate-pulse"></div>
               </div>
               <div className="text-center">
-                <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-tight whitespace-nowrap gradient-text">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white leading-tight gradient-text">
                   RescuePC Repairs
                 </h1>
-                <p className="text-xl md:text-2xl text-blue-100 max-w-4xl mx-auto leading-relaxed font-medium animate-fade-in">
+                <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-blue-100 max-w-4xl mx-auto leading-relaxed font-medium animate-fade-in mt-2">
                   Where Expertise Meets Automation
                 </p>
               </div>
@@ -173,12 +173,12 @@ export function Hero() {
             className={`mb-16 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
           >
             <div className="glass-card max-w-6xl mx-auto">
-              <p className="text-xl md:text-2xl text-white/95 leading-relaxed mb-6">
-                <strong className="text-white text-2xl md:text-3xl">
+              <p className="text-lg sm:text-xl md:text-2xl text-white/95 leading-relaxed mb-6">
+                <strong className="text-white text-xl sm:text-2xl md:text-3xl">
                   🔧 Professional Multi-Platform PC Repair Toolkit
                 </strong>
               </p>
-              <p className="text-lg md:text-xl text-white/90 leading-relaxed">
+              <p className="text-base sm:text-lg md:text-xl text-white/90 leading-relaxed">
                 with <strong className="text-white">military-grade security</strong> and{' '}
                 <strong className="text-white">comprehensive driver database</strong>. Complete
                 toolkit: <strong className="text-white">11GB of drivers and repair tools</strong>{' '}
@@ -260,27 +260,27 @@ export function Hero() {
             className={`mb-16 transition-all duration-1000 delay-1300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
           >
             <div className="bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-indigo-600/20 border border-blue-400/30 rounded-3xl p-10 mb-8 backdrop-blur-xl">
-              <div className="flex items-center justify-center gap-3 mb-6">
-                <Award className="w-8 h-8 text-yellow-400" />
-                <h2 className="text-4xl font-black text-white">Get Your Lifetime Enterprise</h2>
-                <Award className="w-8 h-8 text-yellow-400" />
+              <div className="flex items-center justify-center gap-2 sm:gap-3 mb-6">
+                <Award className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-400" />
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-white">Get Your Lifetime Enterprise</h2>
+                <Award className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-400" />
               </div>
-              <p className="text-2xl text-white/90 mb-8 font-medium">
+              <p className="text-lg sm:text-xl md:text-2xl text-white/90 mb-8 font-medium">
                 One-time payment, lifetime access
               </p>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-8">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-8 mb-8">
                 <div className="text-center">
-                  <div className="text-5xl font-black text-white mb-2">$499.99</div>
-                  <div className="text-white/70 text-lg">One-time payment</div>
+                  <div className="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-2">$499.99</div>
+                  <div className="text-white/70 text-sm sm:text-lg">One-time payment</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-black text-white mb-2">1 License</div>
-                  <div className="text-white/70 text-lg">Unlimited Repairs</div>
+                  <div className="text-2xl sm:text-3xl font-black text-white mb-2">1 License</div>
+                  <div className="text-white/70 text-sm sm:text-lg">Unlimited Repairs</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-black text-white mb-2">Lifetime</div>
-                  <div className="text-white/70 text-lg">Updates Included</div>
+                  <div className="text-2xl sm:text-3xl font-black text-white mb-2">Lifetime</div>
+                  <div className="text-white/70 text-sm sm:text-lg">Updates Included</div>
                 </div>
               </div>
 
