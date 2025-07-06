@@ -1,7 +1,9 @@
 'use client';
 
-// Force dynamic rendering to prevent static generation errors
-export const dynamic = 'force-dynamic';
+import { Inter } from 'next/font/google';
+import './globals.css';
+
+const inter = Inter({ subsets: ['latin'] });
 
 export default function GlobalError({
   error,
@@ -11,17 +13,19 @@ export default function GlobalError({
   reset: () => void;
 }) {
   return (
-    <div className="bg-gray-900 text-white min-h-screen flex items-center justify-center">
-      <div className="text-center">
-        <h2 className="text-2xl font-bold mb-4">Something went wrong!</h2>
-        <p className="text-gray-400 mb-4">An error occurred while loading the application.</p>
-        <button
-          onClick={() => reset()}
-          className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Try again
-        </button>
-      </div>
-    </div>
+    <html lang="en">
+      <body className={inter.className}>
+        <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white">
+          <h1 className="text-3xl font-bold mb-4">Something went wrong!</h1>
+          <p className="mb-4">{error.message || 'An unexpected error occurred.'}</p>
+          <button
+            onClick={() => reset()}
+            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Try again
+          </button>
+        </div>
+      </body>
+    </html>
   );
 }

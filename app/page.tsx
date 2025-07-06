@@ -123,11 +123,11 @@ export default function HomePage({ searchParams }: { searchParams: { error?: str
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen">
       {/* Error Alert for Invalid Payment */}
       {searchParams.error === 'invalid_payment' && (
-        <div className="bg-red-50 border-b border-red-200">
-          <div className="container mx-auto px-4 py-3">
+        <div className="bg-red-50 border-b border-red-200 w-full">
+          <div className="container mx-auto px-4 py-3 text-center">
             <div className="flex items-center space-x-3">
               <AlertTriangle className="w-5 h-5 text-red-600" />
               <div>

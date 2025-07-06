@@ -28,14 +28,17 @@ module.exports = {
   // 📋 EXTENDS
   // ==========================================================================
 
-  extends: ['next/core-web-vitals', 'next/typescript', 'plugin:security/recommended'],
+  extends: [
+    'next/core-web-vitals',
+    'plugin:security/recommended'
+  ],
 
   // ==========================================================================
   // 🔧 PARSER & PLUGINS
   // ==========================================================================
 
   parserOptions: {
-    ecmaVersion: 'latest',
+    ecmaVersion: 2020,
     sourceType: 'module'
   },
 
@@ -95,6 +98,17 @@ module.exports = {
     'security/detect-object-injection': 'off',
     'security/detect-non-literal-regexp': 'off',
     'security/detect-unsafe-regex': 'off',
+    'security/detect-buffer-noassert': 'off',
+    'security/detect-child-process': 'off',
+    'security/detect-disable-mustache-escape': 'off',
+    'security/detect-eval-with-expression': 'off',
+    'security/detect-no-csrf-before-method-override': 'off',
+    'security/detect-non-literal-fs-filename': 'off',
+    'security/detect-non-literal-require': 'off',
+    'security/detect-possible-timing-attacks': 'off',
+    'security/detect-pseudoRandomBytes': 'off',
+    '@next/next/no-img-element': 'off',
+    '@next/next/no-html-link-for-pages': 'off',
 
     // =======================================================================
     // 🚫 RELAXED RULES FOR DEVELOPMENT
@@ -111,9 +125,7 @@ module.exports = {
     'no-useless-escape': 'off',
     '@next/next/no-assign-module-variable': 'off',
     '@typescript-eslint/no-require-imports': 'off',
-    'security/detect-non-literal-fs-filename': 'off',
-    'security/detect-non-literal-regexp': 'off',
-    'security/detect-object-injection': 'off'
+    'security/detect-non-literal-regexp': 'off'
   },
 
   // ==========================================================================

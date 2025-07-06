@@ -7,186 +7,244 @@ import {
   Twitter,
   ShieldCheck,
   Heart,
-  Shield
+  Shield,
+  Phone,
+  MapPin,
+  ExternalLink
 } from 'lucide-react';
 
 export function Footer() {
   return (
-    <footer className="w-full bg-primary-950/90 backdrop-blur-xl border-t border-primary-800 text-white pt-12 pb-6 mt-24">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-wrap justify-between gap-8 mb-8">
+    <footer className="footer py-16 relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-900/50 via-black/50 to-gray-900/50"></div>
+      <div className="absolute top-0 left-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-0 right-0 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl"></div>
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Company Info */}
-          <div className="min-w-[220px] max-w-xs flex-1">
-            <div className="flex items-center gap-3 mb-4">
-              <Shield className="w-8 h-8 text-primary-400" />
-              <div>
-                <div className="text-xl font-bold text-white">RescuePC</div>
-                <div className="text-sm text-primary-300">Repairs</div>
+          <div className="lg:col-span-2">
+            <div className="flex items-center mb-6">
+              <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center mr-4">
+                <Shield className="w-6 h-6 text-white" />
+              </div>
+              <h3 className="text-2xl font-bold text-white">RescuePC Repairs</h3>
+            </div>
+            <p className="text-white/80 mb-6 leading-relaxed">
+              Professional Windows repair toolkit with military-grade security. Lifetime license,
+              24/7 support, and offline operation for maximum privacy and performance.
+            </p>
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center text-white/60">
+                <Mail className="w-4 h-4 mr-2" />
+                <span className="text-sm">rescuepcrepair@yahoo.com</span>
+              </div>
+              <div className="flex items-center text-white/60">
+                <Clock className="w-4 h-4 mr-2" />
+                <span className="text-sm">24/7 Support</span>
               </div>
             </div>
-            <p className="text-white/80 mb-4">
-              Professional Windows repair toolkit trusted by thousands worldwide. Military-grade
-              security, lifetime license, 24/7 support.
-            </p>
-            <div className="flex gap-3">
-              <a
-                href="https://www.youtube.com/@RescuePC-Repairs"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="YouTube"
-                className="hover:text-red-500"
-              >
-                <Youtube size={22} />
-              </a>
-              <a
-                href="https://www.twitch.tv/rescuepc_repairs"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Twitch"
-                className="hover:text-purple-400"
-              >
-                <Twitch size={22} />
-              </a>
-              <a
-                href="https://x.com/RescuePCRepair"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Twitter/X"
-                className="hover:text-blue-400"
-              >
-                <Twitter size={22} />
-              </a>
-            </div>
           </div>
-          {/* Product Links */}
-          <div className="min-w-[180px] flex-1">
-            <h4 className="font-bold mb-3">Product</h4>
-            <ul className="space-y-2">
+
+          {/* Product */}
+          <div>
+            <h4 className="text-lg font-semibold text-white mb-6">Product</h4>
+            <ul className="space-y-3">
               <li>
-                <a href="#features" className="hover:underline">
+                <a
+                  href="#"
+                  className="text-white/70 hover:text-white transition-colors flex items-center group"
+                >
+                  <ExternalLink className="w-3 h-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                   Features
                 </a>
               </li>
               <li>
-                <a href="#pricing" className="hover:underline">
+                <a
+                  href="#"
+                  className="text-white/70 hover:text-white transition-colors flex items-center group"
+                >
+                  <ExternalLink className="w-3 h-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                   Pricing
                 </a>
               </li>
               <li>
-                <a href="/Knowledge-Base.html" className="hover:underline">
+                <a
+                  href="#"
+                  className="text-white/70 hover:text-white transition-colors flex items-center group"
+                >
+                  <ExternalLink className="w-3 h-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                   Knowledge Base
                 </a>
               </li>
               <li>
-                <a href="#download" className="hover:underline">
+                <a
+                  href="#"
+                  className="text-white/70 hover:text-white transition-colors flex items-center group"
+                >
+                  <ExternalLink className="w-3 h-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                   Download
                 </a>
               </li>
               <li>
                 <a
-                  href="/docs/RescuePC Repairs Flyer.pdf"
-                  target="_blank"
-                  rel="noopener"
-                  className="hover:underline"
+                  href="#"
+                  className="text-white/70 hover:text-white transition-colors flex items-center group"
                 >
+                  <ExternalLink className="w-3 h-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                   Product Flyer
                 </a>
               </li>
             </ul>
           </div>
-          {/* Support Links */}
-          <div className="min-w-[180px] flex-1">
-            <h4 className="font-bold mb-3">Support</h4>
-            <ul className="space-y-2">
+
+          {/* Support */}
+          <div>
+            <h4 className="text-lg font-semibold text-white mb-6">Support</h4>
+            <ul className="space-y-3">
               <li>
-                <a href="mailto:***REMOVED***" className="hover:underline">
+                <a
+                  href="#"
+                  className="text-white/70 hover:text-white transition-colors flex items-center group"
+                >
+                  <ExternalLink className="w-3 h-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                   Email Support
                 </a>
               </li>
               <li>
-                <a href="/support.html" className="hover:underline">
+                <a
+                  href="#"
+                  className="text-white/70 hover:text-white transition-colors flex items-center group"
+                >
+                  <ExternalLink className="w-3 h-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                   Support Center
                 </a>
               </li>
               <li>
-                <a href="/Knowledge-Base.html" className="hover:underline">
+                <a
+                  href="#"
+                  className="text-white/70 hover:text-white transition-colors flex items-center group"
+                >
+                  <ExternalLink className="w-3 h-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                   Documentation
                 </a>
               </li>
               <li>
-                <a href="#faq" className="hover:underline">
+                <a
+                  href="#"
+                  className="text-white/70 hover:text-white transition-colors flex items-center group"
+                >
+                  <ExternalLink className="w-3 h-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                   FAQ
                 </a>
               </li>
             </ul>
           </div>
-          {/* Legal Links */}
-          <div className="min-w-[180px] flex-1">
-            <h4 className="font-bold mb-3">Legal</h4>
-            <ul className="space-y-2">
+        </div>
+
+        {/* Legal Links */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          <div>
+            <h4 className="text-lg font-semibold text-white mb-6">Legal</h4>
+            <ul className="space-y-3">
               <li>
-                <a href="/PrivacyPolicy.html" className="hover:underline">
+                <a
+                  href="#"
+                  className="text-white/70 hover:text-white transition-colors flex items-center group"
+                >
+                  <ExternalLink className="w-3 h-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                   Privacy Policy
                 </a>
               </li>
               <li>
-                <a href="/TermsOfService.html" className="hover:underline">
+                <a
+                  href="#"
+                  className="text-white/70 hover:text-white transition-colors flex items-center group"
+                >
+                  <ExternalLink className="w-3 h-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                   Terms of Service
                 </a>
               </li>
               <li>
-                <a href="/RefundPolicy.html" className="hover:underline">
+                <a
+                  href="#"
+                  className="text-white/70 hover:text-white transition-colors flex items-center group"
+                >
+                  <ExternalLink className="w-3 h-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                   Refund Policy
                 </a>
               </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-lg font-semibold text-white mb-6">Compliance</h4>
+            <ul className="space-y-3">
               <li>
-                <a href="/License.html" className="hover:underline">
+                <a
+                  href="#"
+                  className="text-white/70 hover:text-white transition-colors flex items-center group"
+                >
+                  <ExternalLink className="w-3 h-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                   License
                 </a>
               </li>
               <li>
-                <a href="/CookiePolicy.html" className="hover:underline">
+                <a
+                  href="#"
+                  className="text-white/70 hover:text-white transition-colors flex items-center group"
+                >
+                  <ExternalLink className="w-3 h-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                   Cookie Policy
                 </a>
               </li>
               <li>
-                <a href="/GDPR.html" className="hover:underline">
+                <a
+                  href="#"
+                  className="text-white/70 hover:text-white transition-colors flex items-center group"
+                >
+                  <ExternalLink className="w-3 h-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                   GDPR
                 </a>
               </li>
             </ul>
           </div>
-          {/* Contact Info */}
-          <div className="min-w-[180px] flex-1">
-            <h4 className="font-bold mb-3">Contact</h4>
-            <div className="space-y-2">
-              <div className="flex items-center gap-2">
-                <Mail size={18} />
-                <a href="mailto:***REMOVED***" className="hover:underline">
-                  ***REMOVED***
-                </a>
+
+          <div className="lg:col-span-2">
+            <h4 className="text-lg font-semibold text-white mb-6">Contact Information</h4>
+            <div className="space-y-4">
+              <div className="flex items-center text-white/70">
+                <Mail className="w-4 h-4 mr-3" />
+                <span>rescuepcrepair@yahoo.com</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Clock size={18} />
+              <div className="flex items-center text-white/70">
+                <Phone className="w-4 h-4 mr-3" />
                 <span>24/7 Support Available</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Globe size={18} />
+              <div className="flex items-center text-white/70">
+                <Globe className="w-4 h-4 mr-3" />
                 <span>Worldwide Service</span>
               </div>
             </div>
           </div>
         </div>
-        {/* Footer Bottom */}
-        <div className="border-t border-primary-800 pt-6 flex flex-col md:flex-row justify-between items-center text-sm text-white/70">
-          <p>&copy; 2024 RescuePC Repairs. All rights reserved.</p>
-          <div className="flex gap-4 mt-2 md:mt-0">
-            <span className="flex items-center gap-1">
-              <Heart size={14} className="text-red-400" /> Built for Windows users worldwide
-            </span>
-            <span className="flex items-center gap-1">
-              <ShieldCheck size={14} className="text-success-400" /> Trusted by 10,000+ customers
-            </span>
+
+        {/* Bottom Bar */}
+        <div className="pt-8 border-t border-gray-700">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <div className="mb-4 md:mb-0">
+              <p className="text-white/80 text-sm">
+                © 2024 RescuePC Repairs. All rights reserved.
+              </p>
+              <p className="text-white/60 text-xs mt-1">Built for Windows users worldwide</p>
+            </div>
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center text-white/60">
+                <Heart className="w-4 h-4 mr-2 text-red-400" />
+                <span className="text-sm">Made with ❤️ for PC users</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

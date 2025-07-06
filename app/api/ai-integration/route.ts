@@ -593,13 +593,13 @@ async function generateSEOContent({
     case 'title':
       return `${baseContent} | ${keywords.join(' ')}`;
     case 'description':
-      return `Expert ${target} services with military-grade security. ${keywords.join(', ')}. Trusted by professionals worldwide.`;
+      return `Expert ${target} services with military-grade security. ${keywords.join(', ')}.`;
     case 'content':
       return `Our ${target} solutions provide enterprise-level protection with advanced features including ${keywords.join(', ')}.`;
     case 'full_scan':
       return {
         title: `${baseContent} | ${keywords.join(' ')}`,
-        description: `Expert ${target} services with military-grade security. ${keywords.join(', ')}. Trusted by professionals worldwide.`,
+        description: `Expert ${target} services with military-grade security. ${keywords.join(', ')}.`,
         content: `Our ${target} solutions provide enterprise-level protection with advanced features including ${keywords.join(', ')}.`
       };
     default:

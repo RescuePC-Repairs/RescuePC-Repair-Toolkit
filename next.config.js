@@ -1,21 +1,82 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone',
-  experimental: {
-    serverActions: {
-      allowedOrigins: ['localhost:3000', 'rescuepcrepairs.com']
-    },
-  },
   eslint: {
     ignoreDuringBuilds: true
   },
   typescript: {
     ignoreBuildErrors: true
   },
-  // Completely disable static generation
-  trailingSlash: false,
-  async rewrites() {
-    return [];
+  // Security and HTTPS Enforcement
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff'
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY'
+          },
+          {
+            key: 'X-XSS-Protection',
+            value: '1; mode=block'
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'strict-origin-when-cross-origin'
+          },
+          {
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=(), payment=()'
+          },
+          {
+            key: 'Cross-Origin-Embedder-Policy',
+            value: 'require-corp'
+          },
+          {
+            key: 'Cross-Origin-Opener-Policy',
+            value: 'same-origin'
+          },
+          {
+            key: 'Cross-Origin-Resource-Policy',
+            value: 'same-origin'
+          },
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=31536000; includeSubDomains; preload'
+          },
+          {
+            key: 'Content-Security-Policy',
+            value:
+              "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.stripe.com https://fonts.googleapis.com; frame-src 'self' https://js.stripe.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+          }
+        ]
+      },
+      {
+        source: '/favicon.ico',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable'
+          }
+        ]
+      }
+    ];
+  },
+  // Configure proper dynamic rendering
+  staticPageGenerationTimeout: 120,
+  // Configure proper error page handling
+  async redirects() {
+    return [
+      {
+        source: '/http/:path*',
+        destination: '/https/:path*',
+        permanent: true
+      }
+    ];
   },
   generateBuildId: async () => {
     return 'build-' + Date.now();
@@ -29,21 +90,55 @@ const nextConfig = {
         tls: false
       };
     }
+
+    // Ignore specific HTML files in project directories
+    config.module.rules.push({
+      test: /(emails|private-emails)\/.*\.html$/,
+      use: 'ignore-loader'
+    });
+
+    // Handle JSON files from node_modules
+    config.module.rules.push({
+      test: /node_modules\/.*\.json$/,
+      type: 'javascript/auto'
+    });
+
     return config;
   },
   compress: true,
   poweredByHeader: false,
-  // Force dynamic rendering for all pages
-  async headers() {
+  experimental: {
+    serverComponentsExternalPackages: [],
+    // Disable standalone output to avoid symlink issues
+    outputFileTracingRoot: process.cwd(),
+    outputFileTracingExcludes: {
+      '*': [
+        'node_modules/@swc/core-linux-x64-gnu',
+        'node_modules/@swc/core-linux-x64-musl',
+        'node_modules/@esbuild/linux-x64'
+      ]
+    }
+  },
+  // Core settings
+  distDir: '.next',
+  reactStrictMode: true,
+  pageExtensions: ['tsx', 'ts', 'jsx', 'js'],
+  // HTTPS and Security
+  env: {
+    CUSTOM_KEY: process.env.CUSTOM_KEY
+  },
+  // Image optimization
+  images: {
+    domains: ['rescuepcrepairs.com'],
+    formats: ['image/webp', 'image/avif'],
+    minimumCacheTTL: 31536000
+  },
+  // PWA support
+  async rewrites() {
     return [
       {
-        source: '/(.*)',
-        headers: [
-          {
-            key: 'x-force-dynamic',
-            value: 'true'
-          }
-        ]
+        source: '/sw.js',
+        destination: '/_next/static/sw.js'
       }
     ];
   }

@@ -54,65 +54,63 @@ const showcaseStats = [
 
 export function FeatureCards() {
   return (
-    <section className="relative py-24 bg-gradient-to-br from-primary-950 via-primary-900 to-primary-950">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Why Choose RescuePC Repairs?</h2>
-          <p className="text-lg text-white/80">
-            The most comprehensive Windows repair toolkit trusted by thousands worldwide
+    <section className="py-24 relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-indigo-900/20"></div>
+      <div className="absolute top-0 left-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-0 right-0 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl"></div>
+
+      <div className="container relative z-10">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+            Why Choose RescuePC Repairs?
+          </h2>
+          <p className="text-xl text-white/80 max-w-3xl mx-auto">
+            The most comprehensive Windows repair toolkit for professionals, businesses, and home
+            users. Fast, secure, and easy to use—no technical knowledge required.
           </p>
         </div>
+
+        {/* Feature Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-          {features.map((feature, index) => {
-            const IconComponent = feature.icon;
-            return (
-              <div
-                key={index}
-                className="glass-card p-8 flex flex-col items-center text-center shadow-glass-lg"
-              >
-                <div className="mb-4">
-                  <IconComponent className="w-8 h-8 text-primary-400" />
+          {features.map((feature, index) => (
+            <div
+              key={index}
+              className="feature-card transform hover:scale-[1.02] transition-all duration-300"
+              style={{
+                animationDelay: `${index * 100}ms`,
+                animation: 'fadeInUp 0.6s ease-out forwards'
+              }}
+            >
+              <div className="text-center mb-6">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <feature.icon className="w-8 h-8 text-blue-400" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                <p className="text-white/90 mb-4">{feature.description}</p>
-                <ul className="text-white/80 text-left mx-auto space-y-1 mb-2">
-                  {feature.benefits.map((benefit, benefitIndex) => (
-                    <li key={benefitIndex} className="flex items-center gap-2">
-                      <span className="inline-block w-2 h-2 bg-success-400 rounded-full"></span>
-                      {benefit}
-                    </li>
-                  ))}
-                </ul>
+                <h3 className="text-xl font-bold text-white mb-3">{feature.title}</h3>
+                <p className="text-white/80 text-sm leading-relaxed mb-4">{feature.description}</p>
               </div>
-            );
-          })}
-        </div>
-        {/* Features Showcase */}
-        <div className="glass-card flex flex-col md:flex-row items-center justify-between gap-8 p-8 md:p-12">
-          <div className="flex-1 mb-8 md:mb-0">
-            <h3 className="text-2xl font-bold mb-2">Complete System Repair</h3>
-            <p className="text-white/80 mb-6">
-              Our toolkit handles everything from blue screen errors to malware infections. With
-              over 50 repair modules, RescuePC can fix any Windows issue automatically.
-            </p>
-            <div className="flex gap-8">
-              {showcaseStats.map((stat, i) => (
-                <div key={i} className="text-center">
-                  <span className="block text-3xl font-bold text-success-400 mb-1">
-                    {stat.number}
-                  </span>
-                  <span className="block text-white/70 text-sm">{stat.label}</span>
-                </div>
-              ))}
+
+              <ul className="space-y-2">
+                {feature.benefits.map((benefit, benefitIndex) => (
+                  <li key={benefitIndex} className="flex items-center text-white/70 text-sm">
+                    <div className="w-2 h-2 bg-green-400 rounded-full mr-3 flex-shrink-0"></div>
+                    {benefit}
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
-          <div className="flex-1 flex justify-center">
-            <img
-              src="/assets/RescuePC_GUI.png"
-              alt="RescuePC Repairs Interface Screenshot"
-              className="rounded-xl shadow-glass-lg w-full max-w-md"
-              loading="lazy"
-            />
+          ))}
+        </div>
+
+        {/* Stats Section */}
+        <div className="text-center">
+          <div className="inline-flex flex-col sm:flex-row items-center gap-8 bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-400/30 rounded-2xl px-8 py-6 backdrop-blur-sm">
+            {showcaseStats.map((stat, index) => (
+              <div key={index} className="text-center">
+                <div className="text-3xl md:text-4xl font-bold text-white">{stat.number}</div>
+                <div className="text-white/60 text-sm">{stat.label}</div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

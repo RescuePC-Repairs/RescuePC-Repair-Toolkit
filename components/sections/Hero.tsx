@@ -1,29 +1,57 @@
 'use client';
 
-import { LicenseCTA } from '../common/LicenseCTA';
-// import { motion } from 'framer-motion'
-import { Shield, Download, Clock, Server, UserCog, Lock } from 'lucide-react';
-import { SecurityIndicators } from './SecurityIndicators';
-import { PlatformSupport } from './PlatformSupport';
+import { useState } from 'react';
+import {
+  Shield,
+  Download,
+  Clock,
+  Server,
+  UserCog,
+  Lock,
+  CheckCircle,
+  Star,
+  Zap,
+  Globe
+} from 'lucide-react';
+import Image from 'next/image';
 
 export function Hero() {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleGetStarted = () => {
+    setIsLoading(true);
+    // Scroll to pricing section
+    document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => setIsLoading(false), 1000);
+  };
+
   return (
     <section className="hero">
-      <div className="container">
-        <div className="text-center">
-          {/* Main Headline */}
-          <div className="mb-8">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-              RescuePC Repairs
-              <span className="block text-2xl md:text-3xl lg:text-4xl font-medium text-blue-200 mt-2">
-                Complete System Recovery & Driver Management
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="max-w-6xl mx-auto text-center">
+          {/* Main Headline with Logo */}
+          <div className="mb-8 flex flex-col items-center justify-center">
+            <div className="flex items-center justify-center gap-4 mb-2">
+              <Image
+                src="/RescuePC Repairs Logo.png"
+                alt="RescuePC Repairs Logo"
+                width={64}
+                height={64}
+                className="rounded-full shadow-lg border border-blue-500 bg-white p-1"
+                priority
+              />
+              <span className="text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-tight whitespace-nowrap">
+                RescuePC Repairs
               </span>
-            </h1>
+            </div>
+            <p className="text-xl md:text-2xl text-blue-100 max-w-4xl mx-auto leading-relaxed mb-2 font-medium">
+              Where Expertise Meets Automation
+            </p>
           </div>
 
           {/* Hero Description */}
           <div className="mb-12">
-            <p className="text-lg md:text-xl text-white/90 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl text-white/90 max-w-5xl mx-auto leading-relaxed">
               <strong className="text-white">
                 🔧 Professional Multi-Platform PC Repair Toolkit
               </strong>{' '}
@@ -31,56 +59,45 @@ export function Hero() {
               <strong className="text-white">comprehensive driver database</strong>. Complete
               toolkit: <strong className="text-white">11GB of drivers and repair tools</strong>{' '}
               including everything you need to fix any PC.
-              <br />
-              <strong className="text-white">Full Multi-Platform Support</strong>: Windows
-              (PowerShell, EXE, GUI), Linux (Ubuntu, Debian, Fedora, Arch), macOS (10.15+),
-              ChromeOS, and BSD (FreeBSD, OpenBSD, NetBSD).
-              <strong className="text-white"> Professional-grade software</strong> - trusted by
-              technicians worldwide.
             </p>
           </div>
 
-          {/* Hero Benefits */}
+          {/* Key Features Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            <div className="glass-card text-center">
-              <div className="w-12 h-12 bg-success-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-6 h-6 text-success-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+            <div className="feature-card text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Globe className="w-8 h-8 text-blue-400" />
               </div>
-              <span className="text-white font-medium">
-                Complete Multi-Platform Repair Toolkit - Professional-Grade Tools
-              </span>
+              <h3 className="text-white font-semibold text-lg mb-2">Multi-Platform Support</h3>
+              <p className="text-white/80 text-sm">Windows, Linux, macOS, ChromeOS, BSD</p>
             </div>
-            <div className="glass-card text-center">
-              <div className="w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-6 h-6 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
-                </svg>
+
+            <div className="feature-card text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Shield className="w-8 h-8 text-green-400" />
               </div>
-              <span className="text-white font-medium">
-                Full Multi-Platform Support - Windows, Linux, macOS, ChromeOS, BSD
-              </span>
+              <h3 className="text-white font-semibold text-lg mb-2">Military-Grade Security</h3>
+              <p className="text-white/80 text-sm">256-bit encryption & offline operation</p>
             </div>
-            <div className="glass-card text-center">
-              <div className="w-12 h-12 bg-primary-400/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Shield className="w-6 h-6 text-primary-400" />
+
+            <div className="feature-card text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Zap className="w-8 h-8 text-purple-400" />
               </div>
-              <span className="text-white font-medium">
-                Military-Grade Security - SSL Protected
-              </span>
+              <h3 className="text-white font-semibold text-lg mb-2">Instant Recovery</h3>
+              <p className="text-white/80 text-sm">Fix any PC issue in minutes</p>
             </div>
           </div>
 
-          {/* Professional Features Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-16">
+          {/* Professional Features */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-12">
             {[
-              { icon: '🩺', text: 'Professional-grade diagnostics' },
-              { icon: '📊', text: 'Real-time system monitoring' },
-              { icon: '⚙️', text: 'Advanced repair algorithms' },
-              { icon: '⬇️', text: 'One-click driver installation' },
-              { icon: '🛡️', text: 'Military-grade security protection' },
-              { icon: '🔧', text: 'Enterprise scalability' }
+              { icon: '🩺', text: 'Professional diagnostics' },
+              { icon: '📊', text: 'Real-time monitoring' },
+              { icon: '⚙️', text: 'Advanced algorithms' },
+              { icon: '⬇️', text: 'One-click drivers' },
+              { icon: '🛡️', text: 'Security protection' },
+              { icon: '🔧', text: 'Enterprise ready' }
             ].map((feature, index) => (
               <div key={index} className="glass-card text-center p-4">
                 <div className="text-2xl mb-2">{feature.icon}</div>
@@ -89,15 +106,84 @@ export function Hero() {
             ))}
           </div>
 
-          {/* Platform Support */}
-          <PlatformSupport />
-
-          {/* Security Indicators */}
-          <SecurityIndicators />
-
-          {/* CTA Button */}
+          {/* Platform Support Preview */}
           <div className="mb-12">
-            <LicenseCTA variant="primary" className="mx-auto" />
+            <h3 className="text-2xl font-bold text-white mb-6">Supported Platforms</h3>
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+              {[
+                { name: 'Windows', icon: '🪟', versions: '7, 8, 10, 11' },
+                { name: 'Linux', icon: '🐧', versions: 'Ubuntu, Debian, Fedora' },
+                { name: 'macOS', icon: '🍎', versions: '10.14+ to 13+' },
+                { name: 'ChromeOS', icon: '🌐', versions: '80+ to 100+' },
+                { name: 'BSD', icon: '🔧', versions: 'FreeBSD, OpenBSD' }
+              ].map((platform, index) => (
+                <div key={index} className="platform-card text-center">
+                  <div className="text-3xl mb-2">{platform.icon}</div>
+                  <h4 className="text-white font-semibold mb-1">{platform.name}</h4>
+                  <p className="text-white/60 text-xs">{platform.versions}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Security Features */}
+          <div className="mb-12">
+            <h3 className="text-2xl font-bold text-white mb-6">Security Features</h3>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              {[
+                { icon: Lock, title: '256-bit Encryption', desc: 'Bank-level security' },
+                { icon: Download, title: 'Offline Operation', desc: 'No data transmission' },
+                { icon: Shield, title: 'Privacy First', desc: 'No tracking or collection' },
+                { icon: Server, title: 'Secure Environment', desc: 'Isolated execution' }
+              ].map((feature, index) => (
+                <div key={index} className="glass-card text-center">
+                  <feature.icon className="w-8 h-8 text-green-400 mx-auto mb-3" />
+                  <h4 className="text-white font-semibold mb-1">{feature.title}</h4>
+                  <p className="text-white/60 text-sm">{feature.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* CTA Section */}
+          <div className="mb-12">
+            <div className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 border border-blue-400/30 rounded-2xl p-8 mb-6">
+              <h2 className="text-3xl font-bold text-white mb-4">Get Your Lifetime Enterprise</h2>
+              <p className="text-xl text-white/90 mb-6">One-time payment, lifetime access</p>
+
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
+                <div className="text-center">
+                  <div className="text-4xl font-bold text-white">$499.99</div>
+                  <div className="text-white/60">One-time payment</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-white">1 License</div>
+                  <div className="text-white/60">Unlimited Repairs</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-white">Lifetime</div>
+                  <div className="text-white/60">Updates Included</div>
+                </div>
+              </div>
+
+              <button
+                onClick={handleGetStarted}
+                disabled={isLoading}
+                className="cta-button animate-glow"
+              >
+                {isLoading ? (
+                  <div className="flex items-center gap-2">
+                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                    Loading...
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-5 h-5" />
+                    Get Lifetime Enterprise
+                  </div>
+                )}
+              </button>
+            </div>
           </div>
 
           {/* Trust Badges */}
@@ -110,19 +196,19 @@ export function Hero() {
             ].map((badge, index) => (
               <div
                 key={index}
-                className="glass-card text-center p-4 hover:bg-success-500/10 transition-all duration-300"
+                className="glass-card text-center p-4 hover:bg-green-500/10 transition-all duration-300"
               >
-                <badge.icon className="w-8 h-8 text-success-400 mx-auto mb-2" />
+                <badge.icon className="w-8 h-8 text-green-400 mx-auto mb-2" />
                 <span className="text-white text-sm font-medium">{badge.text}</span>
               </div>
             ))}
           </div>
 
           {/* Urgency Section */}
-          <div className="bg-gradient-to-r from-red-600 to-red-500 rounded-2xl p-6 relative overflow-hidden">
-            <div className="relative z-10 text-center">
+          <div className="bg-gradient-to-r from-red-600/20 to-orange-600/20 border border-red-400/30 rounded-2xl p-6">
+            <div className="flex items-center justify-center gap-3">
+              <Clock className="w-6 h-6 text-yellow-400 animate-pulse" />
               <p className="text-white text-lg font-semibold">
-                <Clock className="inline w-5 h-5 mr-2 animate-pulse text-yellow-400" />
                 <strong className="text-yellow-400">Limited Time Offer:</strong> Get professional
                 multi-platform repair toolkit at current price
               </p>

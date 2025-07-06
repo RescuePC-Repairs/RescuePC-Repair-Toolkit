@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 // import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Quote, Star } from 'lucide-react';
 
 const testimonials = [
   {
@@ -11,7 +11,8 @@ const testimonials = [
     role: 'IT Manager, TechSolutions Inc.',
     content:
       'RescuePC Repairs saved my business! I had 15 computers down with driver issues. This toolkit fixed them all in under 2 hours. The 11GB driver library is incredible - it had drivers for every single device. ROI was immediate.',
-    rating: 5
+    rating: 5,
+    avatar: '👨‍💼'
   },
   {
     id: 2,
@@ -19,7 +20,8 @@ const testimonials = [
     role: 'Computer Repair Specialist',
     content:
       'As a computer repair technician, this is now my go-to tool. The USB portability means I can fix any PC anywhere. The malware scanner is top-notch, and the Windows error repair module is incredibly effective.',
-    rating: 5
+    rating: 5,
+    avatar: '👩‍💻'
   },
   {
     id: 3,
@@ -27,7 +29,8 @@ const testimonials = [
     role: 'Gaming Enthusiast',
     content:
       'Fixed my gaming PC in 10 minutes! Had audio issues and missing network drivers. RescuePC Repairs detected and installed everything automatically. The military-grade security gives me peace of mind.',
-    rating: 5
+    rating: 5,
+    avatar: '🎮'
   },
   {
     id: 4,
@@ -35,7 +38,8 @@ const testimonials = [
     role: 'Office Manager, Creative Agency',
     content:
       'Perfect for our small business! We have 8 computers and this toolkit keeps them all running smoothly. The lifetime license is amazing value. Customer support is responsive and helpful.',
-    rating: 5
+    rating: 5,
+    avatar: '👩‍💼'
   },
   {
     id: 5,
@@ -43,7 +47,8 @@ const testimonials = [
     role: 'IT Director, University Tech Dept.',
     content:
       'Incredible tool for educational institutions. We use it across our computer lab with 50+ machines. The offline capability is crucial for our environment. Highly recommend for schools and universities.',
-    rating: 5
+    rating: 5,
+    avatar: '👨‍🎓'
   },
   {
     id: 6,
@@ -51,7 +56,8 @@ const testimonials = [
     role: 'Owner, PC Repair Pro',
     content:
       'Best investment for my computer repair business. The white-label option lets me brand it as my own service. Clients love the professional interface and comprehensive repair capabilities.',
-    rating: 5
+    rating: 5,
+    avatar: '🔧'
   }
 ];
 
@@ -74,86 +80,98 @@ export function TestimonialCarousel() {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-br from-primary-950 via-primary-900 to-primary-800">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Trusted by Thousands of Users Worldwide
+    <section className="py-24 relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-indigo-900/20"></div>
+      <div className="absolute top-0 left-0 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
+
+      <div className="container relative z-10">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+            What Our Customers Say
           </h2>
-          <p className="text-lg text-white/80">See what our customers say about RescuePC Repairs</p>
+          <p className="text-xl text-white/80 max-w-3xl mx-auto">
+            Real experiences from professionals who trust RescuePC Repairs
+          </p>
         </div>
 
-        <div className="max-w-4xl mx-auto relative">
-          <div className="relative overflow-hidden rounded-2xl">
-            <div
-              className="flex transition-transform duration-500 ease-in-out"
-              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-            >
-              {testimonials.map((testimonial) => (
-                <div key={testimonial.id} className="w-full flex-shrink-0 px-4">
-                  <div className="glass-card p-8 text-center">
-                    <div className="mb-6">
-                      <Quote className="w-12 h-12 text-primary-400 mx-auto mb-4" />
-                      <p className="text-lg text-white/90 italic mb-6">"{testimonial.content}"</p>
-                    </div>
-                    <div className="flex items-center justify-center gap-2 mb-4">
+        {/* Mobile Testimonials */}
+        <div className="block md:hidden">
+          <div className="space-y-6">
+            {testimonials.slice(0, 3).map((testimonial, index) => (
+              <div key={index} className="glass-card p-6">
+                <div className="flex items-center mb-4">
+                  <div className="text-3xl mr-4">{testimonial.avatar}</div>
+                  <div className="flex-1">
+                    <div className="flex items-center mb-2">
                       {[...Array(testimonial.rating)].map((_, i) => (
-                        <span key={i} className="text-yellow-400 text-xl">
-                          ★
-                        </span>
+                        <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
                       ))}
                     </div>
-                    <div>
-                      <h4 className="font-semibold text-white mb-1">{testimonial.name}</h4>
-                      <p className="text-white/70 text-sm">{testimonial.role}</p>
-                    </div>
+                    <h4 className="font-semibold text-white">{testimonial.name}</h4>
+                    <p className="text-white/60 text-sm">{testimonial.role}</p>
                   </div>
                 </div>
-              ))}
+                <p className="text-white/90 italic">"{testimonial.content}"</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Desktop Testimonials */}
+        <div className="hidden md:block">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {testimonials.slice(0, 3).map((testimonial, index) => (
+              <div key={index} className="glass-card p-8 h-full">
+                <div className="flex items-start mb-6">
+                  <div className="text-4xl mr-4">{testimonial.avatar}</div>
+                  <div className="flex-1">
+                    <div className="flex items-center mb-3">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                      ))}
+                    </div>
+                    <h4 className="font-semibold text-white text-lg">{testimonial.name}</h4>
+                    <p className="text-white/60 text-sm">{testimonial.role}</p>
+                  </div>
+                </div>
+                <p className="text-white/90 italic leading-relaxed">"{testimonial.content}"</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Stats Section */}
+        <div className="text-center mt-16">
+          <div className="inline-flex flex-col sm:flex-row items-center gap-8 bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-400/30 rounded-2xl px-8 py-6 backdrop-blur-sm">
+            <div className="text-center">
+              <div className="text-3xl md:text-4xl font-bold text-white">4.9/5</div>
+              <div className="text-white/60 text-sm">Customer Rating</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl md:text-4xl font-bold text-white">99.9%</div>
+              <div className="text-white/60 text-sm">Success Rate</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl md:text-4xl font-bold text-white">24/7</div>
+              <div className="text-white/60 text-sm">Support Available</div>
             </div>
           </div>
-
-          {/* Navigation Buttons */}
-          <button
-            onClick={prevTestimonial}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-primary-800/80 hover:bg-primary-700 text-white p-2 rounded-full transition-colors"
-          >
-            <ChevronLeft className="w-6 h-6" />
-          </button>
-          <button
-            onClick={nextTestimonial}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-primary-800/80 hover:bg-primary-700 text-white p-2 rounded-full transition-colors"
-          >
-            <ChevronRight className="w-6 h-6" />
-          </button>
         </div>
 
-        {/* Dots Indicator */}
-        <div className="flex justify-center mt-8 gap-2">
-          {testimonials.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentIndex(index)}
-              className={`w-3 h-3 rounded-full transition-colors ${
-                index === currentIndex ? 'bg-primary-400' : 'bg-white/30'
-              }`}
-            />
-          ))}
-        </div>
-
-        {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
-          <div className="text-center">
-            <div className="text-3xl font-bold text-primary-400 mb-2">4.9/5</div>
-            <div className="text-white/80">Customer Rating</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-primary-400 mb-2">99.9%</div>
-            <div className="text-white/80">Success Rate</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-primary-400 mb-2">24/7</div>
-            <div className="text-white/80">Support Available</div>
+        {/* Navigation Dots */}
+        <div className="flex justify-center mt-8">
+          <div className="flex space-x-2">
+            {testimonials.slice(0, 3).map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentIndex(index)}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  index === currentIndex ? 'bg-white' : 'bg-white/30'
+                }`}
+              />
+            ))}
           </div>
         </div>
       </div>
