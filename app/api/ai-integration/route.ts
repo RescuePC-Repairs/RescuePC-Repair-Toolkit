@@ -339,10 +339,25 @@ async function _handleEmailSending(data: any) {
         text = 'Thank you for using RescuePC Repairs!';
     }
 
-    await sendTransactionalEmail({
+    // Dynamically import nodemailer only on the server
+    const nodemailer = await import('nodemailer');
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.SUPPORT_EMAIL,
+        pass: process.env.GMAIL_APP_PASSWORD
+      },
+      secure: true,
+      port: 465,
+      requireTLS: true
+    });
+
+    await transporter.sendMail({
+      from: `"RescuePC Repairs" <${process.env.SUPPORT_EMAIL}>`,
       to: email,
       subject,
-      text
+      text,
+      replyTo: process.env.BUSINESS_EMAIL || 'rescuepcrepair@yahoo.com'
     });
 
     return NextResponse.json({
@@ -465,10 +480,25 @@ async function sendWelcomeEmail(
   licenses: string[]
 ) {
   try {
-    await sendTransactionalEmail({
+    // Dynamically import nodemailer only on the server
+    const nodemailer = await import('nodemailer');
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.SUPPORT_EMAIL,
+        pass: process.env.GMAIL_APP_PASSWORD
+      },
+      secure: true,
+      port: 465,
+      requireTLS: true
+    });
+
+    await transporter.sendMail({
+      from: `"RescuePC Repairs" <${process.env.SUPPORT_EMAIL}>`,
       to: customerEmail,
       subject: '🎉 Welcome to RescuePC Repairs!',
-      text: `Hi ${customerName},\n\nWelcome to RescuePC Repairs ${packageType}!\n\nYour license(s):\n${licenses.map((license, index) => `${index + 1}. ${license}`).join('\n')}\n\nDownload: ***REMOVED***\n\nBest regards,\nTyler Keesee\nCEO, RescuePC Repairs`
+      text: `Hi ${customerName},\n\nWelcome to RescuePC Repairs ${packageType}!\n\nYour license(s):\n${licenses.map((license, index) => `${index + 1}. ${license}`).join('\n')}\n\nDownload: ***REMOVED***\n\nBest regards,\nTyler Keesee\nCEO, RescuePC Repairs`,
+      replyTo: process.env.BUSINESS_EMAIL || 'rescuepcrepair@yahoo.com'
     });
   } catch (error) {
     console.error('Welcome email error:', error);
