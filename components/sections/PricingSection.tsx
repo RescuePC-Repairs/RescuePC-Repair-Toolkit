@@ -101,34 +101,36 @@ export function PricingSection() {
   const [isLoading, setIsLoading] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const handlePurchase = useCallback(async (tier: PricingTier) => {
-    if (isLoading) return; // Prevent multiple clicks
-    
-    setIsLoading(tier.name);
-    setError(null);
-    
-    try {
-      // Validate the payment link
-      if (!tier.stripePaymentLink || !tier.stripePaymentLink.startsWith('https://')) {
-        throw new Error('Invalid payment link');
+  const handlePurchase = useCallback(
+    async (tier: PricingTier) => {
+      if (isLoading) return; // Prevent multiple clicks
+
+      setIsLoading(tier.name);
+      setError(null);
+
+      try {
+        // Validate the payment link
+        if (!tier.stripePaymentLink || !tier.stripePaymentLink.startsWith('https://')) {
+          throw new Error('Invalid payment link');
+        }
+
+        // Open payment link in new tab
+        const newWindow = window.open(tier.stripePaymentLink, '_blank', 'noopener,noreferrer');
+
+        if (!newWindow) {
+          throw new Error('Popup blocked. Please allow popups for this site.');
+        }
+      } catch (err) {
+        const errorMessage = err instanceof Error ? err.message : 'Failed to open payment link';
+        setError(errorMessage);
+        console.error('Payment link error:', err);
+      } finally {
+        // Reset loading state after a delay
+        setTimeout(() => setIsLoading(null), 2000);
       }
-      
-      // Open payment link in new tab
-      const newWindow = window.open(tier.stripePaymentLink, '_blank', 'noopener,noreferrer');
-      
-      if (!newWindow) {
-        throw new Error('Popup blocked. Please allow popups for this site.');
-      }
-      
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to open payment link';
-      setError(errorMessage);
-      console.error('Payment link error:', err);
-    } finally {
-      // Reset loading state after a delay
-      setTimeout(() => setIsLoading(null), 2000);
-    }
-  }, [isLoading]);
+    },
+    [isLoading]
+  );
 
   const formatPrice = (price: number): string => {
     return new Intl.NumberFormat('en-US', {
@@ -206,9 +208,7 @@ export function PricingSection() {
                 <p className="text-white/60 text-sm mb-4">{tier.description}</p>
                 <div className="mb-4">
                   <div className="text-4xl font-bold text-white">{formatPrice(tier.price)}</div>
-                  <div className="text-white/60 text-sm">
-                    {formatLicenses(tier.licenses)}
-                  </div>
+                  <div className="text-white/60 text-sm">{formatLicenses(tier.licenses)}</div>
                 </div>
               </div>
 
@@ -216,7 +216,10 @@ export function PricingSection() {
               <div className="mb-8 flex-1">
                 <ul className="space-y-3">
                   {tier.features.map((feature, featureIndex) => (
-                    <li key={`${tier.name}-feature-${featureIndex}`} className="flex items-start gap-3">
+                    <li
+                      key={`${tier.name}-feature-${featureIndex}`}
+                      className="flex items-start gap-3"
+                    >
                       <Check className="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" />
                       <span className="text-white/90 text-sm">{feature}</span>
                     </li>
