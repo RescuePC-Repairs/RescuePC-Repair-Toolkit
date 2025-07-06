@@ -6,7 +6,7 @@ import Script from 'next/script';
 import './globals.css';
 import { Inter } from 'next/font/google';
 
-const inter = Inter({ 
+const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-inter'
@@ -38,14 +38,10 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
-      { url: '/icon-192x192.png', sizes: '192x192', type: 'image/png' },
-      { url: '/icon-512x512.png', sizes: '512x512', type: 'image/png' }
+      { url: '/favicon.svg', type: 'image/svg+xml' }
     ],
-    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
-    shortcut: '/favicon.ico',
-    other: [
-      { rel: 'mask-icon', url: '/safari-pinned-tab.svg', color: '#1e40af' }
-    ]
+    apple: [{ url: '/favicon.ico', sizes: '180x180' }],
+    shortcut: '/favicon.ico'
   },
   manifest: '/manifest.json',
   openGraph: {
@@ -58,7 +54,7 @@ export const metadata: Metadata = {
     siteName: 'RescuePC Repairs',
     images: [
       {
-        url: '/RescuePC Repairs Logo.png',
+        url: '/RescuePC-Repairs-Logo.png',
         width: 1200,
         height: 630,
         alt: 'RescuePC Repairs Logo',
@@ -71,7 +67,7 @@ export const metadata: Metadata = {
     title: 'RescuePC Repairs - Professional Computer Repair Toolkit',
     description:
       'Professional computer repair toolkit with military-grade security and advanced diagnostics.',
-    images: ['/RescuePC Repairs Logo.png'],
+    images: ['/RescuePC-Repairs-Logo.png'],
     creator: '@rescuepcrepairs',
     site: '@rescuepcrepairs'
   },
@@ -93,20 +89,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${inter.variable} scroll-smooth`}>
       <head>
-        {/* Enhanced Security Headers */}
-        <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
-        <meta httpEquiv="X-Frame-Options" content="DENY" />
-        <meta httpEquiv="X-XSS-Protection" content="1; mode=block" />
-        <meta httpEquiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
-        <meta httpEquiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=(), magnetometer=(), gyroscope=()" />
-        <meta httpEquiv="Cross-Origin-Embedder-Policy" content="require-corp" />
-        <meta httpEquiv="Cross-Origin-Opener-Policy" content="same-origin" />
-        <meta httpEquiv="Cross-Origin-Resource-Policy" content="same-origin" />
-
-        {/* Enhanced HTTPS Enforcement */}
-        <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
-        <meta httpEquiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload" />
-
         {/* Performance and SEO Optimizations */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -116,11 +98,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         {/* Enhanced Favicon and Icons */}
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/icon-192x192.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/icon-512x512.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="apple-touch-icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
-        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#1e40af" />
 
         {/* Microsoft Tiles */}
         <meta name="msapplication-TileColor" content="#1e40af" />
@@ -135,7 +115,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               '@context': 'https://schema.org',
               '@type': 'SoftwareApplication',
               name: 'RescuePC Repairs',
-              description: 'Professional computer repair toolkit with military-grade security and advanced diagnostics',
+              description:
+                'Professional computer repair toolkit with military-grade security and advanced diagnostics',
               url: 'https://rescuepcrepairs.com',
               applicationCategory: 'UtilitiesApplication',
               operatingSystem: 'Windows, macOS, Linux',
@@ -156,7 +137,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 url: 'https://rescuepcrepairs.com',
                 logo: {
                   '@type': 'ImageObject',
-                  url: 'https://rescuepcrepairs.com/RescuePC Repairs Logo.png'
+                  url: 'https://rescuepcrepairs.com/RescuePC-Repairs-Logo.png'
                 }
               },
               aggregateRating: {
@@ -177,7 +158,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   '@type': 'Person',
                   name: 'Enterprise IT Manager'
                 },
-                reviewBody: 'Professional-grade tools with military security. Essential for any IT department.'
+                reviewBody:
+                  'Professional-grade tools with military security. Essential for any IT department.'
               }
             })
           }}
@@ -192,7 +174,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               '@type': 'Organization',
               name: 'RescuePC Repairs',
               url: 'https://rescuepcrepairs.com',
-              logo: 'https://rescuepcrepairs.com/RescuePC Repairs Logo.png',
+              logo: 'https://rescuepcrepairs.com/RescuePC-Repairs-Logo.png',
               description: 'Professional computer repair toolkit with enterprise-grade security',
               founder: {
                 '@type': 'Person',
@@ -270,12 +252,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               window.addEventListener('load', function() {
                 if ('performance' in window) {
                   const perfData = performance.getEntriesByType('navigation')[0];
-                  const loadTime = perfData.loadEventEnd - perfData.loadEventStart;
-                  console.log('Page Load Time:', loadTime, 'ms');
-                  
-                  // Send performance data to analytics
-                  if (loadTime > 3000) {
-                    console.warn('Slow page load detected:', loadTime, 'ms');
+                  if (perfData) {
+                    const loadTime = perfData.loadEventEnd - perfData.loadEventStart;
+                    console.log('Page Load Time:', loadTime, 'ms');
+                    
+                    // Send performance data to analytics
+                    if (loadTime > 3000) {
+                      console.warn('Slow page load detected:', loadTime, 'ms');
+                    }
                   }
                 }
               });

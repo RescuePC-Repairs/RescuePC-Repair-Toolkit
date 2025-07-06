@@ -10,8 +10,21 @@
   }
 
   body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: linear-gradient(135deg, #0a0f1c 0%, #1a1f2e 25%, #2d3748 50%, #1a202c 75%, #0f1419 100%);
+    font-family:
+      'Inter',
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      Roboto,
+      sans-serif;
+    background: linear-gradient(
+      135deg,
+      #0a0f1c 0%,
+      #1a1f2e 25%,
+      #2d3748 50%,
+      #1a202c 75%,
+      #0f1419 100%
+    );
     color: #ffffff;
     margin: 0;
     padding: 0;
@@ -53,7 +66,12 @@
   }
 
   /* Typography Enhancements */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-weight: 700;
     line-height: 1.2;
     letter-spacing: -0.025em;
@@ -84,7 +102,7 @@
   /* Enhanced Hero Section */
   .hero {
     @apply relative min-h-screen flex items-center justify-center overflow-hidden;
-    background: 
+    background:
       radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
       radial-gradient(circle at 80% 20%, rgba(147, 51, 234, 0.15) 0%, transparent 50%),
       radial-gradient(circle at 40% 40%, rgba(16, 185, 129, 0.1) 0%, transparent 50%),
@@ -98,8 +116,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: 
-      url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="%23334155" stroke-width="0.3"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="%23334155" stroke-width="0.3"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
     opacity: 0.05;
     animation: float 20s ease-in-out infinite;
   }
@@ -111,7 +128,12 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(45deg, transparent 30%, rgba(59, 130, 246, 0.03) 50%, transparent 70%);
+    background: linear-gradient(
+      45deg,
+      transparent 30%,
+      rgba(59, 130, 246, 0.03) 50%,
+      transparent 70%
+    );
     animation: shimmer 8s ease-in-out infinite;
   }
 
@@ -122,7 +144,7 @@
     border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 1rem;
     padding: 2rem;
-    box-shadow: 
+    box-shadow:
       0 4px 6px -1px rgba(0, 0, 0, 0.1),
       0 2px 4px -1px rgba(0, 0, 0, 0.06),
       inset 0 1px 0 rgba(255, 255, 255, 0.1);
@@ -133,7 +155,7 @@
     background: rgba(255, 255, 255, 0.12);
     border-color: rgba(255, 255, 255, 0.2);
     transform: translateY(-4px) scale(1.02);
-    box-shadow: 
+    box-shadow:
       0 20px 25px -5px rgba(0, 0, 0, 0.1),
       0 10px 10px -5px rgba(0, 0, 0, 0.04),
       inset 0 1px 0 rgba(255, 255, 255, 0.15);
@@ -141,22 +163,32 @@
 
   /* Premium Feature Cards */
   .feature-card {
-    background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.05));
+    background: linear-gradient(
+      to bottom right,
+      rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0.05)
+    );
     backdrop-filter: blur(24px);
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 1.5rem;
     padding: 2rem;
-    box-shadow: 
+    box-shadow:
       0 8px 32px rgba(0, 0, 0, 0.12),
       inset 0 1px 0 rgba(255, 255, 255, 0.1);
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .feature-card:hover {
-    background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.08));
+    background: linear-gradient(
+      to bottom right,
+      rgba(255, 255, 255, 0.15),
+      rgba(255, 255, 255, 0.12),
+      rgba(255, 255, 255, 0.08)
+    );
     border-color: rgba(255, 255, 255, 0.25);
     transform: translateY(-8px) scale(1.03);
-    box-shadow: 
+    box-shadow:
       0 25px 50px -12px rgba(0, 0, 0, 0.25),
       inset 0 1px 0 rgba(255, 255, 255, 0.2);
   }
@@ -164,7 +196,7 @@
   /* Enterprise CTA Button */
   .cta-button {
     @apply bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 hover:from-blue-700 hover:via-purple-700 hover:to-indigo-700 text-white font-bold py-5 px-10 rounded-2xl;
-    box-shadow: 
+    box-shadow:
       0 4px 14px 0 rgba(59, 130, 246, 0.4),
       0 2px 4px 0 rgba(0, 0, 0, 0.1);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -189,14 +221,19 @@
 
   .cta-button:hover {
     transform: translateY(-3px) scale(1.05);
-    box-shadow: 
+    box-shadow:
       0 10px 25px 0 rgba(59, 130, 246, 0.6),
       0 4px 8px 0 rgba(0, 0, 0, 0.15);
   }
 
   /* Premium Platform Cards */
   .platform-card {
-    background: linear-gradient(to bottom right, rgba(31, 41, 55, 0.6), rgba(55, 65, 81, 0.5), rgba(17, 24, 39, 0.6));
+    background: linear-gradient(
+      to bottom right,
+      rgba(31, 41, 55, 0.6),
+      rgba(55, 65, 81, 0.5),
+      rgba(17, 24, 39, 0.6)
+    );
     backdrop-filter: blur(24px);
     border: 1px solid rgba(75, 85, 99, 0.2);
     border-radius: 1rem;
@@ -205,7 +242,12 @@
   }
 
   .platform-card:hover {
-    background: linear-gradient(to bottom right, rgba(55, 65, 81, 0.7), rgba(75, 85, 99, 0.6), rgba(31, 41, 55, 0.7));
+    background: linear-gradient(
+      to bottom right,
+      rgba(55, 65, 81, 0.7),
+      rgba(75, 85, 99, 0.6),
+      rgba(31, 41, 55, 0.7)
+    );
     border-color: rgba(107, 114, 128, 0.3);
     transform: translateY(-6px) scale(1.05);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
@@ -213,45 +255,65 @@
 
   /* Enterprise Pricing Cards */
   .pricing-card {
-    background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.05));
+    background: linear-gradient(
+      to bottom right,
+      rgba(255, 255, 255, 0.12),
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0.05)
+    );
     backdrop-filter: blur(24px);
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 1.5rem;
     padding: 2.5rem;
-    box-shadow: 
+    box-shadow:
       0 8px 32px rgba(0, 0, 0, 0.12),
       inset 0 1px 0 rgba(255, 255, 255, 0.1);
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .pricing-card.popular {
-    background: linear-gradient(to bottom right, rgba(59, 130, 246, 0.2), rgba(147, 51, 234, 0.15), rgba(99, 102, 241, 0.2));
+    background: linear-gradient(
+      to bottom right,
+      rgba(59, 130, 246, 0.2),
+      rgba(147, 51, 234, 0.15),
+      rgba(99, 102, 241, 0.2)
+    );
     border-color: rgba(96, 165, 250, 0.3);
     transform: scale(1.05);
-    box-shadow: 
+    box-shadow:
       0 20px 40px rgba(59, 130, 246, 0.3),
       inset 0 1px 0 rgba(255, 255, 255, 0.2);
   }
 
   .pricing-card:hover {
-    background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.08));
+    background: linear-gradient(
+      to bottom right,
+      rgba(255, 255, 255, 0.18),
+      rgba(255, 255, 255, 0.12),
+      rgba(255, 255, 255, 0.08)
+    );
     border-color: rgba(255, 255, 255, 0.25);
     transform: translateY(-8px) scale(1.02);
-    box-shadow: 
+    box-shadow:
       0 25px 50px -12px rgba(0, 0, 0, 0.25),
       inset 0 1px 0 rgba(255, 255, 255, 0.2);
   }
 
   .pricing-card.popular:hover {
     transform: scale(1.05) translateY(-8px);
-    box-shadow: 
+    box-shadow:
       0 30px 60px -12px rgba(59, 130, 246, 0.4),
       inset 0 1px 0 rgba(255, 255, 255, 0.25);
   }
 
   /* Premium Testimonial Cards */
   .testimonial-card {
-    background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.05));
+    background: linear-gradient(
+      to bottom right,
+      rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0.05)
+    );
     backdrop-filter: blur(24px);
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 1.5rem;
@@ -260,7 +322,12 @@
   }
 
   .testimonial-card:hover {
-    background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.08));
+    background: linear-gradient(
+      to bottom right,
+      rgba(255, 255, 255, 0.15),
+      rgba(255, 255, 255, 0.12),
+      rgba(255, 255, 255, 0.08)
+    );
     border-color: rgba(255, 255, 255, 0.25);
     transform: translateY(-4px);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
@@ -268,7 +335,12 @@
 
   /* Enterprise FAQ Accordion */
   .faq-item {
-    background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.05));
+    background: linear-gradient(
+      to bottom right,
+      rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0.05)
+    );
     backdrop-filter: blur(24px);
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 1rem;
@@ -278,7 +350,12 @@
   }
 
   .faq-item:hover {
-    background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.08));
+    background: linear-gradient(
+      to bottom right,
+      rgba(255, 255, 255, 0.15),
+      rgba(255, 255, 255, 0.12),
+      rgba(255, 255, 255, 0.08)
+    );
     border-color: rgba(255, 255, 255, 0.25);
     transform: translateY(-2px);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
@@ -286,7 +363,12 @@
 
   /* Premium Footer */
   .footer {
-    background: linear-gradient(to right, rgba(17, 24, 39, 1), rgba(31, 41, 55, 1), rgba(17, 24, 39, 1));
+    background: linear-gradient(
+      to right,
+      rgba(17, 24, 39, 1),
+      rgba(31, 41, 55, 1),
+      rgba(17, 24, 39, 1)
+    );
     border-top: 1px solid rgba(55, 65, 81, 0.5);
     backdrop-filter: blur(20px);
   }
@@ -349,47 +431,69 @@
 
   /* Keyframe Animations */
   @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-20px); }
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
   }
 
   @keyframes glow {
-    0% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.4); }
-    100% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.8); }
+    0% {
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+    }
+    100% {
+      box-shadow: 0 0 30px rgba(59, 130, 246, 0.8);
+    }
   }
 
   @keyframes shimmer {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
   }
 
   @keyframes gradient-shift {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
   }
 
   @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 
   @keyframes slideUp {
-    from { 
+    from {
       opacity: 0;
       transform: translateY(30px);
     }
-    to { 
+    to {
       opacity: 1;
       transform: translateY(0);
     }
   }
 
   @keyframes scaleIn {
-    from { 
+    from {
       opacity: 0;
       transform: scale(0.9);
     }
-    to { 
+    to {
       opacity: 1;
       transform: scale(1);
     }

@@ -38,14 +38,22 @@ export function Hero() {
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl animate-float"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-green-500/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '4s' }}></div>
+        <div
+          className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl animate-float"
+          style={{ animationDelay: '2s' }}
+        ></div>
+        <div
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-green-500/5 rounded-full blur-3xl animate-float"
+          style={{ animationDelay: '4s' }}
+        ></div>
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-7xl mx-auto text-center">
           {/* Main Headline with Enhanced Logo */}
-          <div className={`mb-12 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div
+            className={`mb-12 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+          >
             <div className="flex items-center justify-center gap-6 mb-6">
               <div className="relative">
                 <Image
@@ -70,7 +78,9 @@ export function Hero() {
           </div>
 
           {/* Enhanced Hero Description */}
-          <div className={`mb-16 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div
+            className={`mb-16 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+          >
             <div className="glass-card max-w-6xl mx-auto">
               <p className="text-xl md:text-2xl text-white/95 leading-relaxed mb-6">
                 <strong className="text-white text-2xl md:text-3xl">
@@ -87,13 +97,17 @@ export function Hero() {
           </div>
 
           {/* Enhanced Key Features Grid */}
-          <div className={`grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div
+            className={`grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+          >
             <div className="feature-card text-center group">
               <div className="w-20 h-20 bg-gradient-to-br from-blue-500/30 to-purple-500/30 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                 <Globe className="w-10 h-10 text-blue-400" />
               </div>
               <h3 className="text-white font-bold text-xl mb-4">Multi-Platform Support</h3>
-              <p className="text-white/80 text-base leading-relaxed">Windows, Linux, macOS, ChromeOS, BSD</p>
+              <p className="text-white/80 text-base leading-relaxed">
+                Windows, Linux, macOS, ChromeOS, BSD
+              </p>
             </div>
 
             <div className="feature-card text-center group">
@@ -101,7 +115,9 @@ export function Hero() {
                 <Shield className="w-10 h-10 text-green-400" />
               </div>
               <h3 className="text-white font-bold text-xl mb-4">Military-Grade Security</h3>
-              <p className="text-white/80 text-base leading-relaxed">256-bit encryption & offline operation</p>
+              <p className="text-white/80 text-base leading-relaxed">
+                256-bit encryption & offline operation
+              </p>
             </div>
 
             <div className="feature-card text-center group">
@@ -114,7 +130,9 @@ export function Hero() {
           </div>
 
           {/* Enhanced Professional Features */}
-          <div className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 mb-16 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div
+            className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 mb-16 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+          >
             {[
               { icon: '🩺', text: 'Professional diagnostics' },
               { icon: '📊', text: 'Real-time monitoring' },
@@ -123,16 +141,27 @@ export function Hero() {
               { icon: '🛡️', text: 'Security protection' },
               { icon: '🔧', text: 'Enterprise ready' }
             ].map((feature, index) => (
-              <div key={index} className="glass-card text-center p-6 group hover:scale-105 transition-all duration-300">
-                <div className="text-3xl mb-3 group-hover:scale-110 transition-transform duration-300">{feature.icon}</div>
-                <span className="text-white text-sm font-semibold leading-tight">{feature.text}</span>
+              <div
+                key={index}
+                className="glass-card text-center p-6 group hover:scale-105 transition-all duration-300"
+              >
+                <div className="text-3xl mb-3 group-hover:scale-110 transition-transform duration-300">
+                  {feature.icon}
+                </div>
+                <span className="text-white text-sm font-semibold leading-tight">
+                  {feature.text}
+                </span>
               </div>
             ))}
           </div>
 
           {/* Enhanced Platform Support Preview */}
-          <div className={`mb-16 transition-all duration-1000 delay-900 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <h3 className="text-3xl font-bold text-white mb-8 gradient-text">Supported Platforms</h3>
+          <div
+            className={`mb-16 transition-all duration-1000 delay-900 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+          >
+            <h3 className="text-3xl font-bold text-white mb-8 gradient-text">
+              Supported Platforms
+            </h3>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
               {[
                 { name: 'Windows', icon: '🪟', versions: '7, 8, 10, 11' },
@@ -142,7 +171,9 @@ export function Hero() {
                 { name: 'BSD', icon: '🔧', versions: 'FreeBSD, OpenBSD' }
               ].map((platform, index) => (
                 <div key={index} className="platform-card text-center group">
-                  <div className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">{platform.icon}</div>
+                  <div className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">
+                    {platform.icon}
+                  </div>
                   <h4 className="text-white font-bold text-lg mb-2">{platform.name}</h4>
                   <p className="text-white/70 text-sm leading-tight">{platform.versions}</p>
                 </div>
@@ -151,7 +182,9 @@ export function Hero() {
           </div>
 
           {/* Enhanced Security Features */}
-          <div className={`mb-16 transition-all duration-1000 delay-1100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div
+            className={`mb-16 transition-all duration-1000 delay-1100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+          >
             <h3 className="text-3xl font-bold text-white mb-8 gradient-text">Security Features</h3>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
               {[
@@ -170,14 +203,18 @@ export function Hero() {
           </div>
 
           {/* Enhanced CTA Section */}
-          <div className={`mb-16 transition-all duration-1000 delay-1300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div
+            className={`mb-16 transition-all duration-1000 delay-1300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+          >
             <div className="bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-indigo-600/20 border border-blue-400/30 rounded-3xl p-10 mb-8 backdrop-blur-xl">
               <div className="flex items-center justify-center gap-3 mb-6">
                 <Award className="w-8 h-8 text-yellow-400" />
                 <h2 className="text-4xl font-black text-white">Get Your Lifetime Enterprise</h2>
                 <Award className="w-8 h-8 text-yellow-400" />
               </div>
-              <p className="text-2xl text-white/90 mb-8 font-medium">One-time payment, lifetime access</p>
+              <p className="text-2xl text-white/90 mb-8 font-medium">
+                One-time payment, lifetime access
+              </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-8">
                 <div className="text-center">
@@ -216,7 +253,9 @@ export function Hero() {
           </div>
 
           {/* Enhanced Trust Badges */}
-          <div className={`grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 transition-all duration-1000 delay-1500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div
+            className={`grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 transition-all duration-1000 delay-1500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+          >
             {[
               { icon: Shield, text: 'Military-Grade Security Certified' },
               { icon: Server, text: 'Enterprise Container Platform' },
@@ -234,7 +273,9 @@ export function Hero() {
           </div>
 
           {/* Enhanced Stats Section */}
-          <div className={`grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 transition-all duration-1000 delay-1700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div
+            className={`grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 transition-all duration-1000 delay-1700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+          >
             {[
               { number: '11GB', label: 'Driver Database' },
               { number: '200+', label: 'Repair Scripts' },

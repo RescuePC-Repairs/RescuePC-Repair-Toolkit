@@ -101,7 +101,9 @@ async function handlePaymentSuccess(event: Stripe.Event) {
     await sendEnhancedConfirmationEmail(customer.email!, paymentIntent, license);
 
     // Log successful automation
-    console.log(`✅ Payment automation completed for ${customer.email}: Payment ${payment.id}, License ${license.id}`);
+    console.log(
+      `✅ Payment automation completed for ${customer.email}: Payment ${payment.id}, License ${license.id}`
+    );
 
     return { success: true, paymentId: payment.id, licenseId: license.id };
   } catch (error) {
@@ -201,7 +203,11 @@ async function handleSubscriptionUpdate(event: Stripe.Event) {
 /**
  * Enhanced confirmation email with Fortune 500 template
  */
-async function sendEnhancedConfirmationEmail(email: string, paymentIntent: Stripe.PaymentIntent, license: any) {
+async function sendEnhancedConfirmationEmail(
+  email: string,
+  paymentIntent: Stripe.PaymentIntent,
+  license: any
+) {
   try {
     const nodemailer = await import('nodemailer');
     const transporter = nodemailer.createTransport({
@@ -453,7 +459,7 @@ export async function POST(request: NextRequest) {
     // 3. Parse and handle event with enhanced logging
     const event = JSON.parse(payload) as Stripe.Event;
     console.log(`🔄 Processing webhook event: ${event.type}`);
-    
+
     let result;
 
     switch (event.type) {
