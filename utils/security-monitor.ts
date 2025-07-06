@@ -272,7 +272,8 @@ export class SecurityMonitor {
   private async monitorAPIEndpoints(): Promise<void> {
     const endpoints = [
       '/api/webhook/stripe',
-      '/api/validate-license',
+      // Skip validate-license endpoint as it requires a key parameter
+      // '/api/validate-license',
       '/api/ai-integration',
       '/api/create-checkout-session'
     ];

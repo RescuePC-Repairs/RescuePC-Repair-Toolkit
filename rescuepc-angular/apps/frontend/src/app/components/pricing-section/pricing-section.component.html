@@ -1,185 +1,102 @@
-<section id="pricing" class="py-20 relative overflow-hidden">
-  <!-- Enhanced Background Elements -->
-  <div class="absolute inset-0">
-    <div class="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl animate-float"></div>
-    <div
-      class="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl animate-float"
-      style="animation-delay: 2s"
-    ></div>
-    <div
-      class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-green-500/5 rounded-full blur-3xl animate-float"
-      style="animation-delay: 4s"
-    ></div>
+<section class="pricing-section">
+  <div class="pricing-header">
+    <img src="/assets/RescuePC-Repairs-Logo.png" alt="RescuePC Repairs Logo" class="pricing-logo" />
+    <h2 class="pricing-title">Choose Your License</h2>
+    <p class="pricing-subtitle">
+      Professional-grade computer repair toolkit with military-grade security and enterprise features.
+    </p>
   </div>
-
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-    <!-- Enhanced Header -->
-    <div
-      class="text-center mb-16 transition-all duration-1000"
-      [class]="isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'"
-    >
-      <div class="flex items-center justify-center gap-3 mb-6">
-        <i class="fas fa-award w-8 h-8 text-yellow-400"></i>
-        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-white gradient-text">
-          Choose Your License
-        </h2>
-        <i class="fas fa-award w-8 h-8 text-yellow-400"></i>
+  <div class="pricing-cards">
+    <div class="pricing-card">
+      <h3>Basic License</h3>
+      <div class="pricing-amount">
+        <span class="price">$49.99</span><span class="per">/year</span>
       </div>
-      <p class="text-xl md:text-2xl text-white/90 max-w-4xl mx-auto leading-relaxed">
-        Professional-grade computer repair toolkit with
-        <strong class="text-white">military-grade security</strong> and
-        <strong class="text-white">enterprise features</strong>. Trusted by Fortune 500
-        companies worldwide.
-      </p>
+      <div class="pricing-old">$99.99</div>
+      <ul>
+        <li>Core diagnostic tools</li>
+        <li>Basic repair scripts</li>
+        <li>Email support</li>
+        <li>1-year updates included</li>
+        <li>Standard security protocols</li>
+        <li>Single device support</li>
+        <li>Basic repair profiles</li>
+      </ul>
+      <button class="pricing-btn">Get Basic License</button>
     </div>
-
-    <!-- Enhanced Pricing Cards -->
-    <div
-      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 mb-16 transition-all duration-1000 delay-300"
-      [class]="isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'"
-    >
-      <div
-        *ngFor="let plan of plans; let i = index"
-        class="pricing-card relative group"
-        [class.popular]="plan.popular"
-        [style.animation-delay]="(i * 200) + 'ms'"
-      >
-        <!-- Popular Badge -->
-        <div *ngIf="plan.popular" class="absolute -top-4 left-1/2 transform -translate-x-1/2">
-          <div class="bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-6 py-2 rounded-full font-bold text-sm flex items-center gap-2">
-            <i class="fas fa-star w-4 h-4"></i>
-            MOST POPULAR
-          </div>
-        </div>
-
-        <!-- Plan Header -->
-        <div class="text-center mb-8">
-          <div
-            class="w-20 h-20 bg-gradient-to-br rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300"
-            [class]="plan.color"
-          >
-            <i [class]="getIconClass(plan.icon) + ' w-10 h-10 text-white'"></i>
-          </div>
-          <h3 class="text-2xl font-black text-white mb-2">{{ plan.name }}</h3>
-          <p class="text-white/70 text-base leading-relaxed">{{ plan.description }}</p>
-        </div>
-
-        <!-- Enhanced Pricing -->
-        <div class="text-center mb-8">
-          <div class="flex items-center justify-center gap-2 mb-2">
-            <span class="text-4xl md:text-5xl font-black text-white">{{ plan.price }}</span>
-            <span class="text-white/60 text-lg">/{{ plan.period }}</span>
-          </div>
-          <div *ngIf="plan.originalPrice" class="flex items-center justify-center gap-2">
-            <span class="text-white/50 line-through text-lg">{{ plan.originalPrice }}</span>
-            <span class="bg-green-500/20 text-green-300 px-3 py-1 rounded-full text-sm font-bold">
-              SAVE {{ calculateSavings(plan.originalPrice, plan.price) }}%
-            </span>
-          </div>
-        </div>
-
-        <!-- Enhanced Features List -->
-        <div class="space-y-4 mb-8">
-          <div
-            *ngFor="let feature of plan.features; let featureIndex = index"
-            class="flex items-start gap-3 group-hover:translate-x-2 transition-transform duration-300"
-          >
-            <div class="w-6 h-6 bg-green-500/20 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-              <i class="fas fa-check w-4 h-4 text-green-400"></i>
-            </div>
-            <span class="text-white/90 text-sm leading-relaxed">{{ feature }}</span>
-          </div>
-        </div>
-
-        <!-- Enhanced CTA Button -->
-        <button
-          (click)="handlePurchase(plan.stripeLink)"
-          class="w-full cta-button group relative overflow-hidden"
-          [class]="plan.popular ? 'bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 hover:from-yellow-600 hover:via-orange-600 hover:to-red-600' : ''"
-        >
-          <div class="flex items-center justify-center gap-3">
-            <i class="fas fa-crown w-5 h-5 group-hover:scale-110 transition-transform duration-300"></i>
-            <span class="font-bold">Get {{ plan.name }}</span>
-            <i class="fas fa-star w-5 h-5 group-hover:scale-110 transition-transform duration-300"></i>
-          </div>
-        </button>
+    <div class="pricing-card popular">
+      <div class="badge">Most Popular</div>
+      <h3>Professional License</h3>
+      <div class="pricing-amount">
+        <span class="price">$199.99</span><span class="per">/year</span>
       </div>
+      <div class="pricing-old">$399.99</div>
+      <ul>
+        <li>Advanced diagnostic algorithms</li>
+        <li>Automated repair scripts</li>
+        <li>Priority email support</li>
+        <li>3-year updates included</li>
+        <li>Enhanced security protocols</li>
+        <li>Remote repair capabilities</li>
+        <li>Custom repair profiles</li>
+      </ul>
+      <button class="pricing-btn">Get Professional License</button>
     </div>
-
-    <!-- Enhanced Trust Indicators -->
-    <div
-      class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12 transition-all duration-1000 delay-600"
-      [class]="isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'"
-    >
-      <div
-        *ngFor="let indicator of trustIndicators"
-        class="glass-card text-center p-6 group hover:scale-105 transition-all duration-300"
-      >
-        <i [class]="getIconClass(indicator.icon) + ' w-8 h-8 text-blue-400 mx-auto mb-3 group-hover:scale-110 transition-transform duration-300'"></i>
-        <h4 class="text-white font-bold text-lg mb-1">{{ indicator.text }}</h4>
-        <p class="text-white/70 text-sm">{{ indicator.desc }}</p>
+    <div class="pricing-card">
+      <h3>Enterprise License</h3>
+      <div class="pricing-amount">
+        <span class="price">$499.99</span><span class="per">/year</span>
       </div>
+      <div class="pricing-old">$999.99</div>
+      <ul>
+        <li>Everything in Professional, plus:</li>
+        <li>Military-grade 256-bit encryption</li>
+        <li>Lifetime updates and support</li>
+        <li>Enterprise container platform</li>
+        <li>Advanced automation tools</li>
+        <li>Multi-device management</li>
+        <li>Custom deployment options</li>
+        <li>Priority phone support</li>
+        <li>White-label licensing</li>
+        <li>API access for integration</li>
+      </ul>
+      <button class="pricing-btn">Get Enterprise License</button>
     </div>
-
-    <!-- Enhanced Comparison Table -->
-    <div
-      class="mb-12 transition-all duration-1000 delay-900"
-      [class]="isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'"
-    >
-      <h3 class="text-3xl font-bold text-white text-center mb-8 gradient-text">
-        Feature Comparison
-      </h3>
-      <div class="glass-card overflow-hidden">
-        <div class="overflow-x-auto">
-          <table class="w-full">
-            <thead>
-              <tr class="border-b border-white/10">
-                <th class="text-left p-6 text-white font-bold">Feature</th>
-                <th class="text-center p-6 text-white font-bold">Basic</th>
-                <th class="text-center p-6 text-white font-bold">Professional</th>
-                <th class="text-center p-6 text-white font-bold bg-gradient-to-r from-yellow-500/20 to-orange-500/20">
-                  Enterprise
-                </th>
-                <th class="text-center p-6 text-white font-bold">Government</th>
-                <th class="text-center p-6 text-white font-bold">Lifetime</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr
-                *ngFor="let row of comparisonRows"
-                class="border-b border-white/5 hover:bg-white/5 transition-colors duration-200"
-              >
-                <td class="p-6 text-white font-medium">{{ row.feature }}</td>
-                <td class="p-6 text-center text-white/70">{{ row.basic }}</td>
-                <td class="p-6 text-center text-white/70">{{ row.pro }}</td>
-                <td class="p-6 text-center text-white font-bold bg-gradient-to-r from-yellow-500/10 to-orange-500/10">
-                  {{ row.enterprise }}
-                </td>
-                <td class="p-6 text-center text-white/70">{{ row.government }}</td>
-                <td class="p-6 text-center text-white/70">{{ row.lifetime }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+    <div class="pricing-card">
+      <h3>Government License</h3>
+      <div class="pricing-amount">
+        <span class="price">$999.99</span><span class="per">/year</span>
       </div>
+      <div class="pricing-old">$1999.99</div>
+      <ul>
+        <li>Everything in Enterprise, plus:</li>
+        <li>Government compliance features</li>
+        <li>Military-grade security protocols</li>
+        <li>Custom deployment for government networks</li>
+        <li>Dedicated support team</li>
+        <li>Compliance documentation</li>
+        <li>Audit trail capabilities</li>
+        <li>Multi-site licensing</li>
+      </ul>
+      <button class="pricing-btn">Get Government License</button>
     </div>
-
-    <!-- Enhanced FAQ Section -->
-    <div
-      class="transition-all duration-1000 delay-1200"
-      [class]="isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'"
-    >
-      <h3 class="text-3xl font-bold text-white text-center mb-8 gradient-text">
-        Frequently Asked Questions
-      </h3>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div *ngFor="let faq of faqs" class="faq-item group">
-          <h4 class="text-white font-bold text-lg mb-3 group-hover:text-blue-300 transition-colors duration-300">
-            {{ faq.question }}
-          </h4>
-          <p class="text-white/70 leading-relaxed">{{ faq.answer }}</p>
-        </div>
+    <div class="pricing-card">
+      <h3>Lifetime Enterprise Package</h3>
+      <div class="pricing-amount">
+        <span class="price">$499.99</span><span class="per">/one-time</span>
       </div>
+      <div class="pricing-old">$999.99</div>
+      <ul>
+        <li>Everything in Enterprise, plus:</li>
+        <li>Lifetime access to all features</li>
+        <li>No recurring payments</li>
+        <li>Lifetime updates and support</li>
+        <li>Transferable license</li>
+        <li>Priority lifetime support</li>
+        <li>Early access to new features</li>
+        <li>Lifetime API access</li>
+      </ul>
+      <button class="pricing-btn">Get Lifetime Enterprise Package</button>
     </div>
   </div>
 </section> 

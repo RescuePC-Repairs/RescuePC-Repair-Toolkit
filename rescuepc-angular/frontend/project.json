@@ -19,6 +19,81 @@
           {
             "glob": "**/*",
             "input": "frontend/public"
+          },
+          {
+            "glob": "favicon.ico",
+            "input": "frontend/public",
+            "output": "."
+          },
+          {
+            "glob": "favicon-16x16.png",
+            "input": "frontend/public",
+            "output": "."
+          },
+          {
+            "glob": "favicon-32x32.png",
+            "input": "frontend/public",
+            "output": "."
+          },
+          {
+            "glob": "favicon.svg",
+            "input": "frontend/public",
+            "output": "."
+          },
+          {
+            "glob": "apple-touch-icon.png",
+            "input": "frontend/public",
+            "output": "."
+          },
+          {
+            "glob": "RescuePC-Repairs-Logo.png",
+            "input": "frontend/public",
+            "output": "."
+          },
+          {
+            "glob": "RescuePC-Repairs-Logo-backup.png",
+            "input": "frontend/public",
+            "output": "."
+          },
+          {
+            "glob": "site.webmanifest",
+            "input": "frontend/public",
+            "output": "."
+          },
+          {
+            "glob": "manifest.json",
+            "input": "frontend/public",
+            "output": "."
+          },
+          {
+            "glob": "safari-pinned-tab.svg",
+            "input": "frontend/public",
+            "output": "."
+          },
+          {
+            "glob": "icon.svg",
+            "input": "frontend/public",
+            "output": "."
+          },
+          {
+            "glob": "browserconfig.xml",
+            "input": "frontend/public",
+            "output": "."
+          },
+          {
+            "glob": "BingSiteAuth.xml",
+            "input": "frontend/public",
+            "output": "."
+          },
+          {
+            "glob": ".well-known/**/*",
+            "input": "frontend/public/.well-known",
+            "output": ".well-known"
+          },
+          {
+            "glob": "assets/**/*",
+            "input": "frontend/public/assets",
+            "output": "assets"
           }
         ],
         "styles": ["frontend/src/styles.css"],

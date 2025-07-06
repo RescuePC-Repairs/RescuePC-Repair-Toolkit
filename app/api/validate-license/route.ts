@@ -143,8 +143,14 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const licenseKey = searchParams.get('key');
 
+    // If no key provided, return a helpful error with example
     if (!licenseKey) {
-      return NextResponse.json({ error: 'License key parameter is required' }, { status: 400 });
+      return NextResponse.json({ 
+        error: 'License key parameter is required',
+        example: 'Use ?key=YOUR_LICENSE_KEY',
+        availableKeys: Object.keys(mockLicenses),
+        message: 'This endpoint requires a license key parameter. Use ?key=YOUR_LICENSE_KEY'
+      }, { status: 400 });
     }
 
     // Check if license exists in mock database
@@ -155,7 +161,8 @@ export async function GET(request: NextRequest) {
         {
           valid: false,
           error: 'License not found',
-          code: 'LICENSE_NOT_FOUND'
+          code: 'LICENSE_NOT_FOUND',
+          availableKeys: Object.keys(mockLicenses)
         },
         { status: 404 }
       );

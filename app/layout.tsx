@@ -118,7 +118,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         {/* Resource hints for faster loading */}
         <link rel="prefetch" href="/api/health" />
-        <link rel="prefetch" href="/api/validate-license" />
 
         {/* Manifest for PWA */}
         <link rel="manifest" href="/manifest.json" />

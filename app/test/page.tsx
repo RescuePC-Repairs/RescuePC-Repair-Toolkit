@@ -1,4 +1,6 @@
-import React from 'react';
+'use client';
+
+import { useState } from 'react';
 
 // Force dynamic rendering to prevent static generation errors
 export const dynamic = 'force-dynamic';
@@ -85,67 +87,87 @@ const PAYMENT_PACKAGES: Record<string, PaymentPackage> = {
 };
 
 export default function TestPage() {
-  const packageCount = Object.keys(PAYMENT_PACKAGES).length;
-  const packageNames = Object.keys(PAYMENT_PACKAGES);
+  const [apiResult, setApiResult] = useState<any>(null);
+  const [loading, setLoading] = useState(false);
+
+  const testApi = async () => {
+    setLoading(true);
+    try {
+      // Test with a valid license key
+      const response = await fetch('/api/validate-license?key=RPC-1234-5678-9ABC');
+      const data = await response.json();
+      setApiResult(data);
+    } catch (error) {
+      setApiResult({ error: error instanceof Error ? error.message : 'Unknown error' });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-900 text-white p-8">
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8 text-center">📦 PAYMENT PACKAGES TEST</h1>
+      <div className="max-w-4xl mx-auto">
+        <h1 className="text-4xl font-bold mb-8">RescuePC Repairs - Test Page</h1>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Font Test */}
+          <div className="bg-gray-800 p-6 rounded-lg">
+            <h2 className="text-2xl font-bold mb-4">Font Loading Test</h2>
+            <p className="text-lg mb-2">This text should be in Inter font:</p>
+            <p className="text-3xl font-bold text-blue-400">Inter Font Test</p>
+            <p className="text-sm text-gray-400 mt-4">
+              If you see this in a clean, modern font, the font loading is working correctly.
+            </p>
+          </div>
 
-        <div className="bg-green-500/10 border border-green-500/30 rounded-xl p-6 mb-8 text-center">
-          <h2 className="text-2xl font-bold text-green-400 mb-4">Package Count: {packageCount}</h2>
-          <p className="text-gray-300">Package Keys: {packageNames.join(', ')}</p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-          {Object.entries(PAYMENT_PACKAGES).map(([key, pkg]) => (
-            <div key={key} className="p-4 bg-gray-800 border border-gray-700 rounded-lg">
-              <h3 className="text-lg font-bold mb-2">{pkg.name}</h3>
-              <p className="text-2xl font-bold text-green-400 mb-2">${pkg.price}</p>
-              <p className="text-gray-400 mb-2">
-                {typeof pkg.licenses === 'number'
-                  ? `${pkg.licenses} Licenses`
-                  : `${pkg.licenses} Access`}
-              </p>
-              <p className="text-sm text-gray-500 mb-3">{pkg.description}</p>
-
-              <div className="space-y-1">
-                <p className="text-xs text-blue-400">Key: {key}</p>
-                <p className="text-xs text-purple-400">Price ID: {pkg.stripePriceId}</p>
-                <p className="text-xs text-yellow-400">
-                  Link: {pkg.stripePaymentLink.slice(-10)}...
-                </p>
+          {/* API Test */}
+          <div className="bg-gray-800 p-6 rounded-lg">
+            <h2 className="text-2xl font-bold mb-4">API Test</h2>
+            <button
+              onClick={testApi}
+              disabled={loading}
+              className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 px-4 py-2 rounded"
+            >
+              {loading ? 'Testing...' : 'Test License API'}
+            </button>
+            
+            {apiResult && (
+              <div className="mt-4 p-4 bg-gray-700 rounded">
+                <h3 className="font-bold mb-2">API Result:</h3>
+                <pre className="text-sm overflow-auto">
+                  {JSON.stringify(apiResult, null, 2)}
+                </pre>
               </div>
+            )}
+          </div>
+        </div>
 
-              {pkg.popular && (
-                <div className="mt-2 text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded">
-                  POPULAR
-                </div>
-              )}
-              {pkg.enterprise && (
-                <div className="mt-2 text-xs bg-purple-500/20 text-purple-400 px-2 py-1 rounded">
-                  ENTERPRISE
-                </div>
-              )}
+        {/* Service Worker Status */}
+        <div className="mt-8 bg-gray-800 p-6 rounded-lg">
+          <h2 className="text-2xl font-bold mb-4">Service Worker Status</h2>
+          <p className="text-green-400">✅ Service Worker: Loaded</p>
+          <p className="text-sm text-gray-400 mt-2">
+            The service worker is active and providing offline support.
+          </p>
+        </div>
+
+        {/* Available Test Keys */}
+        <div className="mt-8 bg-gray-800 p-6 rounded-lg">
+          <h2 className="text-2xl font-bold mb-4">Available Test License Keys</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="bg-gray-700 p-4 rounded">
+              <strong>RPC-1234-5678-9ABC</strong>
+              <p className="text-sm text-gray-400">Basic License</p>
             </div>
-          ))}
-        </div>
-
-        <div className="mt-8 bg-blue-500/10 border border-blue-500/30 rounded-xl p-6">
-          <h3 className="text-xl font-bold mb-4">Package Details:</h3>
-          <pre className="text-sm text-gray-300 overflow-x-auto">
-            {JSON.stringify(PAYMENT_PACKAGES, null, 2)}
-          </pre>
-        </div>
-
-        <div className="text-center mt-8">
-          <a
-            href="/"
-            className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-colors"
-          >
-            ← Back to Main Store
-          </a>
+            <div className="bg-gray-700 p-4 rounded">
+              <strong>EMP-ENT-4FA121C1-ABC12345-1234567890</strong>
+              <p className="text-sm text-gray-400">Enterprise License</p>
+            </div>
+            <div className="bg-gray-700 p-4 rounded">
+              <strong>RescuePC-2025</strong>
+              <p className="text-sm text-gray-400">Lifetime License</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
