@@ -77,20 +77,18 @@ export function PlatformSupport() {
           <div className="space-y-6">
             {platforms.map((platform, index) => (
               <div key={index} className="platform-card p-6">
-                <div className="flex items-center mb-4">
+                <div className="text-center mb-6">
                   <div
-                    className={`w-12 h-12 rounded-full bg-gradient-to-r ${platform.color} flex items-center justify-center mr-4`}
+                    className={`w-16 h-16 rounded-full bg-gradient-to-r ${platform.color} flex items-center justify-center mx-auto mb-4`}
                   >
                     <span className="text-2xl">{platform.emoji}</span>
                   </div>
-                  <div>
-                    <h3 className="text-2xl font-bold text-white">{platform.name}</h3>
-                  </div>
+                  <h3 className="text-2xl font-bold text-white">{platform.name}</h3>
                 </div>
 
                 <div className="mb-6">
-                  <h4 className="text-white font-semibold mb-3">Supported Versions:</h4>
-                  <div className="flex flex-wrap gap-2">
+                  <h4 className="text-white font-semibold mb-3 text-center">Supported Versions:</h4>
+                  <div className="flex flex-wrap gap-2 justify-center">
                     {platform.versions.map((version, vIndex) => (
                       <span
                         key={vIndex}
@@ -103,10 +101,10 @@ export function PlatformSupport() {
                 </div>
 
                 <div>
-                  <h4 className="text-white font-semibold mb-3">Key Features:</h4>
+                  <h4 className="text-white font-semibold mb-3 text-center">Key Features:</h4>
                   <div className="space-y-2">
                     {platform.features.map((feature, fIndex) => (
-                      <div key={fIndex} className="flex items-center">
+                      <div key={fIndex} className="flex items-center justify-center">
                         <Check className="w-4 h-4 text-green-400 mr-2 flex-shrink-0" />
                         <span className="text-white/80 text-sm">{feature}</span>
                       </div>
@@ -122,7 +120,7 @@ export function PlatformSupport() {
         <div className="hidden md:block">
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
             {platforms.map((platform, index) => (
-              <div key={index} className="platform-card p-8 h-full">
+              <div key={index} className="platform-card p-8 h-full flex flex-col">
                 <div className="text-center mb-6">
                   <div
                     className={`w-16 h-16 rounded-full bg-gradient-to-r ${platform.color} flex items-center justify-center mx-auto mb-4`}
@@ -133,8 +131,8 @@ export function PlatformSupport() {
                 </div>
 
                 <div className="mb-6">
-                  <h4 className="text-white font-semibold mb-3">Supported Versions:</h4>
-                  <div className="flex flex-wrap gap-2">
+                  <h4 className="text-white font-semibold mb-3 text-center">Supported Versions:</h4>
+                  <div className="flex flex-wrap gap-2 justify-center">
                     {platform.versions.map((version, vIndex) => (
                       <span
                         key={vIndex}
@@ -146,11 +144,11 @@ export function PlatformSupport() {
                   </div>
                 </div>
 
-                <div>
-                  <h4 className="text-white font-semibold mb-3">Key Features:</h4>
+                <div className="flex-1">
+                  <h4 className="text-white font-semibold mb-3 text-center">Key Features:</h4>
                   <div className="space-y-2">
                     {platform.features.map((feature, fIndex) => (
-                      <div key={fIndex} className="flex items-center">
+                      <div key={fIndex} className="flex items-center justify-center">
                         <Check className="w-4 h-4 text-green-400 mr-2 flex-shrink-0" />
                         <span className="text-white/80 text-sm">{feature}</span>
                       </div>

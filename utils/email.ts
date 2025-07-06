@@ -1,16 +1,4 @@
-import nodemailer from 'nodemailer';
-
 // SECURE EMAIL CONFIGURATION - NO HARDCODED SECRETS
-const emailTransporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.SUPPORT_EMAIL,
-    pass: process.env.GMAIL_APP_PASSWORD
-  },
-  secure: true,
-  port: 465,
-  requireTLS: true
-});
 
 // FREE EMAIL SENDING FUNCTION
 export async function sendTransactionalEmail({
@@ -34,6 +22,19 @@ export async function sendTransactionalEmail({
       );
       return; // Don't throw, just log and return
     }
+
+    // Dynamically import nodemailer only on the server
+    const nodemailer = await import('nodemailer');
+    const emailTransporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.SUPPORT_EMAIL,
+        pass: process.env.GMAIL_APP_PASSWORD
+      },
+      secure: true,
+      port: 465,
+      requireTLS: true
+    });
 
     await emailTransporter.sendMail({
       from: from || `"RescuePC Repairs" <${process.env.SUPPORT_EMAIL}>`,
@@ -266,6 +267,19 @@ export async function sendEmail(
   replyTo?: string
 ): Promise<void> {
   try {
+    // Dynamically import nodemailer only on the server
+    const nodemailer = await import('nodemailer');
+    const emailTransporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.SUPPORT_EMAIL,
+        pass: process.env.GMAIL_APP_PASSWORD
+      },
+      secure: true,
+      port: 465,
+      requireTLS: true
+    });
+
     const emailOptions = {
       from: from || `"RescuePC Repairs" <${process.env.SUPPORT_EMAIL}>`,
       to,

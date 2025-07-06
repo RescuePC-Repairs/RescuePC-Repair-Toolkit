@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { sendWelcomeEmail } from '../../../utils/email';
 import { validateEmail, validateName, sanitizeInput } from '@/utils/validation';
 import { createRateLimiter } from '@/utils/validation';
 
@@ -35,9 +34,27 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid input', details: errors }, { status: 400 });
     }
 
-    // Send welcome email
+    // Send welcome email directly here
     try {
-      await sendWelcomeEmail(emailValidation.sanitizedValue!);
+      const nodemailer = await import('nodemailer');
+      const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: process.env.SUPPORT_EMAIL,
+          pass: process.env.GMAIL_APP_PASSWORD
+        },
+        secure: true,
+        port: 465,
+        requireTLS: true
+      });
+
+      await transporter.sendMail({
+        from: `"RescuePC Repairs" <${process.env.SUPPORT_EMAIL}>`,
+        to: emailValidation.sanitizedValue!,
+        subject: '🎉 Welcome to RescuePC Repairs!',
+        text: `Hi ${nameValidation.sanitizedValue || 'Valued Customer'},\n\nWelcome to RescuePC Repairs! We're excited to have you on board.\n\nBest regards,\nTyler Keesee\nCEO, RescuePC Repairs`,
+        replyTo: process.env.BUSINESS_EMAIL || 'rescuepcrepair@yahoo.com'
+      });
     } catch (error) {
       console.error('Failed to send welcome email:', error);
       return NextResponse.json({ error: 'Failed to send welcome email' }, { status: 500 });

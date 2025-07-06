@@ -29,20 +29,22 @@ module.exports = {
   // ==========================================================================
 
   extends: [
-    'next/core-web-vitals',
-    'plugin:security/recommended'
+    'next/core-web-vitals', 
+    'plugin:security/recommended',
+    'plugin:@typescript-eslint/recommended'
   ],
 
   // ==========================================================================
   // 🔧 PARSER & PLUGINS
   // ==========================================================================
 
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 2020,
     sourceType: 'module'
   },
 
-  plugins: ['security'],
+  plugins: ['security', '@typescript-eslint'],
 
   // ==========================================================================
   // 🚨 RULES - MAXIMUM ENFORCEMENT
@@ -90,6 +92,7 @@ module.exports = {
 
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
+    '@typescript-eslint/ban-ts-comment': 'warn',
 
     // =======================================================================
     // 🚨 SECURITY RULES - RELAXED

@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { sendLicenseEmail } from '../../../utils/email';
 
 export async function GET(request: NextRequest) {
   try {
@@ -20,12 +19,27 @@ export async function GET(request: NextRequest) {
       );
     }
 
+    // Dynamically import nodemailer only on the server
+    const nodemailer = await import('nodemailer');
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.SUPPORT_EMAIL,
+        pass: process.env.GMAIL_APP_PASSWORD
+      },
+      secure: true,
+      port: 465,
+      requireTLS: true
+    });
+
     // Send test email
-    await sendLicenseEmail(
-      'rescuepcrepair@yahoo.com',
-      'TEST-LICENSE-KEY-2024',
-      'Professional License'
-    );
+    await transporter.sendMail({
+      from: `"RescuePC Repairs" <${process.env.SUPPORT_EMAIL}>`,
+      to: 'rescuepcrepair@yahoo.com',
+      subject: 'Test License Email - Professional License',
+      text: `Your license key: TEST-LICENSE-KEY-2024\nThank you for testing RescuePC Repairs!`,
+      replyTo: process.env.BUSINESS_EMAIL || 'rescuepcrepair@yahoo.com'
+    });
 
     return NextResponse.json({
       success: true,

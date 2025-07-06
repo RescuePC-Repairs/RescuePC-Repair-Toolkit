@@ -21,40 +21,44 @@ export function Footer() {
       <div className="absolute top-0 left-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
       <div className="absolute bottom-0 right-0 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl"></div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Main Footer Content */}
+        <div className="text-center mb-12">
           {/* Company Info */}
-          <div className="lg:col-span-2">
-            <div className="flex items-center mb-6">
-              <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center mr-4">
-                <Shield className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="text-2xl font-bold text-white">RescuePC Repairs</h3>
+          <div className="flex items-center justify-center mb-8">
+            <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center mr-4">
+              <Shield className="w-8 h-8 text-white" />
             </div>
-            <p className="text-white/80 mb-6 leading-relaxed">
-              Professional Windows repair toolkit with military-grade security. Lifetime license,
-              24/7 support, and offline operation for maximum privacy and performance.
-            </p>
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center text-white/60">
-                <Mail className="w-4 h-4 mr-2" />
-                <span className="text-sm">rescuepcrepair@yahoo.com</span>
-              </div>
-              <div className="flex items-center text-white/60">
-                <Clock className="w-4 h-4 mr-2" />
-                <span className="text-sm">24/7 Support</span>
-              </div>
-            </div>
+            <h3 className="text-3xl font-bold text-white">RescuePC Repairs</h3>
           </div>
 
+          <p className="text-white/80 mb-8 leading-relaxed max-w-2xl mx-auto text-lg">
+            Professional Windows repair toolkit with military-grade security. Lifetime license, 24/7
+            support, and offline operation for maximum privacy and performance.
+          </p>
+
+          <div className="flex items-center justify-center space-x-8 mb-8">
+            <div className="flex items-center text-white/60">
+              <Mail className="w-5 h-5 mr-2" />
+              <span className="text-sm">rescuepcrepair@yahoo.com</span>
+            </div>
+            <div className="flex items-center text-white/60">
+              <Clock className="w-5 h-5 mr-2" />
+              <span className="text-sm">24/7 Support</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Navigation Links */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           {/* Product */}
-          <div>
+          <div className="text-center">
             <h4 className="text-lg font-semibold text-white mb-6">Product</h4>
             <ul className="space-y-3">
               <li>
                 <a
                   href="#"
-                  className="text-white/70 hover:text-white transition-colors flex items-center group"
+                  className="text-white/70 hover:text-white transition-colors flex items-center justify-center group"
                 >
                   <ExternalLink className="w-3 h-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                   Features
@@ -63,7 +67,7 @@ export function Footer() {
               <li>
                 <a
                   href="#"
-                  className="text-white/70 hover:text-white transition-colors flex items-center group"
+                  className="text-white/70 hover:text-white transition-colors flex items-center justify-center group"
                 >
                   <ExternalLink className="w-3 h-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                   Pricing
@@ -72,7 +76,7 @@ export function Footer() {
               <li>
                 <a
                   href="#"
-                  className="text-white/70 hover:text-white transition-colors flex items-center group"
+                  className="text-white/70 hover:text-white transition-colors flex items-center justify-center group"
                 >
                   <ExternalLink className="w-3 h-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                   Knowledge Base
@@ -81,7 +85,7 @@ export function Footer() {
               <li>
                 <a
                   href="#"
-                  className="text-white/70 hover:text-white transition-colors flex items-center group"
+                  className="text-white/70 hover:text-white transition-colors flex items-center justify-center group"
                 >
                   <ExternalLink className="w-3 h-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                   Download
@@ -90,7 +94,7 @@ export function Footer() {
               <li>
                 <a
                   href="#"
-                  className="text-white/70 hover:text-white transition-colors flex items-center group"
+                  className="text-white/70 hover:text-white transition-colors flex items-center justify-center group"
                 >
                   <ExternalLink className="w-3 h-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                   Product Flyer
@@ -100,13 +104,13 @@ export function Footer() {
           </div>
 
           {/* Support */}
-          <div>
+          <div className="text-center">
             <h4 className="text-lg font-semibold text-white mb-6">Support</h4>
             <ul className="space-y-3">
               <li>
                 <a
                   href="#"
-                  className="text-white/70 hover:text-white transition-colors flex items-center group"
+                  className="text-white/70 hover:text-white transition-colors flex items-center justify-center group"
                 >
                   <ExternalLink className="w-3 h-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                   Email Support
@@ -115,7 +119,7 @@ export function Footer() {
               <li>
                 <a
                   href="#"
-                  className="text-white/70 hover:text-white transition-colors flex items-center group"
+                  className="text-white/70 hover:text-white transition-colors flex items-center justify-center group"
                 >
                   <ExternalLink className="w-3 h-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                   Support Center
@@ -124,7 +128,7 @@ export function Footer() {
               <li>
                 <a
                   href="#"
-                  className="text-white/70 hover:text-white transition-colors flex items-center group"
+                  className="text-white/70 hover:text-white transition-colors flex items-center justify-center group"
                 >
                   <ExternalLink className="w-3 h-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                   Documentation
@@ -133,7 +137,7 @@ export function Footer() {
               <li>
                 <a
                   href="#"
-                  className="text-white/70 hover:text-white transition-colors flex items-center group"
+                  className="text-white/70 hover:text-white transition-colors flex items-center justify-center group"
                 >
                   <ExternalLink className="w-3 h-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                   FAQ
@@ -141,17 +145,15 @@ export function Footer() {
               </li>
             </ul>
           </div>
-        </div>
 
-        {/* Legal Links */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-          <div>
+          {/* Legal */}
+          <div className="text-center">
             <h4 className="text-lg font-semibold text-white mb-6">Legal</h4>
             <ul className="space-y-3">
               <li>
                 <a
                   href="#"
-                  className="text-white/70 hover:text-white transition-colors flex items-center group"
+                  className="text-white/70 hover:text-white transition-colors flex items-center justify-center group"
                 >
                   <ExternalLink className="w-3 h-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                   Privacy Policy
@@ -160,7 +162,7 @@ export function Footer() {
               <li>
                 <a
                   href="#"
-                  className="text-white/70 hover:text-white transition-colors flex items-center group"
+                  className="text-white/70 hover:text-white transition-colors flex items-center justify-center group"
                 >
                   <ExternalLink className="w-3 h-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                   Terms of Service
@@ -169,63 +171,40 @@ export function Footer() {
               <li>
                 <a
                   href="#"
-                  className="text-white/70 hover:text-white transition-colors flex items-center group"
+                  className="text-white/70 hover:text-white transition-colors flex items-center justify-center group"
                 >
                   <ExternalLink className="w-3 h-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                   Refund Policy
                 </a>
               </li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="text-lg font-semibold text-white mb-6">Compliance</h4>
-            <ul className="space-y-3">
               <li>
                 <a
                   href="#"
-                  className="text-white/70 hover:text-white transition-colors flex items-center group"
+                  className="text-white/70 hover:text-white transition-colors flex items-center justify-center group"
                 >
                   <ExternalLink className="w-3 h-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                   License
                 </a>
               </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-white/70 hover:text-white transition-colors flex items-center group"
-                >
-                  <ExternalLink className="w-3 h-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  Cookie Policy
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-white/70 hover:text-white transition-colors flex items-center group"
-                >
-                  <ExternalLink className="w-3 h-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  GDPR
-                </a>
-              </li>
             </ul>
           </div>
+        </div>
 
-          <div className="lg:col-span-2">
-            <h4 className="text-lg font-semibold text-white mb-6">Contact Information</h4>
-            <div className="space-y-4">
-              <div className="flex items-center text-white/70">
-                <Mail className="w-4 h-4 mr-3" />
-                <span>rescuepcrepair@yahoo.com</span>
-              </div>
-              <div className="flex items-center text-white/70">
-                <Phone className="w-4 h-4 mr-3" />
-                <span>24/7 Support Available</span>
-              </div>
-              <div className="flex items-center text-white/70">
-                <Globe className="w-4 h-4 mr-3" />
-                <span>Worldwide Service</span>
-              </div>
+        {/* Contact Information */}
+        <div className="text-center mb-12">
+          <h4 className="text-lg font-semibold text-white mb-6">Contact Information</h4>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+            <div className="flex items-center text-white/70">
+              <Mail className="w-5 h-5 mr-3" />
+              <span>rescuepcrepair@yahoo.com</span>
+            </div>
+            <div className="flex items-center text-white/70">
+              <Phone className="w-5 h-5 mr-3" />
+              <span>24/7 Support Available</span>
+            </div>
+            <div className="flex items-center text-white/70">
+              <Globe className="w-5 h-5 mr-3" />
+              <span>Worldwide Service</span>
             </div>
           </div>
         </div>
@@ -233,7 +212,7 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-gray-700">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="mb-4 md:mb-0">
+            <div className="mb-4 md:mb-0 text-center md:text-left">
               <p className="text-white/80 text-sm">
                 © 2024 RescuePC Repairs. All rights reserved.
               </p>

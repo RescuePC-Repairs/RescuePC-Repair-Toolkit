@@ -101,19 +101,19 @@ export function TestimonialCarousel() {
           <div className="space-y-6">
             {testimonials.slice(0, 3).map((testimonial, index) => (
               <div key={index} className="glass-card p-6">
-                <div className="flex items-center mb-4">
-                  <div className="text-3xl mr-4">{testimonial.avatar}</div>
+                <div className="flex items-start mb-4">
+                  <div className="text-3xl mr-4 flex-shrink-0">{testimonial.avatar}</div>
                   <div className="flex-1">
-                    <div className="flex items-center mb-2">
+                    <div className="flex items-center justify-center mb-2">
                       {[...Array(testimonial.rating)].map((_, i) => (
                         <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
                       ))}
                     </div>
-                    <h4 className="font-semibold text-white">{testimonial.name}</h4>
-                    <p className="text-white/60 text-sm">{testimonial.role}</p>
+                    <h4 className="font-semibold text-white text-center">{testimonial.name}</h4>
+                    <p className="text-white/60 text-sm text-center">{testimonial.role}</p>
                   </div>
                 </div>
-                <p className="text-white/90 italic">"{testimonial.content}"</p>
+                <p className="text-white/90 italic text-center">"{testimonial.content}"</p>
               </div>
             ))}
           </div>
@@ -123,20 +123,20 @@ export function TestimonialCarousel() {
         <div className="hidden md:block">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {testimonials.slice(0, 3).map((testimonial, index) => (
-              <div key={index} className="glass-card p-8 h-full">
-                <div className="flex items-start mb-6">
-                  <div className="text-4xl mr-4">{testimonial.avatar}</div>
-                  <div className="flex-1">
-                    <div className="flex items-center mb-3">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-                      ))}
-                    </div>
-                    <h4 className="font-semibold text-white text-lg">{testimonial.name}</h4>
-                    <p className="text-white/60 text-sm">{testimonial.role}</p>
+              <div key={index} className="glass-card p-8 h-full flex flex-col">
+                <div className="text-center mb-6">
+                  <div className="text-4xl mb-4">{testimonial.avatar}</div>
+                  <div className="flex items-center justify-center mb-3">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                    ))}
                   </div>
+                  <h4 className="font-semibold text-white text-lg">{testimonial.name}</h4>
+                  <p className="text-white/60 text-sm">{testimonial.role}</p>
                 </div>
-                <p className="text-white/90 italic leading-relaxed">"{testimonial.content}"</p>
+                <p className="text-white/90 italic leading-relaxed flex-1">
+                  "{testimonial.content}"
+                </p>
               </div>
             ))}
           </div>
