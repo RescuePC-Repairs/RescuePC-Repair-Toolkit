@@ -139,7 +139,7 @@ const nextConfig = {
     domains: ['rescuepcrepairs.com'],
     formats: ['image/webp', 'image/avif'],
     minimumCacheTTL: 31536000
-  },
+  }
   // PWA support removed - service worker should be served directly from public directory
 };
 

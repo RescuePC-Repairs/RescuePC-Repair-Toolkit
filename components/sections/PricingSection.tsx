@@ -21,44 +21,19 @@ import {
 
 export function PricingSection() {
   const [isVisible, setIsVisible] = useState(false);
-  const [selectedPlan, setSelectedPlan] = useState('enterprise');
-  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setIsVisible(true);
   }, []);
 
-  const handlePurchase = async (planType: string) => {
-    setIsLoading(true);
-    try {
-      const response = await fetch('/api/create-checkout-session', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          planType,
-          successUrl: `${window.location.origin}/success`,
-          cancelUrl: `${window.location.origin}`
-        })
-      });
-
-      const { url } = await response.json();
-      window.location.href = url;
-    } catch (error) {
-      console.error('Failed to create checkout session:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
+  // Direct Stripe Payment Links - Updated with correct prices and links
   const plans = [
     {
       id: 'basic',
       name: 'Basic License',
       price: '$49.99',
       originalPrice: '$99.99',
-      period: 'one-time',
+      period: 'year',
       description: 'Perfect for individual users and small repairs',
       features: [
         'Multi-platform support (Windows, Linux, macOS)',
@@ -70,14 +45,15 @@ export function PricingSection() {
       ],
       icon: Shield,
       color: 'from-blue-500 to-blue-600',
-      popular: false
+      popular: false,
+      stripeLink: 'https://buy.stripe.com/5kQfZggMacypcSl9wP08g05'
     },
     {
       id: 'professional',
       name: 'Professional License',
       price: '$199.99',
       originalPrice: '$399.99',
-      period: 'one-time',
+      period: 'year',
       description: 'Advanced features for IT professionals',
       features: [
         'Everything in Basic, plus:',
@@ -91,14 +67,15 @@ export function PricingSection() {
       ],
       icon: Zap,
       color: 'from-purple-500 to-purple-600',
-      popular: false
+      popular: false,
+      stripeLink: 'https://buy.stripe.com/00wcN4dzY0PHaKdfVd08g04'
     },
     {
       id: 'enterprise',
-      name: 'Lifetime Enterprise',
+      name: 'Enterprise License',
       price: '$499.99',
       originalPrice: '$999.99',
-      period: 'lifetime',
+      period: 'year',
       description: 'Ultimate solution for enterprise environments',
       features: [
         'Everything in Professional, plus:',
@@ -114,9 +91,58 @@ export function PricingSection() {
       ],
       icon: Crown,
       color: 'from-yellow-500 via-orange-500 to-red-500',
-      popular: true
+      popular: true,
+      stripeLink: 'https://buy.stripe.com/4gM8wO53s1TLaKd9wP08g02'
+    },
+    {
+      id: 'government',
+      name: 'Government License',
+      price: '$999.99',
+      originalPrice: '$1999.99',
+      period: 'year',
+      description: 'Specialized for government and military use',
+      features: [
+        'Everything in Enterprise, plus:',
+        'Government compliance features',
+        'Military-grade security protocols',
+        'Custom deployment for government networks',
+        'Dedicated support team',
+        'Compliance documentation',
+        'Audit trail capabilities',
+        'Multi-site licensing'
+      ],
+      icon: Lock,
+      color: 'from-green-500 to-green-600',
+      popular: false,
+      stripeLink: 'https://buy.stripe.com/9B64gy1Rgcyp19DdN508g03'
+    },
+    {
+      id: 'lifetime',
+      name: 'Lifetime Enterprise Package',
+      price: '$499.99',
+      originalPrice: '$999.99',
+      period: 'one-time',
+      description: 'One-time payment for lifetime access',
+      features: [
+        'Everything in Enterprise, plus:',
+        'Lifetime access to all features',
+        'No recurring payments',
+        'Lifetime updates and support',
+        'Transferable license',
+        'Priority lifetime support',
+        'Early access to new features',
+        'Lifetime API access'
+      ],
+      icon: Sparkles,
+      color: 'from-indigo-500 to-purple-600',
+      popular: false,
+      stripeLink: 'https://buy.stripe.com/eVq3cu0Nc8i97y1aAT08g01'
     }
   ];
+
+  const handlePurchase = (stripeLink: string) => {
+    window.open(stripeLink, '_blank');
+  };
 
   return (
     <section id="pricing" className="py-20 relative overflow-hidden">
@@ -155,7 +181,7 @@ export function PricingSection() {
 
         {/* Enhanced Pricing Cards */}
         <div
-          className={`grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 mb-16 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
         >
           {plans.map((plan, index) => (
             <div
@@ -223,26 +249,18 @@ export function PricingSection() {
 
               {/* Enhanced CTA Button */}
               <button
-                onClick={() => handlePurchase(plan.id)}
-                disabled={isLoading}
+                onClick={() => handlePurchase(plan.stripeLink)}
                 className={`w-full cta-button group relative overflow-hidden ${
                   plan.popular
                     ? 'bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 hover:from-yellow-600 hover:via-orange-600 hover:to-red-600'
                     : ''
                 }`}
               >
-                {isLoading ? (
-                  <div className="flex items-center justify-center gap-3">
-                    <RefreshCw className="w-5 h-5 animate-spin" />
-                    <span>Processing...</span>
-                  </div>
-                ) : (
-                  <div className="flex items-center justify-center gap-3">
-                    <Crown className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
-                    <span className="font-bold">Get {plan.name}</span>
-                    <Sparkles className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
-                  </div>
-                )}
+                <div className="flex items-center justify-center gap-3">
+                  <Crown className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
+                  <span className="font-bold">Get {plan.name}</span>
+                  <Sparkles className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
+                </div>
               </button>
             </div>
           ))}
@@ -287,32 +305,42 @@ export function PricingSection() {
                     <th className="text-center p-6 text-white font-bold bg-gradient-to-r from-yellow-500/20 to-orange-500/20">
                       Enterprise
                     </th>
+                    <th className="text-center p-6 text-white font-bold">Government</th>
+                    <th className="text-center p-6 text-white font-bold">Lifetime</th>
                   </tr>
                 </thead>
                 <tbody>
                   {[
-                    { feature: 'Multi-Platform Support', basic: '✓', pro: '✓', enterprise: '✓' },
+                    { feature: 'Multi-Platform Support', basic: '✓', pro: '✓', enterprise: '✓', government: '✓', lifetime: '✓' },
                     {
                       feature: 'Military-Grade Security',
                       basic: 'Basic',
                       pro: 'Enhanced',
-                      enterprise: 'Full'
+                      enterprise: 'Full',
+                      government: 'Military',
+                      lifetime: 'Full'
                     },
-                    { feature: 'Automated Repairs', basic: '✗', pro: '✓', enterprise: '✓' },
+                    { feature: 'Automated Repairs', basic: '✗', pro: '✓', enterprise: '✓', government: '✓', lifetime: '✓' },
                     {
                       feature: 'Lifetime Updates',
                       basic: '1 Year',
                       pro: '3 Years',
-                      enterprise: 'Lifetime'
+                      enterprise: 'Lifetime',
+                      government: 'Lifetime',
+                      lifetime: 'Lifetime'
                     },
                     {
                       feature: 'Priority Support',
                       basic: 'Email',
                       pro: 'Email',
-                      enterprise: 'Phone + Email'
+                      enterprise: 'Phone + Email',
+                      government: 'Dedicated',
+                      lifetime: 'Priority'
                     },
-                    { feature: 'API Access', basic: '✗', pro: '✗', enterprise: '✓' },
-                    { feature: 'White-Label License', basic: '✗', pro: '✗', enterprise: '✓' }
+                    { feature: 'API Access', basic: '✗', pro: '✗', enterprise: '✓', government: '✓', lifetime: '✓' },
+                    { feature: 'White-Label License', basic: '✗', pro: '✗', enterprise: '✓', government: '✓', lifetime: '✓' },
+                    { feature: 'Government Compliance', basic: '✗', pro: '✗', enterprise: '✗', government: '✓', lifetime: '✗' },
+                    { feature: 'Transferable License', basic: '✗', pro: '✗', enterprise: '✗', government: '✗', lifetime: '✓' }
                   ].map((row, index) => (
                     <tr
                       key={index}
@@ -324,6 +352,8 @@ export function PricingSection() {
                       <td className="p-6 text-center text-white font-bold bg-gradient-to-r from-yellow-500/10 to-orange-500/10">
                         {row.enterprise}
                       </td>
+                      <td className="p-6 text-center text-white/70">{row.government}</td>
+                      <td className="p-6 text-center text-white/70">{row.lifetime}</td>
                     </tr>
                   ))}
                 </tbody>
