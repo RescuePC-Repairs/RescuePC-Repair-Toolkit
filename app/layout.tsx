@@ -28,7 +28,7 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
-  userScalable: true,
+  userScalable: true
 };
 
 // Fortune 500 Professional metadata with SEO optimization and security
@@ -50,8 +50,8 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://rescuepcrepairs.com',
     languages: {
-      'en-US': 'https://rescuepcrepairs.com',
-    },
+      'en-US': 'https://rescuepcrepairs.com'
+    }
   },
   openGraph: {
     type: 'website',
@@ -78,12 +78,12 @@ export const metadata: Metadata = {
       'Professional computer repair toolkit with military-grade security and advanced diagnostics.',
     images: ['/RescuePC-Repairs-Logo.png'],
     creator: '@rescuepcrepairs',
-    site: '@rescuepcrepairs',
+    site: '@rescuepcrepairs'
   },
   verification: {
     google: 'your-google-verification-code',
     yandex: 'your-yandex-verification-code',
-    yahoo: 'your-yahoo-verification-code',
+    yahoo: 'your-yahoo-verification-code'
   },
   other: {
     'msapplication-TileColor': '#000000',
@@ -93,8 +93,8 @@ export const metadata: Metadata = {
     'apple-mobile-web-app-title': 'RescuePC Repairs',
     'application-name': 'RescuePC Repairs',
     'mobile-web-app-capable': 'yes',
-    'msapplication-config': '/browserconfig.xml',
-  },
+    'msapplication-config': '/browserconfig.xml'
+  }
 };
 
 // Fortune 500 Professional layout component with enhanced security headers
@@ -107,28 +107,34 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://api.stripe.com" />
         <link rel="preconnect" href="https://js.stripe.com" />
-        
+
         {/* DNS Prefetch for external domains */}
         <link rel="dns-prefetch" href="//fonts.googleapis.com" />
         <link rel="dns-prefetch" href="//fonts.gstatic.com" />
         <link rel="dns-prefetch" href="//api.stripe.com" />
         <link rel="dns-prefetch" href="//js.stripe.com" />
-        
+
         {/* Preload critical resources */}
         <link rel="preload" href="/RescuePC-Repairs-Logo.png" as="image" type="image/png" />
-        <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-        
+        <link
+          rel="preload"
+          href="/fonts/inter-var.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+
         {/* Resource hints for faster loading */}
         <link rel="prefetch" href="/api/health" />
         <link rel="prefetch" href="/api/validate-license" />
-        
+
         {/* Manifest for PWA */}
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        
+
         {/* Performance monitoring */}
         <script
           dangerouslySetInnerHTML={{
@@ -156,7 +162,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     });
                 });
               }
-            `,
+            `
           }}
         />
       </head>

@@ -81,24 +81,24 @@ const TESTIMONIALS_DATA = [
 ];
 
 // Memoized components to prevent unnecessary re-renders
-const TestimonialCard = memo(({ testimonial }: { testimonial: typeof TESTIMONIALS_DATA[0] }) => (
+const TestimonialCard = memo(({ testimonial }: { testimonial: (typeof TESTIMONIALS_DATA)[0] }) => (
   <div className="glass-card p-8 text-center max-w-4xl mx-auto">
     <div className="flex items-center justify-center mb-6">
       <Quote className="w-8 h-8 text-blue-400 mr-2" />
       <div className="text-4xl">{testimonial.avatar}</div>
       <Quote className="w-8 h-8 text-blue-400 ml-2" />
     </div>
-    
+
     <p className="text-lg md:text-xl text-white/90 leading-relaxed mb-6 italic">
       "{testimonial.content}"
     </p>
-    
+
     <div className="flex items-center justify-center gap-1 mb-4">
       {[...Array(testimonial.rating)].map((_, i) => (
         <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
       ))}
     </div>
-    
+
     <div>
       <h4 className="text-white font-bold text-lg">{testimonial.name}</h4>
       <p className="text-white/70 text-sm">{testimonial.role}</p>
@@ -106,37 +106,33 @@ const TestimonialCard = memo(({ testimonial }: { testimonial: typeof TESTIMONIAL
   </div>
 ));
 
-const NavigationButton = memo(({ 
-  direction, 
-  onClick, 
-  disabled 
-}: { 
-  direction: 'prev' | 'next'; 
-  onClick: () => void; 
-  disabled: boolean;
-}) => (
-  <button
-    onClick={onClick}
-    disabled={disabled}
-    className={`absolute top-1/2 transform -translate-y-1/2 z-10 w-12 h-12 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed ${
-      direction === 'prev' ? 'left-4' : 'right-4'
-    }`}
-  >
-    {direction === 'prev' ? (
-      <ChevronLeft className="w-6 h-6" />
-    ) : (
-      <ChevronRight className="w-6 h-6" />
-    )}
-  </button>
-));
+const NavigationButton = memo(
+  ({
+    direction,
+    onClick,
+    disabled
+  }: {
+    direction: 'prev' | 'next';
+    onClick: () => void;
+    disabled: boolean;
+  }) => (
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      className={`absolute top-1/2 transform -translate-y-1/2 z-10 w-12 h-12 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed ${
+        direction === 'prev' ? 'left-4' : 'right-4'
+      }`}
+    >
+      {direction === 'prev' ? (
+        <ChevronLeft className="w-6 h-6" />
+      ) : (
+        <ChevronRight className="w-6 h-6" />
+      )}
+    </button>
+  )
+);
 
-const DotIndicator = memo(({ 
-  active, 
-  onClick 
-}: { 
-  active: boolean; 
-  onClick: () => void;
-}) => (
+const DotIndicator = memo(({ active, onClick }: { active: boolean; onClick: () => void }) => (
   <button
     onClick={onClick}
     className={`w-3 h-3 rounded-full transition-all duration-300 ${
@@ -208,7 +204,7 @@ export function TestimonialCarousel() {
         >
           <div className="relative max-w-6xl mx-auto">
             <TestimonialCard testimonial={currentTestimonial} />
-            
+
             {/* Navigation Buttons */}
             <NavigationButton direction="prev" onClick={handlePrevious} disabled={false} />
             <NavigationButton direction="next" onClick={handleNext} disabled={false} />

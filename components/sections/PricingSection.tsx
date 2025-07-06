@@ -120,7 +120,7 @@ const INDICATORS_DATA = [
 ];
 
 // Memoized components to prevent unnecessary re-renders
-const PlanCard = memo(({ plan, index }: { plan: typeof PLANS_DATA[0]; index: number }) => (
+const PlanCard = memo(({ plan, index }: { plan: (typeof PLANS_DATA)[0]; index: number }) => (
   <div
     className={`pricing-card relative group h-full flex flex-col ${plan.popular ? 'popular scale-105 lg:scale-110' : ''} transition-all duration-500 delay-${index * 200}`}
   >
@@ -142,17 +142,13 @@ const PlanCard = memo(({ plan, index }: { plan: typeof PLANS_DATA[0]; index: num
         <plan.icon className="w-8 h-8 md:w-10 md:h-10 text-white" />
       </div>
       <h3 className="text-xl md:text-2xl font-black text-white mb-2">{plan.name}</h3>
-      <p className="text-white/70 text-sm md:text-base leading-relaxed">
-        {plan.description}
-      </p>
+      <p className="text-white/70 text-sm md:text-base leading-relaxed">{plan.description}</p>
     </div>
 
     {/* Enhanced Pricing */}
     <div className="text-center mb-6 flex-shrink-0">
       <div className="flex items-center justify-center gap-2 mb-2">
-        <span className="text-3xl md:text-4xl lg:text-5xl font-black text-white">
-          {plan.price}
-        </span>
+        <span className="text-3xl md:text-4xl lg:text-5xl font-black text-white">{plan.price}</span>
         <span className="text-white/60 text-base md:text-lg">/{plan.period}</span>
       </div>
       {plan.originalPrice && (
@@ -184,7 +180,7 @@ const PlanCard = memo(({ plan, index }: { plan: typeof PLANS_DATA[0]; index: num
   </div>
 ));
 
-const IndicatorCard = memo(({ indicator }: { indicator: typeof INDICATORS_DATA[0] }) => (
+const IndicatorCard = memo(({ indicator }: { indicator: (typeof INDICATORS_DATA)[0] }) => (
   <div className="glass-card text-center p-4 md:p-6 group hover:scale-105 transition-all duration-300">
     <indicator.icon className="w-6 h-6 md:w-8 md:h-8 text-blue-400 mx-auto mb-3 group-hover:scale-110 transition-transform duration-300" />
     <h4 className="text-white font-bold text-base md:text-lg mb-1">{indicator.text}</h4>
@@ -205,10 +201,13 @@ export function PricingSection() {
   }, []);
 
   // Memoized animation styles to prevent recalculation
-  const animationStyles = useMemo(() => ({
-    delay2s: { animationDelay: '2s' },
-    delay4s: { animationDelay: '4s' }
-  }), []);
+  const animationStyles = useMemo(
+    () => ({
+      delay2s: { animationDelay: '2s' },
+      delay4s: { animationDelay: '4s' }
+    }),
+    []
+  );
 
   return (
     <section id="pricing" className="py-20 relative overflow-hidden">

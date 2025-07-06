@@ -64,13 +64,11 @@ const FeatureCard = memo(({ icon, text }: { icon: string; text: string }) => (
     <div className="text-3xl mb-3 group-hover:scale-110 transition-transform duration-300">
       {icon}
     </div>
-    <span className="text-white text-sm font-semibold leading-tight">
-      {text}
-    </span>
+    <span className="text-white text-sm font-semibold leading-tight">{text}</span>
   </div>
 ));
 
-const PlatformCard = memo(({ platform }: { platform: typeof PLATFORM_DATA[0] }) => (
+const PlatformCard = memo(({ platform }: { platform: (typeof PLATFORM_DATA)[0] }) => (
   <div className="platform-card text-center group">
     <div className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">
       {platform.icon}
@@ -80,7 +78,7 @@ const PlatformCard = memo(({ platform }: { platform: typeof PLATFORM_DATA[0] }) 
   </div>
 ));
 
-const SecurityFeatureCard = memo(({ feature }: { feature: typeof SECURITY_FEATURES[0] }) => (
+const SecurityFeatureCard = memo(({ feature }: { feature: (typeof SECURITY_FEATURES)[0] }) => (
   <div className="glass-card text-center group">
     <feature.icon className="w-10 h-10 text-green-400 mx-auto mb-4 group-hover:scale-110 transition-transform duration-300" />
     <h4 className="text-white font-bold text-lg mb-2">{feature.title}</h4>
@@ -88,14 +86,14 @@ const SecurityFeatureCard = memo(({ feature }: { feature: typeof SECURITY_FEATUR
   </div>
 ));
 
-const StatCard = memo(({ stat }: { stat: typeof STATS_DATA[0] }) => (
+const StatCard = memo(({ stat }: { stat: (typeof STATS_DATA)[0] }) => (
   <div className="glass-card text-center p-6">
     <div className="text-3xl font-black text-white mb-2">{stat.number}</div>
     <div className="text-white/70 text-sm font-medium">{stat.label}</div>
   </div>
 ));
 
-const BadgeCard = memo(({ badge }: { badge: typeof BADGE_DATA[0] }) => (
+const BadgeCard = memo(({ badge }: { badge: (typeof BADGE_DATA)[0] }) => (
   <div className="glass-card text-center p-6 hover:bg-green-500/10 transition-all duration-300 group">
     <badge.icon className="w-8 h-8 text-green-400 mx-auto mb-3 group-hover:scale-110 transition-transform duration-300" />
     <span className="text-white text-sm font-semibold leading-tight">{badge.text}</span>
@@ -118,10 +116,13 @@ export function Hero() {
   }, []);
 
   // Memoized animation styles to prevent recalculation
-  const animationStyles = useMemo(() => ({
-    delay2s: { animationDelay: '2s' },
-    delay4s: { animationDelay: '4s' }
-  }), []);
+  const animationStyles = useMemo(
+    () => ({
+      delay2s: { animationDelay: '2s' },
+      delay4s: { animationDelay: '4s' }
+    }),
+    []
+  );
 
   return (
     <section className="hero relative overflow-hidden">

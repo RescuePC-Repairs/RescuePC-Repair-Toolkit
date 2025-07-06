@@ -2,7 +2,7 @@
 
 /**
  * 🚀 ENHANCED PERFORMANCE MONITORING SCRIPT
- * 
+ *
  * Tracks React performance optimizations and provides detailed metrics
  * Based on the React Performance Optimization Guide from dev.to
  */
@@ -39,7 +39,7 @@ class PerformanceMonitor {
   analyzeBundleSize() {
     try {
       console.log('📦 Analyzing bundle size...');
-      
+
       const buildPath = path.join(process.cwd(), '.next');
       if (!fs.existsSync(buildPath)) {
         console.log('⚠️  Build directory not found. Run "pnpm build" first.');
@@ -49,13 +49,13 @@ class PerformanceMonitor {
       const staticPath = path.join(buildPath, 'static');
       if (fs.existsSync(staticPath)) {
         const files = fs.readdirSync(staticPath);
-        files.forEach(file => {
+        files.forEach((file) => {
           const filePath = path.join(staticPath, file);
           const stats = fs.statSync(filePath);
           this.metrics.bundleSize[file] = {
             size: stats.size,
             sizeInKB: Math.round(stats.size / 1024),
-            sizeInMB: Math.round(stats.size / (1024 * 1024) * 100) / 100
+            sizeInMB: Math.round((stats.size / (1024 * 1024)) * 100) / 100
           };
         });
       }
@@ -75,7 +75,7 @@ class PerformanceMonitor {
   countReactOptimizations() {
     try {
       console.log('⚛️  Analyzing React optimizations...');
-      
+
       const srcPath = path.join(process.cwd(), 'components');
       if (!fs.existsSync(srcPath)) {
         console.log('⚠️  Components directory not found.');
@@ -90,35 +90,35 @@ class PerformanceMonitor {
 
       const walkDir = (dir) => {
         const files = fs.readdirSync(dir);
-        files.forEach(file => {
+        files.forEach((file) => {
           const filePath = path.join(dir, file);
           const stat = fs.statSync(filePath);
-          
+
           if (stat.isDirectory()) {
             walkDir(filePath);
           } else if (file.endsWith('.tsx') || file.endsWith('.ts')) {
             const content = fs.readFileSync(filePath, 'utf8');
-            
+
             // Count React.memo usage
             if (content.includes('React.memo') || content.includes('memo(')) {
               memoizedComponents++;
             }
-            
+
             // Count useCallback usage
             if (content.includes('useCallback')) {
               useCallbackUsage++;
             }
-            
+
             // Count useMemo usage
             if (content.includes('useMemo')) {
               useMemoUsage++;
             }
-            
+
             // Count lazy loading
             if (content.includes('React.lazy') || content.includes('lazy(')) {
               lazyLoadedComponents++;
             }
-            
+
             // Count virtualized lists
             if (content.includes('react-window') || content.includes('react-virtualized')) {
               virtualizedLists++;
@@ -154,14 +154,15 @@ class PerformanceMonitor {
   async runLighthouse() {
     try {
       console.log('🔍 Running Lighthouse audit...');
-      
-      const command = 'npx lighthouse http://localhost:3000 --output=json --output-path=./lighthouse-report.json --chrome-flags="--headless"';
-      
+
+      const command =
+        'npx lighthouse http://localhost:3000 --output=json --output-path=./lighthouse-report.json --chrome-flags="--headless"';
+
       execSync(command, { stdio: 'inherit' });
-      
+
       if (fs.existsSync('./lighthouse-report.json')) {
         const report = JSON.parse(fs.readFileSync('./lighthouse-report.json', 'utf8'));
-        
+
         this.metrics.lighthouse = {
           performance: report.lhr.categories.performance.score * 100,
           accessibility: report.lhr.categories.accessibility.score * 100,
@@ -178,10 +179,18 @@ class PerformanceMonitor {
         console.log(`  Accessibility: ${this.metrics.lighthouse.accessibility.toFixed(1)}%`);
         console.log(`  Best Practices: ${this.metrics.lighthouse.bestPractices.toFixed(1)}%`);
         console.log(`  SEO: ${this.metrics.lighthouse.seo.toFixed(1)}%`);
-        console.log(`  First Contentful Paint: ${(this.metrics.lighthouse.firstContentfulPaint / 1000).toFixed(2)}s`);
-        console.log(`  Largest Contentful Paint: ${(this.metrics.lighthouse.largestContentfulPaint / 1000).toFixed(2)}s`);
-        console.log(`  First Input Delay: ${(this.metrics.lighthouse.firstInputDelay / 1000).toFixed(2)}s`);
-        console.log(`  Cumulative Layout Shift: ${this.metrics.lighthouse.cumulativeLayoutShift.toFixed(3)}`);
+        console.log(
+          `  First Contentful Paint: ${(this.metrics.lighthouse.firstContentfulPaint / 1000).toFixed(2)}s`
+        );
+        console.log(
+          `  Largest Contentful Paint: ${(this.metrics.lighthouse.largestContentfulPaint / 1000).toFixed(2)}s`
+        );
+        console.log(
+          `  First Input Delay: ${(this.metrics.lighthouse.firstInputDelay / 1000).toFixed(2)}s`
+        );
+        console.log(
+          `  Cumulative Layout Shift: ${this.metrics.lighthouse.cumulativeLayoutShift.toFixed(3)}`
+        );
       }
     } catch (error) {
       console.error('❌ Lighthouse audit failed:', error.message);
@@ -193,27 +202,35 @@ class PerformanceMonitor {
    */
   checkCoreWebVitals() {
     const { lighthouse } = this.metrics;
-    
+
     if (!lighthouse.performance) return;
 
     const thresholds = {
       fcp: 1800, // 1.8s
       lcp: 2500, // 2.5s
-      fid: 100,  // 100ms
-      cls: 0.1   // 0.1
+      fid: 100, // 100ms
+      cls: 0.1 // 0.1
     };
 
     console.log('🎯 Core Web Vitals Check:');
-    
+
     const fcpPass = lighthouse.firstContentfulPaint <= thresholds.fcp;
     const lcpPass = lighthouse.largestContentfulPaint <= thresholds.lcp;
     const fidPass = lighthouse.firstInputDelay <= thresholds.fid;
     const clsPass = lighthouse.cumulativeLayoutShift <= thresholds.cls;
 
-    console.log(`  First Contentful Paint: ${fcpPass ? '✅' : '❌'} ${(lighthouse.firstContentfulPaint / 1000).toFixed(2)}s (target: ≤1.8s)`);
-    console.log(`  Largest Contentful Paint: ${lcpPass ? '✅' : '❌'} ${(lighthouse.largestContentfulPaint / 1000).toFixed(2)}s (target: ≤2.5s)`);
-    console.log(`  First Input Delay: ${fidPass ? '✅' : '❌'} ${(lighthouse.firstInputDelay / 1000).toFixed(2)}s (target: ≤100ms)`);
-    console.log(`  Cumulative Layout Shift: ${clsPass ? '✅' : '❌'} ${lighthouse.cumulativeLayoutShift.toFixed(3)} (target: ≤0.1)`);
+    console.log(
+      `  First Contentful Paint: ${fcpPass ? '✅' : '❌'} ${(lighthouse.firstContentfulPaint / 1000).toFixed(2)}s (target: ≤1.8s)`
+    );
+    console.log(
+      `  Largest Contentful Paint: ${lcpPass ? '✅' : '❌'} ${(lighthouse.largestContentfulPaint / 1000).toFixed(2)}s (target: ≤2.5s)`
+    );
+    console.log(
+      `  First Input Delay: ${fidPass ? '✅' : '❌'} ${(lighthouse.firstInputDelay / 1000).toFixed(2)}s (target: ≤100ms)`
+    );
+    console.log(
+      `  Cumulative Layout Shift: ${clsPass ? '✅' : '❌'} ${lighthouse.cumulativeLayoutShift.toFixed(3)} (target: ≤0.1)`
+    );
 
     return fcpPass && lcpPass && fidPass && clsPass;
   }
@@ -225,8 +242,13 @@ class PerformanceMonitor {
     const report = {
       timestamp: this.metrics.timestamp,
       summary: {
-        totalBundleSize: Object.values(this.metrics.bundleSize).reduce((sum, file) => sum + file.size, 0),
-        averageBundleSize: Object.values(this.metrics.bundleSize).reduce((sum, file) => sum + file.size, 0) / Object.keys(this.metrics.bundleSize).length,
+        totalBundleSize: Object.values(this.metrics.bundleSize).reduce(
+          (sum, file) => sum + file.size,
+          0
+        ),
+        averageBundleSize:
+          Object.values(this.metrics.bundleSize).reduce((sum, file) => sum + file.size, 0) /
+          Object.keys(this.metrics.bundleSize).length,
         lighthouseScore: this.metrics.lighthouse.performance || 0,
         coreWebVitalsPass: this.checkCoreWebVitals(),
         reactOptimizations: this.metrics.reactOptimizations
@@ -236,13 +258,19 @@ class PerformanceMonitor {
 
     const reportPath = path.join(process.cwd(), 'performance-report.json');
     fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
-    
+
     console.log('\n📋 Performance Report Generated:');
-    console.log(`  Total Bundle Size: ${(report.summary.totalBundleSize / (1024 * 1024)).toFixed(2)} MB`);
-    console.log(`  Average Bundle Size: ${(report.summary.averageBundleSize / 1024).toFixed(2)} KB`);
+    console.log(
+      `  Total Bundle Size: ${(report.summary.totalBundleSize / (1024 * 1024)).toFixed(2)} MB`
+    );
+    console.log(
+      `  Average Bundle Size: ${(report.summary.averageBundleSize / 1024).toFixed(2)} KB`
+    );
     console.log(`  Lighthouse Score: ${report.summary.lighthouseScore.toFixed(1)}%`);
     console.log(`  Core Web Vitals: ${report.summary.coreWebVitalsPass ? '✅ PASS' : '❌ FAIL'}`);
-    console.log(`  React Optimizations: ${Object.values(this.metrics.reactOptimizations).reduce((sum, count) => sum + count, 0)} total`);
+    console.log(
+      `  React Optimizations: ${Object.values(this.metrics.reactOptimizations).reduce((sum, count) => sum + count, 0)} total`
+    );
     console.log(`  Report saved to: ${reportPath}`);
 
     return report;
@@ -253,18 +281,18 @@ class PerformanceMonitor {
    */
   async run() {
     console.log('🚀 Starting Enhanced Performance Analysis...\n');
-    
+
     this.analyzeBundleSize();
     console.log('');
-    
+
     this.countReactOptimizations();
     console.log('');
-    
+
     await this.runLighthouse();
     console.log('');
-    
+
     this.generateReport();
-    
+
     console.log('\n✅ Performance analysis complete!');
   }
 }
@@ -275,4 +303,4 @@ if (require.main === module) {
   monitor.run().catch(console.error);
 }
 
-module.exports = PerformanceMonitor; 
+module.exports = PerformanceMonitor;

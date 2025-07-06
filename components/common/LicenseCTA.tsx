@@ -94,8 +94,9 @@ export function LicenseCTA({
 
   // Memoized variant styles to prevent recalculation
   const getVariantStyles = useCallback(() => {
-    const baseStyles = 'flex items-center justify-center gap-2 w-full py-3 px-6 rounded-xl font-semibold transition-all duration-300 transform';
-    
+    const baseStyles =
+      'flex items-center justify-center gap-2 w-full py-3 px-6 rounded-xl font-semibold transition-all duration-300 transform';
+
     switch (variant) {
       case 'enterprise':
         return `${baseStyles} bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800`;
