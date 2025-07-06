@@ -23,50 +23,67 @@ import { testWebhookRouter } from './routes/test-webhook';
 const app = express();
 
 // Security middleware
-app.use(helmet({
-  contentSecurityPolicy: {
-    directives: {
-      defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://fonts.googleapis.com"],
-      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
-      fontSrc: ["'self'", "https://fonts.gstatic.com"],
-      imgSrc: ["'self'", "data:", "https:"],
-      connectSrc: ["'self'", "https://api.stripe.com", "https://fonts.googleapis.com"],
-      frameSrc: ["'self'", "https://js.stripe.com"],
-      objectSrc: ["'none'"],
-      baseUri: ["'self'"],
-      formAction: ["'self'"],
-      frameAncestors: ["'none'"],
-      upgradeInsecureRequests: []
-    }
-  },
-  crossOriginEmbedderPolicy: { policy: "require-corp" },
-  crossOriginOpenerPolicy: { policy: "same-origin" },
-  crossOriginResourcePolicy: { policy: "same-origin" },
-  dnsPrefetchControl: { allow: false },
-  frameguard: { action: "deny" },
-  hidePoweredBy: true,
-  hsts: {
-    maxAge: 31536000,
-    includeSubDomains: true,
-    preload: true
-  },
-  ieNoOpen: true,
-  noSniff: true,
-  permittedCrossDomainPolicies: { permittedPolicies: "none" },
-  referrerPolicy: { policy: "strict-origin-when-cross-origin" },
-  xssFilter: true
-}));
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: [
+          "'self'",
+          "'unsafe-inline'",
+          "'unsafe-eval'",
+          'https://fonts.googleapis.com',
+        ],
+        styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
+        fontSrc: ["'self'", 'https://fonts.gstatic.com'],
+        imgSrc: ["'self'", 'data:', 'https:'],
+        connectSrc: [
+          "'self'",
+          'https://api.stripe.com',
+          'https://fonts.googleapis.com',
+        ],
+        frameSrc: ["'self'", 'https://js.stripe.com'],
+        objectSrc: ["'none'"],
+        baseUri: ["'self'"],
+        formAction: ["'self'"],
+        frameAncestors: ["'none'"],
+        upgradeInsecureRequests: [],
+      },
+    },
+    crossOriginEmbedderPolicy: { policy: 'require-corp' },
+    crossOriginOpenerPolicy: { policy: 'same-origin' },
+    crossOriginResourcePolicy: { policy: 'same-origin' },
+    dnsPrefetchControl: { allow: false },
+    frameguard: { action: 'deny' },
+    hidePoweredBy: true,
+    hsts: {
+      maxAge: 31536000,
+      includeSubDomains: true,
+      preload: true,
+    },
+    ieNoOpen: true,
+    noSniff: true,
+    permittedCrossDomainPolicies: { permittedPolicies: 'none' },
+    referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
+    xssFilter: true,
+  }),
+);
 
 // CORS configuration
-app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
-    ? ['https://rescuepcrepairs.com', 'https://rescue-pc-repairs-multi-os-toolkit-ofrjwva13.vercel.app']
-    : ['http://localhost:4200', 'http://localhost:3000'],
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'stripe-signature']
-}));
+app.use(
+  cors({
+    origin:
+      process.env.NODE_ENV === 'production'
+        ? [
+            'https://rescuepcrepairs.com',
+            'https://rescue-pc-repairs-multi-os-toolkit-ofrjwva13.vercel.app',
+          ]
+        : ['http://localhost:4200', 'http://localhost:3000'],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'stripe-signature'],
+  }),
+);
 
 // Rate limiting
 const limiter = rateLimit({
@@ -98,22 +115,32 @@ app.use('/api/test-webhook', testWebhookRouter);
 
 // Root API endpoint
 app.get('/api', (req, res) => {
-  res.json({ 
-    message: 'RescuePC Repairs API', 
+  res.json({
+    message: 'RescuePC Repairs API',
     version: '2.0.0',
     status: 'operational',
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   });
 });
 
 // Error handling middleware
-app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
-  console.error('API Error:', err);
-  res.status(500).json({ 
-    error: 'Internal server error',
-    message: process.env.NODE_ENV === 'development' ? err.message : 'Something went wrong'
-  });
-});
+app.use(
+  (
+    err: any,
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction,
+  ) => {
+    console.error('API Error:', err);
+    res.status(500).json({
+      error: 'Internal server error',
+      message:
+        process.env.NODE_ENV === 'development'
+          ? err.message
+          : 'Something went wrong',
+    });
+  },
+);
 
 // 404 handler
 app.use('*', (req, res) => {
@@ -122,7 +149,9 @@ app.use('*', (req, res) => {
 
 const port = process.env.PORT || 3333;
 const server = app.listen(port, () => {
-  console.log(`🚀 RescuePC Repairs API listening at http://localhost:${port}/api`);
+  console.log(
+    `🚀 RescuePC Repairs API listening at http://localhost:${port}/api`,
+  );
   console.log(`🔒 Security headers enabled`);
   console.log(`⚡ Rate limiting active`);
 });

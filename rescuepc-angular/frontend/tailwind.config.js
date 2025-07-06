@@ -1,12 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./src/**/*.{html,ts}",
-    "../../libs/**/*.{html,ts}",
-    "./src/app/**/*.{html,ts}",
-    "./src/components/**/*.{html,ts}",
-    "./src/pages/**/*.{html,ts}",
-    "./src/shared/**/*.{html,ts}"
+    './src/**/*.{html,ts}',
+    '../../libs/**/*.{html,ts}',
+    './src/app/**/*.{html,ts}',
+    './src/components/**/*.{html,ts}',
+    './src/pages/**/*.{html,ts}',
+    './src/shared/**/*.{html,ts}',
   ],
   theme: {
     extend: {
@@ -75,7 +75,7 @@ module.exports = {
           800: '#991b1b',
           900: '#7f1d1d',
           950: '#450a0a',
-        }
+        },
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
@@ -99,23 +99,25 @@ module.exports = {
         bounceGentle: {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-5px)' },
-        }
+        },
       },
       spacing: {
-        '18': '4.5rem',
-        '88': '22rem',
-        '128': '32rem',
+        18: '4.5rem',
+        88: '22rem',
+        128: '32rem',
       },
       borderRadius: {
-        'xl': '1rem',
+        xl: '1rem',
         '2xl': '1.5rem',
         '3xl': '2rem',
       },
       boxShadow: {
-        'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
-        'medium': '0 4px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
-        'strong': '0 10px 40px -10px rgba(0, 0, 0, 0.15), 0 2px 10px -2px rgba(0, 0, 0, 0.05)',
-      }
+        soft: '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
+        medium:
+          '0 4px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+        strong:
+          '0 10px 40px -10px rgba(0, 0, 0, 0.15), 0 2px 10px -2px rgba(0, 0, 0, 0.05)',
+      },
     },
   },
   plugins: [
@@ -139,5 +141,5 @@ module.exports = {
     'border-success-500',
     'border-warning-500',
     'border-danger-500',
-  ]
-} 
+  ],
+};

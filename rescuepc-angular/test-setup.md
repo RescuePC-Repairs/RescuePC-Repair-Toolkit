@@ -3,16 +3,19 @@
 ## Testing Strategy
 
 ### 1. Unit Tests (Jest)
+
 - **Frontend**: Angular components, services, pipes
 - **Backend**: Express routes, middleware, utilities
 - **Libraries**: Shared utilities, Stripe integration, license validation
 
 ### 2. Integration Tests (Supertest)
+
 - **API Routes**: All Express endpoints
 - **Webhook Handlers**: Stripe webhook processing
 - **Authentication**: License validation flows
 
 ### 3. E2E Tests (Playwright)
+
 - **User Flows**: Complete purchase journeys
 - **Responsive Testing**: Mobile, tablet, desktop
 - **Cross-browser**: Chrome, Firefox, Safari
@@ -87,18 +90,21 @@ rescuepc-angular/
 ## Test Configuration
 
 ### Jest Configuration
+
 - **Coverage**: 80% minimum
 - **Timeout**: 10 seconds
 - **Environment**: jsdom for frontend, node for backend
 - **Mocking**: Stripe, external APIs, file system
 
 ### Playwright Configuration
+
 - **Browsers**: Chrome, Firefox, Safari
 - **Devices**: Mobile, tablet, desktop
 - **Screenshots**: On failure
 - **Video**: Record test runs
 
 ### Supertest Configuration
+
 - **Base URL**: http://localhost:3333
 - **Headers**: Authentication, CORS
 - **Timeout**: 5 seconds per request
@@ -106,6 +112,7 @@ rescuepc-angular/
 ## Test Examples
 
 ### Angular Component Test
+
 ```typescript
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HeroComponent } from './hero.component';
@@ -116,7 +123,7 @@ describe('HeroComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HeroComponent]
+      imports: [HeroComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(HeroComponent);
@@ -136,16 +143,14 @@ describe('HeroComponent', () => {
 ```
 
 ### Express Route Test
+
 ```typescript
 import request from 'supertest';
 import { app } from '../main';
 
 describe('Webhook Routes', () => {
   it('should handle Stripe webhook', async () => {
-    const response = await request(app)
-      .post('/api/webhook')
-      .set('stripe-signature', 'test-signature')
-      .send({ type: 'payment_intent.succeeded' });
+    const response = await request(app).post('/api/webhook').set('stripe-signature', 'test-signature').send({ type: 'payment_intent.succeeded' });
 
     expect(response.status).toBe(200);
     expect(response.body.success).toBe(true);
@@ -154,6 +159,7 @@ describe('Webhook Routes', () => {
 ```
 
 ### E2E Test
+
 ```typescript
 import { test, expect } from '@playwright/test';
 
@@ -163,7 +169,7 @@ test('complete purchase flow', async ({ page }) => {
   await page.click('[data-testid="basic-license"]');
   await page.fill('[data-testid="email"]', 'test@example.com');
   await page.click('[data-testid="purchase"]');
-  
+
   await expect(page.locator('[data-testid="success-message"]')).toBeVisible();
 });
 ```
@@ -171,6 +177,7 @@ test('complete purchase flow', async ({ page }) => {
 ## CI/CD Integration
 
 ### GitHub Actions
+
 ```yaml
 name: Test
 on: [push, pull_request]
@@ -203,4 +210,4 @@ jobs:
 
 - **Dependency Scanning**: npm audit
 - **Code Analysis**: ESLint security rules
-- **Penetration Testing**: OWASP ZAP integration 
+- **Penetration Testing**: OWASP ZAP integration

@@ -29,9 +29,6 @@ export const metadata: Metadata = {
   creator: 'Tyler Keesee',
   publisher: 'RescuePC Repairs',
   robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
-  viewport: 'width=device-width, initial-scale=1, viewport-fit=cover',
-  themeColor: '#1e40af',
-  colorScheme: 'dark',
   applicationName: 'RescuePC Repairs',
   category: 'Technology',
   classification: 'Software',
@@ -82,6 +79,15 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://rescuepcrepairs.com'
   }
+};
+
+// Separate viewport export to fix warnings
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+  themeColor: '#1e40af',
+  colorScheme: 'dark'
 };
 
 // Fortune 500 Professional layout component with enhanced security headers

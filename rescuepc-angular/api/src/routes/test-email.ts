@@ -7,9 +7,9 @@ testEmailRouter.post('/', async (req, res) => {
     const { to, subject, message } = req.body;
 
     if (!to || !to.includes('@')) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         error: 'Valid email address is required',
-        success: false 
+        success: false,
       });
     }
 
@@ -24,10 +24,10 @@ testEmailRouter.post('/', async (req, res) => {
       message: 'Test email logged successfully',
       to,
       subject: subject || 'Test Email',
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
   } catch (error) {
     console.error('Test email error:', error);
     res.status(500).json({ error: 'Test email failed' });
   }
-}); 
+});

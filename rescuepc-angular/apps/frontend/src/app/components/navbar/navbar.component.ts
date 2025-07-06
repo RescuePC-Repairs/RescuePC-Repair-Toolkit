@@ -11,7 +11,7 @@ interface NavigationItem {
   standalone: true,
   imports: [CommonModule],
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent {
   mobileMenuOpen = false;
@@ -21,7 +21,7 @@ export class NavbarComponent {
     { name: 'Features', href: '#features' },
     { name: 'Pricing', href: '#pricing' },
     { name: 'Support', href: '#support' },
-    { name: 'About', href: '#about' }
+    { name: 'About', href: '#about' },
   ];
 
   toggleMobileMenu(): void {
@@ -39,4 +39,4 @@ export class NavbarComponent {
     }
     this.closeMobileMenu();
   }
-} 
+}

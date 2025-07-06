@@ -30,7 +30,7 @@
     flex-direction: column;
     gap: 0.5rem;
   }
-  
+
   .footer .grid {
     grid-template-columns: 1fr;
   }
@@ -66,4 +66,4 @@
   .footer {
     background: linear-gradient(135deg, #0a0f1a, #1a1f2e, #2a2f3e);
   }
-} 
+}

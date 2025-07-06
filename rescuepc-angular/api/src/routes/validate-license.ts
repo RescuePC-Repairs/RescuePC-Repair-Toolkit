@@ -7,9 +7,9 @@ validateLicenseRouter.post('/', async (req, res) => {
     const { licenseKey, email } = req.body;
 
     if (!licenseKey || !email) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         error: 'License key and email are required',
-        valid: false 
+        valid: false,
       });
     }
 
@@ -21,10 +21,10 @@ validateLicenseRouter.post('/', async (req, res) => {
       valid: isValid,
       licenseKey,
       email,
-      message: isValid ? 'License is valid' : 'Invalid license key'
+      message: isValid ? 'License is valid' : 'Invalid license key',
     });
   } catch (error) {
     console.error('License validation error:', error);
     res.status(500).json({ error: 'License validation failed' });
   }
-}); 
+});

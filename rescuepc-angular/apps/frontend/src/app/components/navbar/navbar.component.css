@@ -60,7 +60,9 @@ nav a:hover::after {
 .mobile-menu-enter-active {
   opacity: 1;
   transform: translateY(0);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
 }
 
 .mobile-menu-exit {
@@ -71,7 +73,9 @@ nav a:hover::after {
 .mobile-menu-exit-active {
   opacity: 0;
   transform: translateY(-10px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
 }
 
 /* Responsive design */
@@ -87,4 +91,4 @@ nav a:hover::after {
   :root {
     --primary-950: #0a0f1a;
   }
-} 
+}

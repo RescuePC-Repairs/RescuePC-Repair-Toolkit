@@ -136,7 +136,14 @@ const nextConfig = {
   },
   // Image optimization
   images: {
-    domains: ['rescuepcrepairs.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'rescuepcrepairs.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
     formats: ['image/webp', 'image/avif'],
     minimumCacheTTL: 31536000
   }

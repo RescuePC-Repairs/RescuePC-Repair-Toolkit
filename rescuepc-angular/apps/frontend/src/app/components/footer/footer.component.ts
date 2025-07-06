@@ -16,7 +16,7 @@ interface FooterSection {
   standalone: true,
   imports: [CommonModule],
   templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.css']
+  styleUrls: ['./footer.component.css'],
 })
 export class FooterComponent {
   footerSections: FooterSection[] = [
@@ -27,8 +27,8 @@ export class FooterComponent {
         { name: 'Pricing', href: '#pricing' },
         { name: 'Knowledge Base', href: '#knowledge-base' },
         { name: 'Download', href: '#download' },
-        { name: 'Product Flyer', href: '#flyer' }
-      ]
+        { name: 'Product Flyer', href: '#flyer' },
+      ],
     },
     {
       title: 'Support',
@@ -36,8 +36,8 @@ export class FooterComponent {
         { name: 'Email Support', href: 'mailto:rescuepcrepair@yahoo.com' },
         { name: 'Support Center', href: '#support' },
         { name: 'Documentation', href: '#docs' },
-        { name: 'FAQ', href: '#faq' }
-      ]
+        { name: 'FAQ', href: '#faq' },
+      ],
     },
     {
       title: 'Legal',
@@ -45,15 +45,15 @@ export class FooterComponent {
         { name: 'Privacy Policy', href: '#privacy' },
         { name: 'Terms of Service', href: '#terms' },
         { name: 'Refund Policy', href: '#refund' },
-        { name: 'License', href: '#license' }
-      ]
-    }
+        { name: 'License', href: '#license' },
+      ],
+    },
   ];
 
   contactInfo = [
     { icon: '📧', text: 'rescuepcrepair@yahoo.com' },
     { icon: '📞', text: '24/7 Support Available' },
-    { icon: '🌐', text: 'Worldwide Service' }
+    { icon: '🌐', text: 'Worldwide Service' },
   ];
 
   scrollToSection(href: string): void {
@@ -64,4 +64,4 @@ export class FooterComponent {
       }
     }
   }
-} 
+}

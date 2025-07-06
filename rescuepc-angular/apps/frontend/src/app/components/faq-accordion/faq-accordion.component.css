@@ -84,7 +84,12 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
   transition: left 0.5s;
 }
 
@@ -122,16 +127,16 @@
   .faq-item button {
     padding: 16px;
   }
-  
+
   .faq-item .answer {
     margin: 12px;
     padding: 20px;
   }
-  
+
   .glass-card {
     padding: 20px;
   }
-  
+
   .cta-button {
     padding: 14px 24px;
     font-size: 14px;
@@ -146,7 +151,11 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+  background: linear-gradient(
+    135deg,
+    rgba(59, 130, 246, 0.1),
+    rgba(139, 92, 246, 0.1)
+  );
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
@@ -187,7 +196,12 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
   transition: left 0.6s;
 }
 
@@ -196,14 +210,30 @@
 }
 
 /* Stagger animation for FAQ items */
-.faq-item:nth-child(1) { animation-delay: 0.1s; }
-.faq-item:nth-child(2) { animation-delay: 0.2s; }
-.faq-item:nth-child(3) { animation-delay: 0.3s; }
-.faq-item:nth-child(4) { animation-delay: 0.4s; }
-.faq-item:nth-child(5) { animation-delay: 0.5s; }
-.faq-item:nth-child(6) { animation-delay: 0.6s; }
-.faq-item:nth-child(7) { animation-delay: 0.7s; }
-.faq-item:nth-child(8) { animation-delay: 0.8s; }
+.faq-item:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.faq-item:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.faq-item:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.faq-item:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.faq-item:nth-child(5) {
+  animation-delay: 0.5s;
+}
+.faq-item:nth-child(6) {
+  animation-delay: 0.6s;
+}
+.faq-item:nth-child(7) {
+  animation-delay: 0.7s;
+}
+.faq-item:nth-child(8) {
+  animation-delay: 0.8s;
+}
 
 /* Support section styling */
 .support-section {
@@ -253,4 +283,4 @@
   background: rgba(255, 255, 255, 0.2);
   transform: translateY(-2px);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-} 
+}

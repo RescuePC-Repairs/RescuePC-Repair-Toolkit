@@ -9,12 +9,14 @@ let webhookSecret: string | null = null;
 
 function getStripe(): Stripe {
   if (!process.env.STRIPE_SECRET_KEY) {
-    throw new Error('CRITICAL: STRIPE_SECRET_KEY environment variable is required');
+    throw new Error(
+      'CRITICAL: STRIPE_SECRET_KEY environment variable is required',
+    );
   }
 
   if (!stripe) {
     stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-      apiVersion: '2025-06-30.basil'
+      apiVersion: '2025-06-30.basil',
     });
   }
 
@@ -23,7 +25,9 @@ function getStripe(): Stripe {
 
 function getWebhookSecret(): string {
   if (!process.env.STRIPE_WEBHOOK_SECRET) {
-    throw new Error('CRITICAL: STRIPE_WEBHOOK_SECRET environment variable is required');
+    throw new Error(
+      'CRITICAL: STRIPE_WEBHOOK_SECRET environment variable is required',
+    );
   }
 
   if (!webhookSecret) {
@@ -47,36 +51,36 @@ const ENTERPRISE_PACKAGES: Record<string, EnterprisePackage> = {
     name: 'Enterprise 25',
     userCount: 25,
     price: 499.99,
-    duration: 'annual'
+    duration: 'annual',
   },
   'enterprise-50': {
     id: 'enterprise-50',
     name: 'Enterprise 50',
     userCount: 50,
     price: 899.99,
-    duration: 'annual'
+    duration: 'annual',
   },
   'enterprise-100': {
     id: 'enterprise-100',
     name: 'Enterprise 100',
     userCount: 100,
     price: 1499.99,
-    duration: 'annual'
+    duration: 'annual',
   },
   government: {
     id: 'government',
     name: 'Government',
     userCount: 100,
     price: 999.99,
-    duration: 'annual'
+    duration: 'annual',
   },
   unlimited: {
     id: 'unlimited',
     name: 'Unlimited',
     userCount: -1, // Unlimited
     price: 499.99,
-    duration: 'lifetime'
-  }
+    duration: 'lifetime',
+  },
 };
 
 enterpriseWebhookRouter.post('/', async (req, res) => {
@@ -127,4 +131,4 @@ enterpriseWebhookRouter.post('/', async (req, res) => {
     console.error('Enterprise webhook error:', error);
     res.status(500).json({ error: 'Webhook handler failed' });
   }
-}); 
+});

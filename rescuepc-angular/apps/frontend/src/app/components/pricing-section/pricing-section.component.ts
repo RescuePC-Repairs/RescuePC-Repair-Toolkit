@@ -44,7 +44,7 @@ interface ComparisonRow {
   standalone: true,
   imports: [CommonModule],
   templateUrl: './pricing-section.component.html',
-  styleUrls: ['./pricing-section.component.css']
+  styleUrls: ['./pricing-section.component.css'],
 })
 export class PricingSectionComponent implements OnInit {
   isVisible = false;
@@ -64,12 +64,12 @@ export class PricingSectionComponent implements OnInit {
         'Driver database access',
         'Email support',
         '1-year updates included',
-        'Standard security features'
+        'Standard security features',
       ],
       icon: 'shield',
       color: 'from-blue-500 to-blue-600',
       popular: false,
-      stripeLink: 'https://buy.stripe.com/5kQfZggMacypcSl9wP08g05'
+      stripeLink: 'https://buy.stripe.com/5kQfZggMacypcSl9wP08g05',
     },
     {
       id: 'professional',
@@ -86,12 +86,12 @@ export class PricingSectionComponent implements OnInit {
         '3-year updates included',
         'Enhanced security protocols',
         'Remote repair capabilities',
-        'Custom repair profiles'
+        'Custom repair profiles',
       ],
       icon: 'zap',
       color: 'from-purple-500 to-purple-600',
       popular: false,
-      stripeLink: 'https://buy.stripe.com/00wcN4dzY0PHaKdfVd08g04'
+      stripeLink: 'https://buy.stripe.com/00wcN4dzY0PHaKdfVd08g04',
     },
     {
       id: 'enterprise',
@@ -110,12 +110,12 @@ export class PricingSectionComponent implements OnInit {
         'Custom deployment options',
         'Priority phone support',
         'White-label licensing',
-        'API access for integration'
+        'API access for integration',
       ],
       icon: 'crown',
       color: 'from-yellow-500 via-orange-500 to-red-500',
       popular: true,
-      stripeLink: 'https://buy.stripe.com/4gM8wO53s1TLaKd9wP08g02'
+      stripeLink: 'https://buy.stripe.com/4gM8wO53s1TLaKd9wP08g02',
     },
     {
       id: 'government',
@@ -132,12 +132,12 @@ export class PricingSectionComponent implements OnInit {
         'Dedicated support team',
         'Compliance documentation',
         'Audit trail capabilities',
-        'Multi-site licensing'
+        'Multi-site licensing',
       ],
       icon: 'lock',
       color: 'from-green-500 to-green-600',
       popular: false,
-      stripeLink: 'https://buy.stripe.com/9B64gy1Rgcyp19DdN508g03'
+      stripeLink: 'https://buy.stripe.com/9B64gy1Rgcyp19DdN508g03',
     },
     {
       id: 'lifetime',
@@ -154,20 +154,28 @@ export class PricingSectionComponent implements OnInit {
         'Transferable license',
         'Priority lifetime support',
         'Early access to new features',
-        'Lifetime API access'
+        'Lifetime API access',
       ],
       icon: 'sparkles',
       color: 'from-indigo-500 to-purple-600',
       popular: false,
-      stripeLink: 'https://buy.stripe.com/eVq3cu0Nc8i97y1aAT08g01'
-    }
+      stripeLink: 'https://buy.stripe.com/eVq3cu0Nc8i97y1aAT08g01',
+    },
   ];
 
   trustIndicators: TrustIndicator[] = [
-    { icon: 'shield', text: 'Military-Grade Security', desc: '256-bit encryption' },
-    { icon: 'users', text: 'Trusted by 10,000+ Users', desc: 'Enterprise verified' },
+    {
+      icon: 'shield',
+      text: 'Military-Grade Security',
+      desc: '256-bit encryption',
+    },
+    {
+      icon: 'users',
+      text: 'Trusted by 10,000+ Users',
+      desc: 'Enterprise verified',
+    },
     { icon: 'clock', text: 'Instant Download', desc: 'No waiting time' },
-    { icon: 'trending-up', text: '99.9% Success Rate', desc: 'Proven results' }
+    { icon: 'trending-up', text: '99.9% Success Rate', desc: 'Proven results' },
   ];
 
   comparisonRows: ComparisonRow[] = [
@@ -177,7 +185,7 @@ export class PricingSectionComponent implements OnInit {
       pro: '✓',
       enterprise: '✓',
       government: '✓',
-      lifetime: '✓'
+      lifetime: '✓',
     },
     {
       feature: 'Military-Grade Security',
@@ -185,7 +193,7 @@ export class PricingSectionComponent implements OnInit {
       pro: 'Enhanced',
       enterprise: 'Full',
       government: 'Military',
-      lifetime: 'Full'
+      lifetime: 'Full',
     },
     {
       feature: 'Automated Repairs',
@@ -193,7 +201,7 @@ export class PricingSectionComponent implements OnInit {
       pro: '✓',
       enterprise: '✓',
       government: '✓',
-      lifetime: '✓'
+      lifetime: '✓',
     },
     {
       feature: 'Lifetime Updates',
@@ -201,7 +209,7 @@ export class PricingSectionComponent implements OnInit {
       pro: '3 Years',
       enterprise: 'Lifetime',
       government: 'Lifetime',
-      lifetime: 'Lifetime'
+      lifetime: 'Lifetime',
     },
     {
       feature: 'Priority Support',
@@ -209,7 +217,7 @@ export class PricingSectionComponent implements OnInit {
       pro: 'Email',
       enterprise: 'Phone + Email',
       government: 'Dedicated',
-      lifetime: 'Priority'
+      lifetime: 'Priority',
     },
     {
       feature: 'API Access',
@@ -217,7 +225,7 @@ export class PricingSectionComponent implements OnInit {
       pro: '✗',
       enterprise: '✓',
       government: '✓',
-      lifetime: '✓'
+      lifetime: '✓',
     },
     {
       feature: 'White-Label License',
@@ -225,7 +233,7 @@ export class PricingSectionComponent implements OnInit {
       pro: '✗',
       enterprise: '✓',
       government: '✓',
-      lifetime: '✓'
+      lifetime: '✓',
     },
     {
       feature: 'Government Compliance',
@@ -233,7 +241,7 @@ export class PricingSectionComponent implements OnInit {
       pro: '✗',
       enterprise: '✗',
       government: '✓',
-      lifetime: '✗'
+      lifetime: '✗',
     },
     {
       feature: 'Transferable License',
@@ -241,27 +249,31 @@ export class PricingSectionComponent implements OnInit {
       pro: '✗',
       enterprise: '✗',
       government: '✗',
-      lifetime: '✓'
-    }
+      lifetime: '✓',
+    },
   ];
 
   faqs: FAQ[] = [
     {
       question: 'What payment methods do you accept?',
-      answer: 'We accept all major credit cards, PayPal, and Apple Pay. All payments are processed securely through Stripe.'
+      answer:
+        'We accept all major credit cards, PayPal, and Apple Pay. All payments are processed securely through Stripe.',
     },
     {
       question: 'Is there a money-back guarantee?',
-      answer: "Yes! We offer a 30-day money-back guarantee. If you're not satisfied, we'll refund your purchase, no questions asked."
+      answer:
+        "Yes! We offer a 30-day money-back guarantee. If you're not satisfied, we'll refund your purchase, no questions asked.",
     },
     {
       question: 'How long does delivery take?',
-      answer: "Instant! You'll receive your license key and download link immediately after payment confirmation."
+      answer:
+        "Instant! You'll receive your license key and download link immediately after payment confirmation.",
     },
     {
       question: 'Do you offer technical support?',
-      answer: 'Absolutely! Enterprise customers get priority phone support, while all customers receive email support.'
-    }
+      answer:
+        'Absolutely! Enterprise customers get priority phone support, while all customers receive email support.',
+    },
   ];
 
   ngOnInit(): void {
@@ -292,8 +304,8 @@ export class PricingSectionComponent implements OnInit {
       clock: 'fas fa-clock',
       'trending-up': 'fas fa-chart-line',
       award: 'fas fa-award',
-      check: 'fas fa-check'
+      check: 'fas fa-check',
     };
     return iconMap[icon] || 'fas fa-circle';
   }
-} 
+}

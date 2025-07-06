@@ -11,7 +11,7 @@ const customJestConfig = {
     '^@/(.*)$': '<rootDir>/$1',
     '^lru-cache$': '<rootDir>/__mocks__/lru-cache.js',
     '^lru-cache/(.*)$': '<rootDir>/__mocks__/lru-cache.js',
-    '^lodash-es$': 'lodash',
+    '^lodash-es$': 'lodash'
   },
   testPathIgnorePatterns: [
     '<rootDir>/.next/',
@@ -20,9 +20,7 @@ const customJestConfig = {
     '<rootDir>/e2e/'
   ],
   moduleFileExtensions: ['js', 'mjs', 'cjs', 'jsx', 'ts', 'tsx', 'json', 'node', 'd.ts'],
-  transformIgnorePatterns: [
-    'node_modules/(?!.pnpm|.*\\.mjs$)'
-  ],
+  transformIgnorePatterns: ['node_modules/(?!.pnpm|.*\\.mjs$)'],
   testMatch: [
     '**/test/**/*.(test|spec).(js|jsx|ts|tsx)',
     '**/__tests__/**/*.(js|jsx|ts|tsx)',

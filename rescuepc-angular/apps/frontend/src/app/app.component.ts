@@ -17,7 +17,7 @@ import { FAQAccordionComponent } from './components/faq-accordion/faq-accordion.
     NavbarComponent,
     FooterComponent,
     PricingSectionComponent,
-    FAQAccordionComponent
+    FAQAccordionComponent,
   ],
   template: `
     <app-navbar></app-navbar>
@@ -29,17 +29,19 @@ import { FAQAccordionComponent } from './components/faq-accordion/faq-accordion.
     </main>
     <app-footer></app-footer>
   `,
-  styles: [`
-    :host {
-      display: block;
-      min-height: 100vh;
-    }
-    
-    main {
-      flex: 1;
-    }
-  `]
+  styles: [
+    `
+      :host {
+        display: block;
+        min-height: 100vh;
+      }
+
+      main {
+        flex: 1;
+      }
+    `,
+  ],
 })
 export class AppComponent {
   title = 'RescuePC Repairs - Angular';
-} 
+}

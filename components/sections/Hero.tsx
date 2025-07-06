@@ -57,7 +57,7 @@ export function Hero() {
             <div className="flex items-center justify-center gap-6 mb-6">
               <div className="relative">
                 <Image
-                  src="/RescuePC Repairs Logo.png"
+                  src="/RescuePC-Repairs-Logo.png"
                   alt="RescuePC Repairs Logo"
                   width={80}
                   height={80}

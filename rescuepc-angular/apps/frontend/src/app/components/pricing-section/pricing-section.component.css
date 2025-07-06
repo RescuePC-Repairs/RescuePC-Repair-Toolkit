@@ -57,7 +57,12 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
   transition: left 0.5s;
 }
 
@@ -103,7 +108,8 @@
 }
 
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0px);
   }
   50% {
@@ -116,12 +122,12 @@
   .pricing-card {
     padding: 24px;
   }
-  
+
   .cta-button {
     padding: 14px 24px;
     font-size: 14px;
   }
-  
+
   .glass-card {
     padding: 20px;
   }
@@ -133,7 +139,8 @@ table {
   width: 100%;
 }
 
-th, td {
+th,
+td {
   padding: 16px;
   text-align: left;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -164,7 +171,8 @@ th {
 }
 
 @keyframes shimmer {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {
@@ -205,7 +213,7 @@ th {
   .comparison-table {
     overflow-x: auto;
   }
-  
+
   table {
     min-width: 800px;
   }
@@ -219,7 +227,11 @@ th {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+  background: linear-gradient(
+    135deg,
+    rgba(59, 130, 246, 0.1),
+    rgba(139, 92, 246, 0.1)
+  );
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
@@ -246,8 +258,18 @@ th {
 }
 
 /* Stagger animation for multiple cards */
-.pricing-card:nth-child(1) { animation-delay: 0.1s; }
-.pricing-card:nth-child(2) { animation-delay: 0.2s; }
-.pricing-card:nth-child(3) { animation-delay: 0.3s; }
-.pricing-card:nth-child(4) { animation-delay: 0.4s; }
-.pricing-card:nth-child(5) { animation-delay: 0.5s; } 
+.pricing-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.pricing-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.pricing-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.pricing-card:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.pricing-card:nth-child(5) {
+  animation-delay: 0.5s;
+}

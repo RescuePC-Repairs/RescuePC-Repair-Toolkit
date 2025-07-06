@@ -29,26 +29,6 @@ export function PricingSection() {
   // Direct Stripe Payment Links - Updated with correct prices and links
   const plans = [
     {
-      id: 'basic',
-      name: 'Basic License',
-      price: '$49.99',
-      originalPrice: '$99.99',
-      period: 'year',
-      description: 'Perfect for individual users and small repairs',
-      features: [
-        'Multi-platform support (Windows, Linux, macOS)',
-        'Basic diagnostics and repair tools',
-        'Driver database access',
-        'Email support',
-        '1-year updates included',
-        'Standard security features'
-      ],
-      icon: Shield,
-      color: 'from-blue-500 to-blue-600',
-      popular: false,
-      stripeLink: 'https://buy.stripe.com/5kQfZggMacypcSl9wP08g05'
-    },
-    {
       id: 'professional',
       name: 'Professional License',
       price: '$199.99',
@@ -56,7 +36,7 @@ export function PricingSection() {
       period: 'year',
       description: 'Advanced features for IT professionals',
       features: [
-        'Everything in Basic, plus:',
+        'Everything in Professional, plus:',
         'Advanced diagnostic algorithms',
         'Automated repair scripts',
         'Priority email support',
@@ -174,8 +154,7 @@ export function PricingSection() {
           <p className="text-xl md:text-2xl text-white/90 max-w-4xl mx-auto leading-relaxed">
             Professional-grade computer repair toolkit with{' '}
             <strong className="text-white">military-grade security</strong> and{' '}
-            <strong className="text-white">enterprise features</strong>. Trusted by Fortune 500
-            companies worldwide.
+            <strong className="text-white">enterprise features</strong>.
           </p>
         </div>
 
@@ -300,11 +279,8 @@ export function PricingSection() {
                 <thead>
                   <tr className="border-b border-white/10">
                     <th className="text-left p-6 text-white font-bold">Feature</th>
-                    <th className="text-center p-6 text-white font-bold">Basic</th>
                     <th className="text-center p-6 text-white font-bold">Professional</th>
-                    <th className="text-center p-6 text-white font-bold bg-gradient-to-r from-yellow-500/20 to-orange-500/20">
-                      Enterprise
-                    </th>
+                    <th className="text-center p-6 text-white font-bold">Enterprise</th>
                     <th className="text-center p-6 text-white font-bold">Government</th>
                     <th className="text-center p-6 text-white font-bold">Lifetime</th>
                   </tr>
@@ -313,72 +289,63 @@ export function PricingSection() {
                   {[
                     {
                       feature: 'Multi-Platform Support',
-                      basic: '✓',
-                      pro: '✓',
+                      professional: '✓',
                       enterprise: '✓',
                       government: '✓',
                       lifetime: '✓'
                     },
                     {
                       feature: 'Military-Grade Security',
-                      basic: 'Basic',
-                      pro: 'Enhanced',
+                      professional: 'Enhanced',
                       enterprise: 'Full',
                       government: 'Military',
                       lifetime: 'Full'
                     },
                     {
                       feature: 'Automated Repairs',
-                      basic: '✗',
-                      pro: '✓',
+                      professional: '✓',
                       enterprise: '✓',
                       government: '✓',
                       lifetime: '✓'
                     },
                     {
                       feature: 'Lifetime Updates',
-                      basic: '1 Year',
-                      pro: '3 Years',
+                      professional: '3 Years',
                       enterprise: 'Lifetime',
                       government: 'Lifetime',
                       lifetime: 'Lifetime'
                     },
                     {
                       feature: 'Priority Support',
-                      basic: 'Email',
-                      pro: 'Email',
+                      professional: 'Email',
                       enterprise: 'Phone + Email',
                       government: 'Dedicated',
                       lifetime: 'Priority'
                     },
                     {
                       feature: 'API Access',
-                      basic: '✗',
-                      pro: '✗',
+                      professional: '✗',
                       enterprise: '✓',
                       government: '✓',
                       lifetime: '✓'
                     },
                     {
                       feature: 'White-Label License',
-                      basic: '✗',
-                      pro: '✗',
+                      professional: '✗',
                       enterprise: '✓',
                       government: '✓',
                       lifetime: '✓'
                     },
                     {
                       feature: 'Government Compliance',
-                      basic: '✗',
-                      pro: '✗',
+                      professional: '✗',
                       enterprise: '✗',
                       government: '✓',
                       lifetime: '✗'
                     },
                     {
                       feature: 'Transferable License',
-                      basic: '✗',
-                      pro: '✗',
+                      professional: '✗',
                       enterprise: '✗',
                       government: '✗',
                       lifetime: '✓'
@@ -389,8 +356,7 @@ export function PricingSection() {
                       className="border-b border-white/5 hover:bg-white/5 transition-colors duration-200"
                     >
                       <td className="p-6 text-white font-medium">{row.feature}</td>
-                      <td className="p-6 text-center text-white/70">{row.basic}</td>
-                      <td className="p-6 text-center text-white/70">{row.pro}</td>
+                      <td className="p-6 text-center text-white/70">{row.professional}</td>
                       <td className="p-6 text-center text-white font-bold bg-gradient-to-r from-yellow-500/10 to-orange-500/10">
                         {row.enterprise}
                       </td>

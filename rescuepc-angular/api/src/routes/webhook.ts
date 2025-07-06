@@ -10,12 +10,14 @@ let webhookSecret: string | null = null;
 
 function getStripe(): Stripe {
   if (!process.env.STRIPE_SECRET_KEY) {
-    throw new Error('CRITICAL: STRIPE_SECRET_KEY environment variable is required');
+    throw new Error(
+      'CRITICAL: STRIPE_SECRET_KEY environment variable is required',
+    );
   }
 
   if (!stripe) {
     stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-      apiVersion: '2025-06-30.basil'
+      apiVersion: '2025-06-30.basil',
     });
   }
 
@@ -24,7 +26,9 @@ function getStripe(): Stripe {
 
 function getWebhookSecret(): string {
   if (!process.env.STRIPE_WEBHOOK_SECRET) {
-    throw new Error('CRITICAL: STRIPE_WEBHOOK_SECRET environment variable is required');
+    throw new Error(
+      'CRITICAL: STRIPE_WEBHOOK_SECRET environment variable is required',
+    );
   }
 
   if (!webhookSecret) {
@@ -37,7 +41,10 @@ function getWebhookSecret(): string {
 /**
  * Validates Stripe webhook signature with enhanced security
  */
-function validateStripeSignature(payload: string, signature: string | null): boolean {
+function validateStripeSignature(
+  payload: string,
+  signature: string | null,
+): boolean {
   if (!signature) return false;
 
   try {
@@ -67,7 +74,7 @@ async function handlePaymentSuccess(event: Stripe.Event) {
 
     // Log successful automation
     console.log(
-      `✅ Payment automation completed for ${(customer as Stripe.Customer).email}: Payment ${paymentIntent.id}`
+      `✅ Payment automation completed for ${(customer as Stripe.Customer).email}: Payment ${paymentIntent.id}`,
     );
 
     return { success: true, paymentId: paymentIntent.id };
@@ -91,7 +98,9 @@ async function handlePaymentFailure(event: Stripe.Event) {
       throw new Error('Customer not found or deleted');
     }
 
-    console.log(`❌ Payment failure handled for ${(customer as Stripe.Customer).email}: ${paymentIntent.id}`);
+    console.log(
+      `❌ Payment failure handled for ${(customer as Stripe.Customer).email}: ${paymentIntent.id}`,
+    );
 
     return { success: true };
   } catch (error) {
@@ -126,7 +135,9 @@ webhookRouter.post('/', async (req, res) => {
         break;
       default:
         console.log(`ℹ️ Unhandled event type: ${event.type}`);
-        return res.status(400).json({ error: `Unhandled event type: ${event.type}` });
+        return res
+          .status(400)
+          .json({ error: `Unhandled event type: ${event.type}` });
     }
 
     console.log(`✅ Webhook processed successfully: ${event.type}`);
@@ -135,4 +146,4 @@ webhookRouter.post('/', async (req, res) => {
     console.error('❌ Webhook error:', error);
     res.status(500).json({ error: 'Webhook handler failed' });
   }
-}); 
+});

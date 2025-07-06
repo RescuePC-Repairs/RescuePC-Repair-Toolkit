@@ -35,31 +35,36 @@ export const createRateLimiters = () => {
   return {
     general: generalLimiter,
     strict: strictLimiter,
-    webhook: webhookLimiter
+    webhook: webhookLimiter,
   };
 };
 
 // CORS configuration
 export const corsOptions = {
-  origin: process.env.NODE_ENV === 'production' 
-    ? [
-        'https://rescuepcrepairs.com',
-        'https://rescue-pc-repairs-multi-os-toolkit-ofrjwva13.vercel.app',
-        'https://cloud-webhook-handler-6s83chitd-rescuepc-repairs-projects.vercel.app'
-      ]
-    : ['http://localhost:4200', 'http://localhost:3000', 'http://localhost:4000'],
+  origin:
+    process.env.NODE_ENV === 'production'
+      ? [
+          'https://rescuepcrepairs.com',
+          'https://rescue-pc-repairs-multi-os-toolkit-ofrjwva13.vercel.app',
+          'https://cloud-webhook-handler-6s83chitd-rescuepc-repairs-projects.vercel.app',
+        ]
+      : [
+          'http://localhost:4200',
+          'http://localhost:3000',
+          'http://localhost:4000',
+        ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: [
-    'Content-Type', 
-    'Authorization', 
+    'Content-Type',
+    'Authorization',
     'stripe-signature',
     'X-Requested-With',
     'Accept',
-    'Origin'
+    'Origin',
   ],
   exposedHeaders: ['X-Total-Count', 'X-Page-Count'],
-  maxAge: 86400 // 24 hours
+  maxAge: 86400, // 24 hours
 };
 
 // Helmet security configuration
@@ -67,39 +72,52 @@ export const helmetConfig = {
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://fonts.googleapis.com"],
-      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
-      fontSrc: ["'self'", "https://fonts.gstatic.com"],
-      imgSrc: ["'self'", "data:", "https:"],
-      connectSrc: ["'self'", "https://api.stripe.com", "https://fonts.googleapis.com"],
-      frameSrc: ["'self'", "https://js.stripe.com"],
+      scriptSrc: [
+        "'self'",
+        "'unsafe-inline'",
+        "'unsafe-eval'",
+        'https://fonts.googleapis.com',
+      ],
+      styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
+      fontSrc: ["'self'", 'https://fonts.gstatic.com'],
+      imgSrc: ["'self'", 'data:', 'https:'],
+      connectSrc: [
+        "'self'",
+        'https://api.stripe.com',
+        'https://fonts.googleapis.com',
+      ],
+      frameSrc: ["'self'", 'https://js.stripe.com'],
       objectSrc: ["'none'"],
       baseUri: ["'self'"],
       formAction: ["'self'"],
       frameAncestors: ["'none'"],
-      upgradeInsecureRequests: []
-    }
+      upgradeInsecureRequests: [],
+    },
   },
-  crossOriginEmbedderPolicy: { policy: "require-corp" },
-  crossOriginOpenerPolicy: { policy: "same-origin" },
-  crossOriginResourcePolicy: { policy: "same-origin" },
+  crossOriginEmbedderPolicy: { policy: 'require-corp' },
+  crossOriginOpenerPolicy: { policy: 'same-origin' },
+  crossOriginResourcePolicy: { policy: 'same-origin' },
   dnsPrefetchControl: { allow: false },
-  frameguard: { action: "deny" },
+  frameguard: { action: 'deny' },
   hidePoweredBy: true,
   hsts: {
     maxAge: 31536000,
     includeSubDomains: true,
-    preload: true
+    preload: true,
   },
   ieNoOpen: true,
   noSniff: true,
-  permittedCrossDomainPolicies: { permittedPolicies: "none" },
-  referrerPolicy: { policy: "strict-origin-when-cross-origin" },
-  xssFilter: true
+  permittedCrossDomainPolicies: { permittedPolicies: 'none' },
+  referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
+  xssFilter: true,
 };
 
 // Input validation middleware
-export const validateInput = (req: Request, res: Response, next: NextFunction) => {
+export const validateInput = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   // Check for suspicious patterns
   const suspiciousPatterns = [
     /<script/i,
@@ -107,7 +125,7 @@ export const validateInput = (req: Request, res: Response, next: NextFunction) =
     /on\w+\s*=/i,
     /eval\s*\(/i,
     /document\./i,
-    /window\./i
+    /window\./i,
   ];
 
   const body = JSON.stringify(req.body);
@@ -120,7 +138,7 @@ export const validateInput = (req: Request, res: Response, next: NextFunction) =
     if (pattern.test(allInput)) {
       return res.status(400).json({
         error: 'Suspicious input detected',
-        message: 'Input contains potentially malicious content'
+        message: 'Input contains potentially malicious content',
       });
     }
   }
@@ -129,9 +147,13 @@ export const validateInput = (req: Request, res: Response, next: NextFunction) =
 };
 
 // Request logging middleware
-export const requestLogger = (req: Request, res: Response, next: NextFunction) => {
+export const requestLogger = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   const start = Date.now();
-  
+
   res.on('finish', () => {
     const duration = Date.now() - start;
     const logData = {
@@ -141,7 +163,7 @@ export const requestLogger = (req: Request, res: Response, next: NextFunction) =
       duration: `${duration}ms`,
       ip: req.ip,
       userAgent: req.get('User-Agent'),
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
 
     if (res.statusCode >= 400) {
@@ -155,30 +177,40 @@ export const requestLogger = (req: Request, res: Response, next: NextFunction) =
 };
 
 // Error handling middleware
-export const errorHandler = (err: any, req: Request, res: Response, next: NextFunction) => {
+export const errorHandler = (
+  err: any,
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   console.error('🚨 Error occurred:', {
     error: err.message,
     stack: err.stack,
     url: req.url,
     method: req.method,
     ip: req.ip,
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   });
 
   // Don't expose internal errors in production
-  const message = process.env.NODE_ENV === 'production' 
-    ? 'Internal server error' 
-    : err.message;
+  const message =
+    process.env.NODE_ENV === 'production'
+      ? 'Internal server error'
+      : err.message;
 
   res.status(err.status || 500).json({
     error: 'Internal server error',
     message,
-    ...(process.env.NODE_ENV === 'development' && { stack: err.stack })
+    ...(process.env.NODE_ENV === 'development' && { stack: err.stack }),
   });
 };
 
 // Authentication middleware (placeholder)
-export const authenticate = (req: Request, res: Response, next: NextFunction) => {
+export const authenticate = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   // TODO: Implement actual authentication logic
   // For now, just pass through
   next();
@@ -194,9 +226,13 @@ export const authorize = (roles: string[]) => {
 };
 
 // Webhook signature validation middleware
-export const validateWebhookSignature = (req: Request, res: Response, next: NextFunction) => {
+export const validateWebhookSignature = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   const signature = req.headers['stripe-signature'];
-  
+
   if (!signature) {
     return res.status(400).json({ error: 'Missing webhook signature' });
   }
@@ -204,4 +240,4 @@ export const validateWebhookSignature = (req: Request, res: Response, next: Next
   // TODO: Implement actual signature validation
   // For now, just pass through
   next();
-}; 
+};
