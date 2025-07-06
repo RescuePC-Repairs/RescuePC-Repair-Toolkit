@@ -1,7 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server';
-
-// Force dynamic rendering to prevent static generation errors
 export const dynamic = 'force-dynamic';
+
+import { NextRequest, NextResponse } from 'next/server';
 
 // AUTOMATED EMAIL SYSTEM
 async function sendAutomatedEmail(to: string, subject: string, htmlContent: string) {

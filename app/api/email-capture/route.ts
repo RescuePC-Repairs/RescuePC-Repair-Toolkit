@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { validateEmail, validateName, sanitizeInput } from '@/utils/validation';
 import { createRateLimiter } from '@/utils/validation';
