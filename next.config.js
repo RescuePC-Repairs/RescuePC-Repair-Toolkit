@@ -63,6 +63,32 @@ const nextConfig = {
             value: 'public, max-age=31536000, immutable'
           }
         ]
+      },
+      {
+        source: '/sw.js',
+        headers: [
+          {
+            key: 'Content-Type',
+            value: 'application/javascript'
+          },
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=0, must-revalidate'
+          }
+        ]
+      },
+      {
+        source: '/manifest.json',
+        headers: [
+          {
+            key: 'Content-Type',
+            value: 'application/manifest+json'
+          },
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable'
+          }
+        ]
       }
     ];
   },
@@ -114,15 +140,7 @@ const nextConfig = {
     formats: ['image/webp', 'image/avif'],
     minimumCacheTTL: 31536000
   },
-  // PWA support
-  async rewrites() {
-    return [
-      {
-        source: '/sw.js',
-        destination: '/_next/static/sw.js'
-      }
-    ];
-  }
+  // PWA support removed - service worker should be served directly from public directory
 };
 
 module.exports = nextConfig;

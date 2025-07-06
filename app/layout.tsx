@@ -253,7 +253,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 if ('performance' in window) {
                   const perfData = performance.getEntriesByType('navigation')[0];
                   if (perfData) {
-                    const loadTime = perfData.loadEventEnd - perfData.loadEventStart;
+                    const loadTime = Math.max(0, perfData.loadEventEnd - perfData.loadEventStart);
                     console.log('Page Load Time:', loadTime, 'ms');
                     
                     // Send performance data to analytics
