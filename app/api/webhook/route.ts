@@ -72,11 +72,20 @@ async function handlePaymentSuccess(event: Stripe.Event) {
     });
 
     // Send confirmation email
-    const { sendTransactionalEmail } = await import('../../../utils/email');
-    await sendTransactionalEmail({
+    const nodemailer = await import('nodemailer');
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.SUPPORT_EMAIL,
+        pass: process.env.GMAIL_APP_PASSWORD
+      }
+    });
+
+    await transporter.sendMail({
+      from: `"RescuePC Repairs" <${process.env.SUPPORT_EMAIL}>`,
       to: customer.email!,
       subject: '🎉 Payment Successful - RescuePC Repairs',
-      text: `Hi ${customer.name},\n\nYour payment of ${(amount / 100).toFixed(2)} ${currency.toUpperCase()} has been processed successfully!\n\nLicense Key: ${license.id}\nExpires: ${license.expiresAt}\n\nDownload: ***REMOVED***\n\nBest regards,\nTyler Keesee\nCEO, RescuePC Repairs`
+      text: `Thank you for your purchase! Your payment has been processed successfully.`
     });
 
     return { success: true, paymentId: payment.id, licenseId: license.id };
@@ -113,11 +122,20 @@ async function handlePaymentFailure(event: Stripe.Event) {
     }
 
     // Send failure notification
-    const { sendTransactionalEmail } = await import('../../../utils/email');
-    await sendTransactionalEmail({
+    const nodemailer = await import('nodemailer');
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.SUPPORT_EMAIL,
+        pass: process.env.GMAIL_APP_PASSWORD
+      }
+    });
+
+    await transporter.sendMail({
+      from: `"RescuePC Repairs" <${process.env.SUPPORT_EMAIL}>`,
       to: customer.email!,
       subject: '❌ Payment Failed - RescuePC Repairs',
-      text: `Hi ${customer.name},\n\nYour payment of ${(paymentIntent.amount / 100).toFixed(2)} ${paymentIntent.currency.toUpperCase()} has failed.\n\nReason: ${paymentIntent.last_payment_error?.message || 'Unknown error'}\n\nPlease try again or contact support.\n\nBest regards,\nTyler Keesee\nCEO, RescuePC Repairs`
+      text: `Your payment has failed. Please try again or contact support.`
     });
 
     return { success: true };
@@ -161,11 +179,20 @@ async function handleSubscriptionUpdate(event: Stripe.Event) {
     }
 
     // Send subscription status email
-    const { sendTransactionalEmail } = await import('../../../utils/email');
-    await sendTransactionalEmail({
+    const nodemailer = await import('nodemailer');
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.SUPPORT_EMAIL,
+        pass: process.env.GMAIL_APP_PASSWORD
+      }
+    });
+
+    await transporter.sendMail({
+      from: `"RescuePC Repairs" <${process.env.SUPPORT_EMAIL}>`,
       to: customer.email!,
       subject: '📅 Subscription Update - RescuePC Repairs',
-      text: `Hi ${customer.name},\n\nYour subscription status has been updated to: ${subscription.status}\n\nNext billing date: ${new Date(subscription.current_period_end * 1000)}\n\nBest regards,\nTyler Keesee\nCEO, RescuePC Repairs`
+      text: `Your subscription status has been updated.`
     });
 
     return { success: true };
@@ -177,8 +204,8 @@ async function handleSubscriptionUpdate(event: Stripe.Event) {
 
 export async function POST(request: NextRequest) {
   try {
-    // Dynamically import email function to prevent bundling issues
-    const { sendTransactionalEmail } = await import('../../../utils/email');
+    // Dynamically import nodemailer only on the server
+    const nodemailer = await import('nodemailer');
 
     // 1. Origin validation
     if (!validateOrigin(request)) {
