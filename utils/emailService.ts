@@ -2,7 +2,7 @@ export async function sendEmail(to: string, subject: string, text: string) {
   try {
     // Dynamically import nodemailer only on the server
     const nodemailer = await import('nodemailer');
-    
+
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {

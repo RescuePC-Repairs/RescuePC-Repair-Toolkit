@@ -69,7 +69,7 @@ export class AutomatedHandler {
   private initializeWebSocket() {
     try {
       this.ws = new WebSocket(this.config.wsUrl);
-      
+
       this.ws.on('open', () => {
         console.log('🤖 AI-to-AI Communication Channel Established');
         this.sendStatus('ONLINE');
@@ -141,13 +141,36 @@ export class AutomatedHandler {
       case 'basic':
         return ['Core Protection', 'Basic Support', 'Email Updates'];
       case 'professional':
-        return ['Advanced Protection', 'Priority Support', 'Real-time Updates', 'Custom Configurations'];
+        return [
+          'Advanced Protection',
+          'Priority Support',
+          'Real-time Updates',
+          'Custom Configurations'
+        ];
       case 'enterprise':
-        return ['Enterprise Protection', '24/7 Support', 'Custom Integrations', 'Advanced Analytics', 'Team Management'];
+        return [
+          'Enterprise Protection',
+          '24/7 Support',
+          'Custom Integrations',
+          'Advanced Analytics',
+          'Team Management'
+        ];
       case 'government':
-        return ['Government-grade Security', 'Compliance Tools', 'Audit Logging', 'Custom Deployments', 'Dedicated Support'];
+        return [
+          'Government-grade Security',
+          'Compliance Tools',
+          'Audit Logging',
+          'Custom Deployments',
+          'Dedicated Support'
+        ];
       case 'lifetime_enterprise':
-        return ['Lifetime Updates', 'Enterprise Features', 'Premium Support', 'Custom Development', 'White-label Options'];
+        return [
+          'Lifetime Updates',
+          'Enterprise Features',
+          'Premium Support',
+          'Custom Development',
+          'White-label Options'
+        ];
       default:
         return ['Basic Features'];
     }
@@ -157,13 +180,16 @@ export class AutomatedHandler {
     try {
       // Generate license key
       const licenseKey = `RPCR-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
-      
+
       const license = {
         key: licenseKey,
         email: data.email,
         type: data.type || 'basic',
         issuedAt: new Date().toISOString(),
-        expiresAt: data.type === 'lifetime' ? null : new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(),
+        expiresAt:
+          data.type === 'lifetime'
+            ? null
+            : new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(),
         features: this.getFeaturesForType(data.type || 'basic'),
         status: 'active'
       };

@@ -107,18 +107,6 @@ const nextConfig = {
   },
   compress: true,
   poweredByHeader: false,
-  experimental: {
-    serverComponentsExternalPackages: [],
-    // Disable standalone output to avoid symlink issues
-    outputFileTracingRoot: process.cwd(),
-    outputFileTracingExcludes: {
-      '*': [
-        'node_modules/@swc/core-linux-x64-gnu',
-        'node_modules/@swc/core-linux-x64-musl',
-        'node_modules/@esbuild/linux-x64'
-      ]
-    }
-  },
   // Core settings
   distDir: '.next',
   reactStrictMode: true,

@@ -49,7 +49,7 @@ export class EmailHandler {
     try {
       // Dynamically import nodemailer only on the server
       const nodemailer = await import('nodemailer');
-      
+
       if (!this.transporter) {
         this.transporter = nodemailer.createTransport(this.config);
       }
